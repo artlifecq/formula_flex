@@ -1,6 +1,5 @@
 package com.rpgGame.coreData.cfg.npc
 {
-	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -10,8 +9,7 @@ package com.rpgGame.coreData.cfg.npc
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.MonsterBornData;
 	
-	import app.message.NpcDialogProto;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -310,9 +308,9 @@ package com.rpgGame.coreData.cfg.npc
 		 * @return
 		 *
 		 */
-		public static function getNpcDialog(npcId : int, npcType : int) : NpcDialogProto
-		{
-			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//		public static function getNpcDialog(npcId : int, npcType : int) : NpcDialogProto
+//		{
+//			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
 //			if (!monsterData || !monsterData.npc)
 //				return null;
 //
@@ -323,8 +321,8 @@ package com.rpgGame.coreData.cfg.npc
 //					return dialogData;
 //				}
 //			}
-			return null;
-		}
+//			return null;
+//		}
 
 		/**
 		 * 获得NPC对话列表　

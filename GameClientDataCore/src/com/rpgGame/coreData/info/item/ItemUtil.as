@@ -2,7 +2,6 @@ package com.rpgGame.coreData.info.item
 {
 	import com.game.mainCore.core.utils.TextFormatUtil;
 	import com.rpgGame.coreData.cfg.item.ContainerData;
-	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -10,14 +9,10 @@ package com.rpgGame.coreData.info.item
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
-	import com.rpgGame.coreData.utils.ProtoParseToInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import app.message.AmountType;
-	import app.message.GoodsProto;
 	import app.message.GoodsType;
-	import app.message.PrizeProto;
-	import app.message.ContainerProto.ContainerType;
 	
 	import org.game.netCore.net_protobuff.ByteBuffer;
 	
@@ -63,7 +58,7 @@ package com.rpgGame.coreData.info.item
 			return clientInfo;
 		}
 		
-		public static function createEquipInfo(data : GoodsProto) : EquipInfo
+		public static function createEquipInfo(/*data : GoodsProto*/) : EquipInfo
 		{
 			/*if (!data.hasEquipment)
 			return null;
@@ -96,7 +91,7 @@ package com.rpgGame.coreData.info.item
 		 * @return 
 		 * 
 		 */		
-		public static function createMountInfoData( data:GoodsProto ):MountBeastCardInfo
+		public static function createMountInfoData( /*data:GoodsProto */):MountBeastCardInfo
 		{
 			//			if( data.mount == null )
 			return null;
@@ -124,10 +119,10 @@ package com.rpgGame.coreData.info.item
 		 * 礼包数据转换成vo
 		 * @param prizeProto
 		 */
-		public static function creatPrizeProtoVo(prizeProto : PrizeProto) : PrizeInfo
-		{
-			return ProtoParseToInfo.decodePrizeProto(prizeProto);
-		}
+//		public static function creatPrizeProtoVo(prizeProto : PrizeProto) : PrizeInfo
+//		{
+//			return ProtoParseToInfo.decodePrizeProto(prizeProto);
+//		}
 		
 		/**
 		 * 转换商城tab下的数据
@@ -254,14 +249,14 @@ package com.rpgGame.coreData.info.item
 		 *      }
 		 *
 		 */
-		public static function writeContainerToBytes(bytes : ByteBuffer, containerId : int, index : int = 0) : void
-		{
-			//如果是坐骑装备，other就是槽位，如果是Storage,other就是 NpcId
-			if (containerId == ContainerType.MOUNT_EQUIPMENT || containerId == ContainerType.STORAGE)
-				bytes.writeVarint32((index << 8) | containerId);
-			else
-				bytes.writeVarint32(containerId);
-		}
+//		public static function writeContainerToBytes(bytes : ByteBuffer, containerId : int, index : int = 0) : void
+//		{
+//			//如果是坐骑装备，other就是槽位，如果是Storage,other就是 NpcId
+//			if (containerId == ContainerType.MOUNT_EQUIPMENT || containerId == ContainerType.STORAGE)
+//				bytes.writeVarint32((index << 8) | containerId);
+//			else
+//				bytes.writeVarint32(containerId);
+//		}
 		
 		/**
 		 * 容器类型：

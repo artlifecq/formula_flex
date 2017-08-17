@@ -1,9 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.BoolArrayProto;
-	import app.message.MazeConfig;
-	import app.message.MazeMiscDataProto;
-
 	public class MazeCfgData
 	{
 		public function MazeCfgData()
@@ -20,13 +16,13 @@ package com.rpgGame.coreData.cfg
 		 */		
 		public static var duration : Number;
 		
-		public static function setup(data:MazeConfig):void
-		{
-			var misc : MazeMiscDataProto = data.miscData;
-			timeData = misc.timeData;
-			duration = misc.duration.toNumber();
-			prepareTime = misc.prepareDuration.toNumber();
-		}
+//		public static function setup(data:MazeConfig):void
+//		{
+//			var misc : MazeMiscDataProto = data.miscData;
+//			timeData = misc.timeData;
+//			duration = misc.duration.toNumber();
+//			prepareTime = misc.prepareDuration.toNumber();
+//		}
 		
 		public static var mazeNpcIds : Array = new Array();
 		public static function isMazeNpcId(npc:int):Boolean

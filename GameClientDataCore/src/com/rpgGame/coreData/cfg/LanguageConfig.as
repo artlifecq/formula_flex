@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.app.richText.RichTextCustomLinkType;
-	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.coreData.enum.AlertTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertInfo;
 	import com.rpgGame.coreData.lang.LangHyperlinksMenu;

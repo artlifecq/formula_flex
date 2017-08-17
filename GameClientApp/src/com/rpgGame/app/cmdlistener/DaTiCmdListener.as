@@ -9,10 +9,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	
-	import app.cmd.ExamModuleMessages;
-	import app.cmd.ExamModuleMessages;
-	import app.message.ExamQuestionProto;
-	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.bean.BaseBean;
@@ -29,21 +25,21 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_QUESTION_UPDATE,onExamQuestionUpdate);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION,onExamGetQuestion);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION_FAIL,onExamGetQuestionFail);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION,onExamAnswerQuestion);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION_FAIL,onExamAnswerQuestionFail);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_ANSWER_SUCCESS,onExamUseGoodAnswer);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_FAIL,onExamUseGoodAnswerFail);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA,onExamSelfData);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA_FAIL,onExamSelfDataFail);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_BROADCAST,onExamFinishBroadcast);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_MSG,onExamFinishMsg);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_RANK_MSG,onExamFinishRankMsg);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_MSG,onExamFollowMsg);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_FAIL,onExamFollowMsgFail);
-			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_UPDATE_RANK,onExamUpdateRank);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_QUESTION_UPDATE,onExamQuestionUpdate);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION,onExamGetQuestion);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION_FAIL,onExamGetQuestionFail);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION,onExamAnswerQuestion);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION_FAIL,onExamAnswerQuestionFail);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_ANSWER_SUCCESS,onExamUseGoodAnswer);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_FAIL,onExamUseGoodAnswerFail);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA,onExamSelfData);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA_FAIL,onExamSelfDataFail);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_BROADCAST,onExamFinishBroadcast);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_MSG,onExamFinishMsg);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_RANK_MSG,onExamFinishRankMsg);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_MSG,onExamFollowMsg);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_FAIL,onExamFollowMsgFail);
+//			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_UPDATE_RANK,onExamUpdateRank);
 			finish();
 		}
 		
@@ -66,24 +62,24 @@ package com.rpgGame.app.cmdlistener
 		 *
 		 * 注意，该消息已被压缩，读取之前先解压一下
 		 */
-		private function onExamGetQuestion(buffer:ByteBuffer):void
-		{
-//			trace("QQQQQQQQQQQQQQQ-onExamGetQuestion",getTimer());
-			var uncompressData : ByteBuffer = new ByteBuffer();
-			buffer.readBytes(uncompressData);
-			buffer = uncompressData;
-			buffer.uncompress(); // 解压一下
-			var questionProto:ExamQuestionProto = new ExamQuestionProto();
-			questionProto.mergeFrom(buffer);
-			DaTiManager.preQuestion = DaTiManager.currentQuestion;
-			DaTiManager.preSelectedAnserIndex = DaTiManager.currentSelectedAnserIndex;
-			DaTiManager.preAnswerIsRight = DaTiManager.currentAnswerIsRight;
-			DaTiManager.currentQuestion = questionProto;
-			DaTiManager.currentSelectedAnserIndex = -1;
-			DaTiManager.currentAnswerIsRight = false;
-			DaTiManager.currentAnswerEndTime = questionProto.startTime.toNumber() + DaTiCfgData.answerTime;
-			EventManager.dispatchEvent(DaTiEvent.GET_QUESTION);
-		}
+//		private function onExamGetQuestion(buffer:ByteBuffer):void
+//		{
+////			trace("QQQQQQQQQQQQQQQ-onExamGetQuestion",getTimer());
+//			var uncompressData : ByteBuffer = new ByteBuffer();
+//			buffer.readBytes(uncompressData);
+//			buffer = uncompressData;
+//			buffer.uncompress(); // 解压一下
+//			var questionProto:ExamQuestionProto = new ExamQuestionProto();
+//			questionProto.mergeFrom(buffer);
+//			DaTiManager.preQuestion = DaTiManager.currentQuestion;
+//			DaTiManager.preSelectedAnserIndex = DaTiManager.currentSelectedAnserIndex;
+//			DaTiManager.preAnswerIsRight = DaTiManager.currentAnswerIsRight;
+//			DaTiManager.currentQuestion = questionProto;
+//			DaTiManager.currentSelectedAnserIndex = -1;
+//			DaTiManager.currentAnswerIsRight = false;
+//			DaTiManager.currentAnswerEndTime = questionProto.startTime.toNumber() + DaTiCfgData.answerTime;
+//			EventManager.dispatchEvent(DaTiEvent.GET_QUESTION);
+//		}
 		
 		/**
 		 * 请求最新题目失败，附带byte错误码 1、答题还未开始或者已经结束 2、英雄等级不足
@@ -331,25 +327,25 @@ package com.rpgGame.app.cmdlistener
 		 *
 		 * 注意，该消息已被压缩，读取之前先解压一下
 		 */
-		private function onExamFinishRankMsg(buffer:ByteBuffer):void
-		{
-			var uncompressData : ByteBuffer = new ByteBuffer();
-			buffer.readBytes(uncompressData);
-			buffer = uncompressData;
-			buffer.uncompress(); // 解压一下
-			var questionProto:ExamQuestionProto = new ExamQuestionProto();
-			questionProto.mergeFrom(buffer);
-			questionProto.question = null;
-//			trace("QQQQQQQQQQQQQQQ-onExamFinishRankMsg:",questionProto.question,getTimer());
-			DaTiManager.preQuestion = DaTiManager.currentQuestion;
-			DaTiManager.preSelectedAnserIndex = DaTiManager.currentSelectedAnserIndex;
-			DaTiManager.preAnswerIsRight = DaTiManager.currentAnswerIsRight;
-			DaTiManager.currentQuestion = questionProto;
-			DaTiManager.currentSelectedAnserIndex = -1;
-			DaTiManager.currentAnswerIsRight = false;
-			DaTiManager.currentRank = questionProto;
-			EventManager.dispatchEvent(DaTiEvent.GET_QUESTION);
-		}
+//		private function onExamFinishRankMsg(buffer:ByteBuffer):void
+//		{
+//			var uncompressData : ByteBuffer = new ByteBuffer();
+//			buffer.readBytes(uncompressData);
+//			buffer = uncompressData;
+//			buffer.uncompress(); // 解压一下
+//			var questionProto:ExamQuestionProto = new ExamQuestionProto();
+//			questionProto.mergeFrom(buffer);
+//			questionProto.question = null;
+////			trace("QQQQQQQQQQQQQQQ-onExamFinishRankMsg:",questionProto.question,getTimer());
+//			DaTiManager.preQuestion = DaTiManager.currentQuestion;
+//			DaTiManager.preSelectedAnserIndex = DaTiManager.currentSelectedAnserIndex;
+//			DaTiManager.preAnswerIsRight = DaTiManager.currentAnswerIsRight;
+//			DaTiManager.currentQuestion = questionProto;
+//			DaTiManager.currentSelectedAnserIndex = -1;
+//			DaTiManager.currentAnswerIsRight = false;
+//			DaTiManager.currentRank = questionProto;
+//			EventManager.dispatchEvent(DaTiEvent.GET_QUESTION);
+//		}
 		
 		/**
 		 * 从善如流成功 varint32 答案

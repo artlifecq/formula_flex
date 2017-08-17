@@ -1,9 +1,7 @@
 package com.rpgGame.coreData.info.trade
 {
-	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	
-	import app.message.GoodsType;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	
 	import org.client.mainCore.ds.HashMap;
 

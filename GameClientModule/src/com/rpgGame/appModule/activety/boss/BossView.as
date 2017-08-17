@@ -29,7 +29,6 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;

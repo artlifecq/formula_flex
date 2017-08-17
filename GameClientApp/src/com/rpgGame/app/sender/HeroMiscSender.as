@@ -7,10 +7,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.client.message.ReqClientCustomTagSetMessage;
 	import com.rpgGame.netData.player.message.ReqChangePKStateMessage;
 	
-	import app.cmd.HeroMiscModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 *  
@@ -107,7 +104,7 @@ package com.rpgGame.app.sender
 		public static function reqHookMonsterID():void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send(HeroMiscModuleMessages.C2S_RECOMMEND_AUTO_MONSTER ,_bytes);
+//			SocketConnection_protoBuffer.send(HeroMiscModuleMessages.C2S_RECOMMEND_AUTO_MONSTER ,_bytes);
 		}
 	}
 }

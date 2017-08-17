@@ -2,14 +2,16 @@ package com.rpgGame.app.utils
 {
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.core.utils.PKModeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -182,7 +184,7 @@ package com.rpgGame.app.utils
 //			if (CountryManager.isMyEnemyCountry(heroData.countryId))
 //				return StaticValue.RED_TEXT; //不是我国与盟国的都是红名
 
-			return PKModeUtil.getPKAmountColor(heroData.nameColor);
+			return heroData.nameColor;
 		}
 
 
@@ -218,9 +220,18 @@ package com.rpgGame.app.utils
 			if (MainRoleManager.actorInfo.countryId == heroData.countryId)
 				return _role.name; //本国不显国家
 
+			if(_role.type== SceneCharType.PLAYER){
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				switch(qmap.q_map_type){
+					case EnumMapType.MAP_TYPE_TOWERS:
+						return "神秘人";
+				}
+			}
 
-
-			return "[" + CountryNameCfgData.getCountryNameById(heroData.countryId) + "]" + _role.name;
+			return _role.name;
+//			return "[" + CountryNameCfgData.getCountryNameById(heroData.countryId) + "]" + _role.name;
 		}
 		
 		public static function getStallNameColor(_role : SceneRole):uint

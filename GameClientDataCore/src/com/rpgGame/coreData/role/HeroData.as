@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.role
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -9,22 +10,12 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.SpellTargetType;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	import com.rpgGame.netData.structs.IntKeyValue;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	
-	import app.message.ActiveSpellProto;
-	import app.message.BiaoModuleObjProto;
-	import app.message.CountryModuleObjProto;
-	import app.message.MountModuleObjClientProto;
-	import app.message.OtherHeroProto;
-	import app.message.SpellProto;
-	
-	import away3d.enum.LoadPriorityType;
 	
 	import org.game.netCore.data.long;
 	
@@ -299,55 +290,7 @@ package com.rpgGame.coreData.role
 
 		public static function setUserSingleInfo(info : HeroData, nick : String = null) : void
 		{
-			info.id = 2;
-			info.name = nick;
-			info.mapID = 1;
-			info.totalStat.level = 100;
-			info.totalStat.hp = 1000;
-			info.totalStat.life = 10000;
-			info.totalStat.moveSpeed = 800;
-			info.x = 100;
-			info.y = 100;
 			
-			/** 技能数据 **/ //临时的
-			var activeSpell1 : ActiveSpellProto = new ActiveSpellProto();
-			activeSpell1.spellId = 1;
-			activeSpell1.isLockingSpell = false;
-			activeSpell1.isReleaseAtMouse = true;
-			activeSpell1.targetType = SpellTargetType.SELF;
-			activeSpell1.spellType = 1;
-			activeSpell1.cd = 50;
-			activeSpell1.relateSpells = [activeSpell2];
-			var spell1:SpellProto = new SpellProto();
-			spell1.spellType = 1;
-			spell1.activeSpell = activeSpell1;
-			
-			var activeSpell2 : ActiveSpellProto = new ActiveSpellProto();
-			activeSpell2.spellId = 2;
-			activeSpell2.isLockingSpell = false;
-			activeSpell2.isReleaseAtMouse = true;
-			activeSpell2.targetType = SpellTargetType.SELF;
-			activeSpell2.spellType = 2;
-			activeSpell2.cd = 50;
-			var spell2:SpellProto = new SpellProto();
-			spell2.spellType = 2;
-			spell2.activeSpell = activeSpell2;
-			
-			var activeSpell3 : ActiveSpellProto = new ActiveSpellProto();
-			activeSpell3.spellId = 3;
-			activeSpell3.spellType = 3;
-			activeSpell3.spellEffectId = 3;
-			activeSpell3.cd = 50;
-			var spell3:SpellProto = new SpellProto();
-			spell3.spellType = 3;
-			spell3.activeSpell = activeSpell3;
-			
-			//			info.spellList.addSpell(spell1);
-			//			info.spellList.addSpell(spell2);
-			//			info.spellList.addSpell(spell3);
-			spellArrs.push(spell1);
-			spellArrs.push(spell2);
-			spellArrs.push(spell3);
 		}
 		
 		/**
@@ -524,7 +467,7 @@ package com.rpgGame.coreData.role
 		 * @param teamUint
 		 *
 		 */
-		public static function setOtherRoleData(heroData : HeroData, roleInfo : OtherHeroProto) : void
+		public static function setOtherRoleData(heroData : HeroData, roleInfo : Object) : void
 		{
 			//			if (roleInfo.hasHeroBasic)
 			//			{
@@ -574,7 +517,7 @@ package com.rpgGame.coreData.role
 			return "不存在的职业类型";
 		}
 		
-		private function setCountryModuleData(countryModuleObj : CountryModuleObjProto) : void
+		private function setCountryModuleData(countryModuleObj : Object) : void
 		{
 			//			countryModuleData = new CountryModuleData();
 			//			countryModuleData.setup(countryModuleObj);
@@ -585,7 +528,7 @@ package com.rpgGame.coreData.role
 		 * @param biaoModuleObjPro
 		 *
 		 */
-		private function setBiaoModuleObjProto(biaoModuleObjPro : BiaoModuleObjProto) : void
+		private function setBiaoModuleObjProto(biaoModuleObjPro : Object) : void
 		{
 			if (biaoModuleObjPro.hasTodayAcessPersonalBiaoTimes)
 				biaoTimes = biaoModuleObjPro.todayAcessPersonalBiaoTimes;
@@ -606,10 +549,10 @@ package com.rpgGame.coreData.role
 		 * @param cmountModuleObj
 		 *
 		 */
-		private function setMountData(mountModuleObj : MountModuleObjClientProto) : void
-		{
-			mounModuletData.setConfig(mountModuleObj);
-		}
+//		private function setMountData(mountModuleObj : Object) : void
+//		{
+//			mounModuletData.setConfig(mountModuleObj);
+//		}
 		
 		//		/**
 		//		 * 设置称号模块数据
@@ -633,7 +576,7 @@ package com.rpgGame.coreData.role
 		public function get nameColor() : int
 		{
 			//			return _pk_nameType.getValue(_resources);
-			return 0;
+			return  StaticValue.BEIGE_TEXT;
 		}
 		
 		/** 是否小队跟随中 **/

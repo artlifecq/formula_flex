@@ -22,7 +22,7 @@ package com.rpgGame.app.ui.main.shortcut
 		public function TeamApplyJoinWaiteIcon()
 		{
 			_skin = new Msg_Duiwu();
-			super(_skin, _skin.lbNum, _skin.btnCont);
+			super(_skin, _skin.lbNum, _skin.btnCont,null,_skin.btnClose);
 			TipTargetManager.show( this, TargetTipsMaker.makeSimpleTextTips("收到组队消息"));
 		}
 		

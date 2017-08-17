@@ -153,6 +153,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OVER);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
+			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY_NOTICE,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
 			if(info.actCfg.q_icon_id!=0){//有独立的功能icon
 				MainButtonManager.closeActivityButton(info.actCfg.q_icon_id);

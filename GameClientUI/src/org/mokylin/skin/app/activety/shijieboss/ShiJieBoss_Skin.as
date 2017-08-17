@@ -32,8 +32,6 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var icon4:feathers.controls.UIAsset;
 
-		public var lastSkiller:feathers.controls.Label;
-
 		public var lbTime:feathers.controls.Label;
 
 		public var modeCont:feathers.controls.SkinnableContainer;
@@ -49,7 +47,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 956;
-			this.elementsContent = [__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),lastSkiller_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),__ShiJieBoss_Skin_Label2_i(),lbTime_i()];
+			this.elementsContent = [__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),__ShiJieBoss_Skin_Label2_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -207,21 +205,6 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 857;
 			temp.y = 468;
-			return temp;
-		}
-
-		private function lastSkiller_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lastSkiller = temp;
-			temp.name = "lastSkiller";
-			temp.text = "最后一击$";
-			temp.textAlign = "center";
-			temp.color = 0xBEA757;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 183;
-			temp.x = 692;
-			temp.y = 390;
 			return temp;
 		}
 

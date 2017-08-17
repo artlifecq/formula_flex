@@ -2,8 +2,6 @@ package com.rpgGame.coreData.info.task.daily
 {
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.utils.ProtoParseToInfo;
-	
-	import app.message.TouZhuConfig.TouZhuPrize;
 
 	/**
 	 * 偷猪的奖励
@@ -17,13 +15,13 @@ package com.rpgGame.coreData.info.task.daily
 		/** 偷猪的奖励 **/
 		public var prize:PrizeInfo;
 		
-		public function TouZhuPrizeData( touzhuprize:TouZhuPrize )
-		{
-			if( touzhuprize == null )
-				return;
-			
-			zhuId = touzhuprize.zhuId;
-			prize = ProtoParseToInfo.decodePrizeProto( touzhuprize.prize );
-		}
+//		public function TouZhuPrizeData( touzhuprize:TouZhuPrize )
+//		{
+//			if( touzhuprize == null )
+//				return;
+//			
+//			zhuId = touzhuprize.zhuId;
+//			prize = ProtoParseToInfo.decodePrizeProto( touzhuprize.prize );
+//		}
 	}
 }

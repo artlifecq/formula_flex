@@ -1,15 +1,9 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
-	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
 	import com.rpgGame.netData.npc.message.ReqNpcServicesMessage;
-	import com.rpgGame.netData.npc.message.ResNpcActionMessage;
-	import com.rpgGame.netData.npc.message.ResNpcServicesMessage;
 	import com.rpgGame.netData.task.message.ReqfinishTaskMessage;
-	
-	import app.cmd.TaskModuleMessages;
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
@@ -109,7 +103,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(answerIndex);
 			_bytes.writeVarint32(prizeIndex);
 
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, _bytes);
 		}
 
 		/**
@@ -126,7 +120,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, _bytes);
 		}
 
 		/**
@@ -143,7 +137,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, _bytes);
 		}
 
 		/**
@@ -162,7 +156,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(taskId);
 			_bytes.writeVarint32(clientTaskType);
 
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, _bytes);
 		}
 
 		/**
@@ -171,7 +165,7 @@ package com.rpgGame.app.sender
 		public static function reqReduceEveryDayDiffiStar() : void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REDUCE_DIFFI_STAR, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REDUCE_DIFFI_STAR, _bytes);
 		}
 
 		/**
@@ -180,7 +174,7 @@ package com.rpgGame.app.sender
 		public static function reqEveryDayTaskAddPrizeStar() : void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_ADD_PRIZE_STAR, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_ADD_PRIZE_STAR, _bytes);
 		}
 
 		/**
@@ -189,7 +183,7 @@ package com.rpgGame.app.sender
 		public static function reqAutoCompleteAllEveryDayTask() : void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_ALL_DAILY_TASK, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_ALL_DAILY_TASK, _bytes);
 		}
 
 
@@ -200,7 +194,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(chanceId);
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_CHANCE_TASK, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_CHANCE_TASK, _bytes);
 		}
 
 		/**
@@ -215,7 +209,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(passiveTask);
 			_bytes.writeVarint32(initiativeTask);
 			_bytes.writeBoolean(yuanbaoBool);
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_SWALLOW_TASK, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_SWALLOW_TASK, _bytes);
 		}
 
 		/**
@@ -226,7 +220,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(id);
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REQUEST_COMPLETED_CHAPTER_TASK, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REQUEST_COMPLETED_CHAPTER_TASK, _bytes);
 		}
 
 		/**
@@ -240,7 +234,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 			_bytes.writeVarint32(objectId);
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_COLLECT_GOODS, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_COLLECT_GOODS, _bytes);
 		}
 
 		/**
@@ -284,7 +278,7 @@ package com.rpgGame.app.sender
 					_bytes.writeBytes(upgradeItemListVo.getByte());
 				}
 			}
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_TRANSPORT, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_TRANSPORT, _bytes);
 		}
 
 		/**
@@ -302,7 +296,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 			_bytes.writeVarint64(npcId);
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, _bytes);
 		}
 	}
 }

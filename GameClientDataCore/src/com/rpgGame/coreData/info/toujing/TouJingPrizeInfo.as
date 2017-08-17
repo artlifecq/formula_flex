@@ -2,8 +2,6 @@ package com.rpgGame.coreData.info.toujing
 {
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
-	import app.message.TouJingConfig.TouJingPrizeProto;
-	
 	/**
 	 * 偷经任务奖励 
 	 * @author 陈鹉光
@@ -29,16 +27,16 @@ package com.rpgGame.coreData.info.toujing
 		 * @param data
 		 * 
 		 */		
-		public function setTouJingPrizeInfo( data:TouJingPrizeProto ):void
-		{
-			if( data == null )
-				return;
-			
-			level = data.level;
-			baseExp = data.baseExp;
-			normalExpMulitple  = data.normalExpMulitple;
-			duoJingExpMulitple = data.duoJingExpMulitple;
-			createPrizeItemInfo( data.goods );
-		}
+//		public function setTouJingPrizeInfo( data:TouJingPrizeProto ):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			level = data.level;
+//			baseExp = data.baseExp;
+//			normalExpMulitple  = data.normalExpMulitple;
+//			duoJingExpMulitple = data.duoJingExpMulitple;
+//			createPrizeItemInfo( data.goods );
+//		}
 	}
 }

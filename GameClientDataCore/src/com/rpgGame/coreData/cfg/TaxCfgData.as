@@ -1,8 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.AllTaxConfigProto;
-	import app.message.TaxConfigProto;
-
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -20,20 +17,20 @@ package com.rpgGame.coreData.cfg
 
 		private static var _map : HashMap = new HashMap();
 
-		public static function setConfig(config : AllTaxConfigProto) : void
-		{
-			if (!config)
-				return;
-
-			for each (var taxConfig : TaxConfigProto in config.taxConfig)
-			{
-				_map.add(taxConfig.taxType, taxConfig);
-			}
-		}
-
-		public static function getTaxConfigByType(type : int) : TaxConfigProto
-		{
-			return _map.getValue(type);
-		}
+//		public static function setConfig(config : AllTaxConfigProto) : void
+//		{
+//			if (!config)
+//				return;
+//
+//			for each (var taxConfig : TaxConfigProto in config.taxConfig)
+//			{
+//				_map.add(taxConfig.taxType, taxConfig);
+//			}
+//		}
+//
+//		public static function getTaxConfigByType(type : int) : TaxConfigProto
+//		{
+//			return _map.getValue(type);
+//		}
 	}
 }

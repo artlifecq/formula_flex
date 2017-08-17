@@ -445,7 +445,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.textAlign = "left";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 38;
+			temp.width = 132;
 			temp.x = 651;
 			temp.y = 505;
 			return temp;

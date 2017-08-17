@@ -33,6 +33,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
@@ -303,7 +304,7 @@ package com.rpgGame.app.manager
 					}
 					if (rpd_mount.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_body_02, rpd_body);
+						ru = role.avatar.addRenderUnitToChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.b_0_saddle_01, rpd_body);
 					}else{
 						ru = role.avatar.addRenderUnitToBone(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.b_0_saddle_01, rpd_body);
 					}
@@ -428,13 +429,17 @@ package com.rpgGame.app.manager
 				var ru : RenderUnit3D;
 				if (rpd_body)
 				{
-					if (rpd_body.animatorSourchPath)
-					{
-						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect);
-					}
-					else
-					{
-						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect);
+					if(role.data  is SceneDropGoodsData){
+						ru=role.avatar.addRenderUnit(rpd_body_effect);
+					}else{
+						if (rpd_body.animatorSourchPath)
+						{
+							ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect);
+						}
+						else
+						{
+							ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect);
+						}
 					}
 				}
 				if (ru)
@@ -460,13 +465,17 @@ package com.rpgGame.app.manager
 				//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect2);
 				if (rpd_body)
 				{
-					if (rpd_body.animatorSourchPath)
-					{
-						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
-					}
-					else
-					{
-						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
+					if(role.data  is SceneDropGoodsData){
+						ru=role.avatar.addRenderUnit(rpd_body_effect2);
+					}else{
+						if (rpd_body.animatorSourchPath)
+						{
+							ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
+						}
+						else
+						{
+							ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
+						}
 					}
 				}
 				if (ru)

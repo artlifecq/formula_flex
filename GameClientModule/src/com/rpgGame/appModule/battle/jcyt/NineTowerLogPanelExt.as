@@ -31,7 +31,7 @@ package com.rpgGame.appModule.battle.jcyt
 			{
 				tmp=new NineTowerLogCellExt(i);
 				tmp.x=13;
-				tmp.y=72+i*tmp.height;
+				tmp.y=70+i*tmp.height;
 				_cellList.push(tmp);
 				this.addChild(tmp);
 				tmp.visible=false;

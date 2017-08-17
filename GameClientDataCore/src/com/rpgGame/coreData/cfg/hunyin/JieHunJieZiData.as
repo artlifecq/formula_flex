@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.cfg.hunyin
 {
 	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
-	import com.rpgGame.coreData.clientConfig.Q_ring;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;

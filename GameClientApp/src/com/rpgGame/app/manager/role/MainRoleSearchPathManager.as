@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
-	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -19,7 +18,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.WorldMapEvent;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
-	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.SearchMapData;
@@ -32,8 +30,6 @@ package com.rpgGame.app.manager.role
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	
-	import app.message.SceneTransportProto;
 	
 	import away3d.events.MouseEvent3D;
 	import away3d.pathFinding.DistrictWithPath;
@@ -479,84 +475,84 @@ package com.rpgGame.app.manager.role
 		 * return 数据格式：场景ID和此场景的一个传送点（出）ID，即[sceneID:int,transOutX:int，transOutY:int, dis:int=0]*，返回空数组[]则未找到路径
 		 *
 		 **/
-		private static function doSearch($fromScene : int, $toScene : int, $crossSceneArr : Array = null) : Vector.<SearchMapData>
-		{
-			var pathArr : Vector.<SearchMapData> = new Vector.<SearchMapData>();
-
-			//第一次给$crossSceneArr赋初值
-			$crossSceneArr = $crossSceneArr || [];
-			$crossSceneArr[$crossSceneArr.length] = $fromScene; //将当前场景添加进走过的数组
-
-			//寻路
-			//获取$fromScene所在场景的所有出口
-			var transOuts : Array = TranportsDataManager.getSceneTransportProtos($fromScene, MainRoleManager.actorInfo.sceneSequence);
-
-			if (!transOuts || transOuts.length == 0)
-				return null;
-			var stepPath : SearchMapData; //单步
-			var followPath : Vector.<SearchMapData>; //后面的步
-			var mapID : int; //传送点目标场景ID
-			var polygon : Vector.<Point>;
-			var center : Point;
-			//直接找到的优先选择
-			var transOutRes : SceneTransportProto;
-			for each (transOutRes in transOuts)
-			{
-				mapID = transOutRes.destSceneDataId;
-				//如果目标场景在已经过的路径中则不处理
-				if ($crossSceneArr.indexOf(mapID) != -1)
-				{
-					continue;
-				}
-				//目标一致,成功获取路径，并跳出
-				if (transOutRes.destSceneDataId == $toScene)
-				{
-					polygon = TranportsDataManager.getPolygon(transOutRes);
-					center = MathUtil.getPolygonCenter(polygon);
-					//获取单步路径
-					//格式：[sceneID:int,transOutX:int，transOutY:int, dis:int]
-					stepPath = new SearchMapData($fromScene, center.x, center.y, 0);
-					//直接返回最终或最后一步路径！！！
-					pathArr.push(stepPath);
-					return pathArr;
-				}
-			}
-			//不能直接找到的放在后面递归寻找
-			for each (transOutRes in transOuts)
-			{
-				mapID = transOutRes.destSceneDataId;
-				//如果目标场景在已经过的路径中则不处理
-				if ($crossSceneArr.indexOf(mapID) != -1)
-				{
-					continue;
-				}
-				//递归
-				followPath = doSearch(mapID, $toScene, $crossSceneArr.concat());
-				if (followPath && followPath.length != 0) //连接没有断裂
-				{
-					polygon = TranportsDataManager.getPolygon(transOutRes);
-					center = MathUtil.getPolygonCenter(polygon);
-					//获取单步路径
-					stepPath = new SearchMapData($fromScene, center.x, center.y, 0);
-					//将这条路完整径保存起来！！！
-					pathArr.push(stepPath);
-					pathArr = pathArr.concat(followPath);
-				}
-			}
-			return pathArr;
-
-			//比较选择出一条最短的路径返回
-//			var tempArr : Array = [];
-//			var aPath : Array;
-//			for each (aPath in pathArr)
-//			{
-//				tempArr.push({stepNum: aPath.length, path: aPath});
-//			}
-//			tempArr.sortOn("stepNum", Array.NUMERIC);
-//			path = (tempArr.length > 0) ? tempArr[0].path : [];
+//		private static function doSearch($fromScene : int, $toScene : int, $crossSceneArr : Array = null) : Vector.<SearchMapData>
+//		{
+//			var pathArr : Vector.<SearchMapData> = new Vector.<SearchMapData>();
 //
-//			return path;
-		}
+//			//第一次给$crossSceneArr赋初值
+//			$crossSceneArr = $crossSceneArr || [];
+//			$crossSceneArr[$crossSceneArr.length] = $fromScene; //将当前场景添加进走过的数组
+//
+//			//寻路
+//			//获取$fromScene所在场景的所有出口
+//			var transOuts : Array = TranportsDataManager.getSceneTransportProtos($fromScene, MainRoleManager.actorInfo.sceneSequence);
+//
+//			if (!transOuts || transOuts.length == 0)
+//				return null;
+//			var stepPath : SearchMapData; //单步
+//			var followPath : Vector.<SearchMapData>; //后面的步
+//			var mapID : int; //传送点目标场景ID
+//			var polygon : Vector.<Point>;
+//			var center : Point;
+//			//直接找到的优先选择
+//			var transOutRes : SceneTransportProto;
+//			for each (transOutRes in transOuts)
+//			{
+//				mapID = transOutRes.destSceneDataId;
+//				//如果目标场景在已经过的路径中则不处理
+//				if ($crossSceneArr.indexOf(mapID) != -1)
+//				{
+//					continue;
+//				}
+//				//目标一致,成功获取路径，并跳出
+//				if (transOutRes.destSceneDataId == $toScene)
+//				{
+//					polygon = TranportsDataManager.getPolygon(transOutRes);
+//					center = MathUtil.getPolygonCenter(polygon);
+//					//获取单步路径
+//					//格式：[sceneID:int,transOutX:int，transOutY:int, dis:int]
+//					stepPath = new SearchMapData($fromScene, center.x, center.y, 0);
+//					//直接返回最终或最后一步路径！！！
+//					pathArr.push(stepPath);
+//					return pathArr;
+//				}
+//			}
+//			//不能直接找到的放在后面递归寻找
+//			for each (transOutRes in transOuts)
+//			{
+//				mapID = transOutRes.destSceneDataId;
+//				//如果目标场景在已经过的路径中则不处理
+//				if ($crossSceneArr.indexOf(mapID) != -1)
+//				{
+//					continue;
+//				}
+//				//递归
+//				followPath = doSearch(mapID, $toScene, $crossSceneArr.concat());
+//				if (followPath && followPath.length != 0) //连接没有断裂
+//				{
+//					polygon = TranportsDataManager.getPolygon(transOutRes);
+//					center = MathUtil.getPolygonCenter(polygon);
+//					//获取单步路径
+//					stepPath = new SearchMapData($fromScene, center.x, center.y, 0);
+//					//将这条路完整径保存起来！！！
+//					pathArr.push(stepPath);
+//					pathArr = pathArr.concat(followPath);
+//				}
+//			}
+//			return pathArr;
+//
+//			//比较选择出一条最短的路径返回
+////			var tempArr : Array = [];
+////			var aPath : Array;
+////			for each (aPath in pathArr)
+////			{
+////				tempArr.push({stepNum: aPath.length, path: aPath});
+////			}
+////			tempArr.sortOn("stepNum", Array.NUMERIC);
+////			path = (tempArr.length > 0) ? tempArr[0].path : [];
+////
+////			return path;
+//		}
 
 		/**
 		 * 检查$sceneId指定的场景是否存在

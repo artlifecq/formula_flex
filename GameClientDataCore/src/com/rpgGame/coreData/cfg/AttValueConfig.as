@@ -1,24 +1,18 @@
 package com.rpgGame.coreData.cfg
 {
 	import com.gameClient.utils.HashMap;
-	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-	
-	import feathers.controls.Label;
-	import feathers.controls.text.Fontter;
 	
 	
 	
@@ -101,8 +95,7 @@ package com.rpgGame.coreData.cfg
 		{
 			var per:int=CharAttributeType.getAttrPer(type);
 			if(per!=1){
-				var str:String=(value/per).toFixed(2);
-				return Number(str);
+				return Math.round(value/per);
 			}
 			return value;
 		}

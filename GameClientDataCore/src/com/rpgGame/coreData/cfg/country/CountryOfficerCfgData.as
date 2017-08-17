@@ -1,8 +1,5 @@
 package com.rpgGame.coreData.cfg.country
 {
-	import app.message.CountryOfficerDataProto;
-	import app.message.CountryOfficerDatasProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -20,18 +17,18 @@ package com.rpgGame.coreData.cfg.country
 		{
 		}
 
-		public static function setConfig(cfg : CountryOfficerDatasProto) : void
-		{
-			for each (var dataProto : CountryOfficerDataProto in cfg.data)
-			{
-				addData(dataProto);
-			}
-		}
-
-		public static function addData(dataProto : CountryOfficerDataProto) : void
-		{
-			_map.add(dataProto.pos, dataProto);
-		}
+//		public static function setConfig(cfg : CountryOfficerDatasProto) : void
+//		{
+//			for each (var dataProto : CountryOfficerDataProto in cfg.data)
+//			{
+//				addData(dataProto);
+//			}
+//		}
+//
+//		public static function addData(dataProto : CountryOfficerDataProto) : void
+//		{
+//			_map.add(dataProto.pos, dataProto);
+//		}
 
 		/**
 		 * optional CountryOfficerPos pos = 1; // 官职
@@ -63,10 +60,10 @@ package com.rpgGame.coreData.cfg.country
 		 * @return 
 		 * 
 		 */		
-		public static function getData(pos : int) : CountryOfficerDataProto
-		{
-			return _map.getValue(pos) as CountryOfficerDataProto;
-		}
+//		public static function getData(pos : int) : CountryOfficerDataProto
+//		{
+//			return _map.getValue(pos) as CountryOfficerDataProto;
+//		}
 		
 		public static function getAllData():Array
 		{

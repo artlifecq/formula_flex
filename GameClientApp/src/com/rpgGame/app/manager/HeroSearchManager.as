@@ -2,11 +2,8 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.sender.HeroSearchSender;
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.events.SearchHeroEvent;
 	import com.rpgGame.coreData.info.heroSearch.HeroSearchData;
-	
-	import app.cmd.SearchByHeroNameModuleMessages;
 	
 	import org.client.mainCore.manager.EventManager;
 

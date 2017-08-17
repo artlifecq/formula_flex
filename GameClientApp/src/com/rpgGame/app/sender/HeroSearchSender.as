@@ -1,10 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.ReqLockUtil;
 	
-	import app.cmd.SearchByHeroNameModuleMessages;
-	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	public class HeroSearchSender extends BaseSender
 	{
@@ -28,7 +24,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(reqType);
 			_bytes.writeBoolean(isMyCountry);
 			_bytes.writeUTFBytes(name);
-			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, _bytes);
+//			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, _bytes);
 		}
 
 		/**
@@ -45,7 +41,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(reqType);
 			_bytes.writeBoolean(isMyCountry);
 			_bytes.writeUTFBytes(name);
-			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, _bytes);
+//			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, _bytes);
 		}
 
 		public static function searchHeroIdByName(reqType : int, name : String) : void
@@ -57,7 +53,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);
 			_bytes.writeUTFBytes(name);
-			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, _bytes);
+//			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, _bytes);
 		}
 	}
 }

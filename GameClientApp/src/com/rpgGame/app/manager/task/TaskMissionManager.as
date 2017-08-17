@@ -1,10 +1,6 @@
 package com.rpgGame.app.manager.task
 {
-	import com.adobe.serialization.json.JSON;
-	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -19,10 +15,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
 	import flash.utils.Dictionary;
-	
-	import app.message.BoolArrayProto;
-	
-	import feathers.controls.Check;
 	
 	import org.game.netCore.data.long;
 
@@ -204,7 +196,10 @@ package com.rpgGame.app.manager.task
 			{
 				return TaskType.MAINTYPE_GUILDDAILYTASK;
 			}
-			
+			else if(getTaskInfoByType(TaskType.LIJIN_TASK)!=null&&taskid.ToGID()==getTaskInfoByType(TaskType.LIJIN_TASK).taskId.ToGID())
+			{
+				return TaskType.LIJIN_TASK;
+			}
 			return 0;
 			
 		}
@@ -1145,7 +1140,14 @@ package com.rpgGame.app.manager.task
 			{
 				return true;
 			}
-			
+			if(isTaskMonster(mid,TaskType.MAINTYPE_GUILDDAILYTASK))
+			{
+				return true;
+			}
+			if(isTaskMonster(mid,TaskType.LIJIN_TASK))
+			{
+				return true;
+			}
 			return false;
 		}
 		

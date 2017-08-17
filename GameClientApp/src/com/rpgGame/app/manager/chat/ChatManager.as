@@ -34,10 +34,6 @@ package com.rpgGame.app.manager.chat
 	
 	import flash.utils.Dictionary;
 	
-	import app.client_proto.ChatSetTabProtoC;
-	import app.message.GoodsProto;
-	import app.message.ChatContentProto.PosInfoProto;
-	
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.ds.HashMap;
@@ -187,10 +183,10 @@ package com.rpgGame.app.manager.chat
 					return isShowInSheHui(channel);
 				case EnumChatTabsType.TABS_GEREN:
 					return isShowInGeRen(channel);
-				case EnumChatTabsType.TABS_ZIDINGYIONE:
-					return isShowInZiDingYiOne(channel);
-				case EnumChatTabsType.TABS_ZIDINGYITWO:
-					return isShowInZiDingYiTwo(channel);
+//				case EnumChatTabsType.TABS_ZIDINGYIONE:
+//					return isShowInZiDingYiOne(channel);
+//				case EnumChatTabsType.TABS_ZIDINGYITWO:
+//					return isShowInZiDingYiTwo(channel);
 			}
 			return false;
 		}
@@ -259,38 +255,38 @@ package com.rpgGame.app.manager.chat
 		 * @return
 		 *
 		 */
-		public static function isShowInZiDingYiOne(channel : int) : Boolean
-		{
-			var tabArr:Array = ClientSettingChatManager.getCustomTabList();
-			if(tabArr && tabArr.length)
-			{
-				var tabProto:ChatSetTabProtoC = tabArr[0];
-				if(tabProto.selectedChannelArr && tabProto.selectedChannelArr.indexOf(channel) >= 0)
-				{
-					return true;
-				}
-			}
-			return false;
-		}
+//		public static function isShowInZiDingYiOne(channel : int) : Boolean
+//		{
+//			var tabArr:Array = ClientSettingChatManager.getCustomTabList();
+//			if(tabArr && tabArr.length)
+//			{
+//				var tabProto:ChatSetTabProtoC = tabArr[0];
+//				if(tabProto.selectedChannelArr && tabProto.selectedChannelArr.indexOf(channel) >= 0)
+//				{
+//					return true;
+//				}
+//			}
+//			return false;
+//		}
 		/**
 		 * 判断此频道信息是否在自定义2里显示
 		 * @param channel
 		 * @return
 		 *
 		 */
-		public static function isShowInZiDingYiTwo(channel : int) : Boolean
-		{
-			var tabArr:Array = ClientSettingChatManager.getCustomTabList();
-			if(tabArr && tabArr.length > 1)
-			{
-				var tabProto:ChatSetTabProtoC = tabArr[1];
-				if(tabProto.selectedChannelArr && tabProto.selectedChannelArr.indexOf(channel) >= 0)
-				{
-					return true;
-				}
-			}
-			return false;
-		}
+//		public static function isShowInZiDingYiTwo(channel : int) : Boolean
+//		{
+//			var tabArr:Array = ClientSettingChatManager.getCustomTabList();
+//			if(tabArr && tabArr.length > 1)
+//			{
+//				var tabProto:ChatSetTabProtoC = tabArr[1];
+//				if(tabProto.selectedChannelArr && tabProto.selectedChannelArr.indexOf(channel) >= 0)
+//				{
+//					return true;
+//				}
+//			}
+//			return false;
+//		}
 		/**
 		 * 设置频道信息是否在全部里显示
 		 * @param channel
@@ -361,53 +357,53 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function parseReceivedChatMsg(chatInfo : ChatInfo) : void
 		{
-			if (chatInfo == null)
-				return;
-			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(chatInfo.countryId) + "]";
-			var channelColor:uint = ChatUtil.getChannelColor(chatInfo.channel);
-			var senderNameStr : String = RichTextCustomUtil.getTextLinkCode(chatInfo.name,channelColor,RichTextCustomLinkType.ROLE_NAME_TYPE,chatInfo.id.toString());
-			switch(chatInfo.channel)
-			{
-				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
-					if(chatInfo.id == MainRoleManager.actorID)//自己给别人发的
-					{
-						var targetNameStr:String = RichTextCustomUtil.getTextLinkCode(chatInfo.targetName,channelColor,chatInfo.targetID.toString());
-						chatInfo.realShowName = "你悄悄对" + targetNameStr + "说:";
-					}
-					else//别人给自己发的
-					{
-						chatInfo.realShowName = senderNameStr + "悄悄对你说:";
-					}
-					break;
-				default:
-					chatInfo.realShowName = countryName + senderNameStr + ":";
-			}
-			var realShowMsg : String = chatInfo.speech;
-			
-			if (chatInfo.chatGoods != null)
-			{
-				var itemArr : Array = [];
-				var len : int = chatInfo.chatGoods.length;
-				var chatGoods : ItemInfo;
-				var itemCode : String;
-				for (var i : int = 0; i < len; i++)
-				{
-					chatGoods = chatInfo.chatGoods[i];
-					var itemInfo:ClientItemInfo = ItemUtil.convertClientItemInfo(chatGoods);
-					var key:String = ChatGoodsManager.addItemInfo(itemInfo);
-					itemCode = RichTextCustomUtil.getItemCode(key, ItemConfig.getItemName(chatGoods.itemModelId), ItemConfig.getItemQuality(chatGoods.itemModelId));
-					itemArr.push(itemCode);
-				}
-				
-				realShowMsg = replaceStr(chatInfo.speech, itemArr, MSG_GOODS_CODE);
-			}
-			
-			if (chatInfo.posInfo != null)
-			{
-				var positionCode : String = RichTextCustomUtil.getPositionCode(chatInfo.posInfo.sceneId, chatInfo.posInfo.sceneX, chatInfo.posInfo.sceneY, chatInfo.posInfo.sceneLine, chatInfo.posInfo.sceneCountry);
-				realShowMsg = replaceStr(realShowMsg, [positionCode], MSG_POSITION_CODE);
-			}
-			chatInfo.realShowMsg = realShowMsg;
+//			if (chatInfo == null)
+//				return;
+//			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(chatInfo.countryId) + "]";
+//			var channelColor:uint = ChatUtil.getChannelColor(chatInfo.channel);
+//			var senderNameStr : String = RichTextCustomUtil.getTextLinkCode(chatInfo.name,channelColor,RichTextCustomLinkType.ROLE_NAME_TYPE,chatInfo.id.toString());
+//			switch(chatInfo.channel)
+//			{
+//				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
+//					if(chatInfo.id == MainRoleManager.actorID)//自己给别人发的
+//					{
+//						var targetNameStr:String = RichTextCustomUtil.getTextLinkCode(chatInfo.targetName,channelColor,chatInfo.targetID.toString());
+//						chatInfo.realShowName = "你悄悄对" + targetNameStr + "说:";
+//					}
+//					else//别人给自己发的
+//					{
+//						chatInfo.realShowName = senderNameStr + "悄悄对你说:";
+//					}
+//					break;
+//				default:
+//					chatInfo.realShowName = countryName + senderNameStr + ":";
+//			}
+//			var realShowMsg : String = chatInfo.speech;
+//			
+//			if (chatInfo.chatGoods != null)
+//			{
+//				var itemArr : Array = [];
+//				var len : int = chatInfo.chatGoods.length;
+//				var chatGoods : ItemInfo;
+//				var itemCode : String;
+//				for (var i : int = 0; i < len; i++)
+//				{
+//					chatGoods = chatInfo.chatGoods[i];
+//					var itemInfo:ClientItemInfo = ItemUtil.convertClientItemInfo(chatGoods);
+//					var key:String = ChatGoodsManager.addItemInfo(itemInfo);
+//					itemCode = RichTextCustomUtil.getItemCode(key, ItemConfig.getItemName(chatGoods.itemModelId), ItemConfig.getItemQuality(chatGoods.itemModelId));
+//					itemArr.push(itemCode);
+//				}
+//				
+//				realShowMsg = replaceStr(chatInfo.speech, itemArr, MSG_GOODS_CODE);
+//			}
+//			
+//			if (chatInfo.posInfo != null)
+//			{
+//				var positionCode : String = RichTextCustomUtil.getPositionCode(chatInfo.posInfo.sceneId, chatInfo.posInfo.sceneX, chatInfo.posInfo.sceneY, chatInfo.posInfo.sceneLine, chatInfo.posInfo.sceneCountry);
+//				realShowMsg = replaceStr(realShowMsg, [positionCode], MSG_POSITION_CODE);
+//			}
+//			chatInfo.realShowMsg = realShowMsg;
 		}
 		
 		private static function replaceStr(str : String, args : Array, replaseSye : String) : String
@@ -478,7 +474,7 @@ package com.rpgGame.app.manager.chat
 		public static var currentSiLiaoTargetName:String;
 		private static var _showGoodsList : Array = [];
 		private static var _positionList:Array=[];
-		private static var _posInfoProto : PosInfoProto;
+//		private static var _posInfoProto : PosInfoProto;
 		
 		/**
 		 *
@@ -608,7 +604,7 @@ package com.rpgGame.app.manager.chat
 		{
 			_showGoodsList.length = 0;
 			_positionList.length=0;
-			_posInfoProto = null;
+//			_posInfoProto = null;
 			
 			var separator : String = RichTextConfig.SEPARATOR;
 			var info : String;
@@ -712,12 +708,12 @@ package com.rpgGame.app.manager.chat
 		 * @return
 		 *
 		 */
-		private static function getShowItemProto(specialMsg:RichTextUnitData) : GoodsProto
-		{
-			//			var itemInfo:ItemInfo  = getShowItemInfo(specialMsg);
-			//			return itemInfo.proto;
-			return null;
-		}
+//		private static function getShowItemProto(specialMsg:RichTextUnitData) : GoodsProto
+//		{
+//			//			var itemInfo:ItemInfo  = getShowItemInfo(specialMsg);
+//			//			return itemInfo.proto;
+//			return null;
+//		}
 		
 		
 		/**
@@ -767,51 +763,51 @@ package com.rpgGame.app.manager.chat
 		 * @return
 		 *
 		 */
-		public static function getChatAllTab() : ListCollection
-		{
-			var showType : Array = [EnumChatTabsType.TABS_ALL, EnumChatTabsType.TABS_SHEHUI, EnumChatTabsType.TABS_GEREN,EnumChatTabsType.TABS_LABA];
-			var customTabArr:Array = ClientSettingChatManager.getCustomTabList();
-			if(customTabArr)
-			{
-				var length:int = customTabArr.length;
-				for(var j:int=0;j<length;j++)
-				{
-					if(j == 0)
-					{
-						showType.push(EnumChatTabsType.TABS_ZIDINGYIONE);
-					}
-					else
-					{
-						showType.push(EnumChatTabsType.TABS_ZIDINGYITWO);
-					}
-				}
-			}
-			
-			var tabTitle : Array = [];
-			var len : int = showType.length;
-			var channelProtoC:ChatSetTabProtoC;
-			for (var i : int = 0; i < len; i++)
-			{
-				if(showType[i] == EnumChatTabsType.TABS_ZIDINGYIONE)
-				{
-					channelProtoC = customTabArr[0];
-					tabTitle.push(channelProtoC.name);
-				}
-				else if(showType[i] == EnumChatTabsType.TABS_ZIDINGYITWO)
-				{
-					channelProtoC = customTabArr[1];
-					tabTitle.push(channelProtoC.name);
-				}
-				else
-				{
-					tabTitle.push(ChatUtil.getTabsName(showType[i]));
-				}
-				
-			}
-			var tabBarData : ListCollection = new ListCollection();
-			tabBarData.data = tabTitle;
-			return tabBarData;
-		}
+//		public static function getChatAllTab() : ListCollection
+//		{
+//			var showType : Array = [EnumChatTabsType.TABS_ALL, EnumChatTabsType.TABS_SHEHUI, EnumChatTabsType.TABS_GEREN,EnumChatTabsType.TABS_LABA];
+//			var customTabArr:Array = ClientSettingChatManager.getCustomTabList();
+//			if(customTabArr)
+//			{
+//				var length:int = customTabArr.length;
+//				for(var j:int=0;j<length;j++)
+//				{
+//					if(j == 0)
+//					{
+//						showType.push(EnumChatTabsType.TABS_ZIDINGYIONE);
+//					}
+//					else
+//					{
+//						showType.push(EnumChatTabsType.TABS_ZIDINGYITWO);
+//					}
+//				}
+//			}
+//			
+//			var tabTitle : Array = [];
+//			var len : int = showType.length;
+//			var channelProtoC:ChatSetTabProtoC;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				if(showType[i] == EnumChatTabsType.TABS_ZIDINGYIONE)
+//				{
+//					channelProtoC = customTabArr[0];
+//					tabTitle.push(channelProtoC.name);
+//				}
+//				else if(showType[i] == EnumChatTabsType.TABS_ZIDINGYITWO)
+//				{
+//					channelProtoC = customTabArr[1];
+//					tabTitle.push(channelProtoC.name);
+//				}
+//				else
+//				{
+//					tabTitle.push(ChatUtil.getTabsName(showType[i]));
+//				}
+//				
+//			}
+//			var tabBarData : ListCollection = new ListCollection();
+//			tabBarData.data = tabTitle;
+//			return tabBarData;
+//		}
 		
 		private static var _zongheHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
 		private static var _shejiaoHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;

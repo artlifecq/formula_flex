@@ -7,8 +7,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.fight.message.CSSkillContiStateMessage;
 	import com.rpgGame.netData.skill.message.ReqLevelUpSkillMessage;
 	
-	import app.cmd.SpellModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
 
@@ -112,7 +110,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(spellID);
 			_bytes.writeBytes(itemListVo.getByte());
 			
-			send(SpellModuleMessages.C2S_LEARN_OR_UPGRADE_ACTIVE_SPELL, _bytes);
+//			send(SpellModuleMessages.C2S_LEARN_OR_UPGRADE_ACTIVE_SPELL, _bytes);
 		}
 
 		/**

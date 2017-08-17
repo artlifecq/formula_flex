@@ -3,8 +3,6 @@ package com.rpgGame.coreData.info.upgrade
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.lang.LangMisc;
-	
-	import app.message.UpgradeProto;
 
 	/**
 	 *
@@ -32,32 +30,32 @@ package com.rpgGame.coreData.info.upgrade
 		 */		
 		private var _count : int = 1;
 		
-		public function UpgradeProtoInfo( upgradeProto:UpgradeProto = null )
-		{
-			setProto( upgradeProto );
-		}
-		
-		
-		public function setProto( upgradeProto:UpgradeProto ):void
-		{
-			if( upgradeProto == null )
-				return;
-			
-			goodsInfoVect.length = 0;
-			
-			amountInfo.setData( upgradeProto.amountCost );
-			blessMaxAmount = upgradeProto.blessMaxAmount;
-			rateDesc = upgradeProto.rateDesc;
-			rate = upgradeProto.rate;
-			
-			var len:int = upgradeProto.goodsInfo.length;
-			var upgradeGoodsInfo:UpgradeGoodsInfo;
-			for( var i:int = 0; i < len; i++ )
-			{
-				upgradeGoodsInfo = new UpgradeGoodsInfo( upgradeProto.goodsInfo[i] );
-				goodsInfoVect.push( upgradeGoodsInfo );
-			}
-		}
+//		public function UpgradeProtoInfo( upgradeProto:UpgradeProto = null )
+//		{
+//			setProto( upgradeProto );
+//		}
+//		
+//		
+//		public function setProto( upgradeProto:UpgradeProto ):void
+//		{
+//			if( upgradeProto == null )
+//				return;
+//			
+//			goodsInfoVect.length = 0;
+//			
+//			amountInfo.setData( upgradeProto.amountCost );
+//			blessMaxAmount = upgradeProto.blessMaxAmount;
+//			rateDesc = upgradeProto.rateDesc;
+//			rate = upgradeProto.rate;
+//			
+//			var len:int = upgradeProto.goodsInfo.length;
+//			var upgradeGoodsInfo:UpgradeGoodsInfo;
+//			for( var i:int = 0; i < len; i++ )
+//			{
+//				upgradeGoodsInfo = new UpgradeGoodsInfo( upgradeProto.goodsInfo[i] );
+//				goodsInfoVect.push( upgradeGoodsInfo );
+//			}
+//		}
 		
 		/**
 		 * 得到第一个物的消耗品名字

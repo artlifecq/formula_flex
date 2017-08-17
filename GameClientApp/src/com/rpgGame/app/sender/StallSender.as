@@ -1,10 +1,8 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.info.stall.StallItemData;
 	
-	import app.cmd.StallModuleMessages;
 	import app.message.ChangeToBuyGoodsType;
 	import app.message.ChangeToSellGoodsType;
 
@@ -68,7 +66,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(stallItem.itemId);
 				_bytes.writeVarint32(stallItem.price);
 			}
-			send(StallModuleMessages.C2S_STALL,_bytes);
+//			send(StallModuleMessages.C2S_STALL,_bytes);
 		}
 		/**
 		 * 请求撤摊
@@ -76,7 +74,7 @@ package com.rpgGame.app.sender
 		public static function cancelStall():void
 		{
 			_bytes.clear();
-			send(StallModuleMessages.C2S_CANCEL_STALL,_bytes);
+//			send(StallModuleMessages.C2S_CANCEL_STALL,_bytes);
 		}
 		/**
 		 * 请求修改我要出售的物品,本次操作在收到返回之前,都清锁定
@@ -117,7 +115,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(type);
 			if(type==ChangeToSellGoodsType.SELL_GOODS_DOWN)
 			{
-				send(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,_bytes);
+//				send(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,_bytes);
 			}
 			if(!stallItem)
 				return;
@@ -151,7 +149,7 @@ package com.rpgGame.app.sender
 				trace("错误类型，不能发过去");
 				return;
 			}
-			send(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,_bytes);
+//			send(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,_bytes);
 		}
 		
 		/**
@@ -187,7 +185,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(type);
 			if(type==ChangeToBuyGoodsType.BUY_GOODS_DOWN)
 			{
-				send(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,_bytes);
+//				send(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,_bytes);
 				return;
 			}
 			if(!stallItem)
@@ -206,7 +204,7 @@ package com.rpgGame.app.sender
 				trace("错误类型，不能发过去");
 				return;
 			}
-			send(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,_bytes);
+//			send(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,_bytes);
 		}
 		/**
 		 * 修改摊位类型,不可以修改成出售或者寄售的物品数量减少的摊位类型
@@ -217,7 +215,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(type);
-			send(StallModuleMessages.C2S_CHANGE_STALL_TYPE,_bytes);
+//			send(StallModuleMessages.C2S_CHANGE_STALL_TYPE,_bytes);
 		}
 		/**
 		 * 购买摊位时长
@@ -230,7 +228,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(type);
 			_bytes.writeVarint32(hour);
-			send(StallModuleMessages.C2S_BUY_STALL_TYPE,_bytes);
+//			send(StallModuleMessages.C2S_BUY_STALL_TYPE,_bytes);
 		}
 		/**
 		 * 修改摊位的名字，修改成功通过 S2C_STALL_BROADCAST 修改,该操作写死3秒钟才可以操作一次
@@ -240,7 +238,7 @@ package com.rpgGame.app.sender
 		public static function changeStallName(name:String):void
 		{
 			_bytes.writeUTFBytes(name);
-			send(StallModuleMessages.C2S_CHANGE_STALL_NAME,_bytes);
+//			send(StallModuleMessages.C2S_CHANGE_STALL_NAME,_bytes);
 		}
 		
 		/**
@@ -258,7 +256,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(id);
 			_bytes.writeVarint32(version);
-			send(StallModuleMessages.C2S_GET_STALL_DETAIL,_bytes);
+//			send(StallModuleMessages.C2S_GET_STALL_DETAIL,_bytes);
 		}
 		/**
 		 * 购买摊位里面的东西
@@ -281,7 +279,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(num);
 			_bytes.writeVarint32(item);
 			_bytes.writeVarint32(price);
-			send(StallModuleMessages.C2S_BUY_STALL_GOODS,_bytes);
+//			send(StallModuleMessages.C2S_BUY_STALL_GOODS,_bytes);
 		}
 		/**
 		 * 出售物品给收购摊位
@@ -320,7 +318,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(bagIndexs[i][0]);
 				_bytes.writeVarint32(bagIndexs[i][1]);
 			}
-			send(StallModuleMessages.C2S_SELL_GOODS_TO_STALL,_bytes);
+//			send(StallModuleMessages.C2S_SELL_GOODS_TO_STALL,_bytes);
 		}
 		/**
 		 * 发广告，没有返回
@@ -333,7 +331,7 @@ package com.rpgGame.app.sender
 			_bytes.writeBoolean(isOpen);
 			if(isOpen)
 				_bytes.writeUTFBytes(str);
-			send(StallModuleMessages.C2S_SET_AD,_bytes);
+//			send(StallModuleMessages.C2S_SET_AD,_bytes);
 		}
 	}
 }

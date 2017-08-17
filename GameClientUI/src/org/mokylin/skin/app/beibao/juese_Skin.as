@@ -926,6 +926,7 @@ package org.mokylin.skin.app.beibao
 			temp.btnWidth = 65;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 331;
+			temp.height=31;
 			temp.x = 11;
 			temp.y = -3;
 			temp.layout = __juese_Skin_HorizontalLayout3_i();

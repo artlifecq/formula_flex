@@ -1,8 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
-	
-	import app.message.AddSpriteStatConfig;
 
 	/**
 	 * 洗点相关，可能以后不用了 
@@ -30,13 +28,13 @@ package com.rpgGame.coreData.cfg
 //				"tz":StatType.TI_ZHI
 		}
 		
-		public static function setConfig(data:AddSpriteStatConfig):void
-		{
-			freeClearSpriteStatPointLevel = data.freeClearSpriteStatPointLevel;
-			canUseSpriteStatPointType = data.canUseSpriteStatPointType;
-			
-			clearSpriteStatInfo = new UpgradeProtoInfo();
-			clearSpriteStatInfo.setProto( data.clearSpriteStatPointCost );
-		}
+//		public static function setConfig(data:AddSpriteStatConfig):void
+//		{
+//			freeClearSpriteStatPointLevel = data.freeClearSpriteStatPointLevel;
+//			canUseSpriteStatPointType = data.canUseSpriteStatPointType;
+//			
+//			clearSpriteStatInfo = new UpgradeProtoInfo();
+//			clearSpriteStatInfo.setProto( data.clearSpriteStatPointCost );
+//		}
 	}
 }

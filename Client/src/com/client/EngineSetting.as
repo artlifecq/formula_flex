@@ -32,6 +32,8 @@ package com.client
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
 			ClientConfig.isMapUseAtf = true;
+			ClientConfig.useBpgFormat = false;
+			ClientConfig.useAtfFormat = true;
 			GlobalConfig.mapCameraAngle = -40;
 			PlanarContainer3D.planarRotationX = GlobalConfig.mapCameraAngle;
 			
@@ -49,8 +51,8 @@ package com.client
 
 		public static function initAway3D() : void
 		{
-			AwayStats.alertLogPanelOnError = ClientConfig.isDebug;
-			Away3D.throwErrorForDeveloper = ClientConfig.isDebug;
+			AwayStats.alertLogPanelOnError = !ClientConfig.isRelease;
+			Away3D.throwErrorForDeveloper = !ClientConfig.isRelease;
 			Away3D.LOAD_FILE_WITH_LIB = true;
 			GuiTheme.ENABLE_TEXT_BATCH = true;
 //			Away3D.USE_ASYNC_TEXTURES = true;

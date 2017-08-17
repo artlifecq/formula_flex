@@ -21,7 +21,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.RidingStateReference;
-	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
@@ -30,9 +29,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
-	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
-	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
@@ -65,8 +62,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
-	
-	import app.message.StallTypeDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -321,26 +316,26 @@ package com.rpgGame.app.manager.role
 			role.headFace = StallHeadFace.create(role);
 			role.name = data.stallName;
 			role.ownerIsMainChar = (data.playerId == MainRoleManager.actorID);
-			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(data.stallType);
-			data.avatarInfo.setBodyResID(stallType ? stallType.stallRes : "", null);
-			data.sizeScale = 1;
-			data.totalStat.level = 0;
-			data.bodyRadius = 0;
-			data.direction = 0;
-			//执行主换装更新
-			//AvatarManager.updateAvatar(role);
-			var owner : SceneRole = SceneManager.getSceneObjByID(data.playerId) as SceneRole;
-			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
-			role.setScale(data.sizeScale);
-			if (stallAreaGrid && owner)
-			{
-				role.setGroundXY(stallAreaGrid.gridX, stallAreaGrid.gridY);
-				owner.setCamouflageEntity(role);
-			}
-			else
-				GameAlert.debugShow("没有找到这个人，没办法摆摊");
-			role.rotationY = data.direction;
-			SceneManager.addSceneObjToScene(role, true, true, true);
+//			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(data.stallType);
+//			data.avatarInfo.setBodyResID(stallType ? stallType.stallRes : "", null);
+//			data.sizeScale = 1;
+//			data.totalStat.level = 0;
+//			data.bodyRadius = 0;
+//			data.direction = 0;
+//			//执行主换装更新
+//			//AvatarManager.updateAvatar(role);
+//			var owner : SceneRole = SceneManager.getSceneObjByID(data.playerId) as SceneRole;
+//			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+//			role.setScale(data.sizeScale);
+//			if (stallAreaGrid && owner)
+//			{
+//				role.setGroundXY(stallAreaGrid.gridX, stallAreaGrid.gridY);
+//				owner.setCamouflageEntity(role);
+//			}
+//			else
+//				GameAlert.debugShow("没有找到这个人，没办法摆摊");
+//			role.rotationY = data.direction;
+//			SceneManager.addSceneObjToScene(role, true, true, true);
 		}
 		
 		
@@ -349,20 +344,20 @@ package com.rpgGame.app.manager.role
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, SceneCharType.ZHAN_CHE);
 			var role : SceneRole = SceneRole.create(SceneCharType.ZHAN_CHE, data.id);
-			var monsterCfgID : int = CountryWarCfgData.getMonsterCfgIDOfZhanChe(data.modelID);
-			var bornData : Q_monster = MonsterDataManager.getData(monsterCfgID);
-			//设置VO
-			role.data = data;
-			role.headFace = HeadFace.create(role);
-			var monsterNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
-			var roleNameStr : String = monsterNameStr + "(" + data.ownerName + ")";
-			role.name = data.name = roleNameStr;
-			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-			//			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
-			role.updateBody(bornData ? bornData.q_body_res : "", null);
-			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
-			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
-			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
+//			var monsterCfgID : int = CountryWarCfgData.getMonsterCfgIDOfZhanChe(data.modelID);
+//			var bornData : Q_monster = MonsterDataManager.getData(monsterCfgID);
+//			//设置VO
+//			role.data = data;
+//			role.headFace = HeadFace.create(role);
+//			var monsterNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
+//			var roleNameStr : String = monsterNameStr + "(" + data.ownerName + ")";
+//			role.name = data.name = roleNameStr;
+//			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
+//			//			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+//			role.updateBody(bornData ? bornData.q_body_res : "", null);
+//			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
+//			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
+//			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
 			//data.direction = bornData ? bornData.q_direction : 0;
 			//			AvatarManager.updateAvatar(role);
 			
@@ -425,7 +420,7 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			data.countryId = MainRoleManager.actorInfo.countryId;
 			//data.avatarInfo.setBodyResID(data.getModeRes(), null); //MainRoleManager.actorInfo.avatarInfo.bodyResID
-			role.updateBody(data.getModeRes(), null);
+//			role.updateBody(data.getModeRes(), null);
 			data.fixDirection = true;
 			role.data = data;
 			role.headFace = HeadFace.create(role);
@@ -515,6 +510,11 @@ package com.rpgGame.app.manager.role
 				girlPet.setOwner(role);
 				role.setRenderAnimator(girlPet);
 			}
+			if(data.petData.q_born_animation)//有出生特效
+			{
+				trace(data.x+"   "+data.y);
+				SpellAnimationHelper.addBornEffect(role,data.x, data.y,data.petData.q_born_animation);
+			}
 //			trace("美人创建成功_美人位子："+p.x+"_"+p.y);
 			//			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
@@ -566,22 +566,10 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true,true, true);
 			var qua:int=ItemConfig.getItemQuality(data.goodsDatas.itemModelId);
+			qua=1;
 			if (qua>0) 
 			{
-				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.DROP_ITEM_EFFECT, RenderUnitType.DROP_ITEM_EFFECT, ClientConfig.getDropItemQuatityEffect(qua));
-				rud.clearSameType = true;
-				var effectRu : RenderUnit3D=role.avatar.addRenderUnit(rud);
-				effectRu.allowCameraAnimator =false;
-				effectRu.repeat = 0;
-				effectRu.x = 0;
-				effectRu.y = 0;
-				effectRu.z = 0;
-				effectRu.scaleX=1;
-				effectRu.scaleY=1;
-				effectRu.scaleZ=1;
-				effectRu.rotationY = 0;
-				effectRu.completeWhenInvisible = true;
-				effectRu.play(0);
+				role.updateBodyEft(ClientConfig.getDropItemQuatityEffect(qua));
 			}
 			
 			DropGoodsManager.getInstance().addDropGoods(role);

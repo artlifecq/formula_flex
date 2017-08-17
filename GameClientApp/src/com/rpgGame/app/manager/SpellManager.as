@@ -1,12 +1,8 @@
 package com.rpgGame.app.manager
 {
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
-	import com.rpgGame.app.utils.UpgradeUtil;
-	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
@@ -15,15 +11,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
-	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
-	
-	import app.message.SpellLearnProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -178,66 +169,66 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */		
-		public static function canUpdate(spellLearnProto:SpellLearnProto,  hintOnFail:Boolean = false):Boolean
-		{
-			//无技能点可用了
-			if( !isHasSpellPoint() )
-			{
-				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL8);
-				return false;
-			}
-			
-			if(!spellLearnProto){
-				return false;
-			}
-			
-			//学习该技能需要的前置该系技能花费的技能点
-			if( spellLearnProto.categoryCostSpellPoint > getIndexLearnAllPoint( spellLearnProto.spell.spellType ) )
-			{
-				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL10);
-				return false;
-			}
-			
-			//是否学习过前置技能
-			if( spellLearnProto.preSpellType != 0 && !MainRoleManager.actorInfo.spellList.hasTypeSpell( spellLearnProto.preSpellType ) )
-			{
-				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL9);
-				return false;
-			}
-			
-			//学过别的系就不能学这个系的了
-//			if( MainRoleManager.actorInfo.spellList.race != -1 && spellLearnProto.spell.race != 0 && spellLearnProto.spell.race != MainRoleManager.actorInfo.spellList.race )
+//		public static function canUpdate(spellLearnProto:SpellLearnProto,  hintOnFail:Boolean = false):Boolean
+//		{
+//			//无技能点可用了
+//			if( !isHasSpellPoint() )
 //			{
-//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL12);
+//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL8);
 //				return false;
 //			}
-			//------------------------------
-//			var spellProto:Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell( spellLearnProto.spell.spellType );
-//			if( spellProto == null )
-//			{
-//				//如果为空说明这个技能没有学习过，那么就用配置的数据，就是一级数据
-//				spellProto = spellLearnProto.spell;
-//			}
-//			//满级
-//			if( spellProto.nextSpell == null)
-//			{
-//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL2);
+//			
+//			if(!spellLearnProto){
 //				return false;
 //			}
-//			//还没达到下一级的标准时
-//			if(spellProto.nextSpell.canLearnLevel > MainRoleManager.actorInfo.totalStat.level )
+//			
+//			//学习该技能需要的前置该系技能花费的技能点
+//			if( spellLearnProto.categoryCostSpellPoint > getIndexLearnAllPoint( spellLearnProto.spell.spellType ) )
 //			{
-//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL3);
+//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL10);
 //				return false;
 //			}
-			//------------------------------
-			
-			if( !isCanLearnMutex( spellLearnProto.spell.spellType ) )
-			{
-				return false;
-			}
-			return true;
-		}
+//			
+//			//是否学习过前置技能
+//			if( spellLearnProto.preSpellType != 0 && !MainRoleManager.actorInfo.spellList.hasTypeSpell( spellLearnProto.preSpellType ) )
+//			{
+//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL9);
+//				return false;
+//			}
+//			
+//			//学过别的系就不能学这个系的了
+////			if( MainRoleManager.actorInfo.spellList.race != -1 && spellLearnProto.spell.race != 0 && spellLearnProto.spell.race != MainRoleManager.actorInfo.spellList.race )
+////			{
+////				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL12);
+////				return false;
+////			}
+//			//------------------------------
+////			var spellProto:Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell( spellLearnProto.spell.spellType );
+////			if( spellProto == null )
+////			{
+////				//如果为空说明这个技能没有学习过，那么就用配置的数据，就是一级数据
+////				spellProto = spellLearnProto.spell;
+////			}
+////			//满级
+////			if( spellProto.nextSpell == null)
+////			{
+////				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL2);
+////				return false;
+////			}
+////			//还没达到下一级的标准时
+////			if(spellProto.nextSpell.canLearnLevel > MainRoleManager.actorInfo.totalStat.level )
+////			{
+////				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL3);
+////				return false;
+////			}
+//			//------------------------------
+//			
+//			if( !isCanLearnMutex( spellLearnProto.spell.spellType ) )
+//			{
+//				return false;
+//			}
+//			return true;
+//		}
 		
 		/**
 		 * 是还可 
@@ -287,15 +278,15 @@ package com.rpgGame.app.manager
 		 * @param hintOnFail
 		 * 
 		 */		
-		public static function learnOrUpdateSpell(spellLearnProto:SpellLearnProto, hintOnFail:Boolean = false):void
-		{
-			if(!spellLearnProto || !canUpdate(spellLearnProto, hintOnFail))return;
-			var upgradeInfo:UpgradeProtoInfo = new UpgradeProtoInfo( spellLearnProto.spell.nextSpell.learnCost );
-			var itemListVo:UpgradeItemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeInfo );
-			if( itemListVo == null )
-				return;
-			SpellSender.learnOrUpgradeActiveSpell( spellLearnProto.spell.spellType, itemListVo);
-		}
+//		public static function learnOrUpdateSpell(spellLearnProto:SpellLearnProto, hintOnFail:Boolean = false):void
+//		{
+//			if(!spellLearnProto || !canUpdate(spellLearnProto, hintOnFail))return;
+//			var upgradeInfo:UpgradeProtoInfo = new UpgradeProtoInfo( spellLearnProto.spell.nextSpell.learnCost );
+//			var itemListVo:UpgradeItemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeInfo );
+//			if( itemListVo == null )
+//				return;
+//			SpellSender.learnOrUpgradeActiveSpell( spellLearnProto.spell.spellType, itemListVo);
+//		}
 		
 		/**
 		 * 当前这个系总投入点数

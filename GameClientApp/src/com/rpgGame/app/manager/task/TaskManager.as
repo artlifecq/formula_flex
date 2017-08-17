@@ -1,13 +1,11 @@
 package com.rpgGame.app.manager.task
 {
-	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.cmdlistener.enum.EmEvenTrackType;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
@@ -17,16 +15,12 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.toujing.TouJingEvent;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
-	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
-	import com.rpgGame.coreData.cfg.task.TaskCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
-	import com.rpgGame.coreData.info.task.TaskChanceInfo;
 	import com.rpgGame.coreData.info.task.TaskChapterInfo;
 	import com.rpgGame.coreData.info.task.TaskDailyInfo;
 	import com.rpgGame.coreData.info.task.TaskGuildInfo;
@@ -42,12 +36,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TaskTargetType;
 	import com.rpgGame.coreData.type.TaskType;
-	
-	import flash.geom.Point;
-	
-	import app.message.ChanceTaskProto;
-	import app.message.MonsterDataProto;
-	import app.message.TaskModuleObjProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -144,12 +132,12 @@ package com.rpgGame.app.manager.task
 				}
 			}
 			_currentMainTaskInfo = value;
-			var arr : Array = TaskCfgData.getStoryTaskSectionByCountInChapter(currentChapterInfo.order, currentChapterInfo.completedTaskCount + 1);
-			if (arr)
-			{
-				_currentSection = arr[0];
-				_currentCountInSection = arr[1];
-			}
+//			var arr : Array = TaskCfgData.getStoryTaskSectionByCountInChapter(currentChapterInfo.order, currentChapterInfo.completedTaskCount + 1);
+//			if (arr)
+//			{
+//				_currentSection = arr[0];
+//				_currentCountInSection = arr[1];
+//			}
 		}
 
 		private static var _mainLineTaskInfo : TaskInfo;
@@ -249,62 +237,62 @@ package com.rpgGame.app.manager.task
 		public static var guildTaskInfo : TaskGuildInfo;
 
 
-		public static function setTaskProto(heroTaskProto : TaskModuleObjProto) : void
-		{
-			if (heroTaskProto == null)
-				return;
-
-			//密信
-			MiXinManager.setHero(heroTaskProto.miXinTask, heroTaskProto.acceptMiXinTimes);
-			//偷猪
-			TouZhuManager.setHero(heroTaskProto.touZhuTask, heroTaskProto.touZhuTimes);
-			//偷经
-			TouJingManager.setHero(heroTaskProto.touJingTask, heroTaskProto.touJingTimes);
-
-			//			FREE_FLY_VIP = VipCfgData.getTaskTransFreeLvl();
-			FREE_FLY_VIP = 3;
-			currentChapterInfo = new TaskChapterInfo();
-
-			//主线任务
-			if (heroTaskProto.doingChapterTask)
-			{
-				var taskInfo : TaskInfo = new TaskInfo();
-				TaskInfoDecoder.decodeChapterTaskProto(heroTaskProto.doingChapterTask, currentChapterInfo, taskInfo);
-				mainLineTaskInfo = taskInfo;
-			}
-			else
-			{
-				currentChapterInfo.order = TaskCfgData.getStoryTaskTotalCount();
-				currentChapterInfo.completedTaskCount = TaskCfgData.getStoryTaskChapterNumber(currentChapterInfo.order);
-			}
-			addChapterInfo(currentChapterInfo);
-			//机缘任务
-			chanceTaskSwallowedCount = heroTaskProto.chanceTaskSwallowedCount;
-			chanceTaskAcceptedCount = heroTaskProto.chanceTaskAcceptedCount;
-			_chanceTaskAutoCompleteList = heroTaskProto.chanceTaskAutoCompleteCount.concat();
-			var arr : Array = heroTaskProto.chanceTask;
-			var len : int = arr.length;
-			var chanceProto : ChanceTaskProto;
-			for (var i : int = 0; i < len; i++)
-			{
-				chanceProto = arr[i];
-				var chanceInfo : TaskChanceInfo = new TaskChanceInfo();
-				TaskInfoDecoder.decodeChanceProto(chanceProto, chanceInfo);
-					//addChanceInfo(chanceInfo);
-			}
-			//日常任务
-			if (heroTaskProto.hasDoingDailyTask)
-			{
-				dailyTaskInfo = new TaskDailyInfo();
-				TaskInfoDecoder.decodeDailyProto(heroTaskProto.doingDailyTask, dailyTaskInfo);
-			}
-			//帮会任务
-			//			if(heroTaskProto.hasDoingGuildTask)
-			//			{
-			//				guildTaskInfo = new TaskGuildInfo();
-			//				TaskInfoDecoder.decodeGuildProto(heroTaskProto.doingGuildTask,guildTaskInfo);
-			//			}
-		}
+//		public static function setTaskProto(heroTaskProto : TaskModuleObjProto) : void
+//		{
+//			if (heroTaskProto == null)
+//				return;
+//
+//			//密信
+//			MiXinManager.setHero(heroTaskProto.miXinTask, heroTaskProto.acceptMiXinTimes);
+//			//偷猪
+//			TouZhuManager.setHero(heroTaskProto.touZhuTask, heroTaskProto.touZhuTimes);
+//			//偷经
+//			TouJingManager.setHero(heroTaskProto.touJingTask, heroTaskProto.touJingTimes);
+//
+//			//			FREE_FLY_VIP = VipCfgData.getTaskTransFreeLvl();
+//			FREE_FLY_VIP = 3;
+//			currentChapterInfo = new TaskChapterInfo();
+//
+//			//主线任务
+//			if (heroTaskProto.doingChapterTask)
+//			{
+//				var taskInfo : TaskInfo = new TaskInfo();
+//				TaskInfoDecoder.decodeChapterTaskProto(heroTaskProto.doingChapterTask, currentChapterInfo, taskInfo);
+//				mainLineTaskInfo = taskInfo;
+//			}
+//			else
+//			{
+//				currentChapterInfo.order = TaskCfgData.getStoryTaskTotalCount();
+//				currentChapterInfo.completedTaskCount = TaskCfgData.getStoryTaskChapterNumber(currentChapterInfo.order);
+//			}
+//			addChapterInfo(currentChapterInfo);
+//			//机缘任务
+//			chanceTaskSwallowedCount = heroTaskProto.chanceTaskSwallowedCount;
+//			chanceTaskAcceptedCount = heroTaskProto.chanceTaskAcceptedCount;
+//			_chanceTaskAutoCompleteList = heroTaskProto.chanceTaskAutoCompleteCount.concat();
+//			var arr : Array = heroTaskProto.chanceTask;
+//			var len : int = arr.length;
+//			var chanceProto : ChanceTaskProto;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				chanceProto = arr[i];
+//				var chanceInfo : TaskChanceInfo = new TaskChanceInfo();
+//				TaskInfoDecoder.decodeChanceProto(chanceProto, chanceInfo);
+//					//addChanceInfo(chanceInfo);
+//			}
+//			//日常任务
+//			if (heroTaskProto.hasDoingDailyTask)
+//			{
+//				dailyTaskInfo = new TaskDailyInfo();
+//				TaskInfoDecoder.decodeDailyProto(heroTaskProto.doingDailyTask, dailyTaskInfo);
+//			}
+//			//帮会任务
+//			//			if(heroTaskProto.hasDoingGuildTask)
+//			//			{
+//			//				guildTaskInfo = new TaskGuildInfo();
+//			//				TaskInfoDecoder.decodeGuildProto(heroTaskProto.doingGuildTask,guildTaskInfo);
+//			//			}
+//		}
 
 		/**
 		 * 添加剧情任务章数据
@@ -355,7 +343,7 @@ package com.rpgGame.app.manager.task
 				{
 					return _mainLineTaskInfo.dataInfo.name;
 				}
-				return chapterInfo.getTaskNameBySection(section, countInSection);
+//				return chapterInfo.getTaskNameBySection(section, countInSection);
 			}
 			return null;
 		}
@@ -378,11 +366,11 @@ package com.rpgGame.app.manager.task
 		 */
 		public static function checkCurrentChapterTaskComplete() : Boolean
 		{
-			var taskInfo : TaskInfo = currentMainTaskInfo;
-			if (taskInfo && taskInfo.getProgressNumAt(0) == 0)
-			{
-				return false;
-			}
+//			var taskInfo : TaskInfo = currentMainTaskInfo;
+//			if (taskInfo && taskInfo.getProgressNumAt(0) == 0)
+//			{
+//				return false;
+//			}
 			return true;
 		}
 
@@ -498,11 +486,11 @@ package com.rpgGame.app.manager.task
 			return -1;
 		}
 
-		public static function checkChapterCanRepaired(_chapterIndex : int) : Boolean
-		{
-			var currentOrder : int = currentChapterInfo.order
-			return (_chapterIndex < currentOrder || (_chapterIndex == currentOrder && currentChapterInfo.completedTaskCount == TaskCfgData.getStoryTaskChapterNumber(currentOrder)));
-		}
+//		public static function checkChapterCanRepaired(_chapterIndex : int) : Boolean
+//		{
+//			var currentOrder : int = currentChapterInfo.order
+//			return (_chapterIndex < currentOrder || (_chapterIndex == currentOrder && currentChapterInfo.completedTaskCount == TaskCfgData.getStoryTaskChapterNumber(currentOrder)));
+//		}
 
 		/**  根据章节索引判断任务是否完成 */
 		public static function checkIsTaskCmpByChapterSection(chapter : int, section : int, indexInSection : int) : Boolean

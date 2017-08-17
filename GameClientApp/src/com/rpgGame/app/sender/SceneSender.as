@@ -27,8 +27,6 @@ package com.rpgGame.app.sender
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
-	import app.cmd.SceneModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
@@ -184,7 +182,7 @@ package com.rpgGame.app.sender
 		{
 			//			_bytes.clear();
 			//			_bytes.writeVarint32(jumpAction);
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//

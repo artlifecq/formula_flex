@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.task.target
 {
-	import app.message.AreaDataProto;
+	
 
 	/**
 	 *
@@ -12,7 +12,7 @@ package com.rpgGame.coreData.info.task.target
 	public class TaskFollowEscortInfo extends BaseTaskTargetInfo
 	{
 		/**护送Npc 区域*/
-		public var targetArea : AreaDataProto;
+//		public var targetArea : AreaDataProto;
 		/**护送Npc Id*/
 		public var roleId : Number = 0;
 		/**护送Npc 坐标x*/

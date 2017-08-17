@@ -11,7 +11,6 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.info.tip.BossHurtTipsData;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.monster.bean.BossDamageInfo;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
 	
 	import feathers.controls.ScrollBarDisplayMode;
@@ -20,7 +19,6 @@ package com.rpgGame.appModule.activety.boss
 	import gs.TweenMax;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.activety.shijieboss.ShangHaiPaiHang;
 	
 	import starling.display.DisplayObject;
@@ -86,6 +84,7 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.dataProvider.updateAll();
 			
 			initEvent();
+			this.escExcuteAble=false;
 		}
 		
 		override public function hide():void

@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.BiaoModuleMessages;
+	
 	
 
 	/**
@@ -16,7 +16,7 @@ package com.rpgGame.app.sender
 		public static function giveUpYunBiao() : void
 		{
 			_bytes.clear();
-			send(BiaoModuleMessages.C2S_GIVE_UP_PERSONAL_BIAO, _bytes);
+//			send(BiaoModuleMessages.C2S_GIVE_UP_PERSONAL_BIAO, _bytes);
 		}
 		
 		/**
@@ -25,7 +25,7 @@ package com.rpgGame.app.sender
 		public static function transportToSelfBiao() : void
 		{
 			_bytes.clear();
-			send(BiaoModuleMessages.C2S_TRANSPORT_TO_SELF_BIAO, _bytes);
+//			send(BiaoModuleMessages.C2S_TRANSPORT_TO_SELF_BIAO, _bytes);
 		}
 		
 		
@@ -182,7 +182,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(posx);
 				_bytes.writeVarint32(posy);
 			}
-			send( BiaoModuleMessages.C2S_UP_OR_DOWN_FROM_BIAO, _bytes );
+//			send( BiaoModuleMessages.C2S_UP_OR_DOWN_FROM_BIAO, _bytes );
 		}
 	}
 }

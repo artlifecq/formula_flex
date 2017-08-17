@@ -5,10 +5,6 @@ package com.rpgGame.coreData.cfg.country
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	import com.rpgGame.coreData.type.CountryWarMonsterType;
 	
-	import app.message.CountryWarConfig;
-	import app.message.CountryWarReliveMonDataProto;
-	import app.message.ZhanCheMonsterDataProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -77,82 +73,82 @@ package com.rpgGame.coreData.cfg.country
 		 * @param countryWarData
 		 *
 		 */
-		public static function setConfig(cfg:CountryWarConfig):void
-		{
-			if(cfg == null)
-			{
-				return;
-			}
-			var len:int;
-			var i:int;
-			var value:Int64;
-			if(cfg.miscData)
-			{
-				warTimeData = cfg.miscData.warTimeData;
-				warDuration = cfg.miscData.warDuration.toNumber();
-				declareMoneyCost = cfg.miscData.declareMoneyCost;
-				startWarDurationWhenServerStart = cfg.miscData.startWarDurationWhenServerStart.toNumber();
-				defaultAttackReliveScene = cfg.miscData.defaultAttackerReliveSceneId;
-				defaultDefenceReliveScene = cfg.miscData.defaultDefencerReliveSceneId;
-				joinCountryWarCostInfo = new UpgradeProtoInfo();
-				joinCountryWarCostInfo.setProto(cfg.miscData.joinCountryWarCost);
-				winnerPrizeInfo = new PrizeInfo();
-				winnerPrizeInfo.converData(cfg.miscData.winnerCountryPrize);
-				failerPrizeInfo = new PrizeInfo();
-				failerPrizeInfo.converData(cfg.miscData.failerCountryPrize);
-				if(cfg.miscData.continueKillHeroTimes)
-				{
-					continueKillHeroTimes = [];
-					len = cfg.miscData.continueKillHeroTimes.length;
-					for(i = 0; i < len; i++)
-					{
-						value = cfg.miscData.continueKillHeroTimes[i];
-						continueKillHeroTimes.push(value.toNumber());
-					}
-					continueKillHeroTimes.sort(Array.NUMERIC);
-				}
-				if(cfg.miscData.beenKilledContinueKillHeroTimes)
-				{
-					beenKilledContinueKillHeroTimes = [];
-					len = cfg.miscData.beenKilledContinueKillHeroTimes.length;
-					for(i = 0; i < len; i++)
-					{
-						value = cfg.miscData.beenKilledContinueKillHeroTimes[i];
-						beenKilledContinueKillHeroTimes.push(value.toNumber());
-					}
-					beenKilledContinueKillHeroTimes.sort(Array.NUMERIC);
-				}
-				canAdmireStartTime = cfg.miscData.canAdmireStartTime.toNumber();
-				canAdmireEndTime = cfg.miscData.canAdmireEndTime.toNumber();
-				changePosCd = cfg.miscData.changePosCd.toNumber();
-			}
-			if(cfg.reliveMonDatas)
-			{
-				if(cfg.reliveMonDatas.reliveMonData)
-				{
-					_reliveMonsterProtoArr = cfg.reliveMonDatas.reliveMonData.concat();
-					_reliveMonsterProtoArr.sortOn("relivePosPriority",Array.NUMERIC);
-				}
-				if(cfg.reliveMonDatas.shengShouConfigId)
-				{
-					_monsterHolyCfgIDs = cfg.reliveMonDatas.shengShouConfigId.concat();
-				}
-				monsterFinalCfgID = cfg.reliveMonDatas.qiLinConfigId;
-			}
-			if(cfg.zhanCheMonsterDatas)
-			{
-				if(cfg.zhanCheMonsterDatas.monsters)
-				{
-					_zhanCheProtoMap = new HashMap();
-					len = cfg.zhanCheMonsterDatas.monsters.length;
-					for(i = 0; i < len; i++)
-					{
-						var zhanCheProto:ZhanCheMonsterDataProto = cfg.zhanCheMonsterDatas.monsters[i];
-						_zhanCheProtoMap.add(zhanCheProto.zhanCheId,zhanCheProto);
-					}
-				}
-			}
-		}
+//		public static function setConfig(cfg:CountryWarConfig):void
+//		{
+//			if(cfg == null)
+//			{
+//				return;
+//			}
+//			var len:int;
+//			var i:int;
+//			var value:Int64;
+//			if(cfg.miscData)
+//			{
+//				warTimeData = cfg.miscData.warTimeData;
+//				warDuration = cfg.miscData.warDuration.toNumber();
+//				declareMoneyCost = cfg.miscData.declareMoneyCost;
+//				startWarDurationWhenServerStart = cfg.miscData.startWarDurationWhenServerStart.toNumber();
+//				defaultAttackReliveScene = cfg.miscData.defaultAttackerReliveSceneId;
+//				defaultDefenceReliveScene = cfg.miscData.defaultDefencerReliveSceneId;
+//				joinCountryWarCostInfo = new UpgradeProtoInfo();
+//				joinCountryWarCostInfo.setProto(cfg.miscData.joinCountryWarCost);
+//				winnerPrizeInfo = new PrizeInfo();
+//				winnerPrizeInfo.converData(cfg.miscData.winnerCountryPrize);
+//				failerPrizeInfo = new PrizeInfo();
+//				failerPrizeInfo.converData(cfg.miscData.failerCountryPrize);
+//				if(cfg.miscData.continueKillHeroTimes)
+//				{
+//					continueKillHeroTimes = [];
+//					len = cfg.miscData.continueKillHeroTimes.length;
+//					for(i = 0; i < len; i++)
+//					{
+//						value = cfg.miscData.continueKillHeroTimes[i];
+//						continueKillHeroTimes.push(value.toNumber());
+//					}
+//					continueKillHeroTimes.sort(Array.NUMERIC);
+//				}
+//				if(cfg.miscData.beenKilledContinueKillHeroTimes)
+//				{
+//					beenKilledContinueKillHeroTimes = [];
+//					len = cfg.miscData.beenKilledContinueKillHeroTimes.length;
+//					for(i = 0; i < len; i++)
+//					{
+//						value = cfg.miscData.beenKilledContinueKillHeroTimes[i];
+//						beenKilledContinueKillHeroTimes.push(value.toNumber());
+//					}
+//					beenKilledContinueKillHeroTimes.sort(Array.NUMERIC);
+//				}
+//				canAdmireStartTime = cfg.miscData.canAdmireStartTime.toNumber();
+//				canAdmireEndTime = cfg.miscData.canAdmireEndTime.toNumber();
+//				changePosCd = cfg.miscData.changePosCd.toNumber();
+//			}
+//			if(cfg.reliveMonDatas)
+//			{
+//				if(cfg.reliveMonDatas.reliveMonData)
+//				{
+//					_reliveMonsterProtoArr = cfg.reliveMonDatas.reliveMonData.concat();
+//					_reliveMonsterProtoArr.sortOn("relivePosPriority",Array.NUMERIC);
+//				}
+//				if(cfg.reliveMonDatas.shengShouConfigId)
+//				{
+//					_monsterHolyCfgIDs = cfg.reliveMonDatas.shengShouConfigId.concat();
+//				}
+//				monsterFinalCfgID = cfg.reliveMonDatas.qiLinConfigId;
+//			}
+//			if(cfg.zhanCheMonsterDatas)
+//			{
+//				if(cfg.zhanCheMonsterDatas.monsters)
+//				{
+//					_zhanCheProtoMap = new HashMap();
+//					len = cfg.zhanCheMonsterDatas.monsters.length;
+//					for(i = 0; i < len; i++)
+//					{
+//						var zhanCheProto:ZhanCheMonsterDataProto = cfg.zhanCheMonsterDatas.monsters[i];
+//						_zhanCheProtoMap.add(zhanCheProto.zhanCheId,zhanCheProto);
+//					}
+//				}
+//			}
+//		}
 
 		/**
 		 * 获取带复活点怪物的配置列表
@@ -197,22 +193,22 @@ package com.rpgGame.coreData.cfg.country
 		 * @return 
 		 * 
 		 */
-		public static function getReliveMonsterProto(cfgID:int):CountryWarReliveMonDataProto
-		{
-			if(_reliveMonsterProtoArr)
-			{
-				var len:int = _reliveMonsterProtoArr.length;
-				for(var i:int = 0; i < len; i++)
-				{
-					var data:CountryWarReliveMonDataProto = _reliveMonsterProtoArr[i];
-					if(data.monConfigId == cfgID)
-					{
-						return data;
-					}
-				}
-			}
-			return null;
-		}
+//		public static function getReliveMonsterProto(cfgID:int):CountryWarReliveMonDataProto
+//		{
+//			if(_reliveMonsterProtoArr)
+//			{
+//				var len:int = _reliveMonsterProtoArr.length;
+//				for(var i:int = 0; i < len; i++)
+//				{
+//					var data:CountryWarReliveMonDataProto = _reliveMonsterProtoArr[i];
+//					if(data.monConfigId == cfgID)
+//					{
+//						return data;
+//					}
+//				}
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 根据战车配置ID获取对应怪物配置ID
@@ -220,15 +216,15 @@ package com.rpgGame.coreData.cfg.country
 		 * @return 
 		 * 
 		 */
-		public static function getMonsterCfgIDOfZhanChe(zhanCheCfgID:int):int
-		{
-			var zhanCheProto:ZhanCheMonsterDataProto = _zhanCheProtoMap.getValue(zhanCheCfgID);
-			if(zhanCheProto)
-			{
-				return zhanCheProto.monsterId;
-			}
-			return 0;
-		}
+//		public static function getMonsterCfgIDOfZhanChe(zhanCheCfgID:int):int
+//		{
+//			var zhanCheProto:ZhanCheMonsterDataProto = _zhanCheProtoMap.getValue(zhanCheCfgID);
+//			if(zhanCheProto)
+//			{
+//				return zhanCheProto.monsterId;
+//			}
+//			return 0;
+//		}
 		
 		/**
 		 * 根据战车配置ID获取技能列表
@@ -236,15 +232,15 @@ package com.rpgGame.coreData.cfg.country
 		 * @return 
 		 * 
 		 */
-		public static function getSpellsOfZhanChe(zhanCheCfgID:int):Array
-		{
-			var zhanCheProto:ZhanCheMonsterDataProto = _zhanCheProtoMap.getValue(zhanCheCfgID);
-			if(zhanCheProto)
-			{
-				return zhanCheProto.spells;
-			}
-			return null;
-		}
+//		public static function getSpellsOfZhanChe(zhanCheCfgID:int):Array
+//		{
+//			var zhanCheProto:ZhanCheMonsterDataProto = _zhanCheProtoMap.getValue(zhanCheCfgID);
+//			if(zhanCheProto)
+//			{
+//				return zhanCheProto.spells;
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 是否是守将
@@ -252,22 +248,22 @@ package com.rpgGame.coreData.cfg.country
 		 * @return 
 		 * 
 		 */
-		public static function isMonsterWithRelive(cfgID:int):Boolean
-		{
-			if(_reliveMonsterProtoArr)
-			{
-				var len:int = _reliveMonsterProtoArr.length;
-				for(var i:int = 0; i < len; i++)
-				{
-					var data:CountryWarReliveMonDataProto = _reliveMonsterProtoArr[i];
-					if(data.monConfigId == cfgID)
-					{
-						return true;
-					}
-				}
-			}
-			return false;
-		}
+//		public static function isMonsterWithRelive(cfgID:int):Boolean
+//		{
+//			if(_reliveMonsterProtoArr)
+//			{
+//				var len:int = _reliveMonsterProtoArr.length;
+//				for(var i:int = 0; i < len; i++)
+//				{
+//					var data:CountryWarReliveMonDataProto = _reliveMonsterProtoArr[i];
+//					if(data.monConfigId == cfgID)
+//					{
+//						return true;
+//					}
+//				}
+//			}
+//			return false;
+//		}
 		
 		/**
 		 * 是否是圣兽

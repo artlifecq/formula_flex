@@ -81,6 +81,7 @@ package com.rpgGame.app.manager.task
 			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			resetTechTime();
 		}
 		private function onApphide( ev:AppEvent ):void
@@ -141,13 +142,7 @@ package com.rpgGame.app.manager.task
 		}
 		private function onUpdate():void
 		{
-//			return;
-			if(testStopKey)
-				return;
-			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
-				return;
-			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
-				return;
+			
 			
 			if(istech())
 			{
@@ -156,6 +151,13 @@ package com.rpgGame.app.manager.task
 					if((SystemTimeManager.curtTm-techTime)>=AUTOTREASEUER)
 					{
 						startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+					}
+				}
+				else if(TaskMissionManager.guildCheck&&TaskMissionManager.haveGuildTask)
+				{
+					if((SystemTimeManager.curtTm-techTime)>=AUTOTREASEUER)
+					{
+						startTaskAuto(TaskType.MAINTYPE_GUILDDAILYTASK);
 					}
 				}
 				else if(TaskMissionManager.haveMainTask&&TaskMissionManager.flashMainTaskId!=TaskMissionManager.mainTaskInfo.taskId)
@@ -174,10 +176,24 @@ package com.rpgGame.app.manager.task
 		}
 		private function istech():Boolean
 		{
+			if(testStopKey)
+			{
+				return false;
+			}	
+			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
+			{
+				return false;
+			}
+			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
+			{
+				return false;
+			}
 			if(HuBaoManager.instance().ishuing)//押镖状态不拉
 			{
 				return false;
 			}
+			
+			
 			if(isOpenPanel())
 			{//Lyt.a("istech-1");
 				//if(traceKey!=-1){Lyt.a("istech-1");traceKey=-1;}
@@ -187,12 +203,8 @@ package com.rpgGame.app.manager.task
 			{//if(traceKey!=1){Lyt.a("istech1");traceKey=1;}
 				return true;
 			}
-			if(MainRoleManager.actor.stateMachine.isIdle&&!isTaskRunning)
+			if(MainRoleManager.actor.stateMachine.isIdle)
 			{//if(traceKey!=2){Lyt.a("istech2");traceKey=2;}
-				return true;
-			}
-			if(MainRoleManager.actor.stateMachine.isIdle&&isTaskRunning)
-			{//if(traceKey!=3){Lyt.a("istech3");traceKey=3;}
 				return true;
 			}
 			//if(traceKey!=-2){Lyt.a("istech-2");traceKey=-2;}
@@ -203,10 +215,18 @@ package com.rpgGame.app.manager.task
 		private function newMation(type:int):void
 		{
 			jumpOver=false;
-			taskWalk();
+			//taskWalk();
+			if(!isTaskRunning)
+			{
+				startTaskAuto(type);
+			}
+			
 		}
-		
-		
+		/**完成任务*/
+		private function finishMation(type:int):void
+		{
+			stopAll();
+		}
 		/**任务进度改变*/
 		private function changeMation(type:int):void
 		{
@@ -227,6 +247,10 @@ package com.rpgGame.app.manager.task
 		
 		public function setTaskChange():void
 		{
+			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
+			{
+				GatherAutoManager.getInstance().setGatherChange();
+			}
 			if(TaskMissionManager.getTaskSubIsFinish(taskType,taskTarget))
 			{
 				changeSub();
@@ -234,12 +258,10 @@ package com.rpgGame.app.manager.task
 				GatherAutoManager.getInstance().stopGatherAuto();
 				SceneRoleSelectManager.selectedRole=null;
 				startTaskAuto(taskType);
+				
 			}
-			var missionType:int=TaskMissionManager.getTaskMissionType(taskType);
-			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
-			{
-				GatherAutoManager.getInstance().setGatherChange();
-			}
+			//var missionType:int=TaskMissionManager.getTaskMissionType(taskType);
+			
 			
 			
 		}

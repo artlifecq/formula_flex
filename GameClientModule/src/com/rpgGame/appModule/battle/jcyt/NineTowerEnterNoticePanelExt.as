@@ -37,7 +37,7 @@ package com.rpgGame.appModule.battle.jcyt
 		override protected function onStageResize(sw:int, sh:int):void
 		{
 			this.x=(sw-this.width)/2;
-			this.y=sh-300;
+			this.y=sh-400;
 		}
 	}
 }

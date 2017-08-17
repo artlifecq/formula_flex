@@ -1,10 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	
-	import app.message.RelationConfig;
-	
-	import org.client.mainCore.ds.HashMap;
 
 	public class FriendCfgData
 	{
@@ -22,27 +18,27 @@ package com.rpgGame.coreData.cfg
 		 * @param data
 		 * 
 		 */		
-		public static function setup(data:RelationConfig):void
-		{
-			if(!data)
-				return;
-			friendCountLimit = data.friendCountLimit;
-			blackCountLimit = data.blackCountLimit;
-			enemyCountLimit = data.enemyCountLimit;
-			degreeTitle = data.degreeTitle;
-			degreeArr=[];
-			if(degreeTitle)
-			{
-				var temp: Array = degreeTitle.split("#");
-				for(var i : int = 0 ; i < temp.length;i++)
-				{
-					var tempStr : String = temp[i];
-					var tempArray : Array = tempStr.split(",");
-					tempArray.push(degreeColor[i]);
-					degreeArr.push(tempArray);
-				}
-			}
-		}
+//		public static function setup(data:RelationConfig):void
+//		{
+//			if(!data)
+//				return;
+//			friendCountLimit = data.friendCountLimit;
+//			blackCountLimit = data.blackCountLimit;
+//			enemyCountLimit = data.enemyCountLimit;
+//			degreeTitle = data.degreeTitle;
+//			degreeArr=[];
+//			if(degreeTitle)
+//			{
+//				var temp: Array = degreeTitle.split("#");
+//				for(var i : int = 0 ; i < temp.length;i++)
+//				{
+//					var tempStr : String = temp[i];
+//					var tempArray : Array = tempStr.split(",");
+//					tempArray.push(degreeColor[i]);
+//					degreeArr.push(tempArray);
+//				}
+//			}
+//		}
 		
 		public static function getDegreeString(v:int):String
 		{

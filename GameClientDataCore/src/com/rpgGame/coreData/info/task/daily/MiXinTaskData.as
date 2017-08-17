@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.task.daily
 {
-	import app.message.MiXinTaskProto;
+	
 
 	/**
 	 * 密信 
@@ -32,15 +32,15 @@ package com.rpgGame.coreData.info.task.daily
 		 * @param miXinProto
 		 * 
 		 */		
-		public function setData( miXinProto:MiXinTaskProto ):void
-		{
-			acceptTimes = miXinProto.acceptTimes;
-			level = miXinProto.level;
-			quality = miXinProto.hasQuality ? miXinProto.quality : -1;
-			isSubmit = quality >= 0;
-			if( miXinProto.nextRandomMiXinTime != null )
-				nextRandomMiXinTime = miXinProto.nextRandomMiXinTime.toNumber();
-			isInMiXinActivityTime = miXinProto.isInMiXin;
-		}
+//		public function setData( miXinProto:MiXinTaskProto ):void
+//		{
+//			acceptTimes = miXinProto.acceptTimes;
+//			level = miXinProto.level;
+//			quality = miXinProto.hasQuality ? miXinProto.quality : -1;
+//			isSubmit = quality >= 0;
+//			if( miXinProto.nextRandomMiXinTime != null )
+//				nextRandomMiXinTime = miXinProto.nextRandomMiXinTime.toNumber();
+//			isInMiXinActivityTime = miXinProto.isInMiXin;
+//		}
 	}
 }

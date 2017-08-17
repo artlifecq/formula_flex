@@ -2,42 +2,38 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.BaZhenTuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.core.events.BaZhenTuEvent;
 	import com.rpgGame.coreData.cfg.BaZhenTuCfgData;
 	import com.rpgGame.coreData.lang.LangBaZhenTu;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	
-	import app.cmd.BaZhenTuModuleMessages;
-	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class BaZhenTuCmdListener extends BaseBean
 	{
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START, onTryStartSuccess);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START_FAIL, onTryStartFail);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_LEADER_START_DUNGEON, onLeaderStartDungeon);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE, onRefruseSuccess);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE_FAIL, onRefruseFail);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE, onAgreeSuccess);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE_FAIL, onAgreeFail);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_OTHER_AGREE, onOtherArgee);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_CANCEL, onCancel);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_WAIT_ENTER_DUNGEON, onWaitEnterDungeon);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ENTER_TIMES_CHANGED, onEnterTimesChanged);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_DUNGEON_INFO, onDungeonInfo);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_NEW_WAVE, onNewWave);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_STELE_ACTIVATE, onSteleActivate);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_BUFFER_INVALID, onBufferInvalid);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_FINISH, onFinish);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_MONSTER, onAddMonster);
-			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_STELE_MONSTER, onAddSteleMonster);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START, onTryStartSuccess);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START_FAIL, onTryStartFail);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_LEADER_START_DUNGEON, onLeaderStartDungeon);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE, onRefruseSuccess);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE_FAIL, onRefruseFail);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE, onAgreeSuccess);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE_FAIL, onAgreeFail);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_OTHER_AGREE, onOtherArgee);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_CANCEL, onCancel);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_WAIT_ENTER_DUNGEON, onWaitEnterDungeon);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ENTER_TIMES_CHANGED, onEnterTimesChanged);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_DUNGEON_INFO, onDungeonInfo);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_NEW_WAVE, onNewWave);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_STELE_ACTIVATE, onSteleActivate);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_BUFFER_INVALID, onBufferInvalid);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_FINISH, onFinish);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_MONSTER, onAddMonster);
+//			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_STELE_MONSTER, onAddSteleMonster);
 			finish();
 		}
 

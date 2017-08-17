@@ -2,8 +2,6 @@ package com.rpgGame.coreData.info.chat
 {
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	
-	import app.message.ChatContentProto.PosInfoProto;
-	
 
 	public class ChatInfo
 	{
@@ -38,7 +36,7 @@ package com.rpgGame.coreData.info.chat
 		//发送等级
 		public var level:int;
 		//发送的位置数据
-		public var posInfo:PosInfoProto;
+//		public var posInfo:PosInfoProto;
 		
 		/** 是否国王帮会 **/
 		public var isKingGuild:Boolean = false;

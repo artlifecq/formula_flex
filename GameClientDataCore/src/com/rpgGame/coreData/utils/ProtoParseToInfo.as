@@ -2,8 +2,6 @@ package com.rpgGame.coreData.utils
 {
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
-	
-	import app.message.PrizeProto;
 
 	/**
 	 *
@@ -27,12 +25,12 @@ package com.rpgGame.coreData.utils
 		 * @return 
 		 * 
 		 */		
-		public static function decodePrizeProto(prizeProto:PrizeProto):PrizeInfo
-		{
-			var prizeInfo:PrizeInfo = new PrizeInfo();
-			prizeInfo.converData(prizeProto);
-			return prizeInfo;
-		}
+//		public static function decodePrizeProto(prizeProto:PrizeProto):PrizeInfo
+//		{
+//			var prizeInfo:PrizeInfo = new PrizeInfo();
+//			prizeInfo.converData(prizeProto);
+//			return prizeInfo;
+//		}
 		
 		public static function getPrizeInfoVectItem( prizeVect:Vector.<PrizeInfo> ):Vector.<ClientItemInfo>
 		{

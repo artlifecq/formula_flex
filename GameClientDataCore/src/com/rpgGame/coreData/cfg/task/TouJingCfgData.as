@@ -2,8 +2,6 @@ package com.rpgGame.coreData.cfg.task
 {
 	import com.rpgGame.coreData.info.toujing.TouJingPrizeInfo;
 	
-	import app.message.TouJingConfig;
-	
 	import org.client.mainCore.ds.HashMap;
 	
 	/**
@@ -33,28 +31,28 @@ package com.rpgGame.coreData.cfg.task
 		/**偷经奖励**/
 		public static var awardHashMap:HashMap;
 		
-		public static function setConfig( touJingConfig:TouJingConfig ):void
-		{
-			if( touJingConfig == null )
-				return;
-			awardHashMap = new HashMap();
-			
-			timeData = touJingConfig.touJingTimeData;
-			if( touJingConfig.touJingDuration != null )
-				duration = touJingConfig.touJingDuration.toNumber();
-			hasPrizeTimes = touJingConfig.touJingHasPrizeTimes;
-			timesPerDay = touJingConfig.touJingTimesPerDay;
-			isInTime = touJingConfig.hasTouJingTimeData;
-			
-			var len:int = touJingConfig.touJingPrize.length;
-			var toujingPrize:TouJingPrizeInfo;
-			for( var idx:int = 0; idx < len; idx ++)
-			{
-				toujingPrize = new TouJingPrizeInfo();
-				toujingPrize.setTouJingPrizeInfo( touJingConfig.touJingPrize[ idx ] );
-				awardHashMap.add( toujingPrize.level, toujingPrize );
-			}
-		}
+//		public static function setConfig( touJingConfig:TouJingConfig ):void
+//		{
+//			if( touJingConfig == null )
+//				return;
+//			awardHashMap = new HashMap();
+//			
+//			timeData = touJingConfig.touJingTimeData;
+//			if( touJingConfig.touJingDuration != null )
+//				duration = touJingConfig.touJingDuration.toNumber();
+//			hasPrizeTimes = touJingConfig.touJingHasPrizeTimes;
+//			timesPerDay = touJingConfig.touJingTimesPerDay;
+//			isInTime = touJingConfig.hasTouJingTimeData;
+//			
+//			var len:int = touJingConfig.touJingPrize.length;
+//			var toujingPrize:TouJingPrizeInfo;
+//			for( var idx:int = 0; idx < len; idx ++)
+//			{
+//				toujingPrize = new TouJingPrizeInfo();
+//				toujingPrize.setTouJingPrizeInfo( touJingConfig.touJingPrize[ idx ] );
+//				awardHashMap.add( toujingPrize.level, toujingPrize );
+//			}
+//		}
 		
 		/**
 		 * 获取适合当前等级的偷经奖励配置

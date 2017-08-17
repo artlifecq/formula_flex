@@ -47,11 +47,6 @@ package com.client.process
 		{
 			ClientConfig.loginIP = ip;
 			ClientConfig.loginPort = uint(port);
-
-			//atf测试下
-			ClientConfig.useBpgFormat = false;
-			ClientConfig.useAtfFormat = true;
-			EngineSetting.initAway3D();
 			
 			completeProcess();
 			

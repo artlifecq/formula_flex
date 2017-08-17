@@ -2,6 +2,7 @@ package com.rpgGame.appModule.die
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -81,7 +82,21 @@ package com.rpgGame.appModule.die
 			
 			_skin.lbl_msg.color=0xe1201c;
 			var date:Date=new Date(disMsg.time*1000);
-			_skin.lbl_msg.htmlText="你被"+HtmlTextUtil.getTextColor(0x5DBD37,disMsg.attackername)+"杀死了,("+date.fullYear+"年"+
+			
+			var mapID : int = SceneSwitchManager.currentMapId;
+			var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+			var qmap:Q_map=cfg.getData();
+			var killer:String;
+			switch(qmap.q_map_type){
+				case EnumMapType.MAP_TYPE_TOWERS:
+					killer=HtmlTextUtil.getTextColor(0x5DBD37,"神秘人");
+					break;
+				default:
+					killer=HtmlTextUtil.getTextColor(0x5DBD37,disMsg.attackername)
+					break;
+			}
+			
+			_skin.lbl_msg.htmlText="你被"+killer+"杀死了,("+date.fullYear+"年"+
 				(date.month+1)+"月"+date.date+"日  "+TimeUtil.changeTime(date.hours)+":"+TimeUtil.changeTime(date.minutes)+":"+
 				TimeUtil.changeTime(date.seconds)+")";
 			openNum=DieCfgData.allOpenList.length;
