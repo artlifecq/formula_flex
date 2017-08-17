@@ -107,7 +107,7 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 					FaceUtil.SetItemGrid(_icoList[i],itemInfo);
 					_beijingkuangList[i].visible=true;
 					_icoList[i].visible=true;
-					_labList[i].text=NumberUtil.getNumberTo(HuBaoManager.instance().prize[i].num);
+					_labList[i].text=NumberUtil.getNumberTo(HuBaoManager.instance().prize[i].num,true);
 					_labList[i].visible=true;
 				}
 				else

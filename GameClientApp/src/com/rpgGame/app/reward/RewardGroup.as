@@ -72,6 +72,7 @@ package  com.rpgGame.app.reward
 		private var _data:Vector.<ClientItemInfo>;
 		private var _needTips:Boolean;
 		private var _iconSize:int;
+		private var _showSelectIco:Boolean;
 		/**
 		 * 
 		 * @param g 起始格子背景
@@ -82,8 +83,9 @@ package  com.rpgGame.app.reward
 		 * @param needTip
 		 * @param max 最大个数  0为最大    应策划需求加的 ---yt
 		 * @param showCD 是否显示CD转框---yt
+		 * @param showSelectIco 是否显示鼠标移入移出的背景
 		 */		
-		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0,showCD:Boolean=false)
+		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0,showCD:Boolean=false,showSelectIco:Boolean=true)
 		{
 			super();
 			_iconSize=size;
@@ -96,6 +98,7 @@ package  com.rpgGame.app.reward
 			this.dY=dy;
 			this.max=max>0?max:int.MAX_VALUE;
 			this.showCD=showCD;
+			this._showSelectIco=showSelectIco;
 			if (g.parent) 
 			{
 				this.x=g.x;
@@ -117,6 +120,7 @@ package  com.rpgGame.app.reward
 				obj.showCD=showCD;
 				icons.push(obj);
 				FaceUtil.SetItemGrid(obj,items[i],_needTips);
+				obj.selectImgVisible=_showSelectIco;
 			}
 			layout();
 		}

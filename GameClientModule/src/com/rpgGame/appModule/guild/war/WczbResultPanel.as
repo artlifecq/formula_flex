@@ -75,9 +75,9 @@ package com.rpgGame.appModule.guild.war
 			var defId:int=datas[2];
 			_skin.lbBang1.text=msg.winCampName;
 			_skin.lbBang2.text=msg.lostCampName;
-			_skin.skinBar.maximum=cfg.q_integral_victory;
-			_skin.skinBar.value=msg.myCampScore;
-			_skin.lbBar.text=_skin.skinBar.value+"/"+_skin.skinBar.maximum;
+//			_skin.skinBar.maximum=cfg.q_integral_victory;
+//			_skin.skinBar.value=msg.myCampScore;
+//			_skin.lbBar.text=_skin.skinBar.value+"/"+_skin.skinBar.maximum;
 			
 			_skin.numPaiming.label=msg.myRank.toString(); 
 			_skin.numJisha.label=msg.myKillCnt.toString(); 

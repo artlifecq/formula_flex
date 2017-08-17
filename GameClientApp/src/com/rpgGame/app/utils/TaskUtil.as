@@ -1055,7 +1055,7 @@ package com.rpgGame.app.utils
 					if(item&&i<icoList.length)
 					{
 						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_42));
-						icoList[idd].setSubString(NumberUtil.getNumberTo(rewordList[i].num));
+						icoList[idd].setSubString(NumberUtil.getNumberTo(rewordList[i].num,true));
 						icoList[idd].visible=true;
 						icoBgList[idd].visible=true;
 						setItemTips(icoList[idd],item,int(rewordList[i].num));

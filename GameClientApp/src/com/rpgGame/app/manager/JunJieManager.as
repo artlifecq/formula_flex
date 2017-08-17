@@ -116,8 +116,10 @@ package com.rpgGame.app.manager
 			_power=msg.fightPower;
 			
 			var role:SceneRole=MainRoleManager.actor;
-			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateTitle(getActivationLv());
+			if(role){
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateTitle(getActivationLv());
+			}
 		}
 		
 		/**

@@ -623,6 +623,18 @@ package com.rpgGame.coreData.cfg
 			var url : String = "icon/panel/" + name + eName_PNG;
 			return baseDir + resURL + url;
 		}
+		
+		/**
+		 *获取死亡复活面板icon 
+		 * @param name
+		 * @return 
+		 * 
+		 */
+		public static function getFuHuoPanelIcon(name:String):String
+		{
+			var url : String = "app/siwangfuhuo/icon/" + name + eName_PNG;
+			return baseDir + resURL + url;
+		}
 
 		/**
 		 * 得到技能图标
