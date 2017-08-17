@@ -50,7 +50,7 @@ package  com.rpgGame.appModule.social.team
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=2;
 			registerListeners();
-			timer=new GameTimer("TeamPlayerListPanelExt_timer",1000,0,onTimer);
+			timer=new GameTimer("TeamListPanelExt_timer",1000,0,onTimer);
 		}
 		
 		private function onTimer():void

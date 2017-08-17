@@ -63,7 +63,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		private function __ZhanChangRiZi_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 353;
+			temp.height = 358;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 405;
 			temp.x = 8;
@@ -161,7 +161,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.skin = skin
 			temp.width = 160;
 			temp.x = 131;
-			temp.y = 397;
+			temp.y = 400;
 			return temp;
 		}
 

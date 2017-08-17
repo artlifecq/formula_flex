@@ -37,9 +37,11 @@ package com.rpgGame.appModule.fightsoul
 					currentPropValue = _currentatt["q_value"+i];
 				}
 				
-				if(_nextAtt["q_type"+i]==_typeId)
+				if(_nextAtt&&_nextAtt["q_type"+i]==_typeId)
 				{
 					nextPropValue = _nextAtt["q_value"+i];
+				}else{
+					nextPropValue=currentPropValue;
 				}
 			}
 			

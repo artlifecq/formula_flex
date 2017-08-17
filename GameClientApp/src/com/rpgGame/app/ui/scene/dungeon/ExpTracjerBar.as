@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
@@ -13,6 +14,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -31,7 +33,9 @@ package com.rpgGame.app.ui.scene.dungeon
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
-	public class ExpTracjerBar extends DungeonTrackerUI implements IAnimatable
+	import utils.TimerServer;
+	
+	public class ExpTracjerBar extends DungeonTrackerUI
 	{
 		private var _skin:JingYan_Skin;
 		private var _dailyZoneId:int;
@@ -39,21 +43,24 @@ package com.rpgGame.app.ui.scene.dungeon
 		private var _totalWaveCount:int;
 		private var _totalMonsterCount:int;
 		private var _waveInfo:Dictionary;
-		private var _endTime:int;
-		private var _disTime:Number;
-		private var _ico:IconCDFace;
+		//private var _ico:IconCDFace;
+		private var icoList1Group:RewardGroup;
+		private var icoList2Group:RewardGroup;
 		public function ExpTracjerBar():void
 		{
 			_skin = new JingYan_Skin();
 			super(_skin);
-			_ico=new IconCDFace(IcoSizeEnum.ICON_42);
+			/*_ico=new IconCDFace(IcoSizeEnum.ICON_42);
 			_ico.selectImgVisible=false;
 			_ico.bindBg(_skin.sec_ico1_0);
-			_skin.container.addChild(_ico);
+			_skin.container.addChild(_ico);*/
 			/*updatedailyZoneInfo(11);
 			updatedailyZoneTime(SystemTimeManager.curtTm/1000+1800);*/
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6,true,1);
+			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
+			
+			
 		}
-		
 		private function initView():void
 		{
 			var arr:Array=JSONUtil.decode(_data.q_rewards_show);
@@ -69,7 +76,14 @@ package com.rpgGame.app.ui.scene.dungeon
 				}
 			}
 			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(1,exp);
-			FaceUtil.SetItemGrid(_ico,itemInfo);
+			var itemList:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			itemList.push(itemInfo);
+			icoList1Group.setReward(itemList);
+			icoList1Group.visible=true;
+			icoList2Group.setRewardByJsonStr(_data.q_rewards_client);
+			icoList2Group.visible=true;
+			
+			//FaceUtil.SetItemGrid(_ico,itemInfo);
 		}
 		
 		override protected function onShow() : void
@@ -80,7 +94,14 @@ package com.rpgGame.app.ui.scene.dungeon
 			EventManager.addEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
 			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
-		
+		override protected function onHide():void
+		{
+			stopTimer();
+			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
+			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
+			EventManager.removeEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
+			EventManager.removeEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
+		}
 		private function updateEndInfo(success:int,star:int):void
 		{
 			TrusteeshipManager.getInstance().stopAutoFight();
@@ -117,26 +138,88 @@ package com.rpgGame.app.ui.scene.dungeon
 		private function updatedailyZoneTime(lastTime:Number):void
 		{
 			_endTime = lastTime/1000;
-			
-			Starling.juggler.add(this);
+			currentStateEnd();
 			//TrusteeshipManager.getInstance().findDist=1000;
 			//TrusteeshipManager.getInstance().startAutoFight();		
 		}
 		
-		public function advanceTime(time:Number):void
+		private var _endTime:int;
+		private var _currentStartTime:Number;
+		private var _currentDisTime:Number;
+		private var _currentStar:int ;
+		private var _lastList:Array;
+		/**星级倒计时*/
+		private function updataStarTime():void
+		{
+			var now:int = SystemTimeManager.curtTm/1000;
+			var dis:int = _currentDisTime-now+_currentStartTime;
+			_skin.pro_bar.value = _skin.pro_bar.maximum*percent;
+			if(_currentStar ==3)
+			{
+				_skin.sec_time2.text = "三星通关倒计时："+TimeUtil.format3TimeType(dis);
+			}else if(_currentStar ==2){
+				_skin.sec_time2.text = "二星通关倒计时："+TimeUtil.format3TimeType(dis);
+			}else{
+				_skin.sec_time2.text = "一星通关倒计时："+TimeUtil.format3TimeType(dis);
+			}
+			
+			if(dis<=30)
+				_skin.sec_time2.color = 0xd02525;
+			else
+				_skin.sec_time2.color = 0xe8c958;
+			var percent:Number = dis/_currentDisTime;
+			if(percent<=0)
+			{
+				percent = 0;
+				currentStateEnd();
+			}
+			_skin.pro_bar.value = _skin.pro_bar.maximum*percent;
+			
+		}
+		private function initLastTime():void
+		{
+			var arr:Array = JSONUtil.decode( _data.q_star_condition);
+			_lastList = new Array();
+			for each(var str:String  in arr)
+			{
+				_lastList.push(int(str));
+			}
+			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
+			currentStateEnd();
+		}
+		private function currentStateEnd():void
 		{
 			var now:int = SystemTimeManager.curtTm/1000;
 			var dis:int = _endTime-now;
-			_skin.sec_time.text = "副本倒计时："+TimeUtil.format3TimeType(dis);
-			if(dis<=30)
-				_skin.sec_time.color = 0xd02525;
-			else
-				_skin.sec_time.color = 0xe8c958;
-			if(dis<=0)
+			for(var i:int = 1;i<4;i++)
 			{
-				stopTimer();
+				if(dis >=_lastList[i])
+				{
+					_currentStar = i;
+				}
+			}
+			switch(_currentStar)
+			{
+				case 1:
+					_currentStartTime = _endTime - _lastList[2];
+					_currentDisTime =  _lastList[2] - _lastList[1];
+					break;
+				case 2:
+					_currentStartTime = _endTime- _lastList[3];
+					_currentDisTime = _lastList[3] - _lastList[2];
+					break;
+				case 3:
+					_currentStartTime = _endTime-_data.q_zone_time;
+					_currentDisTime = _data.q_zone_time- _lastList[3];
+					break;
+				default:
+					stopTimer();
+					break;
 			}
 		}
+		
+		
+		
 		private function updatedailyZoneInfo(dailyZoneId:int):void
 		{
 			_dailyZoneId = dailyZoneId;
@@ -152,10 +235,37 @@ package com.rpgGame.app.ui.scene.dungeon
 			
 			_waveInfo = new Dictionary();
 			refeashInfo();
-			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
-			advanceTime(0);
+			initLastTime();
+			setTime();
 		}
-		
+		private var remainTime:int;
+		/**设置倒计时*/
+		private function setTime():void
+		{
+			var rTime:int=_data.q_zone_time;
+			if(rTime<=0){
+				_skin.sec_time.text="未开始挑战!";
+			}else{
+				remainTime=rTime;
+				_skin.sec_time.text="副本剩余时间："+TimeUtil.format3TimeType(remainTime);
+				TimerServer.remove(updateTime);
+				TimerServer.addLoop(updateTime,1000);
+			}
+		}
+		private function updateTime():void
+		{
+			updataStarTime();
+			remainTime--;
+			_skin.sec_time.text="副本剩余时间："+TimeUtil.format3TimeType(remainTime);
+			if(remainTime<=30)
+				_skin.sec_time.color = 0xd02525;
+			else
+				_skin.sec_time.color = 0xe8c958;
+			if(remainTime==0)
+			{
+				stopTimer();
+			}
+		}
 		private function refeashInfo():void
 		{
 			var wave:int =0;
@@ -168,21 +278,11 @@ package com.rpgGame.app.ui.scene.dungeon
 			_skin.killName.text = wave.toString()+"/"+_totalWaveCount;
 			_skin.killNum.text = count.toString()+"/"+_totalMonsterCount;
 		}
-		override protected function onHide():void
-		{
-			stopTimer();
-			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
-			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
-			EventManager.removeEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
-			EventManager.removeEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
-		}
+		
 		
 		private function stopTimer():void
 		{
-			if(Starling.juggler.contains(this))
-			{
-				Starling.juggler.remove(this);
-			}
+			TimerServer.remove(updateTime);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

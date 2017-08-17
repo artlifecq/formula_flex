@@ -58,6 +58,8 @@ package com.rpgGame.app.manager.scene
 	
 	import org.client.mainCore.manager.EventManager;
 	
+	import utils.TimerServer;
+	
 	/**
 	 *
 	 * 场景切换管理器
@@ -82,7 +84,7 @@ package com.rpgGame.app.manager.scene
 		 */
 		public static var isToCrossMap:Boolean;
 		
-		private static var _isChangeSceneComplete : Boolean = false;
+		private static var _isChangeSceneComplete : Boolean = true;
 		private static var _mapRes : String = null;
 		public static var needOpenNewFuncId:int;
 		setup();
@@ -418,6 +420,12 @@ package com.rpgGame.app.manager.scene
 				mapID = 1001;
 				MainRoleManager.actorInfo.mapID = 1001;
 			}
+			
+			if(currentMapId==mapID||!isChangeSceneComplete){//当前的地图就是要去的地图或者前面一张地图都没加载完
+				return;
+			}
+			
+			
 			_isChangeSceneComplete = false;
 				
 			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据

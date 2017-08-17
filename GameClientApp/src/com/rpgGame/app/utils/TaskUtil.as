@@ -923,12 +923,12 @@ package com.rpgGame.app.utils
 		
 		
 		/**设置任务目标内容*/
-		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
+		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>,fly:Boolean=true):void
 		{
 			var i:int,j:int,length:int;
 			var text:String="";
 			var postPath:Array=TaskMissionManager.getTaskPathingByType(mainType,0);
-			var flyKey:Boolean=postPath&&postPath.length==3;
+			var flyKey:Boolean=fly&&postPath&&postPath.length==3;
 			if(missionType==TaskType.SUB_CONVERSATION)
 			{
 				text=TaskMissionCfgData.getTaskDescribe(missionType,describe,TaskMissionManager.getTaskNpcModeId(mainType));
@@ -937,7 +937,7 @@ package com.rpgGame.app.utils
 			else
 			{
 				var finiStr:Array;
-				var informationList:Array=JSONUtil.decode(finisstr);;
+				var informationList:Array=JSONUtil.decode(finisstr);
 				if(informationList&&informationList.length>0)
 				{
 					length=informationList.length;
@@ -954,7 +954,7 @@ package com.rpgGame.app.utils
 								modeid=int(modeArr[0]);
 								finish=int(modeArr[1]);
 							}
-							if(subList[i]!=null)
+							if(subList!=null&&subList.length>i)
 							{
 								modeid=subList[i].modelId;
 								count=subList[i].num;
