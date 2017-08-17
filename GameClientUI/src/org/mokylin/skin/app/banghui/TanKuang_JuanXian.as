@@ -2,10 +2,8 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -53,13 +51,11 @@ package org.mokylin.skin.app.banghui
 
 		public var lbLast:feathers.controls.Label;
 
-		public var lbNum:feathers.controls.text.TextFieldTextEditor;
+		public var lbNum:feathers.controls.Label;
 
 		public var lbNum1:feathers.controls.Label;
 
 		public var lbNum2:feathers.controls.Label;
-
-		public var list:feathers.controls.List;
 
 		public var skinSelect1:feathers.controls.SkinnableContainer;
 
@@ -76,7 +72,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 384;
 			this.width = 552;
-			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),list_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),__TanKuang_JuanXian_Label3_i(),lbHuoyue_i(),__TanKuang_JuanXian_Label4_i(),lbBanggong_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),labToken_i(),labGold_i(),__TanKuang_JuanXian_UIAsset11_i()];
+			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),__TanKuang_JuanXian_Label3_i(),lbHuoyue_i(),__TanKuang_JuanXian_Label4_i(),lbBanggong_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),labToken_i(),labGold_i(),__TanKuang_JuanXian_UIAsset11_i()];
 			
 			states = {
 			};
@@ -463,9 +459,9 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function lbNum_i():feathers.controls.text.TextFieldTextEditor
+		private function lbNum_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.height = 19;
@@ -477,18 +473,6 @@ package org.mokylin.skin.app.banghui
 			temp.width = 50;
 			temp.x = 11;
 			temp.y = 2;
-			return temp;
-		}
-
-		private function list_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			list = temp;
-			temp.name = "list";
-			temp.height = 256;
-			temp.width = 254;
-			temp.x = 14;
-			temp.y = 67;
 			return temp;
 		}
 

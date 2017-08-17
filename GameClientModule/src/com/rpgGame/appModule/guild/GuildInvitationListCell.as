@@ -1,31 +1,29 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
-	
-	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.mokylin.skin.app.banghui.ItemYaoQin;
 	import org.mokylin.skin.common.ItemBg;
 	
 	import starling.display.DisplayObject;
 	
-	public class GuildInvitationListCell extends DefaultListItemRenderer
+	public class GuildInvitationListCell extends SkinUI
 	{
 		private var _skin:ItemYaoQin;
 		private var _inviteInfo:GuildInviteInfo;
-		public function GuildInvitationListCell():void
-		{
-			super();
-		}
-		
-		override protected function initialize():void
+		private var indexValue:int;
+		public function GuildInvitationListCell(index:int):void
 		{
 			_skin = new ItemYaoQin();
-			_skin.toSprite(this);
+			super(_skin);
+			indexValue=index;
 		}
+		
+		
 		
 		private function updateSkin():void
 		{
@@ -40,7 +38,7 @@ package com.rpgGame.appModule.guild
 			}
 			
 		}
-		override protected function commitData():void
+		public function setData(data:GuildInviteInfo):void
 		{
 			updateSkin();
 			_inviteInfo = GuildManager.instance().getinviteListInfoByIndex(this.indexValue);
@@ -86,22 +84,6 @@ package com.rpgGame.appModule.guild
 			{
 				GuildManager.instance().reqGuildInviteOperation(_inviteInfo.id,1);
 			}
-		}
-		
-		private function get indexValue():int
-		{
-			return this.data as int;
-		}
-		
-		
-		override public function get height():Number
-		{
-			return _skin.height;
-		}
-		
-		override public function get width():Number
-		{
-			return _skin.width;
 		}
 	}
 }
