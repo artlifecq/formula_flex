@@ -346,7 +346,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var skin:StateSkin = new org.mokylin.skin.app.shejiao.zudui.Zudui_Head()
 			temp.skin = skin
 			temp.width = 143;
-			temp.x = 0;
+			temp.x = -13;
 			temp.y = 0;
 			return temp;
 		}
@@ -360,7 +360,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var skin:StateSkin = new org.mokylin.skin.app.shejiao.zudui.Zudui_Head()
 			temp.skin = skin
 			temp.width = 143;
-			temp.x = 0;
+			temp.x = -12;
 			temp.y = 0;
 			return temp;
 		}
@@ -374,7 +374,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var skin:StateSkin = new org.mokylin.skin.app.shejiao.zudui.Zudui_Head()
 			temp.skin = skin
 			temp.width = 143;
-			temp.x = 0;
+			temp.x = -7;
 			temp.y = 0;
 			return temp;
 		}
@@ -388,7 +388,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var skin:StateSkin = new org.mokylin.skin.app.shejiao.zudui.Zudui_Head()
 			temp.skin = skin
 			temp.width = 143;
-			temp.x = 0;
+			temp.x = -14;
 			temp.y = 0;
 			return temp;
 		}
@@ -402,7 +402,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var skin:StateSkin = new org.mokylin.skin.app.shejiao.zudui.Zudui_Head()
 			temp.skin = skin
 			temp.width = 143;
-			temp.x = 0;
+			temp.x = -15;
 			temp.y = 0;
 			return temp;
 		}
