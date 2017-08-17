@@ -7,7 +7,7 @@ package org.mokylin.skin.app.shejiao.zudui
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.shejiao.button.ButtonFangdajing;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.button.ButtonSkin_putong5;
 
 	/**
 	 * @private
@@ -48,7 +48,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 262;
 			this.width = 515;
-			this.elementsContent = [__Duiwu_TanKuang_UIAsset1_i(),__Duiwu_TanKuang_UIAsset2_i(),btn_ok_i(),btn_Look_i(),btn_cancel_i(),grpMsg_i(),dui1_i()];
+			this.elementsContent = [__Duiwu_TanKuang_UIAsset1_i(),btn_ok_i(),btn_Look_i(),btn_cancel_i(),grpMsg_i(),dui1_i()];
 			
 			states = {
 			};
@@ -63,7 +63,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "玩家名：";
-			temp.color = 0xDFB01F;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -74,7 +74,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "等级：";
-			temp.color = 0xDFB01F;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 173;
 			temp.y = 0;
@@ -90,21 +90,14 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function __Duiwu_TanKuang_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shejiao/zudui/dizuo1.png";
-			temp.x = 0;
-			temp.y = 215;
-			return temp;
-		}
-
 		private function btn_Look_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_Look = temp;
 			temp.name = "btn_Look";
+			temp.height = 33;
 			temp.styleClass = org.mokylin.skin.app.shejiao.button.ButtonFangdajing;
+			temp.width = 34;
 			temp.x = 72;
 			temp.y = 229;
 			return temp;
@@ -117,11 +110,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_cancel";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "拒 绝";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xFFFFFF;
-			temp.width = 73;
-			temp.x = 342;
-			temp.y = 158;
+			temp.labelOffsetY = 1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong5;
+			temp.color = 0xEAEABC;
+			temp.width = 81;
+			temp.x = 341;
+			temp.y = 160;
 			return temp;
 		}
 
@@ -132,11 +126,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_ok";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "同 意";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xFFFFFF;
-			temp.width = 73;
-			temp.x = 237;
-			temp.y = 158;
+			temp.labelOffsetY = 1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong5;
+			temp.color = 0xEAEABC;
+			temp.width = 81;
+			temp.x = 242;
+			temp.y = 160;
 			return temp;
 		}
 
@@ -145,8 +140,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			dui1 = temp;
 			temp.name = "dui1";
-			temp.height = 10;
-			temp.width = 10;
+			temp.height = 1;
+			temp.width = 1;
 			temp.x = 76;
 			temp.y = 218;
 			return temp;
@@ -157,8 +152,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpMsg = temp;
 			temp.name = "grpMsg";
-			temp.x = 192;
-			temp.y = 74;
+			temp.x = 211;
+			temp.y = 73;
 			temp.elementsContent = [__Duiwu_TanKuang_Label1_i(),lbName_i(),__Duiwu_TanKuang_Label2_i(),lbLevel_i(),lb_ask_i(),lbMsg_i()];
 			return temp;
 		}
@@ -185,8 +180,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.htmlText = "请问您是否同意？（<font color='#5DBD37'>10S</font>）";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 17;
-			temp.y = 52;
+			temp.x = 38;
+			temp.y = 53;
 			return temp;
 		}
 
@@ -210,10 +205,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			lb_ask = temp;
 			temp.name = "lb_ask";
 			temp.text = "邀请你加入其队伍";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 38;
-			temp.y = 31;
+			temp.x = 59;
+			temp.y = 32;
 			return temp;
 		}
 

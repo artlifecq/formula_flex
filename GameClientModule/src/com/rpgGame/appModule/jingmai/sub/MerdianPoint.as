@@ -26,17 +26,18 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
 	import feathers.controls.Label;
+	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	
 	import org.game.netCore.data.long;
+	import org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin;
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.display.DisplayObject;
@@ -44,6 +45,8 @@ package com.rpgGame.appModule.jingmai.sub
 
 	public class MerdianPoint implements IStoneSelector
 	{
+		public static const W:int=48;
+		public static const H:int=48;
 		private var _GRAY_FILTER:FragmentFilter;
 		public var imgPoint:UIAsset;
 		//有可能是空，没得下一个点的链接了
@@ -60,23 +63,28 @@ package com.rpgGame.appModule.jingmai.sub
 		private var _tipsInfo:BaseTipsInfo;
 		private var _type:int;
 		private var _hasReward:Boolean;
-		private var _imgBG:UIAsset;
+		
 		private static var eff:Inter3DContainer;
 		private static var effect3d:InterObject3D;
-		public function MerdianPoint(bg:UIAsset,point:UIAsset,lab:Label,acupoint:String,mapLine:MeridianMapLine,ptType:int)
+		private var _skin:XinfaIconSkin;
+		public function MerdianPoint(s:StateSkin,acupoint:String,mapLine:MeridianMapLine,ptType:int)
 		{
-			this._imgBG=bg;
+			_skin=s as XinfaIconSkin;
+			this._skin.container.touchGroup=true;
+			
 			this._type=ptType;
-			this.imgPoint=point;
+			this.imgPoint=_skin.icok;
 			this.imgPoint.touchGroup=true;
 			
+			this._imgIcon=_skin.ico;
 			//this.linkLine.visible=false;
 			//
-			this.labAtt=lab;
+			this.labAtt=_skin.lab;
+			this.labAtt.bold=true;
 			this._acupointId=acupoint;
 			this._drawLine=mapLine;
 			_tipsInfo=TargetTipsMaker.makeTips( TipType.MERIDIAN_TIP, this );
-			TipTargetManager.show( imgPoint, _tipsInfo);
+			TipTargetManager.show( _skin.container, _tipsInfo);
 			
 		}
 		//设置节点底框
@@ -85,11 +93,11 @@ package com.rpgGame.appModule.jingmai.sub
 			var config:Q_meridian=MeridianCfg.getMeridianCfg(acupointId);
 			if (isUnLock) 
 			{
-				this._imgBG.styleName="ui/app/beibao/icons/bianxian/"+_data.MeridId+"/liang/"+config.q_stone_type+".png";
+				this._skin.icod.styleName="ui/app/beibao/icons/bianxian/"+_data.MeridId+"/liang/"+config.q_stone_type+".png";
 			}
 			else
 			{
-				this._imgBG.styleName="ui/app/beibao/icons/bianxian/"+_data.MeridId+"/an/"+config.q_stone_type+".png";
+				this._skin.icod.styleName="ui/app/beibao/icons/bianxian/"+_data.MeridId+"/an/"+config.q_stone_type+".png";
 			}
 		}
 		//设置节点外框
@@ -328,10 +336,10 @@ package com.rpgGame.appModule.jingmai.sub
 					
 					_upArrow.height =14;
 					_upArrow.width = 14;
-					_upArrow.x=(this.imgPoint.width-14);
+					_upArrow.x=(this._skin.icod.width-14);
 					_upArrow.y=2;
 				}
-				this.imgPoint.addChild(_upArrow);
+				_skin.container.addChild(_upArrow);
 			}
 			else
 			{
@@ -409,10 +417,10 @@ package com.rpgGame.appModule.jingmai.sub
 					_imgIcon=new UIAsset();
 					_imgIcon.name="_imgIcon";
 					
-					this.imgPoint.addChild(_imgIcon);
+				//	this.imgPoint.addChild(_imgIcon);
 				}
-				_imgIcon.x=(imgPoint.width-w)/2;
-				_imgIcon.y=(imgPoint.height-h)/2;
+				_imgIcon.x=(W-w)/2;
+				_imgIcon.y=(H-h)/2;
 				_imgIcon.styleName=url;
 				_imgIcon.width=w;
 				_imgIcon.height=h;

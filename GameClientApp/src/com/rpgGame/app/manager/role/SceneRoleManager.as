@@ -515,6 +515,11 @@ package com.rpgGame.app.manager.role
 				girlPet.setOwner(role);
 				role.setRenderAnimator(girlPet);
 			}
+			if(data.petData.q_born_animation)//有出生特效
+			{
+				trace(data.x+"   "+data.y);
+				SpellAnimationHelper.addBornEffect(role,data.x, data.y,data.petData.q_born_animation);
+			}
 //			trace("美人创建成功_美人位子："+p.x+"_"+p.y);
 			//			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}

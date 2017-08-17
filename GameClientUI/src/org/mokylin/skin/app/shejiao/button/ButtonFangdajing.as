@@ -47,7 +47,7 @@ package org.mokylin.skin.app.shejiao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/shejiao/button/fangdajing/down.png", "hover":"ui/app/shejiao/button/fangdajing/over.png", "up":"ui/app/shejiao/button/fangdajing/up.png"};
+			skinNames={"down":"ui/common/btn/fangdajing/down.png", "hover":"ui/common/btn/fangdajing/over.png", "up":"ui/common/btn/fangdajing/up.png"};
 		}
 
 
