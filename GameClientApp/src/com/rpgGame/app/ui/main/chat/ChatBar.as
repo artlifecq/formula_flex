@@ -137,7 +137,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.listBar.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreateList);
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
-			layout.gap = 0;
+			layout.gap =10;
 			layout.hasVariableItemDimensions = true;
 			_skin.listBar.layout = layout;
 			_skin.btn_lock.isSelected=true;
