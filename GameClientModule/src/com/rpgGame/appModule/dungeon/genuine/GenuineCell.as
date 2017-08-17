@@ -67,6 +67,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.uiName.styleName = "ui/app/fuben/mc/zhenqi/"+_data.q_limit_level+".png";
 			_skin.uiBg.styleName = "ui/big_bg/fuben/zhenqi/"+_data.q_bgicon+".jpg";
 			_skin.numZhanli.number = _data.q_combat;
+			_skin.numZhanli.bounds.width=_skin.numZhanli.width;
 			_skin.grpFirst.visible=_dailyZoneInfo.havePassed==0;
 			var itemInfos:Array = ItemUtil.jsonParseItemClientList(_data.q_special_rewards_show);
 			FaceUtil.SetItemGrid(_fistIcon,itemInfos[0], true);
@@ -127,12 +128,12 @@ package com.rpgGame.appModule.dungeon.genuine
 			{
 				_skin.uiLevel.visible = true;
 				_skin.uiLevel.styleName = "ui/app/fuben/mc/kaiqidengji/kaiqi_"+_data.q_limit_level+".png";
-				_skin.ui_tuijianZhanliName.visible=_skin.numZhanli.visible=false;
+				_skin.grp_Tuijian.visible=false;
 			}else{
 				if(_dailyZoneInfo.todayPassed>0)
-					_skin.ui_tuijianZhanliName.visible=_skin.numZhanli.visible=false;
+					_skin.grp_Tuijian.visible=false;
 				else
-					_skin.ui_tuijianZhanliName.visible=_skin.numZhanli.visible=true;
+					_skin.grp_Tuijian.visible=true;
 				_skin.uiLevel.visible = false;
 			}
 		}

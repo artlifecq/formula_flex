@@ -558,7 +558,7 @@ package com.rpgGame.coreData.cfg
 		public static function getDropItemQuatityEffect(quatity:int) : String
 		{
 			
-			var url : String = "avatar/drop/q" + quatity + eName_AWD;
+			var url : String = "avatar/drop/q" + quatity +eName_AWD;
 			return baseDir + resURL + url;
 		}
 		public static function getQualityBg(type : int, size : int) : String

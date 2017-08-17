@@ -48,6 +48,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.TransCfgData;
+    import com.rpgGame.coreData.cfg.item.ItemConfig;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.enum.BoneNameEnum;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
@@ -64,6 +65,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.netData.map.bean.DropGoodsInfo;
     
     import flash.display.BitmapData;
     import flash.geom.Point;
@@ -953,9 +955,14 @@ package com.rpgGame.app.manager.shell
         
         private function addGroods(goodsId : String) : void {
             var data:SceneDropGoodsData=new SceneDropGoodsData();
-            data.goodsDatas=null;
-            data.id=1;
-            data.avatarRes="goods/"+ goodsId + "/" + goodsId;
+			var info:DropGoodsInfo=new DropGoodsInfo();
+			info.ownerId=new long();
+			info.itemModelId=5091;
+			info.dropGoodsId=new long();
+			info.x=MainRoleManager.actor.x;
+			info.y=MainRoleManager.actor.z;
+			data.updateWithGoodsData(info);
+            data.avatarRes=goodsId;
             //data.avatarRes=AvatarUrl.BAO_XIANG;
             data.x=MainRoleManager.actor.x;
             data.y=MainRoleManager.actor.z;

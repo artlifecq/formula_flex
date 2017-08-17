@@ -179,7 +179,8 @@ package com.rpgGame.coreData
 			_bodyEffectID = value;
 			if (_bodyEffectID)
 			{
-				_rpd_body_effect = new RenderParamData3D(RenderUnitID.BODY_EFFECT, RenderUnitType.BODY_EFFECT, ClientConfig.getEffect(_bodyEffectID));
+				_bodyEffectID=_bodyEffectID.indexOf(ClientConfig.eName_AWD)!=-1?_bodyEffectID:ClientConfig.getEffect(_bodyEffectID);//带awd就使用原来的
+				_rpd_body_effect = new RenderParamData3D(RenderUnitID.BODY_EFFECT, RenderUnitType.BODY_EFFECT, _bodyEffectID);
 				_rpd_body_effect.mouseEnable = false;
 				_rpd_body_effect.clearSameType = false;
 				_rpd_body_effect.priority = _priority;
@@ -198,6 +199,7 @@ package com.rpgGame.coreData
 			_bodyEffectID2 = value;
 			if (_bodyEffectID2)
 			{
+				_bodyEffectID2=_bodyEffectID2.indexOf(ClientConfig.eName_AWD)!=-1?_bodyEffectID2:ClientConfig.getEffect(_bodyEffectID2);//带awd就使用原来的
 				_rpd_body_effect2 = new RenderParamData3D(RenderUnitID.BODY_EFFECT2, RenderUnitType.BODY_EFFECT2, ClientConfig.getEffect(_bodyEffectID2));
 				_rpd_body_effect2.mouseEnable = false;
 				_rpd_body_effect2.clearSameType = false;

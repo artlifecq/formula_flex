@@ -31,12 +31,36 @@ package org.mokylin.skin.component.tabbar
 							name:"color",
 							value:0xeaeabc
 						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:10
+						}
 					]
 				,
 				hover:[
 						{target:"labelDisplay",
 							name:"color",
 							value:0xeaeabc
+						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:10
+						}
+					]
+				,
+				down:[
+						{target:"labelDisplay",
+							name:"y",
+							value:10
+						}
+					]
+				,
+				disabled:[
+						{target:"labelDisplay",
+							name:"y",
+							value:10
 						}
 					]
 				,
@@ -45,6 +69,11 @@ package org.mokylin.skin.component.tabbar
 							name:"color",
 							value:0xe4d075
 						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:10
+						}
 					]
 				,
 				hhoverAndSelected:[
@@ -52,12 +81,29 @@ package org.mokylin.skin.component.tabbar
 							name:"color",
 							value:0xeaeabc
 						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:10
+						}
 					]
 				,
 				downAndSelected:[
 						{target:"labelDisplay",
 							name:"color",
 							value:0xeaeabc
+						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:10
+						}
+					]
+				,
+				disabledAndSelected:[
+						{target:"labelDisplay",
+							name:"y",
+							value:10
 						}
 					]
 				,
@@ -76,11 +122,6 @@ package org.mokylin.skin.component.tabbar
 							name:"nativeFilters",
 							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
 					]
 			};
 			skinNames={"down":"ui/component/tabbar/skin_pack/down.png",
@@ -97,15 +138,13 @@ package org.mokylin.skin.component.tabbar
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 28;
+			temp.height = 21;
 			temp.left = 0;
 			temp.right = 0;
 			temp.text = "活动大厅";
 			temp.textAlign = "center";
 			temp.color = 0xe4d075;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.verticalAlign = "middle";
-			temp.y = 3;
 			return temp;
 		}
 

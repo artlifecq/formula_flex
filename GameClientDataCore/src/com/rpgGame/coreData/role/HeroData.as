@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.role
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -633,7 +634,7 @@ package com.rpgGame.coreData.role
 		public function get nameColor() : int
 		{
 			//			return _pk_nameType.getValue(_resources);
-			return 0;
+			return  StaticValue.BEIGE_TEXT;
 		}
 		
 		/** 是否小队跟随中 **/

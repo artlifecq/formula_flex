@@ -5,10 +5,12 @@ package com.rpgGame.appModule.activety
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.common.alert.AlertActiveyOpen;
 	
 	import starling.display.DisplayObject;
@@ -37,6 +39,15 @@ package com.rpgGame.appModule.activety
 			_skin.icons.styleName="icon/activity/open/"+actInfo.actCfg.q_activity_id+".png";
 			_skin.labContent.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,actInfo.actCfg.q_activity_name)+"活动已开始，是否前往？";
 			super.show(data,openTable,parentContiner);
+			
+			EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY_NOTICE,closeAct);
+		}
+		
+		private function closeAct(data:*=null):void
+		{
+			if(actInfo.actCfg.q_activity_id==data){
+				this.hide();
+			}
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -68,6 +79,12 @@ package com.rpgGame.appModule.activety
 				}
 				this.hide()
 			}
+		}
+		
+		override protected function onHide():void
+		{
+			super.hide();
+			EventManager.removeEvent(ActivityEvent.CLOSE_ACTIVITY_NOTICE,closeAct);
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void
