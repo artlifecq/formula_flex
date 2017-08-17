@@ -5,6 +5,7 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -39,25 +40,27 @@ package com.rpgGame.appModule.die
 	{
 		private var _skin:fuhuo_Skin;
 		private var disMsg:ResPlayerDieMessage;
-
+		
 		private var openNum:int;
 		private var items:Vector.<DieToItem>;
 		private var showItem:DieToItem;
-
+		
 		private var openTime:int;
-
+		
 		private var timer:Timer;
-
+		
 		private var currentSeeIndex:int;
 		private var maxSeeIndex:int;
 		private var tween:TweenLite;
 		private var _listContent:ContentList;
 		private const FUHUO_ID:int=300;
-		private var butX1:int=396;
-		private var timeX1:int=533;
+		
+		private var mianfeiX1:int=431;
+		private var mianfeiX2:int=307;
+		
+		private var butX1:int=386;
 		private var butX2:int=270;
-		private var timeX2:int=407;
-		 
+		
 		public function DiePanel()
 		{
 			_skin=new fuhuo_Skin();
@@ -68,6 +71,7 @@ package com.rpgGame.appModule.die
 			this.addChild(_listContent);
 			_listContent.x = 50;
 			_listContent.y = 150;
+			TaskUtil.addLabelEvet(_skin.lbGoumai);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -84,14 +88,14 @@ package com.rpgGame.appModule.die
 			openTime=disMsg.autoTime;
 			/*items=new Vector.<DieToItem>();
 			for(var i:int=0;i<5;i++){
-				items.push(new DieToItem());
-				this._skin.openGrp.addChild(items[i]);
-				items[i].x=(items[i].width+8)*i;
-				if(i<openNum){
-					items[i].update(DieCfgData.allOpenList[i]);
-				}else{
-					items[i].update(null);
-				}
+			items.push(new DieToItem());
+			this._skin.openGrp.addChild(items[i]);
+			items[i].x=(items[i].width+8)*i;
+			if(i<openNum){
+			items[i].update(DieCfgData.allOpenList[i]);
+			}else{
+			items[i].update(null);
+			}
 			}
 			showItem=items[4];*/
 			
@@ -116,19 +120,21 @@ package com.rpgGame.appModule.die
 			{
 				case EnumMapType.MAP_TYPE_MULTY:
 				{
+					_skin.lbMianfei.x=mianfeiX2;
 					_skin.btn_fuhuodian.x=butX2;
-					_skin.lbl_time.x=timeX2;
 					_skin.btn_yuandi.visible=false;
-					_skin.btn_goumai.visible=false;
+					_skin.lbGoumai.visible=false;
+					_skin.lbDanyao.visible=false;
 					break;
 				}
 					
 				default:
 				{
+					_skin.lbMianfei.x=mianfeiX1;
 					_skin.btn_fuhuodian.x=butX1;
-					_skin.lbl_time.x=timeX1;
 					_skin.btn_yuandi.visible=true;
-					_skin.btn_goumai.visible=true;
+					_skin.lbGoumai.visible=true;
+					_skin.lbDanyao.visible=true;
 					break;
 				}
 			}
@@ -137,12 +143,12 @@ package com.rpgGame.appModule.die
 		
 		protected function onTimer(event:TimerEvent):void
 		{
-			_skin.lbl_time.text="剩余:"+(openTime-timer.currentCount)+"s";
+			_skin.btn_fuhuodian.label="复活点("+(openTime-timer.currentCount)+"s)";
 		}
 		
 		protected function onTimeComplete(event:TimerEvent):void
 		{
-			_skin.lbl_time.text="剩余:"+(openTime-timer.currentCount)+"s";
+			_skin.btn_fuhuodian.label="复活点("+(openTime-timer.currentCount)+"s)";
 			this.hide();
 		}
 		
@@ -174,7 +180,7 @@ package com.rpgGame.appModule.die
 						GameAlert.showAlert(alertSet,alertToBuy);
 					}
 					break;
-				case _skin.btn_goumai:
+				case _skin.lbGoumai:
 					showByFuHuo();
 					break;
 				case _skin.btn_fuhuodian:
@@ -182,19 +188,19 @@ package com.rpgGame.appModule.die
 					this.hide();
 					break;
 				/*case _skin.btn_prev:
-					if(tween){
-						tween.complete();
-					}
-					currentSeeIndex++;
-					updateSeeItem(false);
-					break;
+				if(tween){
+				tween.complete();
+				}
+				currentSeeIndex++;
+				updateSeeItem(false);
+				break;
 				case _skin.btn_next:
-					if(tween){
-						tween.complete();
-					}
-					currentSeeIndex--;
-					updateSeeItem(true);
-					break;*/
+				if(tween){
+				tween.complete();
+				}
+				currentSeeIndex--;
+				updateSeeItem(true);
+				break;*/
 			}
 		}
 		
@@ -207,45 +213,45 @@ package com.rpgGame.appModule.die
 		
 		private function showByFuHuo():void
 		{
-//			this.hide();
+			//			this.hide();
 			ItemBuyPanelExt.buyItemByModelId(300);
 		}
 		
 		/*private function updateSeeItem(isNext:Boolean,showAni:Boolean=true):void
 		{
-			_skin.btn_prev.visible=true;
-			_skin.btn_next.visible=true;
-			if(currentSeeIndex==0){
-				_skin.btn_next.visible=false;
-			}
-			if(currentSeeIndex==maxSeeIndex){
-				GrayFilter.gray(_skin.btn_prev);
-				_skin.btn_prev.visible=false;
-			}
-			
-			if(!showAni){
-				return;
-			}
-			
-			if(isNext){
-				showItem.x=items[0].x-8-items[0].width;
-				showItem.update(DieCfgData.allOpenList[currentSeeIndex]);
-				tween=TweenLite.to(_skin.openGrp,0.5,{x:_skin.openGrp.x+items[0].width+8,onComplete:onTween});
-			}else{
-				showItem.x=items[3].x+items[0].width+8;
-				showItem.update(DieCfgData.allOpenList[currentSeeIndex+3]);
-				tween=TweenLite.to(_skin.openGrp,0.5,{x:_skin.openGrp.x-items[0].width-8,onComplete:onTween});
-			}
+		_skin.btn_prev.visible=true;
+		_skin.btn_next.visible=true;
+		if(currentSeeIndex==0){
+		_skin.btn_next.visible=false;
+		}
+		if(currentSeeIndex==maxSeeIndex){
+		GrayFilter.gray(_skin.btn_prev);
+		_skin.btn_prev.visible=false;
+		}
+		
+		if(!showAni){
+		return;
+		}
+		
+		if(isNext){
+		showItem.x=items[0].x-8-items[0].width;
+		showItem.update(DieCfgData.allOpenList[currentSeeIndex]);
+		tween=TweenLite.to(_skin.openGrp,0.5,{x:_skin.openGrp.x+items[0].width+8,onComplete:onTween});
+		}else{
+		showItem.x=items[3].x+items[0].width+8;
+		showItem.update(DieCfgData.allOpenList[currentSeeIndex+3]);
+		tween=TweenLite.to(_skin.openGrp,0.5,{x:_skin.openGrp.x-items[0].width-8,onComplete:onTween});
+		}
 		}
 		
 		private function onTween():void
 		{
-			_skin.openGrp.x=46;
-			for(var i:int=0;i<4;i++){
-				items[i].update(DieCfgData.allOpenList[currentSeeIndex+i]);
-			}
-			tween.kill();
-			tween=null;
+		_skin.openGrp.x=46;
+		for(var i:int=0;i<4;i++){
+		items[i].update(DieCfgData.allOpenList[currentSeeIndex+i]);
+		}
+		tween.kill();
+		tween=null;
 		}*/
 	}
 }

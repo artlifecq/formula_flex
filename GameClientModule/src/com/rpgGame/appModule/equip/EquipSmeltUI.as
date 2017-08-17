@@ -28,12 +28,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
-	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.SharedObjectEnum;
@@ -775,7 +772,7 @@ package com.rpgGame.appModule.equip
 				if(has_up.getValue(type)) v2=has_up.getValue(type);
 				else v2=0;
 				var num:int=AttValueConfig.getDisAttValue(type,(v2-v1));
-//				trace("属性类型："+type+"值1：——"+v1+"值2:——"+v2);
+				trace("属性类型："+type+"值1：——"+v1+"   值2:——"+v2);
 				if(num!=0)
 					has.put(type,num);
 			}

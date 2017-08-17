@@ -141,6 +141,7 @@ package com.rpgGame.app.manager.task
 		}
 		private function onUpdate():void
 		{
+//			return;
 			if(testStopKey)
 				return;
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
