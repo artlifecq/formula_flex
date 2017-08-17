@@ -16,7 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.lang.LangBaZhenTu;
 	import com.rpgGame.coreData.role.MonsterData;
 	
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;

@@ -1,6 +1,5 @@
 package com.rpgGame.app.manager.task
 {
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -8,7 +7,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TouZhuSender;
 	import com.rpgGame.app.utils.TimeData;
-	import com.rpgGame.core.events.TouZhuEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
@@ -20,11 +18,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.role.HeroData;
 	
 	import flash.geom.Point;
-	
-	import app.message.MonsterDataProto;
-	import app.message.TouZhuTaskProto;
-	
-	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 * 偷猪
@@ -49,18 +42,18 @@ package com.rpgGame.app.manager.task
 		 * @param miXinTime			已经完成过的偷猪任务次数
 		 *
 		 */
-		public static function setHero(touZhuProto : TouZhuTaskProto, touzhuTimes : int) : void
-		{
-			touZhuTimes = touzhuTimes;
-
-			if (touZhuProto == null)
-				return;
-
-			touZhuTask = new TouZhuTaskData();
-			touZhuTask.setData(touZhuProto);
-
-			EventManager.dispatchEvent(TouZhuEvent.START_TOU_ZHU);
-		}
+//		public static function setHero(touZhuProto : TouZhuTaskProto, touzhuTimes : int) : void
+//		{
+//			touZhuTimes = touzhuTimes;
+//
+//			if (touZhuProto == null)
+//				return;
+//
+//			touZhuTask = new TouZhuTaskData();
+//			touZhuTask.setData(touZhuProto);
+//
+//			EventManager.dispatchEvent(TouZhuEvent.START_TOU_ZHU);
+//		}
 
 		/**
 		 * 零点重置

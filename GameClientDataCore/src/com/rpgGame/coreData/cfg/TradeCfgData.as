@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.TradeConfig;
+	
 
 	public class TradeCfgData
 	{
@@ -13,11 +13,11 @@ package com.rpgGame.coreData.cfg
 		public static var tradeInviteExpireTime : Number;
 		/**交易最大距离**/
 		public static var tradeMaxDistance : int;
-		public static function setup(cfg:TradeConfig):void
-		{
-			tradeGoodsLimit = cfg.tradeGoodsLimit;
-			tradeInviteExpireTime = cfg.tradeInviteExpireTime?cfg.tradeInviteExpireTime.toNumber():0;
-			tradeMaxDistance = cfg.tradeMaxDistance;
-		}
+//		public static function setup(cfg:TradeConfig):void
+//		{
+//			tradeGoodsLimit = cfg.tradeGoodsLimit;
+//			tradeInviteExpireTime = cfg.tradeInviteExpireTime?cfg.tradeInviteExpireTime.toNumber():0;
+//			tradeMaxDistance = cfg.tradeMaxDistance;
+//		}
 	}
 }

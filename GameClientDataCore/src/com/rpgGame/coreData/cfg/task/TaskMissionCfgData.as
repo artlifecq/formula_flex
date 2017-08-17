@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.cfg.task
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -9,7 +8,6 @@ package com.rpgGame.coreData.cfg.task
 	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.clientConfig.Q_mission_segment;
 	import com.rpgGame.coreData.clientConfig.Q_suggest;
-	import com.rpgGame.coreData.enum.JobEnum;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;

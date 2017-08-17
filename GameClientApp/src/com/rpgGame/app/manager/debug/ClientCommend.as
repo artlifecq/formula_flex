@@ -470,6 +470,11 @@ package   com.rpgGame.app.manager.debug
 				}
 				
 			});
+			commandList.put( ".enter", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_NOTICE_PANEL,arg[0]);
+				
+			});
 		}
 		
 		

@@ -2,7 +2,7 @@ package com.rpgGame.coreData.info.bazhentu
 {
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	
-	import app.message.MonsterDataProto.MonsterType;
+	import app.message.MonsterType;
 	
 	import org.game.netCore.net_protobuff.ByteBuffer;
 

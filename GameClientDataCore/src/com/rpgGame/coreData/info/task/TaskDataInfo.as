@@ -2,8 +2,6 @@ package com.rpgGame.coreData.info.task
 {
 	import com.rpgGame.coreData.info.task.target.BaseTaskTargetInfo;
 	import com.rpgGame.coreData.utils.ProtoParseToInfo;
-	
-	import app.message.PrizeProto;
 
 	/**
 	 *
@@ -86,19 +84,19 @@ package com.rpgGame.coreData.info.task
 			return _acceptDialogVect && _acceptDialogVect.length;
 		}
 		
-		public function setPrizeInfo( fixPrizeProto:PrizeProto, prizeArr:Array ):void
-		{
-			fixPrize = ProtoParseToInfo.decodePrizeProto( fixPrizeProto );
-			
-			if( prizeArr == null )
-				return;
-			
-			var len:int = prizeArr.length;
-			for( var i:int = 0;i < len; i++ )
-			{
-				selectablePrizeInfoVect.push( ProtoParseToInfo.decodePrizeProto( prizeArr[i] ) );
-			}
-		}
+//		public function setPrizeInfo( fixPrizeProto:PrizeProto, prizeArr:Array ):void
+//		{
+//			fixPrize = ProtoParseToInfo.decodePrizeProto( fixPrizeProto );
+//			
+//			if( prizeArr == null )
+//				return;
+//			
+//			var len:int = prizeArr.length;
+//			for( var i:int = 0;i < len; i++ )
+//			{
+//				selectablePrizeInfoVect.push( ProtoParseToInfo.decodePrizeProto( prizeArr[i] ) );
+//			}
+//		}
 		
 		/**
 		 * 接受对话

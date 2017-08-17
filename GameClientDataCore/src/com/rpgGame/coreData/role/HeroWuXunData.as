@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.role
 {
-	import app.message.CountryModuleObjProto.CountryModuleWuXunProto;
-	import app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto;
+	
 
 	/**
 	 *
@@ -31,22 +30,22 @@ package com.rpgGame.coreData.role
 		{
 		}
 
-		public function setConfig(cfg : CountryModuleWuXunProto) : void
-		{
-			wuXun = cfg.wuXun?cfg.wuXun.toNumber():0;
-			totalWuXun = cfg.totalWuXun?cfg.totalWuXun.toNumber():0;
-			todayKillAddWuXun = cfg.todayKillAddWuXun?cfg.todayKillAddWuXun.toNumber():0;
-			totalKillAddWuXun = cfg.totalKillAddWuXun?cfg.totalKillAddWuXun.toNumber():0;
-			todayOtherAddWuXun = cfg.todayOtherAddWuXun?cfg.todayOtherAddWuXun.toNumber():0;
-			totalOtherAddWuXun = cfg.totalOtherAddWuXun?cfg.totalOtherAddWuXun.toNumber():0;
-
-			addWuXunRecords = new Vector.<HeroAddWuXunRecord>();
-			for each (var recordProto : AddWuXunRecordProto in cfg.records)
-			{
-				var recordData : HeroAddWuXunRecord = new HeroAddWuXunRecord();
-				recordData.setConfig(recordProto);
-				addWuXunRecords.push(recordData);
-			}
-		}
+//		public function setConfig(cfg : CountryModuleWuXunProto) : void
+//		{
+//			wuXun = cfg.wuXun?cfg.wuXun.toNumber():0;
+//			totalWuXun = cfg.totalWuXun?cfg.totalWuXun.toNumber():0;
+//			todayKillAddWuXun = cfg.todayKillAddWuXun?cfg.todayKillAddWuXun.toNumber():0;
+//			totalKillAddWuXun = cfg.totalKillAddWuXun?cfg.totalKillAddWuXun.toNumber():0;
+//			todayOtherAddWuXun = cfg.todayOtherAddWuXun?cfg.todayOtherAddWuXun.toNumber():0;
+//			totalOtherAddWuXun = cfg.totalOtherAddWuXun?cfg.totalOtherAddWuXun.toNumber():0;
+//
+//			addWuXunRecords = new Vector.<HeroAddWuXunRecord>();
+//			for each (var recordProto : AddWuXunRecordProto in cfg.records)
+//			{
+//				var recordData : HeroAddWuXunRecord = new HeroAddWuXunRecord();
+//				recordData.setConfig(recordProto);
+//				addWuXunRecords.push(recordData);
+//			}
+//		}
 	}
 }

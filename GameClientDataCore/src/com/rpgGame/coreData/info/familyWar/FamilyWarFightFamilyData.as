@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.info.familyWar
 {
 	import app.message.KingWarPartyType;
+	
 
 	/**
 	 * 正在打王城战的帮派的数据 

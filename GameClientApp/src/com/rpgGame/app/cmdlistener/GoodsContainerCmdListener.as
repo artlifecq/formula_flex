@@ -3,8 +3,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
-	import com.rpgGame.app.manager.role.DropGoodsManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.EquipAutoDressEffectPanelExt;
@@ -12,7 +10,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.backpack.message.ResChangeBindItemMessage;
@@ -36,12 +33,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.store.message.ResStoreItemRemoveMessage;
 	
 	import flash.geom.Point;
-	import flash.geom.Vector3D;
 	
 	import app.message.EquipOperateType;
 	
 	import away3d.cameras.Camera3D;
-	import away3d.core.math.Matrix3DUtils;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;

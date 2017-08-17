@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg.country
 {
-	import app.message.CountryMiscProto;
+	
 
 	/**
 	 *
@@ -58,31 +58,31 @@ package com.rpgGame.coreData.cfg.country
 		/**投票持续时间**/
 		public static var voteDuration : Number;
 
-		public static function setConfig(cfg : CountryMiscProto) : void
-		{
-			trace(cfg.voteTimeData,"      ",cfg.voteDuration.toNumber());
-			voteExp = cfg.voteExp;
-			taxRateLower = cfg.taxRateLower;
-			taxRateUpper = cfg.taxRateUpper;
-			militarySubsidyLower = cfg.militarySubsidyLower.toNumber();
-			militarySubsidyPerInTotal = cfg.militarySubsidyPerInTotal;
-			militarySubsidyPerLower = cfg.militarySubsidyPerLower;
-			militarySubsidyPerUpper = cfg.militarySubsidyPerUpper;
-			militarySubsidyLowerPerTimes = cfg.militarySubsidyUpperPerTimes;
-			strongMaintainFee = cfg.strongMaintainFee;
-			normalMaintainFee = cfg.normalMaintainFee;
-			weakMaintainFee = cfg.weakMaintainFee;
-			strongReliveCostPercent = Number(cfg.strongReliveCostPercent/ 100);
-			normalReliveCostPercent = Number(cfg.normalReliveCostPercent/ 100);
-			weakReliveCostPercent = Number(cfg.weakReliveCostPercent/ 100);
-			unionNeedMoney = cfg.unionNeedMoney;
-			jinWeiApplicantUpper = cfg.jinWeiApplicantUpper;
-			waitUnionReplyCd = cfg.waitUnionReplyCd.toNumber();
-			autoReduceUnionAmount = cfg.autoReduceUnionAmount;
-			liftUnionCd = cfg.liftUnionCd.toNumber();
-			untalkTimeDuration = cfg.untalkTimeDuration;
-			captivityDuration = cfg.captivityDuration;
-		}
+//		public static function setConfig(cfg : CountryMiscProto) : void
+//		{
+//			trace(cfg.voteTimeData,"      ",cfg.voteDuration.toNumber());
+//			voteExp = cfg.voteExp;
+//			taxRateLower = cfg.taxRateLower;
+//			taxRateUpper = cfg.taxRateUpper;
+//			militarySubsidyLower = cfg.militarySubsidyLower.toNumber();
+//			militarySubsidyPerInTotal = cfg.militarySubsidyPerInTotal;
+//			militarySubsidyPerLower = cfg.militarySubsidyPerLower;
+//			militarySubsidyPerUpper = cfg.militarySubsidyPerUpper;
+//			militarySubsidyLowerPerTimes = cfg.militarySubsidyUpperPerTimes;
+//			strongMaintainFee = cfg.strongMaintainFee;
+//			normalMaintainFee = cfg.normalMaintainFee;
+//			weakMaintainFee = cfg.weakMaintainFee;
+//			strongReliveCostPercent = Number(cfg.strongReliveCostPercent/ 100);
+//			normalReliveCostPercent = Number(cfg.normalReliveCostPercent/ 100);
+//			weakReliveCostPercent = Number(cfg.weakReliveCostPercent/ 100);
+//			unionNeedMoney = cfg.unionNeedMoney;
+//			jinWeiApplicantUpper = cfg.jinWeiApplicantUpper;
+//			waitUnionReplyCd = cfg.waitUnionReplyCd.toNumber();
+//			autoReduceUnionAmount = cfg.autoReduceUnionAmount;
+//			liftUnionCd = cfg.liftUnionCd.toNumber();
+//			untalkTimeDuration = cfg.untalkTimeDuration;
+//			captivityDuration = cfg.captivityDuration;
+//		}
 
 		public function CountryMiscCfgData()
 		{

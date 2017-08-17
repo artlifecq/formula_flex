@@ -4,9 +4,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	
-	import app.cmd.AddSpriteStatModuleMessages;
-	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -28,7 +25,7 @@ package com.rpgGame.app.sender
 			var by:ByteBuffer = new ByteBuffer();
 			by.writeVarint32(statType);
 			by.writeVarint32(value);
-			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_ADD_SPRITE_STAT, by);
+//			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_ADD_SPRITE_STAT, by);
 		}
 		
 		/**
@@ -37,7 +34,7 @@ package com.rpgGame.app.sender
 		public static function autoAddSpriteStat():void
 		{
 			var by:ByteBuffer = new ByteBuffer();
-			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_AUTO_ADD_SPRITE_STAT, by);
+//			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_AUTO_ADD_SPRITE_STAT, by);
 		}
 		
 		/**
@@ -55,7 +52,7 @@ package com.rpgGame.app.sender
 			{
 				by.writeBytes(itemListVo.getByte());
 			}
-			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_CLEAR_SPRITE_STAT, by);
+//			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_CLEAR_SPRITE_STAT, by);
 		}
 	}
 }

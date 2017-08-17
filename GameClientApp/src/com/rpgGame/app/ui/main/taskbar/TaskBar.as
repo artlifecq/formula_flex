@@ -257,11 +257,11 @@ package com.rpgGame.app.ui.main.taskbar
 				if(TaskMissionManager.haveMainTask)
 				{
 					effetCont.playNewtaskEffect();
-					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
+					//TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 				}
 				else
 				{
-					TaskAutoManager.getInstance().stopAll();
+					//TaskAutoManager.getInstance().stopAll();
 				}
 				showNpcMark(true);
 			}
@@ -269,7 +269,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				if(TaskMissionManager.haveTreasuerTask&&TaskMissionManager.treasuerCheck)
 				{
-					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
+					//TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
 				}
 			}
 			setViewShow();

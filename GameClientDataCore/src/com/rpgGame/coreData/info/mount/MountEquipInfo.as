@@ -2,10 +2,6 @@ package com.rpgGame.coreData.info.mount
 {
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	
-	import app.message.EquipmentListProto;
-	import app.message.EquipmentListProto.EquipClientProto;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -28,22 +24,22 @@ package com.rpgGame.coreData.info.mount
 		 * @param proto
 		 * 
 		 */		
-		public function setMountEquipsProto( proto:EquipmentListProto ):void
-		{
-			_equips.clear();
-			var ep:EquipClientProto;
-			var item:ClientItemInfo;
-			for each( ep in proto.equipments )
-			{
-//				item = ( ep && ep.equip ) ? ItemUtil.convertGoodsProtoToItemInfo( ep.equip ) : null;
-				if( item != null )
-				{
-					item.setIndex( ep.pos );
-					item.setContainerId( ItemContainerID.Mount );
-					_equips.add( ep.pos, item );
-				}
-			}
-		}
+//		public function setMountEquipsProto( proto:EquipmentListProto ):void
+//		{
+//			_equips.clear();
+//			var ep:EquipClientProto;
+//			var item:ClientItemInfo;
+//			for each( ep in proto.equipments )
+//			{
+////				item = ( ep && ep.equip ) ? ItemUtil.convertGoodsProtoToItemInfo( ep.equip ) : null;
+//				if( item != null )
+//				{
+//					item.setIndex( ep.pos );
+//					item.setContainerId( ItemContainerID.Mount );
+//					_equips.add( ep.pos, item );
+//				}
+//			}
+//		}
 		
 		/**
 		 * 获取位置对应的装备信息 

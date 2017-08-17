@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.BiaoModuleMessages;
+	
 
 	public class BiaoJuSender extends BaseSender
 	{
@@ -13,7 +13,7 @@ package com.rpgGame.app.sender
 		public static function biaoJuLog():void
 		{
 			_bytes.clear();
-			send(BiaoModuleMessages.C2S_BIAO_JU_LOG,_bytes);
+//			send(BiaoModuleMessages.C2S_BIAO_JU_LOG,_bytes);
 		}
 		/**
 		 * 开启镖局
@@ -24,7 +24,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(value);
-			send(BiaoModuleMessages.C2S_OPEN_BIAO_JU,_bytes);
+//			send(BiaoModuleMessages.C2S_OPEN_BIAO_JU,_bytes);
 		}
 		
 		/**
@@ -33,7 +33,7 @@ package com.rpgGame.app.sender
 		public static function getBiaoJuData():void
 		{
 			_bytes.clear();
-			send(BiaoModuleMessages.C2S_GET_BIAO_JU_DATA,_bytes);
+//			send(BiaoModuleMessages.C2S_GET_BIAO_JU_DATA,_bytes);
 		}
 		/**
 		 * 充入镖局资金
@@ -44,7 +44,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(value);
-			send(BiaoModuleMessages.C2S_RECHARGE_BIAO_JU_MONEY,_bytes);
+//			send(BiaoModuleMessages.C2S_RECHARGE_BIAO_JU_MONEY,_bytes);
 		}
 		/**
 		 * 分配薪水

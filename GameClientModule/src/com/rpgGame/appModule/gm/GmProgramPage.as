@@ -395,7 +395,7 @@
                         _local2.isBroken = false;
                         (_local1.data as BiaoCheData).isBroken = false;
                     }
-                    (_local1.data as BiaoCheData).avatarInfo.setBodyResID(_local2.getModeRes(), null);
+//                    (_local1.data as BiaoCheData).avatarInfo.setBodyResID(_local2.getModeRes(), null);
 //                    AvatarManager.updateAvatar(_local1);
                     EventManager.dispatchEvent(YunBiaoEvent.UPDATE_BIAOCHE_NAME, (_local1.data as BiaoCheData));
                 }

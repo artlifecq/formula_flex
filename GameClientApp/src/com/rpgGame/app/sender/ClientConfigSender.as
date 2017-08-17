@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.MiscModuleMessages;
+	
 
 	/**
 	 *
@@ -23,7 +23,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(0);
-			send(MiscModuleMessages.C2S_REPLY_CONFIG4, _bytes);
+//			send(MiscModuleMessages.C2S_REPLY_CONFIG4, _bytes);
 		}
 	}
 }

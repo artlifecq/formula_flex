@@ -1,8 +1,6 @@
 package com.rpgGame.app.sender
 {
 	import flash.utils.ByteArray;
-	
-	import app.cmd.CountryWarModuleMessages;
 
 	/**
 	 * 国战发送协议
@@ -29,7 +27,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(targetCountryID);
-			send(CountryWarModuleMessages.C2S_COUNTRY_WAR_DECLARE_WAR, _bytes);
+//			send(CountryWarModuleMessages.C2S_COUNTRY_WAR_DECLARE_WAR, _bytes);
 		}
 
 		/**
@@ -38,7 +36,7 @@ package com.rpgGame.app.sender
 		public static function reqCountryWarDetail() : void
 		{
 			_bytes.clear();
-			send(CountryWarModuleMessages.C2S_GET_COUNTRY_WAR_DETAIL, _bytes);
+//			send(CountryWarModuleMessages.C2S_GET_COUNTRY_WAR_DETAIL, _bytes);
 			_countryWarDetailReqed = true;
 		}
 		
@@ -49,7 +47,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBytes(bytes);
-			send(CountryWarModuleMessages.C2S_JOIN_COUNTRY_WAR, _bytes);
+//			send(CountryWarModuleMessages.C2S_JOIN_COUNTRY_WAR, _bytes);
 		}
 		
 		/**
@@ -58,7 +56,7 @@ package com.rpgGame.app.sender
 		public static function reqDownFromZhanChe() : void
 		{
 			_bytes.clear();
-			send(CountryWarModuleMessages.C2S_DOWN_FROM_ZHAN_CHE, _bytes);
+//			send(CountryWarModuleMessages.C2S_DOWN_FROM_ZHAN_CHE, _bytes);
 		}
 		
 		/**
@@ -68,7 +66,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(oldDriverID);
-			send(CountryWarModuleMessages.C2S_OLD_DRIVER_TAKE_ME, _bytes);
+//			send(CountryWarModuleMessages.C2S_OLD_DRIVER_TAKE_ME, _bytes);
 		}
 		
 		/**
@@ -77,7 +75,7 @@ package com.rpgGame.app.sender
 		public static function reqOldDriverLetMeLeave() : void
 		{
 			_bytes.clear();
-			send(CountryWarModuleMessages.C2S_OLD_DRIVER_LET_ME_LEAVE, _bytes);
+//			send(CountryWarModuleMessages.C2S_OLD_DRIVER_LET_ME_LEAVE, _bytes);
 		}
 		
 		/**
@@ -86,7 +84,7 @@ package com.rpgGame.app.sender
 		public static function reqSupport() : void
 		{
 			_bytes.clear();
-			send(CountryWarModuleMessages.C2S_SUPPORT, _bytes);
+//			send(CountryWarModuleMessages.C2S_SUPPORT, _bytes);
 		}
 		
 		/**
@@ -102,7 +100,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.writeVarint64(targetRoleID);
 			}
-			send(CountryWarModuleMessages.C2S_ENTER_WATCH_SCENE, _bytes);
+//			send(CountryWarModuleMessages.C2S_ENTER_WATCH_SCENE, _bytes);
 		}
 		
 		/**
@@ -111,7 +109,7 @@ package com.rpgGame.app.sender
 		public static function reqLeaveWatchScene() : void
 		{
 			_bytes.clear();
-			send(CountryWarModuleMessages.C2S_LEAVE_WATCH_SCENE, _bytes);
+//			send(CountryWarModuleMessages.C2S_LEAVE_WATCH_SCENE, _bytes);
 		}
 		
 		/**
@@ -127,7 +125,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(tx);
 				_bytes.writeVarint32(ty);
 			}
-			send(CountryWarModuleMessages.C2S_CHANGE_WATCH_POS, _bytes);
+//			send(CountryWarModuleMessages.C2S_CHANGE_WATCH_POS, _bytes);
 		}
 		
 		/**
@@ -137,7 +135,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(targetRoleID);
-			send(CountryWarModuleMessages.C2S_GET_HERO_POSITION, _bytes);
+//			send(CountryWarModuleMessages.C2S_GET_HERO_POSITION, _bytes);
 		}
 		
 		/**
@@ -147,7 +145,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(isOpen);
-			send(CountryWarModuleMessages.C2S_TRY_OPEN_OR_CLOSE_DAN_MU, _bytes);
+//			send(CountryWarModuleMessages.C2S_TRY_OPEN_OR_CLOSE_DAN_MU, _bytes);
 		}
 		
 		/**
@@ -157,7 +155,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeUTFBytes(content);
-			send(CountryWarModuleMessages.C2S_SEND_DAN_MU, _bytes);
+//			send(CountryWarModuleMessages.C2S_SEND_DAN_MU, _bytes);
 		}
 		
 		/**
@@ -166,7 +164,7 @@ package com.rpgGame.app.sender
 		public static function reqGetWatchWarCountryOffice():void
 		{
 			_bytes.clear();
-			send(CountryWarModuleMessages.C2S_GET_WATCH_WAR_COUNTRY_OFFICE, _bytes);
+//			send(CountryWarModuleMessages.C2S_GET_WATCH_WAR_COUNTRY_OFFICE, _bytes);
 		}
 		
 	}

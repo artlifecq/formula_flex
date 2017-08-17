@@ -84,7 +84,7 @@ package com.rpgGame.app.ui.tips
 					value1 = buffData.buffInfo.value;
 				desc=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,value1))
 			}
-			_tipSkin.lbl_miaoshu1.text=desc;
+			_tipSkin.lbl_miaoshu1.htmlText=desc;
 			_tipSkin.lbl_miaoshu2.y=_tipSkin.lbl_miaoshu1.y+_tipSkin.lbl_miaoshu1.textHeight+2;
 			//var timeStr : String = buffData.disappearTime > 0 ? TimeUtil.timeFormatCH((buffData.disappearTime) * 0.001) : "永久";
 			_tipSkin.lbl_miaoshu2.text="剩余时间：永久";

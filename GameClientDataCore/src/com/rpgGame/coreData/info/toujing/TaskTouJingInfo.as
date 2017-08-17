@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.toujing
 {
-	import app.message.TouJingTaskProto;
+	
 
 	public class TaskTouJingInfo
 	{
@@ -19,15 +19,15 @@ package com.rpgGame.coreData.info.toujing
 		{
 		}
 		
-		public function setData( touJingTask:TouJingTaskProto ):void
-		{
-			if( touJingTask == null )
-				return;
-			
-			quality = touJingTask.quality;
-			isCollect = touJingTask.isTouSuccess;
-			level = touJingTask.level;
-			country = touJingTask.countrySequence;
-		}
+//		public function setData( touJingTask:TouJingTaskProto ):void
+//		{
+//			if( touJingTask == null )
+//				return;
+//			
+//			quality = touJingTask.quality;
+//			isCollect = touJingTask.isTouSuccess;
+//			level = touJingTask.level;
+//			country = touJingTask.countrySequence;
+//		}
 	}
 }

@@ -1,9 +1,6 @@
 package com.rpgGame.coreData.cfg.country
 {
-	import app.message.CountryConfig;
-	import app.message.CountryMiscProto;
-	import app.message.CountryNameProto;
-	import app.message.CountryOfficerDatasProto;
+	
 
 	/**
 	 *
@@ -17,7 +14,7 @@ package com.rpgGame.coreData.cfg.country
 		/**
 		 * 乱七八糟的数据
 		 */
-		private static var misc : CountryMiscProto;
+//		private static var misc : CountryMiscProto;
 		/**
 		 * 国战配置
 		 */
@@ -25,24 +22,24 @@ package com.rpgGame.coreData.cfg.country
 		/**
 		 * 国家名字
 		 */
-		private static var countryName : CountryNameProto;
+//		private static var countryName : CountryNameProto;
 		/**
 		 * 官员数据
 		 */
-		private static var officerDatas : CountryOfficerDatasProto;
-
-		public static function setConfig(cfg : CountryConfig) : void
-		{
-			misc = cfg.misc;
-			//countryWarConfig = cfg.countryWarConfig;
-			countryName = cfg.countryName;
-			officerDatas = cfg.officerDatas;
-
-			CountryMiscCfgData.setConfig(misc);
-			CountryNameCfgData.setConfig(countryName);
-			//CountryWarCfgData.setConfig(countryWarConfig);
-			CountryOfficerCfgData.setConfig(officerDatas);
-		}
+//		private static var officerDatas : CountryOfficerDatasProto;
+//
+//		public static function setConfig(cfg : CountryConfig) : void
+//		{
+//			misc = cfg.misc;
+//			//countryWarConfig = cfg.countryWarConfig;
+//			countryName = cfg.countryName;
+//			officerDatas = cfg.officerDatas;
+//
+//			CountryMiscCfgData.setConfig(misc);
+//			CountryNameCfgData.setConfig(countryName);
+//			//CountryWarCfgData.setConfig(countryWarConfig);
+//			CountryOfficerCfgData.setConfig(officerDatas);
+//		}
 
 		public function CountryStaticConfigData()
 		{
