@@ -87,7 +87,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.name = "lbId";
 			temp.text = "1";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 40;
 			temp.x = 26;
@@ -102,7 +102,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.name = "lbJifen";
 			temp.text = "3244";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 58;
 			temp.x = 443;
@@ -117,7 +117,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.name = "lbLevel";
 			temp.text = "钻石四阶";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 102;
 			temp.x = 300;
@@ -133,7 +133,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.height = 19;
 			temp.text = "[1000区]玩家名六个字";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 159;
 			temp.x = 149;

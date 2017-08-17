@@ -60,7 +60,7 @@ package org.mokylin.skin.app.meiren
 			temp.letterSpacing = 0;
 			temp.fontSize = 14;
 			temp.text = "推荐战力：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 80;
 			temp.x = 10;
@@ -75,7 +75,7 @@ package org.mokylin.skin.app.meiren
 			temp.letterSpacing = 0;
 			temp.fontSize = 14;
 			temp.text = "通关状态：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 80;
 			temp.x = 10;
@@ -90,7 +90,7 @@ package org.mokylin.skin.app.meiren
 			temp.letterSpacing = 0;
 			temp.fontSize = 14;
 			temp.text = "关卡奖励：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 94;
 			temp.x = 10;

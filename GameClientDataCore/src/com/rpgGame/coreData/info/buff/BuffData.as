@@ -9,6 +9,8 @@ package com.rpgGame.coreData.info.buff
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	
+	import flash.utils.getTimer;
+	
 	/**
 	 * buff数据--部分数据是客户端从服务器读过来，另外部分数据是读buff表的 
 	 * buff相关的都是围绕这个数据来表现的
@@ -25,15 +27,15 @@ package com.rpgGame.coreData.info.buff
 		private var _specialData : Object = null;
 		private var _description : String = "";
 		
-		private var _totalTime:Number = 0;
-		private var _disappearTime : Number = 0;
+		private var _totalTime:int = 0;
+		private var _disappearTime : int = 0;
 		private var _curtStackCount : uint = 0;
 		private var _buffInfo:BuffInfo;
 		
 		private var _clientData:Object=null;
 		
 		private var _srcRole:BaseRole;
-
+		private var _endTime:int;
 		public function BuffData(roleId : Number) : void
 		{
 			_roleId = roleId;
@@ -146,9 +148,11 @@ package com.rpgGame.coreData.info.buff
 			_serverID = _buffInfo.buffId.ToString();
 			_buffId = _buffInfo.buffId.ToGID();
 			cfgId = _buffInfo.buffModelId;
-			_disappearTime = _buffInfo.remainTime.fValue;
-			_totalTime = _buffInfo.totalTime.fValue;
+			_data=BuffStateDataManager.getData(cfgId);
+			_disappearTime = _buffInfo.remainTime;
+			_totalTime = _buffInfo.totalTime;
 			_curtStackCount = _buffInfo.overlay;
+			_endTime=getTimer()+_disappearTime;
 		}
 
 		/** buff叠加次数  */
@@ -249,5 +253,12 @@ package com.rpgGame.coreData.info.buff
 		{
 			_serverID = value;
 		}
+
+		/**结束时间，绝对的**/
+		public function get endTime():int
+		{
+			return _endTime;
+		}
+
 	}
 }

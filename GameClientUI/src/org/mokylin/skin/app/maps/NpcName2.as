@@ -53,8 +53,8 @@ package org.mokylin.skin.app.maps
 			temp.fontSize = 16;
 			temp.text = "npc名字";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 166;
 			temp.x = 0;
 			temp.y = 0;

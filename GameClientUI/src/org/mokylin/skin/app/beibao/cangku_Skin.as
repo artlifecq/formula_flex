@@ -73,8 +73,8 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "仓库空间：";
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 27;
 			temp.y = 413;
 			return temp;
@@ -210,8 +210,8 @@ package org.mokylin.skin.app.beibao
 			lb_Num = temp;
 			temp.name = "lb_Num";
 			temp.text = "0/48";
-			temp.color = 0x59ae03;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 45;
 			temp.x = 98;
 			temp.y = 413;

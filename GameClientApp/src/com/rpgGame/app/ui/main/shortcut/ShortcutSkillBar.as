@@ -126,7 +126,7 @@ package com.rpgGame.app.ui.main.shortcut
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
 				var cd:ShortcutGrid = new ShortcutGrid(_shortcutBar, size);
-				cd.setBg("ui/mainui/shortcut/kuang.png");
+				cd.setBg("normal/kuang");
 				cd.width = cd.height = size;
 
 				cd.dragAble = true;

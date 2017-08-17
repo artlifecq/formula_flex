@@ -70,7 +70,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "本次极限挑战活动中";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 173;
 			temp.y = 230;
@@ -223,7 +223,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lb_damagethan = temp;
 			temp.name = "lb_damagethan";
 			temp.text = "占总伤害:$";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 173;
@@ -237,7 +237,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lb_player_damage = temp;
 			temp.name = "lb_player_damage";
 			temp.text = "累积伤害:$";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 173;

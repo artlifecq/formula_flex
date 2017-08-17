@@ -2,6 +2,8 @@ package com.rpgGame.coreData.cfg.active
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.Q_world_boss;
+	
+	import org.game.netCore.data.long;
 
 	/**
 	 *boss活动信息 
@@ -10,6 +12,10 @@ package com.rpgGame.coreData.cfg.active
 	 */
 	public class BossActInfo extends ActivetyInfo
 	{
+		/**
+		 *击杀者id 
+		 */
+		public var killerId:long;
 		/**
 		 *击杀者 
 		 */

@@ -522,11 +522,11 @@ package com.rpgGame.app.view.icon
 						initStrText();
 					if(info.polishLevel>0){
 						_strOrZMText.htmlText = "Lv"+info.polishLevel.toString();
-						_strOrZMText.color=StaticValue.A_UI_YELLOW_TEXT;
+						_strOrZMText.color=StaticValue.YELLOW_TEXT;
 					}
 					else{
 						_strOrZMText.htmlText = "+"+info.strengthLevel.toString();
-						_strOrZMText.color=StaticValue.A_UI_WHITE_TEXT;
+						_strOrZMText.color=StaticValue.WHITE_TEXT;
 					}
 					_strOrZMText.width=_strOrZMText.textWidth;
 					_strOrZMText.x = this.width - _strOrZMText.textWidth;
@@ -552,7 +552,7 @@ package com.rpgGame.app.view.icon
 			_countText.verticalAlign="middle";
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
-			_countText.color = StaticValue.A_UI_BEIGE_TEXT;
+			_countText.color = StaticValue.BEIGE_TEXT;
 			_countText.fontSize = 12;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);
@@ -572,7 +572,7 @@ package com.rpgGame.app.view.icon
 			_strOrZMText.verticalAlign="middle";
 			_strOrZMText.verticalCenter=-2;
 			_strOrZMText.textAlign = Align.RIGHT;
-			_strOrZMText.color = StaticValue.A_UI_BEIGE_TEXT;
+			_strOrZMText.color = StaticValue.BEIGE_TEXT;
 			_strOrZMText.fontSize = 10;
 			_strOrZMText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_strOrZMText);

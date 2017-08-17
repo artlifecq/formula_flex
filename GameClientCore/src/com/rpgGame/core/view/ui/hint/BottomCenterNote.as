@@ -36,7 +36,7 @@ package com.rpgGame.core.view.ui.hint
 			_textLab.touchable = false;
 			_textLab.fontSize = Fontter.DEFAULT_FONT_SIZE;
 			_textLab.fontName = Fontter.DEFAULT_FONT_NAME;
-			_textLab.color = StaticValue.COLOR_CODE_4;
+			_textLab.color = StaticValue.YELLOW_TEXT;
 			_textLab.autoSize = TextFieldAutoSize.VERTICAL;
 			_textLab.isHtmlText = true;
 			addChild( _textLab );

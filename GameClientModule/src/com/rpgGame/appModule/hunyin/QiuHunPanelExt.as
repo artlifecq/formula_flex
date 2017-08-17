@@ -80,7 +80,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			super.onShow();
 			_skin.textInput.text = DEFAULT_CHAT_TEXT;
-			_skin.textInput.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.textInput.color=StaticValue.GRAY_TEXT;
 			initEvent();
 		}
 		
@@ -148,7 +148,7 @@ package com.rpgGame.appModule.hunyin
 		private function forceinHandler(evt:Event):void
 		{
 			_skin.textInput.text="";		
-			_skin.textInput.color=StaticValue.A_UI_BEIGE_TEXT;
+			_skin.textInput.color=StaticValue.BEIGE_TEXT;
 		}
 		
 		private function forceoutHandler(evt:Event):void
@@ -156,7 +156,7 @@ package com.rpgGame.appModule.hunyin
 			if(_skin.textInput.text == "")
 			{
 				_skin.textInput.text = DEFAULT_CHAT_TEXT;
-				_skin.textInput.color=StaticValue.A_UI_GRAY_TEXT;
+				_skin.textInput.color=StaticValue.GRAY_TEXT;
 			}
 		}	
 		
@@ -166,7 +166,7 @@ package com.rpgGame.appModule.hunyin
 			//			var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
 			//			if(MainRoleManager.actorInfo.sex==1) str+=boyText;
 			//			else str+=grilText;
-//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
+//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
 			//			ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
 		}
 		

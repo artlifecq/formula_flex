@@ -78,11 +78,11 @@ package com.rpgGame.appModule.equip
 		private var _hechengNum:int=1;
 		
 		private var _nowSelect:Q_hecheng;
-
+		
 		private var cailiaoId:int;
 		private var userGold:Number;
 		private var userMoney:Number;
-
+		
 		private var findRootNode:TreeNode;
 		private var firstId:int;
 		private var findId:int;
@@ -101,7 +101,7 @@ package com.rpgGame.appModule.equip
 			_skin.tree.itemRendererType = EquipComboTreeItemRender ;
 			_skin.tree.scrollBarDisplayMode =  ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			GuiThemeStyle.setFeatherSkinClass(_skin.tree, ListSkin1);
-//			GuiThemeStyle.setScrollerStyle(_skin.tree, ScrollBarSkin_pack);
+			//			GuiThemeStyle.setScrollerStyle(_skin.tree, ScrollBarSkin_pack);
 			var lay:VerticalLayout=new VerticalLayout();
 			lay.hasVariableItemDimensions=true;
 			lay.useVirtualLayout = true;
@@ -197,7 +197,7 @@ package com.rpgGame.appModule.equip
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
 			_skin.container.addChild(icon);
-//			_skin.container.addChild(_skin.equip_num);
+			//			_skin.container.addChild(_skin.equip_num);
 			
 			minMaxBar=new MinMaxValueBar(_skin,changeHecheng);
 			
@@ -232,7 +232,7 @@ package com.rpgGame.appModule.equip
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			
 			var node:TreeNode=_skin.tree.rootNode;
-//			node.expanded=false;
+			//			node.expanded=false;
 			if(data){
 				var info:ComboItemInfo=data as ComboItemInfo;
 				if(info.targetId!=0){
@@ -379,7 +379,7 @@ package com.rpgGame.appModule.equip
 			
 			_skin.lbEnd.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
 			_skin.lbEnd.text=itemInfo.name;
-//			_skin.equip_num.text=_skin.input_txt.text;
+			//			_skin.equip_num.text=_skin.input_txt.text;
 			setCaiLiaoData();
 		}
 		
@@ -427,7 +427,7 @@ package com.rpgGame.appModule.equip
 		{
 			_skin.input_txt.text=_hechengNum.toString();
 			_skin.lb_msg.htmlText=getTitleText();
-//			_skin.equip_num.text=_skin.input_txt.text;
+			//			_skin.equip_num.text=_skin.input_txt.text;
 		}
 		
 		private function initEvent():void
@@ -436,9 +436,9 @@ package com.rpgGame.appModule.equip
 			
 			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_IN,forceinHandler);
 			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
-		
-//			_skin.input_txt.addEventListener(Event.CHANGE,changeHandler);
-//			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_OUT,focusOutHandler);
+			
+			//			_skin.input_txt.addEventListener(Event.CHANGE,changeHandler);
+			//			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_OUT,focusOutHandler);
 			
 			EventManager.addEvent(ItemEvent.ITEM_COMBO_MSG,updateHechengHandler);
 			EventManager.addEvent(ItemEvent.ITEM_HECHENG_SELECT,updateHechengHandler);
@@ -461,15 +461,37 @@ package com.rpgGame.appModule.equip
 			userGold=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			setShowData();
+			updateAllList();
 		}
 		
 		
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
-			_skin.tree.dataProvider.updateAll();
-			
+			//			_skin.tree.dataProvider.updateAll();
+//			var not:TreeNode=getDataById(info.qItem.q_id);
+//			if(not){
+//				var index:int=_skin.tree.dataProvider.getItemIndex(not);
+//				_skin.tree.dataProvider.updateItemAt(index);
+//				_skin.tree.validate();
+//				var nextCfg:Q_hecheng=HeChengData.getHeChengTargetByCaiLiao(info.qItem.q_id);
+//				if(nextCfg){
+//					not=getDataById(nextCfg.q_item_id);
+//					index=_skin.tree.dataProvider.getItemIndex(not);
+//					_skin.tree.dataProvider.updateItemAt(index);
+//					_skin.tree.validate();
+//				}
+//			}
+			updateAllList();
 			if(info.containerID==ItemContainerID.BackPack&&info.cfgId==cailiaoId){//背包里的合成对应合成材料
 				setShowData();
+			}
+		}
+		
+		private function updateAllList():void
+		{
+			for(var i:int=0;i<_skin.tree.dataProvider.length;i++)
+			{
+				_skin.tree.dataProvider.updateItemAt(i);
 			}
 		}
 		
@@ -478,10 +500,17 @@ package com.rpgGame.appModule.equip
 			for each(var item:ClientItemInfo in list){
 				if(item.containerID==ItemContainerID.BackPack&&item.cfgId==cailiaoId){//有一个是就去更新展示了
 					setShowData();
+//					var not:TreeNode=getDataById(item.qItem.q_id);
+//					if(not){
+//						var index:int=_skin.tree.dataProvider.getItemIndex(not);
+//						_skin.tree.dataProvider.updateItemAt(index);
+//						_skin.tree.validate();
+//					}
 					break;
 				}
 			}
-			_skin.tree.dataProvider.updateAll();
+			updateAllList();
+			//			_skin.tree.dataProvider.updateAll();
 		}
 		
 		private function onSelected(e:Event):void
@@ -546,9 +575,9 @@ package com.rpgGame.appModule.equip
 			}
 			var needMoney:int=_nowSelect.q_money*_hechengNum;
 			if(needMoney<=userMoney){
-				des+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
+				des+=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
 			}else if(needMoney>userMoney){
-				des+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
+				des+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
 			}
 			return des;
 		}
@@ -627,7 +656,15 @@ package com.rpgGame.appModule.equip
 			if(msg.result==1)
 			{
 				setCaiLiaoData();
-				_skin.tree.dataProvider.updateAll();
+				updateAllList();
+//				if(_nowSelect){
+//					var oldindex:int=_skin.tree.selectedIndex;
+//					_skin.tree.selectedItem=getDataById(_nowSelect.q_item_id);
+//					_skin.tree.dataProvider.updateItemAt(oldindex);
+//					_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
+//					_skin.tree.validate();
+//				}
+				//				_skin.tree.dataProvider.updateAll();
 				
 				this.playInter3DAt(ClientConfig.getEffect("ui_ronglu"),613,313,1);
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_hechengchenggong");

@@ -84,9 +84,11 @@ package org.mokylin.skin.app.npc
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_ok = temp;
 			temp.name = "btn_ok";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "领取奖励";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.color = 0xEAEABC;
 			temp.width = 108;
 			temp.x = 547;
 			temp.y = 171;
@@ -100,7 +102,8 @@ package org.mokylin.skin.app.npc
 			temp.name = "lbl_details";
 			temp.height = 113;
 			temp.text = "内容";
-			temp.color = 0xd6d2bd;
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 366;
 			temp.x = 259;
 			temp.y = 49;
@@ -115,7 +118,8 @@ package org.mokylin.skin.app.npc
 			temp.bold = true;
 			temp.fontSize = 16;
 			temp.text = "npc名字:";
-			temp.color = 0xd6d2bd;
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 392;
 			temp.x = 259;
 			temp.y = 18;

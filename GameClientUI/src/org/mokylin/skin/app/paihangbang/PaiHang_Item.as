@@ -79,7 +79,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "lbContent";
 			temp.text = "羽化乾坤·13阶2星";
 			temp.textAlign = "center";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 254;
@@ -93,7 +93,7 @@ package org.mokylin.skin.app.paihangbang
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "姓名六个字的";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 97;
 			temp.x = 96;
@@ -108,7 +108,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "lbNum";
 			temp.text = "3";
 			temp.textAlign = "center";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 43;
 			temp.x = 9;
@@ -122,7 +122,7 @@ package org.mokylin.skin.app.paihangbang
 			lbZhiye = temp;
 			temp.name = "lbZhiye";
 			temp.text = "兵家";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 42;
 			temp.x = 208;

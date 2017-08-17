@@ -30,22 +30,35 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
-			var height:int=0;
+//			var height:int=0;
 			var info:Q_tipsinfo=data as Q_tipsinfo;
-			_itemTip.lbl_title.htmlText=info.q_describe_tittle;
-			_itemTip.lbl_miaoshu1.htmlText=info.q_describe;
-			height=_itemTip.lbl_miaoshu1.y+_itemTip.lbl_miaoshu1.textHeight;
-			if(info.q_source!=null&&info.q_source!="")
+			var height:int=_itemTip.lbl_title.y;
+			
+			if(info.q_describe_tittle&&info.q_describe_tittle.length!=0){
+				_itemTip.lbl_title.htmlText=info.q_describe_tittle;
+				height+=_itemTip.lbl_title.textHeight;
+			}else{
+				_itemTip.lbl_title.htmlText="";
+			}
+			
+			if(info.q_describe&&info.q_describe.length!=0){
+				_itemTip.lbl_miaoshu1.htmlText=info.q_describe;
+				_itemTip.lbl_miaoshu1.y=height;
+				height+=_itemTip.lbl_miaoshu1.textHeight;
+			}else{
+				_itemTip.lbl_miaoshu1.htmlText="";
+			}
+			
+			if(info.q_source&&info.q_source.length!=0)
 			{
 				_itemTip.lbl_miaoshu2.htmlText=info.q_source;
-				_itemTip.lbl_miaoshu2.y=height+20;
-				height=_itemTip.lbl_miaoshu2.y+_itemTip.lbl_miaoshu2.textHeight;
-				_itemTip.lbl_miaoshu2.visible=true;
+				_itemTip.lbl_miaoshu2.y=height;
+				height+=_itemTip.lbl_miaoshu1.textHeight;
+			}else{
+				_itemTip.lbl_miaoshu2.htmlText="";
 			}
-			else{
-				_itemTip.lbl_miaoshu2.visible=false;
-			}
-			_itemTip.bg.height=height+10;
+			height+=10;
+			_itemTip.bg.height=height;
 		}
 		
 		/**

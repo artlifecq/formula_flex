@@ -31,6 +31,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
@@ -159,6 +160,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				LostSkillManager.instance().checkBigSkill(msg.personId);
 			}
+		
 			//TrusteeshipManager.getInstance().myFighterCtrl.update(msg.personId,msg.fightTarget,msg.targets);
 		}
 		
@@ -376,11 +378,19 @@ package com.rpgGame.app.cmdlistener.scene
 					EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
 				}
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ATTACK_HARD);
-				
-				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+				//主玩家自己走路打断
+				if (qSkill.q_cancel==1||qSkill.q_cancel==3&&MainRoleManager.actor.stateMachine.isWalkMoving&&msg.selfCancel==1) 
+				{
+					//自己取消
+				}
 				else
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+				{
+					if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+					else
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+				}
+				
 			}
 			if (role.isPlayer)
 			{

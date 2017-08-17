@@ -91,6 +91,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			temp.name = "btnBuy";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "购 买";
+			temp.labelOffsetY = 1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
 			temp.width = 110;

@@ -94,7 +94,7 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "购买数量：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 76;
 			temp.x = 0;
@@ -107,7 +107,7 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "所需总价：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 74;
 			temp.x = 40;
@@ -341,7 +341,7 @@ package org.mokylin.skin.app.shangcheng
 			lbDiejia = temp;
 			temp.name = "lbDiejia";
 			temp.text = "最大叠加：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 81;
 			temp.x = 80;
@@ -402,7 +402,7 @@ package org.mokylin.skin.app.shangcheng
 			lbl_num = temp;
 			temp.name = "lbl_num";
 			temp.text = "售价：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 48;
 			temp.x = 81;

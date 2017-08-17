@@ -42,7 +42,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 			if(this.parent==null)
 				return ;
 			if(_actData.info.notifyTime==0){
-				setTextLeable(HtmlTextUtil.getTextColor(StaticValue.UI_RED1, ActivetyDataManager.getNextRefreshTime(_actData.actCfg)+"开启"));
+				setTextLeable(HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, ActivetyDataManager.getNextRefreshTime(_actData.actCfg)+"开启"));
 				ui.uiJinXing.visible=false;
 			}else{
 				this.setupActTime(_actData.info.notifyTime);

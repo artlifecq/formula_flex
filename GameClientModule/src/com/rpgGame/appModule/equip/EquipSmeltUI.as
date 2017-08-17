@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.equip
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -8,9 +9,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
-	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -21,15 +22,22 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.SharedObjectEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -75,7 +83,7 @@ package com.rpgGame.appModule.equip
 	 *@author dik
 	 *2017-4-11下午7:50:15
 	 */
-	public class EquipSmeltUI extends ViewUI
+	public class EquipSmeltUI extends AttChangeView
 	{
 		private const MIN_GRID:int=28;
 		private var _skin:Xilian_Skin;
@@ -98,6 +106,7 @@ package com.rpgGame.appModule.equip
 		
 		private var _sharedObject:SharedObject;
 		private var needMon:int;
+		private var perMon:int;
 		
 		private var userMon:int;
 		
@@ -168,6 +177,8 @@ package com.rpgGame.appModule.equip
 			_getPanel=new ItemGetPathPanel();
 			(_skin.left.skin as Zhuangbei_left).monyIcon.removeFromParent(true);
 			(_skin.left.skin as Zhuangbei_left).monyTips.removeFromParent(true);
+			
+			perMon=GlobalSheetData.getSettingInfo(504).q_int_value;
 		}
 		
 		private function createItemRender():GridItemRender
@@ -242,7 +253,7 @@ package com.rpgGame.appModule.equip
 					}
 					break;
 				case _skin.Item1.skin["chk_suoding"]:
-//					getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
+					//					getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
 					if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 						getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
 					}
@@ -255,7 +266,7 @@ package com.rpgGame.appModule.equip
 					}	
 					break;
 				case _skin.Item2.skin["chk_suoding"]:
-//					getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
+					//					getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
 					if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
 						getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
 					}				
@@ -323,18 +334,19 @@ package com.rpgGame.appModule.equip
 		{
 			var lock:int=0;
 			needMon=0;
+			var cfg:Q_equip_wash_attr
 			if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 				lock=1;
-				needMon+=10;
+				cfg=EquipWashAttCfg.getEquipWashAttr(targetEquipInfo.smeltAtt1);
+				needMon=cfg.q_quality*perMon;
 			}
+			
 			if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
-				if(lock==1){
-					lock=3;
-				}else{
-					lock=2;
-				}
-				needMon+=10;
+				lock=2;
+				cfg=EquipWashAttCfg.getEquipWashAttr(targetEquipInfo.smeltAtt2);
+				needMon=cfg.q_quality*perMon;
 			}
+			
 			return lock;
 		}
 		
@@ -429,9 +441,9 @@ package com.rpgGame.appModule.equip
 				_skin.lb_item2.text=useItemInfo.name;
 				_skin.lb_num.text=useItemInfo.count+"/"+washCfg.q_item_num;
 				if(useItemInfo.count<washCfg.q_item_num){
-					_skin.lb_num.color=StaticValue.A_UI_RED_TEXT;
+					_skin.lb_num.color=StaticValue.RED_TEXT;
 				}else{
-					_skin.lb_num.color=StaticValue.A_UI_GREEN_TEXT;
+					_skin.lb_num.color=StaticValue.GREEN_TEXT;
 				}
 				
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
@@ -462,9 +474,9 @@ package com.rpgGame.appModule.equip
 			}
 			var des:String="";
 			if(value<=value1){
-				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value+"/"+value1);//绿色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value):HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value+"/"+value1);//绿色
 			}else{
-				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value):HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value+"/"+value1);//红色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value):HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value+"/"+value1);//红色
 			}
 			return title+":"+des;
 		}
@@ -751,6 +763,53 @@ package com.rpgGame.appModule.equip
 			return false;
 		}
 		
+		/**获取提升的属性值（这个是前端自己算的）*/
+		private function getupdateAtt(currentLv:EquipInfo,upLv:EquipInfo=null):void
+		{
+			var has_curr:HashMap=AttValueConfig.getAllAttByEquip(currentLv);
+			var has_up:HashMap=AttValueConfig.getAllAttByEquip(upLv);
+			var has:HashMap=new HashMap();
+			var v1:int;
+			var v2:int;
+			var keys_curr:Array=has_curr.keys();
+			var keys_up:Array=has_up.keys();
+			var keys:Array=mergeType(keys_up,keys_curr);
+			for(var i:int=0;i<keys.length;i++)
+			{
+				var type:int=keys[i];
+				if(has_curr.getValue(type)) v1=has_curr.getValue(type);
+				else v1=0;
+				if(has_up.getValue(type)) v2=has_up.getValue(type);
+				else v2=0;
+				var num:int=AttValueConfig.getDisAttValue(type,(v2-v1));
+//				trace("属性类型："+type+"值1：——"+v1+"值2:——"+v2);
+				if(num!=0)
+					has.put(type,num);
+			}
+			attChangeEft.addChangeHandler(has);
+		}
+		
+		//合并类型
+		private function mergeType(arr1:Array,arr2:Array):Array
+		{
+			var list:Array;
+			for(var i:int=0;i<arr2.length;i++)
+			{
+				if(!hasType(arr1,arr2[i]))
+					arr1.push(arr2[i]);
+			}
+			return arr1;
+		}
+		
+		private function hasType(arr1:Array,type:int):Boolean
+		{
+			for(var i:int=0;i<arr1.length;i++)
+			{
+				if(arr1[i]==type) return true;
+			}
+			return false;
+		}
+		
 		private function getSmeltEquips(datas:Array):Vector.<ClientItemInfo>
 		{
 			var num:int=datas.length;
@@ -759,6 +818,12 @@ package com.rpgGame.appModule.equip
 				var info:ClientItemInfo=datas[i];
 				if(isSmelt(info as EquipInfo)){
 					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
+//						trace("当前的1ID："+targetEquipInfo.smeltAtt1+"  琢磨后的值ID：——"+(info as EquipInfo).smeltAtt1+"\n");
+//						trace("当前的2ID："+targetEquipInfo.smeltAtt2+"  琢磨后的值ID：——"+(info as EquipInfo).smeltAtt2+"\n");
+						if(targetEquipInfo.smeltAtt1!=(info as EquipInfo).smeltAtt1||targetEquipInfo.smeltAtt2!=(info as EquipInfo).smeltAtt2)
+						{
+							getupdateAtt(targetEquipInfo,info as EquipInfo);
+						}
 						targetEquipInfo=info as EquipInfo;//更新掉
 						targetEquipInfo.setContainerId(info.containerID);
 						FaceUtil.SetItemGrid(_targetEquip, targetEquipInfo, true);

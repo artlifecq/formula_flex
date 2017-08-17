@@ -90,7 +90,7 @@ package org.mokylin.skin.app.beibao
 		private function __ShangDian_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -1;
+			temp.gap = 1;
 			return temp;
 		}
 
@@ -98,7 +98,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "单击购买商品";
-			temp.color = 0xD23735;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 251;
 			temp.y = 35;
@@ -210,7 +210,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "lbMsg";
 			temp.text = "最多保留10条，道具出售后下线则不保留信息";
 			temp.textAlign = "center";
-			temp.color = 0xD23735;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 350;
 			temp.x = 7;
@@ -268,7 +268,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_pack = temp;
 			temp.name = "tab_pack";
-			temp.btnWidth = 77;
+			temp.btnWidth = 75;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 202;
 			temp.x = 6;

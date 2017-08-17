@@ -89,10 +89,11 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnBuy = temp;
 			temp.name = "btnBuy";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "购 买";
+			temp.labelOffsetY = 1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.width = 110;
 			temp.x = 103;
 			temp.y = 84;
@@ -157,7 +158,7 @@ package org.mokylin.skin.app.shangcheng
 			lbNowPrice = temp;
 			temp.name = "lbNowPrice";
 			temp.text = "售价：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 4;
@@ -197,7 +198,7 @@ package org.mokylin.skin.app.shangcheng
 			lbYuanbao2 = temp;
 			temp.name = "lbYuanbao2";
 			temp.text = "750";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 46;
 			temp.x = 66;

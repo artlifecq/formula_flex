@@ -67,10 +67,11 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnEixt = temp;
 			temp.name = "btnEixt";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出副本";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.width = 112;
 			temp.x = 177;
 			temp.y = 224;
@@ -84,11 +85,11 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbTime";
 			temp.text = "倒计时：10";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 165;
-			temp.y = 257;
+			temp.y = 261;
 			return temp;
 		}
 

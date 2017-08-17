@@ -67,9 +67,10 @@ package org.mokylin.skin.app.zhanchang
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "取消匹配";
 			temp.letterSpacing = 0;
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.color = 0xEAEABC;
 			temp.width = 110;
 			temp.x = 147;
 			temp.y = 136;
@@ -94,7 +95,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "lbPiPei";
 			temp.fontSize = 16;
 			temp.text = "正在匹配中...";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 148;
 			temp.y = 108;

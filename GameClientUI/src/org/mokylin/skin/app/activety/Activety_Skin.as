@@ -47,7 +47,7 @@ package org.mokylin.skin.app.activety
 		private function __Activety_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -1;
+			temp.gap = 1;
 			return temp;
 		}
 
@@ -91,6 +91,7 @@ package org.mokylin.skin.app.activety
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
+			temp.btnWidth = 75;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.x = 23;
 			temp.y = 54;

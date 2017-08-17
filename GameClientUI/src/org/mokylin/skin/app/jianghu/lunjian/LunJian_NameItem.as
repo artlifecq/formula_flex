@@ -36,8 +36,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			super();
 			
 			this.currentState = "normal";
-			this.height = 29;
-			this.width = 146;
+			this.height = 31;
+			this.width = 155;
 			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),selectedBtn_i(),lbName_i(),lbLevel_i(),numBg_i(),lbNum_i()];
 			
 			states = {
@@ -52,8 +52,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 		private function __LunJian_NameItem_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/titilebg/ItemBg2.png";
-			temp.width = 146;
+			temp.styleName = "ui/app/jianghu/lunjian/tiaoan.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -71,7 +70,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 78;
-			temp.y = 6;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -83,11 +82,11 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "新手村村村";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 99;
 			temp.x = 8;
-			temp.y = 6;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -101,8 +100,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 20;
-			temp.x = 123;
-			temp.y = 7;
+			temp.x = 131;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -112,8 +111,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			numBg = temp;
 			temp.name = "numBg";
 			temp.styleName = "ui/common/tubiao/szq.png";
-			temp.x = 121;
-			temp.y = 5;
+			temp.x = 129;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -123,9 +122,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 			selectedBtn = temp;
 			temp.name = "selectedBtn";
 			temp.groupName = "radioGroup1";
-			temp.height = 29;
+			temp.height = 31;
 			temp.styleClass = org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
-			temp.width = 146;
+			temp.width = 155;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

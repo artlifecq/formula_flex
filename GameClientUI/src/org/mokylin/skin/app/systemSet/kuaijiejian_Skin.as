@@ -293,8 +293,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "背包";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -317,8 +317,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "战魂";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -341,8 +341,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "强化";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -365,8 +365,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "绝学";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -389,8 +389,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "商城";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -400,8 +400,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "人物";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -424,8 +424,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "挂机";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -448,8 +448,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "打坐";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -472,8 +472,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "排行榜";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -496,8 +496,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "帮派";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -520,8 +520,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "组队";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -557,8 +557,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "快速拾取";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -581,8 +581,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "系统设置";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -605,8 +605,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "显示掉落";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -629,8 +629,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "激活聊天发送框";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -653,8 +653,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能1";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -664,8 +664,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "武学";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -688,8 +688,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能2";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -712,8 +712,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能3";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -736,8 +736,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能4";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -760,8 +760,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能5";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -784,8 +784,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能6";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -821,8 +821,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能7";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -845,8 +845,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职业技能8";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -869,8 +869,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "任务";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -893,8 +893,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "坐骑";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;
@@ -917,8 +917,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "地图";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 4;
 			return temp;

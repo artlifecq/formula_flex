@@ -8,10 +8,9 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.banghui.button.ButtonJinruzhanchang;
-	import org.mokylin.skin.app.banghui.button.ButtonZhengbabaoming;
 	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -111,7 +110,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "排名";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 35;
 			temp.y = 4;
@@ -122,7 +121,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "帮派名称";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 150;
 			temp.y = 4;
@@ -132,13 +131,24 @@ package org.mokylin.skin.app.banghui.wangcheng
 		private function __WangCheng_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/yeqian.png";
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 96;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
 		private function __WangCheng_Skin_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 179;
+			temp.x = 96;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __WangCheng_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/xian.png";
@@ -239,11 +249,14 @@ package org.mokylin.skin.app.banghui.wangcheng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnBaoming = temp;
 			temp.name = "btnBaoming";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonZhengbabaoming;
-			temp.color = 0xCFC6AE;
-			temp.x = 193;
-			temp.y = 550;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "争霸报名";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 90;
+			temp.x = 221;
+			temp.y = 548;
 			return temp;
 		}
 
@@ -299,11 +312,14 @@ package org.mokylin.skin.app.banghui.wangcheng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnJinru = temp;
 			temp.name = "btnJinru";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonJinruzhanchang;
-			temp.color = 0xCFC6AE;
-			temp.x = 616;
-			temp.y = 550;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "进入战场";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 90;
+			temp.x = 646;
+			temp.y = 548;
 			return temp;
 		}
 
@@ -328,7 +344,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			btnShuoMing = temp;
 			temp.name = "btnShuoMing";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
-			temp.x = 323;
+			temp.x = 185;
 			temp.y = 553;
 			return temp;
 		}
@@ -340,7 +356,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpCheng";
 			temp.x = 29;
 			temp.y = 148;
-			temp.elementsContent = [uiCheng_i(),uiMyFlag_i(),__WangCheng_Skin_UIAsset11_i(),lbName1_i(),lbName2_i(),lbVs_i(),lbTime_i()];
+			temp.elementsContent = [uiCheng_i(),uiMyFlag_i(),__WangCheng_Skin_UIAsset12_i(),lbName1_i(),lbName2_i(),lbVs_i(),lbTime_i()];
 			return temp;
 		}
 
@@ -351,7 +367,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpList";
 			temp.x = 23;
 			temp.y = 297;
-			temp.elementsContent = [__WangCheng_Skin_UIAsset10_i(),__WangCheng_Skin_Label1_i(),__WangCheng_Skin_Label2_i(),List_i()];
+			temp.elementsContent = [__WangCheng_Skin_UIAsset10_i(),__WangCheng_Skin_UIAsset11_i(),__WangCheng_Skin_Label1_i(),__WangCheng_Skin_Label2_i(),List_i()];
 			return temp;
 		}
 
@@ -387,7 +403,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbHead";
 			temp.text = "进攻西卫";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 262;
 			temp.x = 31;
@@ -446,7 +462,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbTime";
 			temp.text = "距离开展还剩：60：55：20";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 254;
 			temp.x = 8;
@@ -461,7 +477,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbTitle";
 			temp.text = "当前无竞拍";
 			temp.textAlign = "center";
-			temp.color = 0xA3A594;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 116;
 			temp.x = 0;

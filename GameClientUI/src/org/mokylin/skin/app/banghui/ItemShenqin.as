@@ -103,7 +103,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbLevel";
 			temp.htmlText = "100级<font color='#ff0000'>兵家</font>";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 79;
 			temp.x = 300;
@@ -134,7 +134,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhanli";
 			temp.text = "999999999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
 			temp.x = 168;

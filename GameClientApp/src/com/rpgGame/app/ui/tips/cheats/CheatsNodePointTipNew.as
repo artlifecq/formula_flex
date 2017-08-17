@@ -261,7 +261,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=nextLevel<=Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
 				lb.width=lb.textWidth;
 			}
 			var needLv:int=qMer.levelUpNeedPlayerLevel;
@@ -272,7 +272,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=needLv<=MainRoleManager.actorInfo.totalStat.level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,"角色等级:"+needLv+"级");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,"角色等级:"+needLv+"级");
 				lb.width=lb.textWidth;
 			}
 			var preLv:int=qMer.levelUpNeedPreLv;
@@ -313,7 +313,7 @@ package  com.rpgGame.app.ui.tips.cheats
 						}
 					}
 					
-					lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,str);
+					lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,str);
 					lb.width=lb.textWidth;
 				}
 			}
@@ -326,7 +326,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=needSprit<=MainRoleManager.actorInfo.curZhenqi;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,"真气消耗:"+needSprit);
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,"真气消耗:"+needSprit);
 				lb.width=lb.textWidth;
 			}
 			return startY;

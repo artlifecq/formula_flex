@@ -60,13 +60,13 @@ package com.rpgGame.app.ui.tips
 			if(!dataTip.isActivation)
 			{
 				_skin.lbJIhuo.text = LanguageConfig.getText(LangUI_2.Skill_weijihuo);
-				_skin.lbJIhuo.color = StaticValue.A_UI_RED_TEXT;
+				_skin.lbJIhuo.color = StaticValue.RED_TEXT;
 				_skin.jihuogroup.visible = true;
 				_skin.lbDengji.text = cfg.q_skillopen_desc;
 				_skin.tipbg.height = 252;
 			}else{
 				_skin.lbJIhuo.text = LanguageConfig.getText(LangUI_2.Skill_jihuo);
-				_skin.lbJIhuo.color = StaticValue.A_UI_GREEN_TEXT;
+				_skin.lbJIhuo.color = StaticValue.GREEN_TEXT;
 				_skin.jihuogroup.visible = false;
 				_skin.tipbg.height = 252-_skin.jihuogroup.height;
 			}

@@ -47,6 +47,10 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbName";
 			temp.height = 21;
 			temp.fontSize = 14;
+			temp.text = "三百只猴子";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 138;
 			temp.text = " [1000区]一二三四五六";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -63,7 +67,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbOk";
 			temp.fontSize = 14;
 			temp.text = "已同意";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 91;
 			temp.x = 172;

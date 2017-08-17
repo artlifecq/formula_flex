@@ -42,7 +42,6 @@ package org.mokylin.skin.app.siwangfuhuo
 			
 			this.currentState = "normal";
 			this.height = 415;
-			this.width = 675;
 			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset1_i(),__fuhuo_Skin_UIAsset2_i(),__fuhuo_Skin_UIAsset3_i(),lbl_msg_i(),lbl_time_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i()];
 			
 			states = {
@@ -165,8 +164,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			lbl_time = temp;
 			temp.name = "lbl_time";
 			temp.text = "剩余：28秒";
-			temp.color = 0xe8c857;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 96;
 			temp.x = 537;
 			temp.y = 371;

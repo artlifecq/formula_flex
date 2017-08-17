@@ -3,6 +3,7 @@ package com.rpgGame.core.manager.tips
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
+	import com.rpgGame.core.view.ui.tip.vo.IDynamicTipData;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsData;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
@@ -88,10 +89,11 @@ package com.rpgGame.core.manager.tips
 			}else if(_currentData is TextTipsPropChangeData){
 				tip.setTipData($tipData);
 			}
-			else if (_currentData is DynamicTipData) 
+			else if (_currentData is IDynamicTipData) 
 			{
 				tip.setTipData($tipData);
 			}
+			
 			_currentSowTips = tip;
 			if(_currentSowTips && _currentSowTips as DisplayObject != null && (_currentSowTips as DisplayObject).parent == null)
 			{

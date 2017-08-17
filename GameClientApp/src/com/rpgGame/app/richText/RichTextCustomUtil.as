@@ -95,6 +95,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.richText.component.RichTextUnit;
 	import com.rpgGame.app.richText.component.RichTextUnitConfigData;
 	import com.rpgGame.app.richText.component.RichTextUnitData;
+	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
 	import com.rpgGame.app.utils.MenuUtil;
@@ -367,6 +368,18 @@ package com.rpgGame.app.richText
 					break;
 				case RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE:
 					MainRoleSearchPathManager.walkToSceneByLink(unitData.linkData);
+					break;
+				case RichTextCustomLinkType.SEE_OTHER_NAME:
+					if(!unitData.linkData){
+						return;
+					}
+					var ids:Array=unitData.linkData.split(",");
+					var ret:long = new long();
+					var _lValue:int=ids[0];
+					var _hValue:int=ids[1];
+					var _hexValue:String=ids[2];
+					ret.SetRawData(_lValue, _hValue, _hexValue);
+					LookSender.lookOtherPlayer(ret);
 					break;
 				case RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE:
 					var scenePosArr : Array = unitData.linkData.split(",");

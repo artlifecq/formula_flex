@@ -77,7 +77,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "批量使用：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 76;
 			temp.x = 0;
@@ -266,7 +266,7 @@ package org.mokylin.skin.app.beibao
 			lbl_num = temp;
 			temp.name = "lbl_num";
 			temp.text = "本组剩余：$";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
 			temp.x = 82;

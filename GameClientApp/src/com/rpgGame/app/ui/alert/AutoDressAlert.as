@@ -77,7 +77,7 @@ package com.rpgGame.app.ui.alert
 			switch(target){
 				case skin.btn_ok:
 					gameTimer.stop();
-					if(okFCallBack != null)
+					if(okFCallBack != null&&equipIcon&&equipIcon.faceInfo)
 					{
 						var pos:Point=this.equipIcon.localToGlobal(new Point(0,0));
 						EquipAutoDressEffectPanelExt.addAutoDressEquip((equipIcon.faceInfo as EquipInfo).itemInfo.itemId,pos);

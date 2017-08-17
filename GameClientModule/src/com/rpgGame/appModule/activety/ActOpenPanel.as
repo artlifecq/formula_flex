@@ -35,7 +35,7 @@ package com.rpgGame.appModule.activety
 		{
 			actInfo=data as ActivetyInfo;
 			_skin.icons.styleName="icon/activity/open/"+actInfo.actCfg.q_activity_id+".png";
-			_skin.labContent.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,actInfo.actCfg.q_activity_name)+"活动已开始，是否前往？";
+			_skin.labContent.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,actInfo.actCfg.q_activity_name)+"活动已开始，是否前往？";
 			super.show(data,openTable,parentContiner);
 		}
 		

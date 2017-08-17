@@ -269,14 +269,14 @@ package com.rpgGame.app.ui.scene.dungeon
 			if(nowNum<maxNum)
 			{
 				price=arr[nowNum];
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,price.toString())+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"元宝临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%")+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%");
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,price.toString())+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"元宝临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%")+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%");
 			}
 			else
 			{
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
 			}
 			TipTargetManager.show( _skin.btnYuanbao, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
 			
@@ -286,14 +286,14 @@ package com.rpgGame.app.ui.scene.dungeon
 			if(nowNum<maxNum)
 			{
 				price=arr[nowNum];
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,price.toString())+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"礼金临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%")+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%");
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,price.toString())+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"礼金临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%")+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%");
 			}
 			else
 			{
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
 			}
 			updateAtt();
 			TipTargetManager.show( _skin.btnLijin, TargetTipsMaker.makeSimpleTextTips(goldBuyText));

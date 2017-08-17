@@ -35,7 +35,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "角色等级：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;

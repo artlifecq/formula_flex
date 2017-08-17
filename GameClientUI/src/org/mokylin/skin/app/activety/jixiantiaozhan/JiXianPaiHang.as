@@ -85,7 +85,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = -23;
 			temp.y = 32;
-			temp.elementsContent = [__JiXianPaiHang_UIAsset5_i(),__JiXianPaiHang_Label2_i(),__JiXianPaiHang_Label3_i(),__JiXianPaiHang_Label4_i(),__JiXianPaiHang_Label5_i()];
+			temp.elementsContent = [__JiXianPaiHang_UIAsset5_i(),__JiXianPaiHang_UIAsset6_i(),__JiXianPaiHang_UIAsset7_i(),__JiXianPaiHang_UIAsset8_i(),__JiXianPaiHang_Label2_i(),__JiXianPaiHang_Label3_i(),__JiXianPaiHang_Label4_i(),__JiXianPaiHang_Label5_i()];
 			return temp;
 		}
 
@@ -93,7 +93,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "若BOSS未被成功击杀，也将发放参与奖";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 251;
 			temp.x = 10;
@@ -106,7 +106,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "名次";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 35;
 			temp.x = 28;
@@ -119,7 +119,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "玩家名";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
 			temp.x = 82;
@@ -132,7 +132,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "伤害值";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 56;
 			temp.x = 223;
@@ -145,7 +145,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "奖励";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 32;
 			temp.x = 290;
@@ -194,8 +194,39 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianPaiHang_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/shijieboss/yeqian.png";
-			temp.x = 25;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 36;
+			temp.x = 26;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __JiXianPaiHang_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 141;
+			temp.x = 62;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __JiXianPaiHang_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 83;
+			temp.x = 203;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __JiXianPaiHang_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 41;
+			temp.x = 286;
 			temp.y = 0;
 			return temp;
 		}
@@ -296,7 +327,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			myHurt = temp;
 			temp.name = "myHurt";
 			temp.text = "我的伤害：$";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 180;
 			temp.x = 10;
@@ -310,7 +341,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			myRank = temp;
 			temp.name = "myRank";
 			temp.text = "我的排名：$";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 110;
 			temp.x = 191;

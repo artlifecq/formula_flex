@@ -230,7 +230,7 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.btnWidth = 68;
+			temp.btnWidth = 70;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.x = 33;
 			temp.y = 54;
