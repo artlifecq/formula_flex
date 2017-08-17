@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	
@@ -9,38 +10,35 @@ package com.rpgGame.appModule.guild
 	import org.mokylin.skin.app.banghui.ItemJuanXian;
 	import org.mokylin.skin.common.ItemBg;
 	
-	public class GuildDonateCell extends DefaultListItemRenderer
+	public class GuildDonateCell extends SkinUI
 	{
 		private var _skin:ItemJuanXian;
 		private var _permissionInfo:Q_guild_permission;
-		public function GuildDonateCell():void
+		private var index:int;
+		public function GuildDonateCell(i:int):void
 		{
-			super();
-		}
-		
-		override protected function initialize():void
-		{
+			this.index=i;
 			_skin = new ItemJuanXian();
-			_skin.toSprite(this);
+			super(_skin);
 		}
-		
-		
+
 		private function updateSkin():void
 		{
 			var item:ItemBg = _skin.bg.skin as org.mokylin.skin.common.ItemBg;
-			item.bg1.visible = this.index/2 !=0;
-			item.bg1.visible = this.index/2 ==0;
+			item.bg1.visible = this.index%2 ==0;
+			item.bg2.visible = !item.bg1.visible ;
 		}
-		override protected function commitData():void
+		public function setData(info:GuildMemberInfo,tIndex:int):void
 		{
 			updateSkin();
-			_skin.uiFirt.visible = this.index ==0;
+			_skin.uiFirt.visible =tIndex ==0;
 			if(info==null)
 			{
+				_skin.gUI.visible=false;
 				return ;
 			}
-			
-			var rank:int = this.index+1;
+			_skin.gUI.visible=true;
+			var rank:int = tIndex+1;
 			if(rank<4)
 			{
 				_skin.numList2.visible = false;
@@ -54,20 +52,6 @@ package com.rpgGame.appModule.guild
 			_skin.lbZhanli.text = info.battle.toString();
 			_skin.lbRolenName.text =MainRoleManager.getPlayerName( info.name);
 			_skin.lbZhanli.text = info.curActive.toString();
-		}
-		private function get info():GuildMemberInfo
-		{
-			return this.data as GuildMemberInfo;
-		}
-		
-		override public function get width():Number
-		{
-			return _skin.width;
-		}
-		
-		override public function get height():Number
-		{
-			return _skin.height;
 		}
 	}
 }

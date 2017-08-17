@@ -15,5 +15,9 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			return getValue()+"/"+maxCount;
 		}
+		public function resetText():void
+		{
+			this.lab.text=getText();
+		}
 	}
 }

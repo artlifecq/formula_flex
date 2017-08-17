@@ -2,15 +2,13 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
-	import feathers.controls.List;
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.banghui.button.ButtonJiantou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -22,8 +20,6 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var ListItem:feathers.controls.List;
-
 		public var btnExit:feathers.controls.Button;
 
 		public var btnNext:feathers.controls.Button;
@@ -32,7 +28,7 @@ package org.mokylin.skin.app.banghui
 
 		public var grpFlip:feathers.controls.Group;
 
-		public var lbNum:feathers.controls.text.TextFieldTextEditor;
+		public var lbNum:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -45,7 +41,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__BangHui_List_UIAsset2_i(),btnExit_i(),__BangHui_List_UIAsset3_i(),__BangHui_List_Group1_i(),ListItem_i(),grpFlip_i()];
+			this.elementsContent = [__BangHui_List_UIAsset2_i(),btnExit_i(),__BangHui_List_UIAsset3_i(),__BangHui_List_Group1_i(),grpFlip_i()];
 			
 			states = {
 			};
@@ -56,19 +52,6 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function ListItem_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			ListItem = temp;
-			temp.name = "ListItem";
-			temp.height = 401;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 631;
-			temp.x = 299;
-			temp.y = 119;
-			return temp;
-		}
-
 		private function __BangHui_List_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -220,9 +203,9 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function lbNum_i():feathers.controls.text.TextFieldTextEditor
+		private function lbNum_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.height = 19;
