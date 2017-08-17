@@ -1,8 +1,6 @@
 package com.rpgGame.app.manager.look
 {
 	import com.rpgGame.coreData.role.HeroData;
-	
-	import app.message.OtherHeroProto;
 
 	/**
 	 * @author 刘吉
@@ -12,16 +10,16 @@ package com.rpgGame.app.manager.look
 	
 	public class LookManager
 	{
-		public static function setRoleData(roleInfo:OtherHeroProto):void
-		{
-			if(!heroData)
-			{
-				heroData = new HeroData();
-			}
-			
-			HeroData.setOtherRoleData(heroData, roleInfo);
-		}
-		
-		public static var heroData:HeroData = null;
+//		public static function setRoleData(roleInfo:OtherHeroProto):void
+//		{
+//			if(!heroData)
+//			{
+//				heroData = new HeroData();
+//			}
+//			
+//			HeroData.setOtherRoleData(heroData, roleInfo);
+//		}
+//		
+//		public static var heroData:HeroData = null;
 	}
 }

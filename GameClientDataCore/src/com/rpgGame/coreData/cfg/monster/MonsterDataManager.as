@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.cfg.monster
 {
 	import com.game.engine3D.utils.TemplateUtil;
-	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_npc;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
@@ -11,7 +10,7 @@ package com.rpgGame.coreData.cfg.monster
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	import app.message.MonsterDataProto.MonsterType;
+	import app.message.MonsterType;
 	
 	import org.client.mainCore.ds.HashMap;
 

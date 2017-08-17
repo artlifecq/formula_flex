@@ -1,6 +1,6 @@
-package com.rpgGame.coreData.cfg {
+package com.rpgGame.coreData.cfg
+{
     import com.gameClient.utils.JSONUtil;
-    import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.role.SceneTranportData;
@@ -10,10 +10,12 @@ package com.rpgGame.coreData.cfg {
     import flash.utils.ByteArray;
     import flash.utils.Dictionary;
 
-    public class TransCfgData {
+    public class TransCfgData
+	{
         private static var _dataDic : Dictionary = new Dictionary();
 
-        public static function setup(data : ByteArray) : void {
+        public static function setup(data : ByteArray) : void 
+		{
             var arr : Array = data.readObject();
             var list : Vector.<Q_map_transfer>;
             for each(var info : Q_map_transfer in arr) {

@@ -6,8 +6,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	
-	import app.cmd.NpcModuleMessages;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	/**
 	 *
@@ -34,7 +33,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(npcId);
 			_bytes.writeVarint32(dialogIndex);
-			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
+//			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
 		}
 		
 		/**
@@ -52,7 +51,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint64(npcId);
 			_bytes.writeVarint32(dialogIndex);
 			_bytes.writeVarint32(itemIndex);
-			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
+//			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
 		}
 		
 		/**
@@ -75,36 +74,36 @@ package com.rpgGame.app.sender
 		 *      UpgradeProto 无敌镖车的消耗
 		 * }
 		 */
-		public static function clickYunBiaoNpc(npcId:Number, dialogIndex:int, dialogType:int, useAcess:Boolean=false) : void
-		{
-			if(lock)return;
-			
-			_bytes.clear();
-			_bytes.writeVarint64(npcId);
-			_bytes.writeVarint32(dialogIndex);
-			
-			var upgradeProtoInfo:UpgradeProtoInfo;
-			var itemListVo:UpgradeItemListVo;
-			switch( dialogType )
-			{
-				case NpcType.ACCEPT_BIAO://镖车
-				{
-					_bytes.writeBoolean(useAcess);
-					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.totalStat.level, useAcess)
-					itemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeProtoInfo);
-					_bytes.writeBytes(itemListVo.getByte());
-					break;
-				}
-				case NpcType.ACCEPT_INVINCIBLE_BIAO://无敌镖车
-				{
-					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.totalStat.level, false, true)
-					itemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeProtoInfo);
-					_bytes.writeBytes(itemListVo.getByte());
-					break;
-				}
-			}
-			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
-		}
+//		public static function clickYunBiaoNpc(npcId:Number, dialogIndex:int, dialogType:int, useAcess:Boolean=false) : void
+//		{
+//			if(lock)return;
+//			
+//			_bytes.clear();
+//			_bytes.writeVarint64(npcId);
+//			_bytes.writeVarint32(dialogIndex);
+//			
+//			var upgradeProtoInfo:UpgradeProtoInfo;
+//			var itemListVo:UpgradeItemListVo;
+//			switch( dialogType )
+//			{
+//				case NpcType.ACCEPT_BIAO://镖车
+//				{
+//					_bytes.writeBoolean(useAcess);
+//					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.totalStat.level, useAcess)
+//					itemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeProtoInfo);
+//					_bytes.writeBytes(itemListVo.getByte());
+//					break;
+//				}
+//				case NpcType.ACCEPT_INVINCIBLE_BIAO://无敌镖车
+//				{
+//					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.totalStat.level, false, true)
+//					itemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeProtoInfo);
+//					_bytes.writeBytes(itemListVo.getByte());
+//					break;
+//				}
+//			}
+//			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
+//		}
 		
 		/**
 		 * 坐骑NPC ( 包括坐骑鉴定、转化、繁育 )
@@ -140,7 +139,7 @@ package com.rpgGame.app.sender
 				default:
 					break;
 			}
-			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
+//			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
 		}
 		
 		/**
@@ -166,7 +165,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(idx);
 			_bytes.writeBoolean(isBackPack);
 			_bytes.writeVarint32(indexOrMountIdx);
-			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
+//			send(NpcModuleMessages.C2S_ON_CLICK_NPC, _bytes);
 		}
 		
 		private static var lock:Boolean=false;

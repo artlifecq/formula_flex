@@ -45,10 +45,10 @@ package com.rpgGame.coreData.info.task
 		 * @return 
 		 * 
 		 */
-		public function getTaskNameBySection( section:int, countInSection:int ):String
-		{
-			return TaskCfgData.getStoryTaskChapterName( order );
-		}
+//		public function getTaskNameBySection( section:int, countInSection:int ):String
+//		{
+//			return TaskCfgData.getStoryTaskChapterName( order );
+//		}
 		
 		/**
 		 * 得到所有任务数量

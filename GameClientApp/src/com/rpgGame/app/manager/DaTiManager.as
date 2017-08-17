@@ -10,12 +10,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	
-	import app.message.ExamQuestionProto;
+	import away3d.events.Event;
 	
 	import gs.TweenLite;
 	
 	import starling.core.Starling;
-	import away3d.events.Event;
 	
 	/**
 	 * @author Guodong.Zhang
@@ -34,16 +33,16 @@ package com.rpgGame.app.manager
 		public static var removeWrongRemainCount:int;
 		public static var followOtherRemainCount:int;
 		
-		public static var preQuestion:ExamQuestionProto;
+//		public static var preQuestion:ExamQuestionProto;
 		public static var preSelectedAnserIndex:int = -1;
 		public static var preAnswerIsRight:Boolean;
 		
-		public static var currentQuestion:ExamQuestionProto;
+//		public static var currentQuestion:ExamQuestionProto;
 		/**-1表示没有选*/
 		public static var currentSelectedAnserIndex:int = -1;
 		public static var currentAnswerIsRight:Boolean;
 		
-		public static var currentRank:ExamQuestionProto;
+//		public static var currentRank:ExamQuestionProto;
 		/**成绩*/
 		public static var score:int;
 		public static var rightCount:int;
@@ -69,16 +68,16 @@ package com.rpgGame.app.manager
 				levelNotReach = false;
 				EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,onMainRoleLevelUp);
 			}*/
-			preQuestion = null;
+//			preQuestion = null;
 			preAnswerIsRight = false;
 			preSelectedAnserIndex = -1;
 			
-			currentQuestion = null;
+//			currentQuestion = null;
 			currentAnswerIsRight = false;
 			currentSelectedAnserIndex = -1;
 			currentAnswerEndTime = 0;
 			
-			currentRank = null;
+//			currentRank = null;
 			score = 0;
 			rightCount = 0;
 			wrongCount = 0;

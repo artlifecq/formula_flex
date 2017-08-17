@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.upgrade
 {
-	import app.message.UpgradeProto.UpgradeGoodsInfoProto;
+	
 	
 	public class UpgradeGoodsInfo
 	{
@@ -12,14 +12,14 @@ package com.rpgGame.coreData.info.upgrade
 		public var substituteGoods:Array;
 		/** 消耗需要的物品个数，客户端需要通过该字段计算发送量已经玩家是否有这么多物品 **/
 		public var upgradeGoodsCount:int;
-		public function UpgradeGoodsInfo( proto:UpgradeGoodsInfoProto )
-		{
-			if( proto == null )
-				return;
-			
-			cfgId = proto.upgradeGoods;
-			substituteGoods = proto.substituteGoods;
-			upgradeGoodsCount = proto.upgradeGoodsCount;
-		}
+//		public function UpgradeGoodsInfo( proto:UpgradeGoodsInfoProto )
+//		{
+//			if( proto == null )
+//				return;
+//			
+//			cfgId = proto.upgradeGoods;
+//			substituteGoods = proto.substituteGoods;
+//			upgradeGoodsCount = proto.upgradeGoodsCount;
+//		}
 	}
 }

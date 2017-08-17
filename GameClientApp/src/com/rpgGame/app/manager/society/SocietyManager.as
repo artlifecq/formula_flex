@@ -7,7 +7,6 @@ package com.rpgGame.app.manager.society
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.sender.SocietySender;
 	import com.rpgGame.app.sender.SummonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -37,15 +36,7 @@ package com.rpgGame.app.manager.society
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	
-	import app.message.AllFamilyNewsProto;
-	import app.message.ClientFamilyListProto;
 	import app.message.FamilyBuildingType;
-	import app.message.FamilyInListProto;
-	import app.message.FamilyModuleObjProto;
-	import app.message.FamilyNewsProto;
-	import app.message.FamilyProto;
-	import app.message.AllFamilyAnimalBarDatasProto.FamilyAnimalBarLevelDataProto;
-	import app.message.FamilyModuleObjProto.FamilyInfoProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -95,19 +86,19 @@ package com.rpgGame.app.manager.society
 		 * @param familyProto
 		 *
 		 */
-		public static function setClientFamilyProto(familyProto : ClientFamilyListProto) : void
-		{
-			_selfSocietyList = [];
-			for each (var family : FamilyInListProto in familyProto.family)
-			{
-				var data : SocietyData = new SocietyData();
-				data.setConfig(family);
-				data.isJoinApplying = hasJoinFamily(data.societyName);
-				_selfSocietyList.push(data);
-			}
-			_selfSocietyList.sort(onSortSocietyList);
-			EventManager.dispatchEvent(SocietyEvent.SOCIETY_LIST_UPDATE);
-		}
+//		public static function setClientFamilyProto(familyProto : ClientFamilyListProto) : void
+//		{
+//			_selfSocietyList = [];
+//			for each (var family : FamilyInListProto in familyProto.family)
+//			{
+//				var data : SocietyData = new SocietyData();
+//				data.setConfig(family);
+//				data.isJoinApplying = hasJoinFamily(data.societyName);
+//				_selfSocietyList.push(data);
+//			}
+//			_selfSocietyList.sort(onSortSocietyList);
+//			EventManager.dispatchEvent(SocietyEvent.SOCIETY_LIST_UPDATE);
+//		}
 
 		public static function getSocietyData(societyName : String) : SocietyData
 		{
@@ -126,31 +117,31 @@ package com.rpgGame.app.manager.society
 		 * @param familyProto
 		 *
 		 */
-		public static function setClientOtherFamilyProto(familyProto : ClientFamilyListProto) : void
-		{
-			_otherSocietyList = [];
-			for each (var family : FamilyInListProto in familyProto.family)
-			{
-				var data : SocietyData = new SocietyData();
-				data.setConfig(family);
-				_otherSocietyList.push(data);
-			}
-			_otherSocietyList.sort(onSortSocietyList);
-			EventManager.dispatchEvent(SocietyEvent.SOCIETY_OTHER_LIST_UPDATE);
-		}
+//		public static function setClientOtherFamilyProto(familyProto : ClientFamilyListProto) : void
+//		{
+//			_otherSocietyList = [];
+//			for each (var family : FamilyInListProto in familyProto.family)
+//			{
+//				var data : SocietyData = new SocietyData();
+//				data.setConfig(family);
+//				_otherSocietyList.push(data);
+//			}
+//			_otherSocietyList.sort(onSortSocietyList);
+//			EventManager.dispatchEvent(SocietyEvent.SOCIETY_OTHER_LIST_UPDATE);
+//		}
 
-		public static function setClientNewsProto(datasProto : AllFamilyNewsProto) : void
-		{
-			_societyTrendsList = [];
-			for each (var newsProto : FamilyNewsProto in datasProto.news)
-			{
-				var trendsData : SocietyTrendsData = new SocietyTrendsData();
-				trendsData.setConfig(newsProto);
-				_societyTrendsList.push(trendsData);
-			}
-			_societyTrendsList.sort(onSortTrends);
-			EventManager.dispatchEvent(SocietyEvent.SOCIETY_TRENDS_UPDATE);
-		}
+//		public static function setClientNewsProto(datasProto : AllFamilyNewsProto) : void
+//		{
+//			_societyTrendsList = [];
+//			for each (var newsProto : FamilyNewsProto in datasProto.news)
+//			{
+//				var trendsData : SocietyTrendsData = new SocietyTrendsData();
+//				trendsData.setConfig(newsProto);
+//				_societyTrendsList.push(trendsData);
+//			}
+//			_societyTrendsList.sort(onSortTrends);
+//			EventManager.dispatchEvent(SocietyEvent.SOCIETY_TRENDS_UPDATE);
+//		}
 
 		private static function onSortSocietyList(societyDataA : SocietyData, societyDataB : SocietyData) : int
 		{
@@ -240,13 +231,13 @@ package com.rpgGame.app.manager.society
 			return animalBarLevel;
 		}
 
-		public static function get animalBarBossSceneId() : int
-		{
-			var familyAnimalBarLevelDataProto : FamilyAnimalBarLevelDataProto = SocietyStaticConfigData.getBuildAnimalBarLevelData(animalBarBossLevel);
-			if (familyAnimalBarLevelDataProto)
-				return familyAnimalBarLevelDataProto.sceneId;
-			return 0;
-		}
+//		public static function get animalBarBossSceneId() : int
+//		{
+//			var familyAnimalBarLevelDataProto : FamilyAnimalBarLevelDataProto = SocietyStaticConfigData.getBuildAnimalBarLevelData(animalBarBossLevel);
+//			if (familyAnimalBarLevelDataProto)
+//				return familyAnimalBarLevelDataProto.sceneId;
+//			return 0;
+//		}
 
 		/**
 		 * 神兽开启中
@@ -282,21 +273,21 @@ package com.rpgGame.app.manager.society
 		 * @param value
 		 *
 		 */
-		public static function setSelfSocietyInfo(value : FamilyProto) : void
-		{
-			_hasRequestJoin = value.hasRequestJoin;
-			_selfSocietyData = new SocietyDetailData();
-			_selfSocietyData.setConfig(value.shared);
-			GuildManager.instance.guildNameChange(_selfSocietyData.guildName);
-			if (_selfSocietyData.guildName)
-				GuildManager.instance.getSelfGuildBaseData();
-			_lastAnnouncement = _selfSocietyData.announcement;
-			GameSetting.autoAgreeJoinApprove = _selfSocietyData.isAutoAcceptJoinRequest;
-			_societySpellTotalData.updateSocietyData(_selfSocietyData);
-			EventManager.dispatchEvent(SocietyEvent.SELF_SOCIETY_INFO_UPDATE);
-			EventManager.dispatchEvent(BuffEvent.UPDATE_SOCIETY_SPELL_BUFF);
-			updateAnimalBarTime();
-		}
+//		public static function setSelfSocietyInfo(value : FamilyProto) : void
+//		{
+//			_hasRequestJoin = value.hasRequestJoin;
+//			_selfSocietyData = new SocietyDetailData();
+//			_selfSocietyData.setConfig(value.shared);
+//			GuildManager.instance.guildNameChange(_selfSocietyData.guildName);
+//			if (_selfSocietyData.guildName)
+//				GuildManager.instance.getSelfGuildBaseData();
+//			_lastAnnouncement = _selfSocietyData.announcement;
+//			GameSetting.autoAgreeJoinApprove = _selfSocietyData.isAutoAcceptJoinRequest;
+//			_societySpellTotalData.updateSocietyData(_selfSocietyData);
+//			EventManager.dispatchEvent(SocietyEvent.SELF_SOCIETY_INFO_UPDATE);
+//			EventManager.dispatchEvent(BuffEvent.UPDATE_SOCIETY_SPELL_BUFF);
+//			updateAnimalBarTime();
+//		}
 
 		public static function cacheAnnouncement(info : String) : void
 		{
@@ -738,22 +729,22 @@ package com.rpgGame.app.manager.society
 		 * @param familyInfo 家族信息，可能为空
 		 *
 		 */
-		public static function setHero(familyModuleObj : FamilyModuleObjProto) : void
-		{
-			if(!familyModuleObj)
-				return;
-			MainRoleManager.actorInfo.societyName = "";
-			_societySpellTotalData = new SocietySpellTotalData(MainRoleManager.actorInfo.id);
-			var familyInfo : FamilyInfoProto = familyModuleObj.familyInfo;
-			if (familyInfo != null)
-			{
-				MainRoleManager.actorInfo.societyName = BytesUtil.bytes2UTF(familyInfo.familyName);
-//				MainRoleManager.actor.headFace.addAndUpdateFamilyName();
-				_societySpellTotalData.updateLearnLevels(familyModuleObj.collageLearnSpells.levels);
-			}
-			GameSetting.autoAgreeJoinApprove = familyModuleObj.familyAutoAcceptInvite;
-			GameSetting.autoRefuseJoinInvite = familyModuleObj.familyForbidOtherInviteMeJoin;
-		}
+//		public static function setHero(familyModuleObj : FamilyModuleObjProto) : void
+//		{
+//			if(!familyModuleObj)
+//				return;
+//			MainRoleManager.actorInfo.societyName = "";
+//			_societySpellTotalData = new SocietySpellTotalData(MainRoleManager.actorInfo.id);
+//			var familyInfo : FamilyInfoProto = familyModuleObj.familyInfo;
+//			if (familyInfo != null)
+//			{
+//				MainRoleManager.actorInfo.societyName = BytesUtil.bytes2UTF(familyInfo.familyName);
+////				MainRoleManager.actor.headFace.addAndUpdateFamilyName();
+//				_societySpellTotalData.updateLearnLevels(familyModuleObj.collageLearnSpells.levels);
+//			}
+//			GameSetting.autoAgreeJoinApprove = familyModuleObj.familyAutoAcceptInvite;
+//			GameSetting.autoRefuseJoinInvite = familyModuleObj.familyForbidOtherInviteMeJoin;
+//		}
 
 		/**
 		 * 是否有帮派
@@ -811,7 +802,7 @@ package com.rpgGame.app.manager.society
 						societyData.collageLevel = level;
 						if (_societySpellTotalData)
 						{
-							_societySpellTotalData.updateSocietyData(societyData);
+//							_societySpellTotalData.updateSocietyData(societyData);
 						}
 						break;
 					case FamilyBuildingType.BIAO:
@@ -866,11 +857,11 @@ package com.rpgGame.app.manager.society
 		public static function useFamilyLeaderToken(item : ClientItemInfo) : void
 		{
 			var selfMemberData : SocietyMemberData = getSelfMemberData();
-			if (!selfMemberData || !selfMemberData.isLeader)
-			{
-				NoticeManager.showNotify(LangSociety.ONLY_LEADER_USE_FAMILY_LEADER_TOKEN);
-				return;
-			}
+//			if (!selfMemberData || !selfMemberData.isLeader)
+//			{
+//				NoticeManager.showNotify(LangSociety.ONLY_LEADER_USE_FAMILY_LEADER_TOKEN);
+//				return;
+//			}
 			if (tokenTimeoutSurplus > 0)
 			{
 				NoticeManager.showNotify(LangSociety.USE_FAMILY_LEADER_TOKEN_IS_CD);
@@ -908,18 +899,18 @@ package com.rpgGame.app.manager.society
 			EventManager.dispatchEvent(SocietyEvent.SOCIETY_LEADER_SUMMON);
 
 			var societyMemberData : SocietyMemberData = getSelfMemberData();
-			if (societyMemberData && societyMemberData.isLeader)
-			{
-				NoticeManager.showNotify(LangSociety.FAMILY_LEADER_SUMMON_SUCCESS);
-			}
-			else
-			{
-				
-				var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.replyGotoSummon);
-				alertSet.isClickHide = false;
-				alertSet.autoCloseTime = TimeUtil.MINUTE_MICRO_SECONDS;
-				GameAlert.showAlert(alertSet,setLeaderSummonClick,tokenData);
-			}
+//			if (societyMemberData && societyMemberData.isLeader)
+//			{
+//				NoticeManager.showNotify(LangSociety.FAMILY_LEADER_SUMMON_SUCCESS);
+//			}
+//			else
+//			{
+//				
+//				var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.replyGotoSummon);
+//				alertSet.isClickHide = false;
+//				alertSet.autoCloseTime = TimeUtil.MINUTE_MICRO_SECONDS;
+//				GameAlert.showAlert(alertSet,setLeaderSummonClick,tokenData);
+//			}
 		}
 		
 		private static function setLeaderSummonClick(gameAlert:GameAlert,data:Array):void

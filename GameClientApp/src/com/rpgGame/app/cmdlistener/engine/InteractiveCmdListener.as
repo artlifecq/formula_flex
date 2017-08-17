@@ -248,7 +248,7 @@ package com.rpgGame.app.cmdlistener.engine
 						if(!MainRoleManager.isTakeZhanChe)//乘坐他人战车时不能点击传送门
 						{
 							
-							WalkToRoleManager.walkToTranport(currTarget as SceneRole);
+//							WalkToRoleManager.walkToTranport(currTarget as SceneRole);
 						}
 					}
 					else if(sceneRole.type == SceneCharType.STALL && 

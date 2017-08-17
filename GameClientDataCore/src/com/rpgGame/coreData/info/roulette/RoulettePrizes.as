@@ -1,9 +1,6 @@
 package com.rpgGame.coreData.info.roulette
 {
 	import com.rpgGame.coreData.info.task.PrizeInfo;
-	
-	import app.message.RoulettePrizeProto;
-	import app.message.RoulettePrizesProto;
 
 	/**
 	 * 转盘奖励 
@@ -22,18 +19,18 @@ package com.rpgGame.coreData.info.roulette
 		{
 		}
 		
-		public function setRoulette(pro:RoulettePrizesProto):void
-		{
-			prizes = [];
-			
-			var info:RoulettePrizeInfo;
-			var data:RoulettePrizeProto;
-			for each(data in pro.prizes)
-			{
-				info = new RoulettePrizeInfo();
-				info.converRoulettePrizeData(data);
-			}
-		}
+//		public function setRoulette(pro:RoulettePrizesProto):void
+//		{
+//			prizes = [];
+//			
+//			var info:RoulettePrizeInfo;
+//			var data:RoulettePrizeProto;
+//			for each(data in pro.prizes)
+//			{
+//				info = new RoulettePrizeInfo();
+//				info.converRoulettePrizeData(data);
+//			}
+//		}
 		
 		
 	}

@@ -1,11 +1,5 @@
 package com.rpgGame.coreData.role
 {
-	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
-	import com.rpgGame.coreData.cfg.biao.BiaoPersonData;
-	
-	import app.message.BiaoResProto;
-	import app.message.BiaoType;
-	
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class BiaoCheData extends RoleData
@@ -51,13 +45,13 @@ package com.rpgGame.coreData.role
 		 * @return 
 		 * 
 		 */		
-		public function getModeRes():String
-		{
-			var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel(totalStat.level);
-			var biaoRes:BiaoResProto = isBroken ? data.broken_biao_res : data.normal_biao_res;
-			var path:String = biaoRes.res[quality];
-			return path;
-		}
+//		public function getModeRes():String
+//		{
+//			var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel(totalStat.level);
+//			var biaoRes:BiaoResProto = isBroken ? data.broken_biao_res : data.normal_biao_res;
+//			var path:String = biaoRes.res[quality];
+//			return path;
+//		}
 		
 		/**
 		 * 设置上线的时候镖车的信息，收到这条消息说明有镖车 

@@ -8,15 +8,11 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.YunBiaoEvent;
-	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.info.yunBiao.GeRenYunBiaoHelpInfo;
 	import com.rpgGame.coreData.lang.LangYunBiao;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	
 	import flash.utils.Dictionary;
-	
-	import app.message.MonsterDataProto;
-	import app.message.VipProto;
 	
 	import org.client.mainCore.manager.EventManager;
 

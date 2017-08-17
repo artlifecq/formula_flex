@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.role
 {
-	import app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto;
+	
 
 	/**
 	 *
@@ -22,11 +22,11 @@ package com.rpgGame.coreData.role
 		{
 		}
 
-		public function setConfig(cfg : AddWuXunRecordProto) : void
-		{
-			time = cfg.time.toNumber();
-			killAddAmount = cfg.killAddAmount?cfg.killAddAmount.toNumber():0;
-			otherAddAmount = cfg.otherAddAmount?cfg.otherAddAmount.toNumber():0;
-		}
+//		public function setConfig(cfg : AddWuXunRecordProto) : void
+//		{
+//			time = cfg.time.toNumber();
+//			killAddAmount = cfg.killAddAmount?cfg.killAddAmount.toNumber():0;
+//			otherAddAmount = cfg.otherAddAmount?cfg.otherAddAmount.toNumber():0;
+//		}
 	}
 }

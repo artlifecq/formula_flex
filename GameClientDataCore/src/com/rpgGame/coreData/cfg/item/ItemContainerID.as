@@ -2,7 +2,7 @@ package com.rpgGame.coreData.cfg.item
 {
 	import com.rpgGame.coreData.rEnum;
 	
-	import app.message.ContainerProto.ContainerType;
+	import app.message.ContainerType;
 
 	/**
 	 * 格子类型 ID
@@ -20,7 +20,7 @@ package com.rpgGame.coreData.cfg.item
 		public static const Role:int = ContainerType.HERO_EQUIPMENT;
 		/** 坐骑 **/
 		public static const Mount : int = ContainerType.MOUNT_EQUIPMENT;
-		
+//		
 		
 		
 		

@@ -1,10 +1,6 @@
 package com.rpgGame.coreData.info.stall
 {
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	
-	import app.message.StallBuyGoodsProto;
-	import app.message.StallSellGoodsProto;
 
 	/**
 	 *  摆摊物品
@@ -38,27 +34,27 @@ package com.rpgGame.coreData.info.stall
 			flag = 0;
 		}
 		
-		public function setupSellProto(proto:StallSellGoodsProto):void
-		{
-			_index = proto.idx;
-			if(proto.goods)
-//				item = ItemUtil.convertGoodsProtoToItemInfo(proto.goods);
-			flag = proto.flag;
-			price = proto.price;
-			if(num==0)
-				clear();
-		}
-		
-		public function setupBuyProto(proto:StallBuyGoodsProto):void
-		{
-			_index = proto.idx;
-			item = new ClientItemInfo(proto.goodsId);
-			item.count = proto.buyCount;
-			flag = proto.flag;
-			price = proto.buyPrice;
-			if(num==0)
-				clear();
-		}
+//		public function setupSellProto(proto:StallSellGoodsProto):void
+//		{
+//			_index = proto.idx;
+//			if(proto.goods)
+////				item = ItemUtil.convertGoodsProtoToItemInfo(proto.goods);
+//			flag = proto.flag;
+//			price = proto.price;
+//			if(num==0)
+//				clear();
+//		}
+//		
+//		public function setupBuyProto(proto:StallBuyGoodsProto):void
+//		{
+//			_index = proto.idx;
+//			item = new ClientItemInfo(proto.goodsId);
+//			item.count = proto.buyCount;
+//			flag = proto.flag;
+//			price = proto.buyPrice;
+//			if(num==0)
+//				clear();
+//		}
 		
 		public function get itemId():int
 		{

@@ -31,7 +31,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
@@ -52,9 +51,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.getDefinitionByName;
-	
-	import app.message.MazeDungeonProto;
-	import app.message.SceneProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -705,16 +701,16 @@ package com.rpgGame.app.manager.scene
 			}
 			else if (sceneData.isMazeScene)
 			{
-				var proto : MazeDungeonProto = (sceneData.getData() as SceneProto).mazeDungeon;
-				if (!proto)
-					return;
+//				var proto : MazeDungeonProto = (sceneData.getData() as SceneProto).mazeDungeon;
+//				if (!proto)
+//					return;
 				EventManager.dispatchEvent(MazeEvent.SHOW_MAZE_RANDOM);
 			}
 			else
 			{
-				var countryName : String = sceneSequence > 0 ? CountryNameCfgData.getCountryNameById(sceneSequence) : "";
-				if (countryName)
-					NoticeManager.showNotify(LangText.SCENE_ENTER_COUNTRY_NOTIFY_TEXT, countryName, sceneName);
+//				var countryName : String = sceneSequence > 0 ? CountryNameCfgData.getCountryNameById(sceneSequence) : "";
+//				if (countryName)
+//					NoticeManager.showNotify(LangText.SCENE_ENTER_COUNTRY_NOTIFY_TEXT, countryName, sceneName);
 //				else
 //					NoticeManager.showNotify(LangText.SCENE_ENTER_NOTIFY_TEXT, sceneName);
 			}

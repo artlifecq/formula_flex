@@ -4,8 +4,6 @@ package com.rpgGame.app.sender
 	
 	import flash.utils.ByteArray;
 	
-	import app.cmd.MiscModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection;
 
 	/**
@@ -49,7 +47,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(index);
 			_bytes.writeBytes(data);
-			send(MiscModuleMessages.C2S_SET_CLIENT_CONFIGS, _bytes);
+//			send(MiscModuleMessages.C2S_SET_CLIENT_CONFIGS, _bytes);
 		}
 	}
 }

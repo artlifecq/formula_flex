@@ -1,8 +1,6 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.coreData.cfg.TaxCfgData;
-	
-	import app.message.TaxConfigProto;
 
 	/**
 	 *
@@ -25,24 +23,24 @@ package com.rpgGame.app.manager
 		 */		
 		public static function getTaxByType(type : int) : int
 		{
-			var taxConfig : TaxConfigProto = TaxCfgData.getTaxConfigByType(type);
-			if (taxConfig)
-			{
-				if (taxConfig.isOpen)
-				{
-					if (taxConfig.fixedTax > 0)
-					{
-						return taxConfig.fixedTax;
-					}
-					else
-					{
-//						if (CountryManager.selfCountryData && CountryManager.selfCountryData.exchequer)
-//						{
-//							return CountryManager.selfCountryData.exchequer.taxRate;
-//						}
-					}
-				}
-			}
+//			var taxConfig : TaxConfigProto = TaxCfgData.getTaxConfigByType(type);
+//			if (taxConfig)
+//			{
+//				if (taxConfig.isOpen)
+//				{
+//					if (taxConfig.fixedTax > 0)
+//					{
+//						return taxConfig.fixedTax;
+//					}
+//					else
+//					{
+////						if (CountryManager.selfCountryData && CountryManager.selfCountryData.exchequer)
+////						{
+////							return CountryManager.selfCountryData.exchequer.taxRate;
+////						}
+//					}
+//				}
+//			}
 			return 0;
 		}
 	}

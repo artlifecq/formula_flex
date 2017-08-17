@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg.mount
 {
-	import app.message.MountDataProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -43,26 +41,26 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param data
 		 * 
 		 */			
-		public function setMountData( data:MountDataProto ):void
-		{
-			if( data == null )
-				return;
-			id = data.id;
-			name = data.name;
-			mountType = data.mountType;
-			prefixType = data.prefixType;
-			quality = data.quality;
-			speciesId = data.speciesId;
-			upgradeExpAdditional = data.upgradeExpAdditional;
-			resource = data.resource;
-			rideMoveSpeed = data.rideMoveSpeed;
-			
-			vitalityExpHash = new HashMap();
-			for (var i:int = 0; i < data.vitalityExp.length; i++) 
-			{
-				vitalityExpHash.add( i + 1, data.vitalityExp[i] );
-			}
-			mountRefineAddVitality = data.mountRefineAddVitalityExp;
-		}
+//		public function setMountData( data:MountDataProto ):void
+//		{
+//			if( data == null )
+//				return;
+//			id = data.id;
+//			name = data.name;
+//			mountType = data.mountType;
+//			prefixType = data.prefixType;
+//			quality = data.quality;
+//			speciesId = data.speciesId;
+//			upgradeExpAdditional = data.upgradeExpAdditional;
+//			resource = data.resource;
+//			rideMoveSpeed = data.rideMoveSpeed;
+//			
+//			vitalityExpHash = new HashMap();
+//			for (var i:int = 0; i < data.vitalityExp.length; i++) 
+//			{
+//				vitalityExpHash.add( i + 1, data.vitalityExp[i] );
+//			}
+//			mountRefineAddVitality = data.mountRefineAddVitalityExp;
+//		}
 	}
 }

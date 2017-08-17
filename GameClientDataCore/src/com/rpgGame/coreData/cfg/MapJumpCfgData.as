@@ -1,13 +1,9 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.coreData.clientConfig.Q_map_jump;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
-	import com.rpgGame.coreData.role.SceneTranportData;
 	
-	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;

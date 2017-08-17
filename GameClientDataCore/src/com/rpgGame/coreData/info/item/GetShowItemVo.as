@@ -1,8 +1,6 @@
 package com.rpgGame.coreData.info.item
 {
 	import flash.utils.ByteArray;
-	
-	import app.message.GoodsProto;
 
 	/**
 	 * 收到展示的物品的数据 
@@ -45,11 +43,11 @@ package com.rpgGame.coreData.info.item
 		}
 
 		/** 解码下发的动态数据 */
-		public function decode(chatGods:GoodsProto):void
-		{
-			cfgId = chatGods.id;
-			parseItemInfo();
-		}
+//		public function decode(chatGods:GoodsProto):void
+//		{
+//			cfgId = chatGods.id;
+//			parseItemInfo();
+//		}
 		
 		public function parseItemInfo():void
 		{

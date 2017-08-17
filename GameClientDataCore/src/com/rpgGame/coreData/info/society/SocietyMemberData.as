@@ -3,9 +3,6 @@ package com.rpgGame.coreData.info.society
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangSociety;
 	
-	import app.message.FamilyMemberProto;
-	import app.message.FamilyOfficerPos;
-	
 	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
@@ -40,28 +37,28 @@ package com.rpgGame.coreData.info.society
 		{
 		}
 
-		public function setConfig(pos : int, cfg : FamilyMemberProto) : void
-		{
-			societyPos = pos;
-			id = cfg.id.toNumber();
-			name = BytesUtil.bytes2UTF(cfg.name);
-			level = cfg.level;
-			isOnline = cfg.isOnline;
-			sceneId = cfg.sceneId;
-			contribution = cfg.contributionPoint ? cfg.contributionPoint.toNumber() : 0;
-			fightingAmount = cfg.fightingAmount ? cfg.fightingAmount.toNumber() : 0;
-			lastOfflineTime = cfg.lastOfflineTime ? cfg.lastOfflineTime.toNumber() : 0;
-		}
-
-		public function get isLeader() : Boolean
-		{
-			return societyPos == FamilyOfficerPos.LEADER;
-		}
-
-		public function get isViceLeader() : Boolean
-		{
-			return societyPos == FamilyOfficerPos.VICE_LEADER;
-		}
+//		public function setConfig(pos : int, cfg : FamilyMemberProto) : void
+//		{
+//			societyPos = pos;
+//			id = cfg.id.toNumber();
+//			name = BytesUtil.bytes2UTF(cfg.name);
+//			level = cfg.level;
+//			isOnline = cfg.isOnline;
+//			sceneId = cfg.sceneId;
+//			contribution = cfg.contributionPoint ? cfg.contributionPoint.toNumber() : 0;
+//			fightingAmount = cfg.fightingAmount ? cfg.fightingAmount.toNumber() : 0;
+//			lastOfflineTime = cfg.lastOfflineTime ? cfg.lastOfflineTime.toNumber() : 0;
+//		}
+//
+//		public function get isLeader() : Boolean
+//		{
+//			return societyPos == FamilyOfficerPos.LEADER;
+//		}
+//
+//		public function get isViceLeader() : Boolean
+//		{
+//			return societyPos == FamilyOfficerPos.VICE_LEADER;
+//		}
 
 		/**
 		 * 得到当前职位的中文
@@ -69,16 +66,16 @@ package com.rpgGame.coreData.info.society
 		 * @return
 		 *
 		 */
-		public static function getPosName(type : int) : String
-		{
-			switch (type)
-			{
-				case FamilyOfficerPos.LEADER:
-					return LanguageConfig.getText(LangSociety.LEADER_NAME);
-				case FamilyOfficerPos.VICE_LEADER:
-					return LanguageConfig.getText(LangSociety.VICE_LEADER_NAME);
-			}
-			return LanguageConfig.getText(LangSociety.MEMBER_NORMAL_NAME);
-		}
+//		public static function getPosName(type : int) : String
+//		{
+//			switch (type)
+//			{
+//				case FamilyOfficerPos.LEADER:
+//					return LanguageConfig.getText(LangSociety.LEADER_NAME);
+//				case FamilyOfficerPos.VICE_LEADER:
+//					return LanguageConfig.getText(LangSociety.VICE_LEADER_NAME);
+//			}
+//			return LanguageConfig.getText(LangSociety.MEMBER_NORMAL_NAME);
+//		}
 	}
 }

@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.RelationModuleMessages;
+	
 
 	/**
 	 *
@@ -22,7 +22,7 @@ package com.rpgGame.app.sender
 		public static function reqRelations() : void
 		{
 			_bytes.clear();
-			send(RelationModuleMessages.C2S_GET_RELATIONS, _bytes);
+//			send(RelationModuleMessages.C2S_GET_RELATIONS, _bytes);
 		}
 
 		/**
@@ -34,7 +34,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			send(RelationModuleMessages.C2S_ADD_FRIEND, _bytes);
+//			send(RelationModuleMessages.C2S_ADD_FRIEND, _bytes);
 		}
 
 		public static function reqReplyAddFriend(id : Number, result : Boolean) : void
@@ -42,7 +42,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(id);
 			_bytes.writeBoolean(result);
-			send(RelationModuleMessages.C2S_REPLY_ADD_FRIEND, _bytes);
+//			send(RelationModuleMessages.C2S_REPLY_ADD_FRIEND, _bytes);
 		}
 
 		/**
@@ -54,7 +54,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			send(RelationModuleMessages.C2S_REMOVE_FRIEND, _bytes);
+//			send(RelationModuleMessages.C2S_REMOVE_FRIEND, _bytes);
 		}
 
 		/**
@@ -66,7 +66,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			send(RelationModuleMessages.C2S_ADD_BLACK, _bytes);
+//			send(RelationModuleMessages.C2S_ADD_BLACK, _bytes);
 		}
 
 		/**
@@ -78,7 +78,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			send(RelationModuleMessages.C2S_REMOVE_BLACK, _bytes);
+//			send(RelationModuleMessages.C2S_REMOVE_BLACK, _bytes);
 		}
 		/**
 		 *  编辑心情
@@ -90,7 +90,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeUTF(str);
-			send(RelationModuleMessages.C2S_EDITOR_MOOD, _bytes);
+//			send(RelationModuleMessages.C2S_EDITOR_MOOD, _bytes);
 		}
 	}
 }

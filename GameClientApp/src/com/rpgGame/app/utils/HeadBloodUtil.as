@@ -3,13 +3,11 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.core.utils.PKModeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -219,8 +217,8 @@ package com.rpgGame.app.utils
 				return _role.name; //本国不显国家
 
 
-
-			return "[" + CountryNameCfgData.getCountryNameById(heroData.countryId) + "]" + _role.name;
+			return "";
+//			return "[" + CountryNameCfgData.getCountryNameById(heroData.countryId) + "]" + _role.name;
 		}
 		
 		public static function getStallNameColor(_role : SceneRole):uint

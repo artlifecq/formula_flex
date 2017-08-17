@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.bazhentu
 {
-	import app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto;
+	
 
 	public class BaZhenTuSpellInfo
 	{
@@ -12,12 +12,12 @@ package com.rpgGame.coreData.info.bazhentu
 		public function BaZhenTuSpellInfo()
 		{
 		}
-		public function setData(proto:BaZhenTuMonsterSpellProto):void
-		{
-			id = proto.spellId;
-			name = proto.spellName;
-			desc = proto.spellDesc;
-			icon = proto.spellIcon;
-		}
+//		public function setData(proto:BaZhenTuMonsterSpellProto):void
+//		{
+//			id = proto.spellId;
+//			name = proto.spellName;
+//			desc = proto.spellDesc;
+//			icon = proto.spellIcon;
+//		}
 	}
 }

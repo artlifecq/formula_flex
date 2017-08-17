@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.task
 {
-	import app.message.MiXinConfig.MiXinPrizeProto;
+	
 
 	/**
 	 * 密信任务奖励
@@ -26,15 +26,15 @@ package com.rpgGame.coreData.info.task
 		 * @param data
 		 * 
 		 */		
-		public function converMixinPrizeData(data:MiXinPrizeProto):void
-		{
-			if( data == null )
-				return;
-			
-			level = data.level;
-			baseExp = data.baseExp;
-			normalExpMulitple  = data.normalExpMulitple;
-			createPrizeItemInfo(data.goods);
-		}
+//		public function converMixinPrizeData(data:MiXinPrizeProto):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			level = data.level;
+//			baseExp = data.baseExp;
+//			normalExpMulitple  = data.normalExpMulitple;
+//			createPrizeItemInfo(data.goods);
+//		}
 	}
 }

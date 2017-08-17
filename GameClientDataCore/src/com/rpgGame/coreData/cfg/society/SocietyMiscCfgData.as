@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.cfg.society
 {
-	import app.message.FamilyMiscProto;
-	import app.message.UpgradeProto;
+	
 
 	/**
 	 *
@@ -21,7 +20,7 @@ package com.rpgGame.coreData.cfg.society
 		/** 捐献银子捐献的基础值 **/
 		public static var donateMoneyBase : int;
 		/** 捐献1个建设令牌的消耗 **/
-		public static var donateGoodsUpgradeData : UpgradeProto;
+//		public static var donateGoodsUpgradeData : UpgradeProto;
 		/** 帮派神兽副本开启的时间开始时间[从0点开始计时，当天0点就是0] **/
 		public static var animalBarDungeonStartTime : Number;
 		/** 帮派神兽副本开启的时间结束时间，同上 **/
@@ -31,15 +30,15 @@ package com.rpgGame.coreData.cfg.society
 		{
 		}
 
-		public static function setConfig(cfg : FamilyMiscProto) : void
-		{
-			familyCreateMoney = cfg.familyCreateMoney;
-			familyCreateGoods = cfg.familyCreateGoods;
-			donateGoodsId = cfg.donateGoodsId;
-			donateMoneyBase = cfg.donateMoneyBase;
-			donateGoodsUpgradeData = cfg.donateGoodsUpgradeData;
-			animalBarDungeonStartTime = cfg.familyAnimalBarDungeonStartTime ? cfg.familyAnimalBarDungeonStartTime.toNumber() : 0;
-			animalBarDungeonEndTime = cfg.familyAnimalBarDungeonEndTime ? cfg.familyAnimalBarDungeonEndTime.toNumber() : 0;
-		}
+//		public static function setConfig(cfg : FamilyMiscProto) : void
+//		{
+//			familyCreateMoney = cfg.familyCreateMoney;
+//			familyCreateGoods = cfg.familyCreateGoods;
+//			donateGoodsId = cfg.donateGoodsId;
+//			donateMoneyBase = cfg.donateMoneyBase;
+//			donateGoodsUpgradeData = cfg.donateGoodsUpgradeData;
+//			animalBarDungeonStartTime = cfg.familyAnimalBarDungeonStartTime ? cfg.familyAnimalBarDungeonStartTime.toNumber() : 0;
+//			animalBarDungeonEndTime = cfg.familyAnimalBarDungeonEndTime ? cfg.familyAnimalBarDungeonEndTime.toNumber() : 0;
+//		}
 	}
 }

@@ -7,7 +7,6 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
@@ -32,13 +31,10 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	
-	import app.message.EquipedMountProto;
-	import app.message.MountProto;
 	import app.message.MountStatus;
 	import app.message.MountType;
 	import app.message.PrefixType;
 	import app.message.Quality;
-	import app.message.StablesBreedProto;
 	import app.message.StablesBreedType;
 	
 	import gs.TweenLite;
@@ -155,22 +151,22 @@ package com.rpgGame.app.manager.mount
 		 * @param data MountProto 坐骑数据
 		 * 
 		 */		
-		public static function setMountIdentify( idx:int, mountProto:MountProto ):void
-		{
-			var slotMountVec:Vector.<MountInfoData> = getAllSlotMounts( MainRoleManager.actorID );
-			if( slotMountVec == null || slotMountVec.length <= 0 )
-				return;
-			
-			for each (var mountInfoData:MountInfoData in slotMountVec)
-			{
-				if( mountInfoData.idx != idx )
-					continue;
-				
-				mountInfoData.setInfoData( mountProto );
-				EventManager.dispatchEvent( MountEvent.MOUNT_AUTHENTICATE_SUCCESS, mountInfoData );
-				NoticeManager.showNotify( LangMount.MOUNT_TIP_61 );
-			}
-		}
+//		public static function setMountIdentify( idx:int, mountProto:MountProto ):void
+//		{
+//			var slotMountVec:Vector.<MountInfoData> = getAllSlotMounts( MainRoleManager.actorID );
+//			if( slotMountVec == null || slotMountVec.length <= 0 )
+//				return;
+//			
+//			for each (var mountInfoData:MountInfoData in slotMountVec)
+//			{
+//				if( mountInfoData.idx != idx )
+//					continue;
+//				
+//				mountInfoData.setInfoData( mountProto );
+//				EventManager.dispatchEvent( MountEvent.MOUNT_AUTHENTICATE_SUCCESS, mountInfoData );
+//				NoticeManager.showNotify( LangMount.MOUNT_TIP_61 );
+//			}
+//		}
 		
 		
 		//----------------------------------------------坐骑繁育-------------------------------------------------------------
@@ -179,26 +175,26 @@ package com.rpgGame.app.manager.mount
 		 * @param stablesBreedPro
 		 * 
 		 */		
-		public static function setStablesBreedInfo( stablesBreedPro:StablesBreedProto ):void
-		{
-			var stablesBreedData:MountStablesBreedData = new MountStablesBreedData();
-			stablesBreedData.setData( stablesBreedPro );
-			MountManager.mountBreedTime = stablesBreedData.bornTime;
-			MountManager.mountStablesBreedType = stablesBreedData.stablesBreedType;
-			isHasBreed = true;
-			
-			//邀请者
-			var mountInvitorData:MountStablesBreedSideData = new MountStablesBreedSideData();
-			mountInvitorData.setData( stablesBreedPro.invitor );
-			mountInvitorData.isInvite = false;
-			mountStablesBreedSideHash.add( mountInvitorData.heroId, mountInvitorData );
-			
-			//被邀请者，可能为空
-			var mountBreedInvitorData:MountStablesBreedSideData = new MountStablesBreedSideData();
-			mountBreedInvitorData.setData( stablesBreedPro.beenInvitor );
-			mountBreedInvitorData.isInvite = true;
-			mountStablesBreedSideHash.add( mountBreedInvitorData.heroId, mountBreedInvitorData );
-		}
+//		public static function setStablesBreedInfo( stablesBreedPro:StablesBreedProto ):void
+//		{
+//			var stablesBreedData:MountStablesBreedData = new MountStablesBreedData();
+//			stablesBreedData.setData( stablesBreedPro );
+//			MountManager.mountBreedTime = stablesBreedData.bornTime;
+//			MountManager.mountStablesBreedType = stablesBreedData.stablesBreedType;
+//			isHasBreed = true;
+//			
+//			//邀请者
+//			var mountInvitorData:MountStablesBreedSideData = new MountStablesBreedSideData();
+//			mountInvitorData.setData( stablesBreedPro.invitor );
+//			mountInvitorData.isInvite = false;
+//			mountStablesBreedSideHash.add( mountInvitorData.heroId, mountInvitorData );
+//			
+//			//被邀请者，可能为空
+//			var mountBreedInvitorData:MountStablesBreedSideData = new MountStablesBreedSideData();
+//			mountBreedInvitorData.setData( stablesBreedPro.beenInvitor );
+//			mountBreedInvitorData.isInvite = true;
+//			mountStablesBreedSideHash.add( mountBreedInvitorData.heroId, mountBreedInvitorData );
+//		}
 		
 		/**
 		 * 获取所有的繁育邀请信息（邀请繁育、被邀请繁育信息）
@@ -373,21 +369,21 @@ package com.rpgGame.app.manager.mount
 		 * @param idx
 		 * 
 		 */		
-		public static function onCancelMountBreed( equipMountPro:EquipedMountProto, idx:int ):void
-		{
-			var info:MountInfoData = new MountInfoData();
-			info.setInfoData( equipMountPro.mount );
-			info.setMountEquipData( equipMountPro.mountEquipments );
-			info.idx = idx;
-			MainRoleManager.actorInfo.mounModuletData.mountInfoDataVec.push( info );
-			
-			mountStablesBreedType = -1;
-			var data:MountStablesBreedSideData = getMountStablesBreedSideByid( MainRoleManager.actorID );
-			if( data != null )
-				mountStablesBreedSideHash.remove( MainRoleManager.actorID );
-			
-			EventManager.dispatchEvent( MountEvent.MOUNT_BREED_CANCEL_SELF );
-		}
+//		public static function onCancelMountBreed( equipMountPro:EquipedMountProto, idx:int ):void
+//		{
+//			var info:MountInfoData = new MountInfoData();
+//			info.setInfoData( equipMountPro.mount );
+//			info.setMountEquipData( equipMountPro.mountEquipments );
+//			info.idx = idx;
+//			MainRoleManager.actorInfo.mounModuletData.mountInfoDataVec.push( info );
+//			
+//			mountStablesBreedType = -1;
+//			var data:MountStablesBreedSideData = getMountStablesBreedSideByid( MainRoleManager.actorID );
+//			if( data != null )
+//				mountStablesBreedSideHash.remove( MainRoleManager.actorID );
+//			
+//			EventManager.dispatchEvent( MountEvent.MOUNT_BREED_CANCEL_SELF );
+//		}
 		
 		/**
 		 * 他人取消繁育了，将本次繁育设置为已经取消，你自己只能够把坐骑领回去了 
