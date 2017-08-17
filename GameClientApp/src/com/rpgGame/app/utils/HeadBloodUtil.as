@@ -2,10 +2,14 @@ package com.rpgGame.app.utils
 {
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
@@ -14,6 +18,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import org.client.mainCore.ds.HashMap;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 
 	public class HeadBloodUtil
 	{
@@ -216,8 +221,17 @@ package com.rpgGame.app.utils
 			if (MainRoleManager.actorInfo.countryId == heroData.countryId)
 				return _role.name; //本国不显国家
 
+			if(_role.type== SceneCharType.PLAYER){
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				switch(qmap.q_map_type){
+					case EnumMapType.MAP_TYPE_TOWERS:
+						return "神秘人";
+				}
+			}
 
-			return "";
+			return _role.name;
 //			return "[" + CountryNameCfgData.getCountryNameById(heroData.countryId) + "]" + _role.name;
 		}
 		

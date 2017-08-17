@@ -15,7 +15,7 @@ package com.rpgGame.appModule.battle.jcyt
 			_skin=new RiZi_Item();
 			super(_skin);
 			_skin.bg1.visible=index%2==0;
-			_skin.bg2.visible!=_skin.bg1.visible;
+			_skin.bg2.visible=!_skin.bg1.visible;
 		}
 		
 		public function setData(data:YaoTaInfo):void

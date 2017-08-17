@@ -10,6 +10,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import flash.utils.Dictionary;
 	
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
@@ -38,27 +39,27 @@ package com.rpgGame.appModule.jingmai.sub
 			
 			pointHash=new HashMap();
 			var len:int=configList.length;
-			var tmpPoint:UIAsset;
+			var tmpPoint:SkinnableContainer;
 		
-			var tmpLab:Label;
+			
 			var mp:MerdianPoint;
 			var key:int;
 			var tmpArr:Array;
 			var posA:Array;
 			//var next:UIAsset;
-			var pre:UIAsset;
+			var pre:SkinnableContainer;
 			var preConfig:Q_meridian;
 			var centerPos:Point;
 			var tmpC:Q_meridian;
 			var drawLine:MeridianMapLine;
-			var pointBG:UIAsset;
+			
 			for (var i:int = 0; i <len; i++) 
 			{
-				tmpPoint=_stateSkin["ico"+(1+i)];
-				pointBG=_stateSkin["icd"+(1+i)];
+				tmpPoint=_stateSkin["icd"+(1+i)];
+			
 				tmpC=configList[i];
 				//if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
-				if (_stateSkin.hasOwnProperty("ico"+(i))&&i>0) 
+				if (_stateSkin.hasOwnProperty("icd"+(i))&&i>0) 
 				{
 					//next=_stateSkin["icd"+(2+i)];
 					pre=_stateSkin["icd"+(i)];
@@ -77,13 +78,13 @@ package com.rpgGame.appModule.jingmai.sub
 							posA.push(new Point(int(coodA[0])+24,int(coodA[1])+24));
 						}
 						//posA.push(new Point(next.x+24,next.y+24));
-						posA.push(new Point(pointBG.x+24,pointBG.y+24));
+						posA.push(new Point(tmpPoint.x+24,tmpPoint.y+24));
 						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/lang/"+meridianId+".png","ui/app/beibao/jingmai/line/an/"+meridianId+".png",posA);
 						linesContianer.addChild(drawLine);
 					}
 				}
-				tmpLab=_stateSkin["lb_"+(1+i)];
-				mp=new MerdianPoint(pointBG,tmpPoint,tmpLab,configList[i].q_meridian_id,drawLine,tmpC.q_showtype);
+				
+				mp=new MerdianPoint(tmpPoint.skin,configList[i].q_meridian_id,drawLine,tmpC.q_showtype);
 				tmpArr=configList[i].q_meridian_id.split("_");
 				key=int(tmpArr[1]);
 				nameDic[tmpPoint.name]=mp;

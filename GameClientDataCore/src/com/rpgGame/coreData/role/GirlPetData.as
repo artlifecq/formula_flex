@@ -15,6 +15,7 @@ package com.rpgGame.coreData.role
 		private var _ownerName:String;
 		private var _ownerId:long;
 		private var _speakWords:Array;
+		private var _petData:Q_girl_pet;
 		public function GirlPetData( priority:int=100)
 		{
 			super(RoleType.GIRL_PET, priority);
@@ -36,10 +37,10 @@ package com.rpgGame.coreData.role
 			var q_pet:Q_girl_advance=PetAdvanceCfg.getPet(info.petModelId,info.rank);
 			this.avatarInfo.setBodyResID(q_pet.q_skinResID,null);
 			this.totalStat.moveSpeed=info.speed;
-			var qPet:Q_girl_pet=PetCfg.getPet(info.petModelId);
-			if (qPet.q_talkwords) 
+			_petData=PetCfg.getPet(info.petModelId);
+			if (_petData.q_talkwords) 
 			{
-				_speakWords=qPet.q_talkwords.split(";");
+				_speakWords=_petData.q_talkwords.split(";");
 			}
 		}
 		
@@ -62,6 +63,12 @@ package com.rpgGame.coreData.role
 		{
 			return _speakWords;
 		}
+
+		public function get petData():Q_girl_pet
+		{
+			return _petData;
+		}
+
 
 	}
 }

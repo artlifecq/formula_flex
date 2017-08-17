@@ -447,7 +447,8 @@ package com.rpgGame.appModule.pet
 					_skin.btnTiaozhan.label="出战";
 					tipStr="点击出战按钮美人协助作战\n无论美人出战与否都会永久提升主角属性";
 				}
-			}			
+			}	
+			TipTargetManager.remove(_skin.btnTiaozhan);
 			TipTargetManager.show( _skin.btnTiaozhan, TargetTipsMaker.makeSimpleTextTips(tipStr));
 		}
 		override protected function onShow():void

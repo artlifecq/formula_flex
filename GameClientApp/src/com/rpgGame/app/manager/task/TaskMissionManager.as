@@ -196,7 +196,10 @@ package com.rpgGame.app.manager.task
 			{
 				return TaskType.MAINTYPE_GUILDDAILYTASK;
 			}
-			
+			else if(getTaskInfoByType(TaskType.LIJIN_TASK)!=null&&taskid.ToGID()==getTaskInfoByType(TaskType.LIJIN_TASK).taskId.ToGID())
+			{
+				return TaskType.LIJIN_TASK;
+			}
 			return 0;
 			
 		}
@@ -1137,7 +1140,14 @@ package com.rpgGame.app.manager.task
 			{
 				return true;
 			}
-			
+			if(isTaskMonster(mid,TaskType.MAINTYPE_GUILDDAILYTASK))
+			{
+				return true;
+			}
+			if(isTaskMonster(mid,TaskType.LIJIN_TASK))
+			{
+				return true;
+			}
 			return false;
 		}
 		
