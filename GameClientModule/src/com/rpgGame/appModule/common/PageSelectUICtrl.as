@@ -89,6 +89,13 @@ package com.rpgGame.appModule.common
 			{
 				setCurPage(0);
 			}
+			else 
+			{
+				if (callBack) 
+				{
+					callBack(data);
+				}
+			}
 		}
 		private function resetState():void
 		{

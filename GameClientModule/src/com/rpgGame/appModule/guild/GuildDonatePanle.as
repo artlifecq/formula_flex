@@ -45,6 +45,7 @@ package com.rpgGame.appModule.guild
 		private var _pageCtrl:PageSelectUICtrl;
 		private var maxCount:int=8;
 		private var cellList:Vector.<GuildDonateCell>=new Vector.<GuildDonateCell>();
+		private var _memList:Vector.<GuildMemberInfo>;
 		public function GuildDonatePanle():void
 		{
 			_skin = new TanKuang_JuanXian();
@@ -56,9 +57,18 @@ package com.rpgGame.appModule.guild
 			// TODO Auto Generated method stub
 			var list:Vector.<GuildMemberInfo>=data;
 			var len:int=list.length;
+			var tmp:GuildMemberInfo;
+			var index:int;
 			for (var i:int = 0; i < maxCount; i++) 
 			{
-				cellList[i].setData(i<len?list[i]:null);
+				tmp=null;
+				index=-1;
+				if (i<len) 
+				{
+					tmp=list[i];
+					index=_memList.indexOf(tmp);
+				}
+				cellList[i].setData(tmp,index);
 			}
 		}
 		private function initView():void
@@ -75,7 +85,7 @@ package com.rpgGame.appModule.guild
 				tmp.y=startY+i*tmp.height;
 				_skin.container.addChild(tmp);
 				cellList.push(tmp);
-				tmp.setData(null);
+				tmp.setData(null,-1);
 			}
 			MCUtil.BringToTop(_skin.grpFlip);
 			//=================
@@ -154,10 +164,10 @@ package com.rpgGame.appModule.guild
 		}
 		private function refeashList():void
 		{
-			var list:Vector.<GuildMemberInfo> = GuildManager.instance().getSortMemberListByProp("curActive");
-			if(list == null)
+			_memList = GuildManager.instance().getSortMemberListByProp("curActive");
+			if(_memList == null)
 				return ;
-			this._pageCtrl.setData(list,maxCount);
+			this._pageCtrl.setData(_memList,maxCount);
 			refeashView();
 		}
 		

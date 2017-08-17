@@ -168,7 +168,7 @@ package org.mokylin.skin.app.banghui
 		private function __TanKuang_JuanXian_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 300;
+			temp.height = 310;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 271;
 			temp.x = 6;
@@ -179,7 +179,7 @@ package org.mokylin.skin.app.banghui
 		private function __TanKuang_JuanXian_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 300;
+			temp.height = 310;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 271;
 			temp.x = 275;
@@ -336,7 +336,7 @@ package org.mokylin.skin.app.banghui
 			grpFlip = temp;
 			temp.name = "grpFlip";
 			temp.x = 105;
-			temp.y = 319;
+			temp.y = 332;
 			temp.elementsContent = [__TanKuang_JuanXian_UIAsset9_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}

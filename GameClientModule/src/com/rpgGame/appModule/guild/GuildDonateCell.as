@@ -28,17 +28,17 @@ package com.rpgGame.appModule.guild
 			item.bg1.visible = this.index%2 ==0;
 			item.bg2.visible = !item.bg1.visible ;
 		}
-		public function setData(info:GuildMemberInfo):void
+		public function setData(info:GuildMemberInfo,tIndex:int):void
 		{
 			updateSkin();
-			_skin.uiFirt.visible = this.index ==0;
+			_skin.uiFirt.visible =tIndex ==0;
 			if(info==null)
 			{
 				_skin.gUI.visible=false;
 				return ;
 			}
 			_skin.gUI.visible=true;
-			var rank:int = this.index+1;
+			var rank:int = tIndex+1;
 			if(rank<4)
 			{
 				_skin.numList2.visible = false;
