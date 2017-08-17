@@ -456,7 +456,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.fontSize = 14;
 			temp.text = "剩余时间：00：1：5";
 			temp.textAlign = "center";
-			temp.color = 0xFF0D0D;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 202;
 			temp.x = 25;
