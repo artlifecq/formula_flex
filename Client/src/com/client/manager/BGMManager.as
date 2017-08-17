@@ -26,7 +26,7 @@ package com.client.manager
 			AudioInterface.init(stage);
 			AudioInterface.baseDir = ClientConfig.baseDir;
 			AudioInterface.getVersionPathFun = VersionUtils.getVersionPath;
-			AudioInterface.debug = ClientConfig.isDebug;
+			AudioInterface.debug = !ClientConfig.isRelease;
 			AudioInterface.allowBackPlay = false;
 			AudioInterface.createAudioSound(AudioConfigType.MUSIC_CHANNEL);
 			AudioInterface.createAudioSound(AudioConfigType.ENV2D_CHANNEL);
