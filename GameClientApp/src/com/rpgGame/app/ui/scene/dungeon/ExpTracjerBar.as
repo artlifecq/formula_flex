@@ -50,12 +50,6 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			_skin = new JingYan_Skin();
 			super(_skin);
-			/*_ico=new IconCDFace(IcoSizeEnum.ICON_42);
-			_ico.selectImgVisible=false;
-			_ico.bindBg(_skin.sec_ico1_0);
-			_skin.container.addChild(_ico);*/
-			/*updatedailyZoneInfo(11);
-			updatedailyZoneTime(SystemTimeManager.curtTm/1000+1800);*/
 			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6,true,1);
 			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
 			
@@ -63,27 +57,41 @@ package com.rpgGame.app.ui.scene.dungeon
 		}
 		private function initView():void
 		{
-			var arr:Array=JSONUtil.decode(_data.q_rewards_show);
-			var exp:int=0;
-			
-			if(arr)
+			var rewardList:Array=JSONUtil.decode(_data.q_rewards_show);
+			if(rewardList!=null&&rewardList.length>0)
 			{
-				arr=arr[2];
-				for(var i:int=0;i<arr.length;i++)
+				var expReward:String="";
+				var otherReward:String="";
+				for(var i:int=0;i<rewardList.length;i++)
 				{
-					if(arr[i].mod==1)
-						exp+=arr[i].num;
+					if(rewardList[i].mod==1)
+					{
+						expReward="["+JSONUtil.encode(rewardList[i])+"]"
+					}
+					else
+					{
+						if(otherReward=="")
+						{
+							otherReward="["+JSONUtil.encode(rewardList[i]);
+						}
+						else
+						{
+							otherReward+=","+JSONUtil.encode(rewardList[i]);
+						}
+					}
 				}
+				if(otherReward!="")
+				{
+					otherReward+="]";
+				}
+				
+				icoList1Group.setRewardByJsonStr(expReward);
+				icoList1Group.visible=true;
+				icoList2Group.setRewardByJsonStr(otherReward);
+				icoList2Group.visible=true;
+				
 			}
-			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(1,exp);
-			var itemList:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
-			itemList.push(itemInfo);
-			icoList1Group.setReward(itemList);
-			icoList1Group.visible=true;
-			icoList2Group.setRewardByJsonStr(_data.q_rewards_client);
-			icoList2Group.visible=true;
 			
-			//FaceUtil.SetItemGrid(_ico,itemInfo);
 		}
 		
 		override protected function onShow() : void
