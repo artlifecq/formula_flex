@@ -5,10 +5,10 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -18,7 +18,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import org.client.mainCore.ds.HashMap;
-	import com.rpgGame.coreData.info.map.EnumMapType;
 
 	public class HeadBloodUtil
 	{
