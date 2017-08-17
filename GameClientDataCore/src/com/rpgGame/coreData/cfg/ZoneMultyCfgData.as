@@ -95,7 +95,11 @@ package com.rpgGame.coreData.cfg
 			return 0;
 		}
 		
-		
+		/**根据副本ID判断是否是多人副本*/
+		public static function isZoneMultyByID(id : int) : Boolean
+		{
+			return _dataDic[id]!=null;
+		}
 		public function ZoneMultyCfgData()
 		{
 			
