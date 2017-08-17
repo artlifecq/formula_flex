@@ -1,17 +1,9 @@
 package com.rpgGame.appModule.die
 {
-	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_die;
 	
-	import away3d.events.Event;
-	
-	import feathers.controls.UIAsset;
-	import feathers.controls.UIMovieClip;
 	import feathers.controls.renderers.DefaultListItemRenderer;
-	
-	import org.mokylin.skin.app.siwangfuhuo.tuijianItems_Skin;
 	
 	public class DieToitemCell extends DefaultListItemRenderer
 	{

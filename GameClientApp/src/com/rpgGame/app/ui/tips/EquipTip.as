@@ -386,7 +386,7 @@ package com.rpgGame.app.ui.tips
 				yinIcon.x=52;
 				yinIcon.y=curY-4;
 				
-				_itemTip.lbl_bangding.x=label.x+label.textWidth+10;
+				_itemTip.lbl_bangding.x=190;
 				_itemTip.lbl_bangding.y=label.y;
 				_itemTip.lbl_bangding.visible=true;
 				if(_itemInfo.binded){

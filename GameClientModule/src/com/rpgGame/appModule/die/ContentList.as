@@ -33,6 +33,7 @@ package com.rpgGame.appModule.die
 		protected function init():void
 		{
 			_skin = new ContentListSkin();
+			_skin.btn_prev.visible=_skin.btn_next.visible=false;
 			_skin.width = _w;
 			_skin.height = _h;
 			_skin.toSprite(this);
@@ -45,11 +46,10 @@ package com.rpgGame.appModule.die
 			_skin.ContList.layout = layout;
 			_skin.ContList.dataProvider = new ListCollection(DieCfgData.allOpenList);
 			
-			_skin.btn_prev.addEventListener(Event.TRIGGERED,triggeredHandler);
-			_skin.btn_next.addEventListener(Event.TRIGGERED,triggeredHandler);
+			//			_skin.btn_prev.addEventListener(Event.TRIGGERED,triggeredHandler);
+			//			_skin.btn_next.addEventListener(Event.TRIGGERED,triggeredHandler);
 			refeashList(0);
 		}
-		
 		
 		private function triggeredHandler(e:Event):void
 		{
@@ -67,8 +67,8 @@ package com.rpgGame.appModule.die
 		
 		private function refeashList(index:int):void
 		{
-			_skin.btn_next.visible = (index <1);
-			_skin.btn_prev.visible = (index >0);
+			//			_skin.btn_next.visible = (index <1);
+			//			_skin.btn_prev.visible = (index >0);
 			_skin.ContList.scrollToPageIndex(index,0);
 		}
 	}

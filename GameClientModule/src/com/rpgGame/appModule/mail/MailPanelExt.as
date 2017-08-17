@@ -4,9 +4,11 @@ package com.rpgGame.appModule.mail
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.MailSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.equip.combo.DetailNodeInfo;
 	import com.rpgGame.appModule.mail.render.MailItemSelectCellRender;
 	import com.rpgGame.core.events.MailEvent;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.info.mail.MailInfo;
 	import com.rpgGame.netData.mail.bean.MailBriefInfo;
 	import com.rpgGame.netData.mail.bean.MailDetailInfo;
 	
@@ -15,6 +17,7 @@ package com.rpgGame.appModule.mail
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
+	import feathers.data.TreeNode;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -29,7 +32,7 @@ package com.rpgGame.appModule.mail
 		private var _skin:MailReceive_Skin;
 		private var _mailReadPanel:MailReadPanelExt;
 		private var _selectItemList:Vector.<long>;
-		//		private var _mailItemList:Vector.<MailItem>;
+		private var _mailItemList:Vector.<MailItem>;
 		//当前选取的邮件
 		private var _nowSelectMailItem:MailItem;
 		
@@ -37,7 +40,7 @@ package com.rpgGame.appModule.mail
 		{
 			_skin=new MailReceive_Skin();
 			super(_skin);
-			//			_mailItemList=new Vector.<MailItem>();
+			_mailItemList=new Vector.<MailItem>();
 			_selectItemList=new Vector.<long>();
 			_skin.listMail.itemRendererFactory = creatMailItemCell;
 			_skin.listMail.clipContent = true;
@@ -108,6 +111,7 @@ package com.rpgGame.appModule.mail
 		
 		private function initView():void
 		{
+			_mailItemList.length=0;
 			_skin.chkSelect.isSelected=false;
 			setAllMailItemBtnStata( _skin.chkSelect.isSelected);
 			var mailItemList:Vector.<MailBriefInfo>=MailManager.getallMailList();
@@ -129,6 +133,7 @@ package com.rpgGame.appModule.mail
 		private function creatMailItemCell():MailItemSelectCellRender
 		{
 			var render:MailItemSelectCellRender=new MailItemSelectCellRender();
+			_mailItemList.push(render.mailitem);
 			return render;
 		}
 		
@@ -187,6 +192,7 @@ package com.rpgGame.appModule.mail
 				_nowSelectMailItem.setIsSelectImgState(false);
 				_nowSelectMailItem=null;
 			}
+			onStageResize(_stage.stageWidth,_stage.stageHeight);
 		}
 		
 		/**更新选择*/

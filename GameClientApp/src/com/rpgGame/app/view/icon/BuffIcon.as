@@ -56,7 +56,7 @@ package com.rpgGame.app.view.icon
 				setSubString("");
 				return;
 			}
-			setSubString("x"+NumberUtil.getNumberTo(value));
+			setSubString("x"+NumberUtil.getNumberTo(value,true));
 		}
 		override protected function calIconPos():void
 		{
