@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.MazeModuleMessages;
+	
 
 	public class MazeSender extends BaseSender
 	{
@@ -22,13 +22,13 @@ package com.rpgGame.app.sender
 
 			_bytes.clear();
 			_bytes.writeVarint32(index);
-			send(MazeModuleMessages.C2S_TRY_TRANSPORT, _bytes);
+//			send(MazeModuleMessages.C2S_TRY_TRANSPORT, _bytes);
 		}
 
 		public static function getLastRank() : void
 		{
 			_bytes.clear();
-			send(MazeModuleMessages.C2S_GET_LAST_RANK, _bytes);
+//			send(MazeModuleMessages.C2S_GET_LAST_RANK, _bytes);
 		}
 	}
 }

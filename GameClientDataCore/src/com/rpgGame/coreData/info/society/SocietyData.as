@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.info.society
 {
-	import app.message.FamilyInListProto;
-	
 	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
@@ -41,18 +39,18 @@ package com.rpgGame.coreData.info.society
 			isJoinApplying = false;
 		}
 
-		public function setConfig(cfg : FamilyInListProto) : void
-		{
-			country = cfg.country;
-			createTime = cfg.createTime ? cfg.createTime.toNumber() : 0;
-			societyName = cfg.name ? BytesUtil.bytes2UTF(cfg.name) : "";
-			leaderName = cfg.leaderName ? BytesUtil.bytes2UTF(cfg.leaderName) : "";
-			peopleCount = cfg.heroCount;
-			maxPeopleCount = cfg.maxHeroCount;
-			onlineCount = cfg.onlineCount;
-			level = cfg.level;
-			isAutoAcceptJoinRequest = cfg.isAutoAcceptJoinRequest;
-			isAnyLeaderOnline = cfg.isAnyLeaderOnline;
-		}
+//		public function setConfig(cfg : FamilyInListProto) : void
+//		{
+//			country = cfg.country;
+//			createTime = cfg.createTime ? cfg.createTime.toNumber() : 0;
+//			societyName = cfg.name ? BytesUtil.bytes2UTF(cfg.name) : "";
+//			leaderName = cfg.leaderName ? BytesUtil.bytes2UTF(cfg.leaderName) : "";
+//			peopleCount = cfg.heroCount;
+//			maxPeopleCount = cfg.maxHeroCount;
+//			onlineCount = cfg.onlineCount;
+//			level = cfg.level;
+//			isAutoAcceptJoinRequest = cfg.isAutoAcceptJoinRequest;
+//			isAnyLeaderOnline = cfg.isAnyLeaderOnline;
+//		}
 	}
 }

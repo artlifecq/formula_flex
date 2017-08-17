@@ -1,12 +1,5 @@
 package com.rpgGame.coreData.cfg.mount
 {
-	import app.message.MountConfig;
-	import app.message.MountDataProto;
-	import app.message.MountHungerDegreeDatasProto.MountHungerDegreeDataProto;
-	import app.message.MountLevelDatasProto.MountLevelDataProto;
-	import app.message.MountSpeciesDatasProto.MountSpeciesDataProto;
-	import app.message.MountVitalityDatasProto.MountVitalityDataProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -38,106 +31,106 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param config
 		 * 
 		 */		
-		public static function setConfig( config:MountConfig ):void
-		{
-			if( config == null )
-				return;
-			
-			mountSpeciesVec = new Vector.<MountSpeciesData>();
-			mountUpgradeExpHash = new HashMap();
-			mountDataVec = new Vector.<MountUnitData>();
-			mountVitalitysVec = new Vector.<MountVitalityData>();
-//			mountRefineVec = new Vector.<MountRefineData>();
-			mountHungerDegreeVec = new Vector.<MountHungerDegreeData>();
-			
-			// 坐骑杂项
-			MountMiscData.setConfig( config.mountMisc );
-			
-			// 坐骑物种
-			if( config.mountSpecies != null )
-			{
-				if( config.mountSpecies.species != null && config.mountSpecies.species.length > 0 )
-				{
-					for each (var mountSpeciesDataPro:MountSpeciesDataProto in config.mountSpecies.species) 
-					{
-						var mountSpecieData:MountSpeciesData = new MountSpeciesData();
-						mountSpecieData.setData( mountSpeciesDataPro );
-						mountSpeciesVec.push( mountSpecieData );
-					}
-				}
-			}
-			
-			// 坐骑等级
-			if( config.mountLevel != null )
-			{
-				if( config.mountLevel.level != null && config.mountLevel.level.length > 0 )
-				{
-					var levelArr:Array = config.mountLevel.level;
-					for (var i:int = 0; i < levelArr.length; i++) 
-					{
-						var mountLevelDataPro:MountLevelDataProto = levelArr[i];
-						var expVal:Number = mountLevelDataPro.upgradeExp.toNumber();
-						mountUpgradeExpHash.add( i + 1, expVal );
-					}
-				}
-			}
-			
-			// 所有坐骑
-			if( config.mountDatas != null )
-			{
-				if( config.mountDatas.mount != null && config.mountDatas.mount.length > 0 )
-				{
-					for each ( var mountDatasPro:MountDataProto in config.mountDatas.mount ) 
-					{
-						var mountUnitData:MountUnitData = new MountUnitData();
-						mountUnitData.setMountData( mountDatasPro );
-						mountDataVec.push( mountUnitData );
-					}
-				}
-			}
-			
-			// 坐骑根骨
-			if( config.mountVitality != null )
-			{
-				if( config.mountVitality.vitalitys != null && config.mountVitality.vitalitys.length > 0 )
-				{
-					for each (var mountVitalityDataPro:MountVitalityDataProto in config.mountVitality.vitalitys) 
-					{
-						var mountVitalityData:MountVitalityData = new MountVitalityData();
-						mountVitalityData.setData( mountVitalityDataPro );
-						mountVitalitysVec.push( mountVitalityData );
-					}
-				}
-			}
-			
-			// 坐骑强化
-//			if( config.mountRefine != null )
+//		public static function setConfig( config:MountConfig ):void
+//		{
+//			if( config == null )
+//				return;
+//			
+//			mountSpeciesVec = new Vector.<MountSpeciesData>();
+//			mountUpgradeExpHash = new HashMap();
+//			mountDataVec = new Vector.<MountUnitData>();
+//			mountVitalitysVec = new Vector.<MountVitalityData>();
+////			mountRefineVec = new Vector.<MountRefineData>();
+//			mountHungerDegreeVec = new Vector.<MountHungerDegreeData>();
+//			
+//			// 坐骑杂项
+//			MountMiscData.setConfig( config.mountMisc );
+//			
+//			// 坐骑物种
+//			if( config.mountSpecies != null )
 //			{
-//				if( config.mountRefine.refineDatas != null && config.mountRefine.refineDatas.length > 0 )
+//				if( config.mountSpecies.species != null && config.mountSpecies.species.length > 0 )
 //				{
-//					for each (var mountRefineDataPro:MountRefineDataProto in config.mountRefine.refineDatas) 
+//					for each (var mountSpeciesDataPro:MountSpeciesDataProto in config.mountSpecies.species) 
 //					{
-//						var mountRefineData:MountRefineData = new MountRefineData();
-//						mountRefineData.setData( mountRefineDataPro );
-//						mountRefineVec.push( mountRefineData );
+//						var mountSpecieData:MountSpeciesData = new MountSpeciesData();
+//						mountSpecieData.setData( mountSpeciesDataPro );
+//						mountSpeciesVec.push( mountSpecieData );
 //					}
 //				}
 //			}
-			
-			// 坐骑饥饿度导致移动速度变化
-			if( config.mountHungreDegreeDatas != null )
-			{
-				if( config.mountHungreDegreeDatas.datas != null && config.mountHungreDegreeDatas.datas.length > 0 )
-				{
-					for each (var mountHungerDegreeDataPro:MountHungerDegreeDataProto in config.mountHungreDegreeDatas.datas ) 
-					{
-						var mountHungerDegreeData:MountHungerDegreeData = new MountHungerDegreeData();
-						mountHungerDegreeData.setData( mountHungerDegreeDataPro );
-						mountHungerDegreeVec.push( mountHungerDegreeData );
-					}
-				}
-			}
-		}
+//			
+//			// 坐骑等级
+//			if( config.mountLevel != null )
+//			{
+//				if( config.mountLevel.level != null && config.mountLevel.level.length > 0 )
+//				{
+//					var levelArr:Array = config.mountLevel.level;
+//					for (var i:int = 0; i < levelArr.length; i++) 
+//					{
+//						var mountLevelDataPro:MountLevelDataProto = levelArr[i];
+//						var expVal:Number = mountLevelDataPro.upgradeExp.toNumber();
+//						mountUpgradeExpHash.add( i + 1, expVal );
+//					}
+//				}
+//			}
+//			
+//			// 所有坐骑
+//			if( config.mountDatas != null )
+//			{
+//				if( config.mountDatas.mount != null && config.mountDatas.mount.length > 0 )
+//				{
+//					for each ( var mountDatasPro:MountDataProto in config.mountDatas.mount ) 
+//					{
+//						var mountUnitData:MountUnitData = new MountUnitData();
+//						mountUnitData.setMountData( mountDatasPro );
+//						mountDataVec.push( mountUnitData );
+//					}
+//				}
+//			}
+//			
+//			// 坐骑根骨
+//			if( config.mountVitality != null )
+//			{
+//				if( config.mountVitality.vitalitys != null && config.mountVitality.vitalitys.length > 0 )
+//				{
+//					for each (var mountVitalityDataPro:MountVitalityDataProto in config.mountVitality.vitalitys) 
+//					{
+//						var mountVitalityData:MountVitalityData = new MountVitalityData();
+//						mountVitalityData.setData( mountVitalityDataPro );
+//						mountVitalitysVec.push( mountVitalityData );
+//					}
+//				}
+//			}
+//			
+//			// 坐骑强化
+////			if( config.mountRefine != null )
+////			{
+////				if( config.mountRefine.refineDatas != null && config.mountRefine.refineDatas.length > 0 )
+////				{
+////					for each (var mountRefineDataPro:MountRefineDataProto in config.mountRefine.refineDatas) 
+////					{
+////						var mountRefineData:MountRefineData = new MountRefineData();
+////						mountRefineData.setData( mountRefineDataPro );
+////						mountRefineVec.push( mountRefineData );
+////					}
+////				}
+////			}
+//			
+//			// 坐骑饥饿度导致移动速度变化
+//			if( config.mountHungreDegreeDatas != null )
+//			{
+//				if( config.mountHungreDegreeDatas.datas != null && config.mountHungreDegreeDatas.datas.length > 0 )
+//				{
+//					for each (var mountHungerDegreeDataPro:MountHungerDegreeDataProto in config.mountHungreDegreeDatas.datas ) 
+//					{
+//						var mountHungerDegreeData:MountHungerDegreeData = new MountHungerDegreeData();
+//						mountHungerDegreeData.setData( mountHungerDegreeDataPro );
+//						mountHungerDegreeVec.push( mountHungerDegreeData );
+//					}
+//				}
+//			}
+//		}
 		
 		//------------------------------------------------静态数据获取方法----------------------------------------------------
 		/**

@@ -1,15 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.UpgradeUtil;
-	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
-	
-	import app.cmd.EquipmentModuleMessages;
-	import app.message.UpgradeProto;
-	
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 装备相关数据请求 
@@ -51,16 +42,16 @@ package com.rpgGame.app.sender
 		 *
 		 * UpgradeProto 材料合成需要的消耗[CombineDataProto.upgrade_data]
 		 */
-		public static function combineMaterial(id:int,count:int,upgradeProto:UpgradeProto):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint32(id);
-			_bytes.writeVarint32(count);
-			var upgrade : UpgradeProtoInfo = new UpgradeProtoInfo(upgradeProto);
-			upgrade.count = count;
-			_bytes.writeBytes(UpgradeUtil.getUpgradeItemListVo(upgrade).getByte());
-			send(EquipmentModuleMessages.C2S_COMBINE_MATERIAL,_bytes);
-		}
+//		public static function combineMaterial(id:int,count:int,upgradeProto:UpgradeProto):void
+//		{
+//			_bytes.clear();
+//			_bytes.writeVarint32(id);
+//			_bytes.writeVarint32(count);
+//			var upgrade : UpgradeProtoInfo = new UpgradeProtoInfo(upgradeProto);
+//			upgrade.count = count;
+//			_bytes.writeBytes(UpgradeUtil.getUpgradeItemListVo(upgrade).getByte());
+//			send(EquipmentModuleMessages.C2S_COMBINE_MATERIAL,_bytes);
+//		}
 		/**
 		 * 装备合成
 		 *
@@ -84,7 +75,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.writeVarint32(itemInfo.index);
 			}
-			send(EquipmentModuleMessages.C2S_COMBINE_EQUIPMENT,_bytes);
+//			send(EquipmentModuleMessages.C2S_COMBINE_EQUIPMENT,_bytes);
 		}
 		/**
 		 * 请求升星
@@ -105,16 +96,16 @@ package com.rpgGame.app.sender
 		 *
 		 * UpgradeProto 升星所需要的消耗
 		 */
-		public static function refineEquipment(refine : int,costBytes:ByteBuffer,containerId : int,pos:int,cfgId : int,index:int = 0):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint32(refine);
-			ItemUtil.writeContainerToBytes(_bytes,containerId,index);
-			_bytes.writeVarint32(pos);
-			_bytes.writeVarint32(cfgId);
-			_bytes.writeBytes(costBytes);
-			send(EquipmentModuleMessages.C2S_REFINE_EQUIPMENT,_bytes);
-		}
+//		public static function refineEquipment(refine : int,costBytes:ByteBuffer,containerId : int,pos:int,cfgId : int,index:int = 0):void
+//		{
+//			_bytes.clear();
+//			_bytes.writeVarint32(refine);
+//			ItemUtil.writeContainerToBytes(_bytes,containerId,index);
+//			_bytes.writeVarint32(pos);
+//			_bytes.writeVarint32(cfgId);
+//			_bytes.writeBytes(costBytes);
+//			send(EquipmentModuleMessages.C2S_REFINE_EQUIPMENT,_bytes);
+//		}
 		/**
 		 * 装备拆解
 		 *
@@ -132,15 +123,15 @@ package com.rpgGame.app.sender
 		 * varint32 装备id，防止拆解错误
 		 * bool 使用银两替代绑银
 		 */
-		public static function destoryEquipment(containerId : int,pos:int,cfgId : int,usebind:Boolean,index = 0):void
-		{
-			_bytes.clear();
-			ItemUtil.writeContainerToBytes(_bytes,containerId,index);
-			_bytes.writeVarint32(pos);
-			_bytes.writeVarint32(cfgId);
-			_bytes.writeBoolean(usebind);
-			send(EquipmentModuleMessages.C2S_DESTROY_EQUIPMENT,_bytes);
-		}
+//		public static function destoryEquipment(containerId : int,pos:int,cfgId : int,usebind:Boolean,index = 0):void
+//		{
+//			_bytes.clear();
+//			ItemUtil.writeContainerToBytes(_bytes,containerId,index);
+//			_bytes.writeVarint32(pos);
+//			_bytes.writeVarint32(cfgId);
+//			_bytes.writeBoolean(usebind);
+//			send(EquipmentModuleMessages.C2S_DESTROY_EQUIPMENT,_bytes);
+//		}
 		/**
 		 * 请求打造装备
 		 * 发送该消息加锁，在未收到S2C_BUILD_EQUIPMENT或S2C_BUILD_EQUIPMENT_FAIL的一定时间内一直保持该锁
@@ -181,7 +172,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(item.index);
 				_bytes.writeVarint32(item.count);
 			}
-			send(EquipmentModuleMessages.C2S_BUILD_EQUIPMENT,_bytes);
+//			send(EquipmentModuleMessages.C2S_BUILD_EQUIPMENT,_bytes);
 		}
 		/**
 		 * 名将改造
@@ -202,15 +193,15 @@ package com.rpgGame.app.sender
 		 * varint32 改造id
 		 * UpgradeProto 改造的消耗需要的数据
 		 */
-		public static function equipGeneralChange(equip:EquipInfo,generalId : int,upgrade:ByteBuffer):void
-		{
-			_bytes.clear();
-			ItemUtil.writeContainerToBytes(_bytes,equip.containerID);
-			_bytes.writeVarint32(equip.index);
-			_bytes.writeVarint32(equip.cfgId);
-			_bytes.writeVarint32(generalId);
-			_bytes.writeBytes(upgrade);
-			send(EquipmentModuleMessages.C2S_CHANGE_EQUIPMENT_GENERAL,_bytes);
-		}
+//		public static function equipGeneralChange(equip:EquipInfo,generalId : int,upgrade:ByteBuffer):void
+//		{
+//			_bytes.clear();
+//			ItemUtil.writeContainerToBytes(_bytes,equip.containerID);
+//			_bytes.writeVarint32(equip.index);
+//			_bytes.writeVarint32(equip.cfgId);
+//			_bytes.writeVarint32(generalId);
+//			_bytes.writeBytes(upgrade);
+//			send(EquipmentModuleMessages.C2S_CHANGE_EQUIPMENT_GENERAL,_bytes);
+//		}
 	}
 }

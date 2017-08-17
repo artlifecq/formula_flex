@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.CountryModuleMessages;
+	
 
 	public class CrownSender extends BaseSender
 	{
@@ -20,7 +20,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.writeBoolean(b);
 			}
-			send(CountryModuleMessages.C2S_COUNTRY_VOTE,_bytes);
+//			send(CountryModuleMessages.C2S_COUNTRY_VOTE,_bytes);
 		}
 		/**
 		 * 囚禁目标
@@ -33,7 +33,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint64(id);
-			send(CountryModuleMessages.C2S_CAPTIVITY, _bytes);
+//			send(CountryModuleMessages.C2S_CAPTIVITY, _bytes);
 		}
 		/**
 		 * 禁言
@@ -46,7 +46,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint64(id);
-			send(CountryModuleMessages.C2S_SET_DONT_TALK, _bytes);
+//			send(CountryModuleMessages.C2S_SET_DONT_TALK, _bytes);
 		}
 		/**
 		 * 捐款 
@@ -57,7 +57,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(v);
-			send(CountryModuleMessages.C2S_DO_DONATE, _bytes);
+//			send(CountryModuleMessages.C2S_DO_DONATE, _bytes);
 		}
 		/**
 		 * 国家募捐 
@@ -67,7 +67,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeUTFBytes(text);
-			send(CountryModuleMessages.C2S_COUNTRY_DONATE, _bytes);
+//			send(CountryModuleMessages.C2S_COUNTRY_DONATE, _bytes);
 		}
 		/**
 		 * 请求禁卫公告，上线时/或者收到国家公告变更，清除缓存
@@ -75,7 +75,7 @@ package com.rpgGame.app.sender
 		public static function getJinWeiAnnouncement():void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_JIN_WEI_ANNOUNCEMENT, _bytes);
+//			send(CountryModuleMessages.C2S_GET_JIN_WEI_ANNOUNCEMENT, _bytes);
 		}
 		/**
 		 * 设置禁卫公告，长度不能够超过100个字节
@@ -86,7 +86,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeUTFBytes(str);
-			send(CountryModuleMessages.C2S_SET_JIN_WEI_ANNOUNCEMENT, _bytes);
+//			send(CountryModuleMessages.C2S_SET_JIN_WEI_ANNOUNCEMENT, _bytes);
 		}
 		/**
 		 * 领取自己的职位俸禄
@@ -94,7 +94,7 @@ package com.rpgGame.app.sender
 		public static function getCollectSalary():void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_COLLECT_SALARY, _bytes);
+//			send(CountryModuleMessages.C2S_COLLECT_SALARY, _bytes);
 		}
 		
 		/**
@@ -103,7 +103,7 @@ package com.rpgGame.app.sender
 		public static function getAnnouncement():void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_COUNTRY_ANNOUNCEMENT, _bytes);
+//			send(CountryModuleMessages.C2S_GET_COUNTRY_ANNOUNCEMENT, _bytes);
 		}
 		/**
 		 * 设置国家公告，长度不能够超过100个字节
@@ -114,7 +114,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeUTFBytes(str);
-			send(CountryModuleMessages.C2S_SET_COUNTRY_ANNOUNCEMENT, _bytes);
+//			send(CountryModuleMessages.C2S_SET_COUNTRY_ANNOUNCEMENT, _bytes);
 		}
 	}
 }

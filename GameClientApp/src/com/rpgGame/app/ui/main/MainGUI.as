@@ -49,7 +49,7 @@ package com.rpgGame.app.ui.main
 	import flash.display.Stage;
 	import flash.geom.Point;
 	
-	import app.message.MonsterDataProto.MonsterType;
+	import app.message.MonsterType;
 	
 	import away3d.events.Event;
 	

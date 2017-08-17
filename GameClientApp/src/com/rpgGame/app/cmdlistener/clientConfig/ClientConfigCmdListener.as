@@ -5,11 +5,8 @@ package com.rpgGame.app.cmdlistener.clientConfig
 	
 	import flash.utils.ByteArray;
 	
-	import app.cmd.MiscModuleMessages;
-	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -30,7 +27,7 @@ package com.rpgGame.app.cmdlistener.clientConfig
 
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(MiscModuleMessages.S2C_REPLY_CONFIG4, onRecConfig4);
+//			SocketConnection_protoBuffer.addCmdListener(MiscModuleMessages.S2C_REPLY_CONFIG4, onRecConfig4);
 			finish();
 		}
 

@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg.country
 {
-	import app.message.CountryJingShuProto;
-
 	/**
 	 *
 	 * 国家结盟数据
@@ -15,9 +13,9 @@ package com.rpgGame.coreData.cfg.country
 		{
 		}
 		
-		public function setConfig(cfg : CountryJingShuProto) : void
-		{
-			
-		}
+//		public function setConfig(cfg : CountryJingShuProto) : void
+//		{
+//			
+//		}
 	}
 }

@@ -1,8 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.SummonModuleMessages;
-
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	
 
 	/**
 	 *
@@ -26,7 +24,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(summonId);
-			SocketConnection_protoBuffer.send(SummonModuleMessages.C2S_COUNTRY_OFFICER_SUMMON, _bytes);
+//			SocketConnection_protoBuffer.send(SummonModuleMessages.C2S_COUNTRY_OFFICER_SUMMON, _bytes);
 		}
 	}
 }

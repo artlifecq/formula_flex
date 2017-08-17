@@ -1,9 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.ExamConfig;
-	import app.message.ExtraPrize;
 	
-	import org.client.mainCore.ds.HashMap;
 
 	/**
 	 * 答题配置管理
@@ -37,46 +34,46 @@ package com.rpgGame.coreData.cfg
 		public static var totalTime:int;
 		private static var _extraPercentVec:Vector.<int>;
 		
-		public static function setConfig(config:ExamConfig):void
-		{
-			waitTime = config.waitTime;
-			answerTime = config.answerTime;
-			showAnswerTime = config.showAnswerTime;
-			questionCount = config.questionCount;
-			doubleScoreMaxTimes = config.doubleScoreMaxTimes;
-			removeWrongAnswerTimes = config.removeWrongAnswerTimes;
-			followMaxTimes = config.followMaxTimes;
-			startTime = config.startTime;
-			totalTime = questionCount*(answerTime + showAnswerTime) + waitTime;
-			
-			_extraPercentVec = new Vector.<int>();
-			if(config.extraPercent)
-			{
-				var len:int = config.extraPercent.length;
-				if(len > 0)
-				{
-					var i:int;
-					var extraProto:ExtraPrize;
-					var map:HashMap = new HashMap();
-					for(i = 0; i < len; i++)
-					{
-						extraProto = config.extraPercent[i];
-						map.add(extraProto.rank - 1,extraProto);
-					}
-					var totalCount:int = extraProto.rank;
-					var percent:int;
-					for(i = totalCount - 1; i >= 0; i--)
-					{
-						extraProto = map.getValue(i);
-						if(extraProto)
-						{
-							percent = extraProto.extraPercent;
-						}
-						_extraPercentVec.unshift(percent);
-					}
-				}
-			}
-		}
+//		public static function setConfig(config:ExamConfig):void
+//		{
+//			waitTime = config.waitTime;
+//			answerTime = config.answerTime;
+//			showAnswerTime = config.showAnswerTime;
+//			questionCount = config.questionCount;
+//			doubleScoreMaxTimes = config.doubleScoreMaxTimes;
+//			removeWrongAnswerTimes = config.removeWrongAnswerTimes;
+//			followMaxTimes = config.followMaxTimes;
+//			startTime = config.startTime;
+//			totalTime = questionCount*(answerTime + showAnswerTime) + waitTime;
+//			
+//			_extraPercentVec = new Vector.<int>();
+//			if(config.extraPercent)
+//			{
+//				var len:int = config.extraPercent.length;
+//				if(len > 0)
+//				{
+//					var i:int;
+//					var extraProto:ExtraPrize;
+//					var map:HashMap = new HashMap();
+//					for(i = 0; i < len; i++)
+//					{
+//						extraProto = config.extraPercent[i];
+//						map.add(extraProto.rank - 1,extraProto);
+//					}
+//					var totalCount:int = extraProto.rank;
+//					var percent:int;
+//					for(i = totalCount - 1; i >= 0; i--)
+//					{
+//						extraProto = map.getValue(i);
+//						if(extraProto)
+//						{
+//							percent = extraProto.extraPercent;
+//						}
+//						_extraPercentVec.unshift(percent);
+//					}
+//				}
+//			}
+//		}
 		
 		/**
 		 * 获得额外奖励百分数不含%

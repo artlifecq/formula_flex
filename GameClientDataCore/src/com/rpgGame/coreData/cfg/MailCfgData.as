@@ -1,8 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.MailConfig;
-	import app.message.MailConfig.MoneyTaxType;
-	
 	/**
 	 * 邮件server端配置数据
 	 * @author Guodong.Zhang
@@ -27,18 +24,18 @@ package com.rpgGame.coreData.cfg
 		public static var mailTargetLimit:int = 10;
 		
 		
-		public static function setConfig( mailConfig:MailConfig ):void
-		{
-			if( mailConfig == null )
-				return;
-			
-			mailExpireTime = mailConfig.mailExpireTime.toNumber();
-			baseBandMoneyTax = mailConfig.baseBandMoneyTax;
-			moneyTaxType = mailConfig.moneyTaxType;
-			moneyTax = mailConfig.moneyTax;
-			goodsTax = mailConfig.goodsTax;
+//		public static function setConfig( mailConfig:MailConfig ):void
+//		{
+//			if( mailConfig == null )
+//				return;
+//			
+//			mailExpireTime = mailConfig.mailExpireTime.toNumber();
+//			baseBandMoneyTax = mailConfig.baseBandMoneyTax;
+//			moneyTaxType = mailConfig.moneyTaxType;
+//			moneyTax = mailConfig.moneyTax;
+//			goodsTax = mailConfig.goodsTax;
 //			mailTargetLimit = mailConfig.recentMailTargetLimit;
-		}
+//		}
 		
 		/**
 		 * 发一封邮件所要的扣的钱
@@ -47,29 +44,29 @@ package com.rpgGame.coreData.cfg
 		 * @return 
 		 * 
 		 */		
-		public static function getMailTax( money:int, itemCount:int ):int
-		{
-			var mt:int = 0;
-			if( money > 0)
-			{
-				if( moneyTaxType == MoneyTaxType.FIX )
-				{
-					mt =  moneyTax;
-				}
-				else if( moneyTaxType == MoneyTaxType.PERCENT )
-				{
-					mt = money * moneyTax / 100;
-				}
-			}
-			var gt:int = 0;
-			if( itemCount <= 0 )
-				gt = 0;
-			else if( itemCount >= goodsTax.length )
-				gt = goodsTax[ goodsTax.length - 1];
-			else
-				gt = goodsTax[ itemCount - 1];
-			
-			return baseBandMoneyTax + mt + gt;
-		}
+//		public static function getMailTax( money:int, itemCount:int ):int
+//		{
+//			var mt:int = 0;
+//			if( money > 0)
+//			{
+//				if( moneyTaxType == MoneyTaxType.FIX )
+//				{
+//					mt =  moneyTax;
+//				}
+//				else if( moneyTaxType == MoneyTaxType.PERCENT )
+//				{
+//					mt = money * moneyTax / 100;
+//				}
+//			}
+//			var gt:int = 0;
+//			if( itemCount <= 0 )
+//				gt = 0;
+//			else if( itemCount >= goodsTax.length )
+//				gt = goodsTax[ goodsTax.length - 1];
+//			else
+//				gt = goodsTax[ itemCount - 1];
+//			
+//			return baseBandMoneyTax + mt + gt;
+//		}
 	}
 }

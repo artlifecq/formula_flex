@@ -3,7 +3,7 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	
-	import app.message.MonsterDataProto.MonsterType;
+	import app.message.MonsterType;
 
 	/**
 	 *

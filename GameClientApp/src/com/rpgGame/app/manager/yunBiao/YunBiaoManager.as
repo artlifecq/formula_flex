@@ -6,7 +6,6 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -39,9 +38,7 @@ package com.rpgGame.app.manager.yunBiao
 	import flash.geom.Point;
 	
 	import app.message.AmountType;
-	import app.message.BiaoResProto;
-	import app.message.MonsterDataProto;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import gs.TweenLite;
 	
@@ -433,25 +430,25 @@ package com.rpgGame.app.manager.yunBiao
 					var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel( roleData.totalStat.level );
 					if( data != null )
 					{
-						var biaoRes:BiaoResProto = roleData.isBroken ? data.broken_biao_res : data.normal_biao_res;
-						if( biaoRes != null )
-						{
-							var path:String = biaoRes.res[quality];
-							SceneRoleManager.getInstance().updateBiaoche( role, path );
-							
-							//是自己的镖车，追踪栏才更新信息
-							var myBiaoData:BiaoCheData = MainRoleManager.actorInfo.biaoCheData;
-							if( myBiaoData != null )
-							{
-								if( myBiaoData.id == roleData.id )
-								{
-									//获取镖车品质提示
-									getBiaoQuality( quality );
-									EventManager.dispatchEvent( YunBiaoEvent.UPDATE_QUALITY_SUCCESS );
-								}
-							}
-							EventManager.dispatchEvent( YunBiaoEvent.UPDATE_BIAOCHE_NAME, roleData );
-						}
+//						var biaoRes:BiaoResProto = roleData.isBroken ? data.broken_biao_res : data.normal_biao_res;
+//						if( biaoRes != null )
+//						{
+//							var path:String = biaoRes.res[quality];
+//							SceneRoleManager.getInstance().updateBiaoche( role, path );
+//							
+//							//是自己的镖车，追踪栏才更新信息
+//							var myBiaoData:BiaoCheData = MainRoleManager.actorInfo.biaoCheData;
+//							if( myBiaoData != null )
+//							{
+//								if( myBiaoData.id == roleData.id )
+//								{
+//									//获取镖车品质提示
+//									getBiaoQuality( quality );
+//									EventManager.dispatchEvent( YunBiaoEvent.UPDATE_QUALITY_SUCCESS );
+//								}
+//							}
+//							EventManager.dispatchEvent( YunBiaoEvent.UPDATE_BIAOCHE_NAME, roleData );
+//						}
 					}
 				}
 			}

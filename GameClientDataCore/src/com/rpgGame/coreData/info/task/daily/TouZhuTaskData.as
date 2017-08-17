@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.task.daily
 {
-	import app.message.TouZhuTaskProto;
+	
 	
 	/**
 	 * 偷猪
@@ -19,13 +19,13 @@ package com.rpgGame.coreData.info.task.daily
 		}
 		
 		
-		public function setData( taskProto:TouZhuTaskProto):void
-		{
-			zhuId = taskProto.zhuId;
-			
-			if( taskProto.failTime != null )
-				failTime = taskProto.failTime.toNumber();
-		}
+//		public function setData( taskProto:TouZhuTaskProto):void
+//		{
+//			zhuId = taskProto.zhuId;
+//			
+//			if( taskProto.failTime != null )
+//				failTime = taskProto.failTime.toNumber();
+//		}
 		
 	}
 }

@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.TradeModuleMessages;
+	
 
 	public class TradeSender extends BaseSender
 	{
@@ -18,7 +18,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(target);
-			send(TradeModuleMessages.C2S_SEND_TRADE_INVITE,_bytes);
+//			send(TradeModuleMessages.C2S_SEND_TRADE_INVITE,_bytes);
 		}
 		/**
 		 * 设置成 自动拒绝所有交易请求. 自己还是可以发送邀请给别人
@@ -28,7 +28,7 @@ package com.rpgGame.app.sender
 		public static function autoRejectToTrue():void
 		{
 			_bytes.clear();
-			send(TradeModuleMessages.C2S_SET_AUTO_REJECT_TO_TRUE,_bytes);
+//			send(TradeModuleMessages.C2S_SET_AUTO_REJECT_TO_TRUE,_bytes);
 		}
 		/**
 		 * 不勾 自动拒绝所有交易请求, 别人可以给他发邀请.
@@ -38,7 +38,7 @@ package com.rpgGame.app.sender
 		public static function autoRejectToFalse():void
 		{
 			_bytes.clear();
-			send(TradeModuleMessages.C2S_SET_AUTO_REJECT_TO_FALSE,_bytes);
+//			send(TradeModuleMessages.C2S_SET_AUTO_REJECT_TO_FALSE,_bytes);
 		}
 		/**
 		 *  varint64 对方id
@@ -49,7 +49,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(player);
 			_bytes.writeBoolean(isAgree);
-			send(TradeModuleMessages.C2S_REPLY_TRADE_INVITE,_bytes);
+//			send(TradeModuleMessages.C2S_REPLY_TRADE_INVITE,_bytes);
 		}
 		
 		/**
@@ -63,7 +63,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint32(pos);
 			_bytes.writeVarint32(id);
-			send(TradeModuleMessages.C2S_SET_GOODS,_bytes);
+//			send(TradeModuleMessages.C2S_SET_GOODS,_bytes);
 		}
 		
 		/**
@@ -77,7 +77,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(index);
-			send(TradeModuleMessages.C2S_REMOVE_GOODS,_bytes);
+//			send(TradeModuleMessages.C2S_REMOVE_GOODS,_bytes);
 		}
 		/**
 		 * 锁定. 必须是正常交易状态
@@ -87,7 +87,7 @@ package com.rpgGame.app.sender
 		public static function lockTrade():void
 		{
 			_bytes.clear();
-			send(TradeModuleMessages.C2S_LOCK,_bytes);
+//			send(TradeModuleMessages.C2S_LOCK,_bytes);
 		}
 		/**
 		 * 确认交易. 在双方都锁定状态下可发, 自己已确认时, 不能再发
@@ -99,7 +99,7 @@ package com.rpgGame.app.sender
 		public static function mineSure():void
 		{
 			_bytes.clear();
-			send(TradeModuleMessages.C2S_CONFIRM,_bytes);
+//			send(TradeModuleMessages.C2S_CONFIRM,_bytes);
 		}
 		/**
 		 * 客户端请求取消交易, 任何时间都可以发送
@@ -109,14 +109,14 @@ package com.rpgGame.app.sender
 		public static function cancelTrade():void
 		{
 			_bytes.clear();
-			send(TradeModuleMessages.C2S_CANCEL,_bytes);
+//			send(TradeModuleMessages.C2S_CANCEL,_bytes);
 		}
 		
 		public static function setMoney(money:int):void
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(money);
-			send(TradeModuleMessages.C2S_SET_MONEY,_bytes)
+//			send(TradeModuleMessages.C2S_SET_MONEY,_bytes)
 		}
 	}
 }

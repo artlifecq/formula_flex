@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg.mount
 {
-	import app.message.MountSpellsDataProto.MountSpellDataProto;
-
 	/**
 	 * 坐骑技能数据 
 	 * @author 陈鹉光-2016-09-14
@@ -21,12 +19,12 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param data
 		 * 
 		 */		
-		public function setMountSpellData( data:MountSpellDataProto ):void
-		{
-			if( data == null )
-				return;
-			
-			weight = data.weight;
-		}
+//		public function setMountSpellData( data:MountSpellDataProto ):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			weight = data.weight;
+//		}
 	}
 }

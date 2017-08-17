@@ -17,8 +17,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.mail.message.SCDeleteResultMessage;
 	
 	import app.message.AmountType;
-	import app.message.Int64StringPairProto;
-	import app.message.MailModuleObjClientProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -171,25 +169,25 @@ package com.rpgGame.app.manager
 		 * @param isRefuse
 		 * 
 		 */		
-		public static function setLoginData(mailModuleObj:MailModuleObjClientProto):void
-		{
-			if(mailModuleObj == null)
-			{
-				return;
-			}
-			isRefuseReceiveMail = mailModuleObj.isRefuseReceiveMail;
-			if(mailModuleObj.recentMailTargets)
-			{
-				var len:int = mailModuleObj.recentMailTargets.length;
-				var pro:Int64StringPairProto;
-				var recent:HeroSearchData;
-				for(var i:int = 0; i< len; i++ )
-				{
-					pro = mailModuleObj.recentMailTargets[i];
-					addRecentTarget(pro.key.toNumber(),pro.value);
-				}
-			}
-		}
+//		public static function setLoginData(mailModuleObj:MailModuleObjClientProto):void
+//		{
+//			if(mailModuleObj == null)
+//			{
+//				return;
+//			}
+//			isRefuseReceiveMail = mailModuleObj.isRefuseReceiveMail;
+//			if(mailModuleObj.recentMailTargets)
+//			{
+//				var len:int = mailModuleObj.recentMailTargets.length;
+//				var pro:Int64StringPairProto;
+//				var recent:HeroSearchData;
+//				for(var i:int = 0; i< len; i++ )
+//				{
+//					pro = mailModuleObj.recentMailTargets[i];
+//					addRecentTarget(pro.key.toNumber(),pro.value);
+//				}
+//			}
+//		}
 		
 		
 		//-------------------------------------------

@@ -7,16 +7,16 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	import com.rpgGame.coreData.lang.LangMount;
 	import com.rpgGame.coreData.type.SexType;
 	import com.rpgGame.coreData.type.mount.MountEquipmentPos;
 	
+	import app.message.ContainerType;
 	import app.message.EquipType;
 	import app.message.GoodsType;
-	import app.message.ContainerProto.ContainerType;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;

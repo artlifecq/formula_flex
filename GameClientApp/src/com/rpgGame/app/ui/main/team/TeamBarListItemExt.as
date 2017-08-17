@@ -27,10 +27,7 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
-	import app.message.BoolArrayProto;
-	
 	import feathers.controls.UIAsset;
-	import feathers.core.IFeathersControl;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;

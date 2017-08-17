@@ -2,9 +2,6 @@ package com.rpgGame.coreData.info.roulette
 {
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
-	import app.message.RoulettePrizeProto;
-	import app.message.RoulettePrizesProto;
-	
 	/**
 	 * 转盘奖励信息
 	 * @author wewell@163.com
@@ -33,19 +30,19 @@ package com.rpgGame.coreData.info.roulette
 		 * @param pro RoulettePrizesProto
 		 * 
 		 */		
-		public function setRoulette(pro:RoulettePrizesProto):void
-		{
-			prizes = [];
-			
-			var info:PrizeInfo;
-			var data:RoulettePrizeProto;
-			for each(data in pro.prizes)
-			{
-				info = new PrizeInfo
-				info.converRoulettePrizeData(data);
-				prizes.push(info);
-			}
-		}
+//		public function setRoulette(pro:RoulettePrizesProto):void
+//		{
+//			prizes = [];
+//			
+//			var info:PrizeInfo;
+//			var data:RoulettePrizeProto;
+//			for each(data in pro.prizes)
+//			{
+//				info = new PrizeInfo
+//				info.converRoulettePrizeData(data);
+//				prizes.push(info);
+//			}
+//		}
 	}
 }
 

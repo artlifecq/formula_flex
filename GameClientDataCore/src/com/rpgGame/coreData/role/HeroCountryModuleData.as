@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.role
 {
-	import app.message.CountryModuleObjProto;
+	
 
 	/**
 	 *
@@ -32,19 +32,19 @@ package com.rpgGame.coreData.role
 		{
 		}
 
-		public function setConfig(cfg : CountryModuleObjProto) : void
-		{
-			if (!cfg)
-				return;
-			hasCollectSalary = cfg.hasCollectSalary;
-			isTodayBeenSetOfficer = cfg.isTodayBeenSetOfficer;
-			isCountryDonate = cfg.isCountryDonate;
-			setDontTalkTimes = cfg.setDontTalkTimes;
-			captivityTimes = cfg.captivityTimes;
-			officerSetUntalkEndTime = cfg.officerSetUntalkEndTime.toNumber();
-			captivityEndTime = cfg.captivityEndTime.toNumber();
-			wuXunData = new HeroWuXunData();
-			wuXunData.setConfig(cfg.wuXun);
-		}
+//		public function setConfig(cfg : CountryModuleObjProto) : void
+//		{
+//			if (!cfg)
+//				return;
+//			hasCollectSalary = cfg.hasCollectSalary;
+//			isTodayBeenSetOfficer = cfg.isTodayBeenSetOfficer;
+//			isCountryDonate = cfg.isCountryDonate;
+//			setDontTalkTimes = cfg.setDontTalkTimes;
+//			captivityTimes = cfg.captivityTimes;
+//			officerSetUntalkEndTime = cfg.officerSetUntalkEndTime.toNumber();
+//			captivityEndTime = cfg.captivityEndTime.toNumber();
+//			wuXunData = new HeroWuXunData();
+//			wuXunData.setConfig(cfg.wuXun);
+//		}
 	}
 }

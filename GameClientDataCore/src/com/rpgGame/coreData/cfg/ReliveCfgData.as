@@ -3,9 +3,6 @@ package com.rpgGame.coreData.cfg
 	import com.rpgGame.coreData.info.scene.ReliveCostData;
 	import com.rpgGame.coreData.type.ReliveType;
 	
-	import app.message.ReliveConfig;
-	import app.message.ReliveTypeDataProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	public class ReliveCfgData
@@ -23,22 +20,22 @@ package com.rpgGame.coreData.cfg
 		 * @param reliveData						ReliveDataProto
 		 * 
 		 */		
-		public static function setConfig( reliveData:ReliveConfig ):void
-		{
-			if( reliveData == null )
-				return;
-			if(reliveData.data == null)
-				return;
-			reliveDatas = new HashMap;
-			var upgradeData:ReliveCostData;
-			var reliveTypeData:ReliveTypeDataProto;
-			for(var i:int = 0;i<reliveData.data.length;i++)
-			{
-				upgradeData = new ReliveCostData();
-				upgradeData.setData( reliveData.data[i]);
-				reliveDatas.add(upgradeData.reliveType,upgradeData);
-			}
-		}
+//		public static function setConfig( reliveData:ReliveConfig ):void
+//		{
+//			if( reliveData == null )
+//				return;
+//			if(reliveData.data == null)
+//				return;
+//			reliveDatas = new HashMap;
+//			var upgradeData:ReliveCostData;
+//			var reliveTypeData:ReliveTypeDataProto;
+//			for(var i:int = 0;i<reliveData.data.length;i++)
+//			{
+//				upgradeData = new ReliveCostData();
+//				upgradeData.setData( reliveData.data[i]);
+//				reliveDatas.add(upgradeData.reliveType,upgradeData);
+//			}
+//		}
 		/**获得完美复活消耗**/
 		public static function get prefectReliveCost():ReliveCostData
 		{
