@@ -322,7 +322,16 @@ package com.rpgGame.appModule.dungeon.multy
 				_skin.btnEnter.visible=true;
 				_skin.btnExit.visible=false;
 				_skin.lbTime.visible=false;
-				_skin.btnEnter.isEnabled=DungeonManager.teamZid>0?false:true;
+				if(DungeonManager.teamZid>0||MainRoleManager.actorInfo.totalStat.level<zoneData.q_level||MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING)<multyData.q_power)
+				{
+					GrayFilter.gray(_skin.btnEnter);
+					_skin.btnEnter.isEnabled=false;
+				}
+				else
+				{
+					GrayFilter.unGray(_skin.btnEnter);
+					_skin.btnEnter.isEnabled=true;
+				}
 			}
 		}
 		

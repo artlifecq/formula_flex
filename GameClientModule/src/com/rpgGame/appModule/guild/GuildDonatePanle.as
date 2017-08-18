@@ -10,8 +10,9 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.ui.common.NumSelectUICtrl;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.common.PageContent;
+	import com.rpgGame.appModule.common.PageSelectUICtrl;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -23,10 +24,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	
-	import feathers.controls.Scroller;
-	import feathers.data.ListCollection;
-	import feathers.layout.VerticalLayout;
-	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.TanKuang_JuanXian;
 	import org.mokylin.skin.common.Flip_Skin;
@@ -37,33 +34,61 @@ package com.rpgGame.appModule.guild
 	public class GuildDonatePanle extends SkinUIPanel
 	{
 		private var _skin:TanKuang_JuanXian;
-		private var _listPage:PageContent;
+	
 		private var _itemPage1:NumSelectUICtrl;
 		private var _itemPage2:NumSelectUICtrl;
 		private var _item1:ClientItemInfo;
 		private var _item2:ClientItemInfo;
 		private var _opaque:int;
 		private var _DonateMax:int;
+		
+		private var _pageCtrl:PageSelectUICtrl;
+		private var maxCount:int=8;
+		private var cellList:Vector.<GuildDonateCell>=new Vector.<GuildDonateCell>();
+		private var _memList:Vector.<GuildMemberInfo>;
 		public function GuildDonatePanle():void
 		{
 			_skin = new TanKuang_JuanXian();
 			super(_skin);
 			initView();
 		}
-		
+		private function showPageData(data:*):void
+		{
+			// TODO Auto Generated method stub
+			var list:Vector.<GuildMemberInfo>=data;
+			var len:int=list.length;
+			var tmp:GuildMemberInfo;
+			var index:int;
+			for (var i:int = 0; i < maxCount; i++) 
+			{
+				tmp=null;
+				index=-1;
+				if (i<len) 
+				{
+					tmp=list[i];
+					index=_memList.indexOf(tmp);
+				}
+				cellList[i].setData(tmp,index);
+			}
+		}
 		private function initView():void
 		{
-			_skin.lbNum.isEditable = false;
-			_skin.list.snapToPages = true;
-			_skin.list.itemRendererType =GuildDonateCell;
-			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 0;
-			_skin.list.layout = layout;
-			_skin.list.dataProvider = new ListCollection();
-			
-			_listPage = new PageContent(_skin.btnPrev,_skin.btnNext,requestPage);
+		
+			_pageCtrl=new PageSelectUICtrl(_skin.btnPrev,_skin.btnNext,_skin.lbNum,showPageData);
+			var tmp:GuildDonateCell;
+			var startX:int=14;
+			var startY:int=70;
+			for (var i:int = 0; i < maxCount; i++) 
+			{
+				tmp=new GuildDonateCell(i);
+				tmp.x=startX;
+				tmp.y=startY+i*tmp.height;
+				_skin.container.addChild(tmp);
+				cellList.push(tmp);
+				tmp.setData(null,-1);
+			}
+			MCUtil.BringToTop(_skin.grpFlip);
+			//=================
 			var iteminfo:Object = JSONUtil.decode( GlobalSheetData.getSettingInfo(822).q_string_value);
 			
 			var itemModeId:int = iteminfo["itemid"];
@@ -139,22 +164,13 @@ package com.rpgGame.appModule.guild
 		}
 		private function refeashList():void
 		{
-			var list:Vector.<GuildMemberInfo> = GuildManager.instance().getSortMemberListByProp("curActive");
-			if(list == null)
+			_memList = GuildManager.instance().getSortMemberListByProp("curActive");
+			if(_memList == null)
 				return ;
-			_skin.list.dataProvider.removeAll();
-			for each(var info:GuildMemberInfo in list)
-			{
-				_skin.list.dataProvider.push(info);
-			}
-			_listPage.maxPage = int(list.length/8);
+			this._pageCtrl.setData(_memList,maxCount);
 			refeashView();
 		}
-		private function requestPage(page:int,maxPage:int):void
-		{
-			_skin.list.scrollToPageIndex(0,page,0.1);
-			_skin.lbNum.text = (page+1).toString()+"/"+(1+maxPage).toString();
-		}
+		
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

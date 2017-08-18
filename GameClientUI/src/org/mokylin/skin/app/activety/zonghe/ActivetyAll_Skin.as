@@ -163,7 +163,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeName = temp;
 			temp.name = "activeName";
-			temp.styleName = "ui/app/activety/zonghe/active_name/1.png";
+			temp.styleName = "ui/app/activety/zonghe/active_name/dianfengduijue.png.png";
 			temp.x = 96;
 			temp.y = 0;
 			return temp;

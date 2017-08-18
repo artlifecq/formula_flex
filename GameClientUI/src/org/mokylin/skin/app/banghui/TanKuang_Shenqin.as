@@ -2,9 +2,8 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
-	import feathers.controls.List;
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -37,9 +36,7 @@ package org.mokylin.skin.app.banghui
 
 		public var grpFlip:feathers.controls.Group;
 
-		public var lbNum:feathers.controls.text.TextFieldTextEditor;
-
-		public var list:feathers.controls.List;
+		public var lbNum:feathers.controls.Label;
 
 		public var uiNull:feathers.controls.UIAsset;
 
@@ -52,9 +49,9 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 357;
+			this.height = 372;
 			this.width = 578;
-			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),list_i(),__TanKuang_Shenqin_UIAsset8_i(),uiNull_i()];
+			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),__TanKuang_Shenqin_UIAsset8_i(),uiNull_i()];
 			
 			states = {
 			};
@@ -77,7 +74,7 @@ package org.mokylin.skin.app.banghui
 		private function __TanKuang_Shenqin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 264;
+			temp.height = 278;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 566;
 			temp.x = 6;
@@ -156,7 +153,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 357;
+			temp.height = 371;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
 			temp.skin = skin
 			temp.width = 578;
@@ -176,7 +173,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 367;
-			temp.y = 307;
+			temp.y = 317;
 			return temp;
 		}
 
@@ -214,7 +211,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 462;
-			temp.y = 307;
+			temp.y = 317;
 			return temp;
 		}
 
@@ -235,14 +232,14 @@ package org.mokylin.skin.app.banghui
 			grpFlip = temp;
 			temp.name = "grpFlip";
 			temp.x = 253;
-			temp.y = 284;
+			temp.y = 295;
 			temp.elementsContent = [__TanKuang_Shenqin_UIAsset2_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}
 
-		private function lbNum_i():feathers.controls.text.TextFieldTextEditor
+		private function lbNum_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.height = 19;
@@ -257,27 +254,14 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function list_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			list = temp;
-			temp.name = "list";
-			temp.height = 222;
-			temp.visible = false;
-			temp.width = 552;
-			temp.x = 13;
-			temp.y = 68;
-			return temp;
-		}
-
 		private function uiNull_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiNull = temp;
 			temp.name = "uiNull";
 			temp.styleName = "ui/app/banghui/word/zanwushenqing.png";
-			temp.x = 66.5;
-			temp.y = 80;
+			temp.x = 54;
+			temp.y = 98;
 			return temp;
 		}
 
