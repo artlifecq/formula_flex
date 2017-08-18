@@ -172,13 +172,12 @@ package com.rpgGame.coreData.info
 		
 		private static function setMapConfigData(url:String, mapData : MapData):void
 		{
-			
-			_numBlocksX = mapData.numBlocksX;
-			_numBlocksY = mapData.numBlocksY;
-			
 			var mapConfig:MapConfig = new MapConfig();
-			mapConfig.width = _numBlocksX*50;
-			mapConfig.height = _numBlocksY*50;
+			mapConfig.width = mapData.width;
+			mapConfig.height = mapData.height;
+            
+            _numBlocksX = Math.ceil(mapData.width / 50);
+            _numBlocksY = Math.ceil(mapData.height / 50);
 			
 			mapConfig.gridH = _numBlocksX;
 			mapConfig.gridV = _numBlocksY;
