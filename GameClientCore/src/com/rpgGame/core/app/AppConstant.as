@@ -550,6 +550,10 @@ package com.rpgGame.core.app
 		
 		/**副本结算通用**/
 		public static var COMMON_ZONE_RESULT_PANLE:String = createAppInfo("zone.CommonZoneResultPanelExt");
+		
+		/**副本结算通用**/
+		public static var NEW_SKILL_ADD_PANLE:String = createAppInfo("skill.NewSkillAddPanelExt","xinjineng");
+
 
 	}
 }

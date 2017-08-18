@@ -65,7 +65,14 @@ package com.rpgGame.appModule.guild
 			EventManager.addEvent(GuildEvent.GET_GUILD_LIST,refeashList);
 			
 			//onPageChange(0);
-			_pageCtrl.setDefault();
+			if (_pageCtrl.getValue()!=1) 
+			{
+				_pageCtrl.setDefault();
+			}
+			else
+			{
+				onPageChange(1);
+			}
 		}
 		
 		private function refeashList():void

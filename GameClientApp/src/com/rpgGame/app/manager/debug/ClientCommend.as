@@ -10,6 +10,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
+	import com.rpgGame.app.fight.spell.NewSkillAddPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -177,7 +178,9 @@ package   com.rpgGame.app.manager.debug
 				skill.skillLevel=1;
 				skill.skillChildLv=1;
 				skill.skillExp=2;
-				UIPopManager.showAlonePopUI(SkillAddPop,skill);
+				//UIPopManager.showAlonePopUI(SkillAddPop,skill);
+				//NewSkillAddPanelExt.showSkill(skill);
+				AppManager.showApp(AppConstant.NEW_SKILL_ADD_PANLE,skill);
 			});
 			commandList.put( ".jz", function (...arg):void
 			{
