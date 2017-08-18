@@ -50,7 +50,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
-			temp.styleName = "ui/app/jianghu/lunjian/tbk.png";
+			temp.height = 50;
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.width = 50;
 			temp.x = 15;
 			temp.y = 6;
 			return temp;
