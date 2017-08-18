@@ -34,6 +34,8 @@ package org.mokylin.skin.app.fuben
 
 		public var prob_ioc_0:feathers.controls.UIAsset;
 
+		public var uiKunNan:feathers.controls.UIAsset;
+
 		public var uiName1:feathers.controls.UIAsset;
 
 		public var uiName2:feathers.controls.UIAsset;
@@ -50,7 +52,7 @@ package org.mokylin.skin.app.fuben
 			
 			this.currentState = "normal";
 			this.width = 539;
-			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),uibg_i(),uiName1_i(),uiName2_i(),lbNum_i(),btnSelect_i(),grpIcon_i(),pass_group_i()];
+			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),uibg_i(),uiName1_i(),uiName2_i(),lbNum_i(),btnSelect_i(),grpIcon_i(),pass_group_i(),uiKunNan_i()];
 			
 			states = {
 			};
@@ -176,6 +178,17 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 108;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function uiKunNan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiKunNan = temp;
+			temp.name = "uiKunNan";
+			temp.styleName = "ui/common/kunnan.png";
+			temp.x = 188;
+			temp.y = 19;
 			return temp;
 		}
 

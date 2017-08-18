@@ -387,12 +387,13 @@ package com.rpgGame.app.ui.scene
 					setExtraLabel(task.loopNumber,reward.l);
 				}
 			}
-			setUisite();
+			
 		}
 		private function hideReword():void
 		{
 			icoList1Group.visible=false;
 			icoList2Group.visible=false;
+			_skin.sec_navi0.visible=false;
 			
 		}
 		private function setGotargetInfo():void
@@ -563,7 +564,7 @@ package com.rpgGame.app.ui.scene
 				_skin.sec_subbut1.isEnabled=true;
 				flishTask();
 			}
-			
+			setUisite();
 		}
 		/**完成任务*/
 		private function finishMation(type:int):void
@@ -589,13 +590,23 @@ package com.rpgGame.app.ui.scene
 				GrayFilter.unGray(_skin.sec_subbut1);
 				_skin.sec_subbut1.isEnabled=true;
 			}
+			setUisite();
 		}
 		
 		/**任务进度改变*/
 		private function changeMation(type:int):void
 		{//L.l("任务进度改变");
-			setGotargetInfo();
-			flishTask();
+			if(isAllFilish())
+			{
+				allFilish();
+			}
+			else
+			{
+				setUisite();
+				setGotargetInfo();
+				flishTask();
+			}
+			
 		}
 		private function flishTask():void
 		{
@@ -612,12 +623,15 @@ package com.rpgGame.app.ui.scene
 		
 		private function allFilish():void
 		{
+			icoList2Group.visible=false;	
+			icoList1Group.visible=false;
+			_skin.sec_navi0.visible=false;
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
 			if(taskData!=null)
 			{
 				GrayFilter.gray(_skin.sec_subbut1);
 				_skin.sec_subbut1.isEnabled=false;
-				TaskUtil.setGotargetLabelText(true,killButList[0],taskData.q_finish_describe);
+				TaskUtil.setGotargetLabelText(false,killButList[0],taskData.q_finish_describe);
 				
 			}
 			
