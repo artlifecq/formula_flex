@@ -30,6 +30,8 @@ package org.mokylin.skin.app.fuben
 
 		public var grp_xin:feathers.controls.Group;
 
+		public var icon1:feathers.controls.UIAsset;
+
 		public var lbJingyan:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 613;
 			this.width = 425;
-			this.elementsContent = [__FuBenJieSuan_Shibai_UIAsset1_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shibai_Label1_i(),__FuBenJieSuan_Shibai_Label2_i(),lbJingyan_i(),lbTongqian_i(),btnOk_i(),lbTime_i()];
+			this.elementsContent = [__FuBenJieSuan_Shibai_UIAsset1_i(),icon1_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shibai_Label1_i(),__FuBenJieSuan_Shibai_Label2_i(),lbJingyan_i(),lbTongqian_i(),btnOk_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -158,6 +160,17 @@ package org.mokylin.skin.app.fuben
 			temp.x = 103;
 			temp.y = 210;
 			temp.elementsContent = [xin1_i(),xin2_i(),xin3_i()];
+			return temp;
+		}
+
+		private function icon1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon1 = temp;
+			temp.name = "icon1";
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 167.5;
+			temp.y = 354;
 			return temp;
 		}
 

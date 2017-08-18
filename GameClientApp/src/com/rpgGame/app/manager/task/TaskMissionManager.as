@@ -495,7 +495,7 @@ package com.rpgGame.app.manager.task
 			}
 			return false;
 		}
-		/**返回主线任务回复npc刷新表id*/
+		/**返回任务回复npc刷新表id*/
 		public static function getTaskNpcAreaId(type:int):int
 		{
 			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);

@@ -23,6 +23,8 @@ package com.rpgGame.appModule.dungeon.exp
 		{
 			_skin=new FuBen_JingYan_Skin();
 			super(_skin);
+			_groupList1=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon_0,RewardGroup.ALIN_CENTER,9,13,0,true,9,false,false);
+			
 		}
 		
 		override public function show(data:Object=null):void
@@ -30,7 +32,6 @@ package com.rpgGame.appModule.dungeon.exp
 			super.show(data);
 			var list:Array = DailyZoneCfgData.getTypeList(3);
 			var qdata:Q_daily_zone = list[0] as Q_daily_zone;
-			_groupList1=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon_0,RewardGroup.ALIN_CENTER,9,13,0,true,9,false,false);
 			_groupList1.setRewardByJsonStr(qdata.q_special_rewards_show);
 			
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(qdata.q_id);

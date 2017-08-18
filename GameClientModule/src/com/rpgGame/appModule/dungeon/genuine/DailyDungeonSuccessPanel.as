@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.dungeon.genuine
 {
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -10,11 +11,12 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneRewardPanelInfoMessage;
 	
+	import away3d.events.Event;
+	
 	import org.mokylin.skin.app.fuben.FuBenJieSuan_Shengli;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	
@@ -22,8 +24,9 @@ package com.rpgGame.appModule.dungeon.genuine
 	{
 		private var _skin:FuBenJieSuan_Shengli;
 		private var _effectList:Vector.<StarEffect>;
-		private var _rewardIcons:Vector.<IconCDFace>;
+		//private var _rewardIcons:Vector.<IconCDFace>;
 		private var leftTime:int;
+		private var icoListGroup:RewardGroup;
 		public function DailyDungeonSuccessPanel():void
 		{
 			_skin = new FuBenJieSuan_Shengli();
@@ -32,6 +35,8 @@ package com.rpgGame.appModule.dungeon.genuine
 		}
 		private function initView():void
 		{
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1,RewardGroup.ALIN_CENTER,4,10,6,true,3);
+			
 			_effectList = new Vector.<StarEffect>();
 			_effectList.push(new StarEffect(_skin.xin1,0));
 			_effectList.push(new StarEffect(_skin.xin2,1));
@@ -62,7 +67,8 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.lbzhenqi.text = msg.zhenqi.toString();
 			_skin.lbzhenqi.visible=_skin.lb_zhenqiName.visible=msg.zhenqi>0;
 			
-			var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
+			icoListGroup.setRewardByItemInfo(msg.itemInfoList);
+			/*var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
 			var length:int = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
 			_rewardIcons =new Vector.<IconCDFace>();
@@ -75,7 +81,7 @@ package com.rpgGame.appModule.dungeon.genuine
 				grid.y = 360;
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(itemlist[i]), true);
 				_rewardIcons.push(grid);
-			}
+			}*/
 			
 		}
 		
@@ -96,7 +102,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			switch(target)
 			{
 				case _skin.btnOk:
-					DungeonSender.reqQuitDungeon();
+					sendQuitDungeon();
 					break;
 			}
 		}
@@ -124,21 +130,26 @@ package com.rpgGame.appModule.dungeon.genuine
 			leftTime--;
 			_skin.lbTime.text=leftTime+"秒后自动退出";
 			if(leftTime<=0){
-				TimerServer.remove(updateTime);
-				DungeonSender.reqQuitDungeon();
+				sendQuitDungeon();
 				this.onHide();
 			}
 		}
-		
+		private function sendQuitDungeon():void
+		{
+			TimerServer.remove(updateTime);
+			icoListGroup.tweeRewardInBag();
+			DungeonSender.reqQuitDungeon();
+		}
 		override protected function onHide():void
 		{
 			super.onHide();
 			TimerServer.remove(updateTime);
-			for each(var icon:IconCDFace in _rewardIcons)
+			icoListGroup.clear();
+			/*for each(var icon:IconCDFace in _rewardIcons)
 			{
 				icon.destroy();
 			}
-			_rewardIcons = null;
+			_rewardIcons = null;*/
 		}
 	}
 }
