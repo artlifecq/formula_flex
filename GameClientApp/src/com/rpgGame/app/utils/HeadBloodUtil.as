@@ -12,6 +12,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -153,7 +154,13 @@ package com.rpgGame.app.utils
 				}
 				else
 				{
-					return StaticValue.RED_TEXT;
+					var myRe:int=MainRoleManager.actorInfo.faction;
+					var roleFac:int=(_role.data as RoleData).faction;
+					if(myRe==roleFac){
+						return StaticValue.BEIGE_TEXT;
+					}else{
+						return StaticValue.RED_TEXT;
+					}
 				}
 			}
 			if (_role.type == SceneCharType.LIANG_CANG)

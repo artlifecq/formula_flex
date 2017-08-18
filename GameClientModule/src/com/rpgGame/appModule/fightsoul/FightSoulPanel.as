@@ -2,6 +2,7 @@ package com.rpgGame.appModule.fightsoul
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
@@ -42,6 +43,8 @@ package com.rpgGame.appModule.fightsoul
 	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalLayout;
 	import feathers.utils.filter.GrayFilter;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
@@ -184,8 +187,24 @@ package com.rpgGame.appModule.fightsoul
 					break;
 				}
 			}
-			if(bool&&_bigEffect==null)
-				_bigEffect=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_xiao"),-23,-12,1,completeHandle);
+			if(bool)
+			{
+				if(!_eftRender){
+					_eft3d=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_xiao"),-10,10,0,null,onAddEft);
+				}else{
+					playEft();
+				}
+			}
+		}
+		
+		private function playEft():void
+		{
+			_eftRender.play(0);
+			_eft3d.visible=true;
+			TweenLite.delayedCall(4,function ():void{
+				_eft3d.visible=false;
+				_eftRender.stop();
+			});
 		}
 		
 		private function buttonTouchHandler(event:Event):void
@@ -282,6 +301,15 @@ package com.rpgGame.appModule.fightsoul
 			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(27)));
 			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 		}
+		
+		private function onAddEft(render:RenderUnit3D):void
+		{
+			_eftRender=render;
+//			_eftRender.scaleX=0.8;
+//			_eftRender.scaleY=0.8;
+			playEft();
+		}
+		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -428,6 +456,8 @@ package com.rpgGame.appModule.fightsoul
 			addFightSoul(cshowshet.q_mode);
 		}
 		private var _level:int;
+		private var _eft3d:InterObject3D;
+		private var _eftRender:RenderUnit3D;
 		private function addFightSoul(level:int):void
 		{
 			if(_level==level)
