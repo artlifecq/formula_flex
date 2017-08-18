@@ -30,6 +30,8 @@ package com.rpgGame.app.display3D
 	import feathers.controls.UIAsset;
 	import feathers.core.FeathersControl;
 	
+	import gs.TweenLite;
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
@@ -46,12 +48,14 @@ package com.rpgGame.app.display3D
 	{
 		private static const HELPER_POINT : Point = new Point();
 		private var avatar3d:InterObject3D;
-		private var role:SceneRole;
+		private var _role:SceneRole;
 		private var touchZone:UIAsset;
 		private var _touchID:int=-1;
 		private var startX:Number;
 		private var defaultRotationY:int;
 		private var _roleData:RoleData;
+		
+		public static const SHOW_ROTATIONX:int=45;
 		
 		/**
 		 * 
@@ -63,14 +67,14 @@ package com.rpgGame.app.display3D
 			super();
 			avatar3d=new InterObject3D();
 			_roleData= new RoleData(0);
-			this.role = SceneRole.create(SceneCharType.DUMMY, _roleData.id);
-			role.rotationX = 45;
-			this.role.data = _roleData;
-			avatar3d.setRenderUnit(role);
-			role.setScale(scale);
+			this._role = SceneRole.create(SceneCharType.DUMMY, _roleData.id);
+			_role.rotationX = SHOW_ROTATIONX;
+			this._role.data = _roleData;
+			avatar3d.setRenderUnit(_role);
+			_role.setScale(scale);
 			
-			role.avatar.shareMaterials = false;
-			role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
+			_role.avatar.shareMaterials = false;
+			_role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
 			this.addChild3D(avatar3d);
 			bindContainer(container);
 			
@@ -78,6 +82,11 @@ package com.rpgGame.app.display3D
 			transition(RoleStateType.ACTION_SHOW); //切换到“站立状态”
 		}
 		
+		public function get role():SceneRole
+		{
+			return _role;
+		}
+
 		/**
 		 *获取换装信息  
 		 * @return 
@@ -132,12 +141,14 @@ package com.rpgGame.app.display3D
 				if (touch.phase == TouchPhase.MOVED)
 				{
 					var movex:Number=touch.globalX-startX;
-					avatar3d.rotationY = avatar3d.rotationY+movex;
+					avatar3d.rotationY = (avatar3d.rotationY+movex)*0.3;
 				}else if (touch.phase == TouchPhase.ENDED)	{
 					this._touchID = -1;
-					avatar3d.rotationY = defaultRotationY;
+//					avatar3d.rotationY = defaultRotationY;
+					TweenLite.to(avatar3d,1,{rotationY:defaultRotationY});
 				}
 			}else{
+				TweenLite.killTweensOf(avatar3d);
 				touch = e.getTouch(this.touchZone, TouchPhase.BEGAN);
 				if(touch){
 					this._touchID=touch.id;
@@ -166,8 +177,8 @@ package com.rpgGame.app.display3D
 		
 		private function onTouchTarget(target : DisplayObject) : void
 		{
-			if(touchZone==target&&this.role){
-				this.role.stateMachine.transition(RoleStateType.ACTION_SHOW);
+			if(touchZone==target&&this._role){
+				this._role.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			}
 		}
 		
@@ -178,8 +189,8 @@ package com.rpgGame.app.display3D
 		 */
 		public function transition(actionType : int) : void
 		{
-			if (role != null)
-				role.stateMachine.transition(actionType);
+			if (_role != null)
+				_role.stateMachine.transition(actionType);
 		}
 		
 		/**
@@ -190,15 +201,15 @@ package com.rpgGame.app.display3D
 		override public function set visible(value : Boolean) : void
 		{
 			super.visible = value;
-			role.visible = value;
+			_role.visible = value;
 		}
 		
 		override public function dispose() : void
 		{
-			if (role)
+			if (_role)
 			{
-				SceneRole.recycle(role);
-				role = null;
+				SceneRole.recycle(_role);
+				_role = null;
 			}
 			if(avatar3d){
 				avatar3d.dispose();
@@ -218,7 +229,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function setScale(num:Number):void
 		{
-			role.setScale(num);
+			_role.setScale(num);
 		}
 		
 		/**
@@ -238,7 +249,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function update():void
 		{
-			AvatarManager.updateAllPart(role);
+			AvatarManager.updateAllPart(_role);
 		}
 		
 		/**
@@ -249,7 +260,7 @@ package com.rpgGame.app.display3D
 		public function updateBodyWithRes(res:String,animat:String=null):void
 		{
 			avatarInfo.setBodyResID(res,animat);
-			AvatarManager.updateBody(role);
+			AvatarManager.updateBody(_role);
 		}
 		
 		/**
@@ -267,7 +278,7 @@ package com.rpgGame.app.display3D
 			avatarInfo.deputyWeaponEffectID=info.deputyWeaponEffectID;
 			avatarInfo.deputyWeaponEffectScale=info.deputyWeaponEffectScale;
 			avatarInfo.zhanqiResID=info.zhanqiResID;
-			AvatarManager.updateAllPart(role);			//执行主换装更新
+			AvatarManager.updateAllPart(_role);			//执行主换装更新
 		}
 		
 		
@@ -371,7 +382,7 @@ package com.rpgGame.app.display3D
 			avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 //			avatarInfo.zhanqiResID = zhanqiResID;
 			
-			AvatarManager.updateAllPart(role);			//执行主换装更新
+			AvatarManager.updateAllPart(_role);			//执行主换装更新
 		}
 		
 		/**
@@ -478,7 +489,7 @@ package com.rpgGame.app.display3D
 			avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			avatarInfo.zhanqiResID = zhanqiResID;
 			
-			AvatarManager.updateAllPart(role);			//执行主换装更新
+			AvatarManager.updateAllPart(_role);			//执行主换装更新
 		}
 	
 		
@@ -490,7 +501,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function updateWithRenderUnitID(ID:int,data:AvatarInfo):void
 		{
-			role.updateWithRenderUnitID(ID,data);
+			_role.updateWithRenderUnitID(ID,data);
 		}
 	}
 }

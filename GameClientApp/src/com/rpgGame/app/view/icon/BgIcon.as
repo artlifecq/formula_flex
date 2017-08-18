@@ -500,7 +500,7 @@ package com.rpgGame.app.view.icon
 					initCountText();
 				_countText.htmlText = value;
 				_countText.width=_countText.textWidth;
-				_countText.x = this.width - _countText.textWidth;
+				_countText.x = this.width - _countText.textWidth-1;
 				_countText.y =  this.height - _countText.height;			
 				//			_countText.x = iconSize - _countText.maxWidth;
 				//			_countText.y = iconSize - _countText.maxHeight;				
