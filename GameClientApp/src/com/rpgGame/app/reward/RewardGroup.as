@@ -85,7 +85,7 @@ package  com.rpgGame.app.reward
 		 * @param showCD 是否显示CD转框---yt
 		 * @param showSelectIco 是否显示鼠标移入移出的背景
 		 */		
-		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0,showCD:Boolean=false,showSelectIco:Boolean=true)
+		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0,showCD:Boolean=false,showSelectIco:Boolean=false)
 		{
 			super();
 			_iconSize=size;

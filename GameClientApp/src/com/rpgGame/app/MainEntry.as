@@ -22,6 +22,8 @@ package com.rpgGame.app
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
 	
+	import away3d.log.Log;
+	
 	import org.client.mainCore.manager.PopUpManager;
 	import org.client.mainCore.manager.ProjectManager;
 
@@ -146,16 +148,9 @@ package com.rpgGame.app
 			ProcessStateMachine.getInstance().run();
 		}
 		
-		/**
-		 *去跨服地图 
-		 * 
-		 */
-		public function toCrossMap():void
+		public function updateLogindata():void
 		{
-			var loginData : MyPlayerInfo = clientGlb.loginData;
-			MainRoleManager.actorInfo.preMapID=MainRoleManager.actorInfo.mapID;
-			MainRoleManager.setLoginData(loginData);
-			SceneSwitchManager.changeMap();
+			MainRoleManager.setLoginData( ClientConfig.loginData);
 		}
 	}
 }

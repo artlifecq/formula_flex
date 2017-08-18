@@ -108,11 +108,12 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbRolenName = temp;
 			temp.name = "lbRolenName";
-			temp.text = "玩家名字六字";
+			temp.text = "[9999区]玩家名字六字";
+			temp.textAlign = "center";
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 95;
-			temp.x = 291;
+			temp.width = 144;
+			temp.x = 276;
 			temp.y = 10;
 			return temp;
 		}
@@ -123,6 +124,7 @@ package org.mokylin.skin.app.banghui
 			lbTeamName = temp;
 			temp.name = "lbTeamName";
 			temp.text = "[00000]帮派名字七个字";
+			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
@@ -138,11 +140,11 @@ package org.mokylin.skin.app.banghui
 			lbZhanli = temp;
 			temp.name = "lbZhanli";
 			temp.text = "999999999";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
-			temp.x = 520;
+			temp.x = 516;
 			temp.y = 10;
 			return temp;
 		}

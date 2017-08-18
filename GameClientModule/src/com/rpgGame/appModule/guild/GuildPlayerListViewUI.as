@@ -108,8 +108,8 @@ package com.rpgGame.appModule.guild
 		}
 		private function refeashList():void
 		{
-			 GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected);
-			this._pageCtrl.setData(GuildManager.instance().memberList,maxCount);
+			// GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected);
+			this._pageCtrl.setData( GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected),maxCount);
 			if(_currentOriderValue=="")
 			{
 				_skin.arrowZhiwei_Down.visible = true;

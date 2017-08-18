@@ -20,9 +20,9 @@ package com.rpgGame.app.manager.fight
 		private var prePlayTime:int;
 		private var timeLineMap:HashMap;
 		
-		private var showTime:Number=0.2;
-		private var moveTime:Number=0.6;
-		private var missTime:Number=0.2;
+		private var showTime:Number=0.2*2;
+		private var moveTime:Number=0.6+0.4;
+		private var missTime:Number=0.2*2;
 		
 		private var showEndY:int=30;
 		private var moveEndY:int=150;

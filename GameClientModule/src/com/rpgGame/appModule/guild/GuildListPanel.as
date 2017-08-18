@@ -18,7 +18,7 @@ package com.rpgGame.appModule.guild
 		private var _skin:BangHui_List;
 	
 		private var _pageCtrl:D1v1RankPageSelectCtrl;
-		private var _cellList:Vector.<GuildListInfoCell>=new Vector.<GuildListInfoCell>();
+		private var _cellList:Vector.<GuildListSeeInfoCell>=new Vector.<GuildListSeeInfoCell>();
 		private const MAX_COUNT:int=12;
 		public function GuildListPanel():void
 		{
@@ -35,13 +35,13 @@ package com.rpgGame.appModule.guild
 			this.addChild(_guildInfo);
 			_pageCtrl=new D1v1RankPageSelectCtrl(_skin.btnNext,_skin.btnPrev,null,null,_skin.lbNum,1,1,onPageChange);
 			_pageCtrl.needSpeed=false;
-			var tmp:GuildListInfoCell;
+			var tmp:GuildListSeeInfoCell;
 			var startX:int=299;
 			var startY:int=119;
 			
 			for (var i:int = 0; i < MAX_COUNT; i++) 
 			{
-				tmp=new GuildListInfoCell(i);
+				tmp=new GuildListSeeInfoCell(i);
 				tmp.x=startX;
 				tmp.y=startY+i*tmp.height;
 				_skin.container.addChild(tmp);
@@ -58,7 +58,14 @@ package com.rpgGame.appModule.guild
 			EventManager.addEvent(GuildEvent.GET_GUILD_LIST,refeashList);
 			//refeashList();
 			//onPageChange(1);
-			_pageCtrl.setDefault();
+			if (_pageCtrl.getValue()!=1) 
+			{
+				_pageCtrl.setDefault();
+			}
+			else
+			{
+				onPageChange(1);
+			}
 			if(GuildManager.instance().canDissolve)
 			{
 				_skin.btnExit.label = "解散帮会";

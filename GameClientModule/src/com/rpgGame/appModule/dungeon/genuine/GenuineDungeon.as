@@ -42,7 +42,7 @@ package com.rpgGame.appModule.dungeon.genuine
 				var icon:IconCDFace=gridList.pop();
 				icon.destroy();
 			}
-			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
 		override public function show(data:Object=null):void
@@ -82,7 +82,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			{
 				onCreate();
 			}
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
 		private function onCreate():void

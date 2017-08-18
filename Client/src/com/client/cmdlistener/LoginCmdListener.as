@@ -11,6 +11,8 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.login.message.ResSubstituteMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	
+	import away3d.log.Log;
+	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.net.MessageMgr;
 
@@ -81,8 +83,7 @@ package com.client.cmdlistener
 			}
 			
 			if(MessageMgr.Ins.isCrossSocket){//跨服登陆
-				GameLog.addShow("收到跨服收到主玩家消息");
-				ClientConfig.mainEntry.toCrossMap();
+				ClientConfig.mainEntry.updateLogindata();
 			}else{
 				GameLog.addShow("收到主玩家消息");
 			}

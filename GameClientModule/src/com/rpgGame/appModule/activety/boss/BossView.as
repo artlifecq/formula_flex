@@ -1,8 +1,7 @@
 package com.rpgGame.appModule.activety.boss
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
@@ -53,9 +52,7 @@ package com.rpgGame.appModule.activety.boss
 		private var _activeData:ListCollection;
 		private var rewardIcon:Vector.<IconCDFace>;
 		
-		private var _avatar : InterAvatar3D;
-		private var _avatarContainer:Inter3DContainer;
-		private var _avatardata:MonsterData;
+		private var _avatar : UIAvatar3D;
 		private var selectedInfo:BossActInfo;
 
 		private var actList:Vector.<ActivetyInfo>;
@@ -83,13 +80,7 @@ package com.rpgGame.appModule.activety.boss
 			}
 			_skin.ListItem.dataProvider=_activeData;
 			
-			_avatarContainer=new Inter3DContainer();
-			_avatar = new InterAvatar3D();
-			_avatarContainer.addChild3D(_avatar);
-			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
-//			_avatarContainer.x=-28;
-			_skin.modeCont.addChild(_avatarContainer);
-			
+			_avatar = new UIAvatar3D(_skin.avatarGrp);
 			rewardIcon=new Vector.<IconCDFace>();
 			
 			_richText= RichTextArea3D.getFromPool();
@@ -115,8 +106,7 @@ package com.rpgGame.appModule.activety.boss
 		private function updateBoss(bossId:int):void
 		{
 			var bossCfg:Q_monster=MonsterDataManager.getData(bossId);
-			_avatardata.avatarInfo.setBodyResID(bossCfg ? bossCfg.q_body_res : "", null);
-			_avatar.setRoleData(this._avatardata);
+			_avatar.updateBodyWithRes(bossCfg ? bossCfg.q_body_res : "");
 		}
 		
 		override public function show(data:Object=null):void
@@ -173,8 +163,8 @@ package com.rpgGame.appModule.activety.boss
 		
 		private function onUpateAvatarScale(role:SceneRole,id:int):void
 		{
-			if(role&&_avatar.curRole&&_avatar.curRole==role&&id==RenderUnitID.BODY){
-				this._avatar.curRole.setScale(Number(selectedInfo.worldBossCfg.q_monster_scale));	
+			if(role&&_avatar.role&&_avatar.role==role&&id==RenderUnitID.BODY){
+				this._avatar.setScale(Number(selectedInfo.worldBossCfg.q_monster_scale));	
 			}
 		}
 		

@@ -132,7 +132,7 @@ package com.rpgGame.app.utils
 			grid.setIsShowCdCircle(true);
 			grid.sortLayer();
 			grid.setIsBind(itemInfo.binded);
-			grid.selectImgVisible = true;
+			grid.selectImgVisible = false;//策划要求 所有禁用
 			
 			if(itemInfo is EquipInfo)
 			{

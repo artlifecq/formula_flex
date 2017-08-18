@@ -52,6 +52,8 @@ package com.rpgGame.app.manager.scene
 	
 	import flash.utils.getDefinitionByName;
 	
+	import away3d.log.Log;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	import utils.TimerServer;
@@ -409,6 +411,7 @@ package com.rpgGame.app.manager.scene
 			GameLog.addShow("开始切换场景...");
 			AppManager.closeAllApp();//切换场景关闭所有面板
 			var mapID : int = MainRoleManager.actorInfo.mapID;
+			Log.debug("前往地图id:"+mapID+",当前地图id:"+currentMapId);
 			if(mapID==1000000){//登录在跨服状态,不做任何处理
 				return;
 			}

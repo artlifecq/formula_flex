@@ -194,7 +194,9 @@ package com.rpgGame.core.app
 			isAppShowIng = false;
 			_needAmition = true;
 			closeTween=null;
-			_app.parent.removeChild(_app as DisplayObject);
+			if(_app.parent){
+				_app.parent.removeChild(_app as DisplayObject);
+			}
 			AppDispather.instance.dispatchEvent(new AppEvent(AppEvent.APP_HIDE, appInfo));
 		}
 		public function dispose() : void
