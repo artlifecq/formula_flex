@@ -117,12 +117,14 @@ package com.rpgGame.appModule.dungeon.genuine
 				_skin.uiLevel.visible = true;
 				_skin.uiLevel.styleName = "ui/app/fuben/mc/kaiqidengji/kaiqi_"+_data.q_limit_level+".png";
 				_skin.grp_Tuijian.visible=false;
+				_skin.grpXin.visible = false;
 			}else{
 				if(_dailyZoneInfo.todayPassed>0)
 					_skin.grp_Tuijian.visible=false;
 				else
 					_skin.grp_Tuijian.visible=true;
 				_skin.uiLevel.visible = false;
+				_skin.grpXin.visible = true;
 			}
 		}
 		

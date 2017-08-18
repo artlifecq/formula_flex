@@ -4,7 +4,6 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -25,6 +24,7 @@ package com.rpgGame.app.state.role.action
 		private var _totalFrameTween:TweenLite;
 		private var _repeatNum:int;
 		private var nextShowTween:TweenLite;
+		private var showCD:Number=10;//每次展示的时间间隔
 		public function ShowState()
 		{
 			super(RoleStateType.ACTION_SHOW);
@@ -94,7 +94,8 @@ package com.rpgGame.app.state.role.action
 			if(role.data is MonsterData){//怪物
 				_showType=RoleActionType.ATTACK;
 			}else{
-				_showType=RoleActionType.SHOW_IDLE;
+//				_showType=RoleActionType.SHOW_IDLE;
+				_showType=RoleActionType.IDLE;
 			}
 			_repeatNum=1;			
 		}
@@ -130,15 +131,22 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween = null;
 				}
 				
-				_showType=RoleActionType.SHOW_STAND;
+//				_showType=RoleActionType.SHOW_STAND;
+				_showType=RoleActionType.STAND;
 				_repeatNum=0;
 				syncAnimation();
-				nextShowTween= TweenLite.delayedCall(10,onShowNext);
+				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);
 			}
 		}
 		
 		private function onShowNext():void
 		{
+			var role:SceneRole=_machine.owner as SceneRole;
+			
+			if(role.parent.parent.rotationY!=0){//不在展示角度不做下次展示
+				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);
+				return;
+			}
 			setShowAction();
 			syncAnimation();
 			showComplete();

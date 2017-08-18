@@ -110,7 +110,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/wuxue/juexue/name/fsjt_xiao.png";
+			temp.styleName = "ui/common/tips/name/bingfengsudong.png";
 			temp.x = 11;
 			temp.y = 83;
 			return temp;

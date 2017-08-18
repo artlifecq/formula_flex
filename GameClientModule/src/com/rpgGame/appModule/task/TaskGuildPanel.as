@@ -202,20 +202,13 @@ package com.rpgGame.appModule.task
 		/**设置倒计时文字*/
 		private function setTimeText():void
 		{
-			if(this.visible&&this.parent!=null)
-			{
-				timerLabel.htmlText=currtimer+"秒后自动领取奖励";
-				if(currtimer==0)
-				{
-					timer.stop();
-					subFinishBut();
-				}
-				currtimer--;
-			}
-			else
+			timerLabel.htmlText=currtimer+"秒后自动领取奖励";
+			if(currtimer==0)
 			{
 				timer.stop();
+				subFinishBut();
 			}
+			currtimer--;
 		}
 		
 		private function hideView():void

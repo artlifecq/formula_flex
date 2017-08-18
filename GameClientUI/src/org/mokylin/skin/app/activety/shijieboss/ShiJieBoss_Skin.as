@@ -1,6 +1,7 @@
 package org.mokylin.skin.app.activety.shijieboss
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
@@ -23,6 +24,8 @@ package org.mokylin.skin.app.activety.shijieboss
 		public var activeBg:feathers.controls.UIAsset;
 
 		public var activeName:feathers.controls.UIAsset;
+
+		public var avatarGrp:feathers.controls.Group;
 
 		public var icon1:feathers.controls.UIAsset;
 
@@ -47,7 +50,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 956;
-			this.elementsContent = [__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),__ShiJieBoss_Skin_Label2_i(),lbTime_i()];
+			this.elementsContent = [__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),avatarGrp_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),__ShiJieBoss_Skin_Label2_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -161,6 +164,18 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.styleName = "ui/app/activety/shijieboss/mingzi/14.png";
 			temp.x = 751;
 			temp.y = 417;
+			return temp;
+		}
+
+		private function avatarGrp_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			avatarGrp = temp;
+			temp.name = "avatarGrp";
+			temp.height = 326;
+			temp.width = 237;
+			temp.x = 669;
+			temp.y = 88;
 			return temp;
 		}
 
