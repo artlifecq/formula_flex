@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildListInfo;
@@ -18,23 +19,22 @@ package com.rpgGame.appModule.guild
 	
 	import starling.display.DisplayObject;
 	
-	public class GuildListInfoCell extends DefaultListItemRenderer
+	public class GuildListInfoCell extends SkinUI
 	{
 		private var _skin:TeamItem1_Skin;
 		private var _levelInfo:Q_guild;
 		private var _opaque:int;
 		private var _guildid:long;
 		private var _guildListinfo:GuildListInfo
-		public function GuildListInfoCell():void
-		{
-			super();
-		}
-		
-		override protected function initialize():void
+		private var _indexValue:int;
+		public function GuildListInfoCell(index:int=0):void
 		{
 			_skin = new TeamItem1_Skin();
-			_skin.toSprite(this);
+			_indexValue=index;
+			super(_skin);
 		}
+		
+		
 		private function addEvent():void
 		{
 			if(!EventManager.hasEvent(GuildEvent.GUILD_OPERATERESULT,opereateHandler));
@@ -56,7 +56,8 @@ package com.rpgGame.appModule.guild
 			if(msg.result == 1&&_guildid.CompareTo(_guildListinfo.guildId)==0)
 			{
 				_guildListinfo.isApply = 1;
-				commitData();
+				//commitData();
+				setData(_guildListinfo);
 				removeEvent();
 			}
 		}
@@ -82,7 +83,7 @@ package com.rpgGame.appModule.guild
 		private function updateSkin():void
 		{
 			var item:ItemBg = _skin.bg.skin as ItemBg;
-			if(this.indexValue%2 ==0)
+			if(this._indexValue%2 ==0)
 			{
 				item.bg1.visible = true;
 				item.bg2.visible = false;
@@ -91,14 +92,11 @@ package com.rpgGame.appModule.guild
 				item.bg2.visible = true;
 			}
 		}
-		private function get indexValue():int
-		{
-			return this.data as int;
-		}
-		override protected function commitData():void
+	
+		public function setData(data:GuildListInfo):void
 		{
 			updateSkin();
-			_guildListinfo = GuildManager.instance().getGuildListInfoByIndex(this.indexValue);
+			_guildListinfo = data;
 			if(_guildListinfo==null)
 			{
 				_skin.btnAdd.visible = false;

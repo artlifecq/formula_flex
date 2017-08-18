@@ -1,7 +1,6 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.utils.TextSizeUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.info.society.SocietySpellTotalData;
 
@@ -45,13 +44,13 @@ package com.rpgGame.app.ui.tips
 			var totalData : SocietySpellTotalData = data as SocietySpellTotalData;
 			if (totalData)
 			{
-				var allSpellStateDesc : String = totalData.allSpellStateDesc;
-				_tipSkin.labDesc.htmlText = allSpellStateDesc;
-
-				_posy = 0;
-				_posy = _tipSkin.labDesc.y + TextSizeUtil.getTextHeght(allSpellStateDesc, _tipSkin.labDesc.width, 14) + 20;
-
-				_tipSkin.imgBG.height = _posy + 10;
+//				var allSpellStateDesc : String = totalData.allSpellStateDesc;
+//				_tipSkin.labDesc.htmlText = allSpellStateDesc;
+//
+//				_posy = 0;
+//				_posy = _tipSkin.labDesc.y + TextSizeUtil.getTextHeght(allSpellStateDesc, _tipSkin.labDesc.width, 14) + 20;
+//
+//				_tipSkin.imgBG.height = _posy + 10;
 			}
 		}
 

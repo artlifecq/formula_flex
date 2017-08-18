@@ -25,8 +25,6 @@ package com.rpgGame.app.manager.goods
 	
 	import app.message.AmountType;
 	import app.message.GoodsType;
-	import app.message.Config.AllGoodsContainerUnlockProto;
-	import app.message.NormalUsableDataProto.NormalEfficacy;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -115,20 +113,20 @@ package com.rpgGame.app.manager.goods
 				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_SILVER, null, MoneyUtil.getHtmlMoneyString(unlockSilver));
 				return;
 			}
-			var item : ClientItemInfo = getItemInfoByUsabelEfficacy(NormalEfficacy.OPEN_DEPOT_GRID);
-			if (!item)
-			{
-				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_ITEM, null, ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
-				return;
-			}
+//			var item : ClientItemInfo = getItemInfoByUsabelEfficacy(NormalEfficacy.OPEN_DEPOT_GRID);
+//			if (!item)
+//			{
+//				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_ITEM, null, ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
+//				return;
+//			}
 //			ItemSender.reqUseGoods(item.index, 1);
 		}
 
-		public function setUnlockData(data : AllGoodsContainerUnlockProto) : void
-		{
-			unlockSilver = data.depotUnlockMoneyCost;
-			unlockBindSilver = data.depotUnlockBandMoneyCost;
-		}
+//		public function setUnlockData(data : AllGoodsContainerUnlockProto) : void
+//		{
+//			unlockSilver = data.depotUnlockMoneyCost;
+//			unlockBindSilver = data.depotUnlockBandMoneyCost;
+//		}
 
 		private static var _ins : BackPackManager;
 

@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg.role
 {
-	import app.message.BloodSkillProto;
+	
 
 	/**
 	 * 血纹技能属性配置
@@ -29,14 +29,14 @@ package com.rpgGame.coreData.cfg.role
 		/**技能基础分值*/
 		public var skillBaseScore:int;
 		
-		public function setConfig(proto:BloodSkillProto):void
-		{
-			skillId = proto.skillId;
-			icon = proto.icon;
-			name = proto.name;
-			desc = proto.desc;
-			skillQuality = proto.skillQuality;
-			skillBaseScore = proto.skillBaseScore;
-		}
+//		public function setConfig(proto:BloodSkillProto):void
+//		{
+//			skillId = proto.skillId;
+//			icon = proto.icon;
+//			name = proto.name;
+//			desc = proto.desc;
+//			skillQuality = proto.skillQuality;
+//			skillBaseScore = proto.skillBaseScore;
+//		}
 	}
 }

@@ -4,6 +4,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.MenuUtil;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
@@ -11,7 +12,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	
-	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.banghui.TeamItem2_Skin;
@@ -19,21 +19,20 @@ package com.rpgGame.appModule.guild
 	
 	import starling.display.DisplayObject;
 	
-	public class GuildPlayerInfoCell extends DefaultListItemRenderer
+	public class GuildPlayerInfoCell extends SkinUI
 	{
 		private var _skin:TeamItem2_Skin;
 		private var _permissionInfo:Q_guild_permission;
 		private var _guildMemberInfo:GuildMemberInfo;
-		public function GuildPlayerInfoCell():void
+		private var indexValue:int;
+		public function GuildPlayerInfoCell(index:int):void
 		{
-			super();
+			this.indexValue=index;
+			_skin = new TeamItem2_Skin();
+			super(_skin);
 		}
 		
-		override protected function initialize():void
-		{
-			_skin = new TeamItem2_Skin();
-			_skin.toSprite(this);
-		}
+		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -68,10 +67,10 @@ package com.rpgGame.appModule.guild
 			}
 			
 		}
-		override protected function commitData():void
+		public function setData(data:GuildMemberInfo):void
 		{
 			updateSkin();
-			_guildMemberInfo = GuildManager.instance().getSortGuildMenberInfoByIndex(indexValue);
+			_guildMemberInfo = data;
 			if(_guildMemberInfo==null)
 			{
 				_skin.lbOnLine.visible = false;
@@ -126,21 +125,6 @@ package com.rpgGame.appModule.guild
 				GrayFilter.gray(_skin.numList2);
 				GrayFilter.gray(_skin.uiTongShuai);
 			}
-		}
-		private function get indexValue():int
-		{
-			return this.data as int;
-		}
-		
-		
-		override public function get width():Number
-		{
-			return _skin.width;
-		}
-		
-		override public function get height():Number
-		{
-			return _skin.height;
 		}
 	}
 }

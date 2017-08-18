@@ -186,8 +186,10 @@ package com.rpgGame.app.manager
 		{
 			showQiuHunTiShiPanel(8,msg,null);
 			var role:SceneRole=MainRoleManager.actor;
-			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
+			if(role){
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
+			}
 		}
 		
 		/**
@@ -226,8 +228,10 @@ package com.rpgGame.app.manager
 		{
 			_marriageInfo=msg.marriageInfo;
 			var role:SceneRole=MainRoleManager.actor;
-			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
+			if(role){
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
+			}
 			EventManager.dispatchEvent(HunYinEvent.HUNYIN_HUNYIN);
 		}
 		

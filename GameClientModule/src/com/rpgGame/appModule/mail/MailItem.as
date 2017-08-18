@@ -1,17 +1,19 @@
 package com.rpgGame.appModule.mail
 {
 	import com.rpgGame.app.manager.MailManager;
-	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.MailEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.mail.bean.MailBriefInfo;
+	
+	import flash.geom.Point;
+	
+	import away3d.events.Event;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.mail.Mail_Item;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -94,16 +96,62 @@ package com.rpgGame.appModule.mail
 			}
 		}
 		
+		private static const HELPER_POINT:Point = new Point();
+		protected var touchPointID:int = -1;
 		public function onTouchItem(e:TouchEvent):void
 		{
-			var t:Touch=e.getTouch(this);
-			if(!t){
-				_skin.imgOver.visible=false;
+			if(this.touchPointID >= 0)
+			{
+				var touch:Touch = e.getTouch(this, null, this.touchPointID);
+				if(!touch || !this.stage)
+				{
+					//this should never happen
+					return;
+				}
+				
+				touch.getLocation(this.stage, HELPER_POINT);
+				var isInBounds:Boolean = this.contains(this.stage.hitTest(HELPER_POINT));
+				if(touch.phase === TouchPhase.MOVED)
+				{
+					if(isInBounds)
+					{
+						_skin.imgOver.visible=true;
+					}
+					else
+					{
+						_skin.imgOver.visible=false;
+					}
+				}else if(touch.phase === TouchPhase.ENDED){
+					this.touchPointID = -1;
+					if(isInBounds)
+					{
+						_skin.imgOver.visible=true;
+					}
+					else
+					{
+						_skin.imgOver.visible=false;
+					}
+				}
 				return;
 			}
-			t=e.getTouch(this,TouchPhase.HOVER);
-			if(t){
-				_skin.imgOver.visible=true;
+			else //if we get here, we don't have a saved touch ID yet
+			{
+				touch = e.getTouch(this, TouchPhase.BEGAN);
+				if(touch)
+				{
+					_skin.imgOver.visible=true;
+					this.touchPointID = touch.id;
+					return;
+				}
+				touch = e.getTouch(this, TouchPhase.HOVER);
+				if(touch)
+				{
+					_skin.imgOver.visible=true;
+					return;
+				}
+				
+				//end of hover
+				_skin.imgOver.visible=false;
 			}
 		}
 		

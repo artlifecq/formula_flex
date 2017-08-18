@@ -50,9 +50,7 @@ package com.rpgGame.appModule.mail
 		
 		override protected function onHide():void
 		{
-			super.onHide();
-			EventManager.dispatchEvent(MailEvent.MAIL_CLOSE_READPANEL);
-			EventManager.removeEvent(MailEvent.MAIL_COLLECT_CHANGE,updateinfo);
+			super.onHide();		
 			_isAddToStage = false;
 			_skin.lbName.text="无";
 			_skin.lbZhuti.text="无";
@@ -60,6 +58,8 @@ package com.rpgGame.appModule.mail
 			_skin.lbTime.text="剩余时间：0天";
 			_info=null;
 			clearIcoList();
+			EventManager.dispatchEvent(MailEvent.MAIL_CLOSE_READPANEL);
+			EventManager.removeEvent(MailEvent.MAIL_COLLECT_CHANGE,updateinfo);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

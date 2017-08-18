@@ -32,7 +32,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			this.currentState = "normal";
 			this.height = 446;
 			this.width = 258;
-			this.elementsContent = [__Juexue_jihuo_UIAsset1_i(),__Juexue_jihuo_UIAsset2_i(),lb_tiaojian_i(),btn_jihuo_i()];
+			this.elementsContent = [__Juexue_jihuo_UIAsset1_i(),lb_tiaojian_i(),btn_jihuo_i()];
 			
 			states = {
 			};
@@ -49,15 +49,6 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.styleName = "ui/app/wuxue/juexue/youbeijing.png";
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __Juexue_jihuo_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/juexue/jihuotishi.png";
-			temp.x = 19;
-			temp.y = 84;
 			return temp;
 		}
 

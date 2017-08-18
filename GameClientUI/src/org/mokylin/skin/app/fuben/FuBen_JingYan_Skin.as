@@ -22,6 +22,8 @@ package org.mokylin.skin.app.fuben
 
 		public var btnEnter:feathers.controls.Button;
 
+		public var icon_0:feathers.controls.UIAsset;
+
 		public var lbGoumai:feathers.controls.Label;
 
 		public var lbShengyu:feathers.controls.Label;
@@ -39,7 +41,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i(),lbTips_i()];
+			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i(),lbTips_i(),icon_0_i()];
 			
 			states = {
 			};
@@ -95,6 +97,17 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
+		private function icon_0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon_0 = temp;
+			temp.name = "icon_0";
+			temp.styleName = "ui/common/grid/normal/36.png";
+			temp.x = 460;
+			temp.y = 541;
+			return temp;
+		}
+
 		private function lbGoumai_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -131,7 +144,6 @@ package org.mokylin.skin.app.fuben
 			temp.height = 88;
 			temp.htmlText = "副本提示<br>1. 当前一波敌人全部死亡后会刷新出下一波怪物，请在限时内击杀，杀敌越多奖励越多。<br>2. 副本会根据您的等级和杀敌数量给予银两奖励。<br>3. 您可购买额外的挑战次数，购买次数与VIP等级相关。";
 			temp.leading = 7;
-			temp.text = "标签";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 875;

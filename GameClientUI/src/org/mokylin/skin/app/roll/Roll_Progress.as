@@ -27,7 +27,7 @@ package org.mokylin.skin.app.roll
 			
 			this.currentState = "normal";
 			this.height = 10;
-			this.width = 251;
+			this.width = 186;
 			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {

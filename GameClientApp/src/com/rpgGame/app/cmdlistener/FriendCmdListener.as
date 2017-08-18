@@ -5,24 +5,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FriendEvent;
-	import com.rpgGame.coreData.info.friend.EnemyInfo;
 	import com.rpgGame.coreData.info.friend.FriendAddedMeInfo;
 	import com.rpgGame.coreData.info.friend.FriendBaseInfo;
-	import com.rpgGame.coreData.info.friend.FriendInfo;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
-	import com.rpgGame.coreData.type.FriendType;
-	
-	import flash.utils.ByteArray;
-	
-	import app.cmd.RelationModuleMessages;
-	import app.message.AllClientRelationDetail;
-	import app.message.ClientRelation;
-	import app.message.EnemyProto;
-	import app.message.SingleRelation;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -36,31 +24,31 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BASIC_RELATION, onBasicRelation);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATION_DETAIL, onRelationDetail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATIONS_ERROR, onRelationFail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_SEND_ADD_FRIEND_SUCCESS, onAddFriendSuccess);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_ADD_FAIL, onRecFriendAddFail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ADD_FRIEND_WAIT_REPLY, onRecOtherAddedYouAsFriend);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_ADD_FRIEND_FAIL, onRecReplyAddFriendFail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REFUSE_ADD_FRIEND_SUCCESS, onRefuseAddFriend);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REFUSE_ADD_FRIEND, onOtherRefuseAddFriend);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_AGREE_ADD_FRIEND_SUCCESS, onAgreeAddFriend);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_AGREE_ADD_FRIEND, onOtherAgreeAddFriend);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVED, onRecFriendRemoved);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REMOVED_YOU_AS_FRIEND, onRecOtherRemovedYouAsFriend);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVE_FAIL, onRecFriendRemoveFail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADDED, onRecBlackAdded);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADD_FAIL, onRecBlackAddFail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVED, onRecBlackRemoved);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVE_FAIL, onRecBlackRemoveFail);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_DETAIL_CHANGED, onRecRelationDetailChanged);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_OFFLINE, onRecRelationOffLine);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_REMOVED, onEnemyRemoved);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_ADD, onEnemyAdd);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_UPDATE, onEnemyUpdate);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD, editorMood);
-			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD_FAIL, editorMoodFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BASIC_RELATION, onBasicRelation);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATION_DETAIL, onRelationDetail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATIONS_ERROR, onRelationFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_SEND_ADD_FRIEND_SUCCESS, onAddFriendSuccess);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_ADD_FAIL, onRecFriendAddFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ADD_FRIEND_WAIT_REPLY, onRecOtherAddedYouAsFriend);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_ADD_FRIEND_FAIL, onRecReplyAddFriendFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REFUSE_ADD_FRIEND_SUCCESS, onRefuseAddFriend);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REFUSE_ADD_FRIEND, onOtherRefuseAddFriend);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_AGREE_ADD_FRIEND_SUCCESS, onAgreeAddFriend);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_AGREE_ADD_FRIEND, onOtherAgreeAddFriend);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVED, onRecFriendRemoved);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REMOVED_YOU_AS_FRIEND, onRecOtherRemovedYouAsFriend);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVE_FAIL, onRecFriendRemoveFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADDED, onRecBlackAdded);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADD_FAIL, onRecBlackAddFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVED, onRecBlackRemoved);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVE_FAIL, onRecBlackRemoveFail);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_DETAIL_CHANGED, onRecRelationDetailChanged);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_OFFLINE, onRecRelationOffLine);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_REMOVED, onEnemyRemoved);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_ADD, onEnemyAdd);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_UPDATE, onEnemyUpdate);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD, editorMood);
+//			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD_FAIL, editorMoodFail);
 
 			finish();
 		}
@@ -99,13 +87,13 @@ package com.rpgGame.app.cmdlistener
 		 *
 		 * 附带EnemyProto
 		 */	
-		private function onEnemyUpdate(buffer : ByteBuffer):void
-		{
-			var enemy : EnemyProto = new EnemyProto();
-			enemy.mergeFrom(buffer);
-			FriendManager.setEnemyRelation(enemy);
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-		}
+//		private function onEnemyUpdate(buffer : ByteBuffer):void
+//		{
+//			var enemy : EnemyProto = new EnemyProto();
+//			enemy.mergeFrom(buffer);
+//			FriendManager.setEnemyRelation(enemy);
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//		}
 		/**
 		 * 添加仇人
 		 * boolean targetIsOnline
@@ -113,28 +101,28 @@ package com.rpgGame.app.cmdlistener
 		 * SingleRelation singleRelation
 		 * 附带EnemyProto
 		 */
-		private function onEnemyAdd(buffer : ByteBuffer):void
-		{
-			var isOnline : Boolean = buffer.readBoolean();
-			var len : int = buffer.readVarint32();
-			var byte:ByteBuffer = new ByteBuffer();
-			buffer.readBytes(byte,0,len);
-			
-			var sing : SingleRelation = new SingleRelation();
-			sing.mergeFrom(byte);
-			
-			var enemy : EnemyProto = new EnemyProto();
-			enemy.mergeFrom(buffer);
-			
-			var enemyInfo : EnemyInfo = new EnemyInfo();
-			enemyInfo.type = FriendType.RELATION_TYPE_ENEMY;
-			enemyInfo.setup(enemy);
-			enemyInfo.setupSingleRelation(sing);
-			enemyInfo.isOnLine = isOnline;
-			FriendManager.addEnemyRelation(enemyInfo);
-			
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-		}
+//		private function onEnemyAdd(buffer : ByteBuffer):void
+//		{
+//			var isOnline : Boolean = buffer.readBoolean();
+//			var len : int = buffer.readVarint32();
+//			var byte:ByteBuffer = new ByteBuffer();
+//			buffer.readBytes(byte,0,len);
+//			
+//			var sing : SingleRelation = new SingleRelation();
+//			sing.mergeFrom(byte);
+//			
+//			var enemy : EnemyProto = new EnemyProto();
+//			enemy.mergeFrom(buffer);
+//			
+//			var enemyInfo : EnemyInfo = new EnemyInfo();
+//			enemyInfo.type = FriendType.RELATION_TYPE_ENEMY;
+//			enemyInfo.setup(enemy);
+//			enemyInfo.setupSingleRelation(sing);
+//			enemyInfo.isOnLine = isOnline;
+//			FriendManager.addEnemyRelation(enemyInfo);
+//			
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//		}
 		/**
 		 * 删除仇人
 		 *
@@ -151,28 +139,28 @@ package com.rpgGame.app.cmdlistener
 		 *
 		 * bytes ClientRelation
 		 */
-		private function onBasicRelation(buffer : ByteBuffer) : void
-		{
-			var relation : ClientRelation = new ClientRelation();
-			relation.mergeFrom(buffer);
-			FriendManager.startTimer();
-			FriendManager.setBasicRelation(relation);
-		}
+//		private function onBasicRelation(buffer : ByteBuffer) : void
+//		{
+//			var relation : ClientRelation = new ClientRelation();
+//			relation.mergeFrom(buffer);
+//			FriendManager.startTimer();
+//			FriendManager.setBasicRelation(relation);
+//		}
 
 		/**
 		 * 返回所有关系中每个人的具体信息. 每个人只会存在一次. 附带个ClientRelationDetail的proto
 		 * 消息内容已压缩
 		 */
-		private function onRelationDetail(buffer : ByteBuffer) : void
-		{
-			FriendManager.requested = true;
-			var allClient : AllClientRelationDetail = new AllClientRelationDetail();
-			var bytes : ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			bytes.uncompress();
-			allClient.mergeFrom(bytes);
-			FriendManager.setAllRelationDetail(allClient);
-		}
+//		private function onRelationDetail(buffer : ByteBuffer) : void
+//		{
+//			FriendManager.requested = true;
+//			var allClient : AllClientRelationDetail = new AllClientRelationDetail();
+//			var bytes : ByteArray = new ByteArray();
+//			buffer.readBytes(bytes);
+//			bytes.uncompress();
+//			allClient.mergeFrom(bytes);
+//			FriendManager.setAllRelationDetail(allClient);
+//		}
 
 		/**
 		 * 获取好友关系出错, 附带varint32的错误码
@@ -261,44 +249,44 @@ package com.rpgGame.app.cmdlistener
 		 * bool 是否在线
 		 * bytes SingleRelation
 		 */
-		private function onAgreeAddFriend(buffer : ByteBuffer) : void
-		{
-			var isOnLine : Boolean = buffer.readBoolean();
-			var singleRelation : SingleRelation = new SingleRelation();
-			singleRelation.mergeFrom(buffer);
-			var friendInfo : FriendInfo = new FriendInfo();
-			friendInfo.type = FriendType.RELATION_TYPE_FRIEND;
-			friendInfo.setupSingleRelation(singleRelation);
-			friendInfo.isOnLine = isOnLine;
-			FriendManager.addDetailInfo(friendInfo);
-			FriendManager.addFriendRemoveBlackAndEnemy(friendInfo.id);
-			NoticeManager.showNotify("您同意了" + singleRelation.name + "的请求，并已同时添加对方为好友");
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-			if(AppManager.isAppInScene(AppConstant.TARGET_ADD_ME_TO_FRIEND))
-				EventManager.dispatchEvent(FriendEvent.FRIEND_ADDED_COUNT_CHANGED);
-		}
+//		private function onAgreeAddFriend(buffer : ByteBuffer) : void
+//		{
+//			var isOnLine : Boolean = buffer.readBoolean();
+//			var singleRelation : SingleRelation = new SingleRelation();
+//			singleRelation.mergeFrom(buffer);
+//			var friendInfo : FriendInfo = new FriendInfo();
+//			friendInfo.type = FriendType.RELATION_TYPE_FRIEND;
+//			friendInfo.setupSingleRelation(singleRelation);
+//			friendInfo.isOnLine = isOnLine;
+//			FriendManager.addDetailInfo(friendInfo);
+//			FriendManager.addFriendRemoveBlackAndEnemy(friendInfo.id);
+//			NoticeManager.showNotify("您同意了" + singleRelation.name + "的请求，并已同时添加对方为好友");
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//			if(AppManager.isAppInScene(AppConstant.TARGET_ADD_ME_TO_FRIEND))
+//				EventManager.dispatchEvent(FriendEvent.FRIEND_ADDED_COUNT_CHANGED);
+//		}
 		/**
 		 * 他人同意加好友，此时该人在线
 		 *
 		 * bool 是否在线
 		 * bytes SingleRelation
 		 */
-		private function onOtherAgreeAddFriend(buffer : ByteBuffer) : void
-		{
-			var isOnLine : Boolean = buffer.readBoolean();
-			var singleRelation : SingleRelation = new SingleRelation();
-			var bytes : ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			singleRelation.mergeFrom(bytes);
-			var friendInfo : FriendInfo = new FriendInfo();
-			friendInfo.setupSingleRelation(singleRelation);
-			friendInfo.type = FriendType.RELATION_TYPE_FRIEND;
-			friendInfo.isOnLine = isOnLine;
-			FriendManager.addDetailInfo(friendInfo);
-			FriendManager.addFriendRemoveBlackAndEnemy(friendInfo.id);
-			NoticeManager.showNotify(singleRelation.name + "同意了您的请求，已经成功添加对方为好友。");
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-		}
+//		private function onOtherAgreeAddFriend(buffer : ByteBuffer) : void
+//		{
+//			var isOnLine : Boolean = buffer.readBoolean();
+//			var singleRelation : SingleRelation = new SingleRelation();
+//			var bytes : ByteArray = new ByteArray();
+//			buffer.readBytes(bytes);
+//			singleRelation.mergeFrom(bytes);
+//			var friendInfo : FriendInfo = new FriendInfo();
+//			friendInfo.setupSingleRelation(singleRelation);
+//			friendInfo.type = FriendType.RELATION_TYPE_FRIEND;
+//			friendInfo.isOnLine = isOnLine;
+//			FriendManager.addDetailInfo(friendInfo);
+//			FriendManager.addFriendRemoveBlackAndEnemy(friendInfo.id);
+//			NoticeManager.showNotify(singleRelation.name + "同意了您的请求，已经成功添加对方为好友。");
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//		}
 
 		private function onRefuseAddFriend(buffer : ByteBuffer) : void
 		{
@@ -360,22 +348,22 @@ package com.rpgGame.app.cmdlistener
 		 * bool 是否在线
 		 * bytes SingleRelation
 		 */
-		private function onRecBlackAdded(buffer : ByteBuffer) : void
-		{
-			var isOnLine : Boolean = buffer.readBoolean();
-			var singleRelation : SingleRelation = new SingleRelation();
-			var bytes : ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			singleRelation.mergeFrom(bytes);
-			var friendInfo : FriendInfo = new FriendInfo();
-			friendInfo.setupSingleRelation(singleRelation);
-			friendInfo.type = FriendType.RELATION_TYPE_BLACKLIST;
-			friendInfo.isOnLine = isOnLine;
-			FriendManager.addDetailInfo(friendInfo);
-			NoticeManager.showNotify("你将" + singleRelation.name + "加入了黑名单");
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-			EventManager.dispatchEvent(FriendEvent.BLACK_STATE_CHANGE);
-		}
+//		private function onRecBlackAdded(buffer : ByteBuffer) : void
+//		{
+//			var isOnLine : Boolean = buffer.readBoolean();
+//			var singleRelation : SingleRelation = new SingleRelation();
+//			var bytes : ByteArray = new ByteArray();
+//			buffer.readBytes(bytes);
+//			singleRelation.mergeFrom(bytes);
+//			var friendInfo : FriendInfo = new FriendInfo();
+//			friendInfo.setupSingleRelation(singleRelation);
+//			friendInfo.type = FriendType.RELATION_TYPE_BLACKLIST;
+//			friendInfo.isOnLine = isOnLine;
+//			FriendManager.addDetailInfo(friendInfo);
+//			NoticeManager.showNotify("你将" + singleRelation.name + "加入了黑名单");
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//			EventManager.dispatchEvent(FriendEvent.BLACK_STATE_CHANGE);
+//		}
 
 		/**
 		 * 添加黑名单失败, 附带varint32的失败原因
@@ -471,15 +459,15 @@ package com.rpgGame.app.cmdlistener
 		 *
 		 * 附带SingleRelation的proto
 		 */
-		private function onRecRelationDetailChanged(buffer : ByteBuffer) : void
-		{
-			var singleRelation : SingleRelation = new SingleRelation();
-			var bytes : ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			singleRelation.mergeFrom(bytes);
-			FriendManager.changeDetailInfo(singleRelation);
-			NoticeManager.showNotify(singleRelation.name + "上线了");
-		}
+//		private function onRecRelationDetailChanged(buffer : ByteBuffer) : void
+//		{
+//			var singleRelation : SingleRelation = new SingleRelation();
+//			var bytes : ByteArray = new ByteArray();
+//			buffer.readBytes(bytes);
+//			singleRelation.mergeFrom(bytes);
+//			FriendManager.changeDetailInfo(singleRelation);
+//			NoticeManager.showNotify(singleRelation.name + "上线了");
+//		}
 
 		/**
 		 * 不过是否请求过好友面板信息

@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.info.familyWar
 {
-	import app.message.KingWarMiscProto;
-	import app.message.PrizeProto;
+	
 
 	public class FamilyWarCfgData
 	{
@@ -18,22 +17,22 @@ package com.rpgGame.coreData.info.familyWar
 		public static var  bid_delay_duration : Number; // 竞标每次延时延时的时长
 		public static var  bid_can_delay_times : int; // 竞标期间能够延时的次数
 		public static var  bid_can_delay_before_end  : Number; // 竞标结束之前多少毫秒内算竞标延时
-		public static var  king_family_membe_prize : PrizeProto ; // 王帮奖励
-		public static function setup(cfg:KingWarMiscProto):void
-		{
-			
-			war_prepare_duration = cfg.warPrepareDuration?cfg.warPrepareDuration.toNumber():0;
-			war_duration = cfg.warDuration?cfg.warDuration.toNumber():0;
-			family_leader_level_limit = cfg.guildLeaderLevelLimit;
-			bid_min_limit = cfg.bidMinLimit;
-			trace(FamilyWarCfgData.bid_min_limit);
-			bid_start_before_war_start_duration = cfg.bidStartBeforeWarStartDuration.toNumber();
-			bid_reset_build_token_count = cfg.bidResetBuildTokenCount.toNumber();
-			bid_duration = cfg.bidDuration.toNumber();
-			bid_delay_duration = cfg.bidDelayDuration.toNumber();
-			bid_can_delay_times = cfg.bidCanDelayTimes;
-			bid_can_delay_before_end = cfg.bidCanDelayBeforeEnd.toNumber();
-			king_family_membe_prize = cfg.kingGuildMembePrize;
-		}
+//		public static var  king_family_membe_prize : PrizeProto ; // 王帮奖励
+//		public static function setup(cfg:KingWarMiscProto):void
+//		{
+//			
+//			war_prepare_duration = cfg.warPrepareDuration?cfg.warPrepareDuration.toNumber():0;
+//			war_duration = cfg.warDuration?cfg.warDuration.toNumber():0;
+//			family_leader_level_limit = cfg.guildLeaderLevelLimit;
+//			bid_min_limit = cfg.bidMinLimit;
+//			trace(FamilyWarCfgData.bid_min_limit);
+//			bid_start_before_war_start_duration = cfg.bidStartBeforeWarStartDuration.toNumber();
+//			bid_reset_build_token_count = cfg.bidResetBuildTokenCount.toNumber();
+//			bid_duration = cfg.bidDuration.toNumber();
+//			bid_delay_duration = cfg.bidDelayDuration.toNumber();
+//			bid_can_delay_times = cfg.bidCanDelayTimes;
+//			bid_can_delay_before_end = cfg.bidCanDelayBeforeEnd.toNumber();
+//			king_family_membe_prize = cfg.kingGuildMembePrize;
+//		}
 	}
 }

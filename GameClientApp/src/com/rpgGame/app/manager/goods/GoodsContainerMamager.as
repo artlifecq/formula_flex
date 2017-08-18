@@ -32,7 +32,6 @@ package com.rpgGame.app.manager.goods
 	import flash.utils.Dictionary;
 	
 	import app.message.GoodsType;
-	import app.message.Config.AllGoodsContainerUnlockProto;
 	
 	import feathers.data.ListCollection;
 	
@@ -1383,11 +1382,11 @@ package com.rpgGame.app.manager.goods
 		 * @param allUnlockData
 		 * 
 		 */		
-		public static function setUnlockDataConfig(allUnlockData:AllGoodsContainerUnlockProto):void
-		{
-			BackPackManager.instance.setUnlockData(allUnlockData);
+//		public static function setUnlockDataConfig(allUnlockData:AllGoodsContainerUnlockProto):void
+//		{
+//			BackPackManager.instance.setUnlockData(allUnlockData);
 //			StorageManager.instance.setUnlockData(allUnlockData.storageDatas);
-		}
+//		}
 		
 		public static function setUnlocked(containerID:int, index:int):void
 		{

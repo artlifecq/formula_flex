@@ -33,7 +33,7 @@ package  com.rpgGame.app.ui.common
 		private var btnDec:Button;
 		private var btnMax:Button;
 		private var callBack:Function;
-		private var lab:Label;
+		protected var lab:Label;
 		private var btnMin:Button;
 		
 		private var _deflatMin:int= 1;
@@ -82,6 +82,13 @@ package  com.rpgGame.app.ui.common
 			if (curNum!=maxCount) 
 			{
 				setcurNum(maxCount);
+			}
+		}
+		public function setDefault():void
+		{
+			if (curNum!=_deflatMin) 
+			{
+				setcurNum(_deflatMin);
 			}
 		}
 		private function onTime():void

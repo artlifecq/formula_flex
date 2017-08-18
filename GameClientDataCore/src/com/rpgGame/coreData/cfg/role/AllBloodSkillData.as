@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg.role
 {
-	import app.message.PlanSkillObjProto;
+	
 
 	/**
 	 * 单个方案的技能proto
@@ -17,19 +17,19 @@ package com.rpgGame.coreData.cfg.role
 		/**方案名称*/
 		public var schemeName:String;
 		
-		public function setConfig(proto:PlanSkillObjProto):void
-		{
-			curSkillAry = [];
-			var data:SingleBloodSkillData;
-			
-			for (var i:int = 0; i < proto.curSkills.length; i++) 
-			{
-				data = new SingleBloodSkillData();
-				data.setData(proto.curSkills[i]);
-				curSkillAry.push(data);
-			}
-			
-			schemeName = proto.name;
-		}
+//		public function setConfig(proto:PlanSkillObjProto):void
+//		{
+//			curSkillAry = [];
+//			var data:SingleBloodSkillData;
+//			
+//			for (var i:int = 0; i < proto.curSkills.length; i++) 
+//			{
+//				data = new SingleBloodSkillData();
+//				data.setData(proto.curSkills[i]);
+//				curSkillAry.push(data);
+//			}
+//			
+//			schemeName = proto.name;
+//		}
 	}
 }

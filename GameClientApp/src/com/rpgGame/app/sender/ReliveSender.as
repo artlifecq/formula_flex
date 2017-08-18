@@ -1,7 +1,5 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.SceneModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	public class ReliveSender extends BaseSender
@@ -26,7 +24,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(type);
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_REQUEST_RELIVE, _bytes);
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_REQUEST_RELIVE, _bytes);
 		}
 		
 	}

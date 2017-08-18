@@ -2,8 +2,6 @@ package com.rpgGame.coreData.info.society
 {
 	import com.rpgGame.coreData.SpriteStat;
 
-	import app.message.SpellProto;
-
 	/**
 	 *
 	 * 帮派技能数据
@@ -26,7 +24,7 @@ package com.rpgGame.coreData.info.society
 		/** 需要书院等级 **/
 		public var needCollageLevel : int;
 		/** 技能数据 **/
-		public var proto : SpellProto;
+//		public var proto : SpellProto;
 		public var spriteStat : SpriteStat;
 
 		public function SocietySpellData()

@@ -3,12 +3,10 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.PageSelectUICtrl;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
-	
-	import feathers.controls.Scroller;
-	import feathers.data.ListCollection;
-	import feathers.layout.VerticalLayout;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.TanKuang_Shenqin;
@@ -19,8 +17,10 @@ package com.rpgGame.appModule.guild
 	public class GuildApplyListPanle extends SkinUIPanel
 	{
 		private var _skin:TanKuang_Shenqin;
-		private var _currentPage:int = 0;
-		private var _maxPage:int = 0;
+		private var _pageCtrl:PageSelectUICtrl;
+		private var maxCount:int=7;
+		private var cellList:Vector.<GuildApplyInfoCell>=new Vector.<GuildApplyInfoCell>();
+		private var _applyList:Vector.<GuildApplyInfo>;
 		public function GuildApplyListPanle():void
 		{
 			_skin = new TanKuang_Shenqin();
@@ -28,79 +28,84 @@ package com.rpgGame.appModule.guild
 			initView();
 		}
 		
+		private function showPageData(data:*):void
+		{
+			// TODO Auto Generated method stub
+			var list:Vector.<GuildApplyInfo>=data;
+			var len:int=list.length;
+			for (var i:int = 0; i < maxCount; i++) 
+			{
+				cellList[i].setData(i<len?list[i]:null);
+			}
+		}
 		private function initView():void
 		{
-			_skin.lbNum.isEditable = false;
-			_skin.list.itemRendererType =GuildApplyInfoCell;
-			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			_skin.list.snapToPages = true;
-			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 10;
-			_skin.list.layout = layout;
-			_skin.list.dataProvider = new ListCollection();
+			
+			_pageCtrl=new PageSelectUICtrl(_skin.btnPrev,_skin.btnNext,_skin.lbNum,showPageData);
+			var tmp:GuildApplyInfoCell;
+			var startX:int=16;
+			var startY:int=69;
+			for (var i:int = 0; i < maxCount; i++) 
+			{
+				tmp=new GuildApplyInfoCell(i);
+				tmp.x=startX;
+				tmp.y=startY+i*tmp.height;
+				_skin.container.addChild(tmp);
+				cellList.push(tmp);
+				tmp.setData(null);
+			}
+			MCUtil.BringToTop(_skin.grpFlip);
+			MCUtil.BringToTop(_skin.uiNull);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 			
+			
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
 			EventManager.addEvent(GuildEvent.GET_JOIN_GUILD_LIST,refeashView);
 			EventManager.addEvent(GuildEvent.DELETE_GUILD_INVAITE,onDeleteOne);
-			refeashView(null);
+			//refeashView(null);
 			GuildSender.reqGuildApplyListInfo();
 		}
-		
 		private function onDeleteOne(id:int):void
 		{
 			// TODO Auto Generated method stub
-			var list:Vector.<GuildApplyInfo>=_skin.list.dataProvider.data as Vector.<GuildApplyInfo>;
-			var len:int=list.length;
+			
+			var len:int=_applyList.length;
 			for (var i:int=0;i<len;i++)
 			{
-				if (list[i].id==id) 
+				if (_applyList[i].id==id) 
 				{
 					//list.removeAt(i);
-					_skin.list.dataProvider.removeItem(list[i]);
+					_applyList.removeAt(i);
+					_pageCtrl.setData(_applyList,maxCount);
+					refreshState();
 					break;
 				}
 			}
-			//_skin.list.dataProvider.data=list;
-			requestPage(0);
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			EventManager.removeEvent(GuildEvent.GET_JOIN_GUILD_LIST,refeashView);
 			EventManager.removeEvent(GuildEvent.DELETE_GUILD_INVAITE,onDeleteOne);
 		}
-		private function requestPage(page:int):void
+		private function refreshState():void
 		{
-			if(page<0)
-				page = 0;
-			if(page>_maxPage)
-				page = _maxPage;
-			_currentPage =_skin.list.selectedIndex = page;
-			_skin.lbNum.text = _currentPage.toString()+"/"+_maxPage.toString();
-			_skin.btnPrev.visible = _currentPage>0;
-			_skin.btnNext.visible = _currentPage< _maxPage;
+			_skin.uiNull.visible=_applyList.length==0;
+			_skin.grpFlip.visible=_applyList.length>0;
 		}
-		
 		private function refeashView(list:Vector.<GuildApplyInfo>):void
 		{
-			if(list == null||list.length<=0)
-			{
-				_skin.uiNull.visible = true;
-				_skin.list.visible = false;
-				_maxPage = 0;
-			}else{
-				_skin.uiNull.visible = false;
-				_skin.list.visible = true;
-				_skin.list.dataProvider.data = list;
-				_maxPage = _skin.list.maxVerticalPageIndex;
-			}
-			requestPage(0);
+			_applyList=list;
+			refreshState();
+			_pageCtrl.setData(_applyList,maxCount);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -110,17 +115,14 @@ package com.rpgGame.appModule.guild
 			{
 				case _skin.btnOk:
 					GuildManager.instance().applyOperation(1,-1);
-					_skin.list.dataProvider.removeAll();
+					//_skin.list.dataProvider.removeAll();
+					_applyList.length=0;
+					_pageCtrl.setData(_applyList,maxCount);
 					break;
 				case _skin.btnCancel:
 					GuildManager.instance().applyOperation(0,-1);
-					_skin.list.dataProvider.removeAll();
-					break;
-				case _skin.btnPrev:
-					requestPage(_currentPage-1);
-					break;
-				case _skin.btnNext:
-					requestPage(_currentPage+1);
+					_applyList.length=0;
+					_pageCtrl.setData(_applyList,maxCount);
 					break;
 			}
 		}

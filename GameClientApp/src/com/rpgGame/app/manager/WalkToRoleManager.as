@@ -22,17 +22,13 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	
-	import app.message.SceneTransportProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -289,16 +285,16 @@ package com.rpgGame.app.manager
 			}
 		}
 		
-		public static function walkToTranport(trans : SceneRole) : void
-		{
-			var transId : int = trans.id;
-			var data : SceneTransportProto = TranportsDataManager.getData(transId);
-			if (data)
-			{
-				var polygon : Vector.<Point> = TranportsDataManager.getPolygon(data);
-				var center : Point = MathUtil.getPolygonCenter(polygon);
-				RoleStateUtil.walk(MainRoleManager.actor, center.x, center.y);
-			}
-		}
+//		public static function walkToTranport(trans : SceneRole) : void
+//		{
+//			var transId : int = trans.id;
+//			var data : SceneTransportProto = TranportsDataManager.getData(transId);
+//			if (data)
+//			{
+//				var polygon : Vector.<Point> = TranportsDataManager.getPolygon(data);
+//				var center : Point = MathUtil.getPolygonCenter(polygon);
+//				RoleStateUtil.walk(MainRoleManager.actor, center.x, center.y);
+//			}
+//		}
 	}
 }

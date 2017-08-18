@@ -61,13 +61,16 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-				case RenderUnitType.WEAPON_EFFECT:
-				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
 				case RenderUnitType.ZHANQI:
-				case RenderUnitType.EFFECT:
 				case RenderUnitType.HURT:
 					render.isHiding = false;
 					render.castsShadows = true;
+					break;
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+				case RenderUnitType.EFFECT:
+					render.isHiding = false;
+					render.castsShadows = false;
 					break;
 			}
 		}

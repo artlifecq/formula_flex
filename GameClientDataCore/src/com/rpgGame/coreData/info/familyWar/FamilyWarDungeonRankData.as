@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.info.familyWar
 {
-	import app.message.KingWarBroadcastProto;
-	
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -47,26 +45,26 @@ package com.rpgGame.coreData.info.familyWar
 		
 		public var broadcasts : Vector.<FamilyWarBroadcastData>;
 		/**读取所有的战报广播**/
-		public function readBroadcasts(data:Array):void
-		{
-			if(!broadcasts)
-				broadcasts = new Vector.<FamilyWarBroadcastData>();
-			else
-				broadcasts.length = 0;
-			for each(var oneof:KingWarBroadcastProto in data)
-			{
-				addOneBroadcast(oneof);
-			}
-		}
-		/**添加一条战场广播**/
-		public function addOneBroadcast(oneof:KingWarBroadcastProto):FamilyWarBroadcastData
-		{
-			if(!broadcasts)
-				broadcasts = new Vector.<FamilyWarBroadcastData>();
-			var familyBroadcast : FamilyWarBroadcastData = new FamilyWarBroadcastData();
-			familyBroadcast.setData(oneof);
-			broadcasts.push(familyBroadcast);
-			return familyBroadcast;
-		}
+//		public function readBroadcasts(data:Array):void
+//		{
+//			if(!broadcasts)
+//				broadcasts = new Vector.<FamilyWarBroadcastData>();
+//			else
+//				broadcasts.length = 0;
+//			for each(var oneof:KingWarBroadcastProto in data)
+//			{
+//				addOneBroadcast(oneof);
+//			}
+//		}
+//		/**添加一条战场广播**/
+//		public function addOneBroadcast(oneof:KingWarBroadcastProto):FamilyWarBroadcastData
+//		{
+//			if(!broadcasts)
+//				broadcasts = new Vector.<FamilyWarBroadcastData>();
+//			var familyBroadcast : FamilyWarBroadcastData = new FamilyWarBroadcastData();
+//			familyBroadcast.setData(oneof);
+//			broadcasts.push(familyBroadcast);
+//			return familyBroadcast;
+//		}
 	}
 }

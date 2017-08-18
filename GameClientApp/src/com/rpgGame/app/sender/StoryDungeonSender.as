@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.StoryModuleMessages;
+	
 
 	/**
 	 *
@@ -25,7 +25,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(roleId);
-			send(StoryModuleMessages.C2S_TRY_ENTER_STORY_DUNGEON, _bytes);
+//			send(StoryModuleMessages.C2S_TRY_ENTER_STORY_DUNGEON, _bytes);
 		}
 
 		/**
@@ -37,7 +37,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(triggerId);
-			send(StoryModuleMessages.C2S_RUN_EVENT, _bytes);
+//			send(StoryModuleMessages.C2S_RUN_EVENT, _bytes);
 		}
 
 		/**
@@ -60,7 +60,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.writeVarint64(id);
 			}
-			send(StoryModuleMessages.C2S_REMOVE_MONSTER_OBJ_EVENT, _bytes);
+//			send(StoryModuleMessages.C2S_REMOVE_MONSTER_OBJ_EVENT, _bytes);
 		}
 
 		/**
@@ -72,7 +72,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(isFreeze);
-			send(StoryModuleMessages.C2S_FROZEN_DUNGEON, _bytes);
+//			send(StoryModuleMessages.C2S_FROZEN_DUNGEON, _bytes);
 		}
 	}
 }

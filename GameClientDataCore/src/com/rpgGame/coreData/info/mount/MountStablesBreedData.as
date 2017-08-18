@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.info.mount
 {
-	import app.message.StablesBreedProto;
-	import app.message.StablesBreedType;
+	
 	
 	/**
 	 * 马厩繁育信息 
@@ -31,34 +30,34 @@ package com.rpgGame.coreData.info.mount
 		 * @param data
 		 * 
 		 */		
-		public function setData( data:StablesBreedProto ):void
-		{
-			stablesBreedType = data.type;
-			switch( stablesBreedType )
-			{
-				case StablesBreedType.INVITE://邀请0
-					if( data.inviteTargetId != null )
-					{
-						inviteTargetId = data.inviteTargetId.toNumber();
-					}
-					if( data.inviteExpireTime != null )
-					{
-						inviteExpireTime = data.inviteExpireTime.toNumber();
-					}
-					break;
-				case StablesBreedType.WAIT_LOCK://等待锁定1
-					break;
-				case StablesBreedType.MAKE_LOVE://生宝宝中2
-					if( data.bornTime != null )
-					{
-						bornTime = data.bornTime.toNumber();
-					}
-					break;
-				case StablesBreedType.CANCEL://取消繁育3
-					break;
-				default:
-					break;
-			}
-		}
+//		public function setData( data:StablesBreedProto ):void
+//		{
+//			stablesBreedType = data.type;
+//			switch( stablesBreedType )
+//			{
+//				case StablesBreedType.INVITE://邀请0
+//					if( data.inviteTargetId != null )
+//					{
+//						inviteTargetId = data.inviteTargetId.toNumber();
+//					}
+//					if( data.inviteExpireTime != null )
+//					{
+//						inviteExpireTime = data.inviteExpireTime.toNumber();
+//					}
+//					break;
+//				case StablesBreedType.WAIT_LOCK://等待锁定1
+//					break;
+//				case StablesBreedType.MAKE_LOVE://生宝宝中2
+//					if( data.bornTime != null )
+//					{
+//						bornTime = data.bornTime.toNumber();
+//					}
+//					break;
+//				case StablesBreedType.CANCEL://取消繁育3
+//					break;
+//				default:
+//					break;
+//			}
+//		}
 	}
 }

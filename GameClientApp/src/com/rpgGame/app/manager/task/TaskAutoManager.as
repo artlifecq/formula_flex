@@ -107,7 +107,6 @@ package com.rpgGame.app.manager.task
 			_taskType=type;
 			_taskTarget=tar;
 			missionType=TaskMissionManager.getTaskDataByType(taskType).q_mission_type;
-			Lyt.a("missionType:"+missionType);
 			changeSub();
 			TrusteeshipManager.getInstance().stopAll();
 			SceneRoleSelectManager.selectedRole=null;
@@ -383,7 +382,7 @@ package com.rpgGame.app.manager.task
 			
 		}
 		private function gotoTaskonArrive(data :Object=null):void
-		{Lyt.a("missionType22:"+missionType);
+		{
 			switch(missionType)
 			{
 				case TaskType.SUB_CONVERSATION:

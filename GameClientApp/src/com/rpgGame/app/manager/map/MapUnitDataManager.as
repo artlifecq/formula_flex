@@ -18,8 +18,6 @@ package com.rpgGame.app.manager.map
 	
 	import flash.utils.ByteArray;
 	
-	import app.cmd.SceneModuleMessages;
-	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
@@ -254,7 +252,7 @@ package com.rpgGame.app.manager.map
 
 			_bytes.clear();
 			_bytes.writeVarint32(type);
-			send(SceneModuleMessages.C2S_GET_SURROUNDING_SCENE_INFO, _bytes);
+//			send(SceneModuleMessages.C2S_GET_SURROUNDING_SCENE_INFO, _bytes);
 		}
 
 //		/**附近的队伍信息，每个队伍中包含的成员信息*/

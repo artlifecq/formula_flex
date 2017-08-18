@@ -54,7 +54,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
-			temp.styleName = "ui/app/beibao/icons/bianshi/hong/baoji.png";
+			temp.styleName = "ui/icon/item/36/1002.png";
 			temp.x = 14;
 			temp.y = 8;
 			return temp;

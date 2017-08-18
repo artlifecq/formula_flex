@@ -3,9 +3,6 @@ package com.rpgGame.coreData.info.item
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
-	import app.message.MountProto;
-	import app.message.MountSpellsProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -28,7 +25,7 @@ package com.rpgGame.coreData.info.item
 		/** 转化属性 **/
 		private var _mountGrowthTransStat:SpriteStat;
 		/** 技能属性Proto **/
-		public var spells:MountSpellsProto;
+		public var spells:Object;
 		
 		/** 经验 **/
 		public var exp:Number;
@@ -65,39 +62,39 @@ package com.rpgGame.coreData.info.item
 		 * @param data
 		 * 
 		 */		
-		public function setMountBreastCardInfo( data:MountProto ):void
-		{
-			//基础属性
-//			bornStat = data.bornStat;
-			_mountBornStat.setData( bornStat );
-			//成长属性
-//			growthStat = data.growthStat;
-			_mountGrowthStat.setData( growthStat );
-			//转化率属性
-//			growthTransStat = data.growthTransStat;
-			_mountGrowthTransStat.setData( growthTransStat );			
-
-			spells = data.mountSpells;
-			id = data.id;
-			exp = data.exp.toNumber();
-			hungerDegree = data.hungerDegree;
-			isBreed = data.isBreed;
-			mountLevel = data.level;
-			lifeTime = data.lifeTime;
-			sex = data.sex;
-			unidentified = data.unidentified;
-			vitality = data.vitality;
-			if( data.vitalityExp != null )
-			{
-				vitalityExp = data.vitalityExp.toNumber();
-			}
-			
-			//设置坐骑的技能数据
-			for (var i:int = 0; i < spells.spellBookId.length; i++) 
-			{
-				spellMap.add( i, spells.spellBookId[i] );
-			}
-		}
+//		public function setMountBreastCardInfo( data:MountProto ):void
+//		{
+//			//基础属性
+////			bornStat = data.bornStat;
+//			_mountBornStat.setData( bornStat );
+//			//成长属性
+////			growthStat = data.growthStat;
+//			_mountGrowthStat.setData( growthStat );
+//			//转化率属性
+////			growthTransStat = data.growthTransStat;
+//			_mountGrowthTransStat.setData( growthTransStat );			
+//
+//			spells = data.mountSpells;
+//			id = data.id;
+//			exp = data.exp.toNumber();
+//			hungerDegree = data.hungerDegree;
+//			isBreed = data.isBreed;
+//			mountLevel = data.level;
+//			lifeTime = data.lifeTime;
+//			sex = data.sex;
+//			unidentified = data.unidentified;
+//			vitality = data.vitality;
+//			if( data.vitalityExp != null )
+//			{
+//				vitalityExp = data.vitalityExp.toNumber();
+//			}
+//			
+//			//设置坐骑的技能数据
+//			for (var i:int = 0; i < spells.spellBookId.length; i++) 
+//			{
+//				spellMap.add( i, spells.spellBookId[i] );
+//			}
+//		}
 		
 		/**
 		 * 获取所有的坐骑技能数据 

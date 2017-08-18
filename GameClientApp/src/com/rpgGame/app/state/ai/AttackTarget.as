@@ -14,8 +14,6 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Point;
-	
-	import app.message.SpellProto;
 
 	/**
 	 *
@@ -132,14 +130,14 @@ package com.rpgGame.app.state.ai
 			}
 			transition(AIStateType.AI_NONE);
 		}
-		private function onSortSpell(spellA : SpellProto, spellB : SpellProto) : int
-		{
-			if (spellA.spellType > spellA.spellType)
-				return 1;
-			else
-				return -1;
-			return 0;
-		}
+//		private function onSortSpell(spellA : SpellProto, spellB : SpellProto) : int
+//		{
+//			if (spellA.spellType > spellA.spellType)
+//				return 1;
+//			else
+//				return -1;
+//			return 0;
+//		}
 
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{

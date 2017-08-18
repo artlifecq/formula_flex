@@ -1,4 +1,3 @@
-
 package com.rpgGame.coreData.cfg
 {
 	import com.gameClient.log.GameLog;

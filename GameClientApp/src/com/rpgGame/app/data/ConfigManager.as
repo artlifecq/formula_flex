@@ -1,11 +1,8 @@
 package com.rpgGame.app.data
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.friend.FriendManager;
-	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	import com.rpgGame.app.manager.mount.ZhanQiExtraItemInfo;
-	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
@@ -15,14 +12,12 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
-	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
-	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.cfg.DieCfgData;
@@ -30,7 +25,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
-	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
@@ -50,10 +44,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
-	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
-	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.MibaoCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
@@ -67,15 +59,12 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
-	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
-	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
-	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
@@ -89,13 +78,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.WorldBossCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
-	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.cheats.CheatsNodeCfg;
-	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
-	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
-	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
-	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinSkillData;
 	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
@@ -115,20 +99,16 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.model.HeroModelCfgData;
 	import com.rpgGame.coreData.cfg.model.MountModelCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
-	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.cfg.sound.GameSoundCfgData;
-	import com.rpgGame.coreData.cfg.task.TaskCfgData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Config;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.familyWar.FamilyWarCfgData;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	import app.message.Config;
 	import app.message.ServiceConfig;
 	
 	import org.game.netCore.net_protobuff.BytesUtil;
@@ -364,7 +344,7 @@ package com.rpgGame.app.data
 			byte.readBytes(configBytes, 0, configLen);
 			configBytes.uncompress();
 			var config : Config = new Config();
-			config.mergeFrom(configBytes);
+//			config.mergeFrom(configBytes);
 			
 			//ServiceConfig描述这个服的单独配置，如开服时间，是否已合过服等等
 			var serviceConfigLen : int = BytesUtil.readVarint32(byte);
@@ -396,41 +376,41 @@ package com.rpgGame.app.data
 			
 			
 			//传送门
-			if (config.hasSceneTranports)
-			{
+//			if (config.hasSceneTranports)
+//			{
 				//TranportsDataManager.setConfig(config.sceneTranports);
-			}
+//			}
 			
-			if (config.relationConfig)
-			{
-				FriendManager.MAX_FRIEND_NUM = config.relationConfig.friendCountLimit;
-				FriendManager.MAX_BLACK_NUM = config.relationConfig.blackCountLimit;
-			}
+//			if (config.relationConfig)
+//			{
+//				FriendManager.MAX_FRIEND_NUM = config.relationConfig.friendCountLimit;
+//				FriendManager.MAX_BLACK_NUM = config.relationConfig.blackCountLimit;
+//			}
 			
 			//采集
-			CollectCfgData.setConfig(config.collecObjectConfig);
+//			CollectCfgData.setConfig(config.collecObjectConfig);
 			//聊天
-			ChatCfgData.setChatConfig(config.chatConfig, config.miscConfig.paidChatGoodsId);
+//			ChatCfgData.setChatConfig(config.chatConfig, config.miscConfig.paidChatGoodsId);
 			//任务
-			TaskCfgData.setConfig(config.taskConfig);
+//			TaskCfgData.setConfig(config.taskConfig);
 			//复活相关配置
-			ReliveCfgData.setConfig(config.reliveConfig);
+//			ReliveCfgData.setConfig(config.reliveConfig);
 			//物品
 			//			ItemCfgData.setAllCfgData(config.goodsConfig);
 			//背包仓库解锁格子数据
-			GoodsContainerMamager.setUnlockDataConfig(config.allUnlockData);
+//			GoodsContainerMamager.setUnlockDataConfig(config.allUnlockData);
 			//帮派
-			SocietyStaticConfigData.setConfig(config.family);
+//			SocietyStaticConfigData.setConfig(config.family);
 			//商店配置
 			//ShopCfgData.setConfig(config.shopConfig);
 			//职业数据
-			RaceCfgData.setConfig(config.raceConfig);
+//			RaceCfgData.setConfig(config.raceConfig);
 			//邮箱
-			MailCfgData.setConfig(config.mailConfig);
+//			MailCfgData.setConfig(config.mailConfig);
 			//答题
-			DaTiCfgData.setConfig(config.exam);
+//			DaTiCfgData.setConfig(config.exam);
 			//加点配置
-			AddSpriteStatCfgData.setConfig(config.addSpriteStatConfig);
+//			AddSpriteStatCfgData.setConfig(config.addSpriteStatConfig);
 			//物品合成
 			//			CombineCfgData.setConfig(config.equipmentConfig.combineDatas);
 			//装备合成
@@ -444,34 +424,34 @@ package com.rpgGame.app.data
 			//装备强化
 			//			RefineCfgData.setConfig(config.equipmentConfig.refineDatas);
 			//王城战配置
-			FamilyWarCfgData.setup(config.kingWarConfig.miscData);
+//			FamilyWarCfgData.setup(config.kingWarConfig.miscData);
 			//运镖配置
-			BiaoCfgData.setConfig(config.biaoConfig);
+//			BiaoCfgData.setConfig(config.biaoConfig);
 			//迷宫
-			MazeCfgData.setup(config.mazeConfig);
+//			MazeCfgData.setup(config.mazeConfig);
 			//摆摊
-			StallCfgData.setup(config.stallConfig);
+//			StallCfgData.setup(config.stallConfig);
 			
 			
-			if (config.biaoConfig)
-			{ //镖局配置
+//			if (config.biaoConfig)
+//			{ //镖局配置
 				//				BiaoJuManager.setMiscData(config.biaoConfig.biaoJuMisc);
-			}
+//			}
 			//坐骑
-			MountConfigData.setConfig(config.mount);
+//			MountConfigData.setConfig(config.mount);
 			//讨逆配置
-			CountryTaoNiCfgData.setConfig(config.taoNiConfig);
+//			CountryTaoNiCfgData.setConfig(config.taoNiConfig);
 			//税收配置
-			TaxCfgData.setConfig(config.allTaxConfig);
-			if (config.hasCountryConfig)
-			{
-				CountryStaticConfigData.setConfig(config.countryConfig);
-			}
+//			TaxCfgData.setConfig(config.allTaxConfig);
+//			if (config.hasCountryConfig)
+//			{
+//				CountryStaticConfigData.setConfig(config.countryConfig);
+//			}
 			//国战配置
-			CountryWarCfgData.setConfig(config.countryWarConfig);
-			
-			if (config.hasRelationConfig)
-				FriendCfgData.setup(config.relationConfig);
+//			CountryWarCfgData.setConfig(config.countryWarConfig);
+//			
+//			if (config.hasRelationConfig)
+//				FriendCfgData.setup(config.relationConfig);
 		}
 	}
 }

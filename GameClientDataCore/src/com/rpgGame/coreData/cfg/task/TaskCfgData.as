@@ -1,11 +1,6 @@
 package com.rpgGame.coreData.cfg.task
 {
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
-	import com.rpgGame.coreData.utils.ProtoParseToInfo;
-	
-	import app.message.TaskConfig;
-	import app.message.AllChapterTaskConfig.ChapterTaskConfig;
 	
 	/**
 	 *
@@ -50,97 +45,97 @@ package com.rpgGame.coreData.cfg.task
 		
 		
 		/** 设置配置常量数据。(四种帮贡物品... */
-		public static function setConfig(config:TaskConfig):void
-		{
-			if( config == null )
-				return;
-			//密信
-			MiXinCfgData.setConfig( config.miXinConfig );
-			//偷猪
-			TouZhuCfgData.setConfig( config.touZhuConfig );
-			//偷经
-			TouJingCfgData.setConfig( config.touJingConfig );
-			
-			//剧情任务
-			if(config.hasChapterTask)
-				_storyTaskChapterArr = config.chapterTask.data;
-			else
-				GameLog.addShow("剧情任务读取失败");
-			var len:int;
-			var i:int;
-			var value:int;
-			//机缘任务
-			var arr:Array;
-			if(config.hasChanceTask)
-			{
-				_chanceTaskAcceptableCount = config.chanceTask.chanceTaskAcceptableCount;
-				_chanceTaskMaxCount = config.chanceTask.chanceTaskMaxCount;
-				_chanceTaskSwallowableCount = config.chanceTask.chanceTaskSwallowableCount;
-				_chanceTaskSwallowableVipAddCount = config.chanceTask.chanceTaskSwallowableVipAddCount;
-				_chanceTaskSwallowCost = config.chanceTask.chanceTaskSwallowCost;
-				
-				arr = config.chanceTask.autoCompleteCost;
-				if(arr)
-				{
-					len = arr.length;
-					_chanceTaskAutoCompleteCostVec = new Vector.<int>();
-					for (i = 0; i < len; i++) 
-					{
-						value = arr[i];
-						_chanceTaskAutoCompleteCostVec[i] = value;
-					}
-				}
-				
-				arr = config.chanceTask.autoCompleteLimit;
-				if(arr)
-				{
-					len = arr.length;
-					_chanceTaskAutoCompleteLimitVec = new Vector.<int>();
-					for(i = 0;i < len ; i++) 
-					{
-						value = arr[i];
-						_chanceTaskAutoCompleteLimitVec.push(value);
-					}
-				}
-				arr = config.chanceTask.swallowMinPercent;
-				if(arr)
-				{
-					len = arr.length;
-					_chanceTaskSwallowMinPercentVec = new Vector.<int>();
-					for(i = 0;i < len; i++) 
-					{
-						value = arr[i];
-						_chanceTaskSwallowMinPercentVec.push(value);
-					}
-				}
-				arr = config.chanceTask.swallowMaxPercent;
-				if(arr)
-				{
-					len = arr.length;
-					_chanceTaskSwallowMaxPercentVec = new Vector.<int>();
-					for(i = 0;i < len; i++) 
-					{
-						_chanceTaskSwallowMaxPercentVec.push(int(arr[i]));
-					}
-				}
-			}
-			
-			//日常任务
-			if(config.hasDailyTask)
-			{
-				_dailyTaskMaxRound = config.dailyTask.dailyTaskMaxRound;
-				_dailyTaskExtraPrizeInfo = ProtoParseToInfo.decodePrizeProto(config.dailyTask.dailyTaskExtraPrize);
-				_dailyTaskReduceDiffiCost = config.dailyTask.dailyTaskReduceDiffiCost;
-				_dailyTaskAddPrizeCost = config.dailyTask.dailyTaskAddPrizeCost;
-				_dailyTaskAutoCompleteCost = config.dailyTask.dailyTaskAutoCompleteCost;
-			}
-			//帮会任务
-			//			guildTaskMaxRound = config.guildTaskMaxRound;
-			//			guildTaskExtraPrizeInfo = ProtoParseToInfo.decodePrizeProto(config.guildTaskExtraPrize);
-			//			guildTaskAutoCompleteCost = config.guildTaskAutoCompleteCost;
-			
-			//---------------
-		}
+//		public static function setConfig(config:TaskConfig):void
+//		{
+//			if( config == null )
+//				return;
+//			//密信
+//			MiXinCfgData.setConfig( config.miXinConfig );
+//			//偷猪
+//			TouZhuCfgData.setConfig( config.touZhuConfig );
+//			//偷经
+//			TouJingCfgData.setConfig( config.touJingConfig );
+//			
+//			//剧情任务
+//			if(config.hasChapterTask)
+//				_storyTaskChapterArr = config.chapterTask.data;
+//			else
+//				GameLog.addShow("剧情任务读取失败");
+//			var len:int;
+//			var i:int;
+//			var value:int;
+//			//机缘任务
+//			var arr:Array;
+//			if(config.hasChanceTask)
+//			{
+//				_chanceTaskAcceptableCount = config.chanceTask.chanceTaskAcceptableCount;
+//				_chanceTaskMaxCount = config.chanceTask.chanceTaskMaxCount;
+//				_chanceTaskSwallowableCount = config.chanceTask.chanceTaskSwallowableCount;
+//				_chanceTaskSwallowableVipAddCount = config.chanceTask.chanceTaskSwallowableVipAddCount;
+//				_chanceTaskSwallowCost = config.chanceTask.chanceTaskSwallowCost;
+//				
+//				arr = config.chanceTask.autoCompleteCost;
+//				if(arr)
+//				{
+//					len = arr.length;
+//					_chanceTaskAutoCompleteCostVec = new Vector.<int>();
+//					for (i = 0; i < len; i++) 
+//					{
+//						value = arr[i];
+//						_chanceTaskAutoCompleteCostVec[i] = value;
+//					}
+//				}
+//				
+//				arr = config.chanceTask.autoCompleteLimit;
+//				if(arr)
+//				{
+//					len = arr.length;
+//					_chanceTaskAutoCompleteLimitVec = new Vector.<int>();
+//					for(i = 0;i < len ; i++) 
+//					{
+//						value = arr[i];
+//						_chanceTaskAutoCompleteLimitVec.push(value);
+//					}
+//				}
+//				arr = config.chanceTask.swallowMinPercent;
+//				if(arr)
+//				{
+//					len = arr.length;
+//					_chanceTaskSwallowMinPercentVec = new Vector.<int>();
+//					for(i = 0;i < len; i++) 
+//					{
+//						value = arr[i];
+//						_chanceTaskSwallowMinPercentVec.push(value);
+//					}
+//				}
+//				arr = config.chanceTask.swallowMaxPercent;
+//				if(arr)
+//				{
+//					len = arr.length;
+//					_chanceTaskSwallowMaxPercentVec = new Vector.<int>();
+//					for(i = 0;i < len; i++) 
+//					{
+//						_chanceTaskSwallowMaxPercentVec.push(int(arr[i]));
+//					}
+//				}
+//			}
+//			
+//			//日常任务
+//			if(config.hasDailyTask)
+//			{
+//				_dailyTaskMaxRound = config.dailyTask.dailyTaskMaxRound;
+//				_dailyTaskExtraPrizeInfo = ProtoParseToInfo.decodePrizeProto(config.dailyTask.dailyTaskExtraPrize);
+//				_dailyTaskReduceDiffiCost = config.dailyTask.dailyTaskReduceDiffiCost;
+//				_dailyTaskAddPrizeCost = config.dailyTask.dailyTaskAddPrizeCost;
+//				_dailyTaskAutoCompleteCost = config.dailyTask.dailyTaskAutoCompleteCost;
+//			}
+//			//帮会任务
+//			//			guildTaskMaxRound = config.guildTaskMaxRound;
+//			//			guildTaskExtraPrizeInfo = ProtoParseToInfo.decodePrizeProto(config.guildTaskExtraPrize);
+//			//			guildTaskAutoCompleteCost = config.guildTaskAutoCompleteCost;
+//			
+//			//---------------
+//		}
 		
 		/**
 		 * 获取剧情任务总章数
@@ -158,16 +153,16 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 
 		 * 
 		 */		
-		public static function getStoryTaskData(chapter:int):ChapterTaskConfig
-		{
-			if( chapter < 1 )
-				chapter = 1;
-			
-			if( chapter >= _storyTaskChapterArr.length )
-				chapter = _storyTaskChapterArr.length;
-			
-			return _storyTaskChapterArr[ chapter -1 ];
-		}
+//		public static function getStoryTaskData(chapter:int):ChapterTaskConfig
+//		{
+//			if( chapter < 1 )
+//				chapter = 1;
+//			
+//			if( chapter >= _storyTaskChapterArr.length )
+//				chapter = _storyTaskChapterArr.length;
+//			
+//			return _storyTaskChapterArr[ chapter -1 ];
+//		}
 		
 		/**
 		 * 获取全部剧情任务
@@ -186,26 +181,26 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 一个数组，[节号(1表示第一节)，任务在节中的序号(1表示第一个)]
 		 * 
 		 */
-		public static function getStoryTaskSectionByCountInChapter( chapter:int, countInChapter:int ):Array
-		{
-			if( _storyTaskChapterArr != null )
-			{
-				var index:int = chapter - 1;
-				if( index >= 0 && index < _storyTaskChapterArr.length )
-				{
-					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
-					var len:int = taskCfg.chapterTaskCount;
-					var totalCount:int;
-					var count:int = len;
-					if(countInChapter <= totalCount + count)
-					{
-						return [ 1,countInChapter - totalCount];
-					}
-					totalCount += count;
-				}
-			}
-			return null;
-		}
+//		public static function getStoryTaskSectionByCountInChapter( chapter:int, countInChapter:int ):Array
+//		{
+//			if( _storyTaskChapterArr != null )
+//			{
+//				var index:int = chapter - 1;
+//				if( index >= 0 && index < _storyTaskChapterArr.length )
+//				{
+//					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
+//					var len:int = taskCfg.chapterTaskCount;
+//					var totalCount:int;
+//					var count:int = len;
+//					if(countInChapter <= totalCount + count)
+//					{
+//						return [ 1,countInChapter - totalCount];
+//					}
+//					totalCount += count;
+//				}
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 根据章序号获取章名
@@ -213,19 +208,19 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 
 		 * 
 		 */
-		public static function getStoryTaskChapterName( chapter:int ):String
-		{
-			if(_storyTaskChapterArr)
-			{
-				var index:int = chapter - 1;
-				if(index >= 0 && index < _storyTaskChapterArr.length)
-				{
-					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
-					return taskCfg.chapterName.toString();
-				}
-			}
-			return null;
-		}
+//		public static function getStoryTaskChapterName( chapter:int ):String
+//		{
+//			if(_storyTaskChapterArr)
+//			{
+//				var index:int = chapter - 1;
+//				if(index >= 0 && index < _storyTaskChapterArr.length)
+//				{
+//					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
+//					return taskCfg.chapterName.toString();
+//				}
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 根据章序号获取图标
@@ -233,19 +228,19 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 
 		 * 
 		 */
-		public static function getStoryTaskChapterIcon(chapter:int):String
-		{
-			if(_storyTaskChapterArr)
-			{
-				var index:int = chapter - 1;
-				if(index >= 0 && index < _storyTaskChapterArr.length)
-				{
-					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
-					return taskCfg.chapterIcon.toString();
-				}
-			}
-			return null;
-		}
+//		public static function getStoryTaskChapterIcon(chapter:int):String
+//		{
+//			if(_storyTaskChapterArr)
+//			{
+//				var index:int = chapter - 1;
+//				if(index >= 0 && index < _storyTaskChapterArr.length)
+//				{
+//					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
+//					return taskCfg.chapterIcon.toString();
+//				}
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 根据章序号获取章节标题
@@ -253,19 +248,19 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 
 		 * 
 		 */
-		public static function getStoryTaskChapterTitle( chapter:int ):String
-		{
-			if(_storyTaskChapterArr)
-			{
-				var index:int = chapter - 1;
-				if(index >= 0 && index < _storyTaskChapterArr.length)
-				{
-					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
-					return taskCfg.chapterTitle.toString();
-				}
-			}
-			return null;
-		}
+//		public static function getStoryTaskChapterTitle( chapter:int ):String
+//		{
+//			if(_storyTaskChapterArr)
+//			{
+//				var index:int = chapter - 1;
+//				if(index >= 0 && index < _storyTaskChapterArr.length)
+//				{
+//					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
+//					return taskCfg.chapterTitle.toString();
+//				}
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 根据章序号获取描述
@@ -273,19 +268,19 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 
 		 * 
 		 */
-		public static function getStoryTaskChapterDesc(chapter:int):String
-		{
-			if(_storyTaskChapterArr)
-			{
-				var index:int = chapter - 1;
-				if(index >= 0 && index < _storyTaskChapterArr.length)
-				{
-					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
-					return taskCfg.chapterDesc.toString();
-				}
-			}
-			return null;
-		}
+//		public static function getStoryTaskChapterDesc(chapter:int):String
+//		{
+//			if(_storyTaskChapterArr)
+//			{
+//				var index:int = chapter - 1;
+//				if(index >= 0 && index < _storyTaskChapterArr.length)
+//				{
+//					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
+//					return taskCfg.chapterDesc.toString();
+//				}
+//			}
+//			return null;
+//		}
 		
 		/**
 		 * 根据章序号获取任务个数
@@ -293,19 +288,19 @@ package com.rpgGame.coreData.cfg.task
 		 * @return 
 		 * 
 		 */
-		public static function getStoryTaskChapterNumber(chapter:int):int
-		{
-			if( _storyTaskChapterArr != null )
-			{
-				var index:int = chapter - 1;
-				if(index >= 0 && index < _storyTaskChapterArr.length)
-				{
-					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
-					return taskCfg.chapterTaskCount;
-				}
-			}
-			return 0;
-		}
+//		public static function getStoryTaskChapterNumber(chapter:int):int
+//		{
+//			if( _storyTaskChapterArr != null )
+//			{
+//				var index:int = chapter - 1;
+//				if(index >= 0 && index < _storyTaskChapterArr.length)
+//				{
+//					var taskCfg:ChapterTaskConfig = _storyTaskChapterArr[index];
+//					return taskCfg.chapterTaskCount;
+//				}
+//			}
+//			return 0;
+//		}
 		//-----------------------------------------------
 		//-----------------------------------------------
 		/**

@@ -59,7 +59,7 @@ package com.rpgGame.app.ui.main.chat
 					_defaultFormat.size = 14;
 					_defaultFormat.align = TextFieldAutoSize.LEFT;
 					_defaultFormat.letterSpacing = 1;
-					_defaultFormat.leading = 0;
+					_defaultFormat.leading = 10;
 				}
 				
 				textFormat = _defaultFormat;

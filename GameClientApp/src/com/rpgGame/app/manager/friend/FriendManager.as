@@ -22,13 +22,6 @@ package com.rpgGame.app.manager.friend
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	import com.rpgGame.coreData.type.FriendType;
 	
-	import app.message.AllClientRelationDetail;
-	import app.message.ClientFriendProto;
-	import app.message.ClientRelation;
-	import app.message.ClientRelationDetail;
-	import app.message.EnemyProto;
-	import app.message.SingleRelation;
-	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	
@@ -76,13 +69,13 @@ package com.rpgGame.app.manager.friend
 			TimerServer.addLoop(onTimeTick, 1000);
 		}
 		/**设置基础数据**/
-		public static function setBasicRelation(relation : ClientRelation) : void
-		{
-			setBaseBlack(relation.blackId);
-			setBaseEnemy(relation.enemyList);
-			setBaseFriend(relation.friends);
-			forbidBeenAddedAsFriend = relation.forbidBeenAddedAsFriend;
-		}
+//		public static function setBasicRelation(relation : ClientRelation) : void
+//		{
+//			setBaseBlack(relation.blackId);
+//			setBaseEnemy(relation.enemyList);
+//			setBaseFriend(relation.friends);
+//			forbidBeenAddedAsFriend = relation.forbidBeenAddedAsFriend;
+//		}
 		//----------------------tools
 		public static function getHashByType(type:int):HashMap
 		{
@@ -109,19 +102,19 @@ package com.rpgGame.app.manager.friend
 		 * @param array
 		 * 
 		 */		
-		private static function setBaseFriend(array:Array):void
-		{
-			var friendInfo : FriendInfo;
-			for each(var data : ClientFriendProto in array)
-			{
-				if(!data)
-					continue;
-				friendInfo = new FriendInfo();
-				friendInfo.setup(data);
-				friendInfo.type = FriendType.RELATION_TYPE_FRIEND;
-				_friendHash.add(friendInfo.id,friendInfo);
-			}
-		}
+//		private static function setBaseFriend(array:Array):void
+//		{
+//			var friendInfo : FriendInfo;
+//			for each(var data : ClientFriendProto in array)
+//			{
+//				if(!data)
+//					continue;
+//				friendInfo = new FriendInfo();
+//				friendInfo.setup(data);
+//				friendInfo.type = FriendType.RELATION_TYPE_FRIEND;
+//				_friendHash.add(friendInfo.id,friendInfo);
+//			}
+//		}
 		
 		public static function getMaxFriendNum():int
 		{
@@ -164,35 +157,35 @@ package com.rpgGame.app.manager.friend
 		 * @param array
 		 * 
 		 */		
-		private static function setBaseEnemy(array:Array):void
-		{
-			var enemy : EnemyInfo;
-			for each(var data : EnemyProto  in array)
-			{
-				if(!data)
-					continue;
-				enemy = new EnemyInfo();
-				enemy.setup(data);
-				enemy.type = FriendType.RELATION_TYPE_ENEMY;
-				_enemyHash.add(enemy.id,enemy);
-			}
-		}
+//		private static function setBaseEnemy(array:Array):void
+//		{
+//			var enemy : EnemyInfo;
+//			for each(var data : EnemyProto  in array)
+//			{
+//				if(!data)
+//					continue;
+//				enemy = new EnemyInfo();
+//				enemy.setup(data);
+//				enemy.type = FriendType.RELATION_TYPE_ENEMY;
+//				_enemyHash.add(enemy.id,enemy);
+//			}
+//		}
 		
 		public static function addEnemyRelation(enemy:EnemyInfo):void
 		{
 			_enemyHash.add(enemy.id,enemy);
 		}
 		
-		public static function setEnemyRelation(proto:EnemyProto):void
-		{
-			if(!proto || !proto.enemyId)
-				return;
-			var enemy : EnemyInfo = _enemyHash.getValue(proto.enemyId.toNumber());
-			if(!enemy)
-				return;
-			enemy.setup(proto);
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-		}
+//		public static function setEnemyRelation(proto:EnemyProto):void
+//		{
+//			if(!proto || !proto.enemyId)
+//				return;
+//			var enemy : EnemyInfo = _enemyHash.getValue(proto.enemyId.toNumber());
+//			if(!enemy)
+//				return;
+//			enemy.setup(proto);
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//		}
 		/**
 		 * 设置黑名单 
 		 * @param array
@@ -257,37 +250,37 @@ package com.rpgGame.app.manager.friend
 		 * @param clientRelationDetail
 		 *
 		 */
-		public static function setAllRelationDetail(allClient : AllClientRelationDetail) : void
-		{
-			var len : int = allClient.detail.length;
-			var baseInfo : FriendBaseInfo;
-			for (var i : int = 0; i < len; i++)
-			{
-				var client : ClientRelationDetail = allClient.detail[i];
-				baseInfo = _friendHash.getValue(client.detail.id.toNumber());
-				if(baseInfo)
-				{
-					baseInfo.setupSingleRelation(client.detail);
-					baseInfo.isOnLine = client.isOnline;
-				}
-				
-				baseInfo = _enemyHash.getValue(client.detail.id.toNumber());
-				if(baseInfo)
-				{
-					baseInfo.setupSingleRelation(client.detail);
-					baseInfo.isOnLine = client.isOnline;
-				}
-				
-				baseInfo = _blackHash.getValue(client.detail.id.toNumber());
-				if(baseInfo)
-				{
-					baseInfo.setupSingleRelation(client.detail);
-					baseInfo.isOnLine = client.isOnline;
-				}
-			}
-			
-			EventManager.dispatchEvent(FriendEvent.FRIEND_ALL_LIST_INIT);
-		}
+//		public static function setAllRelationDetail(allClient : AllClientRelationDetail) : void
+//		{
+//			var len : int = allClient.detail.length;
+//			var baseInfo : FriendBaseInfo;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				var client : ClientRelationDetail = allClient.detail[i];
+//				baseInfo = _friendHash.getValue(client.detail.id.toNumber());
+//				if(baseInfo)
+//				{
+//					baseInfo.setupSingleRelation(client.detail);
+//					baseInfo.isOnLine = client.isOnline;
+//				}
+//				
+//				baseInfo = _enemyHash.getValue(client.detail.id.toNumber());
+//				if(baseInfo)
+//				{
+//					baseInfo.setupSingleRelation(client.detail);
+//					baseInfo.isOnLine = client.isOnline;
+//				}
+//				
+//				baseInfo = _blackHash.getValue(client.detail.id.toNumber());
+//				if(baseInfo)
+//				{
+//					baseInfo.setupSingleRelation(client.detail);
+//					baseInfo.isOnLine = client.isOnline;
+//				}
+//			}
+//			
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_ALL_LIST_INIT);
+//		}
 		
 		/**
 		 * 更新详细数据到指定类型的hashmap
@@ -345,16 +338,16 @@ package com.rpgGame.app.manager.friend
 			return baseInfo;
 		}
 		
-		public static function changeDetailInfo(singleRelation : SingleRelation) : void
-		{
-			var id : Number = singleRelation.id.toNumber();
-			var baseInfo : FriendBaseInfo = _friendHash.getValue(id);
-			if(!baseInfo)
-				return;
-			baseInfo.setupSingleRelation(singleRelation);
-			baseInfo.isOnLine = true;
-			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
-		}
+//		public static function changeDetailInfo(singleRelation : SingleRelation) : void
+//		{
+//			var id : Number = singleRelation.id.toNumber();
+//			var baseInfo : FriendBaseInfo = _friendHash.getValue(id);
+//			if(!baseInfo)
+//				return;
+//			baseInfo.setupSingleRelation(singleRelation);
+//			baseInfo.isOnLine = true;
+//			EventManager.dispatchEvent(FriendEvent.FRIEND_STATE_CHANGE);
+//		}
 		
 		public static function detailInfoOffLine(id : Number) : void
 		{

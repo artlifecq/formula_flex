@@ -1,32 +1,46 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.renderers.DefaultListItemRenderer;
-	
 	import org.mokylin.skin.app.banghui.ItemShenqin;
+	import org.mokylin.skin.common.ItemBg;
 	
-	public class GuildApplyInfoCell extends DefaultListItemRenderer
+	public class GuildApplyInfoCell extends SkinUI
 	{
 		private var _skin:ItemShenqin;
-		public function GuildApplyInfoCell():void
-		{
-			super();
-		}
-		
-		override protected function initialize():void
+		private var info:GuildApplyInfo;
+		private var index:int;
+		public function GuildApplyInfoCell(i:int):void
 		{
 			_skin = new ItemShenqin();
-			_skin.toSprite(this);
+			super(_skin);
+			this.index=i;
 			_skin.btnCancel.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnOk.addEventListener(Event.TRIGGERED,triggeredHandler);
+			updateSkin();
 		}
 		
+		
+		
+		private function updateSkin():void
+		{
+			var item:ItemBg = _skin.bg.skin as org.mokylin.skin.common.ItemBg;
+			if(this.index%2 ==0)
+			{
+				item.bg1.visible = true;
+				item.bg2.visible = false;
+			}else{
+				item.bg1.visible = false;
+				item.bg2.visible = true;
+			}
+			
+		}
 		private function triggeredHandler(e:Event):void
 		{
 			switch(e.target)
@@ -46,29 +60,19 @@ package com.rpgGame.appModule.guild
 			}
 		}
 		
-		override protected function commitData():void
+		public function setData(data:GuildApplyInfo):void
 		{
+			info=data;
 			if(info==null)
+			{
+				_skin.gUI.visible=false;
 				return ;
+			}
+			_skin.gUI.visible=true;
 			_skin.lbRolenName.text = info.name;
 			_skin.lbZhanli.text = info.battle.toString();
 			_skin.lbLevel.htmlText = info.level+"级"+HtmlTextUtil.getTextColor(0xff0000,ItemUtil.getJobName(info.job));
 		}
-		
-		private function get info():GuildApplyInfo
-		{
-			return this.data as GuildApplyInfo;
-		}
-		
-		
-		override public function get height():Number
-		{
-			return _skin.height;
-		}
-		
-		override public function get width():Number
-		{
-			return _skin.width;
-		}
+
 	}
 }

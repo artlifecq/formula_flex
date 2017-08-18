@@ -2,8 +2,6 @@ package com.rpgGame.coreData.cfg.task
 {
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.info.task.daily.TouZhuPrizeData;
-	
-	import app.message.TouZhuConfig;
 
 	public class TouZhuCfgData
 	{
@@ -25,25 +23,25 @@ package com.rpgGame.coreData.cfg.task
 		/**完成对话**/
 		public static var completeDialog:String;
 		
-		public static function setConfig( touZhuConfig:TouZhuConfig ):void
-		{
-			prizeVect = new Vector.<TouZhuPrizeData>();
-			if( touZhuConfig == null )
-				return;
-			
-			timesPerDay = touZhuConfig.timesPerDay;
-			timeData = touZhuConfig.timeData;
-			
-			if( touZhuConfig.duration != null )
-				duration = touZhuConfig.duration.toNumber();
-			
-			var len:int = touZhuConfig.prizes.length;
-			for( var i:int = 0; i < len; i ++)
-			{
-				prizeVect.push( new TouZhuPrizeData( touZhuConfig.prizes[i] ) );
-			}
-			
-		}
+//		public static function setConfig( touZhuConfig:TouZhuConfig ):void
+//		{
+//			prizeVect = new Vector.<TouZhuPrizeData>();
+//			if( touZhuConfig == null )
+//				return;
+//			
+//			timesPerDay = touZhuConfig.timesPerDay;
+//			timeData = touZhuConfig.timeData;
+//			
+//			if( touZhuConfig.duration != null )
+//				duration = touZhuConfig.duration.toNumber();
+//			
+//			var len:int = touZhuConfig.prizes.length;
+//			for( var i:int = 0; i < len; i ++)
+//			{
+//				prizeVect.push( new TouZhuPrizeData( touZhuConfig.prizes[i] ) );
+//			}
+//			
+//		}
 		
 		/**
 		 * 偷猪的猪ID

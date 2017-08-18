@@ -5,9 +5,6 @@ package com.rpgGame.coreData.cfg
 	
 	import flash.utils.ByteArray;
 	
-	import app.message.RaceConfig;
-	import app.message.RaceDataProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	public class RaceCfgData
@@ -35,19 +32,19 @@ package com.rpgGame.coreData.cfg
 			}
 		}
 
-		public static function setConfig(raceConfig : RaceConfig) : void
-		{
-			if (raceConfig == null)
-				return;
-
-			var len : int = raceConfig.races.length;
-			var raceDataProto : RaceDataProto;
-			for (var i : int = 0; i < len; i++)
-			{
-				raceDataProto = raceConfig.races[i];
-				raceDataMap.add(raceDataProto.race, raceDataProto);
-			}
-		}
+//		public static function setConfig(raceConfig : RaceConfig) : void
+//		{
+//			if (raceConfig == null)
+//				return;
+//
+//			var len : int = raceConfig.races.length;
+//			var raceDataProto : RaceDataProto;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				raceDataProto = raceConfig.races[i];
+//				raceDataMap.add(raceDataProto.race, raceDataProto);
+//			}
+//		}
 
 		/**
 		 * 得到职业数据
@@ -55,13 +52,13 @@ package com.rpgGame.coreData.cfg
 		 * @return
 		 *
 		 */
-		public static function getRaceData(raceId : int) : RaceDataProto
-		{
-			if (raceDataMap.getValue(raceId) == null)
-				return null;
-
-			return raceDataMap.getValue(raceId);
-		}
+//		public static function getRaceData(raceId : int) : RaceDataProto
+//		{
+//			if (raceDataMap.getValue(raceId) == null)
+//				return null;
+//
+//			return raceDataMap.getValue(raceId);
+//		}
 		/**
 		 * 获取职业对应的头像 
 		 * @param race

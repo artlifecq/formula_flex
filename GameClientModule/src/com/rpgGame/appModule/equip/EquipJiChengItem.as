@@ -109,7 +109,7 @@ package com.rpgGame.appModule.equip
 					keys=maps2.keys();
 					values2=maps2.values();
 					var changV:*; 
-					if(useInfo.strengthLevel>0&&values2!=null)
+					if(useInfo.strengthLevel>0&&values2!=null&&useInfo.strengthLevel>tragetInfo.strengthLevel)
 					{
 						changV=useInfo.strengthLevel-tragetInfo.strengthLevel;
 						changV=changV>0?"+"+changV:changV;

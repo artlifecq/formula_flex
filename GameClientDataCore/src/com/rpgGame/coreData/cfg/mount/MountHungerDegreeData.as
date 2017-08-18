@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg.mount
 {
-	import app.message.MountHungerDegreeDatasProto.MountHungerDegreeDataProto;
-
 	/**
 	 * 坐骑饥饿度导致移动速度变化 
 	 * @author 陈鹉光
@@ -24,13 +22,13 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param data
 		 * 
 		 */		
-		public function setData( data:MountHungerDegreeDataProto ):void
-		{
-			if( data == null )
-				return;
-			
-			max_hunger_degree = data.maxHungerDegree;
-			speed_percent = data.speedPercent;
-		}
+//		public function setData( data:MountHungerDegreeDataProto ):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			max_hunger_degree = data.maxHungerDegree;
+//			speed_percent = data.speedPercent;
+//		}
 	}
 }

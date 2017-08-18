@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.mount
 {
-	import app.message.StablesBreedSideProto;
+	
 
 	/**
 	 * 繁育信息 
@@ -29,20 +29,20 @@ package com.rpgGame.coreData.info.mount
 		 * @param data
 		 * 
 		 */		
-		public function setData( data:StablesBreedSideProto ):void
-		{
-			if( data == null )
-			{
-				isToNpc = false;
-				return;
-			}
-			
-			isToNpc = true;
-			heroId = data.heroId.toNumber();
-			mountInfoData = new MountInfoData();
-			mountInfoData.setInfoData( data.equipedMount.mount );
-			mountInfoData.setMountEquipData( data.equipedMount.mountEquipments );
-			isLock = data.isLocked;
-		}
+//		public function setData( data:StablesBreedSideProto ):void
+//		{
+//			if( data == null )
+//			{
+//				isToNpc = false;
+//				return;
+//			}
+//			
+//			isToNpc = true;
+//			heroId = data.heroId.toNumber();
+//			mountInfoData = new MountInfoData();
+//			mountInfoData.setInfoData( data.equipedMount.mount );
+//			mountInfoData.setMountEquipData( data.equipedMount.mountEquipments );
+//			isLock = data.isLocked;
+//		}
 	}
 }

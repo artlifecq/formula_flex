@@ -17,7 +17,7 @@ package com.rpgGame.coreData.type
 	import flash.utils.Dictionary;
 	
 	
-
+	
 	/**
 	 *  角色属性配置
 	 * @author wewell
@@ -127,7 +127,7 @@ package com.rpgGame.coreData.type
 		public static const IGNORE_DEFENSE:int =32;
 		/**伤害减免百分比**/	
 		public static const HURT_SUB_PERCENT:int =33;
-
+		
 		/**战斗力**/	
 		public static const FIGHTING:int =44;
 		/**秒伤**/	
@@ -144,7 +144,7 @@ package com.rpgGame.coreData.type
 		public static const  RES_EXP:int=1;
 		/**
 		 * 真气
-
+		 
 		 */
 		public static const  RES_ZHENQI:int=2;
 		/**
@@ -200,14 +200,14 @@ package com.rpgGame.coreData.type
 		public static const  RES_NU_TA:int=14;
 		
 		/**最大血量（生命）**/	
-//		public static const MAX_LIFE:int = 1;
+		//		public static const MAX_LIFE:int = 1;
 		/**物理攻击**/	
 		public static const ATTACK:int = 2;
 		/**物理防御力**/	
 		public static const PHYSICAL_DEFENCE:int = 3;
 		/**魔法防御(法术防御)**/	
 		public static const MAGICAL_DEFENCE:int = 4;
-	
+		
 		/**物理闪避**/	 
 		public static const PHYSICAL_DODGE:int = 7;
 		/**法术抵抗(法术闪避)**/	
@@ -258,13 +258,13 @@ package com.rpgGame.coreData.type
 		private static var enMap:Dictionary;
 		public static var baseAttrIdArr:Array=[];
 		
-//		public static var attrRes:Dictionary;
-//		public static var attrIconRes:Dictionary;
+		//		public static var attrRes:Dictionary;
+		//		public static var attrIconRes:Dictionary;
 		private static function setup():void
 		{
 			idMap = new Dictionary();
-//			attrRes = new Dictionary();
-//			attrIconRes = new Dictionary();
+			//			attrRes = new Dictionary();
+			//			attrIconRes = new Dictionary();
 			//对应SpriteStat
 			pushAttir(LIDAO,"力道");//1
 			pushAttir(GENGU,"根骨");//2
@@ -296,27 +296,27 @@ package com.rpgGame.coreData.type
 			pushAttir(FIGHTING,"战斗力");//44
 			pushAttir(HURT_SEC,"秒伤");//45
 			
-//			attrIconRes[3]="shenfa";
-//			attrIconRes[12]="qixue";
-//			attrIconRes[14]="gongji";
-//			attrIconRes[16]="fangyu";
-//			attrIconRes[17]="baoji";
-//			attrIconRes[18]="baoshang";
-//			attrIconRes[23]="mingzhong";
-//			attrIconRes[24]="shanbi";
-//			
-//			attrRes[1]="ld";
-//			attrRes[2]="gg";
-//			attrRes[3]="sf";
-//			attrRes[4]="hg";
-//			attrRes[12]="qx";
-//			attrRes[14]="gjl";
-//			attrRes[16]="fyz";
-//			attrRes[17]="bjz";
-//			attrRes[18]="bjjc";
-//			attrRes[23]="mz";
-//			attrRes[24]="sb";
-//			attrRes[26]="gjsd";
+			//			attrIconRes[3]="shenfa";
+			//			attrIconRes[12]="qixue";
+			//			attrIconRes[14]="gongji";
+			//			attrIconRes[16]="fangyu";
+			//			attrIconRes[17]="baoji";
+			//			attrIconRes[18]="baoshang";
+			//			attrIconRes[23]="mingzhong";
+			//			attrIconRes[24]="shanbi";
+			//			
+			//			attrRes[1]="ld";
+			//			attrRes[2]="gg";
+			//			attrRes[3]="sf";
+			//			attrRes[4]="hg";
+			//			attrRes[12]="qx";
+			//			attrRes[14]="gjl";
+			//			attrRes[16]="fyz";
+			//			attrRes[17]="bjz";
+			//			attrRes[18]="bjjc";
+			//			attrRes[23]="mz";
+			//			attrRes[24]="sb";
+			//			attrRes[26]="gjsd";
 		}
 		
 		setup();
@@ -411,7 +411,7 @@ package com.rpgGame.coreData.type
 		public static function getWashAttDes(att:int):String
 		{
 			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(att);
-//			var title:String="属性:";
+			//			var title:String="属性:";
 			var des:String="";
 			if(cfg.q_attr_id!=0){
 				des+= CharAttributeType.getCNNameAddValue(cfg.q_attr_id);
@@ -459,7 +459,7 @@ package com.rpgGame.coreData.type
 			var result:String="";
 			for(var i:int=0;i<keys.length;i++){
 				var name:String=CharAttributeType.getCNName(keys[i]);
-				var value:String=values[i];
+				var value:String=AttValueConfig.getDisAttValue(keys[i],values[i]).toString();
 				result+=name+"+"+value;
 			}
 			
