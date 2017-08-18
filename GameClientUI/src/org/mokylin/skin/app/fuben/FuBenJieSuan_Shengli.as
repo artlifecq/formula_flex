@@ -30,15 +30,13 @@ package org.mokylin.skin.app.fuben
 
 		public var grp_xin:feathers.controls.Group;
 
+		public var icon1:feathers.controls.UIAsset;
+
 		public var lbJingyan:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
 
 		public var lbTongqian:feathers.controls.Label;
-
-		public var lb_jingyanName:feathers.controls.Label;
-
-		public var lb_tongqianName:feathers.controls.Label;
 
 		public var lb_zhenqiName:feathers.controls.Label;
 
@@ -61,7 +59,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 612;
 			this.width = 436;
-			this.elementsContent = [__FuBenJieSuan_Shengli_UIAsset1_i(),__FuBenJieSuan_Shengli_UIAsset2_i(),__FuBenJieSuan_Shengli_UIAsset3_i(),grp_dixin_i(),grp_xin_i(),lb_jingyanName_i(),lb_tongqianName_i(),lbJingyan_i(),lbTongqian_i(),lb_zhenqiName_i(),lbzhenqi_i(),btnOk_i(),lbTime_i()];
+			this.elementsContent = [__FuBenJieSuan_Shengli_UIAsset1_i(),__FuBenJieSuan_Shengli_UIAsset2_i(),__FuBenJieSuan_Shengli_UIAsset3_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shengli_Label1_i(),__FuBenJieSuan_Shengli_Label2_i(),lbJingyan_i(),lbTongqian_i(),lb_zhenqiName_i(),lbzhenqi_i(),icon1_i(),btnOk_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -72,6 +70,28 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __FuBenJieSuan_Shengli_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "获得经验：";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 142;
+			temp.y = 249;
+			return temp;
+		}
+
+		private function __FuBenJieSuan_Shengli_Label2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "获得铜钱：";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 142;
+			temp.y = 270;
+			return temp;
+		}
+
 		private function __FuBenJieSuan_Shengli_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -165,6 +185,17 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
+		private function icon1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon1 = temp;
+			temp.name = "icon1";
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 172.5;
+			temp.y = 361;
+			return temp;
+		}
+
 		private function lbJingyan_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -186,7 +217,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbTime";
 			temp.text = "10秒自动领取奖励";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 139;
@@ -208,39 +239,13 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function lb_jingyanName_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_jingyanName = temp;
-			temp.name = "lb_jingyanName";
-			temp.text = "获得经验：";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 142;
-			temp.y = 249;
-			return temp;
-		}
-
-		private function lb_tongqianName_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_tongqianName = temp;
-			temp.name = "lb_tongqianName";
-			temp.text = "获得铜钱：";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 142;
-			temp.y = 270;
-			return temp;
-		}
-
 		private function lb_zhenqiName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_zhenqiName = temp;
 			temp.name = "lb_zhenqiName";
 			temp.text = "获得真气：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 142;
 			temp.y = 290;

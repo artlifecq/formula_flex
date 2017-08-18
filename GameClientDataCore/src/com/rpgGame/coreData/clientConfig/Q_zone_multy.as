@@ -16,6 +16,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_zone_id:int;
 		 /**  Ui资源路径背景和名称图片 */
 		public var q_resurl:String;
+		 /**  困难（多人副本用于面板显示） */
+		public var q_difficult:int;
 		 /**  进入战力限制 */
 		public var q_power:int;
 		 /**  通关总次数 */

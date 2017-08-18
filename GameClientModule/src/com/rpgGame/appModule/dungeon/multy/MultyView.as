@@ -431,45 +431,7 @@ package com.rpgGame.appModule.dungeon.multy
 				passAllreward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.reward_ico_0,RewardGroup.ALIN_LEFT,10,2,2);
 				passAllreward.setRewardByJsonStr(GlobalSheetData.getSettingInfo(516).q_string_value);
 			}
-			
-			
-			/*var reward:Array=JSONUtil.decode(GlobalSheetData.getSettingInfo(516).q_string_value);
-			if(reward==null||reward.length==0)return;
-			var i:int;
-			for(i=0;i<8;i++)
-			{
-				_skin["reward_ico_"+i].visible=false;
-			}
-			allRewardIcon=new Vector.<IconCDFace>();
-			var item:Q_item;
-			var ico:IconCDFace; 
-			for(i=0;i<reward.length;i++)
-			{
-				if(i<8&&reward[i]!=null)
-				{
-					item=ItemConfig.getQItemByID(reward[i].mod);
-					if(item!=null)
-					{
-						ico=IconCDFace.create(IcoSizeEnum.ICON_36);
-						ico.showCD=false;
-						ico.x=_skin["reward_ico_"+i].x+4;
-						ico.y=_skin["reward_ico_"+i].y+4;
-						ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_36));
-						TaskUtil.setItemTips(ico,item,reward[i].num);
-						allRewardIcon.push(ico);
-						_skin["reward_ico_"+i].visible=true;
-						_skin.reward_ico_list.addChild(ico);
-						
-					}
-				}
-			}*/
-			
-			
 		}
-		
-		
-		
-		
 		/**展开元素*/
 		private function unSelectItem(item:FuBen_DuoRen_Item):void
 		{
@@ -528,6 +490,7 @@ package com.rpgGame.appModule.dungeon.multy
 			temp.uiName2.styleName="ui/app/fuben/duorenfuben/fuben_name/"+multyData.q_resurl+"/select.png";
 			temp.imgBg_out.styleName="ui/big_bg/fuben/duorenfuben/fuben_bg/"+multyData.q_resurl+"/up.jpg";
 			temp.imgBg_select.styleName="ui/big_bg/fuben/duorenfuben/fuben_bg/"+multyData.q_resurl+"/select.jpg";
+			temp.uiKunNan.visible=multyData.q_difficult==1;
 			temp.lbNum.text="";
 			var ico:IconCDFace; 
 			var item:Q_item;

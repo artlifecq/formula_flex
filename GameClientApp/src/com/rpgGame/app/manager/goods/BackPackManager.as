@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.GameAlertYellowBtnExt;
 	import com.rpgGame.app.ui.alert.ItemNoticePanel;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -21,6 +22,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangQ_BackPack;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import app.message.AmountType;
@@ -351,7 +353,16 @@ package com.rpgGame.app.manager.goods
 				if(buyItem!=null)
 				{
 					var maxBuy:int;
-					var allRes:Number=Mgr.shopMgr.getCurrency(buyItem.data.priceType);
+					var priceType:int=buyItem.data.priceType;
+					var allRes:Number=Mgr.shopMgr.getCurrency(priceType);
+					if (CharAttributeType.RES_BIND_MONEY==priceType) 
+					{
+						allRes+=Mgr.shopMgr.getCurrency(CharAttributeType.RES_MONEY);
+					}
+					else if (CharAttributeType.RES_BIND_GOLD==priceType)
+					{
+						allRes+=Mgr.shopMgr.getCurrency(CharAttributeType.RES_GOLD);
+					}
 					var maxCount:int=int(allRes/buyItem.data.price);
 					var qmax:int=buyItem.getItemConfig()!=null&&buyItem.getItemConfig().q_max>0?buyItem.getItemConfig().q_max:99;
 					maxCount=Math.min(qmax,maxCount);//999

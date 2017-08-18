@@ -29,6 +29,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
+	import feathers.controls.StateSkin;
 	import feathers.themes.GuiThemeStyle;
 	
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
@@ -68,7 +69,7 @@ package com.rpgGame.app.ui.main.taskbar
 		private var icoList3Group:RewardGroup;
 		private var subBut1:Button;
 		//private var subBut2:Button;
-		private var guideLabelList:Vector.<Label>;
+		private var guideLabelList:Vector.<SkinnableContainer>;
 		
 		public function TaskLoopView(skin:RenWuZhuiZong_Skin)
 		{
@@ -173,7 +174,7 @@ package com.rpgGame.app.ui.main.taskbar
 			//subBut2=_skin.sec_subbut2;
 			_skin.chkAuto.isSelected=false;
 			_skin.chkAuto1.isSelected=false;
-			guideLabelList=new Vector.<Label>();
+			guideLabelList=new Vector.<SkinnableContainer>();
 			
 			hideInfo();
 		}
@@ -523,7 +524,7 @@ package com.rpgGame.app.ui.main.taskbar
 			hideGuideTaskView()
 			var task:Vector.<TaskInfo>=TaskMissionManager.getGuideTaskInfo();
 			var taskData:Q_mission_base;
-			var glabe:Label;
+			var glabe:SkinnableContainer;
 			if(task!=null)
 			{
 				for(var i:int=0;i<task.length;i++)
@@ -536,16 +537,20 @@ package com.rpgGame.app.ui.main.taskbar
 						}
 						else
 						{
-							glabe=new Label();
+							glabe=getKkillbut();
 							guideLabelList.push(glabe);
 							skinList.push(glabe);
 							scrollBox.addChild(glabe);
 						}
-						glabe.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
+						
+						(glabe.skin as Renwu_Item).labelDisplay.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
+						(glabe.skin as Renwu_Item).btn_send.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
 						glabe.x=_skin.sec_navi1.x;
 						glabe.visible=true;
 						taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
-						glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
+						var flyKey:Boolean=taskData.q_mission_type==TaskType.SUB_HUBAO;
+						TaskUtil.setGotargetLabelText(flyKey,glabe,"<font color='#ffea00'>【"+taskData.q_name+"】</font><font color='#eaeabc'>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")</font>");
+						//glabe.htmlText=;
 					}
 				}
 			}
@@ -696,7 +701,18 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			_skin.chkAuto1.isSelected=false;
 		}
-		
+		private function getKkillbut():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			temp.name = "sec_killbut";
+			temp.height = 23;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.width = 170;
+			temp.x = 12;
+			temp.y = 57;
+			return temp;
+		}
 		
 		
 		public function hideInfo():void
