@@ -215,8 +215,8 @@ package com.game.engine2D.scene.layers
 				var cameraZoneRangeY : uint = _camera.zoneRangeXY.y;
 				//得到新区域的可视点数组
 				var pointArr : Array = SceneUtil.findViewZonePoints(newMapZone.tile_x, newMapZone.tile_y, cameraZoneRangeX, cameraZoneRangeY);
-				var zoneMaxX : int = Math.ceil(_mapScene.mapConfig.width / SceneConfig.ZONE_WIDTH); //注意这个是向上取整
-				var zoneMaxY : int = Math.ceil(_mapScene.mapConfig.height / SceneConfig.ZONE_HEIGHT); //注意这个是向上取整
+				var zoneMaxX : int = Math.ceil(_mapScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH); //注意这个是向上取整
+				var zoneMaxY : int = Math.ceil(_mapScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT); //注意这个是向上取整
 				var p : Point;
 				var key : *;
 				var newMapZoneMap : Dictionary = new Dictionary();
