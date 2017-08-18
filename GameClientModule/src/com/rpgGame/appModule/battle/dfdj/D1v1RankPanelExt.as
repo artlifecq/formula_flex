@@ -143,7 +143,14 @@ package com.rpgGame.appModule.battle.dfdj
 			EventManager.addEvent(D1v1Event.GET_RANK_DATA,onGetRankData);
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,ongetPanelData);
 			//Mgr.d1v1Mgr.reqDFRankData(1);
-			_numCtrl.setDefault();
+			if (_numCtrl.getValue()!=1) 
+			{
+				_numCtrl.setDefault();
+			}
+			else
+			{
+				onPageChange(1);
+			}
 		}
 		
 		private function ongetPanelData():void

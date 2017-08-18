@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.LookSender;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildListInfo;
@@ -14,21 +15,21 @@ package com.rpgGame.appModule.guild
 	
 	import starling.display.DisplayObject;
 	
-	public class GuildListSeeInfoCell extends DefaultListItemRenderer
+	public class GuildListSeeInfoCell extends SkinUI
 	{
 		private var _skin:TeamItemList;
 		private var _levelInfo:Q_guild;
 		private var _guildListinfo:GuildListInfo;
-		public function GuildListSeeInfoCell():void
+		private var indexValue:int;
+		public function GuildListSeeInfoCell(index:int):void
 		{
-			super();
+			indexValue=index;
+			_skin = new TeamItemList();
+			super(_skin);
+			updateSkin();
 		}
 		
-		override protected function initialize():void
-		{
-			_skin = new TeamItemList();
-			_skin.toSprite(this);
-		}
+	
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -52,15 +53,11 @@ package com.rpgGame.appModule.guild
 				item.bg2.visible = true;
 			}
 		}
-		private function get indexValue():int
+		
+		public  function setData(data:GuildListInfo):void
 		{
-			return this.data as int;
-		}
-
-		override protected function commitData():void
-		{
-			updateSkin();
-			_guildListinfo = GuildManager.instance().getGuildListInfoByIndex(this.indexValue);
+			//updateSkin();
+			_guildListinfo = data;
 			if(_guildListinfo==null)
 			{
 				_skin.lbLevel.visible = false;

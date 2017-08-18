@@ -138,7 +138,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				name=data.playerName;
 			}
-			_skin.labOwner.htmlText=LanguageConfig.replaceStr(_initNameStr,[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,MainRoleManager.getPlayerName(name))]);
+			_skin.labOwner.htmlText=LanguageConfig.replaceStr(_initNameStr,["<u>"+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,MainRoleManager.getPlayerName(name))+"</u>"]);
 			if (data.time!=0) 
 			{
 				_flagEndTime=data.time*1000+getTimer();
