@@ -4,6 +4,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;

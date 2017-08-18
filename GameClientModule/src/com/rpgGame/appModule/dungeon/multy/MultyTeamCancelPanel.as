@@ -50,6 +50,7 @@ package com.rpgGame.appModule.dungeon.multy
 				}
 				
 			}
+			_skin.title.htmlText="队伍中有玩家还没有准备就绪";
 			
 		}
 	}
