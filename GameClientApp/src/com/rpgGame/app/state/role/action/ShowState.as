@@ -94,7 +94,8 @@ package com.rpgGame.app.state.role.action
 			if(role.data is MonsterData){//怪物
 				_showType=RoleActionType.ATTACK;
 			}else{
-				_showType=RoleActionType.SHOW_IDLE;
+//				_showType=RoleActionType.SHOW_IDLE;
+				_showType=RoleActionType.IDLE;
 			}
 			_repeatNum=1;			
 		}
@@ -130,7 +131,8 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween = null;
 				}
 				
-				_showType=RoleActionType.SHOW_STAND;
+//				_showType=RoleActionType.SHOW_STAND;
+				_showType=RoleActionType.STAND;
 				_repeatNum=0;
 				syncAnimation();
 				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);
