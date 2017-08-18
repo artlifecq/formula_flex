@@ -200,7 +200,7 @@ package org.mokylin.skin.app.roll
 			temp.text = "玩家名六个字";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 120;
+			temp.width = 189;
 			temp.x = 105;
 			temp.y = 257;
 			return temp;
