@@ -53,9 +53,9 @@ package com.game.engine2D.vo
 			_currentTriangleIndex = 0;
 			
 			// need to initialize raw arrays or can be reused?
-			_rawData = target.getRawVertexData();
+			//_rawData = target.getRawVertexData();
 			if (_rawData && (_numVertices*_stride<<2) == _rawData.length) {
-				_rawIndices = target.indexData;
+				//_rawIndices = target.indexData;
 				_rawData.position = 0;
 				_rawIndices.position = 0;
 			} else {
@@ -80,8 +80,8 @@ package com.game.engine2D.vo
 			}
 			
 			// build real data from raw data
-			target.updateData(_rawData);
-			target.updateIndexData(_rawIndices);
+			//target.updateData(_rawData);
+			//target.updateIndexData(_rawIndices);
 		}
 		
 		private function addVertex(px:Number, py:Number, pz:Number,target:CompactSubGeometry):void
