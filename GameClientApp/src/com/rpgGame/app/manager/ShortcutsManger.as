@@ -122,11 +122,15 @@ package com.rpgGame.app.manager
 			var shorts : Object;
 			var spellList : Array = MainRoleManager.actorInfo.getActiveSpells();
 			var len : int = spellList.length;
+			var max:int=SHORTCUTS_LEN>len?SHORTCUTS_LEN:len;
 			
-			for (var i : int = 0; i < SHORTCUTS_LEN; i++)
+			for (var i : int = 0; i < max; i++)
 			{
 				if(i<len){//将已经学习的技能加到快捷栏
 					var cfg:Q_skill_model= spellList[i];
+					if(cfg.q_seat==0){
+						continue;
+					}
 					shortData = new ShortcutsData();
 					shortData.type = ShortcutsTypeEnum.SKILL_TYPE;
 					shortData.shortcutPos = cfg.q_seat-1;
