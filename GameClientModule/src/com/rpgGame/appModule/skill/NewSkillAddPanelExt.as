@@ -99,7 +99,7 @@ package  com.rpgGame.appModule.skill
 			this._skill=skill;
 			_flyIcon.styleName=ClientConfig.getSkillIcon(SpellDataManager.getSpellData(skill.skillModelId).q_icon,48);
 			_icon.setIconResName(ClientConfig.getSkillIcon(SpellDataManager.getSpellData(skill.skillModelId).q_icon,IcoSizeEnum.ICON_64));
-			//_skin.uiName.styleName="ui\app\xinjineng/xurulin.png"
+			_skin.uiName.styleName="ui/app/xinjineng/"+skill.skillModelId+".png"
 			
 			if (!_effect3d) 
 			{
