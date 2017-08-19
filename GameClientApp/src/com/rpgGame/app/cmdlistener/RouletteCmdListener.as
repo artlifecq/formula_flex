@@ -1,9 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
-	import app.cmd.TaskModuleMessages;
-	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	/**
@@ -22,9 +19,9 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ROULETTE, onRoulette);
-			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE , onColletPrize);
-			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE_FAIL  , onColletPrizeFail);
+//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ROULETTE, onRoulette);
+//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE , onColletPrize);
+//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE_FAIL  , onColletPrizeFail);
 			
 			//
 			finish();

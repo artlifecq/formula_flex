@@ -19,6 +19,10 @@ package com.rpgGame.core.events
 		 * 关闭活动
 		 */
 		public static const CLOSE_ACTIVITY : int = UNIQUEID.NEXT;
+		/**
+		 * 关闭活动公告
+		 */
+		public static const CLOSE_ACTIVITY_NOTICE : int = UNIQUEID.NEXT;
 		
 		public static const NOTICE:int = UNIQUEID.NEXT;
 		public static const SHOW_HIDE_ALL:int = UNIQUEID.NEXT;

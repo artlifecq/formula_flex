@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -137,7 +138,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				name=data.playerName;
 			}
-			_skin.labOwner.htmlText=LanguageConfig.replaceStr(_initNameStr,[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,name)]);
+			_skin.labOwner.htmlText=LanguageConfig.replaceStr(_initNameStr,["<u>"+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,MainRoleManager.getPlayerName(name))+"</u>"]);
 			if (data.time!=0) 
 			{
 				_flagEndTime=data.time*1000+getTimer();

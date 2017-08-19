@@ -90,7 +90,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbLevel";
 			temp.text = "90级";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 111;
 			temp.x = 247;
@@ -105,7 +105,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbMap";
 			temp.text = "马贼营寨";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 148;
 			temp.x = 739;
@@ -120,7 +120,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbName";
 			temp.text = "【320000】角色名六个字";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 187;
 			temp.x = 34;
@@ -135,7 +135,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbNum";
 			temp.text = "1/5";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 83;
 			temp.x = 635;
@@ -150,7 +150,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbZhanli";
 			temp.text = "11114228527752";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 212;
 			temp.x = 384;
@@ -165,6 +165,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "rdoSelect";
 			temp.height = 32;
 			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
+			temp.visible = false;
 			temp.width = 894;
 			temp.x = 0;
 			temp.y = -4;

@@ -365,7 +365,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "grpRight";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__PaiHang_Right_UIAsset1_i(),bg_img_i(),grpHead_i(),gprNo_i(),content_i(),grpZhanli_i(),grpKillIcon_i(),weapons_i()];
+			temp.elementsContent = [__PaiHang_Right_UIAsset1_i(),bg_img_i(),gprNo_i(),content_i(),grpZhanli_i(),grpKillIcon_i(),weapons_i(),grpHead_i()];
 			return temp;
 		}
 
@@ -475,7 +475,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "lbName";
 			temp.text = "姓名六个字的";
 			temp.textAlign = "center";
-			temp.color = 0xA3A594;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 151;
 			temp.x = 35;

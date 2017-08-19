@@ -27,10 +27,7 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
-	import app.message.BoolArrayProto;
-	
 	import feathers.controls.UIAsset;
-	import feathers.core.IFeathersControl;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;
@@ -173,11 +170,11 @@ package   com.rpgGame.app.ui.main.team
 			else this._skin.role_name.text =  _data.memberName;
 			if(data.memberId.ToGID()==MainRoleManager.actorID){
 				this._skin.btn_more.visible=false;
-				this._skin.role_name.color = StaticValue.A_UI_YELLOW_TEXT;
+				this._skin.role_name.color = StaticValue.YELLOW_TEXT;
 			}
 			else{
 				this._skin.btn_more.visible=true;
-				this._skin.role_name.color = StaticValue.A_UI_BEIGE_TEXT;
+				this._skin.role_name.color = StaticValue.BEIGE_TEXT;
 			}
 			_skin.qizi.visible=_data.memberId.EqualTo(Mgr.teamMgr.captain.memberId);
 			var state:int=Mgr.teamMgr.getNearState(_data.memberId);

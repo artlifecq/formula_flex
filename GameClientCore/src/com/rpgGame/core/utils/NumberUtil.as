@@ -61,12 +61,13 @@ package com.rpgGame.core.utils
 					else
 						sub=(num/10000).toFixed(0)+"万";
 					return sub;
-				}
-					
+				}					
 				else if(num>=100000000)
 				{
 					sub=(num/100000000).toFixed(1)+"亿";
 					return sub;
+				}else{
+					return num.toString();
 				}
 			}
 			return num.toString();

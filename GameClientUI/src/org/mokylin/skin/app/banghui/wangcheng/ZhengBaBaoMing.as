@@ -39,7 +39,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 625;
-			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i(),List_i(),__ZhengBaBaoMing_UIAsset3_i()];
+			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i(),List_i(),__ZhengBaBaoMing_UIAsset8_i()];
 			
 			states = {
 			};
@@ -68,7 +68,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 12;
 			temp.y = 41;
-			temp.elementsContent = [__ZhengBaBaoMing_UIAsset2_i(),__ZhengBaBaoMing_Label1_i(),__ZhengBaBaoMing_Label2_i(),__ZhengBaBaoMing_Label3_i(),__ZhengBaBaoMing_Label4_i(),__ZhengBaBaoMing_Label5_i(),__ZhengBaBaoMing_Label6_i()];
+			temp.elementsContent = [__ZhengBaBaoMing_UIAsset2_i(),__ZhengBaBaoMing_UIAsset3_i(),__ZhengBaBaoMing_UIAsset4_i(),__ZhengBaBaoMing_UIAsset5_i(),__ZhengBaBaoMing_UIAsset6_i(),__ZhengBaBaoMing_UIAsset7_i(),__ZhengBaBaoMing_Label1_i(),__ZhengBaBaoMing_Label2_i(),__ZhengBaBaoMing_Label3_i(),__ZhengBaBaoMing_Label4_i(),__ZhengBaBaoMing_Label5_i(),__ZhengBaBaoMing_Label6_i()];
 			return temp;
 		}
 
@@ -76,7 +76,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "城市名称";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 4;
 			temp.y = 4;
@@ -87,7 +87,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领帮派";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 95;
 			temp.y = 4;
@@ -98,7 +98,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前出价最高帮派";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 188;
 			temp.y = 4;
@@ -109,7 +109,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前最高出价";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 313;
 			temp.y = 4;
@@ -120,7 +120,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "竞拍结束倒计时";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 414;
 			temp.y = 4;
@@ -131,7 +131,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "操作";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 545;
 			temp.y = 4;
@@ -141,24 +141,75 @@ package org.mokylin.skin.app.banghui.wangcheng
 		private function __ZhengBaBaoMing_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 381;
+			temp.height = 382;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 606;
 			temp.x = 9;
-			temp.y = 40;
+			temp.y = 39;
 			return temp;
 		}
 
 		private function __ZhengBaBaoMing_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/yeqian2.png";
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 67;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
 		private function __ZhengBaBaoMing_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 117;
+			temp.x = 67;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __ZhengBaBaoMing_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 123;
+			temp.x = 184;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __ZhengBaBaoMing_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 100;
+			temp.x = 307;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __ZhengBaBaoMing_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 112;
+			temp.x = 407;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __ZhengBaBaoMing_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 81;
+			temp.x = 519;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __ZhengBaBaoMing_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;

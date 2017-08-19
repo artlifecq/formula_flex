@@ -22,6 +22,8 @@ package org.mokylin.skin.app.fuben
 
 		public var btnEnter:feathers.controls.Button;
 
+		public var icon_0:feathers.controls.UIAsset;
+
 		public var lbGoumai:feathers.controls.Label;
 
 		public var lbShengyu:feathers.controls.Label;
@@ -39,7 +41,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i(),lbTips_i()];
+			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i(),lbTips_i(),icon_0_i()];
 			
 			states = {
 			};
@@ -95,13 +97,24 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
+		private function icon_0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon_0 = temp;
+			temp.name = "icon_0";
+			temp.styleName = "ui/common/grid/normal/36.png";
+			temp.x = 460;
+			temp.y = 541;
+			return temp;
+		}
+
 		private function lbGoumai_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbGoumai = temp;
 			temp.name = "lbGoumai";
 			temp.text = "剩余购买次数：99";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
 			temp.x = 33;
@@ -115,7 +128,7 @@ package org.mokylin.skin.app.fuben
 			lbShengyu = temp;
 			temp.name = "lbShengyu";
 			temp.text = "今日剩余次数：99";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
 			temp.x = 33;

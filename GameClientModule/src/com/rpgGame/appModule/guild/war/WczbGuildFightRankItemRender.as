@@ -55,7 +55,7 @@ package com.rpgGame.appModule.guild.war
 					var info:GuildWarGuildRank=_data as GuildWarGuildRank;
 					if(info){
 						skin.lbNo.text=info.rank.toString();
-						skin.lbBanghui.htmlText=HtmlTextUtil.underLine(HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,info.guildName.toString()));
+						skin.lbBanghui.htmlText=HtmlTextUtil.underLine(HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,info.guildName.toString()));
 					}
 				}
 			}

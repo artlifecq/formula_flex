@@ -2,24 +2,13 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.MailManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.MailEvent;
-	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.info.mail.MailInfo;
-	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	import com.rpgGame.netData.mail.message.ResAllMailsMessage;
 	import com.rpgGame.netData.mail.message.ResGetMailAttachmentSueccessMessage;
 	import com.rpgGame.netData.mail.message.ResMailDetailInfoMessage;
 	import com.rpgGame.netData.mail.message.ResRecevieNewMailMessage;
 	import com.rpgGame.netData.mail.message.SCDeleteResultMessage;
-	
-	import flash.utils.ByteArray;
-	
-	import app.message.MailCollectProto;
-	import app.message.MailProto;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -83,48 +72,48 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onNewMail(buffer:ByteBuffer):void
 		{
-			var mailId:int;
-			var len:int;
-			var bytes:ByteArray;
-			var mailProto:MailProto;
-			var collectProto:MailCollectProto;
-			var mailInfo:MailInfo;
-			while(buffer.bytesAvailable)
-			{
-				mailId = buffer.readVarint32();
-				len = buffer.readVarint32();
-				
-				bytes = new ByteArray();
-				buffer.readBytes(bytes, 0, len);
-				mailProto = new MailProto();
-				mailProto.mergeFrom(bytes);
-				
-				mailInfo = new MailInfo( mailId, mailProto );
-				mailInfo.endTime = MailCfgData.mailExpireTime + mailInfo.startTime;
-				
-				MailManager.addMailInfo( mailInfo );
-				
-				if( buffer.bytesAvailable > 0)
-				{
-					len = buffer.readVarint32();
-					if( len > 0 )
-					{
-						bytes = new ByteArray();
-						buffer.readBytes(bytes, 0, len);
-						collectProto = new MailCollectProto();
-						collectProto.mergeFrom(bytes);
-						mailInfo.setFuJianStatus(collectProto);
-					}
-				}
-			}
-			EventManager.dispatchEvent( MailEvent.ADD_MAIL_DATA );
-			if(!AppManager.isAppInScene(AppConstant.MAIL_PANEL))
-			{
-				if(MailManager.hasUnReadMail())
-				{
-					EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE);
-				}
-			}
+//			var mailId:int;
+//			var len:int;
+//			var bytes:ByteArray;
+//			var mailProto:MailProto;
+//			var collectProto:MailCollectProto;
+//			var mailInfo:MailInfo;
+//			while(buffer.bytesAvailable)
+//			{
+//				mailId = buffer.readVarint32();
+//				len = buffer.readVarint32();
+//				
+//				bytes = new ByteArray();
+//				buffer.readBytes(bytes, 0, len);
+//				mailProto = new MailProto();
+//				mailProto.mergeFrom(bytes);
+//				
+//				mailInfo = new MailInfo( mailId, mailProto );
+//				mailInfo.endTime = MailCfgData.mailExpireTime + mailInfo.startTime;
+//				
+//				MailManager.addMailInfo( mailInfo );
+//				
+//				if( buffer.bytesAvailable > 0)
+//				{
+//					len = buffer.readVarint32();
+//					if( len > 0 )
+//					{
+//						bytes = new ByteArray();
+//						buffer.readBytes(bytes, 0, len);
+//						collectProto = new MailCollectProto();
+//						collectProto.mergeFrom(bytes);
+//						mailInfo.setFuJianStatus(collectProto);
+//					}
+//				}
+//			}
+//			EventManager.dispatchEvent( MailEvent.ADD_MAIL_DATA );
+//			if(!AppManager.isAppInScene(AppConstant.MAIL_PANEL))
+//			{
+//				if(MailManager.hasUnReadMail())
+//				{
+//					EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE);
+//				}
+//			}
 		}
 		
 		/**

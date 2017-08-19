@@ -1,9 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.KingWarModuleMessages;
 	import com.game.engine3D.vo.SenderReferenceSet;
-	
-	import app.cmd.KingWarModuleMessages;
 
 	public class FamilyWarSender extends BaseSender
 	{
@@ -22,7 +19,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(bid);
 //			send(NpcModuleMessages.C2S_ON_CLICK_NPC,_bytes);
-			send(KingWarModuleMessages.C2S_KING_WAR_BID,_bytes);
+//			send(KingWarModuleMessages.C2S_KING_WAR_BID,_bytes);
 		}
 		
 		public static function addReqGetBidRank(ref : Object) : void
@@ -45,7 +42,7 @@ package com.rpgGame.app.sender
 		public static function familyWarBidRank():void
 		{
 			_bytes.clear();
-			send(KingWarModuleMessages.C2S_KING_WAR_BID_RANK,_bytes);
+//			send(KingWarModuleMessages.C2S_KING_WAR_BID_RANK,_bytes);
 		}
 		/**
 		 * 请求进入副本
@@ -53,7 +50,7 @@ package com.rpgGame.app.sender
 		public static function familyWarEnterDungeon():void
 		{
 			_bytes.clear();
-			send(KingWarModuleMessages.C2S_TRY_ENTER_KING_WAR_DUNGEON,_bytes);
+//			send(KingWarModuleMessages.C2S_TRY_ENTER_KING_WAR_DUNGEON,_bytes);
 		}
 		/**
 		 * 请求家族战副本排行，只有在圣旨那里才需要来请求，别的时候服务器都会主动推送的
@@ -61,7 +58,7 @@ package com.rpgGame.app.sender
 		public static function familyWarDungeonRank():void
 		{
 			_bytes.clear();
-			send(KingWarModuleMessages.C2S_KING_WAR_DUNGEON_RANK,_bytes);
+//			send(KingWarModuleMessages.C2S_KING_WAR_DUNGEON_RANK,_bytes);
 		}
 		/**
 		 * 请求战场广播
@@ -69,13 +66,13 @@ package com.rpgGame.app.sender
 		public static function getFamilyWarBroadcast():void
 		{
 			_bytes.clear();
-			send(KingWarModuleMessages.C2S_KING_WAR_BROADCAST,_bytes);
+//			send(KingWarModuleMessages.C2S_KING_WAR_BROADCAST,_bytes);
 		}
 		/**请求王帮奖励**/
 		public static function getCountryKingFamilyPrize():void
 		{
 			_bytes.clear();
-			send(KingWarModuleMessages.C2S_COLLECT_COUNTRY_KING_GUILD_PRIZE,_bytes);
+//			send(KingWarModuleMessages.C2S_COLLECT_COUNTRY_KING_GUILD_PRIZE,_bytes);
 		}
 	}
 }

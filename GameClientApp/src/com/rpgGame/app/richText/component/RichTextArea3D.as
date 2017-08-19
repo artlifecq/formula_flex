@@ -673,7 +673,7 @@
 			//如果没有设置固定高，动态修正文本框高度
 			if(_setHeight <= 0)
 			{
-				_textField.height = _textField.textHeight + 4;
+				_textField.height = _textField.textHeight+4;
 				reDrawMask();
 				this.dispatchEventWith(away3d.events.Event.RESIZE);
 			}
@@ -1372,14 +1372,15 @@
 				{
 					_unitTextFormat = new TextFormat();
 				}
-				if(unit.displayObj is Label)
+			/*	if(unit.displayObj is Label)
 				{
 					$_fontSize = int(_defaultFormat.size);
 				}
 				else
-				{
-					$_fontSize = unit.displayObj.height;
-				}
+				{*/
+//					$_fontSize = unit.displayObj.height;
+				$_fontSize = int(_defaultFormat.size);
+//				}
 				_unitTextFormat.size = $_fontSize;
 				_unitTextFormat.url = unit.unitData.code + SEPARATOR;
 				_unitTextFormat.letterSpacing = unit.unitData.width - getPlaceholderWidth($_fontSize);

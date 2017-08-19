@@ -30,6 +30,8 @@ package org.mokylin.skin.app.fuben
 
 		public var grp_xin:feathers.controls.Group;
 
+		public var icon1:feathers.controls.UIAsset;
+
 		public var lbJingyan:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 613;
 			this.width = 425;
-			this.elementsContent = [__FuBenJieSuan_Shibai_UIAsset1_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shibai_Label1_i(),__FuBenJieSuan_Shibai_Label2_i(),lbJingyan_i(),lbTongqian_i(),btnOk_i(),lbTime_i()];
+			this.elementsContent = [__FuBenJieSuan_Shibai_UIAsset1_i(),icon1_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shibai_Label1_i(),__FuBenJieSuan_Shibai_Label2_i(),lbJingyan_i(),lbTongqian_i(),btnOk_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -68,7 +70,7 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "获得经验：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 137;
 			temp.y = 293;
@@ -79,7 +81,7 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "获得铜钱：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 137;
 			temp.y = 325;
@@ -161,6 +163,17 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
+		private function icon1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon1 = temp;
+			temp.name = "icon1";
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 167.5;
+			temp.y = 354;
+			return temp;
+		}
+
 		private function lbJingyan_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -182,7 +195,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbTime";
 			temp.text = "10秒自动领取奖励";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 134;

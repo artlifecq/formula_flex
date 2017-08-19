@@ -1,6 +1,6 @@
 package com.rpgGame.core.view.ui.tip.vo
 {
-	public class DynamicTipData
+	public class DynamicTipData implements IDynamicTipData
 	{
 		protected var _data:*
 		public function DynamicTipData(d:*=null)

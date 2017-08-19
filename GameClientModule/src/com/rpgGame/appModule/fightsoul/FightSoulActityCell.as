@@ -106,15 +106,15 @@ package com.rpgGame.appModule.fightsoul
 			
 			if(pathinfoData.isOver||pathinfoData.isOpen()==false)
 			{
-				_skin.lb_name.color = StaticValue.A_UI_GRAY_TEXT;
-				_skin.lb_cishu.color = StaticValue.A_UI_GRAY_TEXT;
-				_skin.lb_jinyan.color = StaticValue.A_UI_GRAY_TEXT;
+				_skin.lb_name.color = StaticValue.GRAY_TEXT;
+				_skin.lb_cishu.color = StaticValue.GRAY_TEXT;
+				_skin.lb_jinyan.color = StaticValue.GRAY_TEXT;
 				GrayFilter.gray(_skin.btn_send);
 			}else{
 				/*_skin.lb_name.filter = null;
 				_skin.lb_cishu.filter = null;
 				_skin.lb_jinyan.filter = null;*/
-				_skin.lb_name.color = StaticValue.A_UI_BEIGE_TEXT;
+				_skin.lb_name.color = StaticValue.BEIGE_TEXT;
 				_skin.lb_cishu.color = StaticValue.Q_GREEN;
 				_skin.lb_jinyan.color = StaticValue.Q_YELLOW;
 				_skin.btn_send.filter = null;

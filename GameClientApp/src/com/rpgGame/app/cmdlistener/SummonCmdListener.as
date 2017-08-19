@@ -5,12 +5,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.info.society.SummonTokenData;
 	import com.rpgGame.coreData.lang.LangMisc;
 	
-	import app.cmd.SummonModuleMessages;
-	import app.message.SummonTokenGoodsDataProto.TokenType;
-	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
+	
+	import parse.TokenType;
 
 	/**
 	 *
@@ -28,9 +26,9 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_FAMILY_LEADER_SUMMON, onFamilyLeaderSummon);
-			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON, onCountryOfficerSummon);
-			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON_FAIL, onCountryOfficerSummonFail);
+//			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_FAMILY_LEADER_SUMMON, onFamilyLeaderSummon);
+//			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON, onCountryOfficerSummon);
+//			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON_FAIL, onCountryOfficerSummonFail);
 
 			finish();
 		}
@@ -53,10 +51,10 @@ package com.rpgGame.app.cmdlistener
 		{
 			var tokenData : SummonTokenData = new SummonTokenData();
 			tokenData.readFrom(buffer);
-			if (tokenData.tokenType == TokenType.FAMILY_LEADER)
-			{
-				SocietyManager.setLeaderSummon(tokenData);
-			}
+//			if (tokenData.tokenType == TokenType.FAMILY_LEADER)
+//			{
+//				SocietyManager.setLeaderSummon(tokenData);
+//			}
 		}
 
 		private function onCountryOfficerSummon(buffer : ByteBuffer) : void

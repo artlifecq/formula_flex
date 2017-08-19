@@ -369,11 +369,13 @@ package com.rpgGame.app.ui.scene
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
 			
 			if(task!=null&&taskData!=null)
-			{//L.l("任务："+task.taskModelId);
-				//setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
+			{
 				setGotargetInfo();
-				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
-				icoList1Group.visible=true;
+				if(taskData.q_reword_id>0)
+				{
+					icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
+					icoList1Group.visible=true;
+				}
 				var reward:Object=TaskMissionManager.getTaskExtraReward(TaskType.LIJIN_TASK);
 				_skin.sec_navi0.visible=false;
 				if(reward!=null)
@@ -385,12 +387,13 @@ package com.rpgGame.app.ui.scene
 					setExtraLabel(task.loopNumber,reward.l);
 				}
 			}
-			setUisite();
+			
 		}
 		private function hideReword():void
 		{
 			icoList1Group.visible=false;
 			icoList2Group.visible=false;
+			_skin.sec_navi0.visible=false;
 			
 		}
 		private function setGotargetInfo():void
@@ -400,7 +403,7 @@ package com.rpgGame.app.ui.scene
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
 			if(task!=null&&taskData!=null)
 			{
-				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killButList);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killButList,false);
 			}
 			
 		}
@@ -550,14 +553,23 @@ package com.rpgGame.app.ui.scene
 		/**接受任务信息初始化*/
 		private function inforMation():void
 		{//L.l("任务信息初始化");
-			setReword();
-			flishTask();
+			if(isAllFilish())
+			{
+				allFilish();
+			}
+			else
+			{
+				setReword();
+				GrayFilter.unGray(_skin.sec_subbut1);
+				_skin.sec_subbut1.isEnabled=true;
+				flishTask();
+			}
+			setUisite();
 		}
 		/**完成任务*/
 		private function finishMation(type:int):void
 		{
 			//L.l("完成任务22");
-			TaskAutoManager.getInstance().stopAll();
 			tweeReward();
 			hideReword();
 			hideGotargetInfo();
@@ -566,16 +578,35 @@ package com.rpgGame.app.ui.scene
 		/**新任务*/
 		private function newMation(type:int):void
 		{//L.l("新任务");
-			setReword();
-			taskAuto();
-			allFilish();
+			
+			//taskAuto();
+			if(isAllFilish())
+			{
+				allFilish();
+			}
+			else
+			{
+				setReword();
+				GrayFilter.unGray(_skin.sec_subbut1);
+				_skin.sec_subbut1.isEnabled=true;
+			}
+			setUisite();
 		}
 		
 		/**任务进度改变*/
 		private function changeMation(type:int):void
 		{//L.l("任务进度改变");
-			setGotargetInfo();
-			flishTask();
+			if(isAllFilish())
+			{
+				allFilish();
+			}
+			else
+			{
+				setUisite();
+				setGotargetInfo();
+				flishTask();
+			}
+			
 		}
 		private function flishTask():void
 		{
@@ -592,24 +623,17 @@ package com.rpgGame.app.ui.scene
 		
 		private function allFilish():void
 		{
-			if(isAllFilish())
+			icoList2Group.visible=false;	
+			icoList1Group.visible=false;
+			_skin.sec_navi0.visible=false;
+			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
+			if(taskData!=null)
 			{
-				var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
-				if(taskData!=null)
-				{
-					GrayFilter.gray(_skin.sec_subbut1);
-					_skin.sec_subbut1.isEnabled=false;
-					TaskUtil.setGotargetLabelText(true,killButList[0],taskData.q_finish_describe);
-					
-				}
+				GrayFilter.gray(_skin.sec_subbut1);
+				_skin.sec_subbut1.isEnabled=false;
+				TaskUtil.setGotargetLabelText(false,killButList[0],taskData.q_finish_describe);
+				
 			}
-			else
-			{
-				GrayFilter.unGray(_skin.sec_subbut1);
-				_skin.sec_subbut1.isEnabled=true;
-			}
-			
-			
 			
 		}
 		private function isAllFilish():Boolean

@@ -2,6 +2,7 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -24,6 +25,8 @@ package org.mokylin.skin.app.banghui
 
 		public var btnOk:feathers.controls.Button;
 
+		public var gUI:feathers.controls.Group;
+
 		public var lbLevel:feathers.controls.Label;
 
 		public var lbRolenName:feathers.controls.Label;
@@ -41,7 +44,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 547;
-			this.elementsContent = [bg_i(),lbRolenName_i(),lbZhanli_i(),lbLevel_i(),btnOk_i(),btnCancel_i()];
+			this.elementsContent = [bg_i(),gUI_i()];
 			
 			states = {
 			};
@@ -76,8 +79,8 @@ package org.mokylin.skin.app.banghui
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
 			temp.width = 66;
-			temp.x = 402;
-			temp.y = 5;
+			temp.x = 401;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -91,8 +94,19 @@ package org.mokylin.skin.app.banghui
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
 			temp.width = 66;
-			temp.x = 471;
+			temp.x = 470;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function gUI_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gUI = temp;
+			temp.name = "gUI";
+			temp.x = 1;
 			temp.y = 5;
+			temp.elementsContent = [lbRolenName_i(),lbZhanli_i(),lbLevel_i(),btnOk_i(),btnCancel_i()];
 			return temp;
 		}
 
@@ -103,11 +117,11 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbLevel";
 			temp.htmlText = "100级<font color='#ff0000'>兵家</font>";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 79;
-			temp.x = 300;
-			temp.y = 9;
+			temp.x = 299;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -122,8 +136,8 @@ package org.mokylin.skin.app.banghui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 160;
-			temp.x = 1;
-			temp.y = 9;
+			temp.x = 0;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -134,11 +148,11 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhanli";
 			temp.text = "999999999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
-			temp.x = 168;
-			temp.y = 9;
+			temp.x = 167;
+			temp.y = 4;
 			return temp;
 		}
 

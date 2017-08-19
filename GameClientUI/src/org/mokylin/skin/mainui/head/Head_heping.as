@@ -80,7 +80,7 @@ package org.mokylin.skin.mainui.head
 			temp.touchGroup = true;
 			temp.letterSpacing = 0;
 			temp.text = "【和平模式】您的攻击不会对任何玩家招财伤害";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 33;
 			temp.y = 9;

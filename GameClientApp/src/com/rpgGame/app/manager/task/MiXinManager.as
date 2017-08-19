@@ -33,9 +33,7 @@ package com.rpgGame.app.manager.task
 	
 	import flash.geom.Point;
 	
-	import app.message.MiXinTaskProto;
-	import app.message.MonsterDataProto;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import utils.TimerServer;
 
@@ -81,16 +79,16 @@ package com.rpgGame.app.manager.task
 		 * @param miXinTime			已经完成过的密信任务次数
 		 *
 		 */
-		public static function setHero(miXinProto : MiXinTaskProto, miXinTime : int) : void
-		{
-			miXinTimes = miXinTime;
-
-			if (miXinProto == null)
-				return;
-
-			mixinTask = new MiXinTaskData();
-			mixinTask.setData(miXinProto);
-		}
+//		public static function setHero(miXinProto : MiXinTaskProto, miXinTime : int) : void
+//		{
+//			miXinTimes = miXinTime;
+//
+//			if (miXinProto == null)
+//				return;
+//
+//			mixinTask = new MiXinTaskData();
+//			mixinTask.setData(miXinProto);
+//		}
 
 		/**
 		 * 任务清零 

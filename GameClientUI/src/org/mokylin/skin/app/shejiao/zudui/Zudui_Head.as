@@ -24,7 +24,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			
 			this.currentState = "normal";
 			this.height = 25;
-			this.width = 144;
+			this.width = 175;
 			this.elementsContent = [__Zudui_Head_UIAsset1_i(),lab_name_i()];
 			
 			states = {
@@ -40,6 +40,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/shejiao/zudui/mingzidi.png";
+			temp.width = 175;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -50,13 +51,14 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lab_name = temp;
 			temp.name = "lab_name";
+			temp.height = 17;
 			temp.fontSize = 12;
-			temp.text = "玩家名六个字【69级】";
+			temp.text = "[3000区]玩家名六个字【999】";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 139;
-			temp.x = 3;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 175;
+			temp.x = -1;
 			temp.y = 9;
 			return temp;
 		}

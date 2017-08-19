@@ -1,12 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.coreData.cfg.country.CountryOfficerCfgData;
 	
-	import app.cmd.CountryModuleMessages;
-	import app.cmd.TaskModuleMessages;
-	import app.message.CountryOfficerDataProto;
-	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * 发送消息
@@ -21,23 +15,23 @@ package com.rpgGame.app.sender
 		public static function giveUpMixin( ):void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_GIVE_UP_MI_XIN ,_bytes);
+//			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_GIVE_UP_MI_XIN ,_bytes);
 		}
 		
 		/**
 		 * 开启国家刺探
 		 */
-		public static function startCountryMiXin():void
-		{
-			const pos:int = 25;
-			var countryOfficerData:CountryOfficerDataProto = CountryOfficerCfgData.getData(pos);
-			if(countryOfficerData != null)
-			{
-				if(!countryOfficerData.canStartMiXin)return;
-			}
-			_bytes.clear();
-			SocketConnection_protoBuffer.send( CountryModuleMessages.C2S_START_MI_XIN ,_bytes);
-		}
+//		public static function startCountryMiXin():void
+//		{
+//			const pos:int = 25;
+//			var countryOfficerData:CountryOfficerDataProto = CountryOfficerCfgData.getData(pos);
+//			if(countryOfficerData != null)
+//			{
+//				if(!countryOfficerData.canStartMiXin)return;
+//			}
+//			_bytes.clear();
+//			SocketConnection_protoBuffer.send( CountryModuleMessages.C2S_START_MI_XIN ,_bytes);
+//		}
 		
 		/**
 		 * 领取大转盘奖励
@@ -48,7 +42,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(id);
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COLLECT_ROULETTE_PRIZE, _bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COLLECT_ROULETTE_PRIZE, _bytes);
 		}
 	}
 }

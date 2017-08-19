@@ -1,8 +1,6 @@
 package com.rpgGame.coreData.info.stall
 {
-	import com.rpgGame.coreData.cfg.StallCfgData;
 	
-	import app.message.StallTypeDataProto;
 
 	public class StallTypeData
 	{
@@ -12,9 +10,9 @@ package com.rpgGame.coreData.info.stall
 		public var type : int;
 		public var leftTime : Number;
 		
-		public function get stallTypeData():StallTypeDataProto
-		{
-			return StallCfgData.getStallTypeData(type);
-		}
+//		public function get stallTypeData():StallTypeDataProto
+//		{
+//			return StallCfgData.getStallTypeData(type);
+//		}
 	}
 }

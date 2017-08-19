@@ -1,6 +1,7 @@
 package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -20,6 +21,8 @@ package org.mokylin.skin.app.banghui
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
+
+		public var gUI:feathers.controls.Group;
 
 		public var lbRolenName:feathers.controls.Label;
 
@@ -42,7 +45,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 254;
-			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),numList_i(),lbRolenName_i(),lbZhanli_i()];
+			this.elementsContent = [bg_i(),gUI_i()];
 			
 			states = {
 			};
@@ -67,6 +70,17 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
+		private function gUI_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gUI = temp;
+			temp.name = "gUI";
+			temp.x = 0;
+			temp.y = 2;
+			temp.elementsContent = [uiFirt_i(),numList2_i(),numList_i(),lbRolenName_i(),lbZhanli_i()];
+			return temp;
+		}
+
 		private function lbRolenName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -78,7 +92,7 @@ package org.mokylin.skin.app.banghui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 116;
 			temp.x = 49;
-			temp.y = 8;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -89,11 +103,11 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhanli";
 			temp.text = "999999999";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 77;
 			temp.x = 176;
-			temp.y = 8;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -106,7 +120,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 24;
-			temp.y = 8;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -121,7 +135,7 @@ package org.mokylin.skin.app.banghui
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 33;
 			temp.x = 16;
-			temp.y = 2;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -132,7 +146,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "uiFirt";
 			temp.styleName = "ui/app/banghui/huawen.png";
 			temp.x = 0;
-			temp.y = 11;
+			temp.y = 9;
 			return temp;
 		}
 

@@ -42,7 +42,7 @@ package com.rpgGame.app.ui.roll
 		public function RollPane(data:RollItemInfo):void
 		{
 			_roleItem = data;
-			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
+//			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
 			_roleskin = new Roll_Skin();
 			super(_roleskin);
 			init();	
@@ -78,6 +78,11 @@ package com.rpgGame.app.ui.roll
 		private function init():void
 		{
 			var item:ItemInfo = new ItemInfo();
+			if(_roleItem.tempItemInfo.mod==0)
+			{
+				trace("ROLL点数据有误······道具MODID不应该为0啊");
+				return;
+			}
 			item.itemModelId = _roleItem.tempItemInfo.mod;
 			item.num = _roleItem.tempItemInfo.num;
 			item.itemId = new long("0");
@@ -138,12 +143,14 @@ package com.rpgGame.app.ui.roll
 		private function runProgressTime():void
 		{
 			var now:Number = SystemTimeManager.curtTm;
-			var parcent:Number = (_endRunTime -now)/DurationTime;
-			if(parcent<0)
-				parcent = 0;
-			else if(parcent >1)
-				parcent = 1;
-			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
+//			var parcent:Number = (_endRunTime -now)/DurationTime;
+//			if(parcent<0)
+//				parcent = 0;
+//			else if(parcent >1)
+//				parcent = 1;
+			_roleskin.Pro_bar.maximum=DurationTime;
+			_roleskin.Pro_bar.value=(_endRunTime -now);
+//			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
 			
 			if(now>=_endRunTime)
 			{

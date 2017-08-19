@@ -2,9 +2,6 @@ package com.rpgGame.coreData.cfg
 {
 	import com.rpgGame.coreData.info.BaZhenTuSpellInfo;
 	
-	import app.message.BaZhenTuDungeonProto;
-	import app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	public class BaZhenTuCfgData
@@ -19,24 +16,24 @@ package com.rpgGame.coreData.cfg
 		public function BaZhenTuCfgData()
 		{
 		}
-		public static function setConfig( proto:BaZhenTuDungeonProto ):void
-		{
-			expMultipleStartInToday = proto.expMultipleStartInToday.toNumber();
-			expMultipleEndInToday = proto.expMultipleEndInToday.toNumber();
-			expMultiple = proto.expMultiple;
-			maxWaveCount = proto.maxWaveCount;
-			canEnterTimesPerDay = proto.canEnterTimesPerDay;
-			waveMonsterCount = proto.waveMonsterCount;
-			var len:int = proto.monsterSpells.length;
-			for(var i:int= 0; i<len; i++)
-			{
-				var spellProto:BaZhenTuMonsterSpellProto = proto.monsterSpells[i];
-				var info:BaZhenTuSpellInfo = new BaZhenTuSpellInfo();
-				info.setData(spellProto);
-				_spellHash.add(info.id,info);
-			}
-			
-		}
+//		public static function setConfig( proto:BaZhenTuDungeonProto ):void
+//		{
+//			expMultipleStartInToday = proto.expMultipleStartInToday.toNumber();
+//			expMultipleEndInToday = proto.expMultipleEndInToday.toNumber();
+//			expMultiple = proto.expMultiple;
+//			maxWaveCount = proto.maxWaveCount;
+//			canEnterTimesPerDay = proto.canEnterTimesPerDay;
+//			waveMonsterCount = proto.waveMonsterCount;
+//			var len:int = proto.monsterSpells.length;
+//			for(var i:int= 0; i<len; i++)
+//			{
+//				var spellProto:BaZhenTuMonsterSpellProto = proto.monsterSpells[i];
+//				var info:BaZhenTuSpellInfo = new BaZhenTuSpellInfo();
+//				info.setData(spellProto);
+//				_spellHash.add(info.id,info);
+//			}
+//			
+//		}
 		public static function getSpellInfo(key:int):BaZhenTuSpellInfo
 		{
 			return _spellHash.getValue(key);

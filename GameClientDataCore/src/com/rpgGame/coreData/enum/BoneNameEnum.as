@@ -22,7 +22,7 @@ package com.rpgGame.coreData.enum
 		/**
 		 * 头部挂点 
 		 */		
-		public static const c_0_head_01 : String = "c_0_head_01";
+//		public static const c_0_head_01 : String = "c_0_head_01";
 		/**
 		 * 名字挂点
 		 */		

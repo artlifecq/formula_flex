@@ -2,13 +2,10 @@ package com.rpgGame.appModule.dungeon.equip
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
 	import away3d.events.Event;
@@ -27,9 +24,11 @@ package com.rpgGame.appModule.dungeon.equip
 	{
 		private var _skin:FuBenItem_Zhenqi;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
-		private var _fistIcon:IconCDFace;
-		private var _rewardIcons:Vector.<IconCDFace>;
 		private var _data:Q_daily_zone;
+		
+		private var _groupList1:RewardGroup;
+		private var _groupList2:RewardGroup;
+		
 		public function EquipCell():void
 		{
 			super();
@@ -39,19 +38,15 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin = new FuBenItem_Zhenqi();
 			_skin.toSprite(this);
 			this.setSize(_skin.width,_skin.height);
-			//			_skin.uiJiangli.styleName = "ui/app/fuben/gailvdiaoluo.png"
-			_fistIcon = FaceUtil.creatIconCDFaceByUIAsset(_skin.iconFirst,IcoSizeEnum.ICON_64,1,5,5);
-			_rewardIcons = new Vector.<IconCDFace>();
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_42,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_42,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_42,1,5,5));
+			
+			_groupList1=new RewardGroup(IcoSizeEnum.ICON_48,_skin.iconFirst,RewardGroup.ALIN_CENTER,1,2,2,true,1,false,false);
+			_groupList2=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon_2,RewardGroup.ALIN_CENTER,3,13,13,true,6,false,false);
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnReset.addEventListener(Event.TRIGGERED,resetHandler);
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
 			
 			_skin.resetgroup.visible = false;
 			_skin.combatgroup.visible = false;
-			MCUtil.removeSelf(_skin.uiOk);
 			MCUtil.removeSelf(_skin.lbshenyuName);
 			MCUtil.removeSelf(_skin.lbNum);
 		}
@@ -117,16 +112,10 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.uiName.styleName = "ui/app/fuben/mc/zhuangbei/"+_data.q_limit_level+".png";
 			_skin.uiBg.styleName = "ui/big_bg/fuben/zhuangbei/"+_data.q_bgicon+".jpg";
 			_skin.numZhanli.number = _data.q_combat;
+			_skin.numZhanli.bounds.width=_skin.numZhanli.width;
 			_skin.uiTishi.visible=_dailyZoneInfo.todayPassed>0;
-			var itemInfos:Array = ItemUtil.jsonParseItemClientList(_data.q_special_rewards_show);
-			FaceUtil.SetItemGrid(_fistIcon,itemInfos[0], true);
-			
-			itemInfos = ItemUtil.jsonParseItemClientList(_data.q_rewards_client);
-			for(var i:int = 0;i<_rewardIcons.length;i++)
-			{
-				ClientItemInfo(itemInfos[i]).count = 0;
-				FaceUtil.SetItemGrid(_rewardIcons[i],itemInfos[i], true);
-			}
+			_groupList1.setRewardByJsonStr(_data.q_special_rewards_show);
+			_groupList2.setRewardByJsonStr(_data.q_rewards_client);
 			
 			_skin.grpFirst.visible =_dailyZoneInfo.havePassed==0;
 			
@@ -200,12 +189,12 @@ package com.rpgGame.appModule.dungeon.equip
 				_skin.grpXin.visible=false;
 				_skin.grpXinL.visible=false;
 				_skin.uiLevel.styleName = "ui/app/fuben/mc/kaiqidengji/kaiqi_"+_data.q_limit_level+".png";
-				_skin.ui_tuijianZhanliName.visible= _skin.numZhanli.visible=false;
+				_skin.grp_Tuijian.visible=false;
 			}else{
 				if(_dailyZoneInfo.havePassed==0)
-					_skin.ui_tuijianZhanliName.visible= _skin.numZhanli.visible=true;
+					_skin.grp_Tuijian.visible=true;
 				else
-					_skin.ui_tuijianZhanliName.visible= _skin.numZhanli.visible=false;
+					_skin.grp_Tuijian.visible=false;
 				_skin.uiLevel.visible = false;
 				_skin.grpXin.visible=true;
 				_skin.grpXinL.visible=true;

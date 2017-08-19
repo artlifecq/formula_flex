@@ -6,6 +6,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.NumberUtil;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
@@ -55,7 +56,7 @@ package com.rpgGame.app.view.icon
 				setSubString("");
 				return;
 			}
-			setSubString("x"+NumberUtil.getNumberTo(value));
+			setSubString("x"+NumberUtil.getNumberTo(value,true));
 		}
 		override protected function calIconPos():void
 		{
@@ -114,10 +115,10 @@ package com.rpgGame.app.view.icon
 					readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.BUFF_JIANYI));
 			}
 			//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
-			if (readyEffect&&readyEffect.baseObj3D) 
-			{
-				readyEffect.baseObj3D.setScale(0.5);
-			}
+//			if (readyEffect&&readyEffect.baseObj3D) 
+//			{
+//				readyEffect.baseObj3D.setScale(0.5);
+//			}
 			this.count=buffData.curtStackCount;
 			sortLayer();
 			this.faceInfo=buffData;
@@ -128,23 +129,24 @@ package com.rpgGame.app.view.icon
 			}
 			else
 			{
-				var info:Q_tipsinfo=new Q_tipsinfo();
-				info.q_describe_tittle=_buffData.buffData.q_buff_name;
-				var lostSkiLL:Q_lostskill_open = LostSkillData.getModeInfoById(_buffData.buffData.q_buff_id);
-				if(lostSkiLL==null)
-				{
-					info.q_describe=_buffData.buffData.q_description;
-				}else{
-					var value1:int = 0;
-					if(_buffData.buffInfo.percent>0)
-						value1 = _buffData.buffInfo.percent;
-					else
-						value1 = _buffData.buffInfo.value;
-					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,value1))
-				}
+//				var info:Q_tipsinfo=new Q_tipsinfo();
+//				info.q_describe_tittle=_buffData.buffData.q_buff_name;
+//				var lostSkiLL:Q_lostskill_open = LostSkillData.getModeInfoById(_buffData.buffData.q_buff_id);
+//				if(lostSkiLL==null)
+//				{
+//					info.q_describe=_buffData.buffData.q_description;
+//				}else{
+//					var value1:int = 0;
+//					if(_buffData.buffInfo.percent>0)
+//						value1 = _buffData.buffInfo.percent;
+//					else
+//						value1 = _buffData.buffInfo.value;
+//					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,value1))
+//				}
 				
 				TipTargetManager.remove(this);
-				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
+				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.BUFF_TIP,new DynamicTipData(_buffData)));
+				//TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 			}
 		}
 		

@@ -4,9 +4,6 @@ package com.rpgGame.coreData.info.mail
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import app.message.AmountType;
-	import app.message.MailCollectProto;
-	import app.message.MailProto;
-	import app.message.MailProto.MailGoodsProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	
@@ -45,44 +42,44 @@ package com.rpgGame.coreData.info.mail
 		public var isRead:Boolean;
 		
 		
-		public function MailInfo( id:int, mailProto:MailProto )
+		public function MailInfo( id:int/*, mailProto:MailProto*/ )
 		{
 			mailId = id;
 			
 			itemMap = new HashMap(); 
 			valueMap = new HashMap();
-			if(mailProto.hasSendTime)
-			{
-				startTime = mailProto.sendTime.toNumber();
-			}
-			
-			if(mailProto.hasTitle)
-			{
-				mailTitle = mailProto.title.toString();
-			}
-			
-			if(mailProto.hasContent)
-			{
-				content = mailProto.content.toString();
-			}
-			
-			if(mailProto.hasSenderName)
-			{
-				senderName = mailProto.senderName.toString();
-			}
-			
-			if( mailProto.senderId != null)
-				senderId = mailProto.senderId.toNumber();
-			if(mailProto.amountValue)
-			{
-				var len:int = mailProto.amountValue.length;
-				for(var i:int = 0; i < len; i++)
-				{
-					var value:int = mailProto.amountValue[i];
-					valueMap.add(i,value);
-				}
-			}
-			createItemList( mailProto.goods );
+//			if(mailProto.hasSendTime)
+//			{
+//				startTime = mailProto.sendTime.toNumber();
+//			}
+//			
+//			if(mailProto.hasTitle)
+//			{
+//				mailTitle = mailProto.title.toString();
+//			}
+//			
+//			if(mailProto.hasContent)
+//			{
+//				content = mailProto.content.toString();
+//			}
+//			
+//			if(mailProto.hasSenderName)
+//			{
+//				senderName = mailProto.senderName.toString();
+//			}
+//			
+//			if( mailProto.senderId != null)
+//				senderId = mailProto.senderId.toNumber();
+//			if(mailProto.amountValue)
+//			{
+//				var len:int = mailProto.amountValue.length;
+//				for(var i:int = 0; i < len; i++)
+//				{
+//					var value:int = mailProto.amountValue[i];
+//					valueMap.add(i,value);
+//				}
+//			}
+//			createItemList( mailProto.goods );
 			
 		}
 		
@@ -91,19 +88,19 @@ package com.rpgGame.coreData.info.mail
 		 * @param mailProto
 		 * 
 		 */		
-		private function createItemList( goods:Array ):void
-		{
-			if( goods == null )
-				return;
-			
-			var len:int = goods.length;
-			var mailGoodsProto:MailGoodsProto;
-			for( var i:int = 0; i < len; i++ )
-			{
-				mailGoodsProto = goods[i];
-//				itemMap.add( mailGoodsProto.pos, ItemUtil.convertGoodsProtoToItemInfo( mailGoodsProto.goods ) );
-			}
-		}
+//		private function createItemList( goods:Array ):void
+//		{
+//			if( goods == null )
+//				return;
+//			
+//			var len:int = goods.length;
+//			var mailGoodsProto:MailGoodsProto;
+//			for( var i:int = 0; i < len; i++ )
+//			{
+//				mailGoodsProto = goods[i];
+////				itemMap.add( mailGoodsProto.pos, ItemUtil.convertGoodsProtoToItemInfo( mailGoodsProto.goods ) );
+//			}
+//		}
 		
 		/**
 		 * 某位置上是否有物品 （这个无关是否被领取）
@@ -120,37 +117,37 @@ package com.rpgGame.coreData.info.mail
 			return senderId == 0;
 		}
 		
-		public function setFuJianStatus(collectProto:MailCollectProto):void
-		{
-			if(collectProto)
-			{
-				isRead = collectProto.isRead;
-				var i:int;
-				for(i = 0; i < MailCfgData.MAX_FU_JIAN_COUNT; i++)
-				{
-					value = collectProto.collectGoods & (1<<i);
-					_itemStatusMap.add(i,value != 0);
-				}
-				
-				
-				
-				var keys:Array = valueMap.keys();
-				if(keys)
-				{
-					var len:int = keys.length;
-					for(i = 0; i < len; i++)
-					{
-						var key:int = keys[i];
-						var value:int = valueMap.getValue(key);
-						if(value)
-						{
-							var isGot:Boolean = (collectProto.isCollectAmount & (1<<AmountType.BAND_MONEY)) != 0;
-							_moneyStatusMap.add(key,isGot);
-						}
-					}
-				}
-			}
-		}
+//		public function setFuJianStatus(collectProto:MailCollectProto):void
+//		{
+//			if(collectProto)
+//			{
+//				isRead = collectProto.isRead;
+//				var i:int;
+//				for(i = 0; i < MailCfgData.MAX_FU_JIAN_COUNT; i++)
+//				{
+//					value = collectProto.collectGoods & (1<<i);
+//					_itemStatusMap.add(i,value != 0);
+//				}
+//				
+//				
+//				
+//				var keys:Array = valueMap.keys();
+//				if(keys)
+//				{
+//					var len:int = keys.length;
+//					for(i = 0; i < len; i++)
+//					{
+//						var key:int = keys[i];
+//						var value:int = valueMap.getValue(key);
+//						if(value)
+//						{
+//							var isGot:Boolean = (collectProto.isCollectAmount & (1<<AmountType.BAND_MONEY)) != 0;
+//							_moneyStatusMap.add(key,isGot);
+//						}
+//					}
+//				}
+//			}
+//		}
 		
 		public function setValueCellected():void
 		{

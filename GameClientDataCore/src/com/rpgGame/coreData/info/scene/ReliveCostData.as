@@ -1,11 +1,6 @@
 package com.rpgGame.coreData.info.scene
 {
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
-	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
-	
-	import app.message.AmountType;
-	import app.message.ReliveCostProto;
-	import app.message.ReliveTypeDataProto;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -33,28 +28,28 @@ package com.rpgGame.coreData.info.scene
 		 * @param Cost
 		 * 
 		 */		
-		public function setData( data:ReliveTypeDataProto ):void
-		{
-			var amount : AmountInfo;
-			var costProto : ReliveCostProto;
-			freeTimes = data.freeTimes;
-			reliveType = data.reliveType;
-			lifePercent = data.lifePercent;
-			manaPercent = data.manaPercent;
-			
-			var len:int = data.allReliveCost.length;
-			for( var i:int = 0; i < len; i++ )
-			{
-				costProto = data.allReliveCost[i];
-				if(!costProto)
-					continue;
-				amount = new AmountInfo();
-				amount.setSomeType(AmountType.MONEY,costProto.moneyCost);
-				if(costProto.reliveTimes > maxRelive)
-					maxRelive = costProto.reliveTimes;
-				costMap.add(costProto.reliveTimes,amount);
-			}
-		}
+//		public function setData( data:ReliveTypeDataProto ):void
+//		{
+//			var amount : AmountInfo;
+//			var costProto : ReliveCostProto;
+//			freeTimes = data.freeTimes;
+//			reliveType = data.reliveType;
+//			lifePercent = data.lifePercent;
+//			manaPercent = data.manaPercent;
+//			
+//			var len:int = data.allReliveCost.length;
+//			for( var i:int = 0; i < len; i++ )
+//			{
+//				costProto = data.allReliveCost[i];
+//				if(!costProto)
+//					continue;
+//				amount = new AmountInfo();
+//				amount.setSomeType(AmountType.MONEY,costProto.moneyCost);
+//				if(costProto.reliveTimes > maxRelive)
+//					maxRelive = costProto.reliveTimes;
+//				costMap.add(costProto.reliveTimes,amount);
+//			}
+//		}
 		
 		public function getCostAmountInfoByIndex( index:int ):AmountInfo
 		{

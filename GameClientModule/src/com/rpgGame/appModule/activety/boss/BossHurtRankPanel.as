@@ -77,10 +77,14 @@ package com.rpgGame.appModule.activety.boss
 			for(var i:int=1;i<11;i++){
 				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i-1) as BossHurtInfo;
 				info.bossDamageInfo=null;
+			/*	info.bossDamageInfo.damage=10000;
+				info.bossDamageInfo.playerName="123";
+				info.bossDamageInfo.playerId=new long();*/
 			}
 			_skin.ListItem.dataProvider.updateAll();
 			
 			initEvent();
+			this.escExcuteAble=false;
 		}
 		
 		override public function hide():void

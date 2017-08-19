@@ -25,7 +25,7 @@ package org.mokylin.skin.app.roll
 			this.currentState = "normal";
 			this.height = 22;
 			this.width = 265;
-			this.elementsContent = [__Roll_Item_UIAsset1_i(),labelDisplay_i()];
+			this.elementsContent = [labelDisplay_i()];
 			
 			states = {
 			};
@@ -33,27 +33,13 @@ package org.mokylin.skin.app.roll
 		}
 
 
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
-		private function __Roll_Item_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 22;
-			temp.styleName = "ui/app/roll/wenleidi.png";
-			temp.width = 265;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.text = "玩家名字小A：98点";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 244;
 			temp.x = 12;

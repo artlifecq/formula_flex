@@ -33,6 +33,7 @@ package com.rpgGame.appModule.guild
 			GuildManager.instance().defaultMsg = _skin.lbXuanYan.text;
 			_skin.lbName.addEventListener(FeathersEventType.FOCUS_IN,forceinHandler);
 			_skin.lbName.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
+			_skin.lbName.maxChars=7;
 			_skin.lbXuanYan.addEventListener(FeathersEventType.FOCUS_IN,forceinHandler);
 			_skin.lbXuanYan.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
 			_group = new ToggleGroup();

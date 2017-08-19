@@ -37,8 +37,7 @@ package com.rpgGame.app.manager.task
 	
 	import flash.geom.Point;
 	
-	import app.message.TouJingTaskProto;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -74,16 +73,16 @@ package com.rpgGame.app.manager.task
 		 * @param Count	已经完成过的偷经任务次数
 		 *
 		 */
-		public static function setHero(touJingTask : TouJingTaskProto, Count : int) : void
-		{
-			touJingCount = Count;
-			//偷经
-			if (touJingTask == null)
-				return;
-
-			touJingData = new TouJingTaskData();
-			touJingData.setData(touJingTask);
-		}
+//		public static function setHero(touJingTask : TouJingTaskProto, Count : int) : void
+//		{
+//			touJingCount = Count;
+//			//偷经
+//			if (touJingTask == null)
+//				return;
+//
+//			touJingData = new TouJingTaskData();
+//			touJingData.setData(touJingTask);
+//		}
 
 		/**
 		 * 零点重置
@@ -598,9 +597,9 @@ package com.rpgGame.app.manager.task
 			var itemId:int = int(LanguageConfig.getText( LangTouJing.TOU_JING_HUI_CHENG_ITEM_ID ));
 			var count:int = BackPackManager.instance.getItemCount(itemId);
 			if( count <= 0 )
-				tittle = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_13,ItemConfig.getItemName(itemId));
+				tittle = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,ItemConfig.getItemName(itemId));
 			else
-				tittle = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_15,ItemConfig.getItemName(itemId));
+				tittle = HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,ItemConfig.getItemName(itemId));
 			GameAlert.showAlertUtil( LangTouJing.TOU_JING_HUI_CHENG_DESC, onCheckClickBtn, tittle );
 		}
 		
@@ -618,7 +617,7 @@ package com.rpgGame.app.manager.task
 					var count:int = BackPackManager.instance.getItemCount(itemId);
 					if( count <= 0 )//背包没该物品
 					{
-						NoticeManager.showNotify( LangTouJing.TOU_JING_HUI_CHENG_FAIL, HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_15,ItemConfig.getItemName(itemId)) );
+						NoticeManager.showNotify( LangTouJing.TOU_JING_HUI_CHENG_FAIL, HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,ItemConfig.getItemName(itemId)) );
 						
 						//下面是物品不够自动购买，策划说暂时不需要
 //						var info:AmountInfo = MainRoleManager.actorInfo.amountInfo;

@@ -1,6 +1,5 @@
 package com.rpgGame.coreData.role
 {
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.TransCfgData;
@@ -8,9 +7,6 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.info.MapDataManager;
 	
 	import flash.geom.Point;
-	
-	import app.message.SceneTransportProto;
-	import app.message.MazeDungeonProto.MazePortalDataProto;
 
 	/**
 	 *
@@ -55,46 +51,46 @@ package com.rpgGame.coreData.role
 			
         }
 
-		public function setProtocData(data : SceneTransportProto) : void
-		{
-			this.id = data.id;
-			this.name = MapDataManager.getMapName(data.destSceneDataId) + "传送门";
-			this.effectRes = data.res;
-			this.x = data.resX;
-			this.y = data.resY;
-			this.offsetUp = data.resOffsetUp;
-			this.direction = data.resDirection;
-			this.sizeScale = data.scale > 0 ? (data.scale * 0.01) : 1;
-			//this.destCountry = data.destCountry;
-			//this.destScene = data.destSceneDataId;
-			this.polygon = TranportsDataManager.getPolygon(data);
-			//this.canTransportCountry = data.canTransportCountry;
-			this.showInSmallMapType = data.showInSmallMapType;
-		}
+//		public function setProtocData(data : SceneTransportProto) : void
+//		{
+//			this.id = data.id;
+//			this.name = MapDataManager.getMapName(data.destSceneDataId) + "传送门";
+//			this.effectRes = data.res;
+//			this.x = data.resX;
+//			this.y = data.resY;
+//			this.offsetUp = data.resOffsetUp;
+//			this.direction = data.resDirection;
+//			this.sizeScale = data.scale > 0 ? (data.scale * 0.01) : 1;
+//			//this.destCountry = data.destCountry;
+//			//this.destScene = data.destSceneDataId;
+//			this.polygon = TranportsDataManager.getPolygon(data);
+//			//this.canTransportCountry = data.canTransportCountry;
+//			this.showInSmallMapType = data.showInSmallMapType;
+//		}
 
 		/**
 		 * 构建一个迷宫传送门数据
 		 * @param data
 		 *
 		 */
-		public function setMazeProtocData(data : MazePortalDataProto, index : int) : void
-		{
-			id = index;
-			name = data.name;
-			polygon = new Vector.<Point>();
-			var pos : Array = data.sourceAreaData.pos;
-			var posLen : int = pos.length;
-			for (var i : int = 0; i < posLen; i += 2)
-			{
-				polygon.push(new Point(pos[i], pos[i + 1]));
-			}
-			effectRes = data.res;
-			direction = data.resDirection;
-			sizeScale = data.scale > 0 ? (data.scale * 0.01) : 1;
-			x = data.resX;
-			y = data.resY;
-			offsetUp = data.resOffsetUp;
-			showInSmallMapType = data.showInSmallMapType;
-		}
+//		public function setMazeProtocData(data : MazePortalDataProto, index : int) : void
+//		{
+//			id = index;
+//			name = data.name;
+//			polygon = new Vector.<Point>();
+//			var pos : Array = data.sourceAreaData.pos;
+//			var posLen : int = pos.length;
+//			for (var i : int = 0; i < posLen; i += 2)
+//			{
+//				polygon.push(new Point(pos[i], pos[i + 1]));
+//			}
+//			effectRes = data.res;
+//			direction = data.resDirection;
+//			sizeScale = data.scale > 0 ? (data.scale * 0.01) : 1;
+//			x = data.resX;
+//			y = data.resY;
+//			offsetUp = data.resOffsetUp;
+//			showInSmallMapType = data.showInSmallMapType;
+//		}
 	}
 }

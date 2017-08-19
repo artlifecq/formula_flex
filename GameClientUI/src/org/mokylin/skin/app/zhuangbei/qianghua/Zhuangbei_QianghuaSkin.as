@@ -105,7 +105,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
 			temp.text = "请放入强化材料";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 449;
 			temp.y = 384;
@@ -378,7 +378,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.height = 20;
 			temp.text = "最大强化等级:30/30";
 			temp.textAlign = "right";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 146;
 			temp.x = 755;

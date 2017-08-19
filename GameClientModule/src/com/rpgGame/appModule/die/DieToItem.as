@@ -16,23 +16,12 @@ package com.rpgGame.appModule.die
 	public class DieToItem extends SkinUI
 	{
 		private var _skin:tuijianItems_Skin;
-		private var _icon:UIAsset;
 		private var _item:Q_die;
 		
 		public function DieToItem()
 		{
 			_skin=new tuijianItems_Skin();
 			super(_skin);
-			initView();
-		}
-		
-		private function initView():void
-		{
-			_icon=new UIAsset();
-			_icon.touchable=false;
-			_icon.x=20;
-			_icon.y=48;
-			this.addChild(_icon);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -46,13 +35,8 @@ package com.rpgGame.appModule.die
 		{
 			_item=item;
 			if(item){
-				_skin.lbl_name.text=_item.q_name;
-				_icon.styleName=ClientConfig.getPanelIcon("die/"+_item.q_icon.toString());
-				starNum(_item.q_starsnum);
-			}else{
-				_skin.lbl_name.text="";
-				_icon.styleName="";
-				starNum(0);
+				_skin.uiName.styleName="ui/app/siwangfuhuo/name/"+item.q_icon+".png";
+				_skin.ui_ico.styleName="ui/app/siwangfuhuo/icon/"+item.q_icon+".png";
 			}
 		}
 		
@@ -73,9 +57,8 @@ package com.rpgGame.appModule.die
 		
 		public function clear():void
 		{
-			_skin.lbl_name.text="";
-			_icon.styleName="";
-			starNum(0);
+			_skin.ui_ico.styleName="";
+			_skin.uiName.styleName="";
 		}
 	}
 }

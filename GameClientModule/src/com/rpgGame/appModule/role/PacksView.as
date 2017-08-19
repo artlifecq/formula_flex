@@ -9,7 +9,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.ui.tips.data.AmountTipData;
@@ -59,8 +58,6 @@ package com.rpgGame.appModule.role
 	import app.message.GoodsType;
 	
 	import away3d.events.Event;
-	
-	import cmodule.PreLoader.modPreStaticInit;
 	
 	import feathers.controls.ScrollBar;
 	import feathers.controls.ScrollBarDisplayMode;
@@ -630,7 +627,7 @@ package com.rpgGame.appModule.role
 			if (bool) 
 			{
 				MouseCursorController.showSell();
-				BreatheTweenUtil.add(_skin.imgBg,StaticValue.A_UI_OEANGE_TEXT,30);
+				BreatheTweenUtil.add(_skin.imgBg,StaticValue.OEANGE_TEXT,30);
 				if (!EventManager.hasEvent(SceneEvent.INTERACTIVE,onSceneTouch)) 
 				{
 					EventManager.addEvent(SceneEvent.INTERACTIVE,onSceneTouch);

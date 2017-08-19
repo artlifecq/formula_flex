@@ -42,12 +42,12 @@ package com.rpgGame.appModule.battle.dfdj
 			//win
 			if (msg.result==1) 
 			{
-				_skin.imgWin.styleName="ui/app/zhanchang/jiesuan/tianzhanshengli.png";
+				_skin.imgWin.styleName="ui/big_bg/activety/tianzhanshengli.png";
 				_skin.imgLabWin.styleName="ui/app/zhanchang/jiesuan/gongxinin.png";
 			}
 			else
 			{
-				_skin.imgWin.styleName="ui/app/zhanchang/jiesuan/tiaozhanshibai.png";
+				_skin.imgWin.styleName="ui/big_bg/activety/tiaozhanshibai.png";
 				_skin.imgLabWin.styleName="ui/app/zhanchang/jiesuan/henyihan.png";
 			}
 			_skin.numJifen.label=msg.integral+"";

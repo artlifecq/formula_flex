@@ -3,6 +3,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
@@ -81,7 +82,7 @@ package com.rpgGame.appModule.activety.boss
 					return;
 				}else{
 					_skin.uiBaoxiang.visible=true;
-					_skin.uiNo.visible=true;
+//					_skin.uiNo.visible=true;
 					_skin.lbKillNum.visible=true;
 					_skin.lbName.visible=true;
 					_skin.lbNo.visible=true;
@@ -90,12 +91,12 @@ package com.rpgGame.appModule.activety.boss
 				}
 				var id:Number=info.bossDamageInfo.playerId.ToGID();
 				if(MainRoleManager.isSelf(id)){
-					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.UI_YELLOW;
+					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.RED_TEXT;
 				}else{
-					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.UI_YELLOW1;
+					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.YELLOW_TEXT;
 				}
 				_skin.lbName.text=info.bossDamageInfo.playerName;
-				_skin.lbKillNum.text=info.bossDamageInfo.damage+"("+info.perDamage+"%)";
+				_skin.lbKillNum.text=NumberUtil.getNumberTo(info.bossDamageInfo.damage,true)+"("+Number(info.perDamage)+"%)";
 			}else{
 				
 			}

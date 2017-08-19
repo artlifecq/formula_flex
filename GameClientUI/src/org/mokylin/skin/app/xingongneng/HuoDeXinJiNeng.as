@@ -55,7 +55,7 @@ package org.mokylin.skin.app.xingongneng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "恭喜你获得了新技能！";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 140;
 			temp.y = 31;

@@ -74,5 +74,7 @@ package com.rpgGame.app.richText
 		public static const OTHERTYPE_FLY:String = "123";
 		/**求婚链接*/
 		public static const QIUHUN:String = "124";
+		/**查看其它玩家*/
+		public static const SEE_OTHER_NAME:String = "125";
 	}
 }

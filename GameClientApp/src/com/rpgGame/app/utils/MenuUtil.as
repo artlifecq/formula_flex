@@ -18,7 +18,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -31,8 +30,6 @@ package com.rpgGame.app.utils
 	
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
-	
-	import app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -48,7 +45,7 @@ package com.rpgGame.app.utils
 		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false,isTeam:Boolean= true):Array
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
-			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
+//			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
 			var menus : Array = [];
 			if(fromChat)
 			{
@@ -90,7 +87,7 @@ package com.rpgGame.app.utils
 		public static function getPlayerTeamMenu(targetID:Number,fromChat:Boolean = false):Array
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
-			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
+//			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
 			var menus : Array = [];
 			menus.push(LangMenu.LOOK_HERO);
 			if(fromChat)

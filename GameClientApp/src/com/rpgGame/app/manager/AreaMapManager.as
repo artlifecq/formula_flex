@@ -11,9 +11,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
-	import com.rpgGame.coreData.cfg.ClientTrigger;
 	import com.rpgGame.coreData.cfg.TriggerArea;
-	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
@@ -106,21 +104,21 @@ package com.rpgGame.app.manager
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			if (TaskInfoDecoder.currentEscortInfo)
 			{
-				var mapID : int = SceneSwitchManager.currentMapId;
-				if (TaskInfoDecoder.currentEscortInfo.targetArea.sceneId == mapID)
-				{
-					var polygon : Vector.<Point> = new Vector.<Point>();
-					var poses : Array = TaskInfoDecoder.currentEscortInfo.targetArea.pos;
-					var posesLen : int = poses.length;
-					for (var i : int = 0; i < posesLen; i += 2)
-					{
-						var x : int = poses[i];
-						var y : int = poses[i + 1];
-						polygon.push(new Point(x, y));
-					}
-					var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.EVENT_AREA_PROPERTY, 1, TaskInfoDecoder.currentEscortInfo);
-					otherAreaMap.addFlag(areaMapData);
-				}
+//				var mapID : int = SceneSwitchManager.currentMapId;
+//				if (TaskInfoDecoder.currentEscortInfo.targetArea.sceneId == mapID)
+//				{
+//					var polygon : Vector.<Point> = new Vector.<Point>();
+//					var poses : Array = TaskInfoDecoder.currentEscortInfo.targetArea.pos;
+//					var posesLen : int = poses.length;
+//					for (var i : int = 0; i < posesLen; i += 2)
+//					{
+//						var x : int = poses[i];
+//						var y : int = poses[i + 1];
+//						polygon.push(new Point(x, y));
+//					}
+//					var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.EVENT_AREA_PROPERTY, 1, TaskInfoDecoder.currentEscortInfo);
+//					otherAreaMap.addFlag(areaMapData);
+//				}
 			}
 			else
 			{

@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.role
 {
-	import app.message.GoodsProto;
+	
 
 	/**
 	 *
@@ -12,16 +12,16 @@ package com.rpgGame.coreData.role
 	public class SceneDropGoodsItem
 	{
 		public var isPicked : Boolean = false;
-		private var _data : GoodsProto = null;
-
-		public function SceneDropGoodsItem(data : GoodsProto)
-		{
-			_data = data;
-		}
-
-		public function get data() : GoodsProto
-		{
-			return _data;
-		}
+//		private var _data : GoodsProto = null;
+//
+//		public function SceneDropGoodsItem(data : GoodsProto)
+//		{
+//			_data = data;
+//		}
+//
+//		public function get data() : GoodsProto
+//		{
+//			return _data;
+//		}
 	}
 }

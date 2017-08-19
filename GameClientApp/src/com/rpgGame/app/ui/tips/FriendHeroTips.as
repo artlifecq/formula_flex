@@ -50,7 +50,7 @@ package com.rpgGame.app.ui.tips
 				_tipsSkin.isFriend.styleName = AssetUrl.ENEMY_ICON;
 				var enemy:EnemyInfo = data as EnemyInfo;
 				if(enemy)
-					_tipsSkin.haoyoudu.htmlText = "战绩:"+ HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_16,enemy.winTime+"")+"胜"+"     "+ HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_16,enemy.failTime+"")+"败";
+					_tipsSkin.haoyoudu.htmlText = "战绩:"+ HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,enemy.winTime+"")+"胜"+"     "+ HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,enemy.failTime+"")+"败";
 				else
 					_tipsSkin.haoyoudu.htmlText = "";
 				_tipsSkin.imgBG.height = 93;

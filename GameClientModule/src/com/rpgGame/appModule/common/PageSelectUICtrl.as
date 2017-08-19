@@ -8,7 +8,7 @@ package com.rpgGame.appModule.common
 	import feathers.controls.Label;
 
 	/**
-	 * 翻页控制
+	 * 翻页控制, 这种用于指导所有数据的情况
 	 * @author Administrator
 	 * 
 	 */
@@ -22,7 +22,7 @@ package com.rpgGame.appModule.common
 		private var _curPageIndex:int;
 		private var pageLabel:Label;
 		private var callBack:Function;
-		private var pageData:Array;
+		private var pageData:*;
 		private var dataStep:int;
 		private var labStr:String;
 		public function get maxPage():int
@@ -75,7 +75,7 @@ package com.rpgGame.appModule.common
 				setCurPage(maxPage-1);
 			}
 		}
-		public function setData(data:Array,step:int):void
+		public function setData(data:*,step:int):void
 		{
 			if (data==null||step==0) 
 			{
@@ -88,6 +88,13 @@ package com.rpgGame.appModule.common
 			if (_maxPage>0) 
 			{
 				setCurPage(0);
+			}
+			else 
+			{
+				if (callBack) 
+				{
+					callBack(data);
+				}
 			}
 		}
 		private function resetState():void

@@ -90,7 +90,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.fontSize = 14;
 			temp.text = "12";
 			temp.textAlign = "right";
-			temp.color = 0x55BD15;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 25;
 			temp.x = 23;

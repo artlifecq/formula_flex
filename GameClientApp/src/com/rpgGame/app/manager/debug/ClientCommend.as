@@ -10,6 +10,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
+	import com.rpgGame.app.fight.spell.NewSkillAddPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -177,7 +178,9 @@ package   com.rpgGame.app.manager.debug
 				skill.skillLevel=1;
 				skill.skillChildLv=1;
 				skill.skillExp=2;
-				UIPopManager.showAlonePopUI(SkillAddPop,skill);
+				//UIPopManager.showAlonePopUI(SkillAddPop,skill);
+				//NewSkillAddPanelExt.showSkill(skill);
+				AppManager.showApp(AppConstant.NEW_SKILL_ADD_PANLE,skill);
 			});
 			commandList.put( ".jz", function (...arg):void
 			{
@@ -206,7 +209,7 @@ package   com.rpgGame.app.manager.debug
 				var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
 				if(MainRoleManager.actorInfo.sex==1) str+="玉树临风胜潘安，一树梨花压海棠，求美女老婆一枚";
 				else str+="小萝莉，娇羞藏，声音甜美本领强，求帅哥老公一枚";
-				var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name);		
+				var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name);		
 				ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
 			});		
 			commandList.put( ".jixianjiesuan", function (...arg):void
@@ -468,6 +471,11 @@ package   com.rpgGame.app.manager.debug
 				{
 					FightFaceHelper.showAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace,"",FightFaceHelper.NUMBER_PC_HPSUB,-100-i*10,null,null,SpellResultTweenUtil.TweenDiaoXue);
 				}
+				
+			});
+			commandList.put( ".enter", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_NOTICE_PANEL,arg[0]);
 				
 			});
 		}

@@ -1,5 +1,6 @@
 package org.mokylin.skin.mainui.tishi
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -22,8 +23,8 @@ package org.mokylin.skin.mainui.tishi
 			super();
 			
 			this.currentState = "normal";
-			this.height = 20;
-			this.width = 445;
+			this.height = 26;
+			this.width = 683;
 			this.elementsContent = [__paomadeng_Skin_UIAsset1_i(),lbl_msg_i()];
 			
 			states = {
@@ -39,8 +40,8 @@ package org.mokylin.skin.mainui.tishi
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
-			temp.right = 0;
 			temp.styleName = "ui/mainui/tishi/paomateng.png";
+			temp.width = 683;
 			temp.y = 0;
 			return temp;
 		}
@@ -52,9 +53,10 @@ package org.mokylin.skin.mainui.tishi
 			temp.name = "lbl_msg";
 			temp.bold = true;
 			temp.text = "庆祝寻秦记测试，庆祝寻秦记测试，庆祝寻秦记测试";
-			temp.color = 0x5b564f;
-			temp.x = 62;
-			temp.y = 1;
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 166;
+			temp.y = 4;
 			return temp;
 		}
 

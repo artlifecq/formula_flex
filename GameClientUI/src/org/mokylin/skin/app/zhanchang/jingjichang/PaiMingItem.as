@@ -23,9 +23,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 
 		public var imgHat:feathers.controls.UIAsset;
 
-		public var numLevel:feathers.controls.UINumber;
+		public var numLeve2:feathers.controls.UINumber;
 
-		public var numLevel2:feathers.controls.UINumber;
+		public var numLevel:feathers.controls.UINumber;
 
 		public var uiL1:feathers.controls.UIAsset;
 
@@ -69,7 +69,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.name = "gRank";
 			temp.x = 36;
 			temp.y = 27;
-			temp.elementsContent = [uiL1_i(),uiL2_i(),numLevel2_i(),numLevel_i()];
+			temp.elementsContent = [uiL1_i(),uiL2_i(),numLevel_i(),numLeve2_i()];
 			return temp;
 		}
 
@@ -95,17 +95,17 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			return temp;
 		}
 
-		private function numLevel2_i():feathers.controls.UINumber
+		private function numLeve2_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			numLevel2 = temp;
-			temp.name = "numLevel2";
+			numLeve2 = temp;
+			temp.name = "numLeve2";
 			temp.height = 25;
-			temp.label = "1";
+			temp.label = "5";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2;
-			temp.width = 27;
-			temp.x = 26;
-			temp.y = 1;
+			temp.width = 14;
+			temp.x = 27;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -115,11 +115,11 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			numLevel = temp;
 			temp.name = "numLevel";
 			temp.height = 25;
-			temp.label = "1";
+			temp.label = "5";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2_2;
-			temp.width = 27;
-			temp.x = 24;
-			temp.y = 0;
+			temp.width = 19;
+			temp.x = 25;
+			temp.y = 2;
 			return temp;
 		}
 

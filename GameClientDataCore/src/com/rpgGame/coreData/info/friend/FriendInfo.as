@@ -1,9 +1,5 @@
 package com.rpgGame.coreData.info.friend
 {
-	import com.rpgGame.coreData.type.FriendType;
-	
-	import app.message.ClientFriendProto;
-
 	/**
 	 *
 	 * 好友通用数据，意思是所有的信息都在里面
@@ -22,12 +18,10 @@ package com.rpgGame.coreData.info.friend
 		{
 		}
 		/**设置简单数据数据**/
-		public function setup(data:ClientFriendProto):void
-		{
-			id = data.friendId.toNumber();
-			friendDegree = data.friendDegree;
-		}
-		
-		
+//		public function setup(data:ClientFriendProto):void
+//		{
+//			id = data.friendId.toNumber();
+//			friendDegree = data.friendDegree;
+//		}
 	}
 }

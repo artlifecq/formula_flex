@@ -3,24 +3,18 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
-	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
-	
-	import flash.geom.Point;
 	
 	import feathers.controls.SkinnableContainer;
 	import feathers.utils.filter.GrayFilter;

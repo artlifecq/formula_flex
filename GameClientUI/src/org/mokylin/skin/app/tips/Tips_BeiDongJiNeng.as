@@ -67,7 +67,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "技能类型：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 102;
 			temp.y = 35;

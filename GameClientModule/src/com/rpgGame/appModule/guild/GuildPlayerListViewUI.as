@@ -3,15 +3,15 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.appModule.common.PageSelectUICtrl;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
+	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
-	
-	import feathers.controls.Scroller;
-	import feathers.data.ListCollection;
-	import feathers.layout.VerticalLayout;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.BangHui_Member;
@@ -21,14 +21,17 @@ package com.rpgGame.appModule.guild
 	public class GuildPlayerListViewUI extends ViewUI
 	{
 		private var _skin:BangHui_Member;
-		private var _currentPage:int = 1;
-		private var _maxPage:int = 0;
+	
 		private var _currentOriderValue:String = "";
 		private static const PROP_JOB:String = "memberType";
 		private static const PROP_BATTLE:String = "battle";
 		private static const PROP_LEVEL:String = "level";
 		private static const PROP_CURACTIVE:String = "curActive";
 		private static const PROP_ALLACTIVE:String = "allActive";
+		
+		private var _pageCtrl:PageSelectUICtrl;
+		private var maxCount:int=12;
+		private var cellList:Vector.<GuildPlayerInfoCell>=new Vector.<GuildPlayerInfoCell>();
 		public function GuildPlayerListViewUI():void
 		{
 			_skin = new BangHui_Member();
@@ -38,18 +41,32 @@ package com.rpgGame.appModule.guild
 		
 		private function initView():void
 		{
-			_skin.lbNum.isEditable  = false;
-			_skin.ListItem.snapToPages = true;
-			_skin.ListItem.itemRendererType =GuildPlayerInfoCell;
-			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			_skin.ListItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 0;
-			_skin.ListItem.layout = layout;
-			_skin.ListItem.dataProvider = new ListCollection();
+			_pageCtrl=new PageSelectUICtrl(_skin.btnPrev,_skin.btnNext,_skin.lbNum,showPageData);
+			var tmp:GuildPlayerInfoCell;
+			var startX:int=25;
+			var startY:int=118;
+			for (var i:int = 0; i < maxCount; i++) 
+			{
+				tmp=new GuildPlayerInfoCell(i);
+				tmp.x=startX;
+				tmp.y=startY+i*tmp.height;
+				_skin.container.addChild(tmp);
+				cellList.push(tmp);
+				tmp.setData(null);
+			}
+			MCUtil.BringToTop(_skin.grpFlip);
 			addNode(RTNodeID.GUILD_MEM,RTNodeID.GUILD_MEM_APPLY,_skin.btnApply,88,GuildManager.instance().hasApplyList);
 		}
-		
+		private function showPageData(data:*):void
+		{
+			// TODO Auto Generated method stub
+			var list:Vector.<GuildMemberInfo>=data;
+			var len:int=list.length;
+			for (var i:int = 0; i < maxCount; i++) 
+			{
+				cellList[i].setData(i<len?list[i]:null);
+			}
+		}
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
@@ -61,7 +78,7 @@ package com.rpgGame.appModule.guild
 			_skin.chkAuto.isSelected = GuildManager.instance().guildData.isAutoApply==1;
 			_skin.chkAuto.visible = GuildManager.instance().canJoin;
 			_skin.labchkAuto.visible = GuildManager.instance().canJoin;
-			requestPage(0);
+			
 			_skin.btnZhaoJi.visible = GuildManager.instance().canConvene;
 			_skin.btnZhaoMu.visible = GuildManager.instance().canRecrui;
 			_skin.btnApply.visible = GuildManager.instance().canJoin;
@@ -71,6 +88,7 @@ package com.rpgGame.appModule.guild
 			}else{
 				_skin.btnJoin.label = "退出帮派";
 			}
+			
 			notifyUpdate(RTNodeID.GUILD_MEM_APPLY);
 		}
 		private function refeashAppoint(msg:ResGuildOperateResultMessage):void
@@ -90,9 +108,8 @@ package com.rpgGame.appModule.guild
 		}
 		private function refeashList():void
 		{
-			var totalPage:int = GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected);
-			_maxPage = totalPage;
-			requestPage(_currentPage);
+			// GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected);
+			this._pageCtrl.setData( GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected),maxCount);
 			if(_currentOriderValue=="")
 			{
 				_skin.arrowZhiwei_Down.visible = true;
@@ -117,12 +134,6 @@ package com.rpgGame.appModule.guild
 			{
 				case _skin.chkOnLine:
 					refeashList();
-					break;
-				case _skin.btnPrev:
-					requestPage(_currentPage-1);
-					break;
-				case _skin.btnNext:
-					requestPage(_currentPage+1);
 					break;
 				case _skin.btnZhaoJi:
 					GuildSender.guildConvene();
@@ -159,29 +170,9 @@ package com.rpgGame.appModule.guild
 			}
 		}
 		
-		private function requestPage(page:int):void
-		{
-			if(page<1)
-				page = 1;
-			if(page>_maxPage)
-				page = _maxPage;
-			_skin.ListItem.dataProvider.removeAll();
-			var starValue:int = (page-1)*GuildManager.MaxPlayerListPageCount
-			var endValue:int = page*GuildManager.MaxPlayerListPageCount;
-			for(var i:int = starValue;i<endValue;i++)
-			{
-				_skin.ListItem.dataProvider.push(i);
-			}
-			_currentPage =page;
-			refeahShowPageLable();
-		}
+	
 		
-		private function refeahShowPageLable():void
-		{
-			_skin.lbNum.text = _currentPage.toString()+"/"+_maxPage.toString();
-			_skin.btnPrev.visible = _currentPage>1;
-			_skin.btnNext.visible = _currentPage< _maxPage;
-		}
+	
 		override protected function onHide():void
 		{
 			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);

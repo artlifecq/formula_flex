@@ -3,7 +3,6 @@ package com.rpgGame.app.manager.stall
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
-	import com.netease.protobuf.Int64;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
@@ -17,39 +16,26 @@ package com.rpgGame.app.manager.stall
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.ui.alert.AlertText;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.StallEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.stall.StallBuyTreeItem;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.info.stall.StallItemData;
 	import com.rpgGame.coreData.info.stall.StallTypeData;
 	import com.rpgGame.coreData.lang.LangStall;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.utils.MoneyUtil;
-	import com.rpgGame.coreData.utils.TreeUtils;
 	
-	import app.cmd.StallModuleMessages;
 	import app.message.AmountType;
 	import app.message.ChangeToBuyGoodsType;
 	import app.message.ChangeToSellGoodsType;
-	import app.message.StallBuyGoodsDataProto;
-	import app.message.StallBuyGoodsProto;
-	import app.message.StallDetailProto;
-	import app.message.StallModuleObjProto;
-	import app.message.StallSellGoodsProto;
-	import app.message.StallTypeDataProto;
-	
-	import feathers.data.TreeNode;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -108,14 +94,14 @@ package com.rpgGame.app.manager.stall
 				GameAlert.showAlertUtil(LangStall.cantStartStallChangeId,gotoStartStall);
 				return;
 			}
-			if(!selfStallData)
-			{
-				selfStallData = getBaseStallData();
-				var stallType : StallTypeDataProto = StallCfgData.getFristStallType();
-				selfStallData.stallType = stallType?stallType.type:0;
-				selfStallData.playerId = MainRoleManager.actorID;
-				selfStallData.stallName = MainRoleManager.actorInfo.name+"的摊位";
-			}
+//			if(!selfStallData)
+//			{
+//				selfStallData = getBaseStallData();
+//				var stallType : StallTypeDataProto = StallCfgData.getFristStallType();
+//				selfStallData.stallType = stallType?stallType.type:0;
+//				selfStallData.playerId = MainRoleManager.actorID;
+//				selfStallData.stallName = MainRoleManager.actorInfo.name+"的摊位";
+//			}
 			if(!isOnStall)
 				selfStallData.clearStall();
 			selfStallData.stallId = clientMapAreaGrid.id;
@@ -251,29 +237,29 @@ package com.rpgGame.app.manager.stall
 				StallSender.setAutoAd(true,str);
 		}
 		
-		public static function setAutoAdComplete():void
-		{
-			autoAd = tempAutoAd;
-			tempAutoAd = "";
-			NoticeManager.showNotify(LangStall.setAutoAdComplete);
-			isAutoAd = true;
-			EventManager.dispatchEvent(StallEvent.STALL_AUTO_AD_CHANGE);
-			startAutoAdTime = SystemTimeManager.curtTm;
-			nextAutoAdTime = startAutoAdTime + getAutoAdDuration();
-		}
-		
-		public static function getNextAutoAdTime():Number
-		{
-			var systemTime : Number = SystemTimeManager.curtTm;
-			var duration : Number = getAutoAdDuration();
-			var i : int = 0;
-			while(nextAutoAdTime<systemTime)
-			{
-				nextAutoAdTime = startAutoAdTime + i * duration;
-				i++;
-			}
-			return nextAutoAdTime;
-		}
+//		public static function setAutoAdComplete():void
+//		{
+//			autoAd = tempAutoAd;
+//			tempAutoAd = "";
+//			NoticeManager.showNotify(LangStall.setAutoAdComplete);
+//			isAutoAd = true;
+//			EventManager.dispatchEvent(StallEvent.STALL_AUTO_AD_CHANGE);
+//			startAutoAdTime = SystemTimeManager.curtTm;
+//			nextAutoAdTime = startAutoAdTime + getAutoAdDuration();
+//		}
+//		
+//		public static function getNextAutoAdTime():Number
+//		{
+//			var systemTime : Number = SystemTimeManager.curtTm;
+//			var duration : Number = getAutoAdDuration();
+//			var i : int = 0;
+//			while(nextAutoAdTime<systemTime)
+//			{
+//				nextAutoAdTime = startAutoAdTime + i * duration;
+//				i++;
+//			}
+//			return nextAutoAdTime;
+//		}
 		
 		public static function cancelAutoAdComplete():void
 		{
@@ -282,43 +268,43 @@ package com.rpgGame.app.manager.stall
 			EventManager.dispatchEvent(StallEvent.STALL_AUTO_AD_CHANGE);
 		}
 		
-		public static function canAutoAd():Boolean
-		{
-			if(!selfStallData || !seeIsSelfStall())
-				return false;
-			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(selfStallData.stallType);
-			if(!stallType)
-				return false;
-			return stallType.adMaxLength;
-		}
+//		public static function canAutoAd():Boolean
+//		{
+//			if(!selfStallData || !seeIsSelfStall())
+//				return false;
+//			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(selfStallData.stallType);
+//			if(!stallType)
+//				return false;
+//			return stallType.adMaxLength;
+//		}
 		
-		public static function getAutoAdDuration():Number
-		{
-			if(!selfStallData)
-				return 0;
-			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(selfStallData.stallType);
-			if(!stallType)
-				return 0;
-			return stallType.broadcastAdDuration?stallType.broadcastAdDuration.toNumber():0;
-		}
+//		public static function getAutoAdDuration():Number
+//		{
+//			if(!selfStallData)
+//				return 0;
+//			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(selfStallData.stallType);
+//			if(!stallType)
+//				return 0;
+//			return stallType.broadcastAdDuration?stallType.broadcastAdDuration.toNumber():0;
+//		}
 		
 		//-----------------------------剩余时间的-------------------------------
-		public static function setupStallModuleObj(proto:StallModuleObjProto):void
-		{
-			if(!proto || !proto.stallTypeLeftTime)
-				return;
-//			var stallType : StallTypeDataProto;
-//			var stallTypeArray : Array = StallCfgData.typeHash.getValues();
-			stallTypeDatas = new HashMap();
-			for(var i : int = 0; i < proto.stallTypeLeftTime.length; i++)
-			{
-//				stallType = stallTypeArray[i];
-				var stallTypeData : StallTypeData = new StallTypeData();
-				stallTypeData.type = i;
-				stallTypeData.leftTime = (proto.stallTypeLeftTime[i] as Int64)?(proto.stallTypeLeftTime[i] as Int64).toNumber():0;
-				stallTypeDatas.add(i,stallTypeData);
-			}
-		}
+//		public static function setupStallModuleObj(proto:StallModuleObjProto):void
+//		{
+//			if(!proto || !proto.stallTypeLeftTime)
+//				return;
+////			var stallType : StallTypeDataProto;
+////			var stallTypeArray : Array = StallCfgData.typeHash.getValues();
+//			stallTypeDatas = new HashMap();
+//			for(var i : int = 0; i < proto.stallTypeLeftTime.length; i++)
+//			{
+////				stallType = stallTypeArray[i];
+//				var stallTypeData : StallTypeData = new StallTypeData();
+//				stallTypeData.type = i;
+//				stallTypeData.leftTime = (proto.stallTypeLeftTime[i] as Int64)?(proto.stallTypeLeftTime[i] as Int64).toNumber():0;
+//				stallTypeDatas.add(i,stallTypeData);
+//			}
+//		}
 		
 		//-------------------------------出售物品部分的---------------------------
 		public static function reqUpdateSellGoods(stallItem:StallItemData):void
@@ -384,18 +370,18 @@ package com.rpgGame.app.manager.stall
 			}
 		}
 		
-		public static function updateStallSellItemByProto(index:int,proto:StallSellGoodsProto):void
-		{
-			if(index<selfStallData.stallSellList.length)
-			{
-				var stallItem : StallItemData = selfStallData.stallSellList[index];
-				if(stallItem)
-				{
-					stallItem.setupSellProto(proto);
-					EventManager.dispatchEvent(StallEvent.STALL_UPDATE);
-				}
-			}
-		}
+//		public static function updateStallSellItemByProto(index:int,proto:StallSellGoodsProto):void
+//		{
+//			if(index<selfStallData.stallSellList.length)
+//			{
+//				var stallItem : StallItemData = selfStallData.stallSellList[index];
+//				if(stallItem)
+//				{
+//					stallItem.setupSellProto(proto);
+//					EventManager.dispatchEvent(StallEvent.STALL_UPDATE);
+//				}
+//			}
+//		}
 		//---------------------------------收购物品------------------------------
 		
 		public static function reqSetBuyStallItem(stallItem : StallItemData):void
@@ -457,18 +443,18 @@ package com.rpgGame.app.manager.stall
 			}
 		}
 		
-		public static function updateStallBuyItemByProto(index:int,proto:StallBuyGoodsProto):void
-		{
-			if(index<selfStallData.stallSellList.length)
-			{
-				var stallItem : StallItemData = selfStallData.getStallBuyIndex(index);;
-				if(stallItem)
-				{
-					stallItem.setupBuyProto(proto);
-					EventManager.dispatchEvent(StallEvent.STALL_UPDATE);
-				}
-			}
-		}
+//		public static function updateStallBuyItemByProto(index:int,proto:StallBuyGoodsProto):void
+//		{
+//			if(index<selfStallData.stallSellList.length)
+//			{
+//				var stallItem : StallItemData = selfStallData.getStallBuyIndex(index);;
+//				if(stallItem)
+//				{
+//					stallItem.setupBuyProto(proto);
+//					EventManager.dispatchEvent(StallEvent.STALL_UPDATE);
+//				}
+//			}
+//		}
 		
 		public static function buyItemComplete(index:int,itemId:int,haveItem:int,price:int):void
 		{
@@ -600,15 +586,15 @@ package com.rpgGame.app.manager.stall
 			stallBroadcast(stallData);
 		}
 		//----------------------------查看别人的摊位-------------------------
-		public static function getStallDetail(stall:StallDetailProto):void
-		{
-			var stallData : StallData = getStallDataByStallId(stall.stallId);
-			if(!stallData)
-				return;
-			stallData.setup(stall);
-			setStallData(stallData);
-			EventManager.dispatchEvent(StallEvent.STALL_UPDATE);
-		}
+//		public static function getStallDetail(stall:StallDetailProto):void
+//		{
+//			var stallData : StallData = getStallDataByStallId(stall.stallId);
+//			if(!stallData)
+//				return;
+//			stallData.setup(stall);
+//			setStallData(stallData);
+//			EventManager.dispatchEvent(StallEvent.STALL_UPDATE);
+//		}
 		
 		public static function getSeeStallDetail():void
 		{
@@ -808,71 +794,71 @@ package com.rpgGame.app.manager.stall
 		 *  * [[{name:"name"},HashMap],[{name:"name"},HashMap],[{name:"name"},Array]...]
 		 * 				   HashMap=[data,data,data...]         			   Array=[data,data,data...]
 		 */		
-		public static function getStallBuyDatas(name:String=""):TreeNode
-		{
-			var stallBuyTreeNode : TreeNode= new TreeNode({name:"物品"});
-			var datas : Array = StallCfgData.getStallBuyGoodsByName(name);
-			if(!datas)
-				return stallBuyTreeNode;
-			var typeRoot : HashMap = new HashMap();//单个大类型
-			var nextTypeRoot : HashMap;
-			var tempTreeItem : StallBuyTreeItem;
-			for each(var proto : StallBuyGoodsDataProto in datas)
-			{
-				var keyAndValue:Array = proto.name.split("#");
-				if(keyAndValue.length!=2)
-					continue;
-				var root : String = keyAndValue[0];
-				var nextRoot : String = keyAndValue[1];
-				var rootArray : Array = typeRoot.getValue(root);
-				if(!rootArray)
-				{
-					nextTypeRoot = new HashMap();
-					tempTreeItem = new StallBuyTreeItem();
-					tempTreeItem.typeName = root;
-					rootArray = [tempTreeItem,nextTypeRoot];
-					typeRoot.add(root,rootArray);
-				}else
-				{
-					nextTypeRoot = rootArray[1];
-				}
-				var nextRootArray : Array = nextTypeRoot.getValue(nextRoot);
-				if(!nextRootArray)
-				{
-					tempTreeItem = new StallBuyTreeItem();
-					tempTreeItem.typeName = nextRoot;
-					nextRootArray = [tempTreeItem]
-					nextTypeRoot.add(nextRoot,nextRootArray);
-				}
-				for each(var itemId : int in proto.goodsId)
-				{
-					tempTreeItem = new StallBuyTreeItem();
-					tempTreeItem.itemId = itemId;
-					nextRootArray.push(tempTreeItem);
-				}
-			}
-			stallBuyTreeNode = TreeUtils.setTreeNode(stallBuyTreeNode,typeRoot.getValues());
-			return stallBuyTreeNode;
-		}
+//		public static function getStallBuyDatas(name:String=""):TreeNode
+//		{
+//			var stallBuyTreeNode : TreeNode= new TreeNode({name:"物品"});
+//			var datas : Array = StallCfgData.getStallBuyGoodsByName(name);
+//			if(!datas)
+//				return stallBuyTreeNode;
+//			var typeRoot : HashMap = new HashMap();//单个大类型
+//			var nextTypeRoot : HashMap;
+//			var tempTreeItem : StallBuyTreeItem;
+//			for each(var proto : StallBuyGoodsDataProto in datas)
+//			{
+//				var keyAndValue:Array = proto.name.split("#");
+//				if(keyAndValue.length!=2)
+//					continue;
+//				var root : String = keyAndValue[0];
+//				var nextRoot : String = keyAndValue[1];
+//				var rootArray : Array = typeRoot.getValue(root);
+//				if(!rootArray)
+//				{
+//					nextTypeRoot = new HashMap();
+//					tempTreeItem = new StallBuyTreeItem();
+//					tempTreeItem.typeName = root;
+//					rootArray = [tempTreeItem,nextTypeRoot];
+//					typeRoot.add(root,rootArray);
+//				}else
+//				{
+//					nextTypeRoot = rootArray[1];
+//				}
+//				var nextRootArray : Array = nextTypeRoot.getValue(nextRoot);
+//				if(!nextRootArray)
+//				{
+//					tempTreeItem = new StallBuyTreeItem();
+//					tempTreeItem.typeName = nextRoot;
+//					nextRootArray = [tempTreeItem]
+//					nextTypeRoot.add(nextRoot,nextRootArray);
+//				}
+//				for each(var itemId : int in proto.goodsId)
+//				{
+//					tempTreeItem = new StallBuyTreeItem();
+//					tempTreeItem.itemId = itemId;
+//					nextRootArray.push(tempTreeItem);
+//				}
+//			}
+//			stallBuyTreeNode = TreeUtils.setTreeNode(stallBuyTreeNode,typeRoot.getValues());
+//			return stallBuyTreeNode;
+//		}
 		
 		private static var seeStallArray : Array = [];
 		public static function getStallColor(id:Number):uint
 		{
 			var stallData : StallData = getStallDataByPlayerId(id);
 			if(!stallData)
-				return StaticValue.COLOR_CODE_1;
+				return StaticValue.YELLOW_TEXT;
 			if(seeStallArray.indexOf(id)!=-1)
-				return StaticValue.COLOR_CODE_27;
+				return StaticValue.GRAY_TEXT;
 			switch(stallData.stallType)
 			{
 				case 0:
-					return StaticValue.COLOR_CODE_16;
+					return StaticValue.GREEN_TEXT;
 				case 1:
-					return StaticValue.COLOR_CODE_17;
+					return StaticValue.SKYBLUE_TEXT;
 				case 2:
-					return StaticValue.COLOR_CODE_4;
+					return StaticValue.YELLOW_TEXT;
 			}
-			return StaticValue.COLOR_CODE_1;
+			return StaticValue.YELLOW_TEXT;
 			
 		}
 

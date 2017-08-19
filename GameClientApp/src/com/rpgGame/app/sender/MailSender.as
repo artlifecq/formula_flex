@@ -7,8 +7,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.mail.message.ReqGetMailAttachmentMessage;
 	import com.rpgGame.netData.mail.message.ReqReceiveMailMessage;
 	
-	import app.cmd.MailModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
@@ -31,7 +29,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32( mailId );
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SET_MAIL_READED, _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SET_MAIL_READED, _bytes );
 		}	
 		
 		/**
@@ -46,7 +44,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32( mailId );
 			_bytes.writeVarint32( amountType );
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_MAIL_MONEY, _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_MAIL_MONEY, _bytes );
 		}
 		
 		/**
@@ -59,7 +57,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32( mailId );
 			_bytes.writeVarint32( index );
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_MAIL_GOODS, _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_MAIL_GOODS, _bytes );
 		}
 		
 		/**
@@ -71,7 +69,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32( mailId );
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_MAIL, _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_MAIL, _bytes );
 		}
 		
 		/**
@@ -84,7 +82,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean( isDelete );
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_ALL_MAIL , _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_COLLECT_ALL_MAIL , _bytes );
 		}
 		
 		/**
@@ -103,7 +101,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.writeVarint32( mailIds[i] );
 			}
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_DELETE_MAIL, _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_DELETE_MAIL, _bytes );
 		}
 		
 		/**
@@ -142,7 +140,7 @@ package com.rpgGame.app.sender
 				}
 			}
 			
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SEND_MAIL , _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SEND_MAIL , _bytes );
 		}
 		
 		/**
@@ -153,7 +151,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean( isRefuse );
-			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SET_REFUSE_RECEIVE_MAIL , _bytes );
+//			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SET_REFUSE_RECEIVE_MAIL , _bytes );
 		}
 		
 		/*

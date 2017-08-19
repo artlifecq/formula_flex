@@ -225,13 +225,13 @@ package com.rpgGame.appModule.mount
 		{
 			var num:int=BackPackManager.instance.getBagItemsCountById(406);
 			_skin.lbZhizi.text=num.toString();
-			if(num>0) _skin.lbZhizi.color=StaticValue.A_UI_GREEN_TEXT;
-			else _skin.lbZhizi.color=StaticValue.A_UI_RED_TEXT;
+			if(num>0) _skin.lbZhizi.color=StaticValue.GREEN_TEXT;
+			else _skin.lbZhizi.color=StaticValue.RED_TEXT;
 			
 			num=BackPackManager.instance.getBagItemsCountById(407);
 			_skin.lbJinjie.text=num.toString();
-			if(num>0) _skin.lbJinjie.color=StaticValue.A_UI_GREEN_TEXT;
-			else _skin.lbJinjie.color=StaticValue.A_UI_RED_TEXT;
+			if(num>0) _skin.lbJinjie.color=StaticValue.GREEN_TEXT;
+			else _skin.lbJinjie.color=StaticValue.RED_TEXT;
 			
 		}
 		

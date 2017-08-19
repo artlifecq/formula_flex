@@ -72,7 +72,7 @@ package org.mokylin.skin.app.wuxue.juexue
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前等级：";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 0;
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.wuxue.juexue
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "升级消耗：";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 0;
@@ -194,7 +194,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			lb_dengji = temp;
 			temp.name = "lb_dengji";
 			temp.text = "30/100";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 154;
 			temp.x = 80;
@@ -207,7 +207,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_lujing = temp;
 			temp.name = "lb_lujing";
-			temp.text = "获取路径";
+			temp.text = "获取途径";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
@@ -222,7 +222,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			lb_xiaohao = temp;
 			temp.name = "lb_xiaohao";
 			temp.htmlText = "<u>初级技能书*1（1）</u><font color='#5DBD37'></font>";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 154;
 			temp.x = 78;

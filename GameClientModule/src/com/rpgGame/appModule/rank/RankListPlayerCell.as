@@ -66,7 +66,7 @@ package com.rpgGame.appModule.rank
 				_skin.lbContent.visible = true;
 			}
 			_topInfo = info;
-			if(info.rank<=3)
+			if(info.rank<=3&&info.rank>0)
 			{
 				_skin.lbNum.visible = false;
 				_skin.icon.visible = true;

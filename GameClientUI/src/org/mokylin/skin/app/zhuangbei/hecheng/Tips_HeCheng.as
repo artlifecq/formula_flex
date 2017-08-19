@@ -51,7 +51,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "1.获得低级材料可合成高级材料。";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 12;
 			temp.y = 36;
@@ -64,7 +64,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.height = 36;
 			temp.leading = 4;
 			temp.text = "2.绑定材料和非绑定材料合成后将获得绑定材料。";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 217;
 			temp.x = 12;

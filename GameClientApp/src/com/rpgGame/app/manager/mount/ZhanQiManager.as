@@ -87,7 +87,8 @@ package com.rpgGame.app.manager.mount
 			if(zhanqiDataInfo.warFlagModelId>0) 
 			{
 				var role:SceneRole=MainRoleManager.actor;
-				role.updateFlag(zhanqiDataInfo.warFlagModelId);
+				if(role)
+					role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}
 		}
 		
@@ -116,7 +117,8 @@ package com.rpgGame.app.manager.mount
 				zhanqiDataInfo.warFlagModelId+=1;
 				EventManager.dispatchEvent(ZhanQiUpLevel);
 				var role:SceneRole=MainRoleManager.actor;
-				role.updateFlag(zhanqiDataInfo.warFlagModelId);
+				if(role)
+					role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}else{
 				EventManager.dispatchEvent(ZhanQiChangeExp,msg.exp,msg.count);
 			}

@@ -1,18 +1,16 @@
 package com.rpgGame.app.cmdlistener
 {
-	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.netData.cross.message.SCCancelTeamMatchMessage;
 	import com.rpgGame.netData.cross.message.SCStartTeamMatchMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneIdInfoMessage;
@@ -157,7 +155,11 @@ package com.rpgGame.app.cmdlistener
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void
 		{
-			DungeonManager.teamZid=0;
+			if(ZoneMultyCfgData.isZoneMultyByID(msg.zoneId))
+			{
+				DungeonManager.teamZid=0;
+			}
+			
 			DungeonManager.curryZoneId=msg.zoneId;
 			EventManager.dispatchEvent(DungeonEvent.ZONE_CLEAR_TRIGGER,msg.zoneId);
 			EventManager.dispatchEvent(DungeonEvent.ENTER_ZONE);
@@ -165,7 +167,10 @@ package com.rpgGame.app.cmdlistener
 		}
 		private function onSCOutZoneMessage(msg:SCOutZoneMessage):void
 		{
-			DungeonManager.teamZid=0;
+			if(ZoneMultyCfgData.isZoneMultyByID(msg.zoneId))
+			{
+				DungeonManager.teamZid=0;
+			}
 			TrusteeshipManager.getInstance().findDist=0;
 			TrusteeshipManager.getInstance().stopAll();
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);

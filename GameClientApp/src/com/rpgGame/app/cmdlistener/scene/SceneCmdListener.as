@@ -20,7 +20,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -121,19 +120,11 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 	
-	import app.cmd.NpcModuleMessages;
-	import app.cmd.SceneModuleMessages;
-	import app.cmd.SimpleDungeonModuleMessages;
-	import app.cmd.StoryModuleMessages;
-	import app.cmd.TaskModuleMessages;
-	import app.message.GoodsProto;
-	
 	import away3d.enum.LoadPriorityType;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 	
@@ -202,40 +193,40 @@ package com.rpgGame.app.cmdlistener.scene
 			//////
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
-			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ADD_SENT_NPC, addSentNpc);
-			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SYNC_SENT_NPC_POS, onSceneSyncSentNpcPos);
-			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_ADD_STORY_PROTECT_MONSTER, onAddStoryProtectMonster);
-			
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_TP_SAME_SCENE, onRecHeroTpSameScene);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_TP_SAME_SCENE_BROADCAST, onHeroTp);
-			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_SCENE_REQUEST_NPC_TRANSPORT, onNpcTransSuccess);
-			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_SCENE_REQUEST_NPC_TRANSPORT_FAIL, onNpcTransFail);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_BEEN_TAUNT_TARGET, onBeenTauntTarget);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_LOST_TAUNT_TARGET, onLostTauntTarget);
-			
-			
-			
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_OBJECT_MAX_LIFE_CHANGE, onRecObjectMaxLifeChange);
-			
-			
-			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_FAIL, onLeaveDungeonFail);
-			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_SUCCESS, onLeaveDungeonSuccess);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP, onHeroJump);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP_FAIL, onHeroJumpFail);
-			
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ADD_SCENE_BOX, onSceneAddBoxGoods);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_DROP_SCENE_BOX, onSceneDropBoxGoods);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO, onScenePickUpGoodsInfo);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO_FAIL, onScenePickUpGoodsInfoFail);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS, onScenePickUpGoods);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_FAIL, onScenePickUpGoodsFail);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_NEXT_CAN_PICK_UP_TIME_CHANGED, onScenePickUpGoodsNextCanPickTime);
-			
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_GET_SURROUNDING_SCENE_INFO_FAIL, onGetMapUnitInfoFiald);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_REPLY_SURROUNDING_SCENE_INFO, onGetMapUnitInfoSucced);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK, onPlunderHurtRank);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK_SELF_AMOUNT, onPlunderHurtRankSelfAmount);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_RESET_HURT_RANK, onResetHurtRank);
+//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ADD_SENT_NPC, addSentNpc);
+//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SYNC_SENT_NPC_POS, onSceneSyncSentNpcPos);
+//			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_ADD_STORY_PROTECT_MONSTER, onAddStoryProtectMonster);
+//			
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_TP_SAME_SCENE, onRecHeroTpSameScene);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_TP_SAME_SCENE_BROADCAST, onHeroTp);
+//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_SCENE_REQUEST_NPC_TRANSPORT, onNpcTransSuccess);
+//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_SCENE_REQUEST_NPC_TRANSPORT_FAIL, onNpcTransFail);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_BEEN_TAUNT_TARGET, onBeenTauntTarget);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_LOST_TAUNT_TARGET, onLostTauntTarget);
+//			
+//			
+//			
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_OBJECT_MAX_LIFE_CHANGE, onRecObjectMaxLifeChange);
+//			
+//			
+//			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_FAIL, onLeaveDungeonFail);
+//			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_SUCCESS, onLeaveDungeonSuccess);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP, onHeroJump);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP_FAIL, onHeroJumpFail);
+//			
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ADD_SCENE_BOX, onSceneAddBoxGoods);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_DROP_SCENE_BOX, onSceneDropBoxGoods);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO, onScenePickUpGoodsInfo);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO_FAIL, onScenePickUpGoodsInfoFail);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS, onScenePickUpGoods);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_FAIL, onScenePickUpGoodsFail);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_NEXT_CAN_PICK_UP_TIME_CHANGED, onScenePickUpGoodsNextCanPickTime);
+//			
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_GET_SURROUNDING_SCENE_INFO_FAIL, onGetMapUnitInfoFiald);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_REPLY_SURROUNDING_SCENE_INFO, onGetMapUnitInfoSucced);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK, onPlunderHurtRank);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK_SELF_AMOUNT, onPlunderHurtRankSelfAmount);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_RESET_HURT_RANK, onResetHurtRank);
 			
 			
 			finish();
@@ -309,6 +300,10 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResChangePositionMessage(msg:ResChangePositionMessage):void
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if (!role) 
+			{
+				return;
+			}
 			var posX : uint = msg.position.x;
 			var posY : uint = msg.position.y;
 			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
@@ -563,7 +558,11 @@ package com.rpgGame.app.cmdlistener.scene
 				return;
 			}
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.objId.ToGID()) as SceneRole;
-			if (SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
+			if(!role){
+				trace("居然同步了一个不存在的角色啊!!");
+				return;
+			}
+			if (role && role.usable &&SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
 			{
 				return;
 			}
@@ -1499,22 +1498,22 @@ package com.rpgGame.app.cmdlistener.scene
 			//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
 			var sceneGoodsId : Number = buffer.readVarint64();
 			var goodsItems : Vector.<SceneDropGoodsItem> = new Vector.<SceneDropGoodsItem>();
-			while (buffer.bytesAvailable)
-			{
-				var goodsProto : GoodsProto;
-				var goodsItem : SceneDropGoodsItem;
-				var index : int = buffer.readVarint32();
-				var len : int = buffer.readVarint32();
-				if (len > 0)
-				{
-					goodsProto = new GoodsProto();
-					var protoBytes : ByteArray = new ByteArray();
-					buffer.readBytes(protoBytes, 0, len);
-					goodsProto.mergeFrom(protoBytes);
-					goodsItem = new SceneDropGoodsItem(goodsProto);
-					goodsItems.push(goodsItem);
-				}
-			}
+//			while (buffer.bytesAvailable)
+//			{
+//				var goodsProto : GoodsProto;
+//				var goodsItem : SceneDropGoodsItem;
+//				var index : int = buffer.readVarint32();
+//				var len : int = buffer.readVarint32();
+//				if (len > 0)
+//				{
+//					goodsProto = new GoodsProto();
+//					var protoBytes : ByteArray = new ByteArray();
+//					buffer.readBytes(protoBytes, 0, len);
+//					goodsProto.mergeFrom(protoBytes);
+//					goodsItem = new SceneDropGoodsItem(goodsProto);
+//					goodsItems.push(goodsItem);
+//				}
+//			}
 			SceneDropGoodsManager.pickUpGoodsInfoInit(sceneGoodsId, goodsItems);
 		}
 		

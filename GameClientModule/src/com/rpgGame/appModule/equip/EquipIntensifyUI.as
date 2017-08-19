@@ -23,6 +23,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -218,6 +219,8 @@ package com.rpgGame.appModule.equip
 			
 			alertOk=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
 			alertOk.isShowCBox=true;
+			
+			perMon=GlobalSheetData.getSettingInfo(502).q_int_value;
 		}
 		
 		private function onCreatePinZhi(e:Event):void
@@ -691,9 +694,9 @@ package com.rpgGame.appModule.equip
 			}
 			var des:String="";
 			if(value<=value1){
-				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value+"/"+value1);//绿色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value):HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value+"/"+value1);//绿色
 			}else{
-				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value):HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value+"/"+value1);//红色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value):HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value+"/"+value1);//红色
 			}
 			return title+":"+des;
 		}

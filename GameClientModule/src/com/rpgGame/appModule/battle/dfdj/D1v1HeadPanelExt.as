@@ -65,8 +65,7 @@ package com.rpgGame.appModule.battle.dfdj
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
-			//两分钟
-			_endTime=getTimer()+2*60*1000;
+	
 			var str:String=TextUtil.SecondToHMS2(2*60).replace(/ :/g,"x");
 			_skin.uiTime.label=str;
 			
@@ -151,6 +150,8 @@ package com.rpgGame.appModule.battle.dfdj
 				_timer=new GameTimer("D1v1HeadPanelExt");
 				_timer.onUpdate=onTimer;
 			}
+			//两分钟
+			_endTime=getTimer()+2*60*1000;
 			_timer.start();
 			onTimer();
 		}

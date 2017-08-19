@@ -30,7 +30,9 @@ package com.game.engine3D.display.shapeArea
 		private var _rotationY : Number = 0;
         private var _heightMapHelper : HeightMapHelper;
 
-		public function ClingGroundPlaneGeometry(width : Number = 100, height : Number = 100, segmentsW : uint = 1, segmentsH : uint = 1, yUp : Boolean = false, doubleSided : Boolean = false, flatNormal : Boolean = false, hasNormals : Boolean = true, hasTangents : Boolean = false)
+		public function ClingGroundPlaneGeometry(width : Number = 100, height : Number = 100, segmentsW : uint = 1, segmentsH : uint = 1, 
+												 yUp : Boolean = false, doubleSided : Boolean = false, flatNormal : Boolean = false, 
+												 hasNormals : Boolean = true, hasTangents : Boolean = false)
 		{
 			super(hasNormals, hasTangents);
 

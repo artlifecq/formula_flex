@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg.mount
 {
-	import app.message.MountMiscDataProto;
-
 	/**
 	 * 坐骑杂项data 
 	 * @author 陈鹉光
@@ -46,24 +44,24 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param config
 		 * 
 		 */		
-		public static function setConfig( config:MountMiscDataProto ):void
-		{
-			if( config == null )
-				return;
-			
-			canTraningMountCount = config.canTraningMountCount;
-			upOrDownCd = config.upOrDownCd;
-			mountLevelCapThanMaster = config.mountLevelCapThanMaster;
-			maxHungerDegree = config.maxHungerDegree;
-			canRideLevel = config.canRideLevel;
-			canRideFightLevel = config.canRideFightLevel;
-			canBreedLevel = config.canBreedLevel;
-			canBreedMaxHungreDegree = config.canBreedMaxHungreDegree;
-			autoDownFromMountHungerDegree = config.autoDownFromMountHungerDegree;
-//			moveSpeedHalfHugerDegree = config.;
-			refineCostBnadMonoyBase = config.refineCostBandMoneyBase;
-			refineCostVitalityBase = config.refineCostVitalityBase;
-			inhertPerSpellCostBandMonry = config.inheritPerSpellCostBandMoney;
-		}
+//		public static function setConfig( config:MountMiscDataProto ):void
+//		{
+//			if( config == null )
+//				return;
+//			
+//			canTraningMountCount = config.canTraningMountCount;
+//			upOrDownCd = config.upOrDownCd;
+//			mountLevelCapThanMaster = config.mountLevelCapThanMaster;
+//			maxHungerDegree = config.maxHungerDegree;
+//			canRideLevel = config.canRideLevel;
+//			canRideFightLevel = config.canRideFightLevel;
+//			canBreedLevel = config.canBreedLevel;
+//			canBreedMaxHungreDegree = config.canBreedMaxHungreDegree;
+//			autoDownFromMountHungerDegree = config.autoDownFromMountHungerDegree;
+////			moveSpeedHalfHugerDegree = config.;
+//			refineCostBnadMonoyBase = config.refineCostBandMoneyBase;
+//			refineCostVitalityBase = config.refineCostVitalityBase;
+//			inhertPerSpellCostBandMonry = config.inheritPerSpellCostBandMoney;
+//		}
 	}
 }

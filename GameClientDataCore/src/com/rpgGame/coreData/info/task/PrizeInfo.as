@@ -1,13 +1,7 @@
 package com.rpgGame.coreData.info.task
 {
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
-	
-	import app.message.AmountType;
-	import app.message.GoodsWrapperProto;
-	import app.message.PrizeProto;
-	import app.message.RoulettePrizeProto;
 
 	/**
 	 *
@@ -106,38 +100,38 @@ package com.rpgGame.coreData.info.task
 			return _itemInfoList;
 		}
 
-		public function converData(data:PrizeProto):void
-		{
-			if( data == null )
-				return;
-			
-			moneyAmount.setData( data.amounts );
-			
-			createPrizeItemInfo(data.goodsWrapper);
-		}
+//		public function converData(data:PrizeProto):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			moneyAmount.setData( data.amounts );
+//			
+//			createPrizeItemInfo(data.goodsWrapper);
+//		}
 		
 		/**
 		 * 解析鸡毛信轮盘奖励 
 		 * @param data
 		 * 
 		 */		
-		public function converRoulettePrizeData(data:RoulettePrizeProto):void
-		{
-			if( data == null )
-				return;
-			
-			if(data.hasGoods)
-			{
-				//物品
-				createPrizeItemInfo([data.goods as GoodsWrapperProto]);
-			}
-			
-			if(data.hasExp)
-			{
-				//百分比
-				moneyAmount.addSomeType(AmountType.EXP, data.exp.per);
-			}
-		}
+//		public function converRoulettePrizeData(data:RoulettePrizeProto):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			if(data.hasGoods)
+//			{
+//				//物品
+//				createPrizeItemInfo([data.goods as GoodsWrapperProto]);
+//			}
+//			
+//			if(data.hasExp)
+//			{
+//				//百分比
+//				moneyAmount.addSomeType(AmountType.EXP, data.exp.per);
+//			}
+//		}
 		
 		
 		/** 创建物品数据列表  */		

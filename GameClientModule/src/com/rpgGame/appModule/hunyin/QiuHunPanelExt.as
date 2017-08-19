@@ -6,11 +6,7 @@ package com.rpgGame.appModule.hunyin
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.richText.RichTextCustomLinkType;
-	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -23,10 +19,8 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
-	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	
 	import away3d.events.Event;
 	
@@ -80,7 +74,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			super.onShow();
 			_skin.textInput.text = DEFAULT_CHAT_TEXT;
-			_skin.textInput.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.textInput.color=StaticValue.GRAY_TEXT;
 			initEvent();
 		}
 		
@@ -148,7 +142,7 @@ package com.rpgGame.appModule.hunyin
 		private function forceinHandler(evt:Event):void
 		{
 			_skin.textInput.text="";		
-			_skin.textInput.color=StaticValue.A_UI_BEIGE_TEXT;
+			_skin.textInput.color=StaticValue.BEIGE_TEXT;
 		}
 		
 		private function forceoutHandler(evt:Event):void
@@ -156,7 +150,7 @@ package com.rpgGame.appModule.hunyin
 			if(_skin.textInput.text == "")
 			{
 				_skin.textInput.text = DEFAULT_CHAT_TEXT;
-				_skin.textInput.color=StaticValue.A_UI_GRAY_TEXT;
+				_skin.textInput.color=StaticValue.GRAY_TEXT;
 			}
 		}	
 		
@@ -166,7 +160,7 @@ package com.rpgGame.appModule.hunyin
 			//			var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
 			//			if(MainRoleManager.actorInfo.sex==1) str+=boyText;
 			//			else str+=grilText;
-//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
+//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
 			//			ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
 		}
 		

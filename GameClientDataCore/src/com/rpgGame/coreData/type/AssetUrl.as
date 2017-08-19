@@ -68,7 +68,7 @@ package com.rpgGame.coreData.type
 		/** 图标被使用了 **/
 		public static const ITEM_USING_ASSET : String = "ui/common/version_3/T_tubiaodikuang/tu_biao_zhe_zhao.png";
 		/** 表情底 **/
-		public static const FACE_BG_ASSET : String = "ui/mainui/chat/biao_qing_di1.png";
+		public static const FACE_BG_ASSET : String = "ui/mainui/chat/di_laba.png";
 		/** 坐骑状态--训练状态 **/
 		public static const MOUNT_XUN_LIAN:String = "ui/common/version_3/B_bujian/xun-.png";
 		/** 坐骑状态--出战状态 **/

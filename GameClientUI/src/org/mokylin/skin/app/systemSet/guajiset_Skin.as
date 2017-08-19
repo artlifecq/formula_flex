@@ -88,8 +88,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "生命值低于";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 53;
 			temp.y = 42;
 			return temp;
@@ -99,8 +99,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "%自动智能吃药";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 254;
 			temp.y = 42;
 			return temp;
@@ -110,8 +110,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "药品耗尽时，自动购买与人物等级相符的药品";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 53;
 			temp.y = 77;
 			return temp;
@@ -121,7 +121,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "攻击";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 26;
 			temp.y = 41;
@@ -375,7 +375,7 @@ package org.mokylin.skin.app.systemSet
 			temp.height = 22;
 			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
 			temp.textAlign = "center";
-			temp.color = 0xD02525;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 35;
 			temp.x = 218;

@@ -126,7 +126,8 @@ package com.rpgGame.app.ui.main.chat {
 			this._initSendX = this._skin.btn_send.x;
 			this._initGroupTopY = this._skin.tab_Type.y;
 			
-			
+			//现在不要拉伸 先屏蔽掉
+			this._skin.btn_scale.visible=false;
 			GuiThemeStyle.setScrollerStyle(_skin.listBar,ScrollBarSkin_chat);
 			_skin.listBar.verticalScrollBarPosition = RelativePosition.LEFT;
 			_skin.listBar.horizontalScrollPolicy =ScrollPolicy.OFF;
@@ -137,7 +138,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.listBar.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreateList);
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
-			layout.gap = 0;
+			layout.gap =8;
 			layout.hasVariableItemDimensions = true;
 			_skin.listBar.layout = layout;
 			_skin.btn_lock.isSelected=true;
@@ -356,7 +357,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.btn_lock.visible=false;
 			_skin.lb_tishi.visible=false;
 			_skin.grp_laba.visible=false;
-			_skin.btn_scale.visible=false;
+//			_skin.btn_scale.visible=false;
 			_skin.btns.visible=false;
 		}
 		
@@ -367,7 +368,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.btn_lock.visible=true;
 			_skin.lb_tishi.visible=true;
 			_skin.grp_laba.visible=true;
-			_skin.btn_scale.visible=true;
+//			_skin.btn_scale.visible=true;
 			_skin.btns.visible=true;
 		}
 		
@@ -517,11 +518,11 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			
 			// 调整大小
-			touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
-			if (touch) {
-				this.setAdjustSizeState(true);
-				return;
-			}
+//			touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
+//			if (touch) {
+//				this.setAdjustSizeState(true);
+//				return;
+//			}
 			
 			
 			touch=e.getTouch(_skin.btn_face,TouchPhase.ENDED);
@@ -536,10 +537,10 @@ package com.rpgGame.app.ui.main.chat {
 				onAddLocation();
 			}
 			
-			touch = e.getTouch(this._skin.btn_scale, TouchPhase.ENDED);
-			if (touch) {
-				this.setAdjustSizeState(false);
-			}
+//			touch = e.getTouch(this._skin.btn_scale, TouchPhase.ENDED);
+//			if (touch) {
+//				this.setAdjustSizeState(false);
+//			}
 			if (this._isAdjustSize) {
 				this.adjustSize();
 			}
@@ -558,10 +559,10 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			if(bool){
 				_skin.bg.alpha=1;
-				_skin.btn_scale.alpha=1;
+//				_skin.btn_scale.alpha=1;
 			}else {
 				_skin.bg.alpha=0;
-				_skin.btn_scale.alpha=0;
+//				_skin.btn_scale.alpha=0;
 			}
 			_inputText.visible=bool;
 			_skin.btn_lock.visible=bool;

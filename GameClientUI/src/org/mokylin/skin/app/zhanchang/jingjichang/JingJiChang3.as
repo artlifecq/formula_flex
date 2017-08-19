@@ -84,7 +84,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 53;
 			temp.htmlText = "    领奖排名是指每天<font color='#00ff33'>24:00</font>刷新奖励是您的排名，可能与您的当前排名不同，排行榜奖励<font color='#00ff33'>每天只能领取一次</font>";
 			temp.leading = 6;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 350;
 			temp.x = 572;
@@ -196,9 +196,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnBack = temp;
 			temp.name = "btnBack";
-			temp.height = 21;
+			temp.height = 13;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
-			temp.width = 21;
+			temp.width = 14;
 			temp.x = 910;
 			temp.y = 98;
 			return temp;

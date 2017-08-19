@@ -2,10 +2,8 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -43,19 +41,21 @@ package org.mokylin.skin.app.banghui
 
 		public var icon2:feathers.controls.UIAsset;
 
+		public var labGold:feathers.controls.Label;
+
+		public var labToken:feathers.controls.Label;
+
 		public var lbBanggong:feathers.controls.Label;
 
 		public var lbHuoyue:feathers.controls.Label;
 
 		public var lbLast:feathers.controls.Label;
 
-		public var lbNum:feathers.controls.text.TextFieldTextEditor;
+		public var lbNum:feathers.controls.Label;
 
 		public var lbNum1:feathers.controls.Label;
 
 		public var lbNum2:feathers.controls.Label;
-
-		public var list:feathers.controls.List;
 
 		public var skinSelect1:feathers.controls.SkinnableContainer;
 
@@ -72,7 +72,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 384;
 			this.width = 552;
-			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),list_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),__TanKuang_JuanXian_Label3_i(),lbHuoyue_i(),__TanKuang_JuanXian_Label4_i(),lbBanggong_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),__TanKuang_JuanXian_Label5_i(),__TanKuang_JuanXian_Label6_i(),__TanKuang_JuanXian_UIAsset11_i()];
+			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),__TanKuang_JuanXian_Label3_i(),lbHuoyue_i(),__TanKuang_JuanXian_Label4_i(),lbBanggong_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),labToken_i(),labGold_i(),__TanKuang_JuanXian_UIAsset11_i()];
 			
 			states = {
 			};
@@ -145,28 +145,6 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function __TanKuang_JuanXian_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "1令牌=100帮派活跃+100帮贡";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 293;
-			temp.y = 272;
-			return temp;
-		}
-
-		private function __TanKuang_JuanXian_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "1元宝=1帮派活跃+10帮贡";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 293;
-			temp.y = 292;
-			return temp;
-		}
-
 		private function __TanKuang_JuanXian_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -190,7 +168,7 @@ package org.mokylin.skin.app.banghui
 		private function __TanKuang_JuanXian_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 300;
+			temp.height = 310;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 271;
 			temp.x = 6;
@@ -201,7 +179,7 @@ package org.mokylin.skin.app.banghui
 		private function __TanKuang_JuanXian_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 300;
+			temp.height = 310;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 271;
 			temp.x = 275;
@@ -358,7 +336,7 @@ package org.mokylin.skin.app.banghui
 			grpFlip = temp;
 			temp.name = "grpFlip";
 			temp.x = 105;
-			temp.y = 319;
+			temp.y = 332;
 			temp.elementsContent = [__TanKuang_JuanXian_UIAsset9_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}
@@ -382,6 +360,32 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 288;
 			temp.y = 156;
+			return temp;
+		}
+
+		private function labGold_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labGold = temp;
+			temp.name = "labGold";
+			temp.text = "1元宝=1帮派活跃+10帮贡";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 293;
+			temp.y = 292;
+			return temp;
+		}
+
+		private function labToken_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labToken = temp;
+			temp.name = "labToken";
+			temp.text = "1令牌=100帮派活跃+100帮贡";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 293;
+			temp.y = 272;
 			return temp;
 		}
 
@@ -419,7 +423,7 @@ package org.mokylin.skin.app.banghui
 			lbLast = temp;
 			temp.name = "lbLast";
 			temp.text = "今日还可捐献999元宝";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 228;
 			temp.x = 288;
@@ -455,9 +459,9 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function lbNum_i():feathers.controls.text.TextFieldTextEditor
+		private function lbNum_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.height = 19;
@@ -469,18 +473,6 @@ package org.mokylin.skin.app.banghui
 			temp.width = 50;
 			temp.x = 11;
 			temp.y = 2;
-			return temp;
-		}
-
-		private function list_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			list = temp;
-			temp.name = "list";
-			temp.height = 256;
-			temp.width = 254;
-			temp.x = 14;
-			temp.y = 67;
 			return temp;
 		}
 

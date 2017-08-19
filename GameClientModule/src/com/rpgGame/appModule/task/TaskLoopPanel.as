@@ -3,6 +3,7 @@ package com.rpgGame.appModule.task
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.TaskSender;
@@ -36,7 +37,6 @@ package com.rpgGame.appModule.task
 		private var icoList2Group:RewardGroup;
 		private var timer:GameTimer;
 		private var currtimer:int;
-		private var TIMERDATA:int=15;//倒计时时间
 		private var TwoData:int;
 		private var ThereData:int;
 		private var selectId:int=1;
@@ -82,7 +82,6 @@ package com.rpgGame.appModule.task
 				ThereData=machArr[1];
 			}
 			
-			TIMERDATA=GlobalSheetData.getSettingInfo(509).q_int_value;
 			timer = new GameTimer("TaskLoopPanel", 1000, 0, onTimer);
 			timer.stop();
 		}
@@ -133,9 +132,8 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
-			
 			timer.stop();
-			currtimer=TIMERDATA;
+			currtimer=0;
 			if(this.visible&&this.parent!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				subFinish(TaskMissionManager.treasuerTaskInfo.taskId);
@@ -170,11 +168,17 @@ package com.rpgGame.appModule.task
 		/**判断倒计时*/
 		private function timeInit():void
 		{
-			
+			if(TaskAutoManager.getInstance().isTaskRunning)
+			{
+				currtimer=GlobalSheetData.getSettingInfo(513)!=null?GlobalSheetData.getSettingInfo(513).q_int_value:5;
+			}
+			else
+			{
+				currtimer=GlobalSheetData.getSettingInfo(509)!=null?GlobalSheetData.getSettingInfo(509).q_int_value:10;
+			}
 			if(TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				timer.start();
-				currtimer=TIMERDATA;
 				setTimeText();
 			}
 			else

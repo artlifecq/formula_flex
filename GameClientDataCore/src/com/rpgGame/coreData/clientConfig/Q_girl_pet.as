@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_zones_id:int;
 		 /**  副本关卡总数 */
 		public var q_need_zone:int;
+		 /**  出生特效 */
+		public var q_born_animation:int;
 		 /**    */
 		public var q_need_power:String;
 		 /**  关卡对应奖励 */

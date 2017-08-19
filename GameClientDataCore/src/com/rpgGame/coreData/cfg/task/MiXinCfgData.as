@@ -2,8 +2,6 @@ package com.rpgGame.coreData.cfg.task
 {
 	import com.rpgGame.coreData.info.task.MiXinPrizeInfo;
 	
-	import app.message.MiXinConfig;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -38,27 +36,27 @@ package com.rpgGame.coreData.cfg.task
 		public static var awardHashMap:HashMap;
 		
 		
-		public static function setConfig( miXinConfig:MiXinConfig ):void
-		{
-			if( miXinConfig == null )
-				return;
-			
-			awardHashMap = new HashMap();
-			timesPerDay = miXinConfig.timesPerDay;
-			miXinStartMinHour = miXinConfig.miXinStartMinHour;
-			miXinStartMaxHour = miXinConfig.miXinStartMaxHour;
-			miXinAddMultiple = miXinConfig.miXinAddMultiple;
-			isInTime = miXinConfig.hasTimesPerDay;
-			
-			var len:int = miXinConfig.miXinPrize.length;
-			var mixinPrize:MiXinPrizeInfo;
-			for( var i:int = 0; i < len; i ++)
-			{
-				mixinPrize = new MiXinPrizeInfo();
-				mixinPrize.converMixinPrizeData(miXinConfig.miXinPrize[i]);
-				awardHashMap.add( mixinPrize.level, mixinPrize );
-			}
-		}
+//		public static function setConfig( miXinConfig:MiXinConfig ):void
+//		{
+//			if( miXinConfig == null )
+//				return;
+//			
+//			awardHashMap = new HashMap();
+//			timesPerDay = miXinConfig.timesPerDay;
+//			miXinStartMinHour = miXinConfig.miXinStartMinHour;
+//			miXinStartMaxHour = miXinConfig.miXinStartMaxHour;
+//			miXinAddMultiple = miXinConfig.miXinAddMultiple;
+//			isInTime = miXinConfig.hasTimesPerDay;
+//			
+//			var len:int = miXinConfig.miXinPrize.length;
+//			var mixinPrize:MiXinPrizeInfo;
+//			for( var i:int = 0; i < len; i ++)
+//			{
+//				mixinPrize = new MiXinPrizeInfo();
+//				mixinPrize.converMixinPrizeData(miXinConfig.miXinPrize[i]);
+//				awardHashMap.add( mixinPrize.level, mixinPrize );
+//			}
+//		}
 		
 		/**
 		 * 获取适合当前等级的鸡毛信奖励配置

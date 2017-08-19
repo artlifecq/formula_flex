@@ -47,8 +47,6 @@ package org.mokylin.skin.app.beibao.junjie
 
 		public var uiUp:feathers.controls.UIAsset;
 
-		public var uiUpOK:feathers.controls.UIAsset;
-
 		public var ui_zhandou:feathers.controls.UIAsset;
 
 
@@ -62,7 +60,7 @@ package org.mokylin.skin.app.beibao.junjie
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),ui_zhandou_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i(),btnPrev_i(),btnNext_i(),point_eff_i(),uiUp_i()];
+			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),ui_zhandou_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),btnPrev_i(),btnNext_i(),point_eff_i(),uiUp_i()];
 			
 			states = {
 			};
@@ -318,17 +316,6 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.width = 250;
 			temp.x = 348;
 			temp.y = 102;
-			return temp;
-		}
-
-		private function uiUpOK_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiUpOK = temp;
-			temp.name = "uiUpOK";
-			temp.styleName = "ui/app/beibao/junjie/shengjiechenggong.png";
-			temp.x = 330;
-			temp.y = 84;
 			return temp;
 		}
 

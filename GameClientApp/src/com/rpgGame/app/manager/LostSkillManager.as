@@ -21,13 +21,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
-	import com.rpgGame.netData.lostSkill.message.CSActivitSkillMessage;
-	import com.rpgGame.netData.lostSkill.message.CSChangeSkillMessage;
 	
-	import app.message.MonsterDataProto.MonsterType;
+	import app.message.MonsterType;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
 
 	public class LostSkillManager

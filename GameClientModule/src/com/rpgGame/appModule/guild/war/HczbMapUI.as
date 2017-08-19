@@ -216,17 +216,17 @@ package com.rpgGame.appModule.guild.war
 				var htmlStr:String;
 				nm.lbTxt.textAlign="left";
 				if(info.attackGuildName&&(info.state==3||info.state==4)){
-					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"\n");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[守]");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName+"\n");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"[攻]");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName);
+					htmlStr=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"[占领时间]:");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,info.occupyDay+"\n");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"[守]");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,info.occupyGuildName+"\n");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"[攻]");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,info.attackGuildName);
 				}else{
-					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"\n");
-//					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName);
+					htmlStr=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"[占领时间]:");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,info.occupyDay+"\n");
+//					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"[占]");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,info.occupyGuildName);
 				}
 				nm.lbTxt.htmlText=htmlStr;
 			}

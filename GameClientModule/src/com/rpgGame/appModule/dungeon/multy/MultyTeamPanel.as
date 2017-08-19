@@ -7,6 +7,9 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.utils.NumberUtil;
+	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
@@ -87,7 +90,7 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			super.show(data,openTable,parentContiner);
+			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			addEvent();
 			initVote();
 			
@@ -123,9 +126,12 @@ package com.rpgGame.appModule.dungeon.multy
 			}
 			
 			//naneList[0].lbName.htmlText=MainRoleManager.actorInfo.name;
+			var playername:String="";
+			playername=MainRoleManager.actorInfo.name;
+			playername=TextUtil.getByteLen(playername)<=20?playername:TextUtil.sliceToBytelen(playername,17)+"...";
 			if(DungeonManager.isVote(MainRoleManager.actorInfo.serverID))
 			{
-				naneList[0].lbName.htmlText="<font color='#5cb006'>"+MainRoleManager.actorInfo.name+"</font>";
+				naneList[0].lbName.htmlText="<font color='#5cb006'>"+playername;//+"</font>";
 				naneList[0].lbOk.htmlText="<font color='#5cb006'>已同意</font>";
 				_skin.btnOk.visible=false;
 				_skin.btnCancel.visible=false;
@@ -133,7 +139,7 @@ package com.rpgGame.appModule.dungeon.multy
 			}
 			else
 			{
-				naneList[0].lbName.htmlText="<font color='#dfb01f'>"+MainRoleManager.actorInfo.name+"</font>";
+				naneList[0].lbName.htmlText="<font color='#dfb01f'>"+playername+"</font>";
 				naneList[0].lbOk.htmlText="<font color='#dfb01f'>等待同意</font>";
 				_skin.btnOk.visible=true;
 				_skin.btnCancel.visible=true;
@@ -156,14 +162,16 @@ package com.rpgGame.appModule.dungeon.multy
 						add++;
 						if(!memberInfo.memberId.EqualTo(MainRoleManager.actorInfo.serverID))
 						{
+							playername=memberInfo.memberName;
+							playername=TextUtil.getByteLen(playername)<=20?playername:TextUtil.sliceToBytelen(playername,17)+"...";
 							if(DungeonManager.isVote(memberInfo.memberId))
 							{
-								naneList[add2].lbName.htmlText="<font color='#5cb006'>"+memberInfo.memberName+"</font>";
+								naneList[add2].lbName.htmlText="<font color='#5cb006'>"+playername+"</font>";
 								naneList[add2].lbOk.htmlText="<font color='#5cb006'>已同意</font>";
 							}
 							else
 							{
-								naneList[add2].lbName.htmlText="<font color='#dfb01f'>"+memberInfo.memberName+"</font>";
+								naneList[add2].lbName.htmlText="<font color='#dfb01f'>"+playername+"</font>";
 								naneList[add2].lbOk.htmlText="<font color='#dfb01f'>等待同意</font>";
 							}
 							add2++;

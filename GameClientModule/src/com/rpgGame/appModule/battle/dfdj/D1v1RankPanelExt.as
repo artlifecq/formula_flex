@@ -142,7 +142,15 @@ package com.rpgGame.appModule.battle.dfdj
 			ongetPanelData();
 			EventManager.addEvent(D1v1Event.GET_RANK_DATA,onGetRankData);
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,ongetPanelData);
-			Mgr.d1v1Mgr.reqDFRankData(1);
+			//Mgr.d1v1Mgr.reqDFRankData(1);
+			if (_numCtrl.getValue()!=1) 
+			{
+				_numCtrl.setDefault();
+			}
+			else
+			{
+				onPageChange(1);
+			}
 		}
 		
 		private function ongetPanelData():void
@@ -194,8 +202,8 @@ package com.rpgGame.appModule.battle.dfdj
 					cellCkick(_rankList[0]);
 				}
 				_numCtrl.updateMax(msg.maxPage,msg.maxPage,false);
-				var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
-				skinF.textDisplay.text=_numCtrl.getValue()+"/"+_numCtrl.maxCount;
+//				var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
+//				skinF.textDisplay.text=_numCtrl.getValue()+"/"+_numCtrl.maxCount;
 				_weekRank.setMyRank(msg.dianFengRankInfo.rank);
 			}
 		}

@@ -1,11 +1,9 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.manager.time.SystemTimeManager;
-
-	import flash.utils.Dictionary;
-
-	import app.cmd.CountryModuleMessages;
 	import com.game.engine3D.vo.SenderReferenceSet;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
+	
+	import flash.utils.Dictionary;
 
 	/**
 	 *
@@ -80,7 +78,7 @@ package com.rpgGame.app.sender
 		private static function reqOtherCountryKing() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_OTHER_COUNTRY_KING, _bytes);
+//			send(CountryModuleMessages.C2S_OTHER_COUNTRY_KING, _bytes);
 		}
 
 		/**
@@ -97,7 +95,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.clear();
 				_bytes.writeVarint32(sequence);
-				send(CountryModuleMessages.C2S_COUNTRY_HISTORY_RECORDS, _bytes);
+//				send(CountryModuleMessages.C2S_COUNTRY_HISTORY_RECORDS, _bytes);
 				_reqHistoryRecordsTimeBySequence[sequence] = SystemTimeManager.curtTm + REQ_HISTORY_RECORDS_DELAY_TIME;
 			}
 		}
@@ -111,7 +109,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(sequence);
-			send(CountryModuleMessages.C2S_GET_COUNTRY_EXCHEQUER_AMOUNT, _bytes);
+//			send(CountryModuleMessages.C2S_GET_COUNTRY_EXCHEQUER_AMOUNT, _bytes);
 		}
 
 		private static function onReqCountryExchequerRecords() : void
@@ -139,7 +137,7 @@ package com.rpgGame.app.sender
 		private static function reqGetOffice() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_OFFICE, _bytes);
+//			send(CountryModuleMessages.C2S_GET_OFFICE, _bytes);
 		}
 
 		/**
@@ -156,7 +154,7 @@ package com.rpgGame.app.sender
 		public static function reqGetMilitary() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_MILITARY, _bytes);
+//			send(CountryModuleMessages.C2S_GET_MILITARY, _bytes);
 		}
 
 		/**
@@ -167,7 +165,7 @@ package com.rpgGame.app.sender
 		public static function reqJinWeiApplicant() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_JIN_WEI_APPLICANT, _bytes);
+//			send(CountryModuleMessages.C2S_GET_JIN_WEI_APPLICANT, _bytes);
 		}
 
 		/**
@@ -180,7 +178,7 @@ package com.rpgGame.app.sender
 		public static function reqGetJinWeiRequires() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_JIN_WEI_REQUIRES, _bytes);
+//			send(CountryModuleMessages.C2S_GET_JIN_WEI_REQUIRES, _bytes);
 		}
 
 		/**
@@ -191,7 +189,7 @@ package com.rpgGame.app.sender
 		private static function reqCountryExchequerRecords() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_COUNTRY_EXCHEQUER_RECORDS, _bytes);
+//			send(CountryModuleMessages.C2S_COUNTRY_EXCHEQUER_RECORDS, _bytes);
 		}
 
 		/**
@@ -209,7 +207,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint64(id);
 			_bytes.writeBoolean(isSet);
-			send(CountryModuleMessages.C2S_SET_OFFICER, _bytes);
+//			send(CountryModuleMessages.C2S_SET_OFFICER, _bytes);
 		}
 
 		/**
@@ -218,7 +216,7 @@ package com.rpgGame.app.sender
 		public static function reqOfficeRetire() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_OFFICE_RETIRE, _bytes);
+//			send(CountryModuleMessages.C2S_OFFICE_RETIRE, _bytes);
 		}
 
 		/**
@@ -227,7 +225,7 @@ package com.rpgGame.app.sender
 		public static function reqGetOfficeSeal() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_GET_OFFICE_SEAL, _bytes);
+//			send(CountryModuleMessages.C2S_GET_OFFICE_SEAL, _bytes);
 		}
 
 		/**
@@ -236,7 +234,7 @@ package com.rpgGame.app.sender
 		public static function reqSentJinWeiApplicant() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_SENT_JIN_WEI_APPLICANT, _bytes);
+//			send(CountryModuleMessages.C2S_SENT_JIN_WEI_APPLICANT, _bytes);
 		}
 
 		/**
@@ -250,7 +248,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(id);
 			_bytes.writeBoolean(agree);
-			send(CountryModuleMessages.C2S_REPLY_JIN_WEI_APPLICANT, _bytes);
+//			send(CountryModuleMessages.C2S_REPLY_JIN_WEI_APPLICANT, _bytes);
 		}
 
 		/**
@@ -262,7 +260,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(taxRate);
-			send(CountryModuleMessages.C2S_CHANGE_TAX_RATE, _bytes);
+//			send(CountryModuleMessages.C2S_CHANGE_TAX_RATE, _bytes);
 		}
 
 		/**
@@ -280,7 +278,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint64(combat);
 			_bytes.writeVarint32(combatRank);
 			_bytes.writeBoolean(isSelf);
-			send(CountryModuleMessages.C2S_CHANGE_JIN_WEI_REQUIRES, _bytes);
+//			send(CountryModuleMessages.C2S_CHANGE_JIN_WEI_REQUIRES, _bytes);
 		}
 
 		/**
@@ -296,7 +294,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint64(total);
 			_bytes.writeVarint32(percent);
 			_bytes.writeVarint32(max);
-			send(CountryModuleMessages.C2S_CHANGE_MILITARY, _bytes);
+//			send(CountryModuleMessages.C2S_CHANGE_MILITARY, _bytes);
 		}
 
 		/**
@@ -312,7 +310,7 @@ package com.rpgGame.app.sender
 		public static function reqAllCountryUnionStatus() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_ALL_COUNTRY_UNION_STATUS, _bytes);
+//			send(CountryModuleMessages.C2S_ALL_COUNTRY_UNION_STATUS, _bytes);
 		}
 
 		/**
@@ -325,7 +323,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(targetSequence);
 			_bytes.writeUTFBytes(msg);
-			send(CountryModuleMessages.C2S_UNION_INVITE_OTHER, _bytes);
+//			send(CountryModuleMessages.C2S_UNION_INVITE_OTHER, _bytes);
 		}
 
 		/**
@@ -337,7 +335,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(agree);
-			send(CountryModuleMessages.C2S_UNION_INVITEES_REPLY, _bytes);
+//			send(CountryModuleMessages.C2S_UNION_INVITEES_REPLY, _bytes);
 		}
 
 		/**
@@ -347,7 +345,7 @@ package com.rpgGame.app.sender
 		public static function leftUnion() : void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_LIFT_UNION, _bytes);
+//			send(CountryModuleMessages.C2S_LIFT_UNION, _bytes);
 		}
 		/**
 		 * 开启国运
@@ -355,7 +353,7 @@ package com.rpgGame.app.sender
 		public static function onStartGuoYun():void
 		{
 			_bytes.clear();
-			send(CountryModuleMessages.C2S_START_GUO_YUN, _bytes);
+//			send(CountryModuleMessages.C2S_START_GUO_YUN, _bytes);
 		}
 	}
 }

@@ -507,6 +507,30 @@ package com.rpgGame.app.fight.spell
 						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
+				else if (animatData.role_res)
+				{
+					rud = new RenderParamData3D(hurtEffectObjID, SceneCharType.BORN_EFFECT, ClientConfig.getEffect(animatData.role_res));
+					
+					if (animatData.bind_bone)
+						effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, animatData.bind_bone, rud);
+					else
+						effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rud);
+					if (effectRu)
+					{
+						effectRu.allowCameraAnimator = role.isMainChar;
+						effectRu.repeat = 1;
+						effectRu.x = 0;
+						effectRu.y = 0;
+						effectRu.z = 0;
+						effectRu.scaleX=animatData.scale_x>0?animatData.scale_x*0.01:1;
+						effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
+						effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
+						effectRu.rotationY = 0;
+						effectRu.completeWhenInvisible = true;
+						effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, role.avatar);
+						effectRu.play(0,speed);
+					}
+				}
 			}
 			bornEffectID++;
 		}

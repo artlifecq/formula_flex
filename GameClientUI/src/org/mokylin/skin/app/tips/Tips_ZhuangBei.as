@@ -94,7 +94,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "装备等级：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -105,7 +105,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "品质等级：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 20;
@@ -116,7 +116,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "职    业：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 146;
 			temp.y = 0;
@@ -127,7 +127,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "部    位：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 146;
 			temp.y = 20;

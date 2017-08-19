@@ -32,7 +32,7 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.htmlText = "属性：<font color='#cfc6ae'>1</font><font color='#5DBD37'>(+3)</font>";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;

@@ -260,8 +260,6 @@ package com.rpgGame.coreData.cfg
 		public static function get eName_MAP_CFG():String{return decode==null?".cfg":".res";}
 
 		private static var _lang : String = "cn";
-		private static var _isRelease : Boolean;
-		private static var _isDebug : Boolean;
 		public static var miniDownloadUrl:String;
 		/**
 		 * 单机版本
@@ -289,7 +287,7 @@ package com.rpgGame.coreData.cfg
 		public static function setup($urlParam : Object = null, serverVersion : uint = 0, $isRelease : Boolean = false, uiCompressed : Boolean = true, 
 									 $isWeiDuan : Boolean = false, useWorker : Boolean = false) : void
 		{
-			_isRelease = $isRelease;
+			isRelease = $isRelease;
 			_uiCompressed = uiCompressed;
 			_useWorker = useWorker;
 			_urlParam = $urlParam;
@@ -558,7 +556,7 @@ package com.rpgGame.coreData.cfg
 		public static function getDropItemQuatityEffect(quatity:int) : String
 		{
 			
-			var url : String = "avatar/drop/q" + quatity + eName_AWD;
+			var url : String = "avatar/drop/q" + quatity +eName_AWD;
 			return baseDir + resURL + url;
 		}
 		public static function getQualityBg(type : int, size : int) : String
@@ -623,6 +621,18 @@ package com.rpgGame.coreData.cfg
 		public static function getPanelIcon(name:String):String
 		{
 			var url : String = "icon/panel/" + name + eName_PNG;
+			return baseDir + resURL + url;
+		}
+		
+		/**
+		 *获取死亡复活面板icon 
+		 * @param name
+		 * @return 
+		 * 
+		 */
+		public static function getFuHuoPanelIcon(name:String):String
+		{
+			var url : String = "app/siwangfuhuo/icon/" + name + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -952,19 +962,6 @@ package com.rpgGame.coreData.cfg
 		{
 			var url : String = "icon/common/" + name + eName_PNG;
 			return baseDir + resURL + url;
-		}
-		
-		/**
-		 * 判断当前版本是否是发行版本
-		 */
-//		public static function get isRelease() : Boolean
-//		{
-//			return _isRelease;
-//		}
-		
-		public static function get isDebug():Boolean
-		{
-			return _isDebug;
 		}
 
 		/** 平台的用户名*/

@@ -1,9 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.CountryModuleMessages;
-	import app.cmd.TaskModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * 发送消息 
@@ -18,7 +15,7 @@ package com.rpgGame.app.sender
 		public static function reqDoTouJing():void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_DO_TOU_JING, _bytes );
+//			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_DO_TOU_JING, _bytes );
 		}
 		
 		/**
@@ -27,7 +24,7 @@ package com.rpgGame.app.sender
 		public static function reqStartDuoJing():void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send( CountryModuleMessages.C2S_START_DUO_JING, _bytes );
+//			SocketConnection_protoBuffer.send( CountryModuleMessages.C2S_START_DUO_JING, _bytes );
 		}
 	}
 }

@@ -188,7 +188,7 @@ package com.rpgGame.appModule.activety.zonghe
 						var linkData:String=reCfg.q_mapid+","+reCfg.q_center_x+","+reCfg.q_center_y;
 						var mCfg:Q_monster=MonsterDataManager.getData(reCfg.q_monster_model);
 						if(mCfg){
-							var linkName:String=RichTextCustomUtil.getTextLinkCode(mCfg.q_name,StaticValue.A_UI_GREEN_TEXT,
+							var linkName:String=RichTextCustomUtil.getTextLinkCode(mCfg.q_name,StaticValue.GREEN_TEXT,
 								RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,linkData);
 							text+=linkName;
 							text+=RichTextCustomUtil.getButtonLinkCode("org.mokylin.skin.component.button.ButtonSkin_send",RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE,linkData);

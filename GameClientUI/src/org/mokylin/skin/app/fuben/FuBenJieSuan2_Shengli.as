@@ -34,7 +34,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 347;
 			this.width = 469;
-			this.elementsContent = [__FuBenJieSuan2_Shengli_UIAsset1_i(),icon1_i(),btnEixt_i(),lbTime_i()];
+			this.elementsContent = [__FuBenJieSuan2_Shengli_UIAsset1_i(),icon1_i(),__FuBenJieSuan2_Shengli_UIAsset2_i(),btnEixt_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -55,15 +55,25 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
+		private function __FuBenJieSuan2_Shengli_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/big_bg/fuben/fubenjiesuan/tiaozhanshengli.png";
+			temp.x = 61;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function btnEixt_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnEixt = temp;
 			temp.name = "btnEixt";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出副本";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.width = 112;
 			temp.x = 177;
 			temp.y = 275;
@@ -75,7 +85,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
+			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.x = 199;
 			temp.y = 197;
 			return temp;
@@ -88,11 +98,11 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbTime";
 			temp.text = "10秒自动领取奖励";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 165;
-			temp.y = 308;
+			temp.y = 311;
 			return temp;
 		}
 

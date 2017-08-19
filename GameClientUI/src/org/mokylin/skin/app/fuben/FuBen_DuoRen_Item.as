@@ -34,9 +34,13 @@ package org.mokylin.skin.app.fuben
 
 		public var prob_ioc_0:feathers.controls.UIAsset;
 
+		public var uiKunNan:feathers.controls.UIAsset;
+
 		public var uiName1:feathers.controls.UIAsset;
 
 		public var uiName2:feathers.controls.UIAsset;
+
+		public var uibg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -48,7 +52,7 @@ package org.mokylin.skin.app.fuben
 			
 			this.currentState = "normal";
 			this.width = 539;
-			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),uiName1_i(),uiName2_i(),lbNum_i(),btnSelect_i(),grpIcon_i(),pass_group_i()];
+			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),uibg_i(),uiName1_i(),uiName2_i(),lbNum_i(),btnSelect_i(),grpIcon_i(),pass_group_i(),uiKunNan_i()];
 			
 			states = {
 			};
@@ -65,15 +69,15 @@ package org.mokylin.skin.app.fuben
 			temp.text = "机率掉落：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 16;
-			temp.y = 14;
+			temp.x = 19;
+			temp.y = 18;
 			return temp;
 		}
 
 		private function __FuBen_DuoRen_Item_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 47;
+			temp.height = 52;
 			temp.styleName = "ui/app/fuben/daojubeijing.png";
 			temp.width = 533;
 			temp.x = 0;
@@ -100,7 +104,7 @@ package org.mokylin.skin.app.fuben
 			grpIcon = temp;
 			temp.name = "grpIcon";
 			temp.x = 3;
-			temp.y = 75;
+			temp.y = 70;
 			temp.elementsContent = [__FuBen_DuoRen_Item_UIAsset1_i(),__FuBen_DuoRen_Item_Label1_i(),prob_ioc_0_i()];
 			return temp;
 		}
@@ -138,11 +142,11 @@ package org.mokylin.skin.app.fuben
 			temp.fontSize = 14;
 			temp.text = "2/10通关奖励：";
 			temp.textAlign = "right";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 121;
-			temp.x = 341;
-			temp.y = 33;
+			temp.x = 350;
+			temp.y = 29;
 			return temp;
 		}
 
@@ -151,8 +155,8 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			pass_group = temp;
 			temp.name = "pass_group";
-			temp.x = 458;
-			temp.y = 12;
+			temp.x = 467;
+			temp.y = 10;
 			temp.elementsContent = [pass_ico_i()];
 			return temp;
 		}
@@ -172,8 +176,19 @@ package org.mokylin.skin.app.fuben
 			prob_ioc_0 = temp;
 			temp.name = "prob_ioc_0";
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 101;
-			temp.y = 0;
+			temp.x = 108;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function uiKunNan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiKunNan = temp;
+			temp.name = "uiKunNan";
+			temp.styleName = "ui/common/kunnan.png";
+			temp.x = 188;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -194,6 +209,17 @@ package org.mokylin.skin.app.fuben
 			temp.name = "uiName2";
 			temp.x = 16;
 			temp.y = 28;
+			return temp;
+		}
+
+		private function uibg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uibg = temp;
+			temp.name = "uibg";
+			temp.styleName = "ui/app/fuben/mingzidi.png";
+			temp.x = 13;
+			temp.y = 17;
 			return temp;
 		}
 

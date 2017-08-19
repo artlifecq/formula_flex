@@ -63,9 +63,9 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.htmlText = "中级鉴定图纸<font color='#bea757'>(10)</font>";
+			temp.htmlText = "中级鉴定图纸<font color='#ffea00'>(10)</font>";
 			temp.textAlign = "left";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 210;
 			temp.x = 25;

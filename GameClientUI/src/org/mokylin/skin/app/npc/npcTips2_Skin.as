@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.npc
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -60,7 +61,8 @@ package org.mokylin.skin.app.npc
 			temp.height = 32;
 			temp.text = "你到时说话啊你到时说你到时说话啊你到时说你到时说话啊你到时说";
 			temp.textAlign = "left";
-			temp.color = 0x331103;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 186;
 			temp.x = 6;
 			temp.y = 9;

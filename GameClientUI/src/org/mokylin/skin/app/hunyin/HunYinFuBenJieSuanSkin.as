@@ -74,6 +74,7 @@ package org.mokylin.skin.app.hunyin
 			temp.name = "btnOk";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "确 认";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
 			temp.width = 110;

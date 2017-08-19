@@ -4,6 +4,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_global;
@@ -18,6 +19,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_ZhenQi_Skin;
 	
 	import starling.display.DisplayObject;
@@ -40,6 +42,7 @@ package com.rpgGame.appModule.dungeon.genuine
 				var icon:IconCDFace=gridList.pop();
 				icon.destroy();
 			}
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
 		override public function show(data:Object=null):void
@@ -79,7 +82,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			{
 				onCreate();
 			}
-			
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
 		private function onCreate():void
@@ -116,6 +119,12 @@ package com.rpgGame.appModule.dungeon.genuine
 					refeashList(index-1);
 					break;
 			}
+		}
+		
+		private function updatePlayerLvUp():void
+		{
+			if(_skin.list)
+				_skin.list.dataProvider.updateAll();
 		}
 		
 		private function refeashList(index:int):void

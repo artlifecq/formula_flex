@@ -1,7 +1,5 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.TaskModuleMessages;
-	
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	public class TouZhuSender extends BaseSender
@@ -24,7 +22,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64( monsterId );
-			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_STRAT_TOU_ZHU ,_bytes);
+//			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_STRAT_TOU_ZHU ,_bytes);
 		}
 		
 		/**
@@ -44,7 +42,7 @@ package com.rpgGame.app.sender
 		public static function reqCompleteTouZhuTask():void
 		{
 			_bytes.clear();
-			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_COMPLETE_TOU_ZHU_TASK ,_bytes);
+//			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_COMPLETE_TOU_ZHU_TASK ,_bytes);
 		}
 	}
 }

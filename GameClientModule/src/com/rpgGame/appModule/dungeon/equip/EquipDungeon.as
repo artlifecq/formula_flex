@@ -74,7 +74,7 @@ package com.rpgGame.appModule.dungeon.equip
 			}
 			
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 			refeashValue();
 			if (!_skin.list.hasEventListener(FeathersEventType.CREATION_COMPLETE)) 
 			{
@@ -153,7 +153,7 @@ package com.rpgGame.appModule.dungeon.equip
 		override public function hide():void
 		{
 			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
-			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 			while(gridList.length>0){
 				var icon:IconCDFace=gridList.pop();
 				icon.destroy();

@@ -4,8 +4,6 @@
     import com.rpgGame.core.events.WelfareEvent;
     import com.rpgGame.coreData.cfg.WelfareCfgData;
     
-    import app.message.WelfareModuleObjProto;
-    
     import org.client.mainCore.manager.EventManager;
 
     public class WelfareManager 
@@ -24,13 +22,13 @@
             MainRoleManager.actorInfo.loginDay = value;
         }
 
-        public static function setData(welfareModuleObj:WelfareModuleObjProto):void
-        {
-            if (welfareModuleObj.collectedLoginPrizeDay)
-            {
-                loginDays = welfareModuleObj.collectedLoginPrizeDay;
-            }
-        }
+//        public static function setData(welfareModuleObj:WelfareModuleObjProto):void
+//        {
+//            if (welfareModuleObj.collectedLoginPrizeDay)
+//            {
+//                loginDays = welfareModuleObj.collectedLoginPrizeDay;
+//            }
+//        }
 
         public static function isCanGetPrize():Boolean
         {

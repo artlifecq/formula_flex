@@ -6,6 +6,7 @@
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.LanguageConfig;
+    import com.rpgGame.coreData.lang.LangUI;
     
     import feathers.controls.Button;
     
@@ -60,8 +61,8 @@
 //            _skin.labMessage.visible = false;
             tweenToOpen();
 //            _skin.groupBtn.visible = false;
-            TipTargetManager.show(btnRight, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText("ACTIVITY_BUTTON_RIGHT")));
-            TipTargetManager.show(btnLeft, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText("ACTIVITY_BUTTON_LEFT")));
+            TipTargetManager.show(btnRight, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI.UI_TEXT36)));
+            TipTargetManager.show(btnLeft, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI.UI_TEXT37)));
             EventManager.addEvent(ActivityEvent.SHOW_HIDE_ALL, onShowHide);
             EventManager.addEvent(ActivityEvent.SHOW_NEW_ACTIVITY_BUTTON, onShowNewActivityButton);
         }

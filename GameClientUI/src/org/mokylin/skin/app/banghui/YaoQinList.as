@@ -2,9 +2,8 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
-	import feathers.controls.List;
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -32,9 +31,7 @@ package org.mokylin.skin.app.banghui
 
 		public var grpFlip:feathers.controls.Group;
 
-		public var lbNum:feathers.controls.text.TextFieldTextEditor;
-
-		public var list:feathers.controls.List;
+		public var lbNum:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -47,7 +44,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 357;
 			this.width = 578;
-			this.elementsContent = [bg_i(),__YaoQinList_UIAsset1_i(),btnClose_i(),grpFlip_i(),list_i(),__YaoQinList_Group1_i(),__YaoQinList_UIAsset10_i()];
+			this.elementsContent = [bg_i(),__YaoQinList_UIAsset1_i(),btnClose_i(),grpFlip_i(),__YaoQinList_Group1_i(),__YaoQinList_UIAsset10_i()];
 			
 			states = {
 			};
@@ -219,9 +216,9 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function lbNum_i():feathers.controls.text.TextFieldTextEditor
+		private function lbNum_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.height = 19;
@@ -233,19 +230,6 @@ package org.mokylin.skin.app.banghui
 			temp.width = 50;
 			temp.x = 11;
 			temp.y = 2;
-			return temp;
-		}
-
-		private function list_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			list = temp;
-			temp.name = "list";
-			temp.height = 250;
-			temp.visible = false;
-			temp.width = 549;
-			temp.x = 16;
-			temp.y = 72;
 			return temp;
 		}
 

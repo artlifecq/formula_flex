@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.BaZhenTuModuleMessages;
+	
 
 	public class BaZhenTuSender extends BaseSender
 	{
@@ -10,7 +10,7 @@ package com.rpgGame.app.sender
 		public static function refruseReq() : void
 		{
 			_bytes.clear();
-			send(BaZhenTuModuleMessages.C2S_REFRUSE, _bytes);
+//			send(BaZhenTuModuleMessages.C2S_REFRUSE, _bytes);
 		}
 		/**
 		 * 同意
@@ -18,7 +18,7 @@ package com.rpgGame.app.sender
 		public static function argeeReq() : void
 		{
 			_bytes.clear();
-			send(BaZhenTuModuleMessages.C2S_AGREE, _bytes);
+//			send(BaZhenTuModuleMessages.C2S_AGREE, _bytes);
 		}
 	}
 }

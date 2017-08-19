@@ -25,7 +25,7 @@ package org.mokylin.skin.app.vip
 			this.currentState = "normal";
 			this.height = 110;
 			this.width = 206;
-			this.elementsContent = [imgBG_i(),__Tips_Vip_Label1_i(),__Tips_Vip_UIAsset1_i(),__Tips_Vip_Label2_i(),__Tips_Vip_Label3_i(),__Tips_Vip_Label4_i(),__Tips_Vip_Label5_i()];
+			this.elementsContent = [imgBG_i(),__Tips_Vip_Label1_i(),__Tips_Vip_Label2_i(),__Tips_Vip_Label3_i(),__Tips_Vip_Label4_i(),__Tips_Vip_Label5_i()];
 			
 			states = {
 			};
@@ -56,7 +56,7 @@ package org.mokylin.skin.app.vip
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 13;
-			temp.y = 60;
+			temp.y = 49;
 			return temp;
 		}
 
@@ -67,7 +67,7 @@ package org.mokylin.skin.app.vip
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 13;
-			temp.y = 79;
+			temp.y = 68;
 			return temp;
 		}
 
@@ -79,7 +79,7 @@ package org.mokylin.skin.app.vip
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 120;
 			temp.x = 78;
-			temp.y = 60;
+			temp.y = 49;
 			return temp;
 		}
 
@@ -91,16 +91,7 @@ package org.mokylin.skin.app.vip
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 120;
 			temp.x = 78;
-			temp.y = 79;
-			return temp;
-		}
-
-		private function __Tips_Vip_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/vip/pdzqsx.png";
-			temp.x = 13;
-			temp.y = 41;
+			temp.y = 68;
 			return temp;
 		}
 

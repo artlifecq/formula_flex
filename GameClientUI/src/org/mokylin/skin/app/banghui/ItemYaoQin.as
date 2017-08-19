@@ -92,7 +92,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbLevel";
 			temp.text = "99";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 43;
 			temp.x = 148;
@@ -107,7 +107,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbNum";
 			temp.text = "999/999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 69;
 			temp.x = 298;
@@ -167,7 +167,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhanli";
 			temp.text = "999999999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
 			temp.x = 370;

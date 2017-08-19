@@ -5,20 +5,17 @@ package com.rpgGame.app.manager.trade
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.TradeSender;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.TradeEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.trade.TradeData;
 	import com.rpgGame.coreData.info.trade.TradeTargetData;
 	import com.rpgGame.coreData.lang.LangTrade;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
-	
-	import app.cmd.TradeModuleMessages;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;

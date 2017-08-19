@@ -173,11 +173,12 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnCancel = temp;
 			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "删除";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 90;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
 			temp.x = 129;
 			temp.y = 533;
 			return temp;
@@ -188,11 +189,12 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnTiqu = temp;
 			temp.name = "btnTiqu";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "提取附件";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 90;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
 			temp.x = 227;
 			temp.y = 533;
 			return temp;
@@ -204,7 +206,7 @@ package org.mokylin.skin.app.mail
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "系统邮件";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 198;
 			temp.x = 93;
@@ -219,7 +221,7 @@ package org.mokylin.skin.app.mail
 			temp.name = "lbTime";
 			temp.letterSpacing = -1;
 			temp.text = "剩余时间：29天";
-			temp.color = 0xD02525;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 109;
 			temp.x = 313;
@@ -236,7 +238,7 @@ package org.mokylin.skin.app.mail
 			temp.leading = 18;
 			temp.letterSpacing = 0;
 			temp.text = "为了大虾更加茁长成长，附上一份新手礼包，愿大虾早日成就盖世豪侠";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 372;
 			temp.x = 35;
@@ -250,7 +252,7 @@ package org.mokylin.skin.app.mail
 			lbZhuti = temp;
 			temp.name = "lbZhuti";
 			temp.text = "新手礼包最大十个字";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 198;
 			temp.x = 93;

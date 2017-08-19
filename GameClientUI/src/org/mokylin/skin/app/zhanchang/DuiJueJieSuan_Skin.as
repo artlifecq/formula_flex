@@ -75,8 +75,8 @@ package org.mokylin.skin.app.zhanchang
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "排位积分：";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 5;
 			return temp;
@@ -86,8 +86,8 @@ package org.mokylin.skin.app.zhanchang
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "额外奖励：";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 5;
 			return temp;

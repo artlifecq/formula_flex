@@ -11,14 +11,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ReliveSender;
 	import com.rpgGame.app.sender.TradeSender;
-	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.app.ui.alert.DungeonRelivePanel;
-	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
-	import com.rpgGame.coreData.enum.ReliveShowType;
 	import com.rpgGame.coreData.enum.SceneReliveEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -29,7 +26,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.ReliveType;
 	
 	import app.message.AmountType;
-	import app.message.HeroReliveClientProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -314,42 +310,42 @@ package com.rpgGame.app.manager
 		 * @param heroRelive
 		 * 
 		 */		
-		public static function setHeroData( heroRelive:HeroReliveClientProto ):void
-		{
-			if( heroRelive == null )
-				return;
-			
-			_originReliveTimes = heroRelive.originReliveTimes;
-			_totalOriginReliveTimes = heroRelive.totalOriginReliveTimes;
-			_originPerfectReliveTimes = heroRelive.originPerfectReliveTimes;
-			_totalOriginPerfectReliveTimes = heroRelive.totalOriginPerfectReliveTimes;
-			var reliveTime : Number = heroRelive.autoTownReliveTime?heroRelive.autoTownReliveTime.toNumber():0;
-			var originDiscount : int = heroRelive.originReliveDiscount;
-			var originDiscountTime1 : Number = heroRelive.originReliveDiscountEndTime?heroRelive.originReliveDiscountEndTime.toNumber():0;
-			var prefectDiscount : int = heroRelive.originPerfectReliveDiscount;
-			var prefectDiscountTime1 : Number = heroRelive.originPerfectReliveDiscountEndTime?heroRelive.originPerfectReliveDiscountEndTime.toNumber():0;
-			trace("原地复活折扣时间",originDiscountTime1);
-			setOriginReliveDiscount(originDiscountTime1,originDiscount);
-			trace("完美复活折扣时间",prefectDiscountTime1);
-			setPrefectReliveDiscount(prefectDiscountTime1,prefectDiscount);
-			
-			trace("复活时间"+TimeUtil.changeTimeToSpecStr(reliveTime))
-			if(SystemTimeManager.curtTm < reliveTime)
-			{
-				trace("服务器尝试让我复活");
-				tempDieInfo.reliveTimes = reliveTime;
-				if(heroRelive.canXinChunGe)
-					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_1;
-				else if(heroRelive.canShangBuQi&& heroRelive.canPaoDeKuai)
-					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_4;
-				else if(heroRelive.canShangBuQi)
-					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_2;
-				else if(heroRelive.canPaoDeKuai)
-					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_3;
-				else
-					tempDieInfo.reliveOption = ReliveShowType.RELIVE_NORMAL_TYPE;
-			}
-		}
+//		public static function setHeroData( heroRelive:HeroReliveClientProto ):void
+//		{
+//			if( heroRelive == null )
+//				return;
+//			
+//			_originReliveTimes = heroRelive.originReliveTimes;
+//			_totalOriginReliveTimes = heroRelive.totalOriginReliveTimes;
+//			_originPerfectReliveTimes = heroRelive.originPerfectReliveTimes;
+//			_totalOriginPerfectReliveTimes = heroRelive.totalOriginPerfectReliveTimes;
+//			var reliveTime : Number = heroRelive.autoTownReliveTime?heroRelive.autoTownReliveTime.toNumber():0;
+//			var originDiscount : int = heroRelive.originReliveDiscount;
+//			var originDiscountTime1 : Number = heroRelive.originReliveDiscountEndTime?heroRelive.originReliveDiscountEndTime.toNumber():0;
+//			var prefectDiscount : int = heroRelive.originPerfectReliveDiscount;
+//			var prefectDiscountTime1 : Number = heroRelive.originPerfectReliveDiscountEndTime?heroRelive.originPerfectReliveDiscountEndTime.toNumber():0;
+//			trace("原地复活折扣时间",originDiscountTime1);
+//			setOriginReliveDiscount(originDiscountTime1,originDiscount);
+//			trace("完美复活折扣时间",prefectDiscountTime1);
+//			setPrefectReliveDiscount(prefectDiscountTime1,prefectDiscount);
+//			
+//			trace("复活时间"+TimeUtil.changeTimeToSpecStr(reliveTime))
+//			if(SystemTimeManager.curtTm < reliveTime)
+//			{
+//				trace("服务器尝试让我复活");
+//				tempDieInfo.reliveTimes = reliveTime;
+//				if(heroRelive.canXinChunGe)
+//					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_1;
+//				else if(heroRelive.canShangBuQi&& heroRelive.canPaoDeKuai)
+//					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_4;
+//				else if(heroRelive.canShangBuQi)
+//					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_2;
+//				else if(heroRelive.canPaoDeKuai)
+//					tempDieInfo.reliveOption = ReliveShowType.RELIVE_OTHER_TYPE_3;
+//				else
+//					tempDieInfo.reliveOption = ReliveShowType.RELIVE_NORMAL_TYPE;
+//			}
+//		}
 		
 		private static var tempDieInfo : DieInfo = new DieInfo();
 		/**进入游戏的时候检测玩家是不是挂了，如果挂了就把面板给他打开**/

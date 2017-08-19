@@ -1,17 +1,12 @@
 package com.rpgGame.app.ui.scene
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.SceneSender;
-	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerUI;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
@@ -19,13 +14,9 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.structs.Position;
-	
-	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.ShiJieBoss_Skin;
@@ -62,7 +53,7 @@ package com.rpgGame.app.ui.scene
 		
 		private function updateView():void
 		{
-			_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"下次刷新时间:14:00");
+			_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"下次刷新时间:14:00");
 			_skin.lbHeadName.text=actInfo.actCfg.q_activity_name;
 			
 			
@@ -113,7 +104,7 @@ package com.rpgGame.app.ui.scene
 				_skin.uiWeiJiSha.visible=false;
 				_skin.uiYiTiaoZhan.visible=true;
 				_skin.sec_info.visible=true;
-				_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"下次刷新时间:"+TimeUtil.changeIntHM2Str(next));
+				_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"下次刷新时间:"+TimeUtil.changeIntHM2Str(next));
 			}
 		}
 		

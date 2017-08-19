@@ -6,7 +6,6 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -39,9 +38,7 @@ package com.rpgGame.app.manager.yunBiao
 	import flash.geom.Point;
 	
 	import app.message.AmountType;
-	import app.message.BiaoResProto;
-	import app.message.MonsterDataProto;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import gs.TweenLite;
 	
@@ -433,25 +430,25 @@ package com.rpgGame.app.manager.yunBiao
 					var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel( roleData.totalStat.level );
 					if( data != null )
 					{
-						var biaoRes:BiaoResProto = roleData.isBroken ? data.broken_biao_res : data.normal_biao_res;
-						if( biaoRes != null )
-						{
-							var path:String = biaoRes.res[quality];
-							SceneRoleManager.getInstance().updateBiaoche( role, path );
-							
-							//是自己的镖车，追踪栏才更新信息
-							var myBiaoData:BiaoCheData = MainRoleManager.actorInfo.biaoCheData;
-							if( myBiaoData != null )
-							{
-								if( myBiaoData.id == roleData.id )
-								{
-									//获取镖车品质提示
-									getBiaoQuality( quality );
-									EventManager.dispatchEvent( YunBiaoEvent.UPDATE_QUALITY_SUCCESS );
-								}
-							}
-							EventManager.dispatchEvent( YunBiaoEvent.UPDATE_BIAOCHE_NAME, roleData );
-						}
+//						var biaoRes:BiaoResProto = roleData.isBroken ? data.broken_biao_res : data.normal_biao_res;
+//						if( biaoRes != null )
+//						{
+//							var path:String = biaoRes.res[quality];
+//							SceneRoleManager.getInstance().updateBiaoche( role, path );
+//							
+//							//是自己的镖车，追踪栏才更新信息
+//							var myBiaoData:BiaoCheData = MainRoleManager.actorInfo.biaoCheData;
+//							if( myBiaoData != null )
+//							{
+//								if( myBiaoData.id == roleData.id )
+//								{
+//									//获取镖车品质提示
+//									getBiaoQuality( quality );
+//									EventManager.dispatchEvent( YunBiaoEvent.UPDATE_QUALITY_SUCCESS );
+//								}
+//							}
+//							EventManager.dispatchEvent( YunBiaoEvent.UPDATE_BIAOCHE_NAME, roleData );
+//						}
 					}
 				}
 			}
@@ -744,23 +741,23 @@ package com.rpgGame.app.manager.yunBiao
 			else
 			{
 				//破损镖车 亮红色
-				ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
+				ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
 				switch (biaoData.quality)
 				{
 					case EmQuality.QUALITY_WHITE: //白色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1_1));
 						break;
 					case EmQuality.QUALITY_GREEN: //绿色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2_1));
 						break;
 					case EmQuality.QUALITY_BLUE: //蓝色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3_1));
 						break;
 					case EmQuality.QUALITY_PURPLE: //紫色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4_1));
 						break;
 					case EmQuality.QUALITY_ORANGE: //橙色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5_1));
 						break;
 				}
 			}

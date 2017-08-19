@@ -114,7 +114,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbl_miaoshu";
 			temp.height = 20;
 			temp.text = "玩家名称6个字";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 145;
 			temp.x = 11;

@@ -181,13 +181,12 @@ package com.rpgGame.appModule.task
 		{
 			if(TaskAutoManager.getInstance().isTaskRunning)
 			{
-				currtimer=TIMERDATA_2;
+				currtimer=GlobalSheetData.getSettingInfo(513)!=null?GlobalSheetData.getSettingInfo(513).q_int_value:5;
 			}
 			else
 			{
-				currtimer=TIMERDATA_1;
+				currtimer=GlobalSheetData.getSettingInfo(509)!=null?GlobalSheetData.getSettingInfo(509).q_int_value:10;
 			}
-			
 			if(TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK))
 			{
 				timer.start();
@@ -203,20 +202,13 @@ package com.rpgGame.appModule.task
 		/**设置倒计时文字*/
 		private function setTimeText():void
 		{
-			if(this.visible&&this.parent!=null)
-			{
-				timerLabel.htmlText=currtimer+"秒后自动领取奖励";
-				if(currtimer==0)
-				{
-					timer.stop();
-					subFinishBut();
-				}
-				currtimer--;
-			}
-			else
+			timerLabel.htmlText=currtimer+"秒后自动领取奖励";
+			if(currtimer==0)
 			{
 				timer.stop();
+				subFinishBut();
 			}
+			currtimer--;
 		}
 		
 		private function hideView():void

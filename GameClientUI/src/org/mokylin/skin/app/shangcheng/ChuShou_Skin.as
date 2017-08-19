@@ -164,7 +164,7 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgIocn = temp;
 			temp.name = "imgIocn";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/64.png";
+			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.x = 128;
 			temp.y = 68;
 			return temp;
@@ -177,7 +177,7 @@ package org.mokylin.skin.app.shangcheng
 			temp.name = "lbName";
 			temp.text = "该物品价值";
 			temp.textAlign = "center";
-			temp.color = 0xD02525;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 101;
 			temp.x = 118;
