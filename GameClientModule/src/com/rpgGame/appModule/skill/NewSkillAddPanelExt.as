@@ -45,6 +45,7 @@ package  com.rpgGame.appModule.skill
 		private var _timer:GameTimer;
 		private var _endTime:int;
 		private var _obj:Object={};
+		private var _flyStartPt:Point;
 		public function NewSkillAddPanelExt()
 		{
 			this.dragAble=false;
@@ -68,13 +69,16 @@ package  com.rpgGame.appModule.skill
 			_skin.grpName.mask=_maskSprite;
 			_skin.container.addChild(_maskSprite);
 			_effcon=new Inter3DContainer();
-			_effcon.x=this.width/2;
-			_effcon.y=this.height;
+			_effcon.x=_skin.gGai.x+136/2;
+			_effcon.y=_skin.gGai.y+109/2;
 			this.addChild(_effcon);
 			
 			_flyIcon=new UIAsset();
 			_timer=new GameTimer("NewSkillAddPanelExt");
 			_timer.onUpdate=onTimer;
+			
+			_flyStartPt=new Point();
+			
 		}
 		private function onTimer():void
 		{
@@ -87,6 +91,7 @@ package  com.rpgGame.appModule.skill
 			{
 				_timer.stop();
 				hide();
+				toMis();
 			}
 		}
 		private function effeclComplete(...arg):void
@@ -123,12 +128,8 @@ package  com.rpgGame.appModule.skill
 		}
 		private function toMis():void
 		{
-		
-		
-			var startPt:Point=new Point();
-			this._icon.localToGlobal(new Point(0,0),startPt);
-			_flyIcon.x=startPt.x;
-			_flyIcon.y=startPt.y;
+			_flyIcon.x=_flyStartPt.x;
+			_flyIcon.y=_flyStartPt.y;
 			
 			StarlingLayerManager.topUILayer.addChild(_flyIcon);
 			
@@ -188,14 +189,20 @@ package  com.rpgGame.appModule.skill
 		}
 		override public function hide():void
 		{
-			toMis();
+			//toMis();
 			super.hide();
+			reset();
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			this._icon.localToGlobal(new Point(0,0),_flyStartPt);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			reset();
 			hide();
+			toMis();
 		}
 	}
 }
