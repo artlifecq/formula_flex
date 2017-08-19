@@ -164,17 +164,6 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __xitong_Skin_Label9_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "开启发光效果";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 40;
-			temp.y = 142;
-			return temp;
-		}
-
 		private function __xitong_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -257,7 +246,13 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Check = new feathers.controls.Check();
 			chk_moren = temp;
 			temp.name = "chk_moren";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.iconPosition = "left";
+			temp.label = "开启发光效果";
+			temp.labelOffsetX = 10;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.textAlign = "left";
+			temp.color = 0xEAEABC;
 			temp.x = 0;
 			temp.y = 139;
 			return temp;
@@ -270,7 +265,7 @@ package org.mokylin.skin.app.systemSet
 			temp.name = "grp_shejiao";
 			temp.x = 31;
 			temp.y = 224;
-			temp.elementsContent = [chk_jujuehaoyou_i(),chk_jujuesiliao_i(),chk_jujuezudui_i(),chk_jujuebanghui_i(),chk_moren_i(),__xitong_Skin_Label5_i(),__xitong_Skin_Label6_i(),__xitong_Skin_Label7_i(),__xitong_Skin_Label8_i(),__xitong_Skin_Label9_i()];
+			temp.elementsContent = [chk_jujuehaoyou_i(),chk_jujuesiliao_i(),chk_jujuezudui_i(),chk_jujuebanghui_i(),chk_moren_i(),__xitong_Skin_Label5_i(),__xitong_Skin_Label6_i(),__xitong_Skin_Label7_i(),__xitong_Skin_Label8_i()];
 			return temp;
 		}
 
@@ -407,7 +402,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Slider = new feathers.controls.Slider();
 			sld_yinyue = temp;
 			temp.name = "sld_yinyue";
-			temp.height = 7;
+			temp.height = 27;
 			temp.direction = Slider.DIRECTION_HORIZONTAL
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider;
 			temp.value = 3;
