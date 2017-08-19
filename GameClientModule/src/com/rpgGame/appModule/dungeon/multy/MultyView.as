@@ -419,7 +419,7 @@ package com.rpgGame.appModule.dungeon.multy
 		/**设置全局奖励文字*/
 		private function creatGlobalReward():void
 		{
-			if(GlobalSheetData.getSettingInfo(516))
+			if(GlobalSheetData.getSettingInfo(515))
 			{
 				var allpass:int=GlobalSheetData.getSettingInfo(515).q_int_value;
 				_skin.lbTiaozhan.text="每日挑战"+allpass+"次可领取（"+DungeonManager.challengeCount+"/"+allpass+"）：";
@@ -428,7 +428,7 @@ package com.rpgGame.appModule.dungeon.multy
 			
 			if(GlobalSheetData.getSettingInfo(516));
 			{
-				passAllreward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.reward_ico_0,RewardGroup.ALIN_LEFT,10,2,2);
+				passAllreward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.reward_ico_0,RewardGroup.ALIN_LEFT,15,6,6,true,15);
 				passAllreward.setRewardByJsonStr(GlobalSheetData.getSettingInfo(516).q_string_value);
 			}
 		}

@@ -1,6 +1,9 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.sender.CrossSender;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.netData.cross.message.ResChangeServerGameToClientMessage;
 	
 	import away3d.log.Log;
@@ -31,9 +34,14 @@ package com.rpgGame.app.cmdlistener
 		private function onResChangeServerGameToClient( msg:ResChangeServerGameToClientMessage ):void
 		{
 			Log.debug("通知前端登录战斗服ResChangeServerGameToClientMessage");
-			TweenLite.delayedCall(2,function():void{//因为后台处理需要1-2秒时间
-				CrossSender.reqEnterCrossFight(msg);
-			});
+			var time:int=GlobalSheetData.getSettingInfo(849)!=null?GlobalSheetData.getSettingInfo(849).q_int_value:15;
+			
+			AppManager.showAppNoHide(AppConstant.MULTY_ENTERTIME_PANL,msg.fighttype);
+			TweenLite.delayedCall(time,sendEnterCrossFight,[msg]);
+		}
+		private function sendEnterCrossFight(msg:ResChangeServerGameToClientMessage):void
+		{
+			CrossSender.reqEnterCrossFight(msg);
 		}
 	}
 }

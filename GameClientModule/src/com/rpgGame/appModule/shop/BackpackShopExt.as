@@ -1,11 +1,10 @@
 package com.rpgGame.appModule.shop
 {
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.shop.backpackShop.BackpackShopRebuyView;
 	import com.rpgGame.appModule.shop.backpackShop.BackpackShopView;
-	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	
 	import away3d.events.Event;
@@ -13,9 +12,6 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.beibao.ShangDian_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 
 	/**
 	 *随身商店 

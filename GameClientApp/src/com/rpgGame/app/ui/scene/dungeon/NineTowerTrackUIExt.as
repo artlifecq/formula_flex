@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
@@ -54,6 +55,14 @@ package com.rpgGame.app.ui.scene.dungeon
 			_timer.onUpdate=onTimer;
 			_initNameStr=_skin.labOwner.text;
 			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.TWOER_TIP,null));
+			
+			var touch:TouchCtrl=new TouchCtrl(_skin.labOwner,onClickOwner);
+		}
+		
+		private function onClickOwner():void
+		{
+			// TODO Auto Generated method stub
+			
 		}
 		
 		private function onTimer():void
