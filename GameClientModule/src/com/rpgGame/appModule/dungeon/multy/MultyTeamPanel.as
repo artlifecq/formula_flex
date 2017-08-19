@@ -7,6 +7,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
@@ -89,7 +90,7 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			super.show(data,openTable,parentContiner);
+			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			addEvent();
 			initVote();
 			

@@ -24,6 +24,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.HeroData;
@@ -182,9 +183,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 					var icon:IconCDFace=rewardIcon[i];
 					var diffCfg:Q_lunjian=LunJianCfg.getCfgByInfo(itemData.cfg.q_npc_map,itemData.cfg.q_type,i+1);
 					rewardItemList=JSONUtil.decode(diffCfg.q_rewards);
-					var itemInfo:ClientItemInfo=new ClientItemInfo(rewardItemList[0].mod);
-					itemInfo.itemInfo=new ItemInfo();
-					itemInfo.itemInfo.isbind=rewardItemList[0].bind;
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(rewardItemList[0].mod,1,rewardItemList[0].bind);
 					FaceUtil.SetItemGrid(icon,itemInfo);
 				}
 				_skin.mc_nandu.visible=true;
