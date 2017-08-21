@@ -26,6 +26,10 @@ package org.mokylin.skin.app.fuben
 
 		public var btnPrev:feathers.controls.Button;
 
+		public var icon1:feathers.controls.UIAsset;
+
+		public var jiangli_text:feathers.controls.UIAsset;
+
 		public var lbGoumai:feathers.controls.Label;
 
 		public var lbShengyu:feathers.controls.Label;
@@ -43,7 +47,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__FuBen_ZhuangBei_Skin_UIAsset2_i(),__FuBen_ZhuangBei_Skin_UIAsset3_i(),__FuBen_ZhuangBei_Skin_UIAsset4_i(),lbShengyu_i(),lbGoumai_i(),btnAdd_i(),list_i(),btnNext_i(),btnPrev_i()];
+			this.elementsContent = [__FuBen_ZhuangBei_Skin_UIAsset2_i(),__FuBen_ZhuangBei_Skin_UIAsset3_i(),icon1_i(),jiangli_text_i(),lbShengyu_i(),lbGoumai_i(),btnAdd_i(),list_i(),btnNext_i(),btnPrev_i()];
 			
 			states = {
 			};
@@ -69,15 +73,6 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/app/fuben/tiao.jpg";
 			temp.x = 22;
 			temp.y = 514;
-			return temp;
-		}
-
-		private function __FuBen_ZhuangBei_Skin_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fuben/fubengjiangli.png";
-			temp.x = 656;
-			temp.y = 547;
 			return temp;
 		}
 
@@ -112,6 +107,28 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 57;
 			temp.y = 281;
+			return temp;
+		}
+
+		private function icon1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon1 = temp;
+			temp.name = "icon1";
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 879;
+			temp.y = 528;
+			return temp;
+		}
+
+		private function jiangli_text_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			jiangli_text = temp;
+			temp.name = "jiangli_text";
+			temp.styleName = "ui/app/fuben/fubengjiangli.png";
+			temp.x = 656;
+			temp.y = 547;
 			return temp;
 		}
 

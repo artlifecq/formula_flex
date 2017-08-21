@@ -11,7 +11,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
 	import com.rpgGame.appModule.pet.sub.PetAttrCon;
 	import com.rpgGame.appModule.pet.sub.PetZoneBall;
@@ -45,6 +44,7 @@ package com.rpgGame.appModule.pet
 	import org.mokylin.skin.app.meiren.MeiRen_Skin;
 	
 	import starling.display.Sprite;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	
 	public class PetMainPanelExt extends SkinUIPanel
 	{

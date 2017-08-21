@@ -2,11 +2,11 @@ package com.game.engine3D.display.shapeArea
 {
 	import com.game.engine3D.utils.MathUtil;
 	
-	import flash.utils.ByteArray;
-	import flash.utils.Endian;
-	
 	import away3d.core.base.CompactSubGeometry;
 	import away3d.pathFinding.HeightMapHelper;
+	import away3d.premium.heap.HeapAllocator;
+	import away3d.premium.heap.MemoryItem;
+	import away3d.premium.heap.MemoryItemTypes;
 	import away3d.primitives.PrimitiveBase;
 
 	/**
@@ -134,8 +134,8 @@ package com.game.engine3D.display.shapeArea
 
 		protected override function buildGeometry(target : CompactSubGeometry) : void
 		{
-			var data : ByteArray;
-			var indices : ByteArray;
+			var data : MemoryItem;
+			var indices : MemoryItem;
 			var x : Number, y : Number, z : Number, temp : Number;
 			var numIndices : uint;
 			var base : uint;
@@ -148,25 +148,22 @@ package com.game.engine3D.display.shapeArea
 			numIndices = _segmentsH * _segmentsW * 6;
 			if (_doubleSided)
 				numIndices <<= 1;
+			
+			var dataPos:int,indicesPos:int;
 
 			if (target.vertexData && (numVertices * stride << 2) == target.vertexData.length)
 			{
-				//data = target.vertexData;
-				//indices = target.indexData;
-				data.position = 0;
-				indices.position = 0;
+				data = target.vertexData;
+				indices = target.indexData;
 			}
 			else
 			{
-				data = new ByteArray;
-				data.endian = Endian.LITTLE_ENDIAN;
-				data.length = (numVertices * stride) << 2;
-				indices = new ByteArray;
-				indices.endian = Endian.LITTLE_ENDIAN;
-				indices.length = numIndices << 1;
+				data = HeapAllocator.malloc((numVertices*stride)<<2,MemoryItemTypes.GEOMETRY);
+				indices = HeapAllocator.malloc(numIndices<<1,MemoryItemTypes.GEOMETRY);
+				
 				invalidateUVs();
 			}
-
+			
 			numIndices = 0;
 			var index : uint = target.vertexOffset;
 			for (var yi : uint = 0; yi <= _segmentsH; ++yi)
@@ -181,20 +178,20 @@ package com.game.engine3D.display.shapeArea
 					var dy : Number = MathUtil.getDyByAngle(dist, angle);
 					z = _heightMapHelper ? _heightMapHelper.queryHeightAt(_x + dx, _y + dy) : 0;
 
-					data.position = (index) << 2;
-					data.writeFloat(x);
+					dataPos = (index)<<2;
+					data.writeFloat(x,dataPos);dataPos+=4;
 					index++;
 					if (_yUp)
 					{
-						data.writeFloat(z);
-						data.writeFloat(y);
+						data.writeFloat(y,dataPos);dataPos+=4;
+						data.writeFloat(z,dataPos);dataPos+=4;
 						index++;
 						index++;
 					}
 					else
 					{
-						data.writeFloat(y);
-						data.writeFloat(z);
+						data.writeFloat(y,dataPos);dataPos+=4;
+						data.writeFloat(z,dataPos);dataPos+=4;
 						index++;
 						index++;
 					}
@@ -203,38 +200,40 @@ package com.game.engine3D.display.shapeArea
 					{
 						if (!_flatNormal)
 						{
-							data.writeFloat(0);
+							data.writeFloat(0,dataPos);dataPos+=4;
 							index++;
 							if (_yUp)
 							{
-								data.writeFloat(1);
-								data.writeFloat(0);
+								data.writeFloat(1,dataPos);dataPos+=4;
+								data.writeFloat(0,dataPos);dataPos+=4;
+				
 								index++;
 								index++;
 							}
 							else
 							{
-								data.writeFloat(0);
-								data.writeFloat(-1);
+								data.writeFloat(1,dataPos);dataPos+=4;
+								data.writeFloat(-1,dataPos);dataPos+=4;
+								
 								index++;
 								index++;
 							}
 						}
 						else
 						{
-							data.writeFloat(Math.abs(x) / x);
+							data.writeFloat(Math.abs(x) / x,dataPos);dataPos+=4;
 							index++;
 							if (_yUp)
 							{
-								data.writeFloat(0);
-								data.writeFloat(Math.abs(y) / y);
+								data.writeFloat(0,dataPos);dataPos+=4;
+								data.writeFloat(Math.abs(y) / y,dataPos);dataPos+=4;
 								index++;
 								index++;
 							}
 							else
 							{
-								data.writeFloat(Math.abs(y) / y);
-								data.writeFloat(0);
+								data.writeFloat(Math.abs(y) / y,dataPos);dataPos+=4;
+								data.writeFloat(0,dataPos);dataPos+=4;
 								index++;
 								index++;
 							}
@@ -243,10 +242,10 @@ package com.game.engine3D.display.shapeArea
 
 					if (target.hasTangents)
 					{
-						data.writeFloat(1);
-						data.writeFloat(0);
-						data.writeFloat(0);
-						data.writeFloat(1);
+						data.writeFloat(1,dataPos);dataPos+=4;
+						data.writeFloat(0,dataPos);dataPos+=4;
+						data.writeFloat(0,dataPos);dataPos+=4;
+						data.writeFloat(1,dataPos);
 						index++;
 						index++;
 						index++;
@@ -260,10 +259,10 @@ package com.game.engine3D.display.shapeArea
 					{
 						for (var i : int = 0; i < 3; ++i)
 						{
-							data.position = (index - stride) << 2;
-							temp = data.readFloat();
-							data.position = index << 2;
-							data.writeFloat(temp);
+							dataPos = (index - stride) << 2; 
+							temp = data.readFloat(dataPos);
+							dataPos = index << 2;
+							data.writeFloat(temp,dataPos);
 							++index;
 						}
 						if (target.hasNormals)
@@ -272,10 +271,10 @@ package com.game.engine3D.display.shapeArea
 							{
 								for (i = 0; i < 3; ++i)
 								{
-									data.position = (index - stride) << 2;
-									temp = data.readFloat();
-									data.position = index << 2;
-									data.writeFloat(-temp);
+									dataPos = (index - stride) << 2; 
+									temp = data.readFloat(dataPos);
+									dataPos = index << 2;
+									data.writeFloat(-temp,dataPos);
 									++index;
 								}
 							}
@@ -283,10 +282,10 @@ package com.game.engine3D.display.shapeArea
 							{
 								for (i = 0; i < 3; ++i)
 								{
-									data.position = (index - stride) << 2;
-									temp = data.readFloat();
-									data.position = index << 2;
-									data.writeFloat(temp);
+									dataPos = (index - stride) << 2; 
+									temp = data.readFloat(dataPos);
+									dataPos = index << 2;
+									data.writeFloat(temp,dataPos);
 									++index;
 								}
 							}
@@ -295,10 +294,10 @@ package com.game.engine3D.display.shapeArea
 						{
 							for (i = 0; i < 4; ++i)
 							{
-								data.position = (index - stride) << 2;
-								temp = data.readFloat();
-								data.position = index << 2;
-								data.writeFloat(-temp);
+								dataPos = (index - stride) << 2; 
+								temp = data.readFloat(dataPos);
+								dataPos = index << 2;
+								data.writeFloat(-temp,dataPos);
 								++index;
 							}
 						}
@@ -307,36 +306,36 @@ package com.game.engine3D.display.shapeArea
 
 					if (xi != _segmentsW && yi != _segmentsH)
 					{
-						base = xi + yi * tw;
-						var mult : int = _doubleSided ? 2 : 1;
-
-						indices.writeShort(base * mult);
-						indices.writeShort((base + tw) * mult);
-						indices.writeShort((base + tw + 1) * mult);
-						indices.writeShort(base * mult);
-						indices.writeShort((base + tw + 1) * mult);
-						indices.writeShort((base + 1) * mult);
-
-						if (_doubleSided)
-						{
-							indices.writeShort((base + tw + 1) * mult + 1);
-							indices.writeShort((base + tw) * mult + 1);
-							indices.writeShort(base * mult + 1);
-							indices.writeShort((base + 1) * mult + 1);
-							indices.writeShort((base + tw + 1) * mult + 1);
-							indices.writeShort(base * mult + 1);
+						base = xi + yi*tw;
+						var mult:int = _doubleSided? 2 : 1;
+						
+						indices.writeInt16(base*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + tw)*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + tw + 1)*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16(base*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + tw + 1)*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + 1)*mult,indicesPos);indicesPos+=2;
+						
+						if (_doubleSided) {
+							indices.writeInt16((base + tw + 1)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16((base + tw)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16(base*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16((base + 1)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16((base + tw + 1)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16(base*mult + 1,indicesPos);indicesPos+=2;
 						}
 					}
 				}
 			}
 
-			//target.updateData(data);
-			//target.updateIndexData(indices);
+			target.updateData(data);
+			target.updateIndexData(indices);
 		}
 
 		override protected function buildUVs(target : CompactSubGeometry) : void
 		{
-			var data : ByteArray;
+			var data : MemoryItem;
+			var dataPos:int;
 			var stride : uint = target.UVStride;
 			var numUvs : uint = (_segmentsH + 1) * (_segmentsW + 1) * stride;
 			var skip : uint = stride - 2;
@@ -344,36 +343,31 @@ package com.game.engine3D.display.shapeArea
 			if (_doubleSided)
 				numUvs *= 2;
 
-			if (target.UVData && (numUvs << 2) == target.UVData.length)
+			if (target.UVData && (numUvs<<2) == target.UVData.length)
 			{
-				//data = target.UVData;
+				data = target.UVData;
 			}
 			else
 			{
-				data = new ByteArray;
-				data.endian = Endian.LITTLE_ENDIAN;
-				data.length = numUvs << 2;
+				data = HeapAllocator.malloc(numUvs<<2,MemoryItemTypes.GEOMETRY);
 				invalidateGeometry();
 			}
 
 			var index : uint = target.UVOffset;
 
-			for (var yi : uint = 0; yi <= _segmentsH; ++yi)
-			{
-				for (var xi : uint = 0; xi <= _segmentsW; ++xi)
-				{
-					data.position = index << 2;
-					data.writeFloat((xi / _segmentsW) * 1/*target.scaleU*/);
-					data.writeFloat((1 - yi / _segmentsH) * 1/*target.scaleV*/);
+			for (var yi:uint = 0; yi <= _segmentsH; ++yi) {
+				for (var xi:uint = 0; xi <= _segmentsW; ++xi) {
+					dataPos = index<<2;
+					data.writeFloat( xi/_segmentsW ,dataPos);dataPos+=4;
+					data.writeFloat( 1 - yi/_segmentsH ,dataPos);
 					index++;
 					index++;
 					index += skip;
-
-					if (_doubleSided)
-					{
-						data.position = index << 2;
-						data.writeFloat((xi / _segmentsW) * 1/*target.scaleU*/);
-						data.writeFloat((1 - yi / _segmentsH) * 1/*target.scaleV*/);
+					
+					if (_doubleSided) {
+						dataPos = index<<2;
+						data.writeFloat( xi/_segmentsW,dataPos);dataPos+=4;
+						data.writeFloat( 1 - yi/_segmentsH,dataPos);
 						index++;
 						index++;
 						index += skip;
@@ -381,7 +375,7 @@ package com.game.engine3D.display.shapeArea
 				}
 			}
 
-			//target.updateData(data);
+			target.updateData(data);
 		}
 
 		public function get flatNormal() : Boolean

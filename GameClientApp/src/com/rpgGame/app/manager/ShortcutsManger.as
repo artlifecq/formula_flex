@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
@@ -119,23 +120,35 @@ package com.rpgGame.app.manager
 			shortcutsDataMap.clear();
 			var shortData : ShortcutsData;
 			var shorts : Object;
-			for (var i : int = 0; i < SHORTCUTS_LEN; i++)
+			var spellList : Array = MainRoleManager.actorInfo.getActiveSpells();
+			var len : int = spellList.length;
+			var max:int=SHORTCUTS_LEN>len?SHORTCUTS_LEN:len;
+			
+			for (var i : int = 0; i < max; i++)
 			{
-				shorts = ClientSettingManager.getShortCutDataByKey(i);
-
-				if (shorts == null)
-				{
-					//这段注释里写的是测试代码，为了方便调试技能，所以先这么写，后面系统成熟了，再去掉这段代码
-//					setShortData(i,ShortcutsTypeEnum.SKILL_TYPE,(1001 + i));
-					//
-					continue;
+				if(i<len){//将已经学习的技能加到快捷栏
+					var cfg:Q_skill_model= spellList[i];
+					if(cfg.q_seat==0){
+						continue;
+					}
+					shortData = new ShortcutsData();
+					shortData.type = ShortcutsTypeEnum.SKILL_TYPE;
+					shortData.shortcutPos = cfg.q_seat-1;
+					shortData.id = cfg.q_skillID;
+					shortData.itemBind=0;
+				}else{
+					shorts = ClientSettingManager.getShortCutDataByKey(i);
+					if (shorts == null)
+					{
+						continue;
+					}else{
+						shortData = new ShortcutsData();
+						shortData.type = shorts.t;
+						shortData.shortcutPos = shorts.k;
+						shortData.id = shorts.mid;
+						shortData.itemBind=shorts.bind;
+					}
 				}
-				shortData = new ShortcutsData();
-				
-				shortData.type = shorts.t;
-				shortData.shortcutPos = shorts.k;
-				shortData.id = shorts.mid;
-				shortData.itemBind=shorts.bind;
 				shortcutsDataMap.add(shortData.shortcutPos, shortData);
 			}
 		}

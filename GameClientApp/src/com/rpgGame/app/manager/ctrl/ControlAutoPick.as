@@ -420,7 +420,51 @@ package  com.rpgGame.app.manager.ctrl
 			
 			trace( "req:", sitem.name );
 		}
-		
+		public function hasSth2Pick():Boolean
+		{
+			var itemArray :Array = DropGoodsManager.getInstance().getAllSceneItems();
+			var itemPt:Point=new Point();
+			var playerPt :Point = getPos(_mainplayer);
+			for each ( var item :SceneRole in itemArray )
+			{
+				var gid :Number = item.id;
+				if ( _throwItemHash.containsKey( gid ) )
+				{
+					continue;
+				}
+				
+				if ( isOthers(item) )
+				{
+					continue;
+				}
+				
+				if ( IsNotAutoPick(( item.data as SceneDropGoodsData).goodsDatas.dropGoodsId.hexValue ) )
+				{
+					continue;
+				}
+				
+				if (canPick(item)== false)
+				{
+					continue;
+				}
+				itemPt=getPos(item,itemPt);
+				var dis:int=MathUtil.getDistance(playerPt.x,playerPt.y,item.x,itemPt.y);
+				
+				var isInAutoArea :Boolean = (dis<=AUTO_SEARCH_MAX_DIS);
+				if ( !isInAutoArea )// 超过最大拾取距离
+				{
+					continue;
+				}
+				
+				var ret :int = CanPassFilter( item );
+				if ( ret != 0 )// 不可拾取类型
+				{
+					continue;
+				}
+				return true;
+			}
+			return false;
+		}
 		/**
 		 * 自动拾取物品
 		 */
