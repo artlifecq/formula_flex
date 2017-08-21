@@ -34,8 +34,8 @@ package org.mokylin.skin.app.beibao
 			super();
 			
 			this.currentState = "normal";
-			this.height = 59;
-			this.width = 162;
+			this.height = 58;
+			this.width = 178;
 			this.elementsContent = [__ShangDian_Item_UIAsset1_i(),uiOver_i(),Icon_i(),lbName_i(),imgPrice_i(),lbNum_i()];
 			
 			states = {
@@ -119,9 +119,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiOver = temp;
 			temp.name = "uiOver";
-			temp.height = 59;
+			temp.height = 58;
 			temp.styleName = "ui/common/hover/xuanzhong.png";
-			temp.width = 162;
+			temp.width = 178;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

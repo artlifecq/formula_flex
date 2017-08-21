@@ -10,7 +10,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
-	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.ZhanGongSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
