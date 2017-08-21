@@ -138,7 +138,7 @@ package com.rpgGame.app.manager
 			openPhantom = false;
 			openGlow = false;
 			openHeat = false;
-			viewAntiAlias = 0;
+			viewAntiAlias = 2;
 			displayLevel = 0;
 			shadowLevel = 0;
 			filterQuality = 70;
