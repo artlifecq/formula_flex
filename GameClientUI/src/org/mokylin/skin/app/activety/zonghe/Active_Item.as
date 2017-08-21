@@ -45,7 +45,7 @@ package org.mokylin.skin.app.activety.zonghe
 			
 			this.currentState = "normal";
 			this.height = 71;
-			this.width = 585;
+			this.width = 516;
 			this.elementsContent = [uiBg_i(),mcEffect_i(),selectedBtn_i(),uiName_i(),lbMsg_i(),state_icon_i(),lbLevel_i(),lt_icon_i()];
 			
 			states = {
@@ -66,8 +66,8 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
-			temp.x = 326;
-			temp.y = 18;
+			temp.x = 291;
+			temp.y = 16;
 			return temp;
 		}
 
@@ -85,7 +85,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 155;
-			temp.y = 18;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -105,12 +105,12 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
 			mcEffect = temp;
 			temp.name = "mcEffect";
-			temp.autoPlay = true;
+			temp.autoPlay = false;
 			temp.blendMode = "add";
 			temp.frameRate = 10;
 			temp.height = 71;
 			temp.styleClass = org.mokylin.skin.app.activety.mc.UIMovieClipActiveEffect;
-			temp.width = 585;
+			temp.width = 516;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -124,7 +124,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.groupName = "radioGroup1";
 			temp.height = 71;
 			temp.styleClass = org.mokylin.skin.app.activety.ActiveItemSelecteSkin;
-			temp.width = 585;
+			temp.width = 516;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -138,7 +138,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/activety/jinxingzhong2.png";
-			temp.x = 475;
+			temp.x = 410;
 			temp.y = 21;
 			return temp;
 		}
@@ -162,7 +162,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/activety/zonghe/active_name/dianfengduijue.png";
-			temp.x = 28;
+			temp.x = 22;
 			temp.y = 24;
 			return temp;
 		}
