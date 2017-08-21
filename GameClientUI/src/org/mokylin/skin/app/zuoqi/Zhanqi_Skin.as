@@ -54,6 +54,8 @@ package org.mokylin.skin.app.zuoqi
 
 		public var chk_zidonggoumai:feathers.controls.Check;
 
+		public var currentAvatar:feathers.controls.Group;
+
 		public var expgroup:feathers.controls.Group;
 
 		public var gprShuxing:feathers.controls.Group;
@@ -96,6 +98,8 @@ package org.mokylin.skin.app.zuoqi
 
 		public var mc_name:feathers.controls.UIMovieClip;
 
+		public var nextAvatar:feathers.controls.Group;
+
 		public var num_lv:feathers.controls.UINumber;
 
 		public var progressbar1:feathers.controls.ProgressBar;
@@ -117,7 +121,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__Zhanqi_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__Zhanqi_Skin_UIAsset12_i(),__Zhanqi_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),ui_text_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i()];
+			this.elementsContent = [__Zhanqi_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__Zhanqi_Skin_UIAsset12_i(),__Zhanqi_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),currentAvatar_i(),nextAvatar_i(),ui_text_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i()];
 			
 			states = {
 				normal:[
@@ -518,6 +522,18 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
+		private function currentAvatar_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			currentAvatar = temp;
+			temp.name = "currentAvatar";
+			temp.height = 362;
+			temp.width = 408;
+			temp.x = 142;
+			temp.y = 56;
+			return temp;
+		}
+
 		private function expgroup_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -776,6 +792,18 @@ package org.mokylin.skin.app.zuoqi
 			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipZhanqiName;
 			temp.x = 629;
 			temp.y = 87;
+			return temp;
+		}
+
+		private function nextAvatar_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			nextAvatar = temp;
+			temp.name = "nextAvatar";
+			temp.height = 362;
+			temp.width = 408;
+			temp.x = 142;
+			temp.y = 56;
 			return temp;
 		}
 
