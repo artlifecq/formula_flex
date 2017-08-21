@@ -140,7 +140,7 @@ package com.rpgGame.app.manager
 			openHeat = false;
 			viewAntiAlias = 2;
 			displayLevel = 0;
-			shadowLevel = 0;
+//			shadowLevel = 0;
 			filterQuality = 70;
 		}
 		
@@ -152,9 +152,9 @@ package com.rpgGame.app.manager
 			openPhantom = true;
 			openGlow = true;
 			openHeat = true;
-			viewAntiAlias = 1;
+			viewAntiAlias = 2;
 			displayLevel = 1;
-			shadowLevel = 3;
+//			shadowLevel = 3;
 			filterQuality = 100;
 		}
 		
@@ -168,7 +168,7 @@ package com.rpgGame.app.manager
 			openHeat = true;
 			viewAntiAlias = 2;
 			displayLevel = 2;
-			shadowLevel = 3;
+//			shadowLevel = 3;
 			filterQuality = 100;
 		}
 		
