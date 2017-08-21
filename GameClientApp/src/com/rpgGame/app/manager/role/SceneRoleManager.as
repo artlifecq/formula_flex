@@ -566,7 +566,6 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true,true, true);
 			var qua:int=ItemConfig.getItemQuality(data.goodsDatas.itemModelId);
-			qua=1;
 			if (qua>0) 
 			{
 				role.updateBodyEft(ClientConfig.getDropItemQuatityEffect(qua));
@@ -682,7 +681,7 @@ package com.rpgGame.app.manager.role
 			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(data.effectRes));
 			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
 			effectRu.repeat = 0;
-			effectRu.mouseEnable = true;
+			effectRu.mouseEnable = false;
 			effectRu.play(0);
 			effectRu.visible = true;
 			effectRu.setScale(data.sizeScale > 0 ? (data.sizeScale * 0.01) : 1);

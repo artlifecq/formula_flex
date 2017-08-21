@@ -16,11 +16,11 @@ package org.mokylin.skin.app.zuoqi
 	import org.mokylin.skin.app.zuoqi.button.ButtonZuoqidan;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipJieshu;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
-	import org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
+	import org.mokylin.skin.component.progress.progress_jindutiao2;
 	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 
@@ -53,6 +53,8 @@ package org.mokylin.skin.app.zuoqi
 		public var btn_zizhidan:feathers.controls.Button;
 
 		public var chk_zidonggoumai:feathers.controls.Check;
+
+		public var currentAvatar:feathers.controls.Group;
 
 		public var expgroup:feathers.controls.Group;
 
@@ -104,11 +106,11 @@ package org.mokylin.skin.app.zuoqi
 
 		public var mc_name:feathers.controls.UIMovieClip;
 
+		public var nextAvatar:feathers.controls.Group;
+
 		public var num_lv:feathers.controls.UINumber;
 
 		public var progressbar:feathers.controls.ProgressBar;
-
-		public var roleZone:feathers.controls.UIAsset;
 
 		public var ui_zhandou:feathers.controls.UIAsset;
 
@@ -127,7 +129,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__ZuoqiCont_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__ZuoqiCont_Skin_UIAsset12_i(),__ZuoqiCont_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),lberror_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i(),roleZone_i()];
+			this.elementsContent = [__ZuoqiCont_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__ZuoqiCont_Skin_UIAsset12_i(),__ZuoqiCont_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),lberror_i(),currentAvatar_i(),nextAvatar_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i()];
 			
 			states = {
 			};
@@ -188,7 +190,7 @@ package org.mokylin.skin.app.zuoqi
 		private function __ZuoqiCont_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/jdt_di.png";
+			temp.styleName = "ui/component/progress/jindutiao2/jdt_di.png";
 			temp.width = 228;
 			temp.x = 0;
 			temp.y = 0;
@@ -527,6 +529,18 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
+		private function currentAvatar_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			currentAvatar = temp;
+			temp.name = "currentAvatar";
+			temp.height = 362;
+			temp.width = 408;
+			temp.x = 142;
+			temp.y = 96;
+			return temp;
+		}
+
 		private function expgroup_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -834,6 +848,18 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
+		private function nextAvatar_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			nextAvatar = temp;
+			temp.name = "nextAvatar";
+			temp.height = 362;
+			temp.width = 408;
+			temp.x = 142;
+			temp.y = 96;
+			return temp;
+		}
+
 		private function num_lv_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -856,24 +882,10 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "progressbar";
 			temp.maximum = 200;
 			temp.minimum = 0;
-			temp.styleClass = org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
+			temp.styleClass = org.mokylin.skin.component.progress.progress_jindutiao2;
 			temp.value = 50;
 			temp.x = 21;
 			temp.y = 3;
-			return temp;
-		}
-
-		private function roleZone_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			roleZone = temp;
-			temp.name = "roleZone";
-			temp.alpha = 0;
-			temp.height = 325;
-			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
-			temp.width = 541;
-			temp.x = 86;
-			temp.y = 95;
 			return temp;
 		}
 

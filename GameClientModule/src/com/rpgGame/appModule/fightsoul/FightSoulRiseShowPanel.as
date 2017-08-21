@@ -81,7 +81,7 @@ package com.rpgGame.appModule.fightsoul
 			avatar.avatarInfo.bodyEffectID2 =modeinfo.q_effect1;
 			avatar.update();
 			var scale:Number = modeinfo.q_panleScale/100;
-			avatar.setScale(scale);
+			avatar.scaleRole=scale;
 			avatar.y=modeinfo.q_panleY-150;
 			
 			_skin.zhanhunName.styleName = "ui/app/zhanhun/modename/"+currentShowMode+".png";
