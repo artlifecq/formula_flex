@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
@@ -54,6 +55,14 @@ package com.rpgGame.app.ui.scene.dungeon
 			_timer.onUpdate=onTimer;
 			_initNameStr=_skin.labOwner.text;
 			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.TWOER_TIP,null));
+			
+			var touch:TouchCtrl=new TouchCtrl(_skin.labOwner,onClickOwner);
+		}
+		
+		private function onClickOwner():void
+		{
+			// TODO Auto Generated method stub
+			
 		}
 		
 		private function onTimer():void
@@ -138,7 +147,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				name=data.playerName;
 			}
-			_skin.labOwner.htmlText=LanguageConfig.replaceStr(_initNameStr,[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,MainRoleManager.getPlayerName(name))]);
+			_skin.labOwner.htmlText=LanguageConfig.replaceStr(_initNameStr,["<u>"+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,MainRoleManager.getPlayerName(name))+"</u>"]);
 			if (data.time!=0) 
 			{
 				_flagEndTime=data.time*1000+getTimer();

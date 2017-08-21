@@ -80,8 +80,9 @@ package com.rpgGame.appModule.activety.zonghe
 			_defaultFormat.leading = 4;
 			_richText.defaultTextFormat = _defaultFormat;
 			this.addChild(_richText);
-			_richText.x=640;
-			_richText.y=425;
+			_richText.x=_skin.lbMsg.x;
+			_richText.y=_skin.lbMsg.y;
+			_skin.lbMsg.visible=false;
 		}
 		
 		override public function show(data:Object=null):void
@@ -167,8 +168,7 @@ package com.rpgGame.appModule.activety.zonghe
 			selectedInfo=info;
 			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_res_id+".png";
 			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.actCfg.q_des_bg+".jpg";
-			_skin.lbMsg.htmlText=info.actCfg.q_text;
-			_skin.lbMsg.visible=false;
+//			_skin.lbMsg.htmlText=info.actCfg.q_text;
 			var desObj:Array=JSONUtil.decode(info.actCfg.q_text);
 			
 			_richText.text="";

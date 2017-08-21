@@ -1,40 +1,38 @@
 package com.rpgGame.appModule.mount
 {
-	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
-	import com.rpgGame.coreData.type.RoleActionType;
 	
-	import feathers.controls.NumericStepper;
+	import flash.geom.Point;
+	
+	import gs.TweenLite;
 	
 	import org.mokylin.skin.app.zuoqi.Zhanqi_Skin;
 	
-	import starling.animation.IAnimatable;
-	import starling.core.Starling;
-	
-	public class ZhanQiContent extends Inter3DContainer implements IAnimatable
+	public class ZhanQiContent
 	{
 		private var _skin:Zhanqi_Skin;
 		
-		private var _isSHowNext:Boolean;
+		private var _isShowNext:Boolean;
 		private var _curShowZhanQi:int = 0;
-		private var _curtentInterEff:InterObject3D;
-		private var _nextInterEff:InterObject3D;
-		private var _amationInfos:Vector.<TargetAmationInfo>;
-		private static const TotalTime:Number = 0.3;
-		private static var _passTime:Number = 0;
+		
+		private var _curtentInter3D:UIAvatar3D;
+		private var _nextInter3D:UIAvatar3D;
+		
+		private var showP:Point=new Point(142,96);
+		private var currentMisP:Point=new Point(-50,80);
+		private var nextMisP:Point=new Point(340,80);
+		private var roleScale:Number=3;
 		
 		public function ZhanQiContent(skin:Zhanqi_Skin)
 		{
 			_skin=skin;
 			super();
-			skin.container.addChildAt(this,skin.container.getChildIndex(skin.bg_2)+1);
-			_isSHowNext = true;
+			_curtentInter3D=new UIAvatar3D(_skin.currentAvatar,roleScale);
+			_nextInter3D=new UIAvatar3D(_skin.nextAvatar,roleScale);
 		}
 		
 		public function buttonLeft():void
@@ -63,165 +61,48 @@ package com.rpgGame.appModule.mount
 		
 		public function addMode(current:Q_warflag,next:Q_warflag):void
 		{
-			if(_curtentInterEff!=null)
-			{
-				this.removeChild3D(_curtentInterEff);
-				_curtentInterEff = null;
-			}
+			_curtentInter3D.updateBodyWithRes(ClientConfig.getZhanqi(current.q_panel_show_id));
+			if(next ==null)
+				return ;
+			_nextInter3D.updateBodyWithRes(ClientConfig.getZhanqi(next.q_panel_show_id));
+			_nextInter3D.scaleRole=0;
 			
-			if(_nextInterEff != null)
-			{
-				this.removeChild3D(_nextInterEff);
-				_nextInterEff = null;
-			}
-			
-			var scaleXY:Number=3;
-			
-			_amationInfos=new Vector.<TargetAmationInfo>();
-			var currentName:String=current.q_panel_show_id;
-			_curtentInterEff=new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getZhanqi(currentName));
-			data.forceLoad=true;//ui上的3d特效强制加载
-			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);		
-			_curtentInterEff.x=357;
-			_curtentInterEff.y=400;
-			unit.setScale(scaleXY);
-			unit.setStatus(RoleActionType.STAND);
-			this.addChild3D(_curtentInterEff);
-			
-			var anation:TargetAmationInfo = new TargetAmationInfo();
-			anation.target = _curtentInterEff;
-			anation.propName = "x";
-			anation.setValue(357,137);
-			_amationInfos.push(anation);
-			
-			anation = new TargetAmationInfo();
-			anation.target = _curtentInterEff;
-			anation.propName = "y";
-			anation.setValue(400,440);
-			_amationInfos.push(anation);
-			
-			anation = new TargetAmationInfo();
-			anation.target = unit;
-			anation.propName = "scale";
-			anation.setValue(scaleXY,1);
-			_amationInfos.push(anation);
-			
-			if(next==null) return;
-			var nextName:String=next.q_panel_show_id;
-			_nextInterEff=new InterObject3D();
-			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getZhanqi(nextName));
-			data.forceLoad=true;//ui上的3d特效强制加载
-			unit = _nextInterEff.addRenderUnitWith(data, 0);
-			unit.setStatus(RoleActionType.STAND);
-			_nextInterEff.x=590;
-			_nextInterEff.y=310;
-			unit.setScale(scaleXY);
-			this.addChild3D(_nextInterEff);
-			
-			anation = new TargetAmationInfo();
-			anation.target = _nextInterEff;
-			anation.propName = "x";
-			anation.setValue(590,340);
-			_amationInfos.push(anation);
-			
-			anation = new TargetAmationInfo();
-			anation.target = _nextInterEff;
-			anation.propName = "y";
-			anation.setValue(310,420);
-			_amationInfos.push(anation);
-			
-			anation = new TargetAmationInfo();
-			anation.target = unit;
-			anation.propName = "scale";
-			anation.setValue(1,scaleXY);
-			_amationInfos.push(anation);
-			for each(var info:TargetAmationInfo in _amationInfos)
-			{
-				info.advanceTime(0);
-			}
-			completeHandler();
 		}
 		
-		private var needChangeFun:Function;
-		private var completeFun:Function;
-		private function changeHandler(parcent:Number):Number
-		{
-			return 1 - parcent;
-		}
-		
-		private function completeHandler():void
-		{
-			_nextInterEff.visible = false;
-		}
 		
 		public function playTarget(bool:Boolean):void
 		{
-			if(_isSHowNext==bool)
+			if(_isShowNext==bool)
 				return ;
-			_isSHowNext = bool;
-			if(_nextInterEff==null)
+			_isShowNext = bool;
+			if(_nextInter3D==null)
 				return ;
-			if(bool)
-			{
-				needChangeFun = null;
-				completeFun = null;
+			TweenLite.killTweensOf(_nextInter3D,true);
+			TweenLite.killTweensOf(_curtentInter3D,true);
+			TweenLite.killTweensOf(_skin.currentAvatar,true);
+			TweenLite.killTweensOf(_skin.nextAvatar,true);
+			if(_isShowNext){
+				TweenLite.to(_nextInter3D,1,{scaleRole:roleScale});
+				TweenLite.to(_curtentInter3D,1,{scaleRole:0});
+				TweenLite.to(_skin.currentAvatar,1,{x:currentMisP.x,y:currentMisP.y,onComplete:onTween});
+				TweenLite.to(_skin.nextAvatar,1,{x:showP.x,y:showP.y,onComplete:onTween});
 			}else{
-				needChangeFun = changeHandler;
-				completeFun = completeHandler;
-			}
-			_nextInterEff.visible = true;
-			if(Starling.juggler.contains(this))
-			{
-				_passTime = TotalTime - _passTime;
-			}else{
-				_passTime = 0;
-				Starling.juggler.add(this);
+				TweenLite.to(_curtentInter3D,1,{scaleRole:roleScale});
+				TweenLite.to(_nextInter3D,1,{scaleRole:0});
+				TweenLite.to(_skin.currentAvatar,1,{x:showP.x,y:showP.y,onComplete:onTween});
+				TweenLite.to(_skin.nextAvatar,1,{x:nextMisP.x,y:nextMisP.y,onComplete:onTween});
 			}
 		}
 		
-		public function advanceTime(time:Number):void
+		private function onTween():void
 		{
-			_passTime += time;
-			if(_passTime>= TotalTime)
-			{
-				_passTime =TotalTime;
-				Starling.juggler.remove(this);
-				if(completeFun!=null)
-					completeFun();
+			if(_isShowNext){
+				_curtentInter3D.touchable=false;
+				_nextInter3D.touchable=true;
+			}else{
+				_curtentInter3D.touchable=true;
+				_nextInter3D.touchable=false;
 			}
-			var parcent:Number = _passTime/TotalTime;
-			if(needChangeFun !=null)
-				parcent = needChangeFun(parcent);
-			for each(var info:TargetAmationInfo in _amationInfos)
-			{
-				info.advanceTime(parcent);
-			}
-		}
-	}
-}
-
-import com.game.engine3D.scene.render.RenderUnit3D;
-
-class TargetAmationInfo
-{
-	public var target:*;
-	public var propName:String;
-	public var startValue:Number;
-	public var distance:Number;
-	
-	public function setValue(srat:Number,end:Number):void
-	{
-		startValue = srat;
-		distance = end - srat;
-	}
-	public function advanceTime(parcent:Number):void
-	{
-		if(propName=="scale")
-		{
-			RenderUnit3D(target).setScale(startValue+distance*parcent);
-		}else{
-			target[propName] = startValue+distance*parcent
 		}
 	}
 }

@@ -20,6 +20,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.SpellEvent;
@@ -142,7 +144,10 @@ package com.rpgGame.app.cmdlistener
 			{
 				var cfg:Q_skill_model=SpellDataManager.getSpellData(msg.skillInfo.skillModelId,msg.skillInfo.skillLevel);
 				if(cfg.q_seat!=0)
-					UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
+				{
+					//UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
+					AppManager.showApp(AppConstant.NEW_SKILL_ADD_PANLE,msg.skillInfo);
+				}
 			}
 			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
 		}

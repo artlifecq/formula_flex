@@ -46,6 +46,8 @@ package com.client.view
 			urlloader.dataFormat=URLLoaderDataFormat.TEXT;
 			urlloader.load(new URLRequest("server.xml"));
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
+			var com:ComboBox=new ComboBox();
+			
 		}
 		
 		protected function onErr(event:IOErrorEvent):void

@@ -4,6 +4,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -266,8 +267,10 @@ package com.rpgGame.app.cmdlistener
 				DungeonManager.teamZid=0;
 				DungeonManager.voteZid=0;
 				AppManager.hideApp(AppConstant.MULTY_TEAM_PANL);
-				AppManager.showAppNoHide(AppConstant.MULTY_TEAM_CANCEL_PANL,msg.playerId.ToGID());
-				
+				if(msg.playerId.ToGID()!=MainRoleManager.actorID)
+				{
+					AppManager.showAppNoHide(AppConstant.MULTY_TEAM_CANCEL_PANL,msg.playerId.ToGID());
+				}
 			}
 			else
 			{

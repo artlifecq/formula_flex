@@ -1,10 +1,10 @@
 package com.game.engine2D.vo
 {
-	import flash.utils.ByteArray;
-	import flash.utils.Endian;
-	
 	import away3d.arcane;
 	import away3d.core.base.CompactSubGeometry;
+	import away3d.premium.heap.HeapAllocator;
+	import away3d.premium.heap.MemoryItem;
+	import away3d.premium.heap.MemoryItemTypes;
 	import away3d.primitives.PrimitiveBase;
 	
 	use namespace arcane;
@@ -136,8 +136,8 @@ package com.game.engine2D.vo
 		 */
 		protected override function buildGeometry(target:CompactSubGeometry):void
 		{
-			var data:ByteArray;
-			var indices:ByteArray;
+			var data:MemoryItem;
+			var indices:MemoryItem;
 			var x:Number, y:Number, temp:Number;
 			var numIndices:uint;
 			var base:uint;
@@ -151,18 +151,14 @@ package com.game.engine2D.vo
 			if (_doubleSided)
 				numIndices <<= 1;
 			
+			var dataPos:int,indicesPos:int;
+			
 			if (target.vertexData && (numVertices*stride<<2) == target.vertexData.length) {
 				data = target.vertexData;
 				indices = target.indexData;
-				data.position = 0;
-				indices.position = 0;
 			} else {
-				data = new ByteArray;
-				data.endian = Endian.LITTLE_ENDIAN;
-				data.length = (numVertices*stride)<<2;
-				indices = new ByteArray;
-				indices.endian = Endian.LITTLE_ENDIAN;
-				indices.length = numIndices<<1;
+				data = HeapAllocator.malloc((numVertices*stride)<<2,MemoryItemTypes.GEOMETRY);
+				indices = HeapAllocator.malloc(numIndices<<1,MemoryItemTypes.GEOMETRY);
 				invalidateUVs();
 			}
 			
@@ -172,17 +168,17 @@ package com.game.engine2D.vo
 				for (var xi:uint = 0; xi <= _segmentsW; ++xi) {
 					x = (xi/_segmentsW - 0)*_width;
 					y = (yi/_segmentsH - 1)*_height;
-					data.position = (index)<<2;
-					data.writeFloat(x);
+					dataPos = (index)<<2;
+					data.writeFloat(x,dataPos);dataPos+=4;
 					index++;
 					if (_yUp) {
-						data.writeFloat(0);
-						data.writeFloat(y);
+						data.writeFloat(0,dataPos);dataPos+=4;
+						data.writeFloat(y,dataPos);dataPos+=4;
 						index++;
 						index++;
 					} else {
-						data.writeFloat(y);
-						data.writeFloat(0);
+						data.writeFloat(y,dataPos);dataPos+=4;
+						data.writeFloat(0,dataPos);dataPos+=4;
 						index++;
 						index++;
 					}
@@ -191,32 +187,32 @@ package com.game.engine2D.vo
 					{
 						if(!_flatNormal)
 						{
-							data.writeFloat(0);
+							data.writeFloat(0,dataPos);dataPos+=4;
 							index++;
 							if (_yUp) {
-								data.writeFloat(1);
-								data.writeFloat(0);
+								data.writeFloat(1,dataPos);dataPos+=4;
+								data.writeFloat(0,dataPos);dataPos+=4;
 								index++;
 								index++;
 							} else {
-								data.writeFloat(0);
-								data.writeFloat(-1);
+								data.writeFloat(0,dataPos);dataPos+=4;
+								data.writeFloat(-1,dataPos);dataPos+=4;
 								index++;
 								index++;
 							}
 						}
 						else
 						{
-							data.writeFloat((x==0)?-1:1);
+							data.writeFloat((x==0)?-1:1,dataPos);dataPos+=4;
 							index++;
 							if (_yUp) {
-								data.writeFloat(0);
-								data.writeFloat((y==0)?-1:1);
+								data.writeFloat(0,dataPos);dataPos+=4;
+								data.writeFloat((y==0)?-1:1,dataPos);dataPos+=4;
 								index++;
 								index++;
 							} else {
-								data.writeFloat((y==0)?-1:1);
-								data.writeFloat(0);
+								data.writeFloat((y==0)?-1:1,dataPos);dataPos+=4;
+								data.writeFloat(0,dataPos);dataPos+=4;
 								index++;
 								index++;
 							}
@@ -225,10 +221,10 @@ package com.game.engine2D.vo
 					
 					if(target.hasTangents)
 					{
-						data.writeFloat(1);
-						data.writeFloat(0);
-						data.writeFloat(0);
-						data.writeFloat(1);
+						data.writeFloat(1,dataPos);dataPos+=4;
+						data.writeFloat(0,dataPos);dataPos+=4;
+						data.writeFloat(0,dataPos);dataPos+=4;
+						data.writeFloat(1,dataPos);
 						index++;
 						index++;
 						index++;
@@ -240,10 +236,10 @@ package com.game.engine2D.vo
 					// add vertex with same position, but with inverted normal & tangent
 					if (_doubleSided) {
 						for (var i:int = 0; i < 3; ++i) {
-							data.position = (index - stride)<<2;
-							temp = data.readFloat();
-							data.position = index<<2;
-							data.writeFloat(temp);
+							dataPos = (index - stride)<<2;
+							temp = data.readFloat(dataPos);
+							dataPos = index<<2;
+							data.writeFloat(temp,dataPos);
 							++index;
 						}
 						if(target.hasNormals)
@@ -251,20 +247,20 @@ package com.game.engine2D.vo
 							if(!_flatNormal)
 							{
 								for (i = 0; i < 3; ++i) {
-									data.position = (index - stride)<<2;
-									temp = data.readFloat();
-									data.position = index<<2;
-									data.writeFloat(-temp);
+									dataPos = (index - stride)<<2;
+									temp = data.readFloat(dataPos);
+									dataPos = index<<2;
+									data.writeFloat(-temp,dataPos);
 									++index;
 								}
 							}
 							else
 							{
 								for (i = 0; i < 3; ++i) {
-									data.position = (index - stride)<<2;
-									temp = data.readFloat();
-									data.position = index<<2;
-									data.writeFloat(temp);
+									dataPos = (index - stride)<<2;
+									temp = data.readFloat(dataPos);
+									dataPos = index<<2;
+									data.writeFloat(temp,dataPos);
 									++index;
 								}
 							}
@@ -272,10 +268,10 @@ package com.game.engine2D.vo
 						if(target.hasTangents)
 						{
 							for (i = 0; i < 4; ++i) {
-								data.position = (index - stride)<<2;
-								temp = data.readFloat();
-								data.position = index<<2;
-								data.writeFloat(-temp);
+								dataPos = (index - stride)<<2;
+								temp = data.readFloat(dataPos);
+								dataPos = index<<2;
+								data.writeFloat(-temp,dataPos);
 								++index;
 							}
 						}
@@ -286,20 +282,20 @@ package com.game.engine2D.vo
 						base = xi + yi*tw;
 						var mult:int = _doubleSided? 2 : 1;
 						
-						indices.writeShort(base*mult);
-						indices.writeShort((base + tw)*mult);
-						indices.writeShort((base + tw + 1)*mult);
-						indices.writeShort(base*mult);
-						indices.writeShort((base + tw + 1)*mult);
-						indices.writeShort((base + 1)*mult);
+						indices.writeInt16(base*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + tw)*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + tw + 1)*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16(base*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + tw + 1)*mult,indicesPos);indicesPos+=2;
+						indices.writeInt16((base + 1)*mult,indicesPos);indicesPos+=2;
 						
 						if (_doubleSided) {
-							indices.writeShort((base + tw + 1)*mult + 1);
-							indices.writeShort((base + tw)*mult + 1);
-							indices.writeShort(base*mult + 1);
-							indices.writeShort((base + 1)*mult + 1);
-							indices.writeShort((base + tw + 1)*mult + 1);
-							indices.writeShort(base*mult + 1);
+							indices.writeInt16((base + tw + 1)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16((base + tw)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16(base*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16((base + 1)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16((base + tw + 1)*mult + 1,indicesPos);indicesPos+=2;
+							indices.writeInt16(base*mult + 1,indicesPos);indicesPos+=2;
 						}
 					}
 				}
@@ -314,7 +310,8 @@ package com.game.engine2D.vo
 		 */
 		override protected function buildUVs(target:CompactSubGeometry):void
 		{
-			var data:ByteArray;
+			var data:MemoryItem;
+			var dataPos:int;
 			var stride:uint = target.UVStride;
 			var numUvs:uint = (_segmentsH + 1)*(_segmentsW + 1)*stride;
 			var skip:uint = stride - 2;
@@ -325,9 +322,7 @@ package com.game.engine2D.vo
 			if (target.UVData && (numUvs<<2) == target.UVData.length)
 				data = target.UVData;
 			else {
-				data = new ByteArray;
-				data.endian = Endian.LITTLE_ENDIAN;
-				data.length = numUvs<<2;
+				data = HeapAllocator.malloc(numUvs<<2,MemoryItemTypes.GEOMETRY);
 				invalidateGeometry();
 			}
 			
@@ -335,17 +330,17 @@ package com.game.engine2D.vo
 			
 			for (var yi:uint = 0; yi <= _segmentsH; ++yi) {
 				for (var xi:uint = 0; xi <= _segmentsW; ++xi) {
-					data.position = index<<2;
-					data.writeFloat( (xi/_segmentsW) );
-					data.writeFloat( (1 - yi/_segmentsH) );
+					dataPos = index<<2;
+					data.writeFloat( xi/_segmentsW ,dataPos);dataPos+=4;
+					data.writeFloat( 1 - yi/_segmentsH ,dataPos);
 					index++;
 					index++;
 					index += skip;
 					
 					if (_doubleSided) {
-						data.position = index<<2;
-						data.writeFloat( (xi/_segmentsW) );
-						data.writeFloat( (1 - yi/_segmentsH) );
+						dataPos = index<<2;
+						data.writeFloat( xi/_segmentsW,dataPos);dataPos+=4;
+						data.writeFloat( 1 - yi/_segmentsH,dataPos);
 						index++;
 						index++;
 						index += skip;
@@ -367,6 +362,10 @@ package com.game.engine2D.vo
 			invalidateGeometry();
 		}
 		
+		override public function dispose():void
+		{
+			
+		}
 	}
 }
 

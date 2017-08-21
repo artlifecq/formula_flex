@@ -7,19 +7,26 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
+	
+	import flash.geom.Point;
 	
 	public class TaskControl
 	{
@@ -95,9 +102,22 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				taskData=TaskMissionCfgData.getTaskByID(taskInfo.taskModelId);
 			}
-			if(taskData&&taskData.q_emid!="")
-			{Lyt.a("emid:"+taskData.q_emid);
-				FunctionOpenManager.openAppPaneById(taskData.q_emid);
+			if(taskData)
+			{
+				if(taskData.q_emid!="")
+				{
+					FunctionOpenManager.openAppPaneById(taskData.q_emid);
+				}
+				else if(taskData.q_mission_type==TaskType.SUB_HUBAO)//护宝
+				{
+					var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(taskData.q_finish_npc);
+					if (monsterData)
+					{
+						///TaskMissionManager.flyTaskType=taskData.q_mission_mainType;
+						///TaskMissionManager.flyMissionType=taskData.q_mission_type;
+						SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,25,false,null,1)
+					}
+				}
 			}
 			
 		}
@@ -287,12 +307,13 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(TaskMissionManager.flyTaskType>0)
 			{
-				if(TaskMissionManager.flyTaskType!=TaskType.MAINTYPE_DAILYTASK)
+				TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
+				TaskMissionManager.flyTaskType=0;
+				TaskMissionManager.flyMissionType=0;
+				/*if(TaskMissionManager.flyTaskType!=TaskType.MAINTYPE_DAILYTASK)
 				{
-					TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
-					TaskMissionManager.flyTaskType=0;
-					TaskMissionManager.flyMissionType=0;
-				}
+					
+				}*/
 				
 				/*if(TaskMissionManager.flyTaskType==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.flyMissionType==TaskType.SUB_HUBAO)
 				{

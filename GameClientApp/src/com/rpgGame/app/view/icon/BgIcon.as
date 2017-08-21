@@ -72,7 +72,7 @@ package com.rpgGame.app.view.icon
 		/**是否显示锁定图片**/
 		protected var isShowLockAsset : Boolean = false;
 		/**是否需要显示选中框**/
-		protected var isShow : Boolean = true;
+		protected var isShow : Boolean = false;
 		protected var _qualityEft:UIMovieClip;
 		
 		protected var _luckEff:UIMovieClip;
@@ -548,7 +548,7 @@ package com.rpgGame.app.view.icon
 					initCountText();
 				_countText.htmlText = value;
 				_countText.width=_countText.textWidth;
-				_countText.x = this.width - _countText.textWidth;
+				_countText.x = this.width - _countText.textWidth-1;
 				_countText.y =  this.height - _countText.height;			
 				//			_countText.x = iconSize - _countText.maxWidth;
 				//			_countText.y = iconSize - _countText.maxHeight;				
@@ -648,6 +648,16 @@ package com.rpgGame.app.view.icon
 				addChild( _iconImage );
 			
 			
+			if( _selectImage != null )
+				addChild( _selectImage );
+			
+			if(_wearImage){
+				addChild( _wearImage );
+			}
+			if(_qualityEft){
+				addChild( _qualityEft );
+			}
+			
 			if( _countText != null )
 				addChild( _countText );
 			
@@ -659,15 +669,6 @@ package com.rpgGame.app.view.icon
 			}
 			if(_lvImage){
 				addChild( _lvImage );
-			}
-			if( _selectImage != null )
-				addChild( _selectImage );
-			
-			if(_wearImage){
-				addChild( _wearImage );
-			}
-			if(_qualityEft){
-				addChild( _qualityEft );
 			}
 			
 			if( _strOrZMText != null )

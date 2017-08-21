@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.dungeon.genuine
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -27,22 +28,25 @@ package com.rpgGame.appModule.dungeon.genuine
 	public class GenuineDungeon extends ViewUI
 	{
 		private var _skin:FuBen_ZhenQi_Skin;
-		private var gridList:Vector.<IconCDFace>;
+		//private var gridList:Vector.<IconCDFace>;
+		private var icoListGroup:RewardGroup;
 		public function GenuineDungeon():void
 		{
 			_skin = new FuBen_ZhenQi_Skin();
 			super(_skin);
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon1,RewardGroup.ALIN_RIGHT,15,6,6,true,15);
 			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
-			while(gridList.length>0){
-				var icon:IconCDFace=gridList.pop();
-				icon.destroy();
-			}
-			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
+//			while(gridList.length>0){
+//				var icon:IconCDFace=gridList.pop();
+//				icon.destroy();
+//			}
+			icoListGroup.clear();
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
 		override public function show(data:Object=null):void
@@ -57,32 +61,35 @@ package com.rpgGame.appModule.dungeon.genuine
 			var list:Array = DailyZoneCfgData.getTypeList(1);
 		
 			_skin.list.dataProvider = new ListCollection(list);
+			var reWardStr:String=GlobalSheetData.getSettingInfo(716)!=null?GlobalSheetData.getSettingInfo(716).q_string_value:"";
+			icoListGroup.setRewardByJsonStr(reWardStr);
+			_skin.jiangli_text.x=icoListGroup.x-icoListGroup.width-40;
 			
-			var qglob:Q_global = GlobalSheetData.getSettingInfo(716);
-			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
-			var length:int = itemInfos.length;
-			var startX:Number = 742;
-			var item:ItemInfo;
-			var icon:IconCDFace;
-			gridList=new Vector.<IconCDFace>();
-			for(var i:int = 0;i<length;i++)
-			{
-				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
-				grid.setBg( GridBGType.GRID_SIZE_42,1 );
-//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
-				_skin.container.addChild(grid);
-				grid.x = startX+60*i;
-				grid.y = 532;
-				item = new ItemInfo();
-				item.itemModelId = itemInfos[i]["mod"];
-				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
-				gridList.push(grid);
-			}
+//			var qglob:Q_global = GlobalSheetData.getSettingInfo(716);
+//			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
+//			var length:int = itemInfos.length;
+//			var startX:Number = 742;
+//			var item:ItemInfo;
+//			var icon:IconCDFace;
+//			gridList=new Vector.<IconCDFace>();
+//			for(var i:int = 0;i<length;i++)
+//			{
+//				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
+//				grid.setBg( GridBGType.GRID_SIZE_42,1 );
+////				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
+//				_skin.container.addChild(grid);
+//				grid.x = startX+60*i;
+//				grid.y = 532;
+//				item = new ItemInfo();
+//				item.itemModelId = itemInfos[i]["mod"];
+//				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
+//				gridList.push(grid);
+//			}
 			if (!_skin.list.hasEventListener(FeathersEventType.CREATION_COMPLETE)) 
 			{
 				onCreate();
 			}
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
 		private function onCreate():void

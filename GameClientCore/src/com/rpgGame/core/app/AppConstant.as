@@ -1,7 +1,6 @@
 
 package com.rpgGame.core.app
 {
-	import com.rpgGame.appModule.role;
 	import com.rpgGame.core.app.enum.PanelPosType;
 	
 	import flash.utils.Dictionary;
@@ -551,8 +550,10 @@ package com.rpgGame.core.app
 		
 		/**副本结算通用**/
 		public static var COMMON_ZONE_RESULT_PANLE:String = createAppInfo("zone.CommonZoneResultPanelExt");
-		
+	
 		/**开格提示*/
 		public static var GRID_OPEN_TISHI:String = createAppInfo("role.GridOpenTiShiPanel");
+		/**副本结算通用**/
+		public static var NEW_SKILL_ADD_PANLE:String = createAppInfo("skill.NewSkillAddPanelExt","xinjineng");
 	}
 }

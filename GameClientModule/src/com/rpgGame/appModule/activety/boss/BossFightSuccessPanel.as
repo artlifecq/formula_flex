@@ -1,7 +1,10 @@
 package com.rpgGame.appModule.activety.boss
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -23,12 +26,25 @@ package com.rpgGame.appModule.activety.boss
 	{
 		private var _skin:TiaoZhanShengLi;
 		private var rewardGrp:RewardGroup;
+		private var timer:GameTimer;
 		
 		public function BossFightSuccessPanel()
 		{
 			_skin=new TiaoZhanShengLi();
 			super(_skin);
 			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon1);
+			timer=new GameTimer("BossFightSuccessPanel",1000,10,onUpdate,onComplete);
+			timer.stop();
+		}
+		
+		private function onUpdate():void
+		{
+			_skin.btnOk.label="领取奖励("+(10-timer.currentCount)+")";
+		}
+		
+		private function onComplete():void
+		{
+			AppManager.hideApp(AppConstant.ACTIVETY_BOSS_RESULT);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -48,12 +64,15 @@ package com.rpgGame.appModule.activety.boss
 				list.push(itemInfo);
 			}
 			rewardGrp.setReward(list);
+			timer.reset();
+			timer.start();
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			rewardGrp.clear();
+			timer.stop();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

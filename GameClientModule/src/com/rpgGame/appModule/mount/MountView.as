@@ -59,18 +59,12 @@ package com.rpgGame.appModule.mount
 			_mountShowData = new MountShowData();
 			initView();
 		}
-		override protected function onTouch(e:TouchEvent):void
-		{
-			super.onTouch(e);
-			_mountContent.onTouch(e);
-		}
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
 			_mountShowData.heroJob = MainRoleManager.actorInfo.job;
 			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
-			_mountContent.refeashMode(_mountShowData.mountLevel);
-			_mountContent.show();
+			_mountContent.refreshMode(_mountShowData.mountLevel);
 			refeashPropHandler();
 			_mountupContent.updataInfo(_mountShowData);
 			_mountupContent.updateExp();
@@ -267,7 +261,7 @@ package com.rpgGame.appModule.mount
 		{
 			_mountupContent.updataInfo(_mountShowData);
 			_propContent.refeashPropValue();
-			_mountContent.refeashMode(_mountShowData.mountLevel);
+			_mountContent.refreshMode(_mountShowData.mountLevel);
 			var bool:Boolean = false;
 			for each(var eb:ExtraButton in _extraItemList)
 			{
@@ -311,7 +305,6 @@ package com.rpgGame.appModule.mount
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
-			_mountContent.hide();
 		}
 		private function refeashPropHandler():void
 		{
@@ -338,7 +331,7 @@ package com.rpgGame.appModule.mount
 			if (touch != null && isMouseOut)
 			{
 				isMouseOut = false;
-				_mountContent.refeashMode(_mountShowData.mountLevel);
+				_mountContent.refreshMode(_mountShowData.mountLevel);
 				onMouseOver();
 				return;
 			}

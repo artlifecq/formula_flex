@@ -138,6 +138,8 @@ package com.rpgGame.app.manager.guild
 					if(MainRoleManager.isSelf(menberinfo.id.ToGID()))
 					{
 						_selfMemberInfo = menberinfo;
+						MainRoleManager.actorInfo.guildIsLeader=menberinfo.isLeader;
+						MainRoleManager.actorInfo.guildMemberType=menberinfo.memberType;
 					}
 					if(menberinfo.memberType == EnumGuildPost.GUILDPOST_CHIEF)
 						_chiefGuildMemberInfo = menberinfo;
@@ -928,7 +930,7 @@ package com.rpgGame.app.manager.guild
 		 * @return 
 		 * 
 		 */
-		public function sortGuildMemberInfo(key:String,isShow:Boolean):int
+		public function sortGuildMemberInfo(key:String,isShow:Boolean):Vector.<GuildMemberInfo>
 		{
 			_oriderList.length = 0;
 			var list:Vector.<GuildMemberInfo>
@@ -960,7 +962,7 @@ package com.rpgGame.app.manager.guild
 					continue;
 				_oriderList.push(list[i]);
 			}
-			return Math.ceil(_oriderList.length/MaxPlayerListPageCount);
+			return _oriderList;
 		}
 		
 		public function getSortGuildMenberInfoByIndex(index:int):GuildMemberInfo
