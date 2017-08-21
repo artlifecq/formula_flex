@@ -5,8 +5,10 @@ package com.rpgGame.app.ui.roll
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -23,6 +25,7 @@ package com.rpgGame.app.ui.roll
 	import gs.TweenLite;
 	import gs.easing.Linear;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.roll.Roll_Skin;
 	
@@ -42,7 +45,7 @@ package com.rpgGame.app.ui.roll
 		public function RollPane(data:RollItemInfo):void
 		{
 			_roleItem = data;
-//			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
+			//			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
 			_roleskin = new Roll_Skin();
 			super(_roleskin);
 			init();	
@@ -143,14 +146,14 @@ package com.rpgGame.app.ui.roll
 		private function runProgressTime():void
 		{
 			var now:Number = SystemTimeManager.curtTm;
-//			var parcent:Number = (_endRunTime -now)/DurationTime;
-//			if(parcent<0)
-//				parcent = 0;
-//			else if(parcent >1)
-//				parcent = 1;
+			//			var parcent:Number = (_endRunTime -now)/DurationTime;
+			//			if(parcent<0)
+			//				parcent = 0;
+			//			else if(parcent >1)
+			//				parcent = 1;
 			_roleskin.Pro_bar.maximum=DurationTime;
 			_roleskin.Pro_bar.value=(_endRunTime -now);
-//			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
+			//			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
 			
 			if(now>=_endRunTime)
 			{
@@ -172,8 +175,22 @@ package com.rpgGame.app.ui.roll
 			closeHander();
 		}
 		
+		override protected function onShow():void
+		{
+			super.onShow();
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+		}
+		
+		private function onSwitchCmp():void
+		{
+			// TODO Auto Generated method stub
+			closeHander();
+		}
+		
 		override protected function onHide():void
 		{
+			super.onHide();
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			_roleItem=null;
 			_endRunTime=0;
 		}

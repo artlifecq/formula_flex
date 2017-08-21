@@ -55,8 +55,8 @@ package org.mokylin.skin.app.xingongneng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.horizontalCenter = 4.5;
-			temp.styleName = "ui/app/xingongneng/junjie.png";
+			temp.styleName = "ui/app/xingongneng/icon/jingyanfuben/name.png";
+			temp.x = 65;
 			temp.y = 151;
 			return temp;
 		}

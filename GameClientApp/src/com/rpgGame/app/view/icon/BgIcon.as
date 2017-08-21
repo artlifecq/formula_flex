@@ -3,6 +3,7 @@ package com.rpgGame.app.view.icon
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.EftMcManager;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -73,7 +74,9 @@ package com.rpgGame.app.view.icon
 		/**是否需要显示选中框**/
 		protected var isShow : Boolean = true;
 		protected var _qualityEft:UIMovieClip;
-
+		
+		protected var _luckEff:UIMovieClip;
+		
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
 			super( $iconSize );
@@ -148,6 +151,39 @@ package com.rpgGame.app.view.icon
 			}
 		}
 		
+		/**显示锁特效*/
+		public function showLuckEff(type:int):void
+		{
+			if(_luckEff==null){
+				_luckEff=new UIMovieClip();
+				_luckEff.frameRate=8;
+			}else{
+				_luckEff.removeChildren();
+			}
+			_luckEff.touchable=false;
+			if(type==1)
+				EftMcManager.setMcStyle(_luckEff,Quality.getQualityStyleName(5));
+			else if(type==2)
+				EftMcManager.setMcStyle(_luckEff,Quality.getQualityStyleName(4));
+			_luckEff.width=this.width;
+			_luckEff.height=this.width;
+			this.addChild(_luckEff);
+		}
+		
+		public function heidEff():void
+		{
+			if(_luckEff){
+				_luckEff.removeFromParent();
+				_luckEff.stop();
+				_luckEff.dispose();
+				_luckEff=null;
+			}
+			if(TipTargetManager.hasTipsEventListener(this))
+			{
+				TipTargetManager.remove( this);
+			}
+		}
+		
 		
 		/**销毁显示对象 */
 		override public function destroy() : void
@@ -212,6 +248,12 @@ package com.rpgGame.app.view.icon
 			if(_qualityEft){
 				_qualityEft.width=this.width;
 				_qualityEft.height=this.width;
+			}
+			
+			if(_luckEff)
+			{
+				_luckEff.width=this.width;
+				_luckEff.height=this.width;
 			}
 			
 			sortLayer();
@@ -374,6 +416,12 @@ package com.rpgGame.app.view.icon
 				_qualityEft.width=this.width;
 				_qualityEft.height=this.width;
 			}
+			
+			if(_luckEff)
+			{
+				_luckEff.width=this.width;
+				_luckEff.height=this.width;
+			}
 			calIconPos();
 		}
 		
@@ -479,13 +527,13 @@ package com.rpgGame.app.view.icon
 			}
 			
 			setSubString(NumberUtil.getNumberTo(value,true));
-/*			if( value > 10000 )
+			/*			if( value > 10000 )
 			{
-				setSubString(int( value / 10000 ) + "万");
+			setSubString(int( value / 10000 ) + "万");
 			}
 			else
 			{
-				setSubString( value + "");
+			setSubString( value + "");
 			}*/
 		}
 		/**
@@ -632,6 +680,10 @@ package com.rpgGame.app.view.icon
 				addChild( _selectImg );
 			}
 			
+			if(_luckEff)
+			{
+				addChild( _luckEff );
+			}
 		}
 		
 		/**
@@ -677,6 +729,13 @@ package com.rpgGame.app.view.icon
 				_qualityEft.stop();
 				_qualityEft.dispose();
 				_qualityEft=null;
+			}
+			
+			if(_luckEff){
+				_luckEff.removeFromParent();
+				_luckEff.stop();
+				_luckEff.dispose();
+				_luckEff=null;
 			}
 			super.clear();
 		}

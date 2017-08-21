@@ -20,7 +20,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
@@ -82,7 +81,7 @@ package com.rpgGame.appModule.pet
 			_qPet=PetCfg.getPet(_data.modelId);
 			this._avatarData.avatarInfo.setBodyResID(_qPet.q_panel_show_id, null);
 			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(1.7);	
+			this._avatar.curRole.setScale(2.3);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
 		}
 		

@@ -72,10 +72,10 @@ package org.mokylin.skin.app.meiren
 		private function __MeiRen_JinJie_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "每次消耗：";
+			temp.text = "消耗：";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
+			temp.x = 14;
 			temp.y = 478;
 			return temp;
 		}
@@ -231,11 +231,12 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbCailiao = temp;
 			temp.name = "lbCailiao";
-			temp.text = "仙露*1(10)";
+			temp.height = 18;
+			temp.text = "美人进阶符*10(100)";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 119;
-			temp.x = 85;
+			temp.width = 140;
+			temp.x = 50;
 			temp.y = 478;
 			return temp;
 		}
@@ -249,7 +250,7 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 111;
-			temp.x = 207;
+			temp.x = 209;
 			temp.y = 478;
 			return temp;
 		}

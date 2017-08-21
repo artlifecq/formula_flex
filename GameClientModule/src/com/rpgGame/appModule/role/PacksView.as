@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.role
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.rpgGame.app.manager.MenuManager;
@@ -74,7 +76,7 @@ package com.rpgGame.appModule.role
 	import starling.display.DisplayObject;
 	
 	import utils.KeyboardMananger;
-
+	
 	/**
 	 *背包部分 
 	 * @author dik
@@ -108,13 +110,17 @@ package com.rpgGame.appModule.role
 		private var ybData:AmountTipData;
 		private var ljData:AmountTipData;
 		
+		private var _tishiEff:InterObject3D;
+		private var _tishiEffContaner:Inter3DContainer;
+		
 		public function PacksView(skin:juese_Skin)
 		{
 			_skin=skin;
 			
-			
+			_tishiEffContaner=new Inter3DContainer();
 			initPacks();
 			initDatas();
+			
 		}
 		
 		private function initDatas():void
@@ -159,6 +165,7 @@ package com.rpgGame.appModule.role
 		
 		private function initPacks():void
 		{
+			_skin.skinKuang.visible=false;
 			storagePanel=new StoragePanel();
 			itemSplitPanel=new ItemSplitPanel();
 			itemBatchPanel=new ItemBatchPanel();
@@ -174,9 +181,9 @@ package com.rpgGame.appModule.role
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			
-			_skin.lst_pack.padding=1;
-			(_skin.lst_pack.layout as TiledRowsLayout).horizontalGap=1;
-			(_skin.lst_pack.layout as TiledRowsLayout).verticalGap=2;
+			_skin.lst_pack.padding=0.5;
+			(_skin.lst_pack.layout as TiledRowsLayout).horizontalGap=0.5;
+			(_skin.lst_pack.layout as TiledRowsLayout).verticalGap=0.5;
 			Mgr.shopMgr.sellItemCall=ItemSellAlertExtPanelExt.showAlert;
 			_skin.lst_pack.filter=FilterUtil.getHightLightFilter();
 		}
@@ -186,7 +193,7 @@ package com.rpgGame.appModule.role
 		{
 			_skin.packs.visible=true;
 			initEvent();
-			setGridsCount(BackPackManager.instance.hasOpenCount,true);
+			setGridsCount(BackPackManager.instance.Max_Grid_Count,true);
 			updateAmount();
 			BackPackManager.instance.isShowRole=true;
 		}
@@ -238,7 +245,7 @@ package com.rpgGame.appModule.role
 				BackPackManager.instance.setCheckType(curType);
 				BackPackManager.instance.setUnusableGrid(false);
 				goodsContainer.refleshGrids();
-//				refreshPackGrid();
+				//				refreshPackGrid();
 			}
 		}
 		
@@ -396,6 +403,11 @@ package com.rpgGame.appModule.role
 			}
 			
 			var realIndex:int =  goodsContainer.getRealIndex(grid.index);
+			if(grid.gridInfo.isUnlock&&(realIndex+1)>BackPackManager.instance.hasOpenCount)
+			{
+				BackPackManager.instance.unLockGrid(realIndex);
+				return;
+			}
 			if(GoodsContainerPanel.isFaceMoving)//移动状态
 			{
 				goodsContainer.onFaceMoveSuccess(grid.gridInfo );
@@ -478,12 +490,16 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
+			EventManager.addEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
+			EventManager.addEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
 			
 			EventManager.addEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
 			EventManager.addEvent(ItemEvent.ITEM_BATCH, preBatch);
 			EventManager.addEvent(ItemEvent.ITEM_DISCARDED, preDiscard);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
+			
+			
 			
 			goodsContainer.addEvents();
 			
@@ -514,11 +530,11 @@ package com.rpgGame.appModule.role
 		private function preDiscard(info:ClientItemInfo):void
 		{
 			if(info.qItem.q_drop_confirm==1){//需要二次确认
-//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
-//				GameAlert.showAlert(alertSet,okDiscard,info);
+				//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+				//				GameAlert.showAlert(alertSet,okDiscard,info);
 				
-//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
-//				GameAlert.showAlert(alertSet,okDiscard,info);
+				//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+				//				GameAlert.showAlert(alertSet,okDiscard,info);
 				GameAlertExt.show("这件物品看起来还不错哦！你确定要丢弃吗？",okDiscard,[info]);
 			}else{
 				if(info.qItem.q_drop==0){//不可丢弃
@@ -532,7 +548,7 @@ package com.rpgGame.appModule.role
 		private function okDiscard(info:ClientItemInfo):void
 		{
 			//if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
-				ItemSender.discardItem(info);
+			ItemSender.discardItem(info);
 			//}
 		}
 		
@@ -568,6 +584,14 @@ package com.rpgGame.appModule.role
 			toStorage=isSave;
 		}
 		
+		private function setLuckGridState(containerID:int):void
+		{
+			if(containerID==ItemContainerID.BackPack)
+			{
+				goodsContainer.refleshGrids();
+			}
+		}
+		
 		private function onTab(e:Event):void
 		{
 			onFreshItems();
@@ -599,7 +623,7 @@ package com.rpgGame.appModule.role
 			}			
 			
 			_skin.lst_pack.scrollToPosition(0,oldV,0);
-//			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));//滚动到最新操作物品处
+			//			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));//滚动到最新操作物品处
 			//切换页
 			if (!info&&Mouse.cursor == MouseCursorEnum.SELL) 
 			{
@@ -627,7 +651,8 @@ package com.rpgGame.appModule.role
 			if (bool) 
 			{
 				MouseCursorController.showSell();
-				BreatheTweenUtil.add(_skin.imgBg,StaticValue.OEANGE_TEXT,30);
+				//				BreatheTweenUtil.add(_skin.imgBg,StaticValue.OEANGE_TEXT,30);
+				_skin.skinKuang.visible=true;
 				if (!EventManager.hasEvent(SceneEvent.INTERACTIVE,onSceneTouch)) 
 				{
 					EventManager.addEvent(SceneEvent.INTERACTIVE,onSceneTouch);
@@ -637,7 +662,8 @@ package com.rpgGame.appModule.role
 			else
 			{
 				MouseCursorController.exitSellMode();
-				BreatheTweenUtil.remove(_skin.imgBg);
+				//				BreatheTweenUtil.remove(_skin.imgBg);
+				_skin.skinKuang.visible=false;
 				EventManager.removeEvent(SceneEvent.INTERACTIVE,onSceneTouch);
 			}
 		}
@@ -673,8 +699,8 @@ package com.rpgGame.appModule.role
 						return true;
 					}
 					storagePanel.show(null,"",this._skin.container);
-					storagePanel.x=225;
-					storagePanel.y=75;
+					storagePanel.x=213;
+					storagePanel.y=87;
 					return true;
 				case _skin.btn_shangdian:
 					if (shopPanel.parent) 
@@ -682,8 +708,8 @@ package com.rpgGame.appModule.role
 						shopPanel.hide();
 						return true;
 					}
-					shopPanel.x=225;
-					shopPanel.y=75;
+					shopPanel.x=213;
+					shopPanel.y=87;
 					//this._skin.container.addChild(shopPanel);
 					shopPanel.show(null,"",this._skin.container);
 					return true;
@@ -715,6 +741,8 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
+			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);
 			EventManager.removeEvent(ItemEvent.ITEM_BATCH, preBatch);
 			EventManager.removeEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
@@ -757,6 +785,11 @@ package com.rpgGame.appModule.role
 				_shopPanel=new BackpackShopExt();
 			}
 			return _shopPanel;
+		}
+		
+		public function showEff():void
+		{
+			
 		}
 		
 	}

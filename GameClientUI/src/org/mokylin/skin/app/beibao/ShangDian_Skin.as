@@ -37,9 +37,7 @@ package org.mokylin.skin.app.beibao
 
 		public var gCheck:feathers.controls.Group;
 
-		public var lbMsg:feathers.controls.Label;
-
-		public var lb_Title:feathers.controls.Label;
+		public var lb_Title:feathers.controls.UIAsset;
 
 		public var lst_pack0:feathers.controls.List;
 
@@ -59,7 +57,7 @@ package org.mokylin.skin.app.beibao
 			
 			this.currentState = "normal";
 			this.height = 447;
-			this.width = 364;
+			this.width = 383;
 			this.elementsContent = [__ShangDian_Skin_Group1_i(),lst_pack0_i(),lst_pack1_i(),bg_i(),lb_Title_i(),btnClose_i(),tab_pack_i(),__ShangDian_Skin_Label1_i(),gCheck_i(),uiNo_i()];
 			
 			states = {
@@ -74,7 +72,7 @@ package org.mokylin.skin.app.beibao
 		private function __ShangDian_Skin_ArrayCollection1_i():feathers.data.ListCollection
 		{
 			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['常用道具','回购'];
+			temp.data = ['常用道具','回 购'];
 			return temp;
 		}
 
@@ -83,7 +81,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__ShangDian_Skin_UIAsset1_i(),__ShangDian_Skin_UIAsset2_i(),__ShangDian_Skin_UIAsset3_i(),lbMsg_i()];
+			temp.elementsContent = [__ShangDian_Skin_UIAsset1_i(),__ShangDian_Skin_UIAsset2_i(),__ShangDian_Skin_UIAsset3_i()];
 			return temp;
 		}
 
@@ -100,7 +98,7 @@ package org.mokylin.skin.app.beibao
 			temp.text = "单击购买商品";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 251;
+			temp.x = 289;
 			temp.y = 35;
 			return temp;
 		}
@@ -121,8 +119,8 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 447;
-			temp.styleName = "ui/app/beibao/cangku/bg.png";
-			temp.width = 364;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 383;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -131,10 +129,10 @@ package org.mokylin.skin.app.beibao
 		private function __ShangDian_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 386;
+			temp.height = 391;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 354;
-			temp.x = 5;
+			temp.width = 383;
+			temp.x = 0;
 			temp.y = 56;
 			return temp;
 		}
@@ -143,8 +141,8 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/fenyexian.png";
-			temp.width = 348;
-			temp.x = 8;
+			temp.width = 383;
+			temp.x = 0;
 			temp.y = 382;
 			return temp;
 		}
@@ -163,10 +161,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/common/titilebg/head_bg.png";
-			temp.width = 354;
-			temp.x = 5;
-			temp.y = 4;
+			temp.styleName = "ui/app/beibao/cangku/ckmtiao.png";
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -176,7 +173,7 @@ package org.mokylin.skin.app.beibao
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
-			temp.x = 340;
+			temp.x = 362;
 			temp.y = 9;
 			return temp;
 		}
@@ -197,40 +194,21 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gCheck = temp;
 			temp.name = "gCheck";
-			temp.x = 18;
-			temp.y = 404;
+			temp.x = 7;
+			temp.y = 409;
 			temp.elementsContent = [chkSelect_i(),__ShangDian_Skin_UIAsset4_i()];
 			return temp;
 		}
 
-		private function lbMsg_i():feathers.controls.Label
+		private function lb_Title_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbMsg = temp;
-			temp.name = "lbMsg";
-			temp.text = "最多保留10条，道具出售后下线则不保留信息";
-			temp.textAlign = "center";
-			temp.color = 0xFF0D0D;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 350;
-			temp.x = 7;
-			temp.y = 404;
-			return temp;
-		}
-
-		private function lb_Title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			lb_Title = temp;
 			temp.name = "lb_Title";
-			temp.bold = true;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.letterSpacing = 0;
-			temp.text = "随身商店";
-			temp.color = 0xa6a07b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 33;
+			temp.styleName = "ui/app/beibao/shangdian/suishenshangidan.png";
+			temp.x = 30;
 			temp.y = 7;
 			return temp;
 		}
@@ -242,8 +220,8 @@ package org.mokylin.skin.app.beibao
 			temp.name = "lst_pack0";
 			temp.height = 326;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 346;
-			temp.x = 8;
+			temp.width = 377;
+			temp.x = 2;
 			temp.y = 59;
 			temp.layout = __ShangDian_Skin_TileLayout1_i();
 			return temp;
@@ -254,10 +232,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.List = new feathers.controls.List();
 			lst_pack1 = temp;
 			temp.name = "lst_pack1";
-			temp.height = 326;
+			temp.height = 330;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 346;
-			temp.x = 8;
+			temp.width = 377;
+			temp.x = 2;
 			temp.y = 59;
 			temp.layout = __ShangDian_Skin_TileLayout2_i();
 			return temp;
@@ -268,11 +246,11 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_pack = temp;
 			temp.name = "tab_pack";
-			temp.btnWidth = 75;
+			temp.btnWidth = 79;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 202;
-			temp.x = 6;
-			temp.y = 28;
+			temp.x = 9;
+			temp.y = 30;
 			temp.layout = __ShangDian_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __ShangDian_Skin_ArrayCollection1_i();
 			return temp;
@@ -284,7 +262,7 @@ package org.mokylin.skin.app.beibao
 			uiNo = temp;
 			temp.name = "uiNo";
 			temp.styleName = "ui/app/beibao/shangdian/zwhgsp.png";
-			temp.x = 61;
+			temp.x = 86;
 			temp.y = 177;
 			return temp;
 		}

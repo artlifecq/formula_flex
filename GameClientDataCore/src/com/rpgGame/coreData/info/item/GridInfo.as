@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.item
 {
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
-
+	
 	/**
 	 * 可拖拽格子信息
 	 * @author wewell@163.com
@@ -69,8 +69,8 @@ package com.rpgGame.coreData.info.item
 		/** 是否显示锁定图片(不是背包的锁定图片) **/
 		public var isShowLockAsset : Boolean = false;
 		
-//		//格子待解锁数据
-//		public var unlockInfo:ItemGridUnlockInfo;
+		//格子待解锁数据
+		public var unlockInfo:ItemGridUnlockInfo;
 		
 		//容器格子(显示对象)的真实下标
 		public var realIndex:int = -1;

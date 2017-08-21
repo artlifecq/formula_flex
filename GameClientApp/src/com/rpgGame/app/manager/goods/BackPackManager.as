@@ -6,28 +6,24 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
-	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.ItemNoticePanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.cfg.item.StaticItem;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
-	import com.rpgGame.coreData.info.upgrade.AmountInfo;
-	import com.rpgGame.coreData.lang.LangAlertInfo;
-	import com.rpgGame.coreData.lang.LangQ_BackPack;
-	import com.rpgGame.coreData.utils.MoneyUtil;
 	
-	import app.message.AmountType;
 	import app.message.GoodsType;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
+	import utils.TimerServer;
+	
 	/**
 	 * 背包物品管理
 	 * @author wewell
@@ -36,15 +32,14 @@ package com.rpgGame.app.manager.goods
 	{
 		public var isShowShop:Boolean;
 		public var isShowRole:Boolean;
-		/****/
-		public var unlockSilver : int;
-		public var unlockBindSilver : int;
+		//		/**当前待解锁的ID*/
+		//		public var unlockSilver : int;
 		public var isAlertChangeBind : Boolean = false;
 		/**背包切换其它标签页需要设置格子锁定*/
 		public var isBackpackLock : Boolean = false;
 		/**tabbar当前选中的索引*/
 		public var tabbarIndex : int = 0;
-
+		
 		public function BackPackManager()
 		{
 			super(ItemContainerID.BackPack)
@@ -76,60 +71,76 @@ package com.rpgGame.app.manager.goods
 				dropItem(src.data as ClientItemInfo);
 			}
 		}
-
-		override public function unLockGrid() : void
+		
+		override public function unLockGrid(index:int) : void
 		{
-			if (curUnlockIndex >= Max_Grid_Count)
+			if (index > Max_Grid_Count)
 			{
 				NoticeManager.showNotify("您已经解锁了全部的格子");
 				return;
 			}
-			var useSilver : Number = unlockSilver>0?unlockSilver:unlockBindSilver;
-			GameAlert.showAlertUtil(LangQ_BackPack.UNLOCK_GRID, unLockGridClick, MoneyUtil.getHtmlMoneyString(unlockBindSilver), ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
+			AppManager.showApp(AppConstant.GRID_OPEN_TISHI,[ItemContainerID.BackPack,index]);
 		}
-
-		private function unLockGridClick(gameAlert : GameAlert) : void
-		{
-			switch (gameAlert.clickType)
-			{
-				case AlertClickTypeEnum.TYPE_SURE:
-					useItemUnlockGrid();
-					break;
-			}
-		}
-
-		public function useItemUnlockGrid() : void
-		{
-			var amount : AmountInfo = MainRoleManager.actorInfo.amountInfo;
-			var temp : int = amount.getAmountByType(AmountType.BAND_MONEY);
-			if (temp < unlockBindSilver)
-			{
-				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_BIND_SILVER, null, MoneyUtil.getHtmlMoneyString(unlockBindSilver));
-				return;
-			}
-			temp = amount.getAmountByType(AmountType.MONEY);
-			if (temp < unlockSilver)
-			{
-				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_SILVER, null, MoneyUtil.getHtmlMoneyString(unlockSilver));
-				return;
-			}
-//			var item : ClientItemInfo = getItemInfoByUsabelEfficacy(NormalEfficacy.OPEN_DEPOT_GRID);
-//			if (!item)
-//			{
-//				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_ITEM, null, ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
-//				return;
-//			}
-//			ItemSender.reqUseGoods(item.index, 1);
-		}
-
-//		public function setUnlockData(data : AllGoodsContainerUnlockProto) : void
-//		{
-//			unlockSilver = data.depotUnlockMoneyCost;
-//			unlockBindSilver = data.depotUnlockBandMoneyCost;
-//		}
-
+		
+		//		private function unLockGridClick(gameAlert : GameAlert,datas:Array) : void
+		//		{
+		//			switch (gameAlert.clickType)
+		//			{
+		//				case AlertClickTypeEnum.TYPE_SURE:
+		//					useItemUnlockGrid(datas[0]);
+		//					break;
+		//			}
+		//		}
+		//		
+		//		public function useItemUnlockGrid(index:int) : void
+		//		{
+		//			if(index==unlockSilver&&unlockBindSilver==0)
+		//			{
+		//				if(GoodsContainerMamager.getOpenGridMoney(ItemContainerID.BackPack,index)>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
+		//				{
+		//					NoticeManager.showNotifyById(2008);
+		//					return;
+		//				}
+		//				ItemSender.reqOpenTimeCellMessage(1);
+		//			}
+		//			else{
+		//				if(GoodsContainerMamager.getOpenGridMoney(ItemContainerID.BackPack,index)>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
+		//				{
+		//					NoticeManager.showNotifyById(2008);
+		//					return;
+		//				}
+		//				ItemSender.reqOpenCellMessage(1,index);
+		//			}
+		//			//			var amount : AmountInfo = MainRoleManager.actorInfo.amountInfo;
+		//			//			var temp : int = amount.getAmountByType(AmountType.BAND_MONEY);
+		//			//			if (temp < unlockBindSilver)
+		//			//			{
+		//			//				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_BIND_SILVER, null, MoneyUtil.getHtmlMoneyString(unlockBindSilver));
+		//			//				return;
+		//			//			}
+		//			//			temp = amount.getAmountByType(AmountType.MONEY);
+		//			//			if (temp < unlockSilver)
+		//			//			{
+		//			//				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_SILVER, null, MoneyUtil.getHtmlMoneyString(unlockSilver));
+		//			//				return;
+		//			//			}
+		//			//			var item : ClientItemInfo = getItemInfoByUsabelEfficacy(NormalEfficacy.OPEN_DEPOT_GRID);
+		//			//			if (!item)
+		//			//			{
+		//			//				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_ITEM, null, ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
+		//			//				return;
+		//			//			}
+		//			//			ItemSender.reqUseGoods(item.index, 1);
+		//		} 
+		
+		//		public function setUnlockData(data : AllGoodsContainerUnlockProto) : void
+		//		{
+		//			unlockSilver = data.depotUnlockMoneyCost;
+		//			unlockBindSilver = data.depotUnlockBandMoneyCost;
+		//		}
+		
 		private static var _ins : BackPackManager;
-
+		
 		public static function get instance() : BackPackManager
 		{
 			if (_ins == null)
@@ -142,7 +153,7 @@ package com.rpgGame.app.manager.goods
 		public function setUnusableGrid(isLock:Boolean):void
 		{
 			var curShowNum:int = getAllItem().length;
-//			setIsShowBindLock(isLock);
+			//			setIsShowBindLock(isLock);
 			isBackpackLock = isLock;
 			showLockAssetIndex = [];
 			if(isLock)
@@ -154,7 +165,7 @@ package com.rpgGame.app.manager.goods
 					if(i+lockNum >= hasOpenCount)
 					{
 						showLockAssetIndex.push(i);
-//						setShowLockAssetIndex(i);
+						//						setShowLockAssetIndex(i);
 					}
 				}
 			}
@@ -174,7 +185,7 @@ package com.rpgGame.app.manager.goods
 			return false;
 		}
 		
-
+		
 		/**
 		 * 使用某个物品
 		 * @param cfgId
@@ -186,7 +197,7 @@ package com.rpgGame.app.manager.goods
 			var itemInfo : ClientItemInfo = getFirstCanUseItemByCfgIdAndBind(cfgId,bind);
 			if (itemInfo == null)
 				return;
-
+			
 			ItemUseManager.useItemByIndex(itemInfo.index, count);
 		}
 		override public function addItemInfo(info:ClientItemInfo):void
@@ -221,13 +232,13 @@ package com.rpgGame.app.manager.goods
 					var tip:Boolean = i > 0 ? false : true;
 					while(i > 0)
 					{
-						old = dressEquips[i - 1]
-						if(equip.evaluate > old.evaluate)
-						{
-							tip = true;
-							break;
-						}
-						i--;
+					old = dressEquips[i - 1]
+					if(equip.evaluate > old.evaluate)
+					{
+					tip = true;
+					break;
+					}
+					i--;
 					}*/
 					if (RoleEquipmentManager.instance.isBetterEquipCompareWithEquiped(equip)) //人物装备、坐骑装备
 					{
@@ -238,15 +249,15 @@ package com.rpgGame.app.manager.goods
 					//第一次自动放入快捷栏
 					/*if(ItemCfgData.isAddHpItem(info.cfgId))
 					{
-						EventManager.dispatchEvent( ItemEvent.ITEM_INPUT_SHORTCUT, 18, info.cfgId);
+					EventManager.dispatchEvent( ItemEvent.ITEM_INPUT_SHORTCUT, 18, info.cfgId);
 					}else if(ItemCfgData.isAddMpItem(info.cfgId))
 					{
-						EventManager.dispatchEvent( ItemEvent.ITEM_INPUT_SHORTCUT, 19, info.cfgId);
+					EventManager.dispatchEvent( ItemEvent.ITEM_INPUT_SHORTCUT, 19, info.cfgId);
 					}*/
 					break;
 			}
 		}
-
+		
 		private function autoDressEquip(equip : EquipInfo) : void
 		{
 			ItemUseManager.useItem(equip);
@@ -419,11 +430,9 @@ package com.rpgGame.app.manager.goods
 				if(item!=null&&item.qItem.q_id==id)
 				{
 					ret.push(item);
-				}
-				
+				}				
 			}
 			return ret;
 		}
-		
 	}
 }
