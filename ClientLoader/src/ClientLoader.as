@@ -293,7 +293,7 @@ package
 
 			var bytes : ByteArray = new ByteArray();
 			loadingStream.readBytes(bytes, 0, loadingStream.bytesAvailable);
-			//bytes.uncompress();
+			bytes.uncompress();
 			bytes.endian = Endian.LITTLE_ENDIAN;
 			_versionMap = readVersionsFromBuf(bytes);
 			startLoadClient();
