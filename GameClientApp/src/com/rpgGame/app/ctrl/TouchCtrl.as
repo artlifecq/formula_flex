@@ -1,4 +1,4 @@
-package com.rpgGame.appModule.common.touch
+package  com.rpgGame.app.ctrl
 {
 	import away3d.events.Event;
 	

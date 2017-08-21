@@ -21,6 +21,10 @@ package org.mokylin.skin.app.fuben
 
 		public var btnPrev:feathers.controls.Button;
 
+		public var icon1:feathers.controls.UIAsset;
+
+		public var jiangli_text:feathers.controls.UIAsset;
+
 		public var list:feathers.controls.List;
 
 
@@ -34,7 +38,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__FuBen_ZhenQi_Skin_UIAsset2_i(),__FuBen_ZhenQi_Skin_UIAsset3_i(),__FuBen_ZhenQi_Skin_UIAsset4_i(),list_i(),btnNext_i(),btnPrev_i()];
+			this.elementsContent = [__FuBen_ZhenQi_Skin_UIAsset2_i(),__FuBen_ZhenQi_Skin_UIAsset3_i(),jiangli_text_i(),icon1_i(),list_i(),btnNext_i(),btnPrev_i()];
 			
 			states = {
 			};
@@ -63,15 +67,6 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function __FuBen_ZhenQi_Skin_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fuben/fubengjiangli.png";
-			temp.x = 656;
-			temp.y = 547;
-			return temp;
-		}
-
 		private function btnNext_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -92,6 +87,28 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 57;
 			temp.y = 281;
+			return temp;
+		}
+
+		private function icon1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon1 = temp;
+			temp.name = "icon1";
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 879;
+			temp.y = 528;
+			return temp;
+		}
+
+		private function jiangli_text_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			jiangli_text = temp;
+			temp.name = "jiangli_text";
+			temp.styleName = "ui/app/fuben/fubengjiangli.png";
+			temp.x = 656;
+			temp.y = 547;
 			return temp;
 		}
 

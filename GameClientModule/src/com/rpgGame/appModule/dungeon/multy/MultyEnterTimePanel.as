@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.dungeon.multy
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	
 	import org.mokylin.skin.app.fuben.FuBenTanKuang1;
 	import org.mokylin.skin.app.fuben.FuBen_JinRuTime;
@@ -25,14 +27,29 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			super.show(data,openTable,parentContiner);
+			super.show(data,openTable,StarlingLayerManager.topUILayer);
+			var name:String="";
+			var fighttype:int=int(data);
+			switch(fighttype)
+			{
+				case 2:
+					name="ui/app/fuben/jijiangjinrufuben.png";
+					break;
+				case 12:
+					name="ui/app/fuben/jijiangjinrufuben.png";
+					break;
+				case 19:
+					name="ui/app/fuben/jijiangjinrufuben.png";
+					break;
+			}
+			_skin.name.styleName=name;
 			setTime();
 			
 		}
 		private var remainTime:int;
 		private function setTime():void
 		{
-			var rTime:int=10;
+			var rTime:int=GlobalSheetData.getSettingInfo(849)!=null?GlobalSheetData.getSettingInfo(849).q_int_value:15;
 			if(rTime<=0){
 				_skin.numTime.label="0";
 			}else{

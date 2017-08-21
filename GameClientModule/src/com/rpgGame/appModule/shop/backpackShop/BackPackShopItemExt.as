@@ -3,7 +3,6 @@ package com.rpgGame.appModule.shop.backpackShop
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -19,6 +18,7 @@ package com.rpgGame.appModule.shop.backpackShop
 	import org.mokylin.skin.app.beibao.ShangDian_Item;
 	
 	import starling.display.DisplayObject;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	
 	public class BackPackShopItemExt extends SkinUI
 	{

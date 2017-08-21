@@ -12,7 +12,7 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.app.sender.CheatsSender;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
-	import com.rpgGame.appModule.common.touch.TouchCtrl;
+
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
 	import com.rpgGame.appModule.shop.ItemGetNoticeShowPanelExt;
 	import com.rpgGame.appModule.xinfa.sub.CheatsIcon;
@@ -68,6 +68,7 @@ package com.rpgGame.appModule.xinfa
 	import org.mokylin.skin.app.beibao.Xinfa.xinfa_Skin;
 	
 	import starling.display.Sprite;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 
 	public class XinFaView
 	{
