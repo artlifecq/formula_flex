@@ -97,6 +97,10 @@ package com.rpgGame.core.events
 		public static const ITEM_MOVE_FAIL:int = UNIQUEID.NEXT;
 		/** 解锁格子 **/
 		public static const ITEM_GRID_UNLOCK:int = UNIQUEID.NEXT;
+		/**待解锁格子*/
+		public static const ITEM_GRID_ONLOCK:int = UNIQUEID.NEXT;
+		/**可解锁格子*/
+		public static const ITEM_GRID_CANLOCK:int = UNIQUEID.NEXT;
 		/** 刷新容器内所有物品 **/
 		public static const ITEM_CONTAINER_REFLESH:int = UNIQUEID.NEXT;
 		/** 刷新指定物品下标的所有物品（防止有些操作可能会使物品下标和实际下标不相同，那就刷新一下这些下标的物品）**/
@@ -133,9 +137,9 @@ package com.rpgGame.core.events
 		public static const ITEM_WU_XING_EXCHANGE_SUCCESS:int = UNIQUEID.NEXT;
 		/** 物品已经过期 */
 		public static const ITEM_EXPIRE:int = UNIQUEID.NEXT;
-		/** 增加回收资源 **/
+		/** 添加出售 **/
 		public static const ITEM_RECLAIM_ADD:int = UNIQUEID.NEXT;
-		/** 取消资源回收 **/
+		/** 取消出售 **/
 		public static const ITEM_RECLAIM_CANCEL:int = UNIQUEID.NEXT;
 	}
 }

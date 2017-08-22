@@ -105,7 +105,7 @@ package com.rpgGame.appModule.battle.dfdj
 			var per:Number=score/qRank.q_score;
 			_skin.Pro_duanwei.value=per*100;
 			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
-			
+			_skin.iconName.styleName="ui/app/zhanchang/icon/name/"+qRank.q_subrank_id+".png";
 			_skin.lbCiShu.text=data.currentNumber+"/"+GlobalSheetData.getIntValue(816);
 			_skin.lbSheng.text=data.reputation+"";
 			

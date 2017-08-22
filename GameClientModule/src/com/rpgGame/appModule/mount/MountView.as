@@ -9,9 +9,13 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
+	import com.rpgGame.coreData.clientConfig.Q_marriage_skills;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
@@ -150,6 +154,7 @@ package com.rpgGame.appModule.mount
 			var arr:Array = HorseSpellData.allSpell;
 			for(var i:int = 0;i<_spellIconList.length;i++)
 			{
+				var data:SpellDynamicTipdata = TipTargetManager.getTiipsByTarget(_spellIconList[i]) as SpellDynamicTipdata;
 				var icon:IconCDFace = _spellIconList[i];
 				var qdata:Q_horse_skills = arr[i];
 				if(qdata.q_study_needhorselevel>_mountShowData.mountLevel)
@@ -157,9 +162,17 @@ package com.rpgGame.appModule.mount
 					if(icon.filter==null)
 					{
 						GrayFilter.gray(icon);
+						if(data!=null)
+						{
+							data.isActivation = false;
+						}
 					}
 				}else{
 					icon.filter = null;
+					if(data!=null)
+					{
+						data.isActivation = true;
+					}
 				}
 			}
 		}
@@ -167,6 +180,7 @@ package com.rpgGame.appModule.mount
 		{
 			_spellIconList = new Vector.<IconCDFace>();
 			var spellList:Vector.<BaseFaceInfo> = HorseManager.instance().spellList; 
+			spellList=spellList.sort(short);
 			var partner:DisplayObjectContainer = _skin.kuang_1.parent;
 			var icon:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
 			icon.showCD=false;
@@ -197,6 +211,16 @@ package com.rpgGame.appModule.mount
 			addNode(RTNodeID.HORSE,RTNodeID.HORSE_UP,_skin.btn_kaishi,110,null);
 			
 		}
+		
+		private function short(info1:BaseFaceInfo,info2:BaseFaceInfo):int
+		{
+			var cfg1:Q_horse_skills = HorseSpellData.getCfgById((info1.data as Q_skill_model).q_skillID);
+			var cfg2:Q_horse_skills = HorseSpellData.getCfgById((info2.data as Q_skill_model).q_skillID);
+			if(cfg1.q_study_needhorselevel<cfg2.q_study_needhorselevel)return -1;
+			else if(cfg1.q_study_needhorselevel>cfg2.q_study_needhorselevel) return 1;
+			return 0;
+		}
+		
 		private function labTouchHandler(touch:Touch):void
 		{
 			if(touch.phase!= TouchPhase.ENDED)
@@ -269,6 +293,8 @@ package com.rpgGame.appModule.mount
 				autoReq=null;
 			}
 		}
+		
+		
 		private function removeEvent():void
 		{
 			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouchHandler);

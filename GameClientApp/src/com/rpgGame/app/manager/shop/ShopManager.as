@@ -185,7 +185,6 @@ package  com.rpgGame.app.manager.shop
 		public function SCSaleSuccessHandler(msg:SCSaleSuccessMessage):void
 		{
 			// TODO Auto Generated method stub
-			
 		}
 		public function SCSendShopItemChangeHandler(msg:SCSendShopItemChangeMessage):void
 		{

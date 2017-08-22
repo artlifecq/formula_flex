@@ -1,13 +1,18 @@
 package com.rpgGame.app.ui.main.head
 {
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.PetManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.PetCfg;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
+	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import gs.TweenLite;
@@ -35,6 +40,8 @@ package com.rpgGame.app.ui.main.head
 				_petHeadPanel.y = 103;
 				_petHeadPanel.visible=false;
 			}
+			var str:String=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"点击切换");
+			TipTargetManager.show( _skin.btnSelect, TargetTipsMaker.makeSimpleTextTips(str));
 		}
 		
 		public function show():void
@@ -72,11 +79,11 @@ package com.rpgGame.app.ui.main.head
 		private function getPetListAndShow():Boolean
 		{
 			var list:Vector.<PetInfo>=Mgr.petMgr.petListByJiHuo;
-//			if(list.length==0)
-//			{
-//				NoticeManager.showNotifyById(90301);
-//				return false;
-//			}			
+			//			if(list.length==0)
+			//			{
+			//				NoticeManager.showNotifyById(90301);
+			//				return false;
+			//			}			
 			_petHeadPanel.SetData(list);
 			return true;
 		}
@@ -111,10 +118,13 @@ package com.rpgGame.app.ui.main.head
 		
 		private function updateShow():void
 		{
+			TipTargetManager.remove(this);
 			if(Mgr.petMgr.curPetId==0) return;
 			_petMod=PetCfg.getPet(Mgr.petMgr.curPetId);
 			_skin.uiName.styleName = "ui/mainui/meirenHead/head_icon/name"+Mgr.petMgr.curPetId+"s.png";
 			_skin.icon.styleName = "ui/mainui/meirenHead/head_icon/head"+Mgr.petMgr.curPetId+"s.png";	
+			var info:PetInfo=PetManager.ins.getPet(Mgr.petMgr.curPetId);
+			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, info ,true) );
 		}
 	}
 }

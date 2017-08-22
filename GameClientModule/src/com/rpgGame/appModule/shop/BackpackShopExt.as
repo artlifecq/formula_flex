@@ -12,7 +12,8 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.beibao.ShangDian_Skin;
 	
 	import starling.display.DisplayObject;
-
+	import com.rpgGame.app.ctrl.TouchCtrl;
+	
 	/**
 	 *随身商店 
 	 * @author yfl
@@ -28,9 +29,8 @@ package com.rpgGame.appModule.shop
 		public function BackpackShopExt()
 		{
 			_skin=new ShangDian_Skin();
-			
-			
 			super(_skin);
+			this.dragAble=false;
 			_shopView=new BackpackShopView(_skin);
 			_rebuyView=new BackpackShopRebuyView(_skin);
 			regEvent();

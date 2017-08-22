@@ -96,6 +96,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
+		/**  包裹与仓库开格时间以及费用数据库							 */
+		public static const Q_backpack_grid:String = "data.Q_backpack_grid";
 		/**  争霸战刷怪表											 */
 		public static const Q_battle_monster_refresh:String = "data.Q_battle_monster_refresh";
 		/**  巅峰等级段位升级表						 */
@@ -226,7 +228,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_world_boss:String = "data.Q_world_boss";
 		/**  副本数据表															 */
 		public static const Q_zone:String = "data.Q_zone";
-		/**  多人副本数据表								 */
+		/**  多人副本数据表									 */
 		public static const Q_zone_multy:String = "data.Q_zone_multy";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
@@ -250,7 +252,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																											 */
+		/**  技能基本信息配置数据表																																																																																																																																												 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  预警技能关联表			 */
 		public static const Q_skill_warning:String = "data.spell.Q_skill_warning";
@@ -306,6 +308,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_advance_wedding", com.rpgGame.coreData.clientConfig.Q_advance_wedding);
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
+			regClass("data.Q_backpack_grid", com.rpgGame.coreData.clientConfig.Q_backpack_grid);
 			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
 			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
 			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);

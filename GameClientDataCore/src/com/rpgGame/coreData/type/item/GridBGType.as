@@ -7,7 +7,7 @@ package com.rpgGame.coreData.type.item
 		/** 背包格子（解锁格子） 40*40 **/
 		public static const CHORTCUT_2:String = "normal/zmbk";
 		/** 背包格子（未解锁格子） 40*40 **/
-		public static const CHORTCUT_2_MASK:String = "normal/zmbk_mask";
+		public static const CHORTCUT_2_MASK:String = "normal/luck";
 		/** 格子 16*16 **/
 		public static const GRID_SIZE_16 : String = "normal/16";
 		/** 格子 22*22 **/

@@ -29,5 +29,7 @@ package com.rpgGame.core.events
 		public static const MAIL_ALL_SELECT:int = UNIQUEID.NEXT;
 		/**单选*/
 		public static const MAIL_ONE_SELECT:int = UNIQUEID.NEXT;
+		/**显示下一封*/
+		public static const MAIL_NEXT_SELECT:int = UNIQUEID.NEXT;
 	}
 }

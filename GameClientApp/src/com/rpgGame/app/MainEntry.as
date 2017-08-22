@@ -8,12 +8,12 @@ package com.rpgGame.app
 	import com.rpgGame.app.cmdlistener.scene.SceneSwitchCmdListener;
 	import com.rpgGame.app.manager.ReconnectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.process.LoadConfigData;
 	import com.rpgGame.app.process.LocalConfigData;
 	import com.rpgGame.app.process.ProcessState;
 	import com.rpgGame.app.process.StartGame;
 	import com.rpgGame.app.ui.ResLoadingView;
+	import com.rpgGame.app.ui.TipsInfoView2D;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
@@ -21,8 +21,6 @@ package com.rpgGame.app
 	
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
-	
-	import away3d.log.Log;
 	
 	import org.client.mainCore.manager.PopUpManager;
 	import org.client.mainCore.manager.ProjectManager;
@@ -37,6 +35,8 @@ package com.rpgGame.app
 	{
 		private var _root : Sprite;
 		public var loadingActual : Class = null;
+		public var tipsView2DActual:Class = null;
+		public var errorReporterActual:Class = null;
 		private var _isRelease : Boolean = false;
 		private var clientGlb:Class;
 
@@ -75,6 +75,8 @@ package com.rpgGame.app
 			}
 			//
 			ResLoadingView.instance.setActual(loadingActual);
+			
+			TipsInfoView2D.setActual(tipsView2DActual);
 
 			initGame();
 			initProcess();
@@ -106,9 +108,6 @@ package com.rpgGame.app
 
 		private function initProcess() : void
 		{
-//			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
-//			ProcessStateMachine.getInstance().pushProcess(new LoadPngxUIAssets());
-//			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 			ProcessStateMachine.getInstance().pushProcess(new LoadConfigData());
             if (ClientConfig.isSingle) 
 			{
@@ -122,9 +121,6 @@ package com.rpgGame.app
 		{
 			SceneSwitchCmdListener.fromPercent = 0.6;
 			SceneSwitchCmdListener.toPercent = 1;
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35);
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PNGX_UI_ASSETS, 0.35, 0.4)
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.4, 0.45);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.55, 0.6);
 			if (ClientConfig.isSingle) 
 			{

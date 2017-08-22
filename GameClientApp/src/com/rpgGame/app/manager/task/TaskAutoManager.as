@@ -56,6 +56,8 @@ package com.rpgGame.app.manager.task
 			}
 			return _instance;
 		}
+		
+		
 		private var _gTimer : GameTimer;
 		private var _isTaskRunning : Boolean=false;
 		private var _taskType:int;
@@ -143,7 +145,7 @@ package com.rpgGame.app.manager.task
 		private function onUpdate():void
 		{
 			
-			
+//			return ;
 			if(istech())
 			{
 				if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)

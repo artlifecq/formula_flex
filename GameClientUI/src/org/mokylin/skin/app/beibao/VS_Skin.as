@@ -144,7 +144,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/ljdb.png";
+			temp.styleName = "ui/app/beibao/vs/9.png";
 			temp.x = 128;
 			temp.y = 20;
 			return temp;
@@ -162,7 +162,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/msdb.png";
+			temp.styleName = "ui/app/beibao/vs/1.png";
 			temp.x = 128;
 			temp.y = 19;
 			return temp;
@@ -171,7 +171,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/djdb.png";
+			temp.styleName = "ui/app/beibao/vs/2.png";
 			temp.x = 128;
 			temp.y = 17;
 			return temp;
@@ -180,7 +180,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/zqdb.png";
+			temp.styleName = "ui/app/beibao/vs/3.png";
 			temp.x = 128;
 			temp.y = 19;
 			return temp;
@@ -189,7 +189,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/zbdb.png";
+			temp.styleName = "ui/app/beibao/vs/4.png";
 			temp.x = 128;
 			temp.y = 19;
 			return temp;
@@ -198,7 +198,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/xfdb.png";
+			temp.styleName = "ui/app/beibao/vs/5.png";
 			temp.x = 128;
 			temp.y = 18;
 			return temp;
@@ -207,7 +207,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/jndb.png";
+			temp.styleName = "ui/app/beibao/vs/6.png";
 			temp.x = 128;
 			temp.y = 20;
 			return temp;
@@ -216,7 +216,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/jpdb.png";
+			temp.styleName = "ui/app/beibao/vs/7.png";
 			temp.x = 128;
 			temp.y = 18;
 			return temp;
@@ -225,7 +225,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/jxdb.png";
+			temp.styleName = "ui/app/beibao/vs/8.png";
 			temp.x = 128;
 			temp.y = 20;
 			return temp;

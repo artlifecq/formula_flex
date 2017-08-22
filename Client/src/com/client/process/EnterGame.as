@@ -2,6 +2,7 @@ package com.client.process
 {
 	import com.client.cmdlistener.LoginCmdListener;
 	import com.client.ui.alert.GameAlert;
+	import com.client.view.TipsInfoView2D;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.process.BaseProcess;
@@ -70,6 +71,7 @@ package com.client.process
 			var main:Object=new entryClass();
 			ClientConfig.mainEntry = main;
 			ClientConfig.mainEntry.loadingActual = ResLoadingView;
+			ClientConfig.mainEntry.tipsView2DActual = TipsInfoView2D;
 			ClientConfig.mainEntry.setup(ClientConfig, userInfo);
 
 			if (!ClientConfig.isRelease)
@@ -92,6 +94,7 @@ package com.client.process
 		{
 			if (Capabilities.isDebugger)
 			{
+				GameLog.addShow("您当前的播放器是Debug版本，所有表现和数据不能用作性能参考！");
 //				GameAlert.show("您当前的播放器是Debug版本，所有表现和数据不能用作性能参考！", "提示", onShowDebugPlayerFunc, onShowDebugPlayerFunc);
 				return true;
 			}

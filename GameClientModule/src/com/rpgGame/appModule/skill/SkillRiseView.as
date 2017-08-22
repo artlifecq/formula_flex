@@ -133,6 +133,7 @@ package com.rpgGame.appModule.skill
 				skin.grp_tiaojian.visible=false;
 				skin.btn_jinjie.visible=false;
 				skin.Icon_jineng2.visible=false;
+				skin.uiOk.visible=true;
 				_riseIcon.visible=false;
 				return;
 			}
@@ -145,6 +146,7 @@ package com.rpgGame.appModule.skill
 			skin.grp_tiaojian.visible=true;
 			skin.btn_jinjie.visible=true;
 			skin.Icon_jineng2.visible=true;
+			skin.uiOk.visible=false;
 			
 			cacheLb=labelList;
 			var i:int;

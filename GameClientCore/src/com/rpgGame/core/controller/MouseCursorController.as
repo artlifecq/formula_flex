@@ -8,7 +8,7 @@ package com.rpgGame.core.controller
 	import flash.ui.MouseCursorData;
 	
 	import feathers.themes.GuiTheme;
-
+	
 	/**
 	 * 鼠标样式控制器
 	 * @author Administrator
@@ -19,12 +19,12 @@ package com.rpgGame.core.controller
 		private static var _currentMouse : String;
 		private static var _folder : String;
 		private static var _isSetup : Boolean;
-
+		
 		public static function setup() : void
 		{
 			_isSetup = true;
 			_folder = "ui/alphapng/mouse/";
-
+			
 			registerCursor(MouseCursorEnum.NORMAL, "normal_up", new Point(0, 0));
 			registerCursor(MouseCursorEnum.TALK, "talk_up", new Point(0, 0), 3, 3);
 			registerCursor(MouseCursorEnum.ATTACK, "attack_up", new Point(0, 0));
@@ -33,34 +33,36 @@ package com.rpgGame.core.controller
 			registerCursor(MouseCursorEnum.FINGER, "finger_up", new Point(0, 0));
 			registerCursor(MouseCursorEnum.REPAIR, "repair_up", new Point(0, 0));
 			registerCursor(MouseCursorEnum.SELL, "sell_up", new Point(0, 0));
+			registerCursor(MouseCursorEnum.SAVE, "save_up", new Point(0, 0));
+			registerCursor(MouseCursorEnum.TAKE, "take_up", new Point(0, 0));
 			showNormal();
 		}
-
+		
 		public static function showNormal() : void
 		{
 			update( MouseCursorEnum.NORMAL );
 		}
-
+		
 		public static function showAttack() : void
 		{
 			update( MouseCursorEnum.ATTACK );
 		}
-
+		
 		public static function showTalk() : void
 		{
 			update(  MouseCursorEnum.TALK );
 		}
-
+		
 		public static function showCollect() : void
 		{
 			update( MouseCursorEnum.COLLECT );
 		}
-
+		
 		public static function showMove() : void
 		{
 			update( MouseCursorEnum.MOVE );
 		}
-
+		
 		public static function showFinger() : void
 		{
 			update( MouseCursorEnum.FINGER );
@@ -91,7 +93,33 @@ package com.rpgGame.core.controller
 			_selling = false;
 			showNormal();
 		}
-
+		
+		private static var _saveing:Boolean;
+		public static function showSave() : void
+		{
+			_saveing=true;
+			update( MouseCursorEnum.SAVE );
+		}
+		
+		public static function exitSaveMode():void
+		{
+			_saveing = false;
+			showNormal();
+		}
+		
+		private static var _takeing:Boolean;
+		public static function showTake() : void
+		{
+			_takeing=true;
+			update( MouseCursorEnum.TAKE );
+		}
+		
+		public static function exitTakeMode():void
+		{
+			_takeing = false;
+			showNormal();
+		}
+		
 		/**
 		 *
 		 * @param cursor 鼠标样式名称，由MouseCursorEnum枚举
@@ -123,7 +151,7 @@ package com.rpgGame.core.controller
 			}
 			Mouse.registerCursor(cursor, cursorData);
 		}
-
+		
 		private static function update(mouse:String) : void
 		{
 			if(!_isSetup || _currentMouse == mouse)
@@ -136,6 +164,11 @@ package com.rpgGame.core.controller
 				return;
 			}
 			if(_repairing && mouse != MouseCursorEnum.REPAIR)
+			{
+				return;
+			}
+			
+			if(_saveing && mouse != MouseCursorEnum.SAVE)
 			{
 				return;
 			}

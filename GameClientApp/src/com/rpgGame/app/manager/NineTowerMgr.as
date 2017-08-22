@@ -1,7 +1,9 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.hint.FloatingText;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.NineTowerSender;
+	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.NineTowerEvent;
@@ -9,6 +11,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.netData.yaota.message.SCDrawYaoTaAwardMessage;
 	import com.rpgGame.netData.yaota.message.SCEnterYaoTaResultMessage;
+	import com.rpgGame.netData.yaota.message.SCGetPlayerPostionMessage;
 	import com.rpgGame.netData.yaota.message.SCOpenYaoTaPanelMessage;
 	import com.rpgGame.netData.yaota.message.SCQuitYaoTaMessage;
 	import com.rpgGame.netData.yaota.message.SCUpdateYaoTaMessage;
@@ -16,6 +19,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	import com.rpgGame.netData.yaota.message.SCYaoTaIntegralMessage;
 	import com.rpgGame.netData.yaota.message.SCYaoTaLogMessage;
+	
+	import flash.geom.Vector3D;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -25,6 +30,7 @@ package com.rpgGame.app.manager
 		public static var ins:NineTowerMgr=new NineTowerMgr();
 		public var data:SCUpdateYaoTaMessage;
 		public var flagData:SCWarChessMessage;
+		
 		
 		public function NineTowerMgr()
 		{
@@ -108,6 +114,16 @@ package com.rpgGame.app.manager
 			// TODO Auto Generated method stub
 			this.flagData=msg;
 			EventManager.dispatchEvent(NineTowerEvent.GET_TRACK__FLAG_DATA,msg);
+		}
+		public  function SCGetPlayerPostionHandler(msg:SCGetPlayerPostionMessage):void
+		{
+			if (msg.positions) 
+			{
+				var pos:Vector3D=new Vector3D();
+				pos.x=msg.positions.x;
+				pos.y=msg.positions.y;
+				RoleStateUtil.walkToPos(MainRoleManager.actor,pos);
+			}
 		}
 		public function autoJoin():void
 		{

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.equip
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
@@ -46,6 +47,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
@@ -992,7 +994,9 @@ package com.rpgGame.appModule.equip
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
 				}
-				GameAlert.showAlert(alertOk);
+//				GameAlert.showAlert(alertOk);
+				
+				ChatManager.onShowChatInChatBar(alertOk.alertInfo.value, EnumChatChannelType.CHAT_CHANNEL_SYSTEM);
 			}
 			if(msg.result==1){
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");

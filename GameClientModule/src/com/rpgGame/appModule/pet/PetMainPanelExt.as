@@ -93,12 +93,12 @@ package com.rpgGame.appModule.pet
 				qPet=pets[i];
 				tmp=new PetHeadItemExt(qPet);
 				tmp.x=0;
-				tmp.y=(2+tmp.height)*i;
+				tmp.y=(tmp.height-4)*i;
 				//tmp.setServerData(Mgr.petMgr.getPet(qPet.q_id));
 				_headCon.addChild(tmp);
 				_headItems.push(tmp);
 			}
-			_tweenS=new TweenScaleScrollUitlExt(_headCon,_headItems,_skin.btnPrev,_skin.btnNext,1,109,101*4,101,0.5/4,false);
+			_tweenS=new TweenScaleScrollUitlExt(_headCon,_headItems,_skin.btnPrev,_skin.btnNext,1,130,101*4,101,0.5/4,false);
 			_tweenS.setStep(4);
 			
 			_zoneBalls=new Vector.<PetZoneBall>();
@@ -155,7 +155,7 @@ package com.rpgGame.appModule.pet
 				_blessPanel = new PetLevelUPPanelExt();
 				this.addChild(_blessPanel);
 				_blessPanel.x=this._skin.width;
-				_blessPanel.y=46;
+				_blessPanel.y=44;
 			}
 			onStageResize(_stage.stageWidth-_blessPanel.getwidth(),_stage.stageHeight);
 			_blessPanel.setData(_curSelectItem.data);
@@ -309,13 +309,13 @@ package com.rpgGame.appModule.pet
 			{
 				_avatar=new InterAvatar3D();
 				_modContaner.addChild3D(_avatar);
-				_avatar.x = 448;
+				_avatar.x = 420;
 				_avatar.y =490;
 			}
 			_avatarData=new RoleData(0);		
 			this._avatarData.avatarInfo.setBodyResID(qPet.q_panel_show_id, null);
 			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(3);	
+			this._avatar.curRole.setScale(2.3);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
 		}
 		
@@ -385,8 +385,9 @@ package com.rpgGame.appModule.pet
 			_attrCon.setData(addid,nextAttrId);
 			
 			var skill:Q_skill_model=SpellDataManager.getSpellById(qPetAdv.q_skill_id);
-			FaceUtil.SetSkillGrid(_bgIco, FaceUtil.chanceSpellToFaceInfo(skill), true);
-//			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
+			if(skill)
+				FaceUtil.SetSkillGrid(_bgIco, FaceUtil.chanceSpellToFaceInfo(skill), true);
+			//			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{
 				GrayFilter.gray(_bgIco);
@@ -463,6 +464,7 @@ package com.rpgGame.appModule.pet
 			for each (var item:PetHeadItemExt in _headItems) 
 			{
 				item.setServerData(Mgr.petMgr.getPet(item.config.q_id))
+				item.setSelect(false);
 			}
 			
 			var tmp:PetHeadItemExt=null;

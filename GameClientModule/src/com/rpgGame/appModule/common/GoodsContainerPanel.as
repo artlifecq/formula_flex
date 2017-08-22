@@ -8,12 +8,14 @@ package com.rpgGame.appModule.common
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GridOpenCfg;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.enum.item.ItemTypeEnum;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemGridUnlockInfo;
 	import com.rpgGame.coreData.lang.LangGoods;
 	
 	import flash.geom.Point;
@@ -217,6 +219,20 @@ package com.rpgGame.appModule.common
 		}
 		
 		/**
+		 * 依据下标获取格子
+		 * */
+		private function getGridIndex(index:int):DragDropItem
+		{
+			for(var i:int=0;i<dndGrids.length;i++)
+			{
+				var item:DragDropItem=dndGrids[i];
+				if(item.index==index)
+					return item;
+			}
+			return null;
+		}
+		
+		/**
 		 * 设置格子数据 
 		 * @param index
 		 * @param itemInfo
@@ -227,12 +243,13 @@ package com.rpgGame.appModule.common
 			var gridInfo:GridInfo = dataProvider.getItemAt(index) as GridInfo;
 			if(!gridInfo)
 				return;
-			if(gridInfo.data==itemInfo){
+			if(gridInfo.data!=null&&gridInfo.data==itemInfo){
 				return;
 			}
 			gridInfo.data = itemInfo;
 			gridInfo.isEnabled = _mgr?_mgr.isEnabled(index):true;
-			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):true;
+			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):false;
+			
 			if(itemInfo && gridIndex == -1)
 			{
 				gridInfo.isShowLockAsset = GoodsContainerMamager.getIsShowLockAsset(containerId, itemInfo.index);
@@ -334,7 +351,17 @@ package com.rpgGame.appModule.common
 				}
 			}
 			updateGridLen && updateGridLen();
-			dataProvider.updateAll();
+			updateList();
+			//			dataProvider.updateAll();
+		}
+		
+		/**不要跳格子 还是循环刷新吧*/
+		private function updateList():void
+		{
+			for(var i:int=0;i<dataProvider.length;i++)
+			{
+				dataProvider.updateItemAt(i);
+			}
 		}
 		
 		/**
@@ -368,7 +395,6 @@ package com.rpgGame.appModule.common
 		 */		
 		private function onRefleshGrids(containerId:int):void
 		{
-			if(containerId != this.containerId)return;
 			refleshGrids();
 		}
 		
@@ -607,6 +633,7 @@ package com.rpgGame.appModule.common
 		 */		
 		protected function onItemGridUnlock(containerId:int, index:int):void
 		{
+			if(containerId != this.containerId)return;
 			onRefleshGrids(containerId);
 		}
 		
@@ -628,7 +655,7 @@ package com.rpgGame.appModule.common
 			EventManager.addEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.addEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);
-			//			EventManager.addEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
+			EventManager.addEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
 			
 			EventManager.addEvent(ItemEvent.ITEM_REFLESH_BY_ITEM_INDEX,refleshGridByItemIndex);
 			EventManager.addEvent(ItemEvent.ITEM_CONTAINER_REFLESH, onRefleshGrids);
@@ -646,7 +673,7 @@ package com.rpgGame.appModule.common
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.removeEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.removeEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);
-			//			EventManager.removeEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
+			EventManager.removeEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
 			
 			EventManager.removeEvent(ItemEvent.ITEM_REFLESH_BY_ITEM_INDEX,refleshGridByItemIndex);
 			EventManager.removeEvent(ItemEvent.ITEM_CONTAINER_REFLESH, onRefleshGrids);
@@ -690,7 +717,5 @@ package com.rpgGame.appModule.common
 		{
 			return _dataProvider;
 		}
-		
-		
 	}
 }
