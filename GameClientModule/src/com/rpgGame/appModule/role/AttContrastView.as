@@ -51,7 +51,7 @@ package com.rpgGame.appModule.role
 			setValue("xf");
 			setValue("jn");
 			setValue("jm");
-			setValue("zq");
+			setValue("zqi");
 			setValue("mr");
 			
 		}
@@ -101,7 +101,7 @@ package com.rpgGame.appModule.role
 						m=getPowerByType(5,_otherInfo.selfFightPower);
 						o=getPowerByType(5,_otherInfo.otherFightPowr);;
 						break
-					case "zq"://战旗
+					case "zqi"://战旗
 						m=getPowerByType(6,_otherInfo.selfFightPower);
 						o=getPowerByType(6,_otherInfo.otherFightPowr);;
 						break
