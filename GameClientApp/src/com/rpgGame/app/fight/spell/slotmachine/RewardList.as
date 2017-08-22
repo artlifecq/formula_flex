@@ -21,7 +21,7 @@ package  com.rpgGame.app.fight.spell.slotmachine
 		public static const SCROLL_DOWN:int = -1;
 		public static const REWARDlISTSTOP:String = "rewardliststop";
 		public var accelearation:Number = 0.7;
-		public var maxSpeed:Number = 40;
+		public var maxSpeed:Number = 20;
 		public var minSpeed:Number = 1;
 		public var isAutoStop:Boolean = false;
 		private var _rewards:Array = null;

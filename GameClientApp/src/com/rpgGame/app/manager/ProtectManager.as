@@ -3,6 +3,7 @@
     import com.game.mainCore.core.timer.GameTimer;
     import com.rpgGame.app.manager.goods.BackPackManager;
     import com.rpgGame.app.manager.goods.ItemManager;
+    import com.rpgGame.app.manager.goods.ItemUseManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.core.events.MainPlayerEvent;
@@ -186,7 +187,8 @@
 			var item:ClientItemInfo=BackPackManager.instance.searchHPSuitDrugItem(toBuyGoods);
 			if(item!=null)     //搜索物品的时候已经做了CD判断
 			{
-				BackPackManager.instance.useItem(item.cfgId, item.qItem.q_bind);
+				//BackPackManager.instance.useItem(item.cfgId, item.qItem.q_bind);
+				ItemUseManager.useItem(item);
 			}
         }
     }
