@@ -620,6 +620,11 @@ package com.rpgGame.app.manager.fight
 			var numberColor : String = "";
 			switch (type)
 			{
+				case EnumHurtType.SUBHP: //减血血
+					typeRes="";
+					numberColor=NUMBER_PC_HPSUB;
+					showQueueAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenDiaoXue)
+					return;
 				case EnumHurtType.ADDHP: //回血
 					typeRes="";
 					numberColor=NUMBER_PC_HPREC;
