@@ -89,7 +89,7 @@ package com.client.process
 			GameLog.addShow("加载字体库完成...");
 
 			var loader : FontLoader = e.target as FontLoader;
-			const className : String = "FONT_WHOLE";
+			const className : String = "Font_hei_ti";
 			const fontName : String = "SimHei";
 			try
 			{
