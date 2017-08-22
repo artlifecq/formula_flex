@@ -47,7 +47,7 @@ package com.client
 			//初始UI引擎
 			initFeathers();
 			
-			ReportUtil.setup(6);
+//			ReportUtil.setup(6);
 		}
 
 		public static function initAway3D() : void
