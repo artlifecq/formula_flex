@@ -1,5 +1,6 @@
 package com.rpgGame.app.display3D
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
@@ -55,7 +56,7 @@ package com.rpgGame.app.display3D
 		private var defaultRotationY:int;
 		private var _roleData:RoleData;
 		
-		public static const SHOW_ROTATIONX:int=45;
+//		public static const SHOW_ROTATIONX:int=-GlobalConfig.mapCameraAngle;
 		
 		/**
 		 * 
@@ -68,7 +69,7 @@ package com.rpgGame.app.display3D
 			avatar3d=new InterObject3D();
 			_roleData= new RoleData(0);
 			this._role = SceneRole.create(SceneCharType.DUMMY, _roleData.id);
-			_role.rotationX = SHOW_ROTATIONX;
+			_role.rotationX = -GlobalConfig.mapCameraAngle;
 			this._role.data = _roleData;
 			avatar3d.setRenderUnit(_role);
 			_role.setScale(scale);
