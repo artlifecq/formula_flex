@@ -2,6 +2,7 @@ package com.rpgGame.app.sender
 {
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
+	import com.rpgGame.netData.npc.message.CSGatherFinishMessage;
 	import com.rpgGame.netData.npc.message.ReqNpcServicesMessage;
 	import com.rpgGame.netData.task.message.ReqfinishTaskMessage;
 	
@@ -36,7 +37,6 @@ package com.rpgGame.app.sender
 			SocketConnection.send(msg);
 		}
 		
-		
 		/**
 		 * 开始采集
 		 * @param tid 
@@ -47,6 +47,17 @@ package com.rpgGame.app.sender
 		{
 			var msg:ReqNpcServicesMessage = new ReqNpcServicesMessage();
 			msg.npcId=tid;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 结束采集
+		 * @param tid 
+		 */	
+		public static function sendFinishGatherMessage(tid:long):void
+		{
+			var msg:CSGatherFinishMessage = new CSGatherFinishMessage();
+			msg.gatherId=tid;
 			SocketConnection.send(msg);
 		}
 		

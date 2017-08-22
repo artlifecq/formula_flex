@@ -536,7 +536,9 @@ package com.rpgGame.app.fight.spell
 		}
 		
 		
-		private static var _sceneWarningID : Dictionary = new Dictionary(true);
+		//private static var _sceneWarningID : Dictionary = new Dictionary(true);
+		
+		private static var sceneWarningEffectObjID : int = 1;
 		/**
 		 * 添加预警特效
 		 * @param destX
@@ -590,7 +592,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.play(0,speed);
 				}else if (animatData.scene_res)
 				{
-					rud = new RenderParamData3D(1, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(sceneWarningEffectObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = false;
@@ -604,25 +606,10 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu, true);
 					
-					//					if (lifecycle > 0)
-					//					{
-					//						effectRu.lifecycle = lifecycle;
-					//						effectRu.setPlayCompleteCallBack(removeTrapFromScene, info.atkorID);
-					//						
-					//						var traps : Dictionary = _sceneTrapsByAtkorID[info.atkorID];
-					//						if (!traps)
-					//						{
-					//							traps = new Dictionary(true);
-					//							_sceneTrapsByAtkorID[info.atkorID] = traps;
-					//						}
-					//						traps[info.flySceneObjID] = effectRu;
-					//					}
-					//					else
-					//					{
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
-					//					}
 					effectRu.play(0,speed);
 				}
+				sceneWarningEffectObjID++;
 			}
 		}
 		

@@ -121,11 +121,11 @@
             var diffTime:int = (currTime - _memCheckTime);
             if (diffTime > 60000)
             {
-                if (_totalMem > 1300)
+                if (_totalMem > 1800)
                 {
                     if (currTime > _nextTooHighedTipTime)
                     {
-                        TipsInfoView2D.showAlert2D("检测到您的内存使用量过高，为保证游戏的流畅度和稳定，请重启浏览器再进入游戏。");
+                        TipsInfoView2D.showAlert2D("检测到您的内存使用量过高，为保证游戏的流畅度和稳定，请不要开3个端以上嘛！亲爱的！");
                         _nextTooHighedTipTime = (currTime + TimeUtil.HOUR_MICRO_SECONDS);
                     }
                 }

@@ -1,8 +1,8 @@
 package com.rpgGame.appModule.shop
 {
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.shop.backpackShop.BackpackShopRebuyView;
 	import com.rpgGame.appModule.shop.backpackShop.BackpackShopView;
 	import com.rpgGame.core.utils.MCUtil;

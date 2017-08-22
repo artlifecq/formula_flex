@@ -115,7 +115,7 @@ package com.rpgGame.app.ui.main.taskbar
 					{
 						///TaskMissionManager.flyTaskType=taskData.q_mission_mainType;
 						///TaskMissionManager.flyMissionType=taskData.q_mission_type;
-						SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,25,false,null,1)
+						SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,25,false,null,0,0)
 					}
 				}
 			}

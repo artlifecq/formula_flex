@@ -13,6 +13,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
@@ -46,6 +47,7 @@ package com.rpgGame.app.controller.keyboard
 					
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
+					AppManager.showAppNoHide(AppConstant.ALERT_TEXT_PANEL,"ssssssssssss");
 					break;
 				case "65": //A 自动挂机   挂机改到A去了
 					if (TrusteeshipManager.getInstance().isAutoFightRunning)
@@ -158,7 +160,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "66":
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();
-					TrusteeshipManager.getInstance().autoPickCtrl.DoShortcutPick();
+					PickAutoManager.getInstance().autoPickCtrl.DoShortcutPick();
 					break;
 				case "20":
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();

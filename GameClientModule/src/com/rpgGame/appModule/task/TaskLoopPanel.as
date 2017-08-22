@@ -207,7 +207,8 @@ package com.rpgGame.appModule.task
 						}
 						else
 						{
-							NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"银两不足，无法领取二倍奖励");
+							NoticeManager.showNotifyById(31009);
+							//NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"银两不足，无法领取二倍奖励");
 						}
 						break;
 					case 3:
@@ -218,7 +219,8 @@ package com.rpgGame.appModule.task
 						}
 						else
 						{
-							NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"元宝不足，无法领取三倍奖励");
+							NoticeManager.showNotifyById(31010);
+							//NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"元宝不足，无法领取三倍奖励");
 						}
 						
 						break;

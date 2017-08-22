@@ -12,6 +12,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.stall.StallManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -354,7 +355,7 @@ package com.rpgGame.app.state.role
 				if (!ref.isServerStop)
 				{
 					SceneSender.SendPlayerStopMessage(); //告诉服务器，停止移动。
-					TrusteeshipManager.getInstance().autoPickCtrl.SetPickingState(false);
+					PickAutoManager.getInstance().autoPickCtrl.SetPickingState(false);
 				}
 			}
 		}

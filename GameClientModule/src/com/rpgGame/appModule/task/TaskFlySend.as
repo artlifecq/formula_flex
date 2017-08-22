@@ -92,7 +92,7 @@ package com.rpgGame.appModule.task
 				var postPath:Array=TaskMissionManager.getTaskPathingByType(taskData.q_mission_mainType,0);
 				TaskMissionManager.flyTaskType=taskData.q_mission_mainType;
 				TaskMissionManager.flyMissionType=taskData.q_mission_type;
-				SceneSender.sceneMapTransport(postPath[0], postPath[1], postPath[2],25,false,null,1);
+				SceneSender.sceneMapTransport(postPath[0], postPath[1], postPath[2],25,false,null,0,0);
 			}
 			
 //			

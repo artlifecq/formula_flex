@@ -10,6 +10,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.utils.TextUtil;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
@@ -24,6 +25,8 @@ package com.rpgGame.appModule.dungeon.multy
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	
+	import utils.TimerServer;
 
 	/**
 	 *多人副本队伍投票面板
@@ -58,6 +61,7 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		private function addEvent():void
 		{
+			removeEvent();
 			EventManager.addEvent(DungeonEvent.ZONE_TEAM_VOTE,teamVote);
 		}
 		private function removeEvent():void
@@ -70,20 +74,16 @@ package com.rpgGame.appModule.dungeon.multy
 			switch (target) {
 				case _skin.btnOk:
 					DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,1);
+					TimerServer.remove(updateTime);
+					_skin.btnCancel.label="拒 绝";
 					_skin.btnOk.isEnabled=false;
 					_skin.btnCancel.isEnabled=false;
 					break;
 				case _skin.btnCancel:
-					DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,0);
-					_skin.btnOk.isEnabled=false;
-					_skin.btnCancel.isEnabled=false;
+					cancel();
 					break;
 				case _skin.btnClose:
-					if(!DungeonManager.isVote(MainRoleManager.actorInfo.serverID))
-					{
-						DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,0);
-					}
-					this.hide();
+					cancel();
 					break;
 			}
 			
@@ -93,7 +93,7 @@ package com.rpgGame.appModule.dungeon.multy
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			addEvent();
 			initVote();
-			
+			setTime();
 		}
 		override public function hide():void
 		{
@@ -182,6 +182,39 @@ package com.rpgGame.appModule.dungeon.multy
 				
 			}
 		}
+		private var remainTime:int;
+		private function setTime():void
+		{
+			var rTime:int=GlobalSheetData.getSettingInfo(850)!=null?GlobalSheetData.getSettingInfo(850).q_int_value:20;
+			if(rTime<=0){
+				_skin.btnCancel.label="拒 绝";
+			}else{
+				remainTime=rTime;
+				_skin.btnCancel.label="拒绝("+remainTime.toString()+")";
+				TimerServer.remove(updateTime);
+				TimerServer.addLoop(updateTime,1000);
+			}
+		}
+		private function updateTime():void
+		{
+			remainTime--;
+			_skin.btnCancel.label="拒绝("+remainTime.toString()+")";
+			if(remainTime==0){
+				cancel();
+			}
+		}
+		
+		private function cancel():void
+		{
+			TimerServer.remove(updateTime);
+			if(!DungeonManager.isVote(MainRoleManager.actorInfo.serverID))
+			{
+				DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,0);
+			}
+			hide();
+		}
+		
+		
 		/**自己投票*/
 		private function changeVoteButton():void
 		{
