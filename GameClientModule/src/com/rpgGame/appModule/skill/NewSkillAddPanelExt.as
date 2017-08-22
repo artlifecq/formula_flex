@@ -82,7 +82,8 @@ package  com.rpgGame.appModule.skill
 		}
 		private function onTimer():void
 		{
-			var left:int=(_endTime-getTimer())/1000;
+			var diff:Number=_endTime-getTimer();
+			var left:int=Math.ceil((diff)/1000);
 			if (left>0) 
 			{
 				_skin.lbTime.text=left+"后自动关闭";
@@ -101,6 +102,8 @@ package  com.rpgGame.appModule.skill
 		private function start(skill:SkillInfo):void
 		{
 			reset();
+			_skin.gGai.visible=true;
+			_skin.bg.visible=true;
 			this._skill=skill;
 			_flyIcon.styleName=ClientConfig.getSkillIcon(SpellDataManager.getSpellData(skill.skillModelId).q_icon,48);
 			_icon.setIconResName(ClientConfig.getSkillIcon(SpellDataManager.getSpellData(skill.skillModelId).q_icon,IcoSizeEnum.ICON_64));
@@ -128,6 +131,7 @@ package  com.rpgGame.appModule.skill
 		}
 		private function toMis():void
 		{
+			_skin.bg.visible=false;
 			_flyIcon.x=_flyStartPt.x;
 			_flyIcon.y=_flyStartPt.y;
 			
@@ -164,7 +168,7 @@ package  com.rpgGame.appModule.skill
 			TweenLite.killTweensOf(_obj);
 			TweenLite.killTweensOf(_maskSprite);
 			TweenLite.killTweensOf(_flyIcon);
-			_skin.gGai.visible=true;
+			
 			
 		
 			MCUtil.removeSelf(_flyIcon);
