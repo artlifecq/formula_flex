@@ -171,7 +171,7 @@ package com.rpgGame.app.state.role
 				if (nowTime - RoleStateUtil.lastWalkTime < RoleStateUtil.WALK_DELAY)
 				{
 					Lyt.a("寻路太频繁");
-					TweenLite.delayedCall(RoleStateUtil.WALK_DELAY*0.001, doWalkTo, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite]);//寻路太频繁并不是不处理了，可以延时执行
+//					TweenLite.delayedCall(RoleStateUtil.WALK_DELAY*0.001, doWalkTo, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite]);//寻路太频繁并不是不处理了，可以延时执行
 					return false;
 				}
 			}
