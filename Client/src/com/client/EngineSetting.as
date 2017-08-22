@@ -8,6 +8,7 @@ package com.client
 	import away3d.Away3D;
 	import away3d.containers.PlanarContainer3D;
 	import away3d.debug.AwayStats;
+	import away3d.debug.ReportUtil;
 	import away3d.enum.LoadPriorityType;
 	import away3d.loaders.multi.MultiUrlLoadManager;
 	import away3d.utils.SoundUtil;
@@ -46,7 +47,7 @@ package com.client
 			//初始UI引擎
 			initFeathers();
 			
-//			ReportUtil.setup(6);
+			ReportUtil.setup(6);
 		}
 
 		public static function initAway3D() : void
@@ -68,7 +69,7 @@ package com.client
 			MultiUrlLoadManager.getUrlWithVersion = VersionUtils.getVersionPath;
 			
 			Away3D.PURE_COLOR_PASS = false;
-			Away3D.MIN_HEAP_SIZE = 188743680;
+			Away3D.MIN_HEAP_SIZE = 104857600;//给heap分配100兆的空间  1024*1024*100
 			MultiUrlLoadManager.maxQueueSize = 3;
 			
 			SoundUtil.volume = 1;
