@@ -100,6 +100,8 @@ package com.rpgGame.appModule.mail
 						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,  "请选择要删除的邮件");
 					}
 					else{
+						if(_mailReadPanel&&_mailReadPanel.visible==true)
+							_mailReadPanel.hide();
 						MailSender.reqDeletAllMailMessage(_selectItemList);
 					}
 					break;
