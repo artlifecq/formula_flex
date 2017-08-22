@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.task
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.WelcomeManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -113,6 +114,10 @@ package com.rpgGame.app.manager.task
 			_isTaskRunning = true;
 			resetTechTime();
 			taskWalk();
+			
+			if(TaskType.MAINTYPE_MAINTASK==_taskType){
+				WelcomeManager.desoryWelcome();
+			}
 		}
 		
 		

@@ -1,8 +1,5 @@
 package com.rpgGame.app.ui.main.taskbar
 {
-	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.HuBaoManager;
-	import com.rpgGame.app.manager.SystemSetManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -12,20 +9,14 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.main.head.NpcSpeakBubble;
 	import com.rpgGame.app.utils.TaskUtil;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.TaskType;
-	import com.rpgGame.netData.task.bean.NoMainTaskInfo;
 	
 	import away3d.events.Event;
 	
@@ -36,7 +27,6 @@ package com.rpgGame.app.ui.main.taskbar
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
-	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
 	import starling.display.DisplayObject;
 	
@@ -140,6 +130,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			EventManager.addEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
 			EventManager.addEvent(TaskEvent.TASK_DROP,dropTask);
+			EventManager.addEvent(TaskEvent.SWITCH_TASK_BAR,setState);
 
 			
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
@@ -147,8 +138,8 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
-			_skin.chkAuto.addEventListener(Event.CHANGE,checkChangeHandler)
-			_skin.chkAuto1.addEventListener(Event.CHANGE,check1ChangeHandler)
+			_skin.chkAuto.addEventListener(Event.CHANGE,checkChangeHandler);
+			_skin.chkAuto1.addEventListener(Event.CHANGE,check1ChangeHandler);
 		}
 		private function removeEvent():void
 		{
@@ -162,6 +153,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
+			EventManager.removeEvent(TaskEvent.SWITCH_TASK_BAR,setState);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			_skin.chkAuto.removeEventListener(Event.CHANGE,checkChangeHandler)
 			_skin.chkAuto1.removeEventListener(Event.CHANGE,check1ChangeHandler)

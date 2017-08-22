@@ -149,6 +149,8 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_BOSS_RESULT:String = createAppInfo("activety.boss.BossFightSuccessPanel","activety");
 		/** 活动开启 **/
 		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
+		/** 欢迎 **/
+		public static var WELCOME_PANEL:String = createAppInfo("huanying.WelcomePanel","huanying");
 		
 		/**
 		 *天降礼金排行榜

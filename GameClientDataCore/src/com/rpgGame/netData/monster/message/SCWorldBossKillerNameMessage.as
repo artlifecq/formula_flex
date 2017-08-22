@@ -1,4 +1,5 @@
 package com.rpgGame.netData.monster.message{
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -18,6 +19,9 @@ package com.rpgGame.netData.monster.message{
 		//击杀者名字
 		private var _killerName: String;
 		
+		//击杀者ID
+		private var _killerId: long;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -27,6 +31,8 @@ package com.rpgGame.netData.monster.message{
 			writeInt(_activityId);
 			//击杀者名字
 			writeString(_killerName);
+			//击杀者ID
+			writeLong(_killerId);
 			return true;
 		}
 		
@@ -38,6 +44,8 @@ package com.rpgGame.netData.monster.message{
 			_activityId = readInt();
 			//击杀者名字
 			_killerName = readString();
+			//击杀者ID
+			_killerId = readLong();
 			return true;
 		}
 		
@@ -77,6 +85,21 @@ package com.rpgGame.netData.monster.message{
 		 */
 		public function set killerName(value: String): void{
 			this._killerName = value;
+		}
+		
+		/**
+		 * get 击杀者ID
+		 * @return 
+		 */
+		public function get killerId(): long{
+			return _killerId;
+		}
+		
+		/**
+		 * set 击杀者ID
+		 */
+		public function set killerId(value: long): void{
+			this._killerId = value;
 		}
 		
 	}

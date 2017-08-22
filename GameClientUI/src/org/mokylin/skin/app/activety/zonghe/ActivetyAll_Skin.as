@@ -252,7 +252,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xEAEABC;
 			temp.width = 110;
 			temp.x = 694;
-			temp.y = 529;
+			temp.y = 535;
 			return temp;
 		}
 
@@ -269,9 +269,9 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.letterSpacing = 0;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 297;
-			temp.x = 576;
-			temp.y = 425;
+			temp.width = 350;
+			temp.x = 578;
+			temp.y = 432;
 			return temp;
 		}
 

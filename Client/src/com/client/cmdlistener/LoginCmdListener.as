@@ -4,15 +4,16 @@ package com.client.cmdlistener
 	import com.client.ui.alert.GameAlert;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
 	import com.rpgGame.netData.login.message.ResErrorMessage;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	import com.rpgGame.netData.login.message.ResLoginSuccessMessage;
 	import com.rpgGame.netData.login.message.ResSubstituteMessage;
+	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	
-	import away3d.log.Log;
-	
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.net.MessageMgr;
 
@@ -58,6 +59,14 @@ package com.client.cmdlistener
 			SocketConnection.addCmdListener(100104, RecvErrorMessage);
 //			SocketConnection.addCmdListener(100106, RecvHeartMessage);
 			SocketConnection.addCmdListener(103101, RecvMyPlayerInfoMessage);
+			SocketConnection.addCmdListener(103111, changePlayerName);
+		}
+		
+		private static function changePlayerName(msg:ResChangePlayerNameToClientMessage):void
+		{
+			if(msg.playerId.ToGID()==ClientConfig.loginData.personId.ToGID()){
+				EventManager.dispatchEvent(CharAttributeType.CHANGE_NAME,msg);
+			}
 		}
 		
 		private static function RecvResSubstituteMessage(msg:ResSubstituteMessage):void
