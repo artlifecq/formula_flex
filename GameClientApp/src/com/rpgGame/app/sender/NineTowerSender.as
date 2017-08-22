@@ -9,6 +9,11 @@ package com.rpgGame.app.sender
 
 	public class NineTowerSender extends BaseSender
 	{
+		public static function reqTrackFlagPlayer():void
+		{
+			var msg:CSGetPlayerPostionMessage=new CSGetPlayerPostionMessage();
+			SocketConnection.send(msg);
+		}
 		public static function reqPanelData():void
 		{
 			var msg:CSOpenYaoTaPanelMessage=new CSOpenYaoTaPanelMessage();
