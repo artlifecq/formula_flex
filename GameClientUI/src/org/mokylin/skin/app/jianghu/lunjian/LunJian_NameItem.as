@@ -37,7 +37,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			
 			this.currentState = "normal";
 			this.height = 31;
-			this.width = 155;
+			this.width = 145;
 			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),selectedBtn_i(),lbName_i(),lbLevel_i(),numBg_i(),lbNum_i()];
 			
 			states = {
@@ -53,6 +53,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jianghu/lunjian/tiaoan.png";
+			temp.width = 145;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -100,8 +101,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 20;
-			temp.x = 131;
-			temp.y = 8;
+			temp.x = 123;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -111,8 +112,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			numBg = temp;
 			temp.name = "numBg";
 			temp.styleName = "ui/common/tubiao/szq.png";
-			temp.x = 129;
-			temp.y = 6;
+			temp.x = 122;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -124,7 +125,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.groupName = "radioGroup1";
 			temp.height = 31;
 			temp.styleClass = org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
-			temp.width = 155;
+			temp.width = 145;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
