@@ -118,7 +118,6 @@ package com.rpgGame.app.state.role
 				ref.setParams(info.speed, 0, null, info);
 				ref.overrideType = StateRefOverrideType.ATTACH;
 				ref.onMove(onWalkMove);
-				ref.onArrive(onMoveEnd);
 				if (ref.throughFuncArgs && ref.throughFuncArgs.length > 0)
 					ref.onThrough(onWalkThrough, ref.throughFuncArgs[0]);
 				else
