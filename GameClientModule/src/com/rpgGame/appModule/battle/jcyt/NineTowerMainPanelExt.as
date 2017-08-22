@@ -100,7 +100,10 @@ package com.rpgGame.appModule.battle.jcyt
 	
 			
 			var state:int=arg[0];
+			var bool:Boolean=state==1;
 			showRewardEffect(state==1);
+			_skin.btnOpen.visible=!bool;
+			_skin.btnStart.visible=bool;
 		}
 		private function addEft(render:RenderUnit3D):void
 		{
@@ -108,6 +111,7 @@ package com.rpgGame.appModule.battle.jcyt
 		}
 		private function showRewardEffect(bool:Boolean):void
 		{
+		
 			if (bool) 
 			{
 				if (!_eff) 
