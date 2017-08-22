@@ -7,7 +7,6 @@ package com.client.process
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
-	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -31,17 +30,17 @@ package com.client.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
-			if(ClientConfig.isRelease){
-				var nowName:String= ClientConfig.loginData.name;
-				var index:int=nowName.indexOf("]");
-				nowName=nowName.substring(index+1);
-				var oldName:String=ClientConfig.loginName;
-				if(oldName==nowName){
-					EventManager.addEvent(CharAttributeType.CHANGE_NAME,getChangeName);
-					randomName();
-					return;
-				}
+//			if(ClientConfig.isRelease){
+			var nowName:String= ClientConfig.loginData.name;
+			var index:int=nowName.indexOf("]");
+			nowName=nowName.substring(index+1);
+			var oldName:String=ClientConfig.loginName;
+			if(oldName==nowName){
+				EventManager.addEvent(CharAttributeType.CHANGE_NAME,getChangeName);
+				randomName();
+				return;
 			}
+//			}
 			completeProcess();
 		}
 		
