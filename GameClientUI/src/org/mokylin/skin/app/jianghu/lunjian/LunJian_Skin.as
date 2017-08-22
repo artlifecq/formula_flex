@@ -39,7 +39,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
+			this.height = 601;
 			this.width = 956;
 			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),pageList_i(),btnP_i(),btnN_i(),btnShuoming_i()];
 			
@@ -55,18 +55,16 @@ package org.mokylin.skin.app.jianghu.lunjian
 		private function __LunJian_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 485;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 156;
-			temp.x = 24;
-			temp.y = 89;
+			temp.styleName = "ui/app/jianghu/lunjian/shubg.jpg";
+			temp.x = 22;
+			temp.y = 86;
 			return temp;
 		}
 
 		private function __LunJian_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jianghu/lunjian/lj.png";
+			temp.styleName = "ui/app/jianghu/lunjian/lunjian.png";
 			temp.x = 450;
 			temp.y = 17;
 			return temp;
@@ -84,8 +82,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			btnN = temp;
 			temp.name = "btnN";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 900;
-			temp.y = 301;
+			temp.x = 896;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -96,8 +94,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "btnP";
 			temp.scaleX = -1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 219;
-			temp.y = 302;
+			temp.x = 224;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -117,11 +115,11 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.List = new feathers.controls.List();
 			list_map = temp;
 			temp.name = "list_map";
-			temp.height = 479;
+			temp.height = 494;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 148;
-			temp.x = 29;
-			temp.y = 93;
+			temp.width = 161;
+			temp.x = 24;
+			temp.y = 90;
 			temp.layout = __LunJian_Skin_VerticalLayout1_i();
 			return temp;
 		}
@@ -133,8 +131,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "pageList";
 			temp.height = 481;
 			temp.width = 748;
-			temp.x = 183;
-			temp.y = 88;
+			temp.x = 191;
+			temp.y = 95;
 			return temp;
 		}
 
