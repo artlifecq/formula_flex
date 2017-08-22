@@ -264,8 +264,8 @@ package org.mokylin.skin.app.meiren
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 106;
-			temp.x = 78;
+			temp.width = 223;
+			temp.x = 20;
 			temp.y = 3;
 			return temp;
 		}
@@ -275,7 +275,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLevel = temp;
 			temp.name = "uiLevel";
-			temp.styleName = "ui/app/meiren/jieshu/12.png";
+			temp.styleName = "ui/mainui/meirenHead/jieshu/12.png";
 			temp.x = 267;
 			temp.y = 49;
 			return temp;

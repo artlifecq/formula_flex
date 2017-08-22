@@ -6,6 +6,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
@@ -16,12 +17,14 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import gs.TweenLite;
@@ -70,7 +73,7 @@ package com.rpgGame.appModule.pet
 			this._data=data;
 			initModEff();
 			if(data.rank>=_qPet.q_max_grade) return;
-			_skin.uiLevel.styleName="ui/app/meiren/jieshu/"+data.rank+".png";
+			_skin.uiLevel.styleName="ui/mainui/meirenHead/jieshu/"+data.rank+".png";
 			updateNeedItems();
 			updateBlessData();
 			setAutoState(false);		
@@ -99,10 +102,18 @@ package com.rpgGame.appModule.pet
 			}
 			_skin.barJindu.maximum=_petAdvConfig.q_blessnum_limit;
 		}
-		private function updateBlessData():void
+		private function updateBlessData(isShow:Boolean=false):void
 		{
 			_skin.barJindu.maximum=_petAdvConfig.q_blessnum_limit;
 			_skin.lbJindu.text=_data.rankExp+"/"+_petAdvConfig.q_blessnum_limit;
+			if(isShow)
+			{
+				var vaule:int=_data.rankExp-_skin.barJindu.value;
+				if(vaule!=0){
+					var str:String=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+"+vaule);
+					FloatingText.showUp(str,_skin.lbJindu);
+				}
+			}
 			_skin.barJindu.value=_data.rankExp;
 			updateItem();
 		}
@@ -170,7 +181,7 @@ package com.rpgGame.appModule.pet
 			if (_skin.cboxTip.isSelected==false&&itemNum<_needItemNum)
 			{
 				//				FloatingText.showUp("材料不足");
-				NoticeManager.showNotifyById(9002,itemName);
+				NoticeManager.showNotifyById(9002,"",itemName);
 				return false;
 			}
 			PetSender.reqPetLevelUp(_data.modelId,1,_skin.cboxTip.isSelected?1:0);
@@ -221,11 +232,11 @@ package com.rpgGame.appModule.pet
 			var isSuccess:int=arg[2];
 			if (petId==_data.modelId) 
 			{
-				updateBlessData();
+				updateBlessData(true);
 				//成功了停止自动进阶
 				if (isSuccess==1) 
 				{
-					UIPopManager.showAlonePopUI(CenterEftPop,"ui_jichengchenggong");
+					UIPopManager.showAlonePopUI(CenterEftPop,"ui_jinjiechenggongchenggong_01");
 					if (_isAutoState) 
 					{
 						setAutoState(false);

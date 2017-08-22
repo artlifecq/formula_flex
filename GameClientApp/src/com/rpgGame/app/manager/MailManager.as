@@ -369,6 +369,16 @@ package com.rpgGame.app.manager
 			return null;
 		}
 		
+		public static function getNextMail(id:long):MailBriefInfo
+		{
+			if(_allMailList==null||_allMailList.length<=0) return null;
+			for(var i:int=0;i<_allMailList.length;i++)
+			{
+				if(id.EqualTo(_allMailList[i].mailInfoId)&&i+1<_allMailList.length) return _allMailList[i+1];
+			}
+			return null;
+		}
+		
 		//获取未读邮件的数量
 		public static function getNewMailNum():int
 		{

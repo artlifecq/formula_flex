@@ -8,9 +8,11 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.junjie.JunJiePanelExt;
 	import com.rpgGame.appModule.xinfa.XinFaMainPanelExt;
 	import com.rpgGame.appModule.zhangong.ZhanGongPanelExt;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.beibao_Skin;
 	import org.mokylin.skin.app.beibao.daohang_Skin;
 	import org.mokylin.skin.app.beibao.button.ButtonJingmai;
@@ -53,5 +55,23 @@ package com.rpgGame.appModule.role
 			addNode(RTNodeID.MAINROLE,RTNodeID.ZG,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZHANGONG).button,140,ZhanGongManager.getCanUp,false,null,true);
 			addNode(RTNodeID.MAINROLE,RTNodeID.JJ,_tabBar.getTabDataByTabKey(EmFunctionID.Em_JUNJIE).button,140,JunJieManager.ins.getCanActivation,false,null,true);
 		}
+		
+//		override protected function onShow():void
+//		{
+//			super.onShow();
+//			EventManager.addEvent(ItemEvent.ITEM_RECLAIM_ADD,setPanelState);
+//			EventManager.addEvent(ItemEvent.ITEM_RECLAIM_CANCEL,setPanelState);
+//		}
+//		override protected function onHide():void
+//		{
+//			super.onHide();
+//			EventManager.removeEvent(ItemEvent.ITEM_RECLAIM_ADD,setPanelState);
+//			EventManager.removeEvent(ItemEvent.ITEM_RECLAIM_CANCEL,setPanelState);
+//		}
+//		
+//		private function setPanelState(bool:Boolean):void
+//		{
+//			this.setBg(bool);
+//		}
 	}
 }

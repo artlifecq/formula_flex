@@ -158,7 +158,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.fontSize = 14;
 			temp.text = "Lv0";
 			temp.textAlign = "left";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 5;
@@ -174,7 +174,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.fontSize = 14;
 			temp.text = "Lv1";
 			temp.textAlign = "right";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 157;
@@ -187,12 +187,13 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 1;
 			temp.fontSize = 14;
 			temp.text = "BOSS名";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
 			temp.width = 82;
 			temp.x = 0;
 			temp.y = 4;
@@ -222,7 +223,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.fontSize = 14;
 			temp.text = "3/9";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xFFFFFF;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 86;
 			temp.x = 69;
@@ -285,9 +286,11 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiDian = temp;
 			temp.name = "uiDian";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/common/tubiao/tishi.png";
-			temp.x = 128;
-			temp.y = 173;
+			temp.x = 129;
+			temp.y = 172;
 			return temp;
 		}
 
