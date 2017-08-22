@@ -5,6 +5,7 @@ package com.client.process
 	import com.gameClient.utils.RandomNick;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	
@@ -31,10 +32,10 @@ package com.client.process
 		{
 			super.startProcess();
 			if(ClientConfig.isRelease){
-				var oldName:String= ClientConfig.loginData.name;
-				var index:int=oldName.indexOf("]");
-				oldName=oldName.substring(index+1);
-				var nowName:String=ClientConfig.loginName;
+				var nowName:String= ClientConfig.loginData.name;
+				var index:int=nowName.indexOf("]");
+				nowName=nowName.substring(index+1);
+				var oldName:String=ClientConfig.loginName;
 				if(oldName==nowName){
 					EventManager.addEvent(CharAttributeType.CHANGE_NAME,getChangeName);
 					randomName();
@@ -51,10 +52,10 @@ package com.client.process
 			LoginSender.reqLoginChangeName(newname);			
 		}
 		
-		private function getChangeName(msg:ResChangePlayerNameToClientMessage):void
+		private function getChangeName(msg:ResRoundPlayerChangeNameMessage):void
 		{
-			if(msg.result==1){
-				ClientConfig.loginData.name=msg.newname;
+			if(msg.success==1){
+				ClientConfig.loginData.name=msg.name;
 				EventManager.removeEvent(CharAttributeType.CHANGE_NAME,getChangeName);
 				completeProcess();
 			}else{
