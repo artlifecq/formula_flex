@@ -32,11 +32,13 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.TrusteeshipManager;
     import com.rpgGame.app.manager.chat.ChatManager;
+    import com.rpgGame.app.manager.role.DropGoodsManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.task.TaskAutoManager;
     import com.rpgGame.app.manager.task.TouJingManager;
+    import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
     import com.rpgGame.app.sender.SceneSender;
@@ -65,6 +67,8 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.netData.backpack.bean.TempItemInfo;
+    import com.rpgGame.netData.drop.bean.RollItemInfo;
     import com.rpgGame.netData.map.bean.DropGoodsInfo;
     
     import flash.display.BitmapData;
@@ -142,11 +146,28 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
 			this._funcs["&Whosyourdaddy".toLowerCase()] = this.whosyourdaddy;
+			this._funcs["&testRoll".toLowerCase()] = this.testRoll;
             
             // cross
             this._funcs["&enterCross".toLowerCase()] = this.enterCross;
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
+		
+		private function testRoll():void
+		{
+			var info:RollItemInfo=new RollItemInfo();
+			info.uniqueId=new long(1);
+			var temp:TempItemInfo=new TempItemInfo();
+			temp.isbind=0;
+			temp.itemId=new long(10000);
+			temp.job=0;
+			temp.mod=10000;
+			temp.num=10;
+			temp.ltime=SystemTimeManager.curtTm/1000+10000;
+			info.tempItemInfo=temp;
+			
+			DropGoodsManager.getInstance().addRollGoods(info);
+		}
 		
 		private function testRibbon():void
 		{
@@ -957,7 +978,7 @@ package com.rpgGame.app.manager.shell
             var data:SceneDropGoodsData=new SceneDropGoodsData();
 			var info:DropGoodsInfo=new DropGoodsInfo();
 			info.ownerId=new long();
-			info.itemModelId=5091;
+			info.itemModelId=5088;
 			info.dropGoodsId=new long();
 			info.x=MainRoleManager.actor.x;
 			info.y=MainRoleManager.actor.z;

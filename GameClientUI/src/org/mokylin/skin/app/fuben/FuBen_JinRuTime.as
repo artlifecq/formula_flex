@@ -12,6 +12,11 @@ package org.mokylin.skin.app.fuben
 	 */
 	public class FuBen_JinRuTime extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var name:feathers.controls.UIAsset;
+
 		public var numTime:feathers.controls.UINumber;
 
 
@@ -25,7 +30,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 107;
 			this.width = 299;
-			this.elementsContent = [__FuBen_JinRuTime_UIAsset1_i(),__FuBen_JinRuTime_UIAsset2_i(),numTime_i()];
+			this.elementsContent = [__FuBen_JinRuTime_UIAsset1_i(),name_i(),numTime_i()];
 			
 			states = {
 			};
@@ -46,9 +51,11 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function __FuBen_JinRuTime_UIAsset2_i():feathers.controls.UIAsset
+		private function name_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			name = temp;
+			temp.name = "name";
 			temp.styleName = "ui/app/fuben/jijiangjinrufuben.png";
 			temp.x = 57;
 			temp.y = 23;
@@ -63,6 +70,7 @@ package org.mokylin.skin.app.fuben
 			temp.height = 32;
 			temp.label = "5";
 			temp.styleClass = org.mokylin.skin.app.fuben.uinumber.UINumberTime;
+			temp.textAlign = "center";
 			temp.width = 67;
 			temp.x = 112;
 			temp.y = 52;

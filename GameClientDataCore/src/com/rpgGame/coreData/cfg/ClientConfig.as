@@ -509,6 +509,9 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getAvatar(avatarName : String) : String
 		{
+			if(avatarName.indexOf(eName_AWD)!=-1){
+				return avatarName;
+			}
 			var url : String = "avatar/" + avatarName + eName_AWD;
 			return baseDir + resURL + url;
 		}
@@ -521,6 +524,9 @@ package com.rpgGame.coreData.cfg
 		
 		public static function getFightSoul(avatarName : String) : String
 		{
+			if(avatarName.indexOf(eName_AWD)!=-1){
+				return avatarName;
+			}
 			var url : String = "avatar/pc/fightsoul/" + avatarName + eName_AWD;
 			return baseDir + resURL + url;
 		}
@@ -533,6 +539,9 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getZhanqi(res:String):String
 		{
+			if(res.indexOf(eName_AWD)!=-1){
+				return res;
+			}
 			var url : String = "avatar/pc/flag/"+res+ eName_AWD;
 			return baseDir + resURL + url;
 		}
@@ -544,6 +553,9 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getEffect(effectName : String) : String
 		{
+			if(effectName.indexOf(eName_AWD)!=-1){
+				return effectName;
+			}
 			var url : String = "effect/" + effectName + eName_AWD;
 			return baseDir + resURL + url;
 		}

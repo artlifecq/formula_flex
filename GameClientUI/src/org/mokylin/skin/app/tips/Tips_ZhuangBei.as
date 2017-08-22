@@ -398,7 +398,7 @@ package org.mokylin.skin.app.tips
 			uiKuang = temp;
 			temp.name = "uiKuang";
 			temp.height = 488;
-			temp.styleName = "ui/common/hover/liangkuang2.png";
+			temp.styleName = "ui/common/hover/tipsgaoxian.png";
 			temp.width = 280;
 			temp.x = 0;
 			temp.y = 0;

@@ -403,8 +403,8 @@ package org.mokylin.skin.app.meiren
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/app/meiren/icon/guangqiu.png";
-			temp.x = 48;
-			temp.y = 309;
+			temp.x = 96;
+			temp.y = -18;
 			return temp;
 		}
 
@@ -414,8 +414,8 @@ package org.mokylin.skin.app.meiren
 			icon2 = temp;
 			temp.name = "icon2";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 0;
-			temp.y = 235;
+			temp.x = 26;
+			temp.y = 75;
 			return temp;
 		}
 
@@ -425,8 +425,8 @@ package org.mokylin.skin.app.meiren
 			icon3 = temp;
 			temp.name = "icon3";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 33;
-			temp.y = 129;
+			temp.x = 13;
+			temp.y = 200;
 			return temp;
 		}
 
@@ -436,8 +436,8 @@ package org.mokylin.skin.app.meiren
 			icon4 = temp;
 			temp.name = "icon4";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 105;
-			temp.y = 35;
+			temp.x = 86;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -447,8 +447,8 @@ package org.mokylin.skin.app.meiren
 			icon5 = temp;
 			temp.name = "icon5";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 215;
-			temp.y = 0;
+			temp.x = 209;
+			temp.y = 343;
 			return temp;
 		}
 
@@ -458,8 +458,8 @@ package org.mokylin.skin.app.meiren
 			icon6 = temp;
 			temp.name = "icon6";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 314;
-			temp.y = 35;
+			temp.x = 332;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -469,8 +469,8 @@ package org.mokylin.skin.app.meiren
 			icon7 = temp;
 			temp.name = "icon7";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 384;
-			temp.y = 129;
+			temp.x = 404;
+			temp.y = 197;
 			return temp;
 		}
 
@@ -480,8 +480,8 @@ package org.mokylin.skin.app.meiren
 			icon8 = temp;
 			temp.name = "icon8";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 420;
-			temp.y = 233;
+			temp.x = 394;
+			temp.y = 74;
 			return temp;
 		}
 
@@ -491,8 +491,8 @@ package org.mokylin.skin.app.meiren
 			icon9 = temp;
 			temp.name = "icon9";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 349;
-			temp.y = 331;
+			temp.x = 324;
+			temp.y = -16;
 			return temp;
 		}
 

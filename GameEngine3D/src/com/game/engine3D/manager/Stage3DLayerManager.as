@@ -3,7 +3,6 @@ package com.game.engine3D.manager
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.core.StarlingLayer;
-	import com.game.engine3D.utils.UnCatchErrorReport;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
@@ -363,8 +362,8 @@ package com.game.engine3D.manager
 			var height : Number = _viewHeight || _stage.stageHeight;
 			
 			_stage3DProxy.hackViewSize(width, height);
-			var hackedWidth : Number = _stage3DProxy.width;
-			var hackedHeight : Number = _stage3DProxy.height;
+			var hackedWidth : Number = _stage3DProxy.backBufferWidth;
+			var hackedHeight : Number = _stage3DProxy.backBufferHeight;
 			
 			//防止最小化，stageWidth,stageHeight为0
 			if (width <= 1 || height <= 1)

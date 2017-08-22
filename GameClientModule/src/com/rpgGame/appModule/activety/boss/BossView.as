@@ -24,11 +24,10 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	
+	import flash.text.FontType;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
@@ -84,7 +83,7 @@ package com.rpgGame.appModule.activety.boss
 			rewardIcon=new Vector.<IconCDFace>();
 			
 			_richText= RichTextArea3D.getFromPool();
-			_richText.setSize(180);
+			_richText.setSize(_skin.lastSkiller.width);
 			_richText.breakLineManual = true;
 			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
 			_richText.wordWrap = false;
@@ -93,13 +92,15 @@ package com.rpgGame.appModule.activety.boss
 			_defaultFormat = new TextFormat(Fontter.FONT_Hei);
 			_defaultFormat.color = StaticValue.GREEN_TEXT;
 			_defaultFormat.size = 14;
-			_defaultFormat.align = TextFieldAutoSize.LEFT;
+			_defaultFormat.align = TextFieldAutoSize.CENTER;
 			_defaultFormat.letterSpacing = 1;
 			_defaultFormat.leading = 4;
 			_richText.defaultTextFormat = _defaultFormat;
+			_richText.filters=Fontter.filterObj["textFilterBlackGreen"];
 			this.addChild(_richText);
-			_richText.x=692;
-			_richText.y=390;
+			_richText.x=_skin.lastSkiller.x;
+			_richText.y=_skin.lastSkiller.y;
+			_skin.lastSkiller.visible=false;
 		}
 		
 		
@@ -164,7 +165,7 @@ package com.rpgGame.appModule.activety.boss
 		private function onUpateAvatarScale(role:SceneRole,id:int):void
 		{
 			if(role&&_avatar.role&&_avatar.role==role&&id==RenderUnitID.BODY){
-				this._avatar.setScale(Number(selectedInfo.worldBossCfg.q_monster_scale));	
+				this._avatar.scaleRole=Number(selectedInfo.worldBossCfg.q_monster_scale);	
 			}
 		}
 		

@@ -1,21 +1,14 @@
 package com.rpgGame.app.ui.main.chat
 {
 	import com.rpgGame.app.manager.chat.ChatManager;
-	import com.rpgGame.app.richText.RichTextCustomUtil;
-	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
-	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	import flash.utils.getTimer;
 	
-	import away3d.events.Event;
-	
-	import feathers.controls.Scroller;
-	import feathers.controls.ToggleButton;
 	import feathers.controls.text.Fontter;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;

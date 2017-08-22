@@ -1,12 +1,15 @@
 package com.rpgGame.app.ui.roll
 {
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -23,6 +26,7 @@ package com.rpgGame.app.ui.roll
 	import gs.TweenLite;
 	import gs.easing.Linear;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.roll.Roll_Skin;
 	
@@ -31,6 +35,8 @@ package com.rpgGame.app.ui.roll
 	
 	public class RollPane extends SkinUI implements IAnimatable
 	{
+		private var stopTimes:Array=[0,4,1,1.84,3.377,4.774];//1,2,4,5,6,2
+		
 		private var _roleItem:RollItemInfo;
 		private var _roleskin:Roll_Skin;
 		private var _startNum:Number;
@@ -42,7 +48,7 @@ package com.rpgGame.app.ui.roll
 		public function RollPane(data:RollItemInfo):void
 		{
 			_roleItem = data;
-//			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
+			//			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
 			_roleskin = new Roll_Skin();
 			super(_roleskin);
 			init();	
@@ -100,7 +106,20 @@ package com.rpgGame.app.ui.roll
 			_roleskin.listItem.itemRendererType = RollGetScoreCell;
 			_roleskin.btnRandom.addEventListener(Event.TRIGGERED,randomclickHandler);
 			_isRandomEnd = false;
+			
+			this.playInter3DAt(ClientConfig.getEffect("ui_shaizi"),_roleskin.btnRandom.x+14,_roleskin.btnRandom.y+15,0,null,addComple);
+			
 			updateView();
+		}
+		
+		private function addComple(render:RenderUnit3D):void
+		{
+			this.saiziRender=render;
+			this.saiziRender.visible=false;
+			var scale:Number=0.3;
+			this.saiziRender.scaleX=scale
+			this.saiziRender.scaleY=scale;
+			this.saiziRender.scaleZ=scale;
 		}
 		
 		private function randomclickHandler():void
@@ -108,6 +127,11 @@ package com.rpgGame.app.ui.roll
 			if(_isRandomEnd)
 				return ;
 			DropGoodsManager.getInstance().reqRollPoint(_roleItem);
+			_roleskin.btnRandom.visible=false;
+			if(saiziRender){
+				saiziRender.play();
+				this.saiziRender.visible=true;
+			}
 		}
 		private function updateView():void
 		{
@@ -143,14 +167,14 @@ package com.rpgGame.app.ui.roll
 		private function runProgressTime():void
 		{
 			var now:Number = SystemTimeManager.curtTm;
-//			var parcent:Number = (_endRunTime -now)/DurationTime;
-//			if(parcent<0)
-//				parcent = 0;
-//			else if(parcent >1)
-//				parcent = 1;
+			//			var parcent:Number = (_endRunTime -now)/DurationTime;
+			//			if(parcent<0)
+			//				parcent = 0;
+			//			else if(parcent >1)
+			//				parcent = 1;
 			_roleskin.Pro_bar.maximum=DurationTime;
 			_roleskin.Pro_bar.value=(_endRunTime -now);
-//			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
+			//			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
 			
 			if(now>=_endRunTime)
 			{
@@ -158,12 +182,17 @@ package com.rpgGame.app.ui.roll
 			}
 		}
 		private var _isRandomEnd:Boolean;
+		private var saiziRender:RenderUnit3D;
 		public function setEndHandler():void
 		{
 			_isRandomEnd = true;
 			_roleskin.btnRandom.isEnabled = false;
 			_currentFun = runRemoveHandler;
 			_endRunTime = SystemTimeManager.curtTm+DURATION_REMOVE_TIME;
+			var stopTime:Number=stopTimes[int(Math.random()*6)];
+			saiziRender.stop(stopTime);
+			this.saiziRender.visible=false;
+			_roleskin.btnRandom.visible=true;
 		}
 		private function runRemoveHandler():void
 		{
@@ -172,10 +201,29 @@ package com.rpgGame.app.ui.roll
 			closeHander();
 		}
 		
+		override protected function onShow():void
+		{
+			super.onShow();
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+		}
+		
+		private function onSwitchCmp():void
+		{
+			// TODO Auto Generated method stub
+			closeHander();
+		}
+		
 		override protected function onHide():void
 		{
+			super.onHide();
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			_roleItem=null;
 			_endRunTime=0;
+			if(saiziRender){
+				saiziRender.stop();
+				this.saiziRender.visible=false;
+			}
+			_roleskin.btnRandom.visible=true;
 		}
 		
 		private function closeHander():void

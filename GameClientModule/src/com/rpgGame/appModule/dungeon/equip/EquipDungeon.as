@@ -2,12 +2,15 @@ package com.rpgGame.appModule.dungeon.equip
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -29,12 +32,13 @@ package com.rpgGame.appModule.dungeon.equip
 	{
 		private var _skin:FuBen_ZhuangBei_Skin;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
-		
-		private var gridList:Vector.<IconCDFace>;
+		private var icoListGroup:RewardGroup;
+		//private var gridList:Vector.<IconCDFace>;
 		public function EquipDungeon():void
 		{
 			_skin = new FuBen_ZhuangBei_Skin();
 			super(_skin);
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon1,RewardGroup.ALIN_RIGHT,15,6,6,true,15);
 			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 		}
 		
@@ -53,25 +57,29 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.list.dataProvider = new ListCollection(list);
 			
 			
-			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
-			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
-			var length:int = itemInfos.length;
-			var startX:Number = 742;
-			var item:ItemInfo;
-			var icon:IconCDFace;
-			gridList=new Vector.<IconCDFace>();
-			for(var i:int = 0;i<length;i++)
-			{
-				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
-				//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
-				_skin.container.addChild(grid);
-				grid.x = startX+60*i;
-				grid.y = 532;
-				gridList.push(grid);
-				item = new ItemInfo();
-				item.itemModelId = itemInfos[i]["mod"];
-				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
-			}
+			var reWardStr:String=GlobalSheetData.getSettingInfo(717)!=null?GlobalSheetData.getSettingInfo(717).q_string_value:"";
+			icoListGroup.setRewardByJsonStr(reWardStr);
+			_skin.jiangli_text.x=icoListGroup.x-icoListGroup.width-40;
+			
+//			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
+//			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
+//			var length:int = itemInfos.length;
+//			var startX:Number = 742;
+//			var item:ItemInfo;
+//			var icon:IconCDFace;
+//			gridList=new Vector.<IconCDFace>();
+//			for(var i:int = 0;i<length;i++)
+//			{
+//				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
+//				//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
+//				_skin.container.addChild(grid);
+//				grid.x = startX+60*i;
+//				grid.y = 532;
+//				gridList.push(grid);
+//				item = new ItemInfo();
+//				item.itemModelId = itemInfos[i]["mod"];
+//				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
+//			}
 			
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
@@ -154,10 +162,11 @@ package com.rpgGame.appModule.dungeon.equip
 		{
 			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
-			while(gridList.length>0){
+			/*while(gridList.length>0){
 				var icon:IconCDFace=gridList.pop();
 				icon.destroy();
-			}
+			}*/
+			icoListGroup.clear();
 		}
 	}
 }
