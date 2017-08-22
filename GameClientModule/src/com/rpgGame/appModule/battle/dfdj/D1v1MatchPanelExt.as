@@ -56,9 +56,10 @@ package com.rpgGame.appModule.battle.dfdj
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
-			_step=0;
+			var dataArr:Array=data as Array;
+			_step=dataArr[0];
 			setState(_step);
-			_endTime=getTimer()+int(data*1000);
+			_endTime=getTimer()+int(dataArr[1]*1000);
 			_timer.start();
 			onTimer();
 		}
@@ -88,24 +89,24 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				_timer.stop();
 			}
-			EventManager.removeEvent(D1v1Event.MATCH_OK,onMatchOk);
+			//EventManager.removeEvent(D1v1Event.MATCH_OK,onMatchOk);
 			_step=0;
 		}
 		override protected function onShow():void
 		{
 			super.onShow();
-			EventManager.addEvent(D1v1Event.MATCH_OK,onMatchOk);
+			//EventManager.addEvent(D1v1Event.MATCH_OK,onMatchOk);
 		}
 		
-		private function onMatchOk(time:int):void
-		{
-			// TODO Auto Generated method stub
-			_step=1;
-			setState(_step);
-			_endTime=getTimer()+time*1000;
-			//_timer.start();
-			onTimer();
-		}
+//		private function onMatchOk(time:int):void
+//		{
+//			// TODO Auto Generated method stub
+//			_step=1;
+//			setState(_step);
+//			_endTime=getTimer()+time*1000;
+//			//_timer.start();
+//			onTimer();
+//		}
 		private function setState(state:int):void
 		{
 			if (state==0) 
