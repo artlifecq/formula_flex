@@ -47,7 +47,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__JiXianTiaoZhan_UIAsset1_i(),__JiXianTiaoZhan_UIAsset3_i(),__JiXianTiaoZhan_UIAsset4_i(),__JiXianTiaoZhan_UIAsset5_i(),__JiXianTiaoZhan_UIAsset6_i(),__JiXianTiaoZhan_UIAsset7_i(),__JiXianTiaoZhan_Label1_i(),lbDec_i(),__JiXianTiaoZhan_UIAsset8_i(),lbBossKill_i(),__JiXianTiaoZhan_UIAsset9_i(),icon_i(),btn_enter_i(),__JiXianTiaoZhan_UIAsset10_i(),__JiXianTiaoZhan_UIAsset11_i(),__JiXianTiaoZhan_UIAsset12_i(),__JiXianTiaoZhan_UIAsset13_i(),__JiXianTiaoZhan_UIAsset14_i(),__JiXianTiaoZhan_UIAsset15_i(),__JiXianTiaoZhan_UIAsset16_i(),lbPaiMing_i(),lbShangHai_i(),__JiXianTiaoZhan_Group1_i(),container_list_i(),skinFlip_i()];
+			this.elementsContent = [__JiXianTiaoZhan_UIAsset3_i(),__JiXianTiaoZhan_UIAsset4_i(),__JiXianTiaoZhan_UIAsset5_i(),__JiXianTiaoZhan_UIAsset6_i(),__JiXianTiaoZhan_UIAsset7_i(),__JiXianTiaoZhan_Label1_i(),lbDec_i(),__JiXianTiaoZhan_UIAsset8_i(),lbBossKill_i(),__JiXianTiaoZhan_UIAsset9_i(),icon_i(),btn_enter_i(),__JiXianTiaoZhan_UIAsset10_i(),__JiXianTiaoZhan_UIAsset11_i(),__JiXianTiaoZhan_UIAsset12_i(),__JiXianTiaoZhan_UIAsset13_i(),__JiXianTiaoZhan_UIAsset14_i(),__JiXianTiaoZhan_UIAsset15_i(),__JiXianTiaoZhan_UIAsset16_i(),lbPaiMing_i(),lbShangHai_i(),__JiXianTiaoZhan_Group1_i(),container_list_i(),skinFlip_i()];
 			
 			states = {
 			};
@@ -168,16 +168,6 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/mingzi.png";
 			temp.x = 122;
 			temp.y = 7;
-			return temp;
-		}
-
-		private function __JiXianTiaoZhan_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/dianweixiaoguotu/app/activety/jixiantiaozhan.jpg";
-			temp.visible = false;
-			temp.x = -21;
-			temp.y = -15;
 			return temp;
 		}
 
