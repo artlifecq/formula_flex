@@ -9,6 +9,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
 	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqibg;
+	import org.mokylin.skin.app.zhanchang.button.ButtonKaishitiaozhan;
 	import org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yaota;
 
@@ -25,6 +26,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		public var btnOpen:feathers.controls.Button;
 
 		public var btnShengwang:feathers.controls.Button;
+
+		public var btnStart:feathers.controls.Button;
 
 		public var gBtn:feathers.controls.Group;
 
@@ -107,6 +110,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			btnOpen = temp;
 			temp.name = "btnOpen";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
+			temp.visible = false;
 			temp.x = 48;
 			temp.y = 23;
 			return temp;
@@ -123,6 +127,17 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			return temp;
 		}
 
+		private function btnStart_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnStart = temp;
+			temp.name = "btnStart";
+			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonKaishitiaozhan;
+			temp.x = 64;
+			temp.y = 22;
+			return temp;
+		}
+
 		private function gBtn_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -130,7 +145,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.name = "gBtn";
 			temp.x = 363;
 			temp.y = 479;
-			temp.elementsContent = [uiCon_i(),btnOpen_i()];
+			temp.elementsContent = [uiCon_i(),btnOpen_i(),btnStart_i()];
 			return temp;
 		}
 

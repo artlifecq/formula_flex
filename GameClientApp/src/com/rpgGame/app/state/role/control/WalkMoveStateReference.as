@@ -44,7 +44,8 @@ package com.rpgGame.app.state.role.control
 		private var _stopFunc : Function;
 		private var _endFunc : Function;
 		private var _syncFunc : Function;
-
+		private var _debugPosFunc:Function;
+		
 		public var nextPos : Vector3D;
 		public var nextGridPos : Vector3D;
 		public var nextPosGapTm : int;
@@ -151,7 +152,11 @@ package com.rpgGame.app.state.role.control
 			_arriveFuncArgs = args;
 			return this;
 		}
-
+		public function onDebugPos(func : Function) : WalkMoveStateReference
+		{
+			_debugPosFunc=func;
+			return this;
+		}
 		public function onStop(func : Function) : WalkMoveStateReference
 		{
 			_stopFunc = func;
@@ -214,6 +219,11 @@ package com.rpgGame.app.state.role.control
 				args = [this];
 			if (_arriveFunc != null)
 				_arriveFunc.apply(null, args);
+			
+			if (_debugPosFunc) 
+			{
+				_debugPosFunc.apply(null, [this]);
+			}
 		}
 
 		internal function stop() : void
@@ -259,6 +269,7 @@ package com.rpgGame.app.state.role.control
 			isServerStop = false;
 			needSpriteUp=false;
 			leftPath=null;
+			_debugPosFunc=null;
 			super.dispose();
 		}
 	}
