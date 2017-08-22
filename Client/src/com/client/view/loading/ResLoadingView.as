@@ -107,6 +107,8 @@ package com.client.view.loading
 			_tipTimer.onUpdate=onTipsTimer;
 			_themeLoader = new ThemeLoader();
 			_themeLoader.load(ClientConfig.getLoadingResUrl(), onResLoaded, null, onResError);
+			
+			_resArr=[{url:"ui/big_bg/bg_bing.jpg",call:onAssetComplete1},{url:"ui/big_bg/bg_yi.jpg",call:onAssetComplete2}];
 		}
 		
 		private function onTipsTimer():void
@@ -156,24 +158,31 @@ package com.client.view.loading
 			_initTime=getTimer();
 			
 		}
-		private var isLoad:Boolean;
+		
+		private var _resArr:Array;
+		private var _time:int=90*1000;
 		private function loadRandomBg():void
 		{
-			if (isLoad) 
+			if (_resArr.length==0) 
 			{
 				return;
 			}
-			isLoad=true;
-			GuiTheme.ins.LoadAsset("ui/big_bg/bg_bing.png",onAssetComplete1);
+			if (getTimer()-_initTime<_time) 
+			{
+				return;
+			}
+			_initTime=getTimer();
+			var obj:Object=_resArr.pop();
+			GuiTheme.ins.LoadAsset(obj.url,obj.call);
 			
-			GuiTheme.ins.LoadAsset("ui/big_bg/bg_yi.png",onAssetComplete2);
+			//GuiTheme.ins.LoadAsset("ui/big_bg/bg_yi.jpg",onAssetComplete2);
 		}
 		
 		private function onAssetComplete1(texture:IStarlingTexture):void
 		{
 			// TODO Auto Generated method stub
 			var ui:UIAsset=new UIAsset();
-			ui.setTexture(texture,"ui/big_bg/bg_bing.png");
+			ui.setTexture(texture,"ui/big_bg/bg_bing.jpg");
 			_resLoadingViewSkin.container.addChildAt(ui,0);
 			_randomArr.push(ui);
 		}
@@ -181,7 +190,7 @@ package com.client.view.loading
 		{
 			// TODO Auto Generated method stub
 			var ui:UIAsset=new UIAsset();
-			ui.setTexture(texture,"ui/big_bg/bg_yi.png");
+			ui.setTexture(texture,"ui/big_bg/bg_yi.jpg");
 			_randomArr.push(ui);
 			_resLoadingViewSkin.container.addChildAt(ui,0);
 		
@@ -275,14 +284,9 @@ package com.client.view.loading
 				{
 					randomChangeBg();
 				}
+				loadRandomBg();
 					//只有一个
-				else
-				{
-					if (getTimer()-_initTime>90*1000) 
-					{
-						loadRandomBg();
-					}
-				}
+				
 			}
 			Stage3DLayerManager.starlingLayer.getLayer("loading").addChild(_container);
 		}

@@ -3,6 +3,7 @@ package com.client.process
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.RandomNick;
 	import com.gameClient.utils.StringFilter;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -72,6 +73,18 @@ package com.client.process
 			StringFilter.init(lang ? lang.value : "");
 			_stream.close();
 			_stream = null;
+			
+			//注册随机名信息
+			lang = config["PLAYER_LAST_NAME"];
+			var lastNameStr : String = lang ? lang.value : "";
+			lang = config["SYMBOL_NAME"];
+			var flagNameStr : String = lang ? lang.value : "";
+			lang = config["MALE_NAME"];
+			var maleNameStr : String = lang ? lang.value : "";
+			lang = config["FEMALE_NAME"];
+			var femaleNameStr : String = lang ? lang.value : "";
+			
+			RandomNick.setup(lastNameStr.split(","), flagNameStr.split(","), maleNameStr.split(","), femaleNameStr.split(","));
 
 			completeProcess();
 		}

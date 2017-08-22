@@ -22,6 +22,8 @@ package com.rpgGame.app.ui.alert
 	
 	import app.message.EquipType;
 	
+	import away3d.log.Log;
+	
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
@@ -145,6 +147,10 @@ package com.rpgGame.app.ui.alert
 		private function stepShow(mid:int,st:Point):void
 		{
 			var qItem:Q_item=ItemConfig.getQItemByID(mid);
+			if (!qItem) 
+			{
+				Log.error("新装备穿戴错误：物品表不存在："+mid);
+			}
 			_flyIcon.styleName=ClientConfig.getItemIcon(qItem.q_icon+"",IcoSizeEnum.ICON_48);
 			stopTween();
 			if (st==null) 
@@ -162,6 +168,10 @@ package com.rpgGame.app.ui.alert
 			_flyIcon.y=startPos.y;
 			
 			var ico:IconCDFace=_equipGrid.getValue(qItem.q_kind);
+			if (!ico) 
+			{
+				Log.error("麻蛋，类型不对："+qItem.q_kind);
+			}
 			this.alpha=1;
 			this.scale=1;
 			var newS:Point=new Point();

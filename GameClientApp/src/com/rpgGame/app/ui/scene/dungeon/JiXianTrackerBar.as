@@ -215,7 +215,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function doFindMonsterWork():void
 		{
-			MainRoleSearchPathManager.walkToScene(MainRoleManager.actorInfo.mapID, ActivetyDataManager.jixianVo.qmod.q_x, ActivetyDataManager.jixianVo.qmod.q_y,null, 100);
+			MainRoleSearchPathManager.walkToScenePreAttack(MainRoleManager.actorInfo.mapID, ActivetyDataManager.jixianVo.qmod.q_x, ActivetyDataManager.jixianVo.qmod.q_y,null, 100);
 		}
 	}
 }

@@ -10,6 +10,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -65,7 +66,7 @@ package com.rpgGame.app.manager
 		private var _targetRoles : Vector.<SceneRole>;
 		private var _findDist:int=0;
 		private var ACTORTIME:int=4;
-		private var _autoPickCtrl:ControlAutoPick;
+		
 		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
@@ -86,17 +87,13 @@ package com.rpgGame.app.manager
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
-			_autoPickCtrl=new ControlAutoPick(role);
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
 			_tripleSkillCtrl=new ControlTripleSkill();
 			_myFighterCtrl=new ControlMainPlayerFight();
 			TrusteeshipFightSoulManager.getInstance().setup(role);
-			
+			PickAutoManager.getInstance().setup(role);
 		}
-		public  function get autoPickCtrl():ControlAutoPick
-		{
-			return _autoPickCtrl;
-		}
+		
 
 		
 		private var _isFightSelect:Boolean=false;
@@ -281,6 +278,7 @@ package com.rpgGame.app.manager
 		
 		public function startAutoFight() : void
 		{
+			//PickAutoManager.getInstance().startPickAuto();//自动战斗同时开启自动拾取
 			stopFightTarget();
 			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
 			/*if(selectedRole)
@@ -490,12 +488,12 @@ package com.rpgGame.app.manager
 			
 			if (_isAutoFightRunning) 
 			{
-				if (_autoPickCtrl.isPicking||autoPickCtrl.TryAutoPickItem()) 
+				if (PickAutoManager.getInstance().autoPickCtrl.isPicking||PickAutoManager.getInstance().autoPickCtrl.TryAutoPickItem()) 
 				{
 					//stopFightTarget();
 					return;
 				}
-				if (_autoPickCtrl.isArrivePk) 
+				if (PickAutoManager.getInstance().autoPickCtrl.isArrivePk) 
 				{
 					return;
 				}

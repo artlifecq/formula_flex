@@ -90,23 +90,19 @@ package com.rpgGame.appModule.activety.boss
 				switch(info.info.joinState){
 					case ActivityJoinStateEnum.KILLED_BOSS:
 						_skin.uiJinxing.visible=true;
-						ungrayItem();
-						break;
-					case ActivityJoinStateEnum.JOINING:
-						_skin.uiJinxing.visible=false;
-						ungrayItem();
 						break;
 					default:
 						_skin.uiJinxing.visible=false;
-						grayItem();
 						break;
 				}
 				
 				var lv:int=MainRoleManager.actorInfo.totalStat.level;
 				if(lv<info.actCfg.q_activity_limit_level){
-					_skin.lbLevel.text="(等级需求:+"+info.actCfg.q_activity_limit_level+")";
+					_skin.lbLevel.text="(等级需求:"+info.actCfg.q_activity_limit_level+"级)";
+					_skin.btnEnter.visible=false;
 				}else{
 					_skin.lbLevel.text="";
+					_skin.btnEnter.visible=true;
 				}
 				
 				var timeStr:String;
@@ -135,28 +131,6 @@ package com.rpgGame.appModule.activety.boss
 				
 				_skin.lbMsg2.htmlText=timeStr;
 			}
-		}
-		
-		private function grayItem():void
-		{
-			GrayFilter.gray(_skin.uiName);
-			GrayFilter.gray(_skin.uiBg);
-			GrayFilter.gray(_skin.btnEnter);
-			GrayFilter.gray(_skin.lbLevel);
-			_skin.lbLevel.color=StaticValue.GRAY_TEXT;
-			_skin.lbMsg1.color=StaticValue.GRAY_TEXT;
-			_skin.lbMsg2.color=StaticValue.GRAY_TEXT;
-		}
-		
-		private function ungrayItem():void
-		{
-			GrayFilter.unGray(_skin.uiName);
-			GrayFilter.unGray(_skin.uiBg);
-			GrayFilter.unGray(_skin.lbLevel);
-			GrayFilter.unGray(_skin.btnEnter);
-			_skin.lbLevel.color=StaticValue.Q_YELLOW;
-			_skin.lbMsg1.color=StaticValue.YELLOW_TEXT;
-			_skin.lbMsg2.color=StaticValue.YELLOW_TEXT;
 		}
 	}
 }

@@ -465,7 +465,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (msg.posList&&msg.posList.length>0&&animationData)
 			{
 				for each(var point:Position in msg.posList)
-				{
+				{Lyt.a("预警点："+point.x+","+point.y);
 					SpellAnimationHelper.addWarningEffect(role,point.x, point.y, 0, animationData);
 				}
 			}

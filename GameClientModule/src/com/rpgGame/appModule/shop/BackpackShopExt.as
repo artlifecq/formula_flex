@@ -12,6 +12,7 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.beibao.ShangDian_Skin;
 	
 	import starling.display.DisplayObject;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	
 	/**
 	 *随身商店 

@@ -35,6 +35,8 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var icon4:feathers.controls.UIAsset;
 
+		public var icon5:feathers.controls.UIAsset;
+
 		public var lastSkiller:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -50,7 +52,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),avatarGrp_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),lastSkiller_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),lbTime_i(),__ShiJieBoss_Skin_UIAsset7_i()];
+			this.elementsContent = [__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),avatarGrp_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),lastSkiller_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),lbTime_i(),__ShiJieBoss_Skin_UIAsset7_i()];
 			
 			states = {
 			};
@@ -81,8 +83,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 83;
-			temp.x = 572;
-			temp.y = 526;
+			temp.x = 637;
+			temp.y = 485;
 			return temp;
 		}
 
@@ -111,7 +113,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/wenzidi.png";
 			temp.x = 641;
-			temp.y = 444;
+			temp.y = 443;
 			return temp;
 		}
 
@@ -128,8 +130,8 @@ package org.mokylin.skin.app.activety.shijieboss
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/xiedaibaowu.png";
-			temp.x = 579;
-			temp.y = 503;
+			temp.x = 577;
+			temp.y = 483;
 			return temp;
 		}
 
@@ -160,7 +162,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "activeName";
 			temp.styleName = "ui/app/activety/shijieboss/mingzi/mazeilaocao.png";
 			temp.x = 717;
-			temp.y = 452;
+			temp.y = 451;
 			return temp;
 		}
 
@@ -182,8 +184,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 676;
-			temp.y = 497;
+			temp.x = 580;
+			temp.y = 507;
 			return temp;
 		}
 
@@ -193,8 +195,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			icon2 = temp;
 			temp.name = "icon2";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 739;
-			temp.y = 497;
+			temp.x = 651;
+			temp.y = 507;
 			return temp;
 		}
 
@@ -204,8 +206,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			icon3 = temp;
 			temp.name = "icon3";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 802;
-			temp.y = 497;
+			temp.x = 723;
+			temp.y = 507;
 			return temp;
 		}
 
@@ -215,8 +217,19 @@ package org.mokylin.skin.app.activety.shijieboss
 			icon4 = temp;
 			temp.name = "icon4";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 864;
-			temp.y = 497;
+			temp.x = 794;
+			temp.y = 507;
+			return temp;
+		}
+
+		private function icon5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon5 = temp;
+			temp.name = "icon5";
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.x = 865;
+			temp.y = 507;
 			return temp;
 		}
 
@@ -225,7 +238,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lastSkiller = temp;
 			temp.name = "lastSkiller";
-			temp.text = "最后一击 一笑倾城";
+			temp.text = "最后一击:一笑倾城";
 			temp.textAlign = "center";
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];

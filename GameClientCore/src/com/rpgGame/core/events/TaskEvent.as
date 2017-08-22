@@ -77,6 +77,8 @@ package com.rpgGame.core.events
 		public static const AUTO_WALK_START:int = UNIQUEID.NEXT;
 		/**自动寻路结束*/
 		public static const AUTO_WALK_STOP:int = UNIQUEID.NEXT;
+		/**切换任务追踪显示*/
+		public static const SWITCH_TASK_BAR:int = UNIQUEID.NEXT;
 		
 	}
 }

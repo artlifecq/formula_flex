@@ -4,6 +4,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.WelcomeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -200,6 +201,8 @@ package com.rpgGame.app.cmdlistener.scene
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
 				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,p[0],p[1]]);
 			}
+			
+			WelcomeManager.checkWelcomeState();
 		}
 		
 		/*private static function finishWalk(data:Object):void

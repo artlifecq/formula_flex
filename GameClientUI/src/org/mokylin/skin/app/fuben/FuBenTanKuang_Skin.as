@@ -124,12 +124,14 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnCancel = temp;
 			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "拒 绝";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.width = 95;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
 			temp.x = 187;
-			temp.y = 268;
+			temp.y = 267;
 			return temp;
 		}
 
@@ -149,12 +151,14 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "同 意";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 56;
-			temp.y = 271;
+			temp.y = 267;
 			return temp;
 		}
 

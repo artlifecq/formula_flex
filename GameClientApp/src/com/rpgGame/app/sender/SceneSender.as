@@ -28,7 +28,6 @@ package com.rpgGame.app.sender
 	import flash.geom.Vector3D;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
@@ -137,7 +136,7 @@ package com.rpgGame.app.sender
 		 *
 		 * 成功后会收到切场景的消息
 		 */
-		public static function sceneMapTransport(sceneID : int, posx : int, posy : int, randomRan : int = 25, isVipTrans : Boolean = false, upgradeItemListVo : UpgradeItemListVo = null,autoGold:int=0) : void
+		public static function sceneMapTransport(sceneID : int, posx : int, posy : int, randomRan : int = 25, isVipTrans : Boolean = false, upgradeItemListVo : UpgradeItemListVo = null,autoGold:int=0,deduct:int=1) : void
 		{
 			/*if (PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(posx, posy, 0)))
 			{
@@ -159,6 +158,7 @@ package com.rpgGame.app.sender
 			}
 			
 			var msg:ReqSmallFlyShoesMessage = new ReqSmallFlyShoesMessage();
+			msg.deduct=deduct;
 			msg.autoGold = autoGold;
 			msg.mapLine = 1;
 			msg.mapModel = sceneID;

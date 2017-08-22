@@ -5,6 +5,7 @@ package com.rpgGame.app.cmdlistener.task
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -28,9 +29,12 @@ package com.rpgGame.app.cmdlistener.task
 	import com.rpgGame.netData.task.message.SCDropTaskMessage;
 	import com.rpgGame.netData.task.message.SCNoMainTaskMessage;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 	
 	/**
 	 * 任务消息监听
@@ -180,14 +184,20 @@ package com.rpgGame.app.cmdlistener.task
 					
 					
 				}
-				
-				
 				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,singStr,2);
 				CollectManager.show("caiji",msg.costtime,null);
+				//TweenLite.killDelayedCallsTo(sendFinishGather);
+				TweenLite.delayedCall(msg.costtime*0.001, sendFinishGather,[msg.tatget]);
+				
 			}
 		}
+		private function sendFinishGather(tid:long):void
+		{
+			TaskSender.sendFinishGatherMessage(tid);
+		}
 		
-		/**开始采集	*/
+		
+		/**停止采集	*/
 		private function onResStopGatherMessage(msg:ResStopGatherMessage):void
 		{
 			EventManager.dispatchEvent(SkillEvent.SING_STOP);
