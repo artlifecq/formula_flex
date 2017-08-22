@@ -15,6 +15,9 @@ package com.rpgGame.netData.backpack.message{
 		//格子编号
 		private var _cellId: int;
 		
+		//1 包裹  2仓库  3寻宝仓库
+		private var _type: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -22,6 +25,8 @@ package com.rpgGame.netData.backpack.message{
 		override protected function writing(): Boolean{
 			//格子编号
 			writeInt(_cellId);
+			//1 包裹  2仓库  3寻宝仓库
+			writeByte(_type);
 			return true;
 		}
 		
@@ -31,6 +36,8 @@ package com.rpgGame.netData.backpack.message{
 		override protected function reading(): Boolean{
 			//格子编号
 			_cellId = readInt();
+			//1 包裹  2仓库  3寻宝仓库
+			_type = readByte();
 			return true;
 		}
 		
@@ -55,6 +62,21 @@ package com.rpgGame.netData.backpack.message{
 		 */
 		public function set cellId(value: int): void{
 			this._cellId = value;
+		}
+		
+		/**
+		 * get 1 包裹  2仓库  3寻宝仓库
+		 * @return 
+		 */
+		public function get type(): int{
+			return _type;
+		}
+		
+		/**
+		 * set 1 包裹  2仓库  3寻宝仓库
+		 */
+		public function set type(value: int): void{
+			this._type = value;
 		}
 		
 	}

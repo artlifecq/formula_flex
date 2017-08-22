@@ -192,6 +192,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.text = "BOSS名";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
 			temp.width = 82;
 			temp.x = 0;
 			temp.y = 4;

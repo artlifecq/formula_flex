@@ -21,6 +21,7 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -85,6 +86,7 @@ package com.rpgGame.appModule.hunyin
 		{		
 			_skillList = new Vector.<IconCDFace>();
 			var skillMods:Vector.<Q_marriage_skills>=HunYinSkillData.skillLists;
+			skillMods=skillMods.sort(short);
 			for(var i:int = 0;i < 3;i ++)
 			{
 				var skill:Q_skill_model = SpellDataManager.getSpellById(skillMods[i].q_id);
@@ -113,6 +115,13 @@ package com.rpgGame.appModule.hunyin
 			_itemFace.selectImgVisible=false;	
 			_skin.container.addChild(_itemFace);
 			_itemFace.bindBg(_skin.icon4);
+		}
+		
+		private function short(cfg1:Q_marriage_skills,cfg2:Q_marriage_skills):int
+		{
+			if(cfg1.q_study_needjiezilevel<cfg2.q_study_needjiezilevel) return -1;
+			else if(cfg1.q_study_needjiezilevel>cfg2.q_study_needjiezilevel) return 1;
+			return 0;
 		}
 		
 		private function initEff():void
@@ -289,12 +298,22 @@ package com.rpgGame.appModule.hunyin
 			var list:Vector.<Q_marriage_skills>=HunYinSkillData.skillLists;
 			for(var i:int=0;i<list.length;i++)
 			{
+				var data:SpellDynamicTipdata = TipTargetManager.getTiipsByTarget(_skillList[i]) as SpellDynamicTipdata;
 				if(list[i].q_study_needjiezilevel>Mgr.hunyinMgr.JieZiLv)
 				{
 					GrayFilter.gray(_skillList[i]);
+					if(data!=null)
+					{
+						data.isActivation = false;
+					}
 				}
-				else
+				else{
 					_skillList[i].filter=null;
+					if(data!=null)
+					{
+						data.isActivation = true;
+					}
+				}
 			}
 		}
 		
@@ -414,7 +433,6 @@ package com.rpgGame.appModule.hunyin
 			_rightPanel.updateAttribute();
 			_rightPanel.updateBestWishesValue();
 		}
-		
 		
 		protected function btnHandler(e:TouchEvent):void
 		{

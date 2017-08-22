@@ -6,12 +6,15 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.netData.backpack.message.ReqCellTimeQueryMessage;
 	import com.rpgGame.netData.backpack.message.ReqClearUpGoodsMessage;
 	import com.rpgGame.netData.backpack.message.ReqDelItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqDestroyMessage;
 	import com.rpgGame.netData.backpack.message.ReqDiscardMessage;
 	import com.rpgGame.netData.backpack.message.ReqGetItemsMessage;
 	import com.rpgGame.netData.backpack.message.ReqMoveItemMessage;
+	import com.rpgGame.netData.backpack.message.ReqOpenCellMessage;
+	import com.rpgGame.netData.backpack.message.ReqOpenTimeCellMessage;
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipInheritMessage;
@@ -366,6 +369,38 @@ package com.rpgGame.app.sender
 			msg.toEquipId=toEquipId;
 			msg.toType=toType;
 			msg.index=index;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 打开格子请求（时间到了之后的开格请求）
+		 * @param type 1_背包 2_仓库 3_寻宝仓库
+		 * */
+		public static function reqOpenTimeCellMessage(type:int):void
+		{
+			var msg:ReqOpenTimeCellMessage=new ReqOpenTimeCellMessage();
+			msg.type=type;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 打开格子请求（消耗元宝等开格子）
+		 * @param type 1_背包 2_仓库 3_寻宝仓库
+		 * */
+		public static function reqOpenCellMessage(type:int,cellid:int):void
+		{
+			var msg:ReqOpenCellMessage=new ReqOpenCellMessage();
+			msg.type=type;
+			msg.cellId=cellid;
+			SocketConnection.send(msg);
+		}
+		
+		/**请求格子信息*/
+		public static function reqCellTimeQueryMessage(type:int,cellid:int):void
+		{
+			var msg:ReqCellTimeQueryMessage=new ReqCellTimeQueryMessage();
+			msg.type=type;
+			msg.cellId=cellid;
 			SocketConnection.send(msg);
 		}
 	}

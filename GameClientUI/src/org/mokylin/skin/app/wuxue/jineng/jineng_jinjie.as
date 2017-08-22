@@ -62,6 +62,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var tj_name:feathers.controls.UIAsset;
 
+		public var uiOk:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -73,7 +75,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 394;
 			this.width = 340;
-			this.elementsContent = [__jineng_jinjie_UIAsset1_i(),Icon_jineng_i(),__jineng_jinjie_UIAsset2_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),lb_weijihuo_i(),lb_jihuo_i(),Icon_jineng2_i(),Icon_lock_i(),__jineng_jinjie_UIAsset3_i(),lb_name2_i(),lb_miaoshu_i(),grp_tiaojian_i(),btn_jinjie_i(),eft_name_i()];
+			this.elementsContent = [__jineng_jinjie_UIAsset1_i(),Icon_jineng_i(),__jineng_jinjie_UIAsset2_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),lb_weijihuo_i(),lb_jihuo_i(),Icon_jineng2_i(),Icon_lock_i(),__jineng_jinjie_UIAsset3_i(),lb_name2_i(),lb_miaoshu_i(),grp_tiaojian_i(),btn_jinjie_i(),eft_name_i(),uiOk_i()];
 			
 			states = {
 			};
@@ -419,6 +421,17 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.styleName = "ui/app/wuxue/jineng/jnsjtj.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function uiOk_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOk = temp;
+			temp.name = "uiOk";
+			temp.styleName = "ui/app/wuxue/jineng/yimanji.png";
+			temp.x = 111;
+			temp.y = 240;
 			return temp;
 		}
 

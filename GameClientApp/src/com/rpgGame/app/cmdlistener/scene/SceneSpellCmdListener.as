@@ -31,7 +31,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;

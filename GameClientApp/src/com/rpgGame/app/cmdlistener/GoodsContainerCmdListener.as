@@ -2,6 +2,7 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.ItemCDManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -12,12 +13,15 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.backpack.message.ResBackpackFullMessage;
+	import com.rpgGame.netData.backpack.message.ResCellTimeMessage;
 	import com.rpgGame.netData.backpack.message.ResChangeBindItemMessage;
 	import com.rpgGame.netData.backpack.message.ResChangeLimitItemMessage;
 	import com.rpgGame.netData.backpack.message.ResItemAddMessage;
 	import com.rpgGame.netData.backpack.message.ResItemChangeMessage;
 	import com.rpgGame.netData.backpack.message.ResItemInfoMessage;
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
+	import com.rpgGame.netData.backpack.message.ResOpenCellResultMessage;
 	import com.rpgGame.netData.backpack.message.ResTakeUpSuccessMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
 	import com.rpgGame.netData.backpack.message.SCFlyItemsMessage;
@@ -71,6 +75,20 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
 			SocketConnection.addCmdListener(107106, onResEquipOperateResultMessage );
 			SocketConnection.addCmdListener(228100, onResCooldownInfoListMessage );
+			
+			//2017.8.18  GNW
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108108, onResCellTimeMessage );		
+			SocketConnection.addCmdListener(108109, onResOpenCellResultMessage );
+			
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
+			
 			finish();
 		}
 		
@@ -88,7 +106,7 @@ package com.rpgGame.app.cmdlistener
 			var point:Point = new Point(role.x-cam.x,cam.y-role.z);
 			ItemActionManager.tweenMode(point);
 		}
-		private function onResEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void
+		private function onResEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void//1
 		{
 			switch(msg.opaque){
 				case EquipOperateType.STRENGTH_NORMAL:
@@ -120,7 +138,7 @@ package com.rpgGame.app.cmdlistener
 			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).changItemBind(msg);	
 		}
 		
-		private function onResEquipInfoMessage(msg:ResEquipInfoMessage):void
+		private function onResEquipInfoMessage(msg:ResEquipInfoMessage):void//1
 		{
 			var equips:Vector.<ItemInfo>=msg.equips;
 			for each(var item:ItemInfo in equips){
@@ -129,34 +147,34 @@ package com.rpgGame.app.cmdlistener
 			GoodsContainerMamager.getMrg(ItemContainerID.Role).setItemsInfo(10,msg.equips);
 		}
 		
-		private function onUnwearEquipItemMessage(msg:UnwearEquipItemMessage):void
+		private function onUnwearEquipItemMessage(msg:UnwearEquipItemMessage):void//1
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.Role).removeItem(msg.gridId);
 		}
 		
-		private function onWearEquipItemMessage(msg:WearEquipItemMessage):void
+		private function onWearEquipItemMessage(msg:WearEquipItemMessage):void//1
 		{
 			msg.equip.gridId=ItemConfig.getQItemByID(msg.equip.itemModelId).q_kind;
 			GoodsContainerMamager.getMrg(ItemContainerID.Role).addItem(msg.equip);
 			EquipAutoDressEffectPanelExt.checkShowDressEffect(msg.equip);
 		}
 		
-		private function onResStoreItemRemoveMessage(msg:ResStoreItemRemoveMessage):void
+		private function onResStoreItemRemoveMessage(msg:ResStoreItemRemoveMessage):void//1
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.Storage).removeItem(msg.gridId);
 		}
 		
-		private function onResStoreItemAddMessage(msg:ResStoreItemAddMessage):void
+		private function onResStoreItemAddMessage(msg:ResStoreItemAddMessage):void//1
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.Storage).addItem(msg.item);			
 		}
 		
-		private function onResStoreItemChangeMessage(msg:ResStoreItemChangeMessage):void
+		private function onResStoreItemChangeMessage(msg:ResStoreItemChangeMessage):void//1
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.Storage).changItem(msg.item);			
 		}
 		
-		private function onResStoreItemInfosMessage(msg:ResStoreItemInfosMessage):void
+		private function onResStoreItemInfosMessage(msg:ResStoreItemInfosMessage):void//1
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.Storage).setItemsInfo(msg.cellnum,msg.items);
 		}
@@ -164,9 +182,9 @@ package com.rpgGame.app.cmdlistener
 		private function onResUseItemSuccessMessage(msg:ResUseItemSuccessMessage):void
 		{
 			ItemCDManager.getInstance().addItemCDTimeByid(msg.itemModelId);
-
+			
 		}
-		private function onResCooldownInfoListMessage(msg:ResCooldownInfoListMessage):void
+		private function onResCooldownInfoListMessage(msg:ResCooldownInfoListMessage):void//1
 		{
 			if(msg&&msg.list)
 			{
@@ -198,6 +216,26 @@ package com.rpgGame.app.cmdlistener
 		private function onResItemInfoMessage(msg:ResItemInfoMessage):void
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).setItemsInfo(msg.cellnum,msg.items);
+		}
+		
+		/**背包已满的提示*/
+		private function onResBackpackFullMessage(msg:ResBackpackFullMessage):void
+		{
+			NoticeManager.showNotifyById(5004);
+		}
+		
+		/**格子打开所需要的时间*/
+		private function onResCellTimeMessage(msg:ResCellTimeMessage):void
+		{
+			GoodsContainerMamager.getMrg(GoodsContainerMamager.getGoodsType(msg.type)).setGridUnLuck(msg.cellId,msg.timeRemaining);
+		}
+		
+		/**格子打开结果*/
+		private function onResOpenCellResultMessage(msg:ResOpenCellResultMessage):void
+		{
+			if(msg.isSuccess==1){
+				GoodsContainerMamager.setUnlocked(GoodsContainerMamager.getGoodsType(msg.type),msg.cellId);
+			}
 		}
 	}
 }

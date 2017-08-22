@@ -183,7 +183,7 @@ package com.rpgGame.app.view.icon
 					temp.isEnabled = gridInfo.isEnabled;
 					temp.isTips = gridInfo.isTips;
 					temp.isUnlock = gridInfo.isUnlock;
-//					temp.unlockInfo = gridInfo.unlockInfo;
+					temp.unlockInfo = gridInfo.unlockInfo;
 					dragSource.gridInfo = temp;
 					dragSource.setIconResName( iconResURL );
 					
