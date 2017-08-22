@@ -71,7 +71,7 @@ package com.rpgGame.app.manager
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
 		private var _isNormalSpell:Boolean = false;
-		public var isAutoWalking:Boolean=false;
+		private var _isAutoWalking:Boolean=false;
 		private var _myFighterCtrl:ControlMainPlayerFight;
 		public function TrusteeshipManager()
 		{
@@ -686,6 +686,17 @@ package com.rpgGame.app.manager
 		{
 			return _myFighterCtrl;
 		}
+
+		public function get isAutoWalking():Boolean
+		{
+			return _isAutoWalking;
+		}
+
+		public function set isAutoWalking(value:Boolean):void
+		{
+			_isAutoWalking = value;
+		}
+
 
 		//以下是美人ai需求的===========================================================
 		/**

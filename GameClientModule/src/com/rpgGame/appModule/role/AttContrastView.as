@@ -3,6 +3,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.netData.player.bean.OtherFightPower;
+	import com.rpgGame.netData.player.bean.OthersInfo;
 	
 	import org.mokylin.skin.app.beibao.VS_Skin;
 	import org.mokylin.skin.app.beibao.juese_Skin;
@@ -18,15 +20,17 @@ package com.rpgGame.appModule.role
 		private var _vsSkin:VS_Skin;
 		private var _roleData:HeroData;
 		private var _mainRoleData:HeroData;
+		private var _otherInfo:OthersInfo;
 		public function AttContrastView(skin:juese_Skin)
 		{
 			_skin=skin;
 			_vsSkin=skin.duibi_panel.skin as VS_Skin;
 		}
 		
-		public function show(data:HeroData):void
+		public function show(data:HeroData,info:OthersInfo):void
 		{
 			_roleData=data;
+			_otherInfo=info;
 			_mainRoleData=MainRoleManager.actorInfo;
 			_skin.duibi_panel.visible=true;
 			initView();
@@ -42,15 +46,26 @@ package com.rpgGame.appModule.role
 		
 			setValue("ms",CharAttributeType.HURT_SEC);
 			setValue("dj");
-			setValue("zq");
 			setValue("zb");
+			setValue("zq");
 			setValue("xf");
 			setValue("jn");
 			setValue("jm");
-			setValue("jx");
-			setValue("lj");
+			setValue("zqi");
+			setValue("mr");
 			
 		}
+		
+		private function getPowerByType(type:int,list:Vector.<OtherFightPower>):int
+		{
+			for(var i:int=list.length-1;i>=0;i--){
+				if(list[i].type==type){
+					return list[i].fightPower;
+				}
+			}
+			return 0;
+		}
+		
 		
 		private function setValue(vsName:String,type:int=-1):void
 		{
@@ -67,32 +82,32 @@ package com.rpgGame.appModule.role
 					o=_roleData.totalStat.level;
 					break
 					case "zq"://坐骑
-					m=0;
-					o=0;
+					m=getPowerByType(1,_otherInfo.selfFightPower);
+					o=getPowerByType(1,_otherInfo.otherFightPowr);
 					break
 					case "zb"://装备
-						m=0;
-						o=0;
+						m=getPowerByType(2,_otherInfo.selfFightPower);
+						o=getPowerByType(2,_otherInfo.otherFightPowr);
 						break
 					case "xf"://心法
-						m=0;
-						o=0;
+						m=getPowerByType(3,_otherInfo.selfFightPower);
+						o=getPowerByType(3,_otherInfo.otherFightPowr);;
 						break
 					case "jn"://技能
-						m=0;
-						o=0;
+						m=getPowerByType(4,_otherInfo.selfFightPower);
+						o=getPowerByType(4,_otherInfo.otherFightPowr);;
 						break
 					case "jm"://经脉
-						m=0;
-						o=0;
+						m=getPowerByType(5,_otherInfo.selfFightPower);
+						o=getPowerByType(5,_otherInfo.otherFightPowr);;
 						break
-					case "jx"://绝学
-						m=0;
-						o=0;
+					case "zqi"://战旗
+						m=getPowerByType(6,_otherInfo.selfFightPower);
+						o=getPowerByType(6,_otherInfo.otherFightPowr);;
 						break
-					case "lj"://论剑
-						m=0;
-						o=0;
+					case "mr"://美人
+						m=getPowerByType(7,_otherInfo.selfFightPower);
+						o=getPowerByType(7,_otherInfo.otherFightPowr);;
 						break;
 				}
 			}

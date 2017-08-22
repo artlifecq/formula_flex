@@ -66,8 +66,8 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
-			temp.x = 291;
-			temp.y = 16;
+			temp.x = 262;
+			temp.y = 35;
 			return temp;
 		}
 
@@ -77,7 +77,7 @@ package org.mokylin.skin.app.activety.zonghe
 			lbMsg = temp;
 			temp.name = "lbMsg";
 			temp.height = 39;
-			temp.htmlText = "活动时间21:00-21:30<br>每周一，周三，周六，周日";
+			temp.htmlText = "每周一，周三，周六，周日<br>21:00-21:30";
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.leading = 7;
@@ -110,6 +110,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.frameRate = 10;
 			temp.height = 71;
 			temp.styleClass = org.mokylin.skin.app.activety.mc.UIMovieClipActiveEffect;
+			temp.visible = false;
 			temp.width = 516;
 			temp.x = 0;
 			temp.y = 0;

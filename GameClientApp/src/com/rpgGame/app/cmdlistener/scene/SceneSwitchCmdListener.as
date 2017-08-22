@@ -4,14 +4,22 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.WelcomeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppInfo;
+	import com.rpgGame.core.app.AppLoadManager;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.info.map.EnumMapZones;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	
@@ -193,6 +201,8 @@ package com.rpgGame.app.cmdlistener.scene
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
 				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,p[0],p[1]]);
 			}
+			
+			WelcomeManager.checkWelcomeState();
 		}
 		
 		/*private static function finishWalk(data:Object):void

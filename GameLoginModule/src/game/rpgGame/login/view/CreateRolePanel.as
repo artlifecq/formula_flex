@@ -3,6 +3,7 @@ package game.rpgGame.login.view
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.utils.DisplayUtil;
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.utils.RandomNick;
 	
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -21,7 +22,6 @@ package game.rpgGame.login.view
 	import game.rpgGame.login.data.RoleData;
 	import game.rpgGame.login.display3D.InterAvatar3D;
 	import game.rpgGame.login.state.RoleStateType;
-	import game.rpgGame.login.util.RandomNick;
 	
 	import gs.TweenLite;
 	import gs.easing.Bounce;

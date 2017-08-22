@@ -5,6 +5,7 @@ package com.client.sender
 	import com.rpgGame.netData.login.message.ReqCreateCharacterMessage;
 	import com.rpgGame.netData.login.message.ReqLoginForPlatformMessage;
 	import com.rpgGame.netData.login.message.ReqLoginMessage;
+	import com.rpgGame.netData.player.message.ReqPlayerChangeNameMessage;
 	
 	import flash.utils.getTimer;
 	
@@ -89,6 +90,14 @@ package com.client.sender
 			msg.adregtime = "";
 			msg.win_width = ClientConfig.stage.width;
 			msg.win_high = ClientConfig.stage.height;
+			SocketConnection.send(msg);
+		}
+		
+		public static function reqLoginChangeName(name:String):void
+		{
+			var msg:ReqPlayerChangeNameMessage=new ReqPlayerChangeNameMessage();
+			msg.name=name;
+			msg.sex=0;
 			SocketConnection.send(msg);
 		}
 	}

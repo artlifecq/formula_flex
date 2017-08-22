@@ -8,8 +8,10 @@ package
 	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
 	import com.client.process.LoadPublicUIAssets;
+	import com.client.process.LoadWelcome;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
+	import com.client.process.RandomChangeName;
 	import com.client.process.SelectDeveloper;
 	import com.client.process.ServerConnect;
 	import com.client.utils.ClientUrlManager;
@@ -301,12 +303,14 @@ package
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
+			ProcessStateMachine.getInstance().pushProcess(new RandomChangeName());
 			ProcessStateMachine.getInstance().pushProcess(new LoadDll());
 			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
 //			ProcessStateMachine.getInstance().pushProcess(new LoadMouseAssets());
 			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
+			ProcessStateMachine.getInstance().pushProcess(new LoadWelcome());
 		}
 		
 		private function getWebParams() : void
@@ -355,10 +359,12 @@ package
 			
 			var pg:ProcessGroup = new ProcessGroup();
 			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
-			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3, true);
+			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.2, 0.25, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.25, 0.3, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35, true);
 //			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.35, 0.55, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.35, 0.5, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_WEL, 0.5, 0.55, true);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);

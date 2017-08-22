@@ -2,6 +2,7 @@ package
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.RandomNick;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -9,7 +10,6 @@ package
 	
 	import game.rpgGame.login.ClientConfig;
 	import game.rpgGame.login.data.CreateRoleData;
-	import game.rpgGame.login.util.RandomNick;
 	import game.rpgGame.login.view.CreateRolePanel;
 	
 	/**

@@ -44,6 +44,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintInfo:String = "data.HintInfo";
 		/**  消息提示类型配置表																													 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
+		/**  人物创建表																 */
+		public static const InitPlayerInfo:String = "data.InitPlayerInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
 		/**  							本列取消，安全区改为刷格方式								本列取消																																															 */
@@ -282,6 +284,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
 			regClass("data.HintInfo", com.rpgGame.coreData.clientConfig.HintInfo);
 			regClass("data.HintTypeSetInfo", com.rpgGame.coreData.clientConfig.HintTypeSetInfo);
+			regClass("data.InitPlayerInfo", com.rpgGame.coreData.clientConfig.InitPlayerInfo);
 			regClass("data.map.Q_area", com.rpgGame.coreData.clientConfig.Q_area);
 			regClass("data.map.Q_map", com.rpgGame.coreData.clientConfig.Q_map);
 			regClass("data.map.Q_map_effect", com.rpgGame.coreData.clientConfig.Q_map_effect);

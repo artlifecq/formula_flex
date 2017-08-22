@@ -242,7 +242,7 @@ package   com.rpgGame.app.ui.main.team
 				for (var i:int = 0; i < len; i++) 
 				{
 					var q_buff:Q_buff=BuffStateDataManager.getData(buff[i]);
-					if(q_buff.q_effect_type==2)
+					if(q_buff&&q_buff.q_effect_type==2)
 					{
 						var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_16);				
 						icon.setIconResName(ClientConfig.getBuffIcon(q_buff.q_icon, IcoSizeEnum.ICON_16 ));
@@ -256,6 +256,9 @@ package   com.rpgGame.app.ui.main.team
 						
 						TipTargetManager.show(icon, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 						buffIcon.push(icon);
+					}
+					else{
+					trace("这个BUFF为空了，看看是什么原因······························");
 					}
 				}
 			}
