@@ -34,7 +34,8 @@ package com.client.process
 				var oldName:String= ClientConfig.loginData.name;
 				var index:int=oldName.indexOf("]");
 				oldName=oldName.substring(index+1);
-				if(oldName!=ClientConfig.loginName){
+				var nowName:String=ClientConfig.loginName;
+				if(oldName==nowName){
 					EventManager.addEvent(CharAttributeType.CHANGE_NAME,getChangeName);
 					randomName();
 					return;
