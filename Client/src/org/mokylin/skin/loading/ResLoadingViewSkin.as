@@ -98,7 +98,7 @@ package org.mokylin.skin.loading
 			bgImage = temp;
 			temp.name = "bgImage";
 			temp.height = 730;
-			temp.styleName = "ui/big_bg/bg_mo.png";
+			temp.styleName = "ui/big_bg/bg_mo.jpg";
 			temp.width = 1920;
 			temp.x = 0;
 			temp.y = 82;

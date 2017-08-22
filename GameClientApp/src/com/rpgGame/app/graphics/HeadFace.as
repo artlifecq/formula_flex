@@ -103,7 +103,7 @@ package com.rpgGame.app.graphics
 		private var _guildNameBar : HeadNameBar;
 		private var _familNameBar : HeadNameBar;
 		private var _guildWarInfoBar:GuildWarInfoBar;
-		
+		private var _debugPosBar:HeadNameBar;
 		/** 图标图片*/
 		private var _icoImage : UIAsset;
 		/**心情动画*/
@@ -376,6 +376,7 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_countryWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
 			showAndHideElement(_familyWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
 			showAndHideElement(_moodMC, true);
+			showAndHideElement(_debugPosBar, debug,DecorCtrl.TOP_POS);
 		}
 		
 		private function sortAttackFace():void
@@ -1105,7 +1106,11 @@ package com.rpgGame.app.graphics
 				HeadNameBar.recycle(_familNameBar);
 				_familNameBar = null;
 			}
-			
+			if (_debugPosBar) 
+			{
+				HeadNameBar.recycle(_debugPosBar);
+				_familNameBar=null;
+			}
 			if (_office != null)
 			{
 				_office.dispose();
@@ -1647,6 +1652,19 @@ package com.rpgGame.app.graphics
 		override public function get height():Number
 		{
 			return deCtrl.topHeight;
+		}
+		public static var debug:Boolean=false
+		public function updatePos(posX:int,posY:int):void
+		{
+			if (debug) 
+			{
+				if (!_debugPosBar) 
+				{
+					_debugPosBar=HeadNameBar.create();
+					deCtrl.addTop(_debugPosBar,DecorCtrl.TOP_POS);
+				}
+				_debugPosBar.setName("x:"+posX+" y:"+posY);
+			}
 		}
 	}
 }

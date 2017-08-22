@@ -22,6 +22,9 @@ package com.rpgGame.netData.map.message{
 		//目的地图线（0是自动分配线路）
 		private var _mapLine: int;
 		
+		//是否扣除小飞鞋  0 不扣除  1 扣除
+		private var _deduct: int;
+		
 		//目的坐标坐标
 		private var _position: com.rpgGame.netData.structs.Position;
 		
@@ -36,6 +39,8 @@ package com.rpgGame.netData.map.message{
 			writeInt(_mapModel);
 			//目的地图线（0是自动分配线路）
 			writeInt(_mapLine);
+			//是否扣除小飞鞋  0 不扣除  1 扣除
+			writeByte(_deduct);
 			//目的坐标坐标
 			writeBean(_position);
 			return true;
@@ -51,6 +56,8 @@ package com.rpgGame.netData.map.message{
 			_mapModel = readInt();
 			//目的地图线（0是自动分配线路）
 			_mapLine = readInt();
+			//是否扣除小飞鞋  0 不扣除  1 扣除
+			_deduct = readByte();
 			//目的坐标坐标
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			return true;
@@ -107,6 +114,21 @@ package com.rpgGame.netData.map.message{
 		 */
 		public function set mapLine(value: int): void{
 			this._mapLine = value;
+		}
+		
+		/**
+		 * get 是否扣除小飞鞋  0 不扣除  1 扣除
+		 * @return 
+		 */
+		public function get deduct(): int{
+			return _deduct;
+		}
+		
+		/**
+		 * set 是否扣除小飞鞋  0 不扣除  1 扣除
+		 */
+		public function set deduct(value: int): void{
+			this._deduct = value;
 		}
 		
 		/**

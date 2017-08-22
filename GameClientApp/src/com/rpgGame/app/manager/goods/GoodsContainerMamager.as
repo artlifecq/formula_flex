@@ -1236,7 +1236,9 @@ package com.rpgGame.app.manager.goods
 		 */		
 		public function isUnlock(index:int):Boolean
 		{
-			return index >= curUnlockIndex;
+			if(containerId==ItemContainerID.BackPack||containerId==ItemContainerID.Storage)
+				return index >= curUnlockIndex;
+			return false;
 		}
 		
 		public function setUnlocked(index:int):void

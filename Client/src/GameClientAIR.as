@@ -37,6 +37,7 @@ package
 	import flash.ui.ContextMenuItem;
 	
 	import away3d.Away3D;
+	import away3d.debug.ReportUtil;
 	import away3d.loaders.parsers.Parsers;
 	import away3d.log.Log;
 	
@@ -218,6 +219,7 @@ package
 					{
 						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
 					}
+					ReportUtil.setup(6);
 					showCheckInfo();
 					runProcess();
 				}

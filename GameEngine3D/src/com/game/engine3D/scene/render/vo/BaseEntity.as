@@ -491,7 +491,8 @@ package com.game.engine3D.scene.render.vo
 				else
 					_graphicDis = PoolContainer3D.create();
 			}
-			if (!_staticGraphicDis) {
+			if (!_staticGraphicDis) 
+			{
 				if (GlobalConfig.use2DMap)
 					_staticGraphicDis = PoolEntityContainer3D.create();
 				else
@@ -508,6 +509,7 @@ package com.game.engine3D.scene.render.vo
 			_renderSet.setMouseOutCallBack(handlerMouseOut);
 			_renderSet.setMouseRightUpCallBack(handleMouseRightUp);
 			_renderSet.setMouseRightDownCallBack(handleMouseRightDown);
+			_renderSet.isAlpha = false;
 		}
 		
 		override protected function addToGraphic() : void

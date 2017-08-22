@@ -13,6 +13,7 @@ package com.rpgGame.app.ui
 	import org.mokylin.skin.loading.Bg_head;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 

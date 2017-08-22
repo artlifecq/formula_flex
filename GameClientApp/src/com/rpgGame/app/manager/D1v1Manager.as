@@ -88,7 +88,7 @@ package com.rpgGame.app.manager
 			// TODO Auto Generated method stub
 			if (msg.result==1) 
 			{
-				AppManager.showApp(AppConstant.BATTLE_D1V1_MATCH_PANEL,msg.delayTime);
+				AppManager.showApp(AppConstant.BATTLE_D1V1_MATCH_PANEL,[0,msg.delayTime]);
 			}
 		}
 		public function SCReadyToLoadHandler(msg:SCReadyToLoadMessage):void

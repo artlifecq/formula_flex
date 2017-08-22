@@ -57,6 +57,8 @@ package com.rpgGame.app.manager.task
 			}
 			return _instance;
 		}
+		
+		
 		private var _gTimer : GameTimer;
 		private var _isTaskRunning : Boolean=false;
 		private var _taskType:int;

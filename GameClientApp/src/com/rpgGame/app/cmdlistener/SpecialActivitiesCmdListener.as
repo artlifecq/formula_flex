@@ -23,7 +23,9 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.mibao.message.SCMiBaoRewardInfoMessage;
 	import com.rpgGame.netData.mibao.message.SCMosterNumChangeMessage;
 	import com.rpgGame.netData.mibao.message.SCRemainMosterNumMessage;
+	import com.rpgGame.netData.monster.bean.HateInfo;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
+	import com.rpgGame.netData.monster.message.ResBossHateInfosToClientMessage;
 	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossKillerNameMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossResultMessage;
@@ -58,6 +60,8 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(114119,onSCWorldBossKillerNameMessage);
 			SocketConnection.addCmdListener(114115,onResBossDamageInfosToClientMessage);
 			SocketConnection.addCmdListener(114120,onSCLimitChallengeBossResultMessage);
+			SocketConnection.addCmdListener(114121,onResBossHateInfosToClientMessage);
+			
 			/*----------------天降元宝   yt---------------------------------------------*/
 			SocketConnection.addCmdListener(130101,onSCRankInfoMessage);
 			SocketConnection.addCmdListener(130102,onSCCashGiftClientMessage);
@@ -187,6 +191,21 @@ package com.rpgGame.app.cmdlistener
 //				UIPopManager.showAlonePopUI(JiXianTiaoZhanExtPop);
 //			}
 		}
+		/**boss伤害排行*/
+		private function onResBossHateInfosToClientMessage(msg:ResBossHateInfosToClientMessage):void
+		{
+			var hstr:String="";
+			for each(var hate:HateInfo in msg.hateInfos)
+			{
+				hstr+=hate.playerName+"=伤害："+hate.hate+"\n";
+			}
+			
+			AppManager.showAppNoHide(AppConstant.ALERT_TEXT_PANEL,hstr);
+			
+			
+		}
+		
+		
 		
 		/*----------------天降元宝   yt---------------------------------------------*/
 		/**排名消息*/

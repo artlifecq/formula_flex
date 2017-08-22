@@ -55,6 +55,8 @@ package org.mokylin.skin.app.beibao.zhangong
 		private function __MapItem_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/beibao/zhangong/yuan.png";
 			temp.x = 0;
 			temp.y = 0;
@@ -77,6 +79,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_dengji = temp;
 			temp.name = "grp_dengji";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.x = 198;
 			temp.y = 8;
 			temp.elementsContent = [__MapItem_Skin_UIAsset1_i(),lbNum_i()];
@@ -88,6 +92,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbBuzu = temp;
 			temp.name = "lbBuzu";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.text = "等级不足";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -101,13 +107,15 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbMsg = temp;
 			temp.name = "lbMsg";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 1;
 			temp.text = "8%";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 109;
 			temp.x = 4;
-			temp.y = 55;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -116,6 +124,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.fontSize = 14;
 			temp.text = "5";
 			temp.textAlign = "center";

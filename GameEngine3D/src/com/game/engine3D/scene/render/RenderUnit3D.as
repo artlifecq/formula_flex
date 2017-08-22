@@ -288,14 +288,21 @@ package com.game.engine3D.scene.render
 		
 		override public function set alpha(value:Number):void
 		{
-			if (this.alpha == value)return;
+			if (this._alpha == value)return;
 			super.alpha = value;
-			_useIndependentColor = true;
+//			_useIndependentColor = true;
 			_independentColorTransform.alphaMultiplier = alpha;
 			if (_renderUnitData)
 			{
 //				trace("alpha   被半透的unit 的类型：\t" + this.type);
-				_renderUnitData.setIndependentColorTransform(_independentColorTransform);
+				if(alpha < 1)
+				{
+					_renderUnitData.setIndependentColorTransform(_independentColorTransform);
+				}
+				else
+				{
+					_renderUnitData.restoreColor();
+				}
 			}
 		}
 		
@@ -2260,7 +2267,6 @@ package com.game.engine3D.scene.render
 					_resSwitch = false;
 					_renderUnitData = SceneRenderCache.getRenderUnitData(resData, this.type, this.id);
 					
-					_renderUnitData.blendMode = _blendMode;
 					validateGraphic();
 					validateProperties();
 					validateUnitChildren();
@@ -3006,6 +3012,10 @@ package com.game.engine3D.scene.render
 			
 			useFog = false;
 			_validateChildMeshEffect = false;
+			
+			_isAlpha = false;
+			blendMode = BlendMode.NORMAL;
+			alpha = 1;
 		}
 
 		/**

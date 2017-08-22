@@ -35,8 +35,15 @@ package com.rpgGame.app.cmdlistener
 		{
 			Log.debug("通知前端登录战斗服ResChangeServerGameToClientMessage");
 			var time:int=GlobalSheetData.getSettingInfo(849)!=null?GlobalSheetData.getSettingInfo(849).q_int_value:15;
+			if(msg.fighttype==2)
+			{
+				AppManager.showAppNoHide(AppConstant.BATTLE_D1V1_MATCH_PANEL,[1,time]);
+			}
+			else
+			{
+				AppManager.showAppNoHide(AppConstant.MULTY_ENTERTIME_PANL,msg.fighttype);
+			}
 			
-			AppManager.showAppNoHide(AppConstant.MULTY_ENTERTIME_PANL,msg.fighttype);
 			TweenLite.delayedCall(time,sendEnterCrossFight,[msg]);
 		}
 		private function sendEnterCrossFight(msg:ResChangeServerGameToClientMessage):void

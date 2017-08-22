@@ -26,7 +26,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_type_description:String;
 		 /**  进阶名效果名 */
 		public var q_grade_name:String;
-		 /**  释放类型（针对客户端释放的类型，0玩家释放，1战魂释放） */
+		 /**  释放类型（针对客户端释放的类型，0玩家释放，1战魂释放,2美人释放） */
 		public var q_performType:int;
 		 /**  技能开启描述 */
 		public var q_skillopen_desc:String;
@@ -292,6 +292,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_shake_screen:int;
 		 /**  扩展字段[dp：伤害加深比例，dr：伤害范围,为0表示必须指定目标，没有目标则没有伤害，dt,伤害时间间隔，受技能总的延迟时间影响，，dbt:BUFF触发方式，0伤害前触发，1伤害后触发，db:触发BUFF  id,dk:是否触发击退1击退] */
 		public var q_other:String;
+		 /**    */
+		public var q_multi_id:String;
 
 	}
 }

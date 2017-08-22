@@ -39,7 +39,7 @@ package org.mokylin.skin.app.wuxue.jineng
 		private function __JinengTitle_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/biaotilan.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.width = 528;
 			temp.x = 0;
 			temp.y = 0;
@@ -56,8 +56,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchGroup = true;
 			temp.letterSpacing = -1;
 			temp.text = "职业技能";
-			temp.color = 0xA6A07B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 4;
 			return temp;

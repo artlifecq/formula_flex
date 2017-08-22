@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.NineTowerSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.NineTowerEvent;
@@ -62,7 +63,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		private function onClickOwner():void
 		{
 			// TODO Auto Generated method stub
-			
+			NineTowerSender.reqTrackFlagPlayer();
 		}
 		
 		private function onTimer():void

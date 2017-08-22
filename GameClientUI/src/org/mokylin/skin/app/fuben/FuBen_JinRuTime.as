@@ -28,8 +28,8 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
-			this.height = 107;
-			this.width = 299;
+			this.height = 198;
+			this.width = 632;
 			this.elementsContent = [__FuBen_JinRuTime_UIAsset1_i(),name_i(),numTime_i()];
 			
 			states = {
@@ -44,7 +44,7 @@ package org.mokylin.skin.app.fuben
 		private function __FuBen_JinRuTime_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 107;
+			temp.height = 198;
 			temp.styleName = "ui/app/fuben/tishibg.png";
 			temp.x = 0;
 			temp.y = 0;
@@ -57,8 +57,8 @@ package org.mokylin.skin.app.fuben
 			name = temp;
 			temp.name = "name";
 			temp.styleName = "ui/app/fuben/jijiangjinrufuben.png";
-			temp.x = 57;
-			temp.y = 23;
+			temp.x = 130;
+			temp.y = 35;
 			return temp;
 		}
 
@@ -72,8 +72,8 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.app.fuben.uinumber.UINumberTime;
 			temp.textAlign = "center";
 			temp.width = 67;
-			temp.x = 112;
-			temp.y = 52;
+			temp.x = 265;
+			temp.y = 97;
 			return temp;
 		}
 

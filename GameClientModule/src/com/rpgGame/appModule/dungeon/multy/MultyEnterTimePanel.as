@@ -39,7 +39,7 @@ package com.rpgGame.appModule.dungeon.multy
 					name="ui/app/fuben/jijiangjinrufuben.png";
 					break;
 				case 19:
-					name="ui/app/fuben/jijiangjinrufuben.png";
+					name="ui/app/fuben/jijiangjinruzhanchang.png";
 					break;
 			}
 			_skin.name.styleName=name;

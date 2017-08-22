@@ -1,6 +1,5 @@
 package com.rpgGame.app.view.icon
 {
-	import com.rpgGame.app.manager.EftMcManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -11,9 +10,6 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
-	import app.message.Quality;
-	
-	import feathers.controls.UIMovieClip;
 	import feathers.utils.filter.GrayFilter;
 	
 	import starling.events.TouchEvent;
