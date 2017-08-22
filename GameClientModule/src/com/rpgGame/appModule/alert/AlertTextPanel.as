@@ -2,6 +2,7 @@ package com.rpgGame.appModule.alert
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
 	
+	import org.mokylin.skin.common.alert.AlertInfo;
 	import org.mokylin.skin.common.alert.AlertSkin;
 	
 	import starling.display.DisplayObjectContainer;
@@ -13,17 +14,17 @@ package com.rpgGame.appModule.alert
 	 */
 	public class AlertTextPanel  extends SkinUIPanel
 	{
-		private var _skin :AlertSkin;
+		private var _skin :AlertInfo;
 		public function AlertTextPanel()
 		{
-			_skin=new AlertSkin();
+			_skin=new AlertInfo();
 			super(_skin);
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
 			
-			_skin.lbTip.htmlText=""+data;
+			_skin.lb_text.text=String(data);
 		}
 		
 		override public function hide():void 
