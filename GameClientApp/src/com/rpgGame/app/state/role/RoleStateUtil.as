@@ -4,6 +4,7 @@ package com.rpgGame.app.state.role
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
@@ -11,6 +12,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.stall.StallManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -37,6 +39,8 @@ package com.rpgGame.app.state.role
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
+	
+	import cmodule.PreLoader.regFunc;
 	
 	import gs.TweenLite;
 	
@@ -114,6 +118,7 @@ package com.rpgGame.app.state.role
 				ref.setParams(info.speed, 0, null, info);
 				ref.overrideType = StateRefOverrideType.ATTACH;
 				ref.onMove(onWalkMove);
+				ref.onArrive(onMoveEnd);
 				if (ref.throughFuncArgs && ref.throughFuncArgs.length > 0)
 					ref.onThrough(onWalkThrough, ref.throughFuncArgs[0]);
 				else
@@ -121,7 +126,17 @@ package com.rpgGame.app.state.role
 				role.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref, true, true);
 			}
 		}
-
+		private static function onMoveEnd(ref:WalkMoveStateReference):void
+		{
+			if (HeadFace.debug) 
+			{
+				if (ref.owner is SceneRole&&SceneRole(ref.owner).headFace is HeadFace) 
+				{
+					var head:HeadFace=SceneRole(ref.owner).headFace as HeadFace;
+					head.updatePos(ref.owner.pos.x,ref.owner.pos.y);
+				}
+			}
+		}
 		/**
 		 * 行走到点，主要用这个
 		 * @param role
@@ -340,7 +355,7 @@ package com.rpgGame.app.state.role
 				if (!ref.isServerStop)
 				{
 					SceneSender.SendPlayerStopMessage(); //告诉服务器，停止移动。
-					TrusteeshipManager.getInstance().autoPickCtrl.SetPickingState(false);
+					PickAutoManager.getInstance().autoPickCtrl.SetPickingState(false);
 				}
 			}
 		}

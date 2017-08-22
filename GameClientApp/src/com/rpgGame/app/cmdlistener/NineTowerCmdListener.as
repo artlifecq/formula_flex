@@ -23,6 +23,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(129110, Mgr.nineTowerMgr.SCWarChessHandler);
 			SocketConnection.addCmdListener(129112, Mgr.nineTowerMgr.SCOpenYaoTaPanelHandler);
 			SocketConnection.addCmdListener(129114, Mgr.nineTowerMgr.SCDrawYaoTaAwardHandler);
+			SocketConnection.addCmdListener(129116, Mgr.nineTowerMgr.SCGetPlayerPostionHandler);
 			finish();
 		}	
 		

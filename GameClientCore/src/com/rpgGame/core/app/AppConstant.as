@@ -555,5 +555,8 @@ package com.rpgGame.core.app
 		public static var GRID_OPEN_TISHI:String = createAppInfo("role.GridOpenTiShiPanel");
 		/**副本结算通用**/
 		public static var NEW_SKILL_ADD_PANLE:String = createAppInfo("skill.NewSkillAddPanelExt","xinjineng");
+		
+		/**提示*/
+		public static var ALERT_TEXT_PANEL:String = createAppInfo("alert.AlertTextPanel");
 	}
 }

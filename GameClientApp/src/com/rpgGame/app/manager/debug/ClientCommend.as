@@ -478,6 +478,10 @@ package   com.rpgGame.app.manager.debug
 				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_NOTICE_PANEL,arg[0]);
 				
 			});
+			commandList.put( ".debugpos", function (...arg):void
+			{
+				HeadFace.debug=true;
+			});
 		}
 		
 		

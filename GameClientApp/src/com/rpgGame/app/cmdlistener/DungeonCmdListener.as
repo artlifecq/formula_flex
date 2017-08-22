@@ -282,7 +282,10 @@ package com.rpgGame.app.cmdlistener
 				}
 				else
 				{
-					AppManager.showAppNoHide(AppConstant.MULTY_TEAM_PANL);
+					if(!AppManager.isAppInScene(AppConstant.MULTY_TEAM_PANL))
+					{
+						AppManager.showAppNoHide(AppConstant.MULTY_TEAM_PANL);
+					}
 					EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_VOTE);
 				}
 			}		

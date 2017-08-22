@@ -188,7 +188,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "uiKunNan";
 			temp.styleName = "ui/common/kunnan.png";
 			temp.x = 188;
-			temp.y = 19;
+			temp.y = 24;
 			return temp;
 		}
 

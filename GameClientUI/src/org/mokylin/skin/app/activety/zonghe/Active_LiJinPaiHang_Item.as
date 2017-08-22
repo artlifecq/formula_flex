@@ -108,13 +108,13 @@ package org.mokylin.skin.app.activety.zonghe
 			lbKill = temp;
 			temp.name = "lbKill";
 			temp.fontSize = 12;
-			temp.text = "帮会名字";
+			temp.text = "[1000区]一二三四五六";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
-			temp.width = 81;
-			temp.x = 194;
+			temp.width = 136;
+			temp.x = 190;
 			temp.y = 9;
 			return temp;
 		}
@@ -124,14 +124,15 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
+			temp.height = 17;
 			temp.fontSize = 12;
-			temp.text = "s1223 狼来了";
+			temp.text = "[1000区]一二三四五六";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 109;
-			temp.x = 67;
+			temp.width = 140;
+			temp.x = 57;
 			temp.y = 9;
 			return temp;
 		}
@@ -164,7 +165,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 61;
-			temp.x = 317;
+			temp.x = 326;
 			temp.y = 9;
 			return temp;
 		}

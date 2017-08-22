@@ -12,6 +12,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.stall.StallManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -253,7 +254,7 @@ package com.rpgGame.app.manager
 			if (role == null || !role.usable)
 				return;
 			
-			TrusteeshipManager.getInstance().autoPickCtrl.isArrivePk=true;
+			PickAutoManager.getInstance().autoPickCtrl.isArrivePk=true;
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
@@ -271,7 +272,7 @@ package com.rpgGame.app.manager
 		{
 			if (role == null || !role.usable)
 				return;
-			TrusteeshipManager.getInstance().autoPickCtrl.isArrivePk=true;
+			PickAutoManager.getInstance().autoPickCtrl.isArrivePk=true;
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
