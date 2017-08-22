@@ -164,16 +164,16 @@ package com.client.view.loading
 				return;
 			}
 			isLoad=true;
-			GuiTheme.ins.LoadAsset("ui/big_bg/bg_bing.png",onAssetComplete1);
+			GuiTheme.ins.LoadAsset("ui/big_bg/bg_bing.jpg",onAssetComplete1);
 			
-			GuiTheme.ins.LoadAsset("ui/big_bg/bg_yi.png",onAssetComplete2);
+			GuiTheme.ins.LoadAsset("ui/big_bg/bg_yi.jpg",onAssetComplete2);
 		}
 		
 		private function onAssetComplete1(texture:IStarlingTexture):void
 		{
 			// TODO Auto Generated method stub
 			var ui:UIAsset=new UIAsset();
-			ui.setTexture(texture,"ui/big_bg/bg_bing.png");
+			ui.setTexture(texture,"ui/big_bg/bg_bing.jpg");
 			_resLoadingViewSkin.container.addChildAt(ui,0);
 			_randomArr.push(ui);
 		}
@@ -181,7 +181,7 @@ package com.client.view.loading
 		{
 			// TODO Auto Generated method stub
 			var ui:UIAsset=new UIAsset();
-			ui.setTexture(texture,"ui/big_bg/bg_yi.png");
+			ui.setTexture(texture,"ui/big_bg/bg_yi.jpg");
 			_randomArr.push(ui);
 			_resLoadingViewSkin.container.addChildAt(ui,0);
 		

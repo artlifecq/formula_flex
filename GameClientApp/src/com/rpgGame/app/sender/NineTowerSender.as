@@ -6,9 +6,15 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.yaota.message.CSYaoTaLogMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
+	import com.rpgGame.netData.yaota.message.CSGetPlayerPostionMessage;
 
 	public class NineTowerSender extends BaseSender
 	{
+		public static function reqTrackFlagPlayer():void
+		{
+			var msg:CSGetPlayerPostionMessage=new CSGetPlayerPostionMessage();
+			SocketConnection.send(msg);
+		}
 		public static function reqPanelData():void
 		{
 			var msg:CSOpenYaoTaPanelMessage=new CSOpenYaoTaPanelMessage();

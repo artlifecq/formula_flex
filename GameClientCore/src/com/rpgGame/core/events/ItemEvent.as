@@ -137,9 +137,9 @@ package com.rpgGame.core.events
 		public static const ITEM_WU_XING_EXCHANGE_SUCCESS:int = UNIQUEID.NEXT;
 		/** 物品已经过期 */
 		public static const ITEM_EXPIRE:int = UNIQUEID.NEXT;
-		/** 增加回收资源 **/
+		/** 添加出售 **/
 		public static const ITEM_RECLAIM_ADD:int = UNIQUEID.NEXT;
-		/** 取消资源回收 **/
+		/** 取消出售 **/
 		public static const ITEM_RECLAIM_CANCEL:int = UNIQUEID.NEXT;
 	}
 }

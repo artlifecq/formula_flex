@@ -267,13 +267,20 @@ package com.rpgGame.app.manager.role
 		 * */
 		public static function getPlayerName(name:String,length:int=0):String
 		{
-			var arr:Array= name.split(']');
-			var newname:String="";
-			if(arr)	{
-				for(var i:int=1;i<arr.length;i++)
-				{
-					newname+=arr[i];
+			if (name.indexOf("]")!=-1) 
+			{
+				var arr:Array= name.split(']');
+				var newname:String="";
+				if(arr)	{
+					for(var i:int=1;i<arr.length;i++)
+					{
+						newname+=arr[i];
+					}
 				}
+			}
+			else
+			{
+				newname=name;
 			}
 			if(length>0)
 			{

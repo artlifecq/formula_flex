@@ -248,7 +248,7 @@ package com.rpgGame.appModule.common
 			}
 			gridInfo.data = itemInfo;
 			gridInfo.isEnabled = _mgr?_mgr.isEnabled(index):true;
-			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):true;
+			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):false;
 			
 			if(itemInfo && gridIndex == -1)
 			{

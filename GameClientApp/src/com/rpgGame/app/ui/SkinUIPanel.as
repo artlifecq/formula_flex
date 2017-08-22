@@ -5,6 +5,8 @@ package com.rpgGame.app.ui
 	import com.rpgGame.core.app.enum.PanelPosType;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.core.utils.UIUtil;
 	
 	import away3d.events.Event;
 	
@@ -19,7 +21,7 @@ package com.rpgGame.app.ui
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-
+	
 	/**
 	 *基于skinState配置的app面板基类,
 	 *有拖动功能:dargAble=true; 模态功能:model=true; Esc快捷关闭功能:escExcuteAble=true;
@@ -32,14 +34,14 @@ package com.rpgGame.app.ui
 		protected var _appInfo : AppInfo;
 		protected var _data : Object;
 		protected var _openTab : String;
-
+		
 		public function SkinUIPanel(skin : StateSkin)
 		{
 			super(skin);
-
+			
 			dragAble = true;
 		}
-
+		
 		/**
 		 * esc快捷关闭是否可用
 		 * @param value
@@ -69,7 +71,7 @@ package com.rpgGame.app.ui
 			}
 			_model = value;
 		}
-
+		
 		/**
 		 * 当舞台尺寸变化后
 		 * @param sw 舞台宽
@@ -78,8 +80,8 @@ package com.rpgGame.app.ui
 		 */
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
-//			if(_blackShape)_blackShape.removeFromParent();
-
+			//			if(_blackShape)_blackShape.removeFromParent();
+			
 			var xx : int, yy : int;
 			if (!_appInfo)
 			{
@@ -133,7 +135,7 @@ package com.rpgGame.app.ui
 				this.y = yy + _appInfo.pY;
 			}
 		}
-
+		
 		//==================================DragDrop============================================
 		private static const DRAG_FORMAT : String = "draggablePanel";
 		private var _dragAble : Boolean = true;
@@ -141,32 +143,32 @@ package com.rpgGame.app.ui
 		private var _draggedObject : DisplayObject;
 		private var _touchOffX : int;
 		private var _touchOffY : int;
-
+		
 		public function set dragAble(b : Boolean) : void
 		{
 			_dragAble = b;
 			b ? activeDragDrop() : inactiveDragDrop();
 		}
-
+		
 		public function get dragAble() : Boolean
 		{
 			return _dragAble;
 		}
-
+		
 		private function activeDragDrop() : void
 		{
 			this.addEventListener(starling.events.TouchEvent.TOUCH, touchHandler);
 			this.addEventListener(DragDropEvent.DRAG_START, dragStartHandler);
 			this.addEventListener(DragDropEvent.DRAG_COMPLETE, dragCompleteHandler);
 		}
-
+		
 		private function inactiveDragDrop() : void
 		{
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, touchHandler);
 			this.removeEventListener(DragDropEvent.DRAG_START, dragStartHandler);
 			this.removeEventListener(DragDropEvent.DRAG_COMPLETE, dragCompleteHandler);
 		}
-
+		
 		private function touchHandler(event : starling.events.TouchEvent) : void
 		{
 			if (DragDropManager.isDragging)
@@ -182,7 +184,7 @@ package com.rpgGame.app.ui
 					this._touchID = -1;
 					return;
 				}
-
+				
 				if (touch.phase == TouchPhase.MOVED)
 				{
 					//仅点中背景层时才允许被拖动,bg必须是第０层
@@ -190,11 +192,11 @@ package com.rpgGame.app.ui
 					{
 						return;
 					}
-
+					
 					this._touchID = -1;
 					this._touchOffX = touch.globalX - this.x;
 					this._touchOffY = touch.globalY - this.y;
-
+					
 					var dragData : DragData = new DragData();
 					dragData.setDataForFormat(DRAG_FORMAT, this._draggedObject);
 					DragDropManager.startDrag(this, touch, dragData);
@@ -215,12 +217,12 @@ package com.rpgGame.app.ui
 				this._draggedObject = touch.target;
 			}
 		}
-
+		
 		private function dragStartHandler(event : DragDropEvent, dragData : DragData) : void
 		{
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onDragMove);
 		}
-
+		
 		private function onDragMove(event : starling.events.TouchEvent) : void
 		{
 			var touch : Touch = event.getTouch(this);
@@ -254,24 +256,24 @@ package com.rpgGame.app.ui
 				{
 					this.y=ty;
 				}
-//				this.x = int(touch.globalX - _touchOffX);
-//				this.y = int(touch.globalY - _touchOffY);
+				//				this.x = int(touch.globalX - _touchOffX);
+				//				this.y = int(touch.globalY - _touchOffY);
 			}
 		}
-
+		
 		private function dragCompleteHandler(event : DragDropEvent, dragData : DragData) : void
 		{
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onDragMove);
 			if (event.isDropped)
 			{
-
+				
 			}
 			else
 			{
 				//the drag cancelled and the object was not dropped
 			}
 		}
-
+		
 		//==========================model==============================
 		//
 		//==========================implements==============================
@@ -282,47 +284,47 @@ package com.rpgGame.app.ui
 				return;
 			_appInfo = value;
 		}
-
+		
 		public function get appinfo() : AppInfo
 		{
 			return _appInfo;
 		}
-
+		
 		/*		public function supperSetup() : void
-				{
-				}
-				;
-
-				public function superAddEvent() : void
-				{
-				}
-
-				public function superRemoveEvent() : void
-				{
-				}
-
-
-				public function setup() : void
-				{
-
-				}
-
-				public function initAttr() : void
-				{
-				}
-
-				public function initView() : void
-				{
-
-				}*/
+		{
+		}
+		;
+		
+		public function superAddEvent() : void
+		{
+		}
+		
+		public function superRemoveEvent() : void
+		{
+		}
+		
+		
+		public function setup() : void
+		{
+		
+		}
+		
+		public function initAttr() : void
+		{
+		}
+		
+		public function initView() : void
+		{
+		
+		}*/
 		
 		private var _isSHowing:Boolean = false;
-
+		
 		public function get isSHowing():Boolean
 		{
 			return _isSHowing;
 		}
-
+		
 		/**
 		 *  添加到显示列表
 		 * @param data 界面显示需要的自定义数据
@@ -351,7 +353,7 @@ package com.rpgGame.app.ui
 			}
 			refresh();
 		}
-
+		
 		/**
 		 *从显示列表移除，但并不销毁,
 		 */
@@ -374,17 +376,17 @@ package com.rpgGame.app.ui
 		{
 			return _parentContainer;
 		}
-
+		
 		public function isHideEffecting() : Boolean
 		{
 			return true;
 		}
-
+		
 		public function showCloseGuide(isShowBg : Boolean, bgAlpha : Number) : void
 		{
-
+			
 		}
-
+		
 		/**
 		 *当Panel被点击时置顶
 		 */
@@ -398,10 +400,10 @@ package com.rpgGame.app.ui
 					this.parent.addChild(this);
 				}
 			}
-
+			
 			super.onTouch(e);
 		}
-
+		
 		override protected function onTouchTarget(target : DisplayObject) : void
 		{
 			var name : String = target.name;
@@ -413,7 +415,7 @@ package com.rpgGame.app.ui
 					break;
 			}
 		}
-
+		
 		//==========================implements IEscExcute==============================
 		//
 		public function excute() : void
@@ -421,7 +423,7 @@ package com.rpgGame.app.ui
 			if (_escAble)
 				hide();
 		}
-
+		
 		override public function dispose() : void
 		{
 			super.dispose();

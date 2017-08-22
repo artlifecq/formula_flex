@@ -70,7 +70,7 @@ package org.mokylin.skin.app.xinjineng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gGai = temp;
 			temp.name = "gGai";
-			temp.x = 198;
+			temp.x = 193;
 			temp.y = 8;
 			temp.elementsContent = [uiRight_i(),uiLeft_i()];
 			return temp;
@@ -98,8 +98,8 @@ package org.mokylin.skin.app.xinjineng
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 117;
-			temp.x = 245;
-			temp.y = 53;
+			temp.x = 255;
+			temp.y = 55;
 			return temp;
 		}
 
@@ -109,7 +109,7 @@ package org.mokylin.skin.app.xinjineng
 			uiKuang = temp;
 			temp.name = "uiKuang";
 			temp.styleName = "ui/app/xinjineng/gezi.png";
-			temp.x = 117;
+			temp.x = 130;
 			temp.y = 0;
 			return temp;
 		}
@@ -132,7 +132,7 @@ package org.mokylin.skin.app.xinjineng
 			temp.name = "uiName";
 			temp.styleName = "ui/app/xinjineng/1001.png";
 			temp.x = 0;
-			temp.y = 46;
+			temp.y = 43;
 			return temp;
 		}
 
