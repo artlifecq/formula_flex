@@ -13,6 +13,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
@@ -158,7 +159,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "66":
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();
-					TrusteeshipManager.getInstance().autoPickCtrl.DoShortcutPick();
+					PickAutoManager.getInstance().autoPickCtrl.DoShortcutPick();
 					break;
 				case "20":
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();

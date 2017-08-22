@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -45,7 +46,7 @@ package com.rpgGame.app.manager.role
 			{
 				SceneSender.requestPickUpGoodsInfo(dropGoodsData.goodsDatas.dropGoodsId);
 //				dropGoodsDatasInit(dropGoodsData);
-				TrusteeshipManager.getInstance().autoPickCtrl.SetPickingState(false);
+				PickAutoManager.getInstance().autoPickCtrl.SetPickingState(false);
 			}
 			else
 			{

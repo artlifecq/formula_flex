@@ -366,15 +366,28 @@ package com.rpgGame.app.manager.goods
 					var maxCount:int=int(allRes/buyItem.data.price);
 					var qmax:int=buyItem.getItemConfig()!=null&&buyItem.getItemConfig().q_max>0?buyItem.getItemConfig().q_max:99;
 					maxCount=Math.min(qmax,maxCount);//999
-					if(maxCount>0)
+					//ItemManager.isCanPushPack(buyItem.getItemConfig().q_id,maxCount);
+					if(maxCount==0)
+					{
+						if(SystemTimeManager.curtTm>=timeNum)
+						{
+							timeNum=SystemTimeManager.curtTm+5000;
+							NoticeManager.showNotifyById(31008);
+						}
+					}
+					else if(!ItemManager.isCanPushPack(buyItem.getItemConfig().q_id,maxCount))
+					{
+						if(SystemTimeManager.curtTm>=timeNum)
+						{
+							timeNum=SystemTimeManager.curtTm+5000;
+							NoticeManager.showNotifyById(14005);
+						}
+					}
+					else if(maxCount>0)
 					{
 						Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null);
 					}
-					else if(SystemTimeManager.curtTm>=timeNum)
-					{
-						timeNum=SystemTimeManager.curtTm+5000;
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"银两不足，无法购买药水!");
-					}
+					
 				}
 				
 			}
