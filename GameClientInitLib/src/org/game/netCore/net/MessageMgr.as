@@ -453,6 +453,8 @@ package org.game.netCore.net
 			
 			//采集请求
 			sendCrossHash.put( 104201, 1 );
+			sendCrossHash.put( 104203, 1 );
+			
 			
 			sendCrossHash.put( 101215, 1 );
 			//boss传送  跨服中不允许使用

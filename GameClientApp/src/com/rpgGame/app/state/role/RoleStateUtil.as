@@ -118,6 +118,10 @@ package com.rpgGame.app.state.role
 				ref.setParams(info.speed, 0, null, info);
 				ref.overrideType = StateRefOverrideType.ATTACH;
 				ref.onMove(onWalkMove);
+				if (HeadFace.debug) 
+				{
+					ref.onDebugPos(onDebugPos);
+				}
 				if (ref.throughFuncArgs && ref.throughFuncArgs.length > 0)
 					ref.onThrough(onWalkThrough, ref.throughFuncArgs[0]);
 				else
@@ -125,9 +129,9 @@ package com.rpgGame.app.state.role
 				role.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref, true, true);
 			}
 		}
-		private static function onMoveEnd(ref:WalkMoveStateReference):void
+		private static function onDebugPos(ref:WalkMoveStateReference):void
 		{
-			if (HeadFace.debug) 
+			if (HeadFace.debug&&SceneRole(ref.owner).isMainChar==false) 
 			{
 				if (ref.owner is SceneRole&&SceneRole(ref.owner).headFace is HeadFace) 
 				{

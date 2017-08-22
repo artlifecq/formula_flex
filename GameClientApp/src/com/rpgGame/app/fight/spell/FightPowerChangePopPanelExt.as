@@ -125,8 +125,8 @@ package com.rpgGame.app.fight.spell
 				return ;
 			//this.filter = new GlowFilter(0xffff00,1,70,1);
 			var timeLine:TimelineLite = new TimelineLite();
-			timeLine.append(TweenLite.to(skin.container,0.3,{scale:1.5,ease:Expo.easeOut}));
-			timeLine.append(TweenLite.to(skin.container,0.3,{scale:1}));
+			timeLine.append(TweenLite.to(skin.container,0.4,{scale:1.5,ease:Expo.easeOut}));
+			timeLine.append(TweenLite.to(skin.container,0.4,{scale:1}));
 			timeLine.append(TweenLite.to(skin.container,0.3,{y:y-100,alpha:0,ease:Expo.easeOut,onComplete:popComplete}));
 			
 		}

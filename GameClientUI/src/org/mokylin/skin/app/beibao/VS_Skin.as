@@ -51,13 +51,9 @@ package org.mokylin.skin.app.beibao
 
 		public var lb_jn_own:feathers.controls.Label;
 
-		public var lb_jx_other:feathers.controls.Label;
+		public var lb_mr_other:feathers.controls.Label;
 
-		public var lb_jx_own:feathers.controls.Label;
-
-		public var lb_lj_other:feathers.controls.Label;
-
-		public var lb_lj_own:feathers.controls.Label;
+		public var lb_mr_own:feathers.controls.Label;
 
 		public var lb_ms_other:feathers.controls.Label;
 
@@ -79,6 +75,10 @@ package org.mokylin.skin.app.beibao
 
 		public var lb_zq_own:feathers.controls.Label;
 
+		public var lb_zqi_other:feathers.controls.Label;
+
+		public var lb_zqi_own:feathers.controls.Label;
+
 		public var num_other:feathers.controls.UINumber;
 
 		public var num_own:feathers.controls.UINumber;
@@ -95,13 +95,9 @@ package org.mokylin.skin.app.beibao
 
 		public var pro_jn_own:feathers.controls.ProgressBar;
 
-		public var pro_jx_other:feathers.controls.ProgressBar;
+		public var pro_mr_other:feathers.controls.ProgressBar;
 
-		public var pro_jx_own:feathers.controls.ProgressBar;
-
-		public var pro_lj_other:feathers.controls.ProgressBar;
-
-		public var pro_lj_own:feathers.controls.ProgressBar;
+		public var pro_mr_own:feathers.controls.ProgressBar;
 
 		public var pro_ms_other:feathers.controls.ProgressBar;
 
@@ -118,6 +114,10 @@ package org.mokylin.skin.app.beibao
 		public var pro_zq_other:feathers.controls.ProgressBar;
 
 		public var pro_zq_own:feathers.controls.ProgressBar;
+
+		public var pro_zqi_other:feathers.controls.ProgressBar;
+
+		public var pro_zqi_own:feathers.controls.ProgressBar;
 
 
 		//==========================================================================
@@ -249,7 +249,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_jm";
 			temp.x = 20;
 			temp.y = 322;
-			temp.elementsContent = [pro_jm_other_i(),pro_jm_own_i(),lb_jm_own_i(),lb_jm_other_i(),__VS_Skin_UIAsset8_i()];
+			temp.elementsContent = [pro_xf_other_i(),pro_xf_own_i(),lb_xf_own_i(),lb_xf_other_i(),__VS_Skin_UIAsset8_i()];
 			return temp;
 		}
 
@@ -260,7 +260,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_jn";
 			temp.x = 20;
 			temp.y = 285;
-			temp.elementsContent = [pro_jn_other_i(),pro_jn_own_i(),lb_jn_own_i(),lb_jn_other_i(),__VS_Skin_UIAsset7_i()];
+			temp.elementsContent = [pro_jm_other_i(),pro_jm_own_i(),lb_jm_own_i(),lb_jm_other_i(),__VS_Skin_UIAsset7_i()];
 			return temp;
 		}
 
@@ -271,7 +271,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_jx";
 			temp.x = 20;
 			temp.y = 358;
-			temp.elementsContent = [pro_jx_other_i(),pro_jx_own_i(),lb_jx_own_i(),lb_jx_other_i(),__VS_Skin_UIAsset9_i()];
+			temp.elementsContent = [pro_jn_other_i(),pro_jn_own_i(),lb_jn_own_i(),lb_jn_other_i(),__VS_Skin_UIAsset9_i()];
 			return temp;
 		}
 
@@ -282,7 +282,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_lj";
 			temp.x = 20;
 			temp.y = 395;
-			temp.elementsContent = [pro_lj_other_i(),pro_lj_own_i(),lb_lj_own_i(),lb_lj_other_i(),__VS_Skin_UIAsset10_i()];
+			temp.elementsContent = [pro_mr_other_i(),pro_mr_own_i(),lb_mr_own_i(),lb_mr_other_i(),__VS_Skin_UIAsset10_i()];
 			return temp;
 		}
 
@@ -304,7 +304,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_xf";
 			temp.x = 20;
 			temp.y = 248;
-			temp.elementsContent = [pro_xf_other_i(),pro_xf_own_i(),lb_xf_own_i(),lb_xf_other_i(),__VS_Skin_UIAsset6_i()];
+			temp.elementsContent = [pro_zqi_other_i(),pro_zqi_own_i(),lb_zqi_own_i(),lb_zqi_other_i(),__VS_Skin_UIAsset6_i()];
 			return temp;
 		}
 
@@ -315,7 +315,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_zb";
 			temp.x = 20;
 			temp.y = 212;
-			temp.elementsContent = [pro_zb_other_i(),pro_zb_own_i(),lb_zb_own_i(),lb_zb_other_i(),__VS_Skin_UIAsset5_i()];
+			temp.elementsContent = [pro_zq_other_i(),pro_zq_own_i(),lb_zq_own_i(),lb_zq_other_i(),__VS_Skin_UIAsset5_i()];
 			return temp;
 		}
 
@@ -326,7 +326,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "grp_zq";
 			temp.x = 20;
 			temp.y = 174;
-			temp.elementsContent = [pro_zq_other_i(),pro_zq_own_i(),lb_zq_own_i(),lb_zq_other_i(),__VS_Skin_UIAsset4_i()];
+			temp.elementsContent = [pro_zb_other_i(),pro_zb_own_i(),lb_zb_own_i(),lb_zb_other_i(),__VS_Skin_UIAsset4_i()];
 			return temp;
 		}
 
@@ -365,7 +365,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_jm_other = temp;
 			temp.name = "lb_jm_other";
-			temp.text = "190";
+			temp.text = "6644";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -380,7 +380,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_jm_own = temp;
 			temp.name = "lb_jm_own";
-			temp.text = "970";
+			temp.text = "3300";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -395,7 +395,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_jn_other = temp;
 			temp.name = "lb_jn_other";
-			temp.text = "6644";
+			temp.text = "2345";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -410,36 +410,6 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_jn_own = temp;
 			temp.name = "lb_jn_own";
-			temp.text = "3300";
-			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 117;
-			temp.x = 2;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function lb_jx_other_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_jx_other = temp;
-			temp.name = "lb_jx_other";
-			temp.text = "2345";
-			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 117;
-			temp.x = 194;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function lb_jx_own_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_jx_own = temp;
-			temp.name = "lb_jx_own";
 			temp.text = "1234";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
@@ -450,11 +420,11 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function lb_lj_other_i():feathers.controls.Label
+		private function lb_mr_other_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_lj_other = temp;
-			temp.name = "lb_lj_other";
+			lb_mr_other = temp;
+			temp.name = "lb_mr_other";
 			temp.text = "2345";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
@@ -465,11 +435,11 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function lb_lj_own_i():feathers.controls.Label
+		private function lb_mr_own_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_lj_own = temp;
-			temp.name = "lb_lj_own";
+			lb_mr_own = temp;
+			temp.name = "lb_mr_own";
 			temp.text = "1234";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
@@ -541,7 +511,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_xf_other = temp;
 			temp.name = "lb_xf_other";
-			temp.text = "4700";
+			temp.text = "190";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -556,7 +526,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_xf_own = temp;
 			temp.name = "lb_xf_own";
-			temp.text = "2300";
+			temp.text = "970";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -571,7 +541,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_zb_other = temp;
 			temp.name = "lb_zb_other";
-			temp.text = "4700";
+			temp.text = "1780";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -601,7 +571,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_zq_other = temp;
 			temp.name = "lb_zq_other";
-			temp.text = "1780";
+			temp.text = "4700";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -616,6 +586,36 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_zq_own = temp;
 			temp.name = "lb_zq_own";
+			temp.text = "2300";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 117;
+			temp.x = 2;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function lb_zqi_other_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_zqi_other = temp;
+			temp.name = "lb_zqi_other";
+			temp.text = "4700";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 117;
+			temp.x = 194;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function lb_zqi_own_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_zqi_own = temp;
+			temp.name = "lb_zqi_own";
 			temp.text = "2300";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
@@ -743,11 +743,11 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function pro_jx_other_i():feathers.controls.ProgressBar
+		private function pro_mr_other_i():feathers.controls.ProgressBar
 		{
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			pro_jx_other = temp;
-			temp.name = "pro_jx_other";
+			pro_mr_other = temp;
+			temp.name = "pro_mr_other";
 			temp.height = 19;
 			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_vs1_Skin;
@@ -758,40 +758,11 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function pro_jx_own_i():feathers.controls.ProgressBar
+		private function pro_mr_own_i():feathers.controls.ProgressBar
 		{
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			pro_jx_own = temp;
-			temp.name = "pro_jx_own";
-			temp.height = 19;
-			temp.styleClass = org.mokylin.skin.component.progress.pro_vs2_Skin;
-			temp.value = 0;
-			temp.width = 120;
-			temp.x = 0;
-			temp.y = 18;
-			return temp;
-		}
-
-		private function pro_lj_other_i():feathers.controls.ProgressBar
-		{
-			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			pro_lj_other = temp;
-			temp.name = "pro_lj_other";
-			temp.height = 19;
-			temp.minimum = 0;
-			temp.styleClass = org.mokylin.skin.component.progress.pro_vs1_Skin;
-			temp.value = 50;
-			temp.width = 120;
-			temp.x = 194;
-			temp.y = 18;
-			return temp;
-		}
-
-		private function pro_lj_own_i():feathers.controls.ProgressBar
-		{
-			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			pro_lj_own = temp;
-			temp.name = "pro_lj_own";
+			pro_mr_own = temp;
+			temp.name = "pro_mr_own";
 			temp.height = 19;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_vs2_Skin;
 			temp.value = 10;
@@ -908,6 +879,35 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			pro_zq_own = temp;
 			temp.name = "pro_zq_own";
+			temp.height = 19;
+			temp.styleClass = org.mokylin.skin.component.progress.pro_vs2_Skin;
+			temp.value = 0;
+			temp.width = 120;
+			temp.x = 0;
+			temp.y = 18;
+			return temp;
+		}
+
+		private function pro_zqi_other_i():feathers.controls.ProgressBar
+		{
+			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
+			pro_zqi_other = temp;
+			temp.name = "pro_zqi_other";
+			temp.height = 19;
+			temp.minimum = 0;
+			temp.styleClass = org.mokylin.skin.component.progress.pro_vs1_Skin;
+			temp.value = 50;
+			temp.width = 120;
+			temp.x = 194;
+			temp.y = 18;
+			return temp;
+		}
+
+		private function pro_zqi_own_i():feathers.controls.ProgressBar
+		{
+			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
+			pro_zqi_own = temp;
+			temp.name = "pro_zqi_own";
 			temp.height = 19;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_vs2_Skin;
 			temp.value = 0;
