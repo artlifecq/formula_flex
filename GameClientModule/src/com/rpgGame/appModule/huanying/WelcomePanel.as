@@ -1,10 +1,14 @@
 package com.rpgGame.appModule.huanying
 {
+	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.type.TaskType;
 	
 	import org.mokylin.skin.app.huanying.HuanYing_Skin;
-	import com.game.engine3D.display.InterObject3D;
+	
+	import starling.display.DisplayObject;
 	
 	/**
 	 *欢迎界面 
@@ -24,7 +28,16 @@ package com.rpgGame.appModule.huanying
 		
 		private function initView():void
 		{
-			eft=this.playInter3DAt(ClientConfig.getEffect("ui_jixurenwu"),_skin.closeBtn.x+_skin.closeBtn.width/2,_skin.closeBtn.y+_skin.closeBtn.height/2,0);		
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_jixurenwu"),_skin.startBtn.x+_skin.startBtn.width/2,_skin.startBtn.y+_skin.startBtn.height/2,0);		
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(target==_skin.startBtn){
+				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
+				this.hide();
+			}
 		}
 		
 		override public function hide():void

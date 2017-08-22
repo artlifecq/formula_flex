@@ -17,7 +17,7 @@ package org.mokylin.skin.app.huanying
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var closeBtn:feathers.controls.Button;
+		public var startBtn:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -30,7 +30,7 @@ package org.mokylin.skin.app.huanying
 			this.currentState = "normal";
 			this.height = 467;
 			this.width = 912;
-			this.elementsContent = [bg_i(),closeBtn_i()];
+			this.elementsContent = [bg_i(),startBtn_i()];
 			
 			states = {
 			};
@@ -52,11 +52,11 @@ package org.mokylin.skin.app.huanying
 			return temp;
 		}
 
-		private function closeBtn_i():feathers.controls.Button
+		private function startBtn_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			closeBtn = temp;
-			temp.name = "closeBtn";
+			startBtn = temp;
+			temp.name = "startBtn";
 			temp.height = 52;
 			temp.styleClass = org.mokylin.skin.app.huanying.button.ButtonKaishijinru;
 			temp.width = 174;
