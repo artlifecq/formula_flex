@@ -39,6 +39,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.InitPlayerInfoCfgData;
 	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LijinCfgData;
@@ -273,6 +274,8 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 			TaskMissionCfgData.setupSuggest(dic[ConfigClassRegister.Q_suggest]);
+			
+			InitPlayerInfoCfgData.setup(dic[ConfigClassRegister.InitPlayerInfo]);
 			
 			
 			//窗口信息配置

@@ -115,7 +115,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCWorldBossKillerNameMessage(msg:SCWorldBossKillerNameMessage):void
 		{
-			ActivetyDataManager.updateBossKiller(msg.activityId,msg.killerName);
+			ActivetyDataManager.updateBossKiller(msg.activityId,msg.killerName,msg.killerId);
 		}
 		
 		/**

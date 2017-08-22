@@ -5,6 +5,7 @@ package com.client.process
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 
 	public class GetMainPlayerInfo extends BaseProcess
 	{

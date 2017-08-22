@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.type
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttributeCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
@@ -257,6 +258,9 @@ package com.rpgGame.coreData.type
 		private static var idMap:Dictionary;
 		private static var enMap:Dictionary;
 		public static var baseAttrIdArr:Array=[];
+		
+		
+		public static const CHANGE_NAME:int = UNIQUEID.NEXT;//因为登录需要改名字临时在这儿定义使用
 		
 		//		public static var attrRes:Dictionary;
 		//		public static var attrIconRes:Dictionary;

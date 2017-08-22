@@ -82,10 +82,10 @@ package org.mokylin.skin.app.activety.shijieboss
 			lbLevel = temp;
 			temp.name = "lbLevel";
 			temp.text = "(等级需求：70级)";
-			temp.color = 0xFFEA00;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 123;
-			temp.x = 389;
+			temp.x = 390;
 			temp.y = 25;
 			return temp;
 		}
@@ -99,13 +99,14 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.touchGroup = true;
 			temp.leading = 7;
 			temp.letterSpacing = 0;
-			temp.text = "【16-20级】 马贼首领";
+			temp.fontSize = 16;
+			temp.text = "【40级】 马贼首领";
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 156;
-			temp.x = 187;
-			temp.y = 18;
+			temp.width = 185;
+			temp.x = 180;
+			temp.y = 16;
 			return temp;
 		}
 
@@ -118,12 +119,12 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.touchGroup = true;
 			temp.leading = 7;
 			temp.letterSpacing = 0;
-			temp.text = "21:00-21:30";
+			temp.text = "下次刷新时间：21:00";
 			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 156;
-			temp.x = 187;
+			temp.width = 185;
+			temp.x = 180;
 			temp.y = 39;
 			return temp;
 		}
@@ -176,7 +177,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/common/yijisha2.png";
-			temp.x = 347;
+			temp.x = 117;
 			temp.y = 16;
 			return temp;
 		}
@@ -189,8 +190,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/activety/zonghe/active_name/dianfengduijue.png";
-			temp.x = 22;
-			temp.y = 22;
+			temp.x = 17;
+			temp.y = 21;
 			return temp;
 		}
 

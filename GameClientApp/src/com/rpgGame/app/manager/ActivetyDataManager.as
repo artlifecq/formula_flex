@@ -13,6 +13,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 
 	/**
 	 *活动大厅数据管理器 
@@ -36,11 +37,12 @@ package com.rpgGame.app.manager
 		 *更新击杀者 
 		 * 
 		 */
-		public static function updateBossKiller(id:int,killer:String):void
+		public static function updateBossKiller(id:int,killer:String,killerId:long):void
 		{
 			var bossInfo:BossActInfo=ActivetyCfgData.getActInfoById(id) as BossActInfo;
 			if(bossInfo){
 				bossInfo.killerName=killer;
+				bossInfo.killerId=killerId;
 			}
 		}
 		

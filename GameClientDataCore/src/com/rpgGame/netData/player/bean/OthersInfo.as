@@ -1,5 +1,6 @@
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.player.bean.ResourceDataItem;
+	import com.rpgGame.netData.player.bean.OtherFightPower;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
@@ -84,6 +85,10 @@ package com.rpgGame.netData.player.bean{
 		private var _resourceData: Vector.<ResourceDataItem> = new Vector.<ResourceDataItem>();
 		//装备信息列表
 		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
+		//玩家自己相关战斗力
+		private var _selfFightPower: Vector.<OtherFightPower> = new Vector.<OtherFightPower>();
+		//查询玩家相关战斗力
+		private var _otherFightPowr: Vector.<OtherFightPower> = new Vector.<OtherFightPower>();
 		/**
 		 * 写入字节缓存
 		 */
@@ -142,6 +147,16 @@ package com.rpgGame.netData.player.bean{
 			writeShort(_equips.length);
 			for (var i: int = 0; i < _equips.length; i++) {
 				writeBean(_equips[i]);
+			}
+			//玩家自己相关战斗力
+			writeShort(_selfFightPower.length);
+			for (var i: int = 0; i < _selfFightPower.length; i++) {
+				writeBean(_selfFightPower[i]);
+			}
+			//查询玩家相关战斗力
+			writeShort(_otherFightPowr.length);
+			for (var i: int = 0; i < _otherFightPowr.length; i++) {
+				writeBean(_otherFightPowr[i]);
 			}
 			return true;
 		}
@@ -204,6 +219,16 @@ package com.rpgGame.netData.player.bean{
 			var equips_length : int = readShort();
 			for (var i: int = 0; i < equips_length; i++) {
 				_equips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
+			}
+			//玩家自己相关战斗力
+			var selfFightPower_length : int = readShort();
+			for (var i: int = 0; i < selfFightPower_length; i++) {
+				_selfFightPower[i] = readBean(OtherFightPower) as OtherFightPower;
+			}
+			//查询玩家相关战斗力
+			var otherFightPowr_length : int = readShort();
+			for (var i: int = 0; i < otherFightPowr_length; i++) {
+				_otherFightPowr[i] = readBean(OtherFightPower) as OtherFightPower;
 			}
 			return true;
 		}
@@ -551,6 +576,36 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set equips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
 			this._equips = value;
+		}
+		
+		/**
+		 * get 玩家自己相关战斗力
+		 * @return 
+		 */
+		public function get selfFightPower(): Vector.<OtherFightPower>{
+			return _selfFightPower;
+		}
+		
+		/**
+		 * set 玩家自己相关战斗力
+		 */
+		public function set selfFightPower(value: Vector.<OtherFightPower>): void{
+			this._selfFightPower = value;
+		}
+		
+		/**
+		 * get 查询玩家相关战斗力
+		 * @return 
+		 */
+		public function get otherFightPowr(): Vector.<OtherFightPower>{
+			return _otherFightPowr;
+		}
+		
+		/**
+		 * set 查询玩家相关战斗力
+		 */
+		public function set otherFightPowr(value: Vector.<OtherFightPower>): void{
+			this._otherFightPowr = value;
 		}
 		
 	}
