@@ -48,7 +48,6 @@ package com.rpgGame.app.ui.roll
 		public function RollPane(data:RollItemInfo):void
 		{
 			_roleItem = data;
-			//			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
 			_roleskin = new Roll_Skin();
 			super(_roleskin);
 			init();	
@@ -98,7 +97,6 @@ package com.rpgGame.app.ui.roll
 			_roleskin.lbZhuangbeiName.text = _clientItem.qItem.q_name;
 			_roleskin.lbZhuangbeiName.color=ItemConfig.getItemQualityColor(_clientItem.cfgId);
 			_endRunTime = _roleItem.tempItemInfo.ltime*1000;
-			trace("时间："+_endRunTime+" 服务端时间："+SystemTimeManager.curtTm);
 			
 			_startNum = _endRunTime-DurationTime;
 			_currentFun = runProgressTime;
@@ -106,6 +104,7 @@ package com.rpgGame.app.ui.roll
 			_roleskin.listItem.itemRendererType = RollGetScoreCell;
 			_roleskin.btnRandom.addEventListener(Event.TRIGGERED,randomclickHandler);
 			_isRandomEnd = false;
+			_roleskin.btnRandom.alpha=0;
 			
 			this.playInter3DAt(ClientConfig.getEffect("ui_shaizi"),_roleskin.btnRandom.x+14,_roleskin.btnRandom.y+15,0,null,addComple);
 			
@@ -115,11 +114,11 @@ package com.rpgGame.app.ui.roll
 		private function addComple(render:RenderUnit3D):void
 		{
 			this.saiziRender=render;
-			this.saiziRender.visible=false;
 			var scale:Number=0.3;
 			this.saiziRender.scaleX=scale
 			this.saiziRender.scaleY=scale;
 			this.saiziRender.scaleZ=scale;
+			saiziRender.play(0);
 		}
 		
 		private function randomclickHandler():void
@@ -127,10 +126,10 @@ package com.rpgGame.app.ui.roll
 			if(_isRandomEnd)
 				return ;
 			DropGoodsManager.getInstance().reqRollPoint(_roleItem);
-			_roleskin.btnRandom.visible=false;
+			_roleskin.btnRandom.alpha=1;
+			_roleskin.btnRandom.isEnabled = false;
 			if(saiziRender){
-				saiziRender.play();
-				this.saiziRender.visible=true;
+				saiziRender.stop();
 			}
 		}
 		private function updateView():void
@@ -167,15 +166,8 @@ package com.rpgGame.app.ui.roll
 		private function runProgressTime():void
 		{
 			var now:Number = SystemTimeManager.curtTm;
-			//			var parcent:Number = (_endRunTime -now)/DurationTime;
-			//			if(parcent<0)
-			//				parcent = 0;
-			//			else if(parcent >1)
-			//				parcent = 1;
 			_roleskin.Pro_bar.maximum=DurationTime;
-			_roleskin.Pro_bar.value=(_endRunTime -now);
-			//			_roleskin.Pro_bar.value = parcent*_roleskin.Pro_bar.maximum;
-			
+			_roleskin.Pro_bar.value=(_endRunTime -now);			
 			if(now>=_endRunTime)
 			{
 				setEndHandler();
@@ -191,8 +183,7 @@ package com.rpgGame.app.ui.roll
 			_endRunTime = SystemTimeManager.curtTm+DURATION_REMOVE_TIME;
 			var stopTime:Number=stopTimes[int(Math.random()*6)];
 			saiziRender.stop(stopTime);
-			this.saiziRender.visible=false;
-			_roleskin.btnRandom.visible=true;
+			_roleskin.btnRandom.visible=false;
 		}
 		private function runRemoveHandler():void
 		{
@@ -221,7 +212,8 @@ package com.rpgGame.app.ui.roll
 			_endRunTime=0;
 			if(saiziRender){
 				saiziRender.stop();
-				this.saiziRender.visible=false;
+				saiziRender.dispose();
+//				this.saiziRender.visible=false;
 			}
 			_roleskin.btnRandom.visible=true;
 		}
