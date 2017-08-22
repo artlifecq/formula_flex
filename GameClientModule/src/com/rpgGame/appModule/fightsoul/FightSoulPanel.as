@@ -201,7 +201,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_eftRender.play(0);
 			_eft3d.visible=true;
-			TweenLite.delayedCall(4,function ():void{
+			TweenLite.delayedCall(2,function ():void{
 				_eft3d.visible=false;
 				_eftRender.stop();
 			});

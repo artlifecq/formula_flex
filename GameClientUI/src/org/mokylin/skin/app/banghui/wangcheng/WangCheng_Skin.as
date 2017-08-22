@@ -198,7 +198,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		private function __WangCheng_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/xiaodiandi.png";
+			temp.styleName = "ui/app/banghui/wangcheng/xiaodiandi2.png";
 			temp.x = 102;
 			temp.y = 119;
 			return temp;

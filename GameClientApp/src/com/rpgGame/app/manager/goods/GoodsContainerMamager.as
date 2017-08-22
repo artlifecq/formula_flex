@@ -11,13 +11,19 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.GridOpenCfg;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_backpack_grid;
+	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.ItemChangeType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemGridUnlockInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.item.UpgradeItemData;
 	import com.rpgGame.coreData.info.item.UpgradeItemInfo;
@@ -37,6 +43,8 @@ package com.rpgGame.app.manager.goods
 	
 	import org.client.mainCore.manager.EventManager;
 	
+	import utils.TimerServer;
+	
 	/**
 	 * 物品容器管理器
 	 * @author wewell@163.com
@@ -47,16 +55,20 @@ package com.rpgGame.app.manager.goods
 		
 		/** 已经开启个数 */
 		public var hasOpenCount:int;
-		public const Max_Grid_Count:int = 126;
+		public var Max_Grid_Count:int = 126;
 		
 		/** 解锁位置*/
 		public var curUnlockIndex:int;
+		/**当前待解锁的开格时间*/
+		public var unlockTime : int;
+		/**是否能免费解锁*/
+		public var isMianFei:Boolean;
 		
 		/**此处type为背包或者仓库table栏的分类  非物品type*/
 		protected var CUR_TYPE:uint;
 		protected var isSellItem:Boolean = false;//是否在出售
 		/** 与当前等级最接近的药 **/
-	//	private var _drugShopInfo:ShopItemData = null;
+		//	private var _drugShopInfo:ShopItemData = null;
 		/** 所有药品id **/
 		private var _drugList:Array = [];
 		
@@ -85,6 +97,19 @@ package com.rpgGame.app.manager.goods
 			
 			_goodsList = [];
 			goodsEnableDict = new Dictionary();
+			var id:int;
+			switch(this.containerId){
+				case ItemContainerID.BackPack:
+					id=18;
+					break;
+				case ItemContainerID.Storage:
+					id=20;
+					break;
+			}
+			var global:Q_global=GlobalSheetData.getSettingInfo(id);
+			if(global){
+				Max_Grid_Count=global.q_int_value;
+			}
 		}
 		
 		public function isEquip(cfg:Q_item):Boolean
@@ -129,24 +154,22 @@ package com.rpgGame.app.manager.goods
 			}
 		}
 		
-		
-		
 		public function set showLockAssetIndex(value:Array):void
 		{
 			_showLockAssetIndex = value;
 		}
-
+		
 		/** 额外的需要显示红色锁定的物品的下标**/
 		public function get showLockAssetIndex():Array
 		{
 			return _showLockAssetIndex;
 		}
-
+		
 		public function get checkType():Array
 		{
 			return _checkType;
 		}
-
+		
 		public function setIsShowBindLock(value:Boolean,lockUseMove:Boolean = true):void
 		{
 			if(value == isShowBindLock)
@@ -261,8 +284,6 @@ package com.rpgGame.app.manager.goods
 			}
 			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE_LIST,removeList);
 		}
-				
-		
 		
 		/**
 		 *改变物品 
@@ -1033,84 +1054,84 @@ package com.rpgGame.app.manager.goods
 		/** 查找当前背包中最合适的药品，品质优先，品质相同的等级优先 **/
 		/*private function searchSuitDrugItem( isAutoBuy:Boolean ):ClientItemInfo
 		{
-			var itemInfoList:Array = _goodsList;
-			var returnItem:ClientItemInfo;
-			if( isAutoBuy )
-			{
-				for each(var item:ClientItemInfo in itemInfoList)
-				{
-					var cfgId:int = item.cfgId;
-					var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
-					var quality:int = ItemConfig.getItemQuality( cfgId );
-					var cfgId1:int;
-					var requireLevel1:int;
-					var quality1:int;
-					
-					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
-					{
-						if( returnItem )
-						{
-							cfgId1 = returnItem.cfgId;
-							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
-						}
-						else
-						{
-							cfgId1 = _drugShopInfo.itemInfo.cfgId;
-							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
-						}
-						quality1 = ItemConfig.getItemQuality( cfgId1 );
-						if( quality > quality1 )
-						{
-							returnItem = item;
-						}
-						else if( quality == quality1 )
-						{
-							if( requireLevel > requireLevel1)
-							{
-								returnItem = item;
-							}
-						}
-					}
-				}
-			}
-			else
-			{
-				for each(item in itemInfoList)
-				{
-					cfgId = item.cfgId;
-					requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
-					
-					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
-					{
-						quality = ItemConfig.getItemQuality( cfgId );
-						if( returnItem )
-						{
-							requireLevel1 = ItemConfig.getItemRequireLevel( returnItem.cfgId );
-							quality1 = ItemConfig.getItemQuality( returnItem.cfgId );
-							if( quality > quality1 )
-							{
-								returnItem = item;
-							}
-							else if( (quality == quality1) && (requireLevel > requireLevel1) )
-							{
-								returnItem = item;
-							}
-						}
-						else
-						{
-							returnItem = item;
-						}
-					}
-				}
-			}
-			return returnItem;
+		var itemInfoList:Array = _goodsList;
+		var returnItem:ClientItemInfo;
+		if( isAutoBuy )
+		{
+		for each(var item:ClientItemInfo in itemInfoList)
+		{
+		var cfgId:int = item.cfgId;
+		var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
+		var quality:int = ItemConfig.getItemQuality( cfgId );
+		var cfgId1:int;
+		var requireLevel1:int;
+		var quality1:int;
+		
+		if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+		{
+		if( returnItem )
+		{
+		cfgId1 = returnItem.cfgId;
+		requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
+		}
+		else
+		{
+		cfgId1 = _drugShopInfo.itemInfo.cfgId;
+		requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
+		}
+		quality1 = ItemConfig.getItemQuality( cfgId1 );
+		if( quality > quality1 )
+		{
+		returnItem = item;
+		}
+		else if( quality == quality1 )
+		{
+		if( requireLevel > requireLevel1)
+		{
+		returnItem = item;
+		}
+		}
+		}
+		}
+		}
+		else
+		{
+		for each(item in itemInfoList)
+		{
+		cfgId = item.cfgId;
+		requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
+		
+		if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+		{
+		quality = ItemConfig.getItemQuality( cfgId );
+		if( returnItem )
+		{
+		requireLevel1 = ItemConfig.getItemRequireLevel( returnItem.cfgId );
+		quality1 = ItemConfig.getItemQuality( returnItem.cfgId );
+		if( quality > quality1 )
+		{
+		returnItem = item;
+		}
+		else if( (quality == quality1) && (requireLevel > requireLevel1) )
+		{
+		returnItem = item;
+		}
+		}
+		else
+		{
+		returnItem = item;
+		}
+		}
+		}
+		}
+		return returnItem;
 		}
 		
 		/**
-		 * 根据iteminfo获得；
-		 * 当前物品是否过期；(当前物品是否可用)
-		 * true(可用) false(不可用)
-		 */
+		* 根据iteminfo获得；
+		* 当前物品是否过期；(当前物品是否可用)
+		* true(可用) false(不可用)
+		*/
 		public function isCanUse($info:ClientItemInfo):Boolean
 		{
 			return checkItemExpireTime($info.expireTime);
@@ -1188,8 +1209,8 @@ package com.rpgGame.app.manager.goods
 		{
 			_checkType = value;
 		}
-				
-
+		
+		
 		/**
 		 * 设置装备类型（区分是坐骑装备还是人物装备） 
 		 * @param value
@@ -1222,12 +1243,12 @@ package com.rpgGame.app.manager.goods
 		{
 			curUnlockIndex = index+1;
 			hasOpenCount = index+1;
-//			unlockData.setUnlockedSize(hasOpenCount-initOpenCount);
+			//						unlockData.setUnlockedSize(hasOpenCount-initOpenCount);
 			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_UNLOCK, containerId,index);
 		}
 		
 		/**如果是需要解锁格子的容器，需要重写这个方法**/
-		public function unLockGrid():void
+		public function unLockGrid(index:int):void
 		{
 			
 		}
@@ -1238,8 +1259,8 @@ package com.rpgGame.app.manager.goods
 			{
 				if(!item)
 					continue;
-			/*	if(item.getNormalUsableType == type)
-					return item;*/
+				/*	if(item.getNormalUsableType == type)
+				return item;*/
 			}
 			return null;
 		}
@@ -1257,16 +1278,16 @@ package com.rpgGame.app.manager.goods
 					return StorageManager.instance;
 				case ItemContainerID.Role:
 					return RoleEquipmentManager.instance;
-//				case ItemContainerID.EQUIP_MAKE:
-//					return EquipMakeManager.instance;
-//				case ItemContainerID.EQUIP_COMBINE:
-//					return EquipCombineManager.instance;
-//				case ItemContainerID.EQUIP_DESTORY:
-//					return EquipDestoryManager.instance;
-//				case ItemContainerID.EQUIP_REFINE:
-//					return EquipRefineManager.instance;
-//				case ItemContainerID.EQUIP_GENERAL:
-//					return EquipGeneralChangeManager.instance;
+					//				case ItemContainerID.EQUIP_MAKE:
+					//					return EquipMakeManager.instance;
+					//				case ItemContainerID.EQUIP_COMBINE:
+					//					return EquipCombineManager.instance;
+					//				case ItemContainerID.EQUIP_DESTORY:
+					//					return EquipDestoryManager.instance;
+					//				case ItemContainerID.EQUIP_REFINE:
+					//					return EquipRefineManager.instance;
+					//				case ItemContainerID.EQUIP_GENERAL:
+					//					return EquipGeneralChangeManager.instance;
 				case ItemContainerID.Mount:
 					return MountEquipmentManager.instance;
 				case ItemContainerID.MOUNT_EQUIP:
@@ -1281,10 +1302,10 @@ package com.rpgGame.app.manager.goods
 					return MountSlotManager.instance;
 				case ItemContainerID.MOUNT_INHERTIT:
 					return MountInheritManager.instance;
-//				case ItemContainerID.MOUNT_AUTHENTICATE:
-//					return MountAuthenticateManager.instance;
-//				case ItemContainerID.MOUNT_BEAST_CARD:
-//					return MountChangeManeger.instance;
+					//				case ItemContainerID.MOUNT_AUTHENTICATE:
+					//					return MountAuthenticateManager.instance;
+					//				case ItemContainerID.MOUNT_BEAST_CARD:
+					//					return MountChangeManeger.instance;
 			}
 			return null;
 		}
@@ -1336,7 +1357,7 @@ package com.rpgGame.app.manager.goods
 			}
 			if(getMrg(item.containerID).getIsShowBindLock() == true)
 			{
-//				GameAlert.debugShow("这个时候不能丢弃物品");
+				//				GameAlert.debugShow("这个时候不能丢弃物品");
 				return;
 			}
 			EventManager.dispatchEvent(ItemEvent.ITEM_DISCARDED, item);
@@ -1382,18 +1403,123 @@ package com.rpgGame.app.manager.goods
 		 * @param allUnlockData
 		 * 
 		 */		
-//		public static function setUnlockDataConfig(allUnlockData:AllGoodsContainerUnlockProto):void
-//		{
-//			BackPackManager.instance.setUnlockData(allUnlockData);
-//			StorageManager.instance.setUnlockData(allUnlockData.storageDatas);
-//		}
+		public static function setUnlockDataConfig(info:GridInfo):GridInfo
+		{
+			//			BackPackManager.instance.setUnlockData(allUnlockData);
+			//			StorageManager.instance.setUnlockData(allUnlockData.storageDatas);
+			switch(info.containerID)
+			{
+				case ItemContainerID.BackPack:
+				{
+					if(info.index==GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
+					{
+						var id:String=getGridType(ItemContainerID.BackPack).toString()+"_"+info.index;
+						info.unlockInfo=setUnlockData(ItemContainerID.BackPack,id);
+					}
+					else
+					{
+						info.unlockInfo=null;
+					}
+					break;
+				}
+				case ItemContainerID.Storage:
+				{
+					if(info.index==GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
+					{
+						id=getGridType(ItemContainerID.Storage).toString()+"_"+info.index;
+						info.unlockInfo=setUnlockData(ItemContainerID.Storage,id);
+					}
+					else
+					{
+						info.unlockInfo=null;
+					}
+					break;
+				}
+			}
+			return info;
+		}
+		
+		/**设置待解锁格子数据*/
+		private static function setUnlockData(containerId:int,id:String):ItemGridUnlockInfo
+		{
+			var unlockInfo:ItemGridUnlockInfo=new ItemGridUnlockInfo();
+			unlockInfo.setdate(containerId,id);
+			return unlockInfo;
+		}
 		
 		public static function setUnlocked(containerID:int, index:int):void
 		{
 			getMrg(containerID).setUnlocked(index);
 			setItemInfo(containerID, index, null);
 		}
-
+		
+		/**获取格子类型
+		 * @param 1_背包 2_仓库 3_寻宝仓库（暂时没得）
+		 * */
+		public static function getGoodsType(type:int):int
+		{
+			switch(type){
+				case 1: return ItemContainerID.BackPack;
+				case 2: return ItemContainerID.Storage;
+			}		
+			return ItemContainerID.BackPack;
+		}
+		
+		/**依据格子类型获取类型
+		 * @param 1_背包 2_仓库 3_寻宝仓库（暂时没得）
+		 * */
+		public static function getGridType(containerID:int):int
+		{
+			switch(containerID){
+				case ItemContainerID.BackPack: return 1;
+				case ItemContainerID.Storage: return 2;
+			}		
+			return 1;
+		}
+		
+		/**
+		 * 计算开格需要的钱
+		 * */
+		public static function getOpenGridMoney(containerID:int, index:int):int
+		{
+			var pice:int=0;
+			var type:int=getGridType(containerID);
+			var starindex:int=getMrg(containerID).curUnlockIndex;
+			for(var i:int=starindex;i<=index;i++)
+			{
+				var id:String=type+"_"+index;
+				var cfg:Q_backpack_grid=GridOpenCfg.getCfgById(id);
+				if(cfg){
+					pice+=cfg.q_cost;
+				}
+			}
+			return pice;
+		}
+		
+		/**设置待开启格子*/
+		public function setGridUnLuck(index:int,tiem:int):void
+		{
+			curUnlockIndex=index-1;
+			unlockTime=tiem;
+			updateTime();
+			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_ONLOCK,this.containerId);
+			TimerServer.addLoop(updateTime,1000);		
+		}
+		
+		private function updateTime():void
+		{
+			unlockTime--;
+			if(unlockTime<=0)	{
+				TimerServer.remove(updateTime);
+				unlockTime=0;
+				isMianFei=true;
+				EventManager.dispatchEvent(ItemEvent.ITEM_GRID_CANLOCK,this.containerId);
+			}
+			else
+			{		
+				isMianFei=false;
+			}
+		}	
 	}	
 }
 

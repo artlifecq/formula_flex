@@ -1,14 +1,19 @@
 package com.rpgGame.app.view.icon
 {
-	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.EftMcManager;
+	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.coreData.type.item.GridBGType;
 	
+	import app.message.Quality;
+	
+	import feathers.controls.UIMovieClip;
 	import feathers.utils.filter.GrayFilter;
 	
 	import starling.events.TouchEvent;
@@ -45,12 +50,13 @@ package com.rpgGame.app.view.icon
 		 */		
 		override public function set gridInfo(value:GridInfo):void
 		{
+			heidEff();
 			if(!value)
 			{
 				trace("[DragDropItem]:gridInfo不能为空");
 				return;
 			}
-			
+			value=GoodsContainerMamager.setUnlockDataConfig(value);
 			_gridInfo = value;
 			
 			//有效的真实下标
@@ -61,7 +67,7 @@ package com.rpgGame.app.view.icon
 			
 			faceInfo =  _gridInfo.data;
 			
-			//			setBg( GridBGType.CHORTCUT_2 );
+			//						setBg( GridBGType.CHORTCUT_2 );
 			
 			if( _gridInfo.data)
 			{
@@ -81,13 +87,17 @@ package com.rpgGame.app.view.icon
 		
 		private function setGridUnlock():void
 		{
-			//			setBg( GridBGType.CHORTCUT_2_MASK );
-			//			if(gridInfo.unlockInfo && !TipTargetManager.hasTipsEventListener(this))
-			//			{
-			//				TipTargetManager.addTxtTipTarget( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
-			//			}
-		}
-		
+			setBg( GridBGType.CHORTCUT_2_MASK );
+			if(gridInfo.unlockInfo && !TipTargetManager.hasTipsEventListener(this))
+			{
+				var type:int=GoodsContainerMamager.getMrg(gridInfo.containerID).isMianFei?2:1;
+				showLuckEff(type);
+				TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
+			}
+			else{
+				heidEff();
+			}
+		}	
 		
 		//-----------------------------------
 		/**

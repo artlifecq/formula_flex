@@ -148,7 +148,10 @@ package com.rpgGame.app.display3D
 					TweenLite.to(avatar3d,1,{rotationY:defaultRotationY});
 				}
 			}else{
-				TweenLite.killTweensOf(avatar3d);
+				var currRo:int=Math.round(avatar3d.rotationY);
+				if(currRo!=defaultRotationY){
+					return;
+				}
 				touch = e.getTouch(this.touchZone, TouchPhase.BEGAN);
 				if(touch){
 					this._touchID=touch.id;
@@ -222,14 +225,14 @@ package com.rpgGame.app.display3D
 			super.dispose();
 		}
 		
-		/**
-		 *缩放 
-		 * @param num
-		 * 
-		 */
-		public function setScale(num:Number):void
+		public function set scaleRole(num:Number):void
 		{
 			_role.setScale(num);
+		}
+		
+		public function get scaleRole():Number
+		{
+			return _role.scaleX;
 		}
 		
 		/**

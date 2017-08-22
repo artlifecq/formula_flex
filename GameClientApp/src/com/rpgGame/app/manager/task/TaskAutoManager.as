@@ -145,7 +145,7 @@ package com.rpgGame.app.manager.task
 		private function onUpdate():void
 		{
 			
-			
+//			return ;
 			if(istech())
 			{
 				if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)

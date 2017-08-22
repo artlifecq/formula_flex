@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.tips
 {
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
@@ -12,7 +11,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	
 	import org.mokylin.skin.app.tips.Tips_BeiDongJiNeng;

@@ -8,8 +8,8 @@ package org.mokylin.skin.app.activety.shijieboss
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import org.mokylin.skin.app.activety.ActiveItemSelecteSkin;
-	import org.mokylin.skin.app.activety.button.ButtonJinru;
 	import org.mokylin.skin.app.activety.mc.UIMovieClipActiveEffect;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			
 			this.currentState = "normal";
 			this.height = 71;
-			this.width = 585;
+			this.width = 516;
 			this.elementsContent = [uiBg_i(),mcEffect_i(),selectedBtn_i(),uiName_i(),lbMsg1_i(),lbMsg2_i(),uiJinxing_i(),btnEnter_i(),lbLevel_i()];
 			
 			states = {
@@ -66,9 +66,13 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnEnter = temp;
 			temp.name = "btnEnter";
-			temp.styleClass = org.mokylin.skin.app.activety.button.ButtonJinru;
-			temp.x = 477;
-			temp.y = 19;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "进入";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.x = 406;
+			temp.y = 18;
 			return temp;
 		}
 
@@ -80,9 +84,9 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.text = "(等级需求：70级)";
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
-			temp.x = 307;
-			temp.y = 18;
+			temp.width = 123;
+			temp.x = 389;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -96,9 +100,11 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.leading = 7;
 			temp.letterSpacing = 0;
 			temp.text = "【16-20级】 马贼首领";
+			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 155;
+			temp.width = 156;
+			temp.x = 187;
 			temp.y = 18;
 			return temp;
 		}
@@ -113,9 +119,11 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.leading = 7;
 			temp.letterSpacing = 0;
 			temp.text = "21:00-21:30";
+			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 155;
+			temp.width = 156;
+			temp.x = 187;
 			temp.y = 39;
 			return temp;
 		}
@@ -128,10 +136,9 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.autoPlay = false;
 			temp.blendMode = "add";
 			temp.frameRate = 10;
-			temp.height = 83;
 			temp.styleClass = org.mokylin.skin.app.activety.mc.UIMovieClipActiveEffect;
-			temp.width = 590;
-			temp.x = -4;
+			temp.width = 516;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -144,7 +151,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.groupName = "radioGroup1";
 			temp.height = 71;
 			temp.styleClass = org.mokylin.skin.app.activety.ActiveItemSelecteSkin;
-			temp.width = 585;
+			temp.width = 516;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -183,7 +190,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/activety/zonghe/active_name/dianfengduijue.png";
 			temp.x = 22;
-			temp.y = 19;
+			temp.y = 22;
 			return temp;
 		}
 

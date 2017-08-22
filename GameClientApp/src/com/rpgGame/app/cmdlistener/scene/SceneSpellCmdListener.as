@@ -31,7 +31,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
@@ -136,8 +135,9 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
 		{
 			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
-			
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			if (info.atkor == null || !info.atkor.usable || !info.atkor.isInViewDistance)
+				return;
 			if (info.atkor.isPlayer) 
 			{
 				SpellEffectRecordCtrl.clear(msg.personId.ToGID());
@@ -167,6 +167,8 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			if (info.atkor == null || !info.atkor.usable || !info.atkor.isInViewDistance)
+				return;
 			if (info.atkor.isPlayer)
 			{
 				SpellEffectRecordCtrl.clear(msg.playerid.ToGID());

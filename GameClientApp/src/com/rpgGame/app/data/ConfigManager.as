@@ -30,6 +30,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
+	import com.rpgGame.coreData.cfg.GridOpenCfg;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.HeChengData;
@@ -260,6 +261,8 @@ package com.rpgGame.app.data
 			JunJieData.setup(dic[ConfigClassRegister.Q_junjie]);
 			//护宝
 			HuBaoData.setup(dic[ConfigClassRegister.Q_convoy]);
+			//格子配置
+			GridOpenCfg.setup(dic[ConfigClassRegister.Q_backpack_grid]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
