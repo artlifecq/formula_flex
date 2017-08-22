@@ -51,14 +51,14 @@ package com.rpgGame.appModule.role
 			setValue("xf");
 			setValue("jn");
 			setValue("jm");
-			setValue("zq");
+			setValue("zqi");
 			setValue("mr");
 			
 		}
 		
 		private function getPowerByType(type:int,list:Vector.<OtherFightPower>):int
 		{
-			for(var i:int=list.length-1;i>0;i--){
+			for(var i:int=list.length-1;i>=0;i--){
 				if(list[i].type==type){
 					return list[i].fightPower;
 				}
@@ -101,7 +101,7 @@ package com.rpgGame.appModule.role
 						m=getPowerByType(5,_otherInfo.selfFightPower);
 						o=getPowerByType(5,_otherInfo.otherFightPowr);;
 						break
-					case "zq"://战旗
+					case "zqi"://战旗
 						m=getPowerByType(6,_otherInfo.selfFightPower);
 						o=getPowerByType(6,_otherInfo.otherFightPowr);;
 						break

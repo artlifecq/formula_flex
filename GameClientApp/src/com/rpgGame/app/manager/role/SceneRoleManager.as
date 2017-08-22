@@ -54,6 +54,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.SculptureData;
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
+	import com.rpgGame.coreData.type.EnumMonsterId;
+	import com.rpgGame.coreData.type.EnumMonsterType;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -276,6 +278,11 @@ package com.rpgGame.app.manager.role
 			if (charType == SceneCharType.NPC)
 			{
 				TaskUtil.tryAddTaskIco(role);
+			}
+			//弓弩不要鼠标事件
+			if (SceneCharType.MONSTER==charType&&(data.modelID==EnumMonsterId.BOW1||data.modelID==EnumMonsterId.BOW2)) 
+			{
+				role.mouseEnable=false;
 			}
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;

@@ -180,6 +180,16 @@ package com.rpgGame.app.manager.role
 			
 		}
 		
+		
+		
+		/**打完怪后再任务 跨场景寻路 + 有跳跃点，统一延时0.5秒处理*/		
+		public static function walkToSceneAndJumpPreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			TrusteeshipManager.getInstance().isAutoWalking=true;
+			TweenLite.killDelayedCallsTo(walkToSceneAndJump);
+			TweenLite.delayedCall(0.5, walkToSceneAndJump, [targetSceneId, posx, posy, onArrive, spacing,data,needSprite]);
+		}
+		
 		/**
 		 * //任务 跨场景寻路 + 有跳跃点
 		 * */
@@ -197,7 +207,6 @@ package com.rpgGame.app.manager.role
 			
 			
 		}
-		
 		
 		/**
 		 * 跨场景寻路
