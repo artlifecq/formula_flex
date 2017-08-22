@@ -227,7 +227,7 @@ package org.mokylin.skin.app.beibao
 			Icbg11 = temp;
 			temp.name = "Icbg11";
 			temp.styleName = "ui/common/grid/equip/12lingpai.png";
-			temp.x = 308;
+			temp.x = 317;
 			temp.y = 302;
 			return temp;
 		}
@@ -238,7 +238,7 @@ package org.mokylin.skin.app.beibao
 			Icolingpai = temp;
 			temp.name = "Icolingpai";
 			temp.styleName = "ui/app/beibao/huijiebiankuang.png";
-			temp.x = 300;
+			temp.x = 309;
 			temp.y = 296;
 			return temp;
 		}
@@ -336,8 +336,6 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
 		{
 			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
-			temp.requestedColumnCount = 7;
-			temp.requestedRowCount = 7;
 			return temp;
 		}
 
@@ -874,7 +872,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "packs";
 			temp.x = 594;
 			temp.y = 87;
-			temp.elementsContent = [imgBg_i(),__juese_Skin_UIAsset21_i(),tab_pack_i(),money_i(),Icons_i(),skinKuang_i(),lst_pack_i()];
+			temp.elementsContent = [imgBg_i(),__juese_Skin_UIAsset21_i(),tab_pack_i(),money_i(),Icons_i(),lst_pack_i(),skinKuang_i()];
 			return temp;
 		}
 
@@ -929,12 +927,14 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinKuang = temp;
 			temp.name = "skinKuang";
-			temp.height = 321;
+			temp.height = 315;
+			temp.touchable = false;
+			temp.touchGroup = true;
 			var skin:StateSkin = new org.mokylin.skin.app.beibao.WaiKuang_Skin()
 			temp.skin = skin
-			temp.width = 338;
-			temp.x = 3;
-			temp.y = 24;
+			temp.width = 334;
+			temp.x = 6;
+			temp.y = 27;
 			return temp;
 		}
 

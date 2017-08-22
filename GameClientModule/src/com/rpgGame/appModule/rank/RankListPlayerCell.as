@@ -78,7 +78,9 @@ package com.rpgGame.appModule.rank
 			}
 			
 			_skin.vip.visible = info.vipId>0;
-			_skin.vip.styleName = "ui/common/tubiao/vips"+info.vipId+".png";
+			if(_skin.vip.visible){
+				_skin.vip.styleName = "ui/common/tubiao/vips"+info.vipId+".png";
+			}
 			//不要显示[]
 			var tname:String=info.playername;
 			var index:int=tname.indexOf("]");

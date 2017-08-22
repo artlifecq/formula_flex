@@ -66,7 +66,6 @@ package com.rpgGame.app.state.role.control
 		{
 			super.execute();
 			_stateReference = null;
-			TrusteeshipManager.getInstance().isAutoWalking=false;
 			if (_ref is WalkMoveStateReference)
 			{
 				_stateReference = _ref as WalkMoveStateReference;
@@ -470,8 +469,9 @@ package com.rpgGame.app.state.role.control
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			if(TrusteeshipManager.getInstance().isAutoWalking)
+			if(((_machine as RoleStateMachine).owner as SceneRole).isMainChar&&TrusteeshipManager.getInstance().isAutoWalking)
 			{
+				TrusteeshipManager.getInstance().isAutoWalking=false;
 				return true;
 			}
 			if (prevState)
