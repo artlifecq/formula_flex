@@ -36,7 +36,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 				_skin.selectedBtn.isSelected=true;
 			}
 		}
-			
+		
 		
 		override protected function initialize():void
 		{

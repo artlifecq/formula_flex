@@ -26,19 +26,44 @@ package org.mokylin.skin.app.jianghu.lunjian
 			super();
 			
 			this.currentState = "up";
+			this.height = 31;
+			this.width = 141;
 			this.elementsContent = [];
 			__NameItemSelect_UIAsset1_i();
 			__NameItemSelect_UIAsset2_i();
 			
 			
 			states = {
+				disabled:[
+						{target:"__NameItemSelect_UIAsset1",
+							name:"width",
+							value:146
+						}
+						,
+						{target:"__NameItemSelect_UIAsset1",
+							name:"height",
+							value:29
+						}
+					]
+				,
+				up:[
+						{target:"__NameItemSelect_UIAsset1",
+							name:"width",
+							value:146
+						}
+						,
+						{target:"__NameItemSelect_UIAsset1",
+							name:"height",
+							value:29
+						}
+					]
 			};
-			skinNames={"down":"ui/common/titilebg/ItemBghei2.png",
-			"downAndSelected":"ui/common/titilebg/ItemBghei2.png",
-			"hover":"ui/common/titilebg/ItemBghei2.png",
-			"overAndSelected":"ui/common/titilebg/ItemBghei2.png",
+			skinNames={"down":"ui/app/jianghu/lunjian/tiaoliang.png",
+			"downAndSelected":"ui/app/jianghu/lunjian/tiaoliang.png",
+			"hover":"ui/app/jianghu/lunjian/tiaoliang.png",
+			"overAndSelected":"ui/app/jianghu/lunjian/tiaoliang.png",
 			"up":"ui/common/hover/xuanqukuang2_alpha.png",
-			"upAndSelected":"ui/common/titilebg/ItemBghei2.png"};
+			"upAndSelected":"ui/app/jianghu/lunjian/tiaoliang.png"};
 		}
 
 
@@ -49,10 +74,10 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__NameItemSelect_UIAsset1 = temp;
-			temp.height = 29;
-			temp.styleName = "ui/common/titilebg/ItemBghei2.png";
+			temp.height = 31;
+			temp.styleName = "ui/app/jianghu/lunjian/tiaoliang.png";
 			temp.top = 0;
-			temp.width = 146;
+			temp.width = 141;
 			temp.x = 0;
 			return temp;
 		}
@@ -61,9 +86,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__NameItemSelect_UIAsset2 = temp;
-			temp.height = 29;
+			temp.height = 31;
 			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
-			temp.width = 146;
+			temp.width = 141;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
