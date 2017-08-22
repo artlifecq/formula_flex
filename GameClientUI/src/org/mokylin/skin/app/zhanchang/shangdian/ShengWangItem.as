@@ -209,7 +209,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLine = temp;
 			temp.name = "uiLine";
-			temp.styleName = "ui/app/shangcheng/xian.png";
+			temp.styleName = "ui/app/zhanchang/xian.png";
 			temp.x = 42;
 			temp.y = 12;
 			return temp;

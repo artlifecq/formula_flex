@@ -333,7 +333,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "btnNext";
 			temp.scaleY = -1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
-			temp.x = 60;
+			temp.x = 68;
 			temp.y = 568;
 			return temp;
 		}
@@ -344,7 +344,7 @@ package org.mokylin.skin.app.meiren
 			btnPrev = temp;
 			temp.name = "btnPrev";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
-			temp.x = 60;
+			temp.x = 68;
 			temp.y = 106;
 			return temp;
 		}

@@ -58,7 +58,7 @@ package com.rpgGame.appModule.role
 		
 		private function getPowerByType(type:int,list:Vector.<OtherFightPower>):int
 		{
-			for(var i:int=list.length-1;i>0;i--){
+			for(var i:int=list.length-1;i>=0;i--){
 				if(list[i].type==type){
 					return list[i].fightPower;
 				}
