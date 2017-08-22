@@ -24,7 +24,7 @@ package com.rpgGame.appModule.alert
 		{
 			super.show(data, openTable, parentContiner);
 			
-			_skin.lb_text.text=String(data);
+			_skin.lb_text.htmlText=String(data);
 		}
 		
 		override public function hide():void 

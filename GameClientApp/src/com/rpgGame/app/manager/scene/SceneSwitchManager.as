@@ -39,14 +39,12 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
-	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map_preload;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
-	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
@@ -55,8 +53,6 @@ package com.rpgGame.app.manager.scene
 	import away3d.log.Log;
 	
 	import org.client.mainCore.manager.EventManager;
-	
-	import utils.TimerServer;
 	
 	/**
 	 *

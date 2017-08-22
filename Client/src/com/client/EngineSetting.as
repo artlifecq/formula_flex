@@ -8,7 +8,6 @@ package com.client
 	import away3d.Away3D;
 	import away3d.containers.PlanarContainer3D;
 	import away3d.debug.AwayStats;
-	import away3d.debug.ReportUtil;
 	import away3d.enum.LoadPriorityType;
 	import away3d.loaders.multi.MultiUrlLoadManager;
 	import away3d.utils.SoundUtil;
@@ -46,8 +45,6 @@ package com.client
 
 			//初始UI引擎
 			initFeathers();
-			
-//			ReportUtil.setup(6);
 		}
 
 		public static function initAway3D() : void

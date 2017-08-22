@@ -93,12 +93,12 @@ package com.rpgGame.appModule.pet
 				qPet=pets[i];
 				tmp=new PetHeadItemExt(qPet);
 				tmp.x=0;
-				tmp.y=(2+tmp.height)*i;
+				tmp.y=(tmp.height-4)*i;
 				//tmp.setServerData(Mgr.petMgr.getPet(qPet.q_id));
 				_headCon.addChild(tmp);
 				_headItems.push(tmp);
 			}
-			_tweenS=new TweenScaleScrollUitlExt(_headCon,_headItems,_skin.btnPrev,_skin.btnNext,1,109,101*4,101,0.5/4,false);
+			_tweenS=new TweenScaleScrollUitlExt(_headCon,_headItems,_skin.btnPrev,_skin.btnNext,1,130,101*4,101,0.5/4,false);
 			_tweenS.setStep(4);
 			
 			_zoneBalls=new Vector.<PetZoneBall>();
@@ -385,7 +385,8 @@ package com.rpgGame.appModule.pet
 			_attrCon.setData(addid,nextAttrId);
 			
 			var skill:Q_skill_model=SpellDataManager.getSpellById(qPetAdv.q_skill_id);
-			FaceUtil.SetSkillGrid(_bgIco, FaceUtil.chanceSpellToFaceInfo(skill), true);
+			if(skill)
+				FaceUtil.SetSkillGrid(_bgIco, FaceUtil.chanceSpellToFaceInfo(skill), true);
 			//			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{

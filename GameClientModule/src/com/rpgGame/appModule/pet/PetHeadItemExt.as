@@ -32,11 +32,11 @@ package com.rpgGame.appModule.pet
 			this._data=data;
 			if (data.actived>0) 
 			{
-				GrayFilter.unGray(_skin.icon);
+				GrayFilter.unGray(this);
 			}
 			else
 			{
-				GrayFilter.gray(_skin.icon);
+				GrayFilter.gray(this);
 			}
 			updateIsChuZhan();
 		}
