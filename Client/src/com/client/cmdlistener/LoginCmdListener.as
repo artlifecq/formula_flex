@@ -10,6 +10,7 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	import com.rpgGame.netData.login.message.ResLoginSuccessMessage;
 	import com.rpgGame.netData.login.message.ResSubstituteMessage;
+	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
 	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	
@@ -59,12 +60,12 @@ package com.client.cmdlistener
 			SocketConnection.addCmdListener(100104, RecvErrorMessage);
 //			SocketConnection.addCmdListener(100106, RecvHeartMessage);
 			SocketConnection.addCmdListener(103101, RecvMyPlayerInfoMessage);
-			SocketConnection.addCmdListener(103111, changePlayerName);
+			SocketConnection.addCmdListener(101144, changePlayerName);
 		}
 		
-		private static function changePlayerName(msg:ResChangePlayerNameToClientMessage):void
+		private static function changePlayerName(msg:ResRoundPlayerChangeNameMessage):void
 		{
-			if(msg.playerId.ToGID()==ClientConfig.loginData.personId.ToGID()){
+			if(msg.pid.ToGID()==ClientConfig.loginData.personId.ToGID()){
 				EventManager.dispatchEvent(CharAttributeType.CHANGE_NAME,msg);
 			}
 		}

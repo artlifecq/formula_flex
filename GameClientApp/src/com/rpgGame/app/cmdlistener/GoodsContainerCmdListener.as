@@ -81,14 +81,6 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108108, onResCellTimeMessage );		
 			SocketConnection.addCmdListener(108109, onResOpenCellResultMessage );
 			
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			SocketConnection.addCmdListener(108106, onResBackpackFullMessage );
-			
 			finish();
 		}
 		
