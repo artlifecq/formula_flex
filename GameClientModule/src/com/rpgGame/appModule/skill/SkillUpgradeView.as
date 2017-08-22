@@ -84,6 +84,7 @@ package com.rpgGame.appModule.skill
 				skin.lb_renwudengji.visible=false;
 				skin.lb_zhenqi.visible=false;
 				skin.lb_yinliang.visible=false;
+				skin.uiOk.visible=true;
 				//				skin.line1.visible=false;
 				//				skin.line2.visible=false;
 				return;
@@ -98,6 +99,7 @@ package com.rpgGame.appModule.skill
 			skin.lb_renwudengji.visible=true;
 			skin.lb_zhenqi.visible=true;
 			skin.lb_yinliang.visible=true;
+			skin.uiOk.visible=false;
 			//			skin.line1.visible=true;
 			//			skin.line2.visible=true;
 			

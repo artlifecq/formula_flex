@@ -23,9 +23,6 @@ package com.rpgGame.appModule.shop.backpackShop
 			this.list=_skin.lst_pack1;
 			this.addChild(list);
 			this.addChild(imgNone);
-			this.addChild(_skin.lbMsg);
-			_skin.lbMsg.x-=list.x;
-			_skin.lbMsg.y-=list.y;
 			this.x=list.x;
 			this.y=list.y;
 			this.imgNone.x-=list.x;

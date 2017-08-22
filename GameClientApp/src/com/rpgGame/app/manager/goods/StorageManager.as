@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.goods
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -60,5 +61,14 @@ package com.rpgGame.app.manager.goods
 			}
 		}
 		
+		override public function unLockGrid(index:int) : void
+		{
+			if (index > Max_Grid_Count)
+			{
+				NoticeManager.showNotify("您已经解锁了全部的格子");
+				return;
+			}
+			AppManager.showApp(AppConstant.GRID_OPEN_TISHI,[ItemContainerID.Storage,index]);
+		}
 	}
 }

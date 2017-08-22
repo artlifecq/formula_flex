@@ -9,12 +9,15 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DieCfgData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangQ_BackPack;
@@ -78,6 +81,10 @@ package com.rpgGame.appModule.die
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			
 			disMsg=data as ResPlayerDieMessage;
 			
 			_skin.lbl_msg.color=0xe1201c;
@@ -131,6 +138,11 @@ package com.rpgGame.appModule.die
 			var sceneData:SceneData=MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID);
 			var mapCfg:Q_map=sceneData.getData();
 			
+			var danyaoNum:int=BackPackManager.instance.getItemCount(300);
+			_skin.lbDanyao.text="1/"+danyaoNum;
+			if(danyaoNum>0) _skin.lbDanyao.color=StaticValue.BEIGE_TEXT;
+			else _skin.lbDanyao.color=StaticValue.RED_TEXT;
+			
 			switch(mapCfg.q_map_type)
 			{
 				case EnumMapType.MAP_TYPE_MULTY:
@@ -156,6 +168,17 @@ package com.rpgGame.appModule.die
 			this.escExcuteAble=false;
 		}
 		
+		protected function onFreshItems(info:ClientItemInfo=null):void
+		{
+			if(info.qItem.q_id==300)
+			{
+				var danyaoNum:int=BackPackManager.instance.getItemCount(300);
+				_skin.lbDanyao.text="1/"+danyaoNum;
+				if(danyaoNum>0) _skin.lbDanyao.color=StaticValue.BEIGE_TEXT;
+				else _skin.lbDanyao.color=StaticValue.RED_TEXT;
+			}
+		}
+		
 		protected function onTimer(event:TimerEvent):void
 		{
 			_skin.btn_fuhuodian.label="复活点("+(openTime-timer.currentCount)+"s)";
@@ -170,6 +193,9 @@ package com.rpgGame.appModule.die
 		override public function hide():void
 		{
 			super.hide();
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.REVIVE_SUCCESS,hide);
 			timer.removeEventListener(TimerEvent.TIMER_COMPLETE,onTimeComplete);
 			timer.removeEventListener(TimerEvent.TIMER,onTimer);

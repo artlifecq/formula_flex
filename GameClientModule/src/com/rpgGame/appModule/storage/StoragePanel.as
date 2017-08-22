@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.storage
 {
+	import com.game.engine3D.events.SceneEvent;
+	import com.game.engine3D.events.SceneEventAction3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -12,9 +14,11 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.MouseCursorEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -22,9 +26,11 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.geom.Point;
+	import flash.ui.Mouse;
 	
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
+	import feathers.layout.TiledRowsLayout;
 	import feathers.themes.GuiThemeStyle;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -33,7 +39,7 @@ package com.rpgGame.appModule.storage
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-
+	
 	/**
 	 *仓库面板 
 	 * @author dik
@@ -52,7 +58,7 @@ package com.rpgGame.appModule.storage
 		{
 			this._skin = new cangku_Skin();
 			super(_skin);
-			
+			this.dragAble=false;
 			initGoodsPanel();
 		}
 		
@@ -70,7 +76,9 @@ package com.rpgGame.appModule.storage
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			
-			_skin.lst_pack.padding=3;
+			_skin.lst_pack.padding=0.5;
+			(_skin.lst_pack.layout as TiledRowsLayout).horizontalGap=0.5;
+			(_skin.lst_pack.layout as TiledRowsLayout).verticalGap=1;
 			GuiThemeStyle.setScrollerStyle(_skin.lst_pack, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);			
 		}
 		
@@ -105,7 +113,7 @@ package com.rpgGame.appModule.storage
 		
 		protected function onRightMouse(grid:IconCDFace):void
 		{
-//			ItemUseManager.useItem(grid.faceInfo as ItemInfo);
+			//			ItemUseManager.useItem(grid.faceInfo as ItemInfo);
 		}
 		
 		/**
@@ -119,6 +127,12 @@ package com.rpgGame.appModule.storage
 			if(GoodsContainerPanel.isFaceMoving)
 			{
 				goodsContainer.onFaceMoveSuccess(grid.gridInfo );
+				return;
+			}
+			
+			if(grid.gridInfo.isUnlock&&(realIndex+1)>StorageManager.instance.hasOpenCount)
+			{
+				StorageManager.instance.unLockGrid(realIndex);
 				return;
 			}
 			
@@ -164,13 +178,13 @@ package com.rpgGame.appModule.storage
 				target = dstGrid.data as ClientItemInfo;
 				/*if(target && target.cfgId == item.cfgId && target.binded != item.binded && target.expireTime == 0 && item.expireTime == 0 && item.maxCount>1 && target.maxCount>1)
 				{
-					if(StorageManager.instance.isAlertChangeBind == false)
-					{
-						var alertSet : AlertSetInfo =  new AlertSetInfo(LangBackPack.CHANGE_ITEM_BIND);
-						alertSet.isShowCBox = true;
-						GameAlert.showAlert(alertSet,changeItemBind,srcGrid,dstGrid);
-						return;
-					}
+				if(StorageManager.instance.isAlertChangeBind == false)
+				{
+				var alertSet : AlertSetInfo =  new AlertSetInfo(LangBackPack.CHANGE_ITEM_BIND);
+				alertSet.isShowCBox = true;
+				GameAlert.showAlert(alertSet,changeItemBind,srcGrid,dstGrid);
+				return;
+				}
 				}*/
 			}
 			GameLog.addShow("moveItem");
@@ -187,8 +201,8 @@ package com.rpgGame.appModule.storage
 			if(gameAlert.clickType == AlertClickTypeEnum.TYPE_SURE)
 			{
 				var item : ClientItemInfo = srcGrid.data as ClientItemInfo;
-//				if(item)
-//					ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);
+				//				if(item)
+				//					ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);
 			}
 		}
 		
@@ -218,6 +232,8 @@ package com.rpgGame.appModule.storage
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,refreshGrid);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,refreshGrid);
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
+			EventManager.addEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
+			EventManager.addEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
 		}
 		
 		private function getItem(info:GridInfo):void
@@ -236,7 +252,7 @@ package com.rpgGame.appModule.storage
 				return;
 			}
 			EventManager.removeEvent(ItemEvent.ITEM_INIT,initStorageDatas);
-			setGridsCount(StorageManager.instance.hasOpenCount);
+			setGridsCount(StorageManager.instance.Max_Grid_Count);
 		}
 		
 		private function setGridsCount(count:int):void
@@ -261,6 +277,14 @@ package com.rpgGame.appModule.storage
 			goodsContainer.refleshGrids();		
 		}
 		
+		private function setLuckGridState(containerID:int):void
+		{
+			if(containerID==ItemContainerID.Storage)
+			{
+				goodsContainer.refleshGrids();
+			}
+		}
+		
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
 			
@@ -275,8 +299,36 @@ package com.rpgGame.appModule.storage
 					break
 				case _skin.btn_chucun:
 					isSave=!isSave;
+					enterOrLeaveSaveMode(isSave);
 					EventManager.dispatchEvent(ItemEvent.CHANGE_ACCESS_STATE,isSave);
 					break
+			}
+		}
+		
+		private function enterOrLeaveSaveMode(bool:Boolean):void
+		{
+			if (bool) 
+			{
+				MouseCursorController.showSave();
+				if (!EventManager.hasEvent(SceneEvent.INTERACTIVE,onSceneTouch)) 
+				{
+					EventManager.addEvent(SceneEvent.INTERACTIVE,onSceneTouch);
+				}
+			}
+			else
+			{
+				MouseCursorController.exitSaveMode();
+				EventManager.removeEvent(SceneEvent.INTERACTIVE,onSceneTouch);
+			}
+		}
+		
+		private function onSceneTouch(...arg):void
+		{
+			var type:String=arg[0];
+			if ( SceneEventAction3D.SCENE_MAP_MOUSE_DOWN==type) 
+			{
+				enterOrLeaveSaveMode(false);
+				isSave=false;
 			}
 		}
 		
@@ -284,11 +336,14 @@ package com.rpgGame.appModule.storage
 		{
 			super.hide();
 			goodsContainer.hide();
-			
+			enterOrLeaveSaveMode(false);
+			isSave=false;
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,refreshGrid);
-			EventManager.dispatchEvent(ItemEvent.CHANGE_ACCESS_STATE,false);
+			EventManager.removeEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
+			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
+			EventManager.dispatchEvent(ItemEvent.CHANGE_ACCESS_STATE,false);		
 		}
 	}
 }

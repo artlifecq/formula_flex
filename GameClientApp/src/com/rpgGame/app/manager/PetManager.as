@@ -92,7 +92,6 @@ package com.rpgGame.app.manager
 			}
 			EventManager.dispatchEvent(PetEvent.PET_DATA_CHANGE,newInfo);
 		}
-		
 		public function ResPetListHandler(msg:ResPetListMessage):void
 		{
 			// TODO Auto Generated method stub

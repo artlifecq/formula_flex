@@ -40,6 +40,8 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
+			this.height = 581;
+			this.width = 337;
 			this.elementsContent = [bg_i(),__panel_ziriSkin_UIAsset1_i(),btnClose_i(),tab_zizhi_i(),msg_list_i(),__panel_ziriSkin_UIAsset2_i()];
 			
 			states = {
