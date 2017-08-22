@@ -28,7 +28,6 @@ package com.rpgGame.app.sender
 	import flash.geom.Vector3D;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
