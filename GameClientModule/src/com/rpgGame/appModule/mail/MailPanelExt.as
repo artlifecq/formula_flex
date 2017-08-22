@@ -4,11 +4,9 @@ package com.rpgGame.appModule.mail
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.MailSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.appModule.equip.combo.DetailNodeInfo;
 	import com.rpgGame.appModule.mail.render.MailItemSelectCellRender;
 	import com.rpgGame.core.events.MailEvent;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.info.mail.MailInfo;
 	import com.rpgGame.netData.mail.bean.MailBriefInfo;
 	import com.rpgGame.netData.mail.bean.MailDetailInfo;
 	
@@ -17,7 +15,6 @@ package com.rpgGame.appModule.mail
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
-	import feathers.data.TreeNode;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -156,6 +153,8 @@ package com.rpgGame.appModule.mail
 			MailManager.setMailIsRead(_nowSelectMailItem.mailId);
 			_nowSelectMailItem.setData(MailManager.getMailById(_nowSelectMailItem.mailId));
 			MailSender.reqGetMailAttachmentMessage(_nowSelectMailItem.mailId);
+//			var index:int=_skin.listMail.dataProvider.getItemIndex(_nowSelectMailItem.info);
+//			_skin.listMail.scrollToDisplayIndex(index);
 		}
 		
 		/**显示选取的邮件的详细信息*/
@@ -241,6 +240,11 @@ package com.rpgGame.appModule.mail
 				//				}
 			}
 			return list;
+		}
+		
+		private function getNextMail():void
+		{
+			
 		}
 		
 		private function isHaveId(id:long):Boolean

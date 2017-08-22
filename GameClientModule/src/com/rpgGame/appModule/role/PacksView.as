@@ -14,7 +14,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.ui.tips.data.AmountTipData;
-	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -34,7 +33,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -51,6 +49,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
@@ -73,7 +72,9 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 	
 	import utils.KeyboardMananger;
 	
@@ -653,17 +654,20 @@ package com.rpgGame.appModule.role
 				MouseCursorController.showSell();
 				//				BreatheTweenUtil.add(_skin.imgBg,StaticValue.OEANGE_TEXT,30);
 				_skin.skinKuang.visible=true;
+				showBG(true,0.5);
+				//				EventManager.dispatchEvent(ItemEvent.ITEM_RECLAIM_ADD,true);
 				if (!EventManager.hasEvent(SceneEvent.INTERACTIVE,onSceneTouch)) 
 				{
 					EventManager.addEvent(SceneEvent.INTERACTIVE,onSceneTouch);
-				}
-				
+				}		
 			}
 			else
 			{
 				MouseCursorController.exitSellMode();
 				//				BreatheTweenUtil.remove(_skin.imgBg);
 				_skin.skinKuang.visible=false;
+				showBG(false,0.5);
+				//				EventManager.dispatchEvent(ItemEvent.ITEM_RECLAIM_CANCEL,false);
 				EventManager.removeEvent(SceneEvent.INTERACTIVE,onSceneTouch);
 			}
 		}
@@ -677,11 +681,17 @@ package com.rpgGame.appModule.role
 		}
 		internal function onTouchTarget(target : DisplayObject):Boolean
 		{
+			if(_blackBG&&_blackBG.graphics==target)
+			{
+				enterOrLeaveSellMode(false);
+				return true;
+			}
 			switch (target) {
 				case _skin.btn_chushou:
 					enterOrLeaveSellMode(Mouse.cursor != MouseCursorEnum.SELL);
 					return true;
 				case _skin.btn_zhengli:
+					enterOrLeaveSellMode(false);
 					if(leftCD!=0){
 						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_SORT_CD);
 						alertSet.alertInfo.value=alertSet.alertInfo.value.replace(/#/,leftCD);
@@ -694,6 +704,7 @@ package com.rpgGame.appModule.role
 					ItemSender.clearUpItem(ItemContainerID.BackPack);
 					return true;
 				case _skin.btn_cangku:
+					enterOrLeaveSellMode(false);
 					if(storagePanel.parent){
 						storagePanel.hide();
 						return true;
@@ -703,6 +714,7 @@ package com.rpgGame.appModule.role
 					storagePanel.y=87;
 					return true;
 				case _skin.btn_shangdian:
+					enterOrLeaveSellMode(false);
 					if (shopPanel.parent) 
 					{
 						shopPanel.hide();
@@ -714,6 +726,7 @@ package com.rpgGame.appModule.role
 					shopPanel.show(null,"",this._skin.container);
 					return true;
 				case _skin.btn_getYuanbao:
+					enterOrLeaveSellMode(false);
 					return true;
 			}
 			return false;
@@ -792,5 +805,39 @@ package com.rpgGame.appModule.role
 			
 		}
 		
+		private function showBG(isAdd:Boolean,alpha:Number):void
+		{
+			if(isAdd&&!_blackBG){
+				drawBG(alpha);
+			}else{
+				if(_blackBG){
+					_blackBG.removeFromParent(true);
+					_blackBG=null;
+				}
+			}
+		}
+		
+		private var _blackBG:Sprite;
+		private function drawBG(alpha:Number):void
+		{
+			var index:int=_skin.container.getChildIndex(_skin.packs);
+			_blackBG=new Sprite();
+			_blackBG.graphics.beginFill(0x000000,alpha);
+			_blackBG.graphics.drawRect(0,0,10,10);
+			_blackBG.graphics.endFill();
+			
+			_skin.container.addChildAt( _blackBG , index );
+			updateResize(null);
+		}
+		
+		private function updateResize(e:*):void
+		{
+			_blackBG.width = Starling.current.nativeStage.stageWidth;
+			_blackBG.height = Starling.current.nativeStage.stageHeight;
+			var p:Point=new Point(0,0);
+			p=_skin.container.globalToLocal(p);	
+			_blackBG.x=p.x;
+			_blackBG.y=p.y;
+		}
 	}
 }

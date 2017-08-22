@@ -36,12 +36,18 @@ package com.rpgGame.appModule.mail
 			return _info.mailInfoId;
 		}
 		
+		public function get info():MailBriefInfo
+		{
+			return _info;
+		}
+		
 		override protected function onShow():void
 		{
 			super.onShow();
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.addEvent(MailEvent.MAIL_COLLECT_CHANGE,updateinfo);
 			EventManager.addEvent(MailEvent.MAIL_ALL_SELECT,setChkselectStata);
+//			EventManager.addEvent(MailEvent.MAIL_NEXT_SELECT,showNext);
 			_skin.chkSelect.isSelected=MailManager.isALL;
 		}
 		
@@ -51,6 +57,7 @@ package com.rpgGame.appModule.mail
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.removeEvent(MailEvent.MAIL_COLLECT_CHANGE,updateinfo);
 			EventManager.removeEvent(MailEvent.MAIL_ALL_SELECT,setChkselectStata);
+//			EventManager.removeEvent(MailEvent.MAIL_NEXT_SELECT,showNext);
 			_skin.chkSelect.isSelected=false;
 		}
 		
@@ -164,6 +171,10 @@ package com.rpgGame.appModule.mail
 					_info.isRead=1;
 					_info.items=null;
 					updateIco();
+//					var nextMail:MailBriefInfo=MailManager.getNextMail(_info.mailInfoId);
+//					if(nextMail){
+//						EventManager.dispatchEvent(MailEvent.MAIL_NEXT_SELECT,nextMail.mailInfoId);
+//					}
 				}
 			}
 		}
@@ -180,9 +191,16 @@ package com.rpgGame.appModule.mail
 			_isselect=_skin.chkSelect.isSelected=bool;
 		}
 		
+		private function showNext(id:long):void
+		{
+			if(_info.mailInfoId.EqualTo(id))
+				onToShowThis(null);
+		}
+		
 		public function setIsSelectImgState(bool:Boolean):void
 		{
 			_skin.imgSelect.visible=bool;
+//			if(!bool)	_skin.imgOver.visible=false;
 		}
 		
 		public function isSelect():Boolean
