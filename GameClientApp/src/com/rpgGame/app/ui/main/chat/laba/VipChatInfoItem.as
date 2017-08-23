@@ -62,6 +62,7 @@ package com.rpgGame.app.ui.main.chat.laba
 			_richText.mask=_unitsMask;
 			
 			_ico = new UIAsset();
+			_ico.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			_ico.styleName = AssetUrl.LA_BA_ICON;
 			_ico.y = -7;
 			addChild( _ico );
@@ -75,6 +76,7 @@ package com.rpgGame.app.ui.main.chat.laba
 		
 		override public function get height():Number
 		{
+			_totalHeight=_richText.textHeight<_ico.height?_ico.height:_richText.textHeight;
 			return _totalHeight;
 		}
 		
@@ -87,7 +89,6 @@ package com.rpgGame.app.ui.main.chat.laba
 			/*var rec:Rectangle = _richText.textfield.getCharBoundaries(0);
 			var $_txtLineMetrics:TextLineMetrics = _richText.textfield.getLineMetrics(_richText.textfield.getLineIndexOfChar(0));
 			_ico.y = $_txtLineMetrics.height - $_txtLineMetrics.descent - 12;*/
-			_totalHeight = _richText.textHeight;
 			_richText.setSize(_richText.textWidth+10,_richText.height);
 			_richText.y=4;
 		}
