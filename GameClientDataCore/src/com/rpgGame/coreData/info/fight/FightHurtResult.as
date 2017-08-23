@@ -1,6 +1,8 @@
 package com.rpgGame.coreData.info.fight
 {
 	import com.game.engine3D.vo.BaseRole;
+	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
@@ -10,6 +12,8 @@ package com.rpgGame.coreData.info.fight
 	import com.rpgGame.coreData.type.EnumHurtType;
 	
 	import flash.geom.Point;
+	
+	import away3d.log.Log;
 	
 	/**
 	 * 对某个单位的一个技能伤害结果 ，可能包含多次伤害 
@@ -139,8 +143,18 @@ package com.rpgGame.coreData.info.fight
 		public function readSpellEffectData(spellID:int):void
 		{
 			_spellData = SpellDataManager.getSpellDataWithID(spellID);
+			if (!_spellData) 
+			{
+				GameLog.addError("客户端战斗结果技能为空,服务器发送id:"+spellID);
+				AlertPanel.showMsg( "客户端战斗结果技能为空,服务器发送id:"+spellID, null );
+			}
 			_spellEffectID = _spellData.q_spell_effect;
 			_spellEffectData = SpellEffectDataManager.getData(_spellEffectID);
+			if (!_spellEffectData) 
+			{
+				GameLog.addError("客户端战斗结果技能特效为空,服务器发送id:"+spellID+" skillId:"+_spellData.q_skillID+" 特效id:"+_spellEffectID);
+				AlertPanel.showMsg( "客户端战斗结果技能特效为空,服务器发送id:"+spellID+" skillId:"+_spellData.q_skillID+" 特效id:"+_spellEffectID);
+			}
 			if (_spellEffectData)
 			{
 				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurt_animation);

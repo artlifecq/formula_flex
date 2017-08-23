@@ -215,7 +215,7 @@ package com.rpgGame.app.manager.goods
 			//弹新物品提示
 			if (info.qItem.q_use_prompt!=0&&info.itemInfo.num>=info.qItem.q_use_prompt) 
 			{
-				if (!ItemNoticePanel.checkInBlack(info.qItem.q_id)) 
+				if (!ItemNoticePanel.checkInBlack(info.itemInfo.itemId)) 
 				{
 					ItemNoticePanel.show(info);
 				}

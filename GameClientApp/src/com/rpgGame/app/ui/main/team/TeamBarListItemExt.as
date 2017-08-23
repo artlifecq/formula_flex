@@ -184,8 +184,7 @@ package   com.rpgGame.app.ui.main.team
 		{
 			if (state==0) 
 			{
-				_skin.icon.filter=null;
-				_skin.xuecao_bar.filter=null;
+				this.filter=null;
 				if (_stateImg) 
 				{
 					_stateImg.visible=false;
@@ -204,8 +203,7 @@ package   com.rpgGame.app.ui.main.team
 					}
 					_stateImg.styleName="ui/common/yinzhang3.png";
 					_stateImg.visible=true;
-					_skin.icon.filter=null;
-					_skin.xuecao_bar.filter=null;
+					this.filter=null;
 				}
 				else
 				{
@@ -213,8 +211,8 @@ package   com.rpgGame.app.ui.main.team
 					{
 						_stateImg.visible=false;
 					}
-					GrayFilter.gray(_skin.icon);
-					GrayFilter.gray(_skin.xuecao_bar);
+					GrayFilter.gray(this);
+					//GrayFilter.gray(_skin.xuecao_bar);
 				}
 				
 			}
@@ -257,8 +255,9 @@ package   com.rpgGame.app.ui.main.team
 						TipTargetManager.show(icon, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 						buffIcon.push(icon);
 					}
-					else{
-					trace("这个BUFF为空了，看看是什么原因······························");
+					else if(q_buff==null)
+					{
+						trace("这个BUFF为空了，看看是什么原因······························");
 					}
 				}
 			}
