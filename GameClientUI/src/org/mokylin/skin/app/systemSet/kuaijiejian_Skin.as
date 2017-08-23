@@ -38,7 +38,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 207;
-			temp.elementsContent = [__kuaijiejian_Skin_Label19_i(),__kuaijiejian_Skin_UIAsset21_i(),__kuaijiejian_Skin_UIAsset22_i(),__kuaijiejian_Skin_Label20_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label19_i(),__kuaijiejian_Skin_UIAsset12_i(),__kuaijiejian_Skin_Label20_i()];
 			return temp;
 		}
 
@@ -47,7 +47,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 291;
-			temp.elementsContent = [__kuaijiejian_Skin_Label21_i(),__kuaijiejian_Skin_UIAsset23_i(),__kuaijiejian_Skin_UIAsset24_i(),__kuaijiejian_Skin_Label22_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label21_i(),__kuaijiejian_Skin_UIAsset13_i(),__kuaijiejian_Skin_Label22_i()];
 			return temp;
 		}
 
@@ -56,7 +56,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 319;
-			temp.elementsContent = [__kuaijiejian_Skin_Label23_i(),__kuaijiejian_Skin_UIAsset25_i(),__kuaijiejian_Skin_UIAsset26_i(),__kuaijiejian_Skin_Label24_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label23_i(),__kuaijiejian_Skin_UIAsset14_i(),__kuaijiejian_Skin_Label24_i()];
 			return temp;
 		}
 
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 347;
-			temp.elementsContent = [__kuaijiejian_Skin_Label25_i(),__kuaijiejian_Skin_UIAsset27_i(),__kuaijiejian_Skin_UIAsset28_i(),__kuaijiejian_Skin_Label26_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label25_i(),__kuaijiejian_Skin_UIAsset15_i(),__kuaijiejian_Skin_Label26_i()];
 			return temp;
 		}
 
@@ -74,7 +74,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 375;
-			temp.elementsContent = [__kuaijiejian_Skin_Label27_i(),__kuaijiejian_Skin_UIAsset29_i(),__kuaijiejian_Skin_UIAsset30_i(),__kuaijiejian_Skin_Label28_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label27_i(),__kuaijiejian_Skin_UIAsset16_i(),__kuaijiejian_Skin_Label28_i()];
 			return temp;
 		}
 
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 403;
-			temp.elementsContent = [__kuaijiejian_Skin_Label29_i(),__kuaijiejian_Skin_UIAsset31_i(),__kuaijiejian_Skin_UIAsset32_i(),__kuaijiejian_Skin_Label30_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label29_i(),__kuaijiejian_Skin_UIAsset17_i(),__kuaijiejian_Skin_Label30_i()];
 			return temp;
 		}
 
@@ -92,7 +92,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 431;
-			temp.elementsContent = [__kuaijiejian_Skin_Label31_i(),__kuaijiejian_Skin_UIAsset34_i(),__kuaijiejian_Skin_Label32_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label31_i(),__kuaijiejian_Skin_Label32_i()];
 			return temp;
 		}
 
@@ -101,7 +101,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 11;
-			temp.elementsContent = [__kuaijiejian_Skin_Label33_i(),__kuaijiejian_Skin_UIAsset35_i(),__kuaijiejian_Skin_UIAsset36_i(),__kuaijiejian_Skin_Label34_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label33_i(),__kuaijiejian_Skin_UIAsset19_i(),__kuaijiejian_Skin_Label34_i()];
 			return temp;
 		}
 
@@ -110,7 +110,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 39;
-			temp.elementsContent = [__kuaijiejian_Skin_Label35_i(),__kuaijiejian_Skin_UIAsset37_i(),__kuaijiejian_Skin_UIAsset38_i(),__kuaijiejian_Skin_Label36_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label35_i(),__kuaijiejian_Skin_UIAsset20_i(),__kuaijiejian_Skin_Label36_i()];
 			return temp;
 		}
 
@@ -119,7 +119,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 67;
-			temp.elementsContent = [__kuaijiejian_Skin_Label37_i(),__kuaijiejian_Skin_UIAsset39_i(),__kuaijiejian_Skin_UIAsset40_i(),__kuaijiejian_Skin_Label38_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label37_i(),__kuaijiejian_Skin_UIAsset21_i(),__kuaijiejian_Skin_Label38_i()];
 			return temp;
 		}
 
@@ -128,7 +128,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 39;
-			temp.elementsContent = [__kuaijiejian_Skin_Label1_i(),__kuaijiejian_Skin_UIAsset3_i(),__kuaijiejian_Skin_UIAsset4_i(),__kuaijiejian_Skin_Label2_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label1_i(),__kuaijiejian_Skin_UIAsset3_i(),__kuaijiejian_Skin_Label2_i()];
 			return temp;
 		}
 
@@ -137,7 +137,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 95;
-			temp.elementsContent = [__kuaijiejian_Skin_Label39_i(),__kuaijiejian_Skin_UIAsset41_i(),__kuaijiejian_Skin_UIAsset42_i(),__kuaijiejian_Skin_Label40_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label39_i(),__kuaijiejian_Skin_UIAsset22_i(),__kuaijiejian_Skin_Label40_i()];
 			return temp;
 		}
 
@@ -146,7 +146,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 123;
-			temp.elementsContent = [__kuaijiejian_Skin_Label41_i(),__kuaijiejian_Skin_UIAsset43_i(),__kuaijiejian_Skin_UIAsset44_i(),__kuaijiejian_Skin_Label42_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label41_i(),__kuaijiejian_Skin_UIAsset23_i(),__kuaijiejian_Skin_Label42_i()];
 			return temp;
 		}
 
@@ -155,7 +155,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 151;
-			temp.elementsContent = [__kuaijiejian_Skin_Label43_i(),__kuaijiejian_Skin_UIAsset45_i(),__kuaijiejian_Skin_UIAsset46_i(),__kuaijiejian_Skin_Label44_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label43_i(),__kuaijiejian_Skin_UIAsset24_i(),__kuaijiejian_Skin_Label44_i()];
 			return temp;
 		}
 
@@ -164,7 +164,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 179;
-			temp.elementsContent = [__kuaijiejian_Skin_Label45_i(),__kuaijiejian_Skin_UIAsset47_i(),__kuaijiejian_Skin_UIAsset48_i(),__kuaijiejian_Skin_Label46_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label45_i(),__kuaijiejian_Skin_UIAsset25_i(),__kuaijiejian_Skin_Label46_i()];
 			return temp;
 		}
 
@@ -173,7 +173,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 207;
-			temp.elementsContent = [__kuaijiejian_Skin_Label47_i(),__kuaijiejian_Skin_UIAsset49_i(),__kuaijiejian_Skin_UIAsset50_i(),__kuaijiejian_Skin_Label48_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label47_i(),__kuaijiejian_Skin_UIAsset26_i(),__kuaijiejian_Skin_Label48_i()];
 			return temp;
 		}
 
@@ -182,7 +182,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 235;
-			temp.elementsContent = [__kuaijiejian_Skin_Label49_i(),__kuaijiejian_Skin_UIAsset51_i(),__kuaijiejian_Skin_UIAsset52_i(),__kuaijiejian_Skin_Label50_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label49_i(),__kuaijiejian_Skin_UIAsset27_i(),__kuaijiejian_Skin_Label50_i()];
 			return temp;
 		}
 
@@ -191,7 +191,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 263;
-			temp.elementsContent = [__kuaijiejian_Skin_Label51_i(),__kuaijiejian_Skin_UIAsset53_i(),__kuaijiejian_Skin_UIAsset54_i(),__kuaijiejian_Skin_Label52_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label51_i(),__kuaijiejian_Skin_UIAsset28_i(),__kuaijiejian_Skin_Label52_i()];
 			return temp;
 		}
 
@@ -200,7 +200,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 215;
 			temp.y = 291;
-			temp.elementsContent = [__kuaijiejian_Skin_Label53_i(),__kuaijiejian_Skin_UIAsset56_i(),__kuaijiejian_Skin_Label54_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label53_i(),__kuaijiejian_Skin_Label54_i()];
 			return temp;
 		}
 
@@ -209,7 +209,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 151;
-			temp.elementsContent = [__kuaijiejian_Skin_Label3_i(),__kuaijiejian_Skin_UIAsset5_i(),__kuaijiejian_Skin_UIAsset6_i(),__kuaijiejian_Skin_Label4_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label3_i(),__kuaijiejian_Skin_UIAsset4_i(),__kuaijiejian_Skin_Label4_i()];
 			return temp;
 		}
 
@@ -218,7 +218,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 235;
-			temp.elementsContent = [__kuaijiejian_Skin_Label5_i(),__kuaijiejian_Skin_UIAsset7_i(),__kuaijiejian_Skin_UIAsset8_i(),__kuaijiejian_Skin_Label6_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label5_i(),__kuaijiejian_Skin_UIAsset5_i(),__kuaijiejian_Skin_Label6_i()];
 			return temp;
 		}
 
@@ -227,7 +227,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 95;
-			temp.elementsContent = [__kuaijiejian_Skin_Label7_i(),__kuaijiejian_Skin_UIAsset9_i(),__kuaijiejian_Skin_UIAsset10_i(),__kuaijiejian_Skin_Label8_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label7_i(),__kuaijiejian_Skin_UIAsset6_i(),__kuaijiejian_Skin_Label8_i()];
 			return temp;
 		}
 
@@ -236,7 +236,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 263;
-			temp.elementsContent = [__kuaijiejian_Skin_Label9_i(),__kuaijiejian_Skin_UIAsset11_i(),__kuaijiejian_Skin_UIAsset12_i(),__kuaijiejian_Skin_Label10_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label9_i(),__kuaijiejian_Skin_UIAsset7_i(),__kuaijiejian_Skin_Label10_i()];
 			return temp;
 		}
 
@@ -245,7 +245,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 67;
-			temp.elementsContent = [__kuaijiejian_Skin_Label11_i(),__kuaijiejian_Skin_UIAsset13_i(),__kuaijiejian_Skin_UIAsset14_i(),__kuaijiejian_Skin_Label12_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label11_i(),__kuaijiejian_Skin_UIAsset8_i(),__kuaijiejian_Skin_Label12_i()];
 			return temp;
 		}
 
@@ -254,7 +254,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 11;
-			temp.elementsContent = [__kuaijiejian_Skin_Label13_i(),__kuaijiejian_Skin_UIAsset15_i(),__kuaijiejian_Skin_UIAsset16_i(),__kuaijiejian_Skin_Label14_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label13_i(),__kuaijiejian_Skin_UIAsset9_i(),__kuaijiejian_Skin_Label14_i()];
 			return temp;
 		}
 
@@ -263,7 +263,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 123;
-			temp.elementsContent = [__kuaijiejian_Skin_Label15_i(),__kuaijiejian_Skin_UIAsset17_i(),__kuaijiejian_Skin_UIAsset18_i(),__kuaijiejian_Skin_Label16_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label15_i(),__kuaijiejian_Skin_UIAsset10_i(),__kuaijiejian_Skin_Label16_i()];
 			return temp;
 		}
 
@@ -272,7 +272,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 179;
-			temp.elementsContent = [__kuaijiejian_Skin_Label17_i(),__kuaijiejian_Skin_UIAsset19_i(),__kuaijiejian_Skin_UIAsset20_i(),__kuaijiejian_Skin_Label18_i()];
+			temp.elementsContent = [__kuaijiejian_Skin_Label17_i(),__kuaijiejian_Skin_UIAsset11_i(),__kuaijiejian_Skin_Label18_i()];
 			return temp;
 		}
 
@@ -927,11 +927,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -948,11 +947,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -969,11 +967,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -990,11 +987,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -1005,17 +1001,6 @@ package org.mokylin.skin.app.systemSet
 			temp.width = 180;
 			temp.x = 0;
 			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset18_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
 			return temp;
 		}
 
@@ -1043,11 +1028,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset20_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -1064,11 +1048,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset22_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -1085,11 +1068,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset24_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -1106,11 +1088,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset26_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -1125,17 +1106,6 @@ package org.mokylin.skin.app.systemSet
 		}
 
 		private function __kuaijiejian_Skin_UIAsset28_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset29_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/tips_1fengexian.png";
@@ -1156,207 +1126,7 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __kuaijiejian_Skin_UIAsset30_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset31_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset32_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset34_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset35_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset36_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset37_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset38_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset39_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
 		private function __kuaijiejian_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset40_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset41_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset42_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset43_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset44_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset45_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset46_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset47_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset48_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset49_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/tips_1fengexian.png";
@@ -1369,75 +1139,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset50_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset51_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/tips_1fengexian.png";
 			temp.width = 180;
 			temp.x = 0;
 			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset52_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset53_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 180;
-			temp.x = 0;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset54_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __kuaijiejian_Skin_UIAsset56_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
 			return temp;
 		}
 
@@ -1454,11 +1159,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -1475,11 +1179,10 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 39;
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
 			return temp;
 		}
 
