@@ -679,6 +679,7 @@ package com.rpgGame.app.ui.main.taskbar
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{
+				clearGuildCheck();
 				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 			}
 			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行环式任务":"取消自动进行环式任务");
@@ -693,6 +694,7 @@ package com.rpgGame.app.ui.main.taskbar
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{
+				clearTreasuerCheck();
 				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_GUILDDAILYTASK);
 			}
 			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行帮派任务":"取消自动进行帮派任务");
