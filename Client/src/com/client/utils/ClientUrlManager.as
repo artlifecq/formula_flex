@@ -15,7 +15,7 @@ package com.client.utils
 		private static const LOADING_BG : String = "res/login/loadingBg.swf";
 		private static const GAME_XML_URL : String = "entry/game.xml";
 		private static const LOAD_LOADING_URL : String = "res/login/loading.swf";
-		private static const LOGIN_URL : String = "res/login/login.swf";
+		private static const LOGIN_URL : String = "res/login/Login.swf";
 		
 		private static var _baseDir : String;
 		private static var _version : String;
