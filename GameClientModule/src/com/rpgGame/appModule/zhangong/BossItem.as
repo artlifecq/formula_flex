@@ -264,7 +264,7 @@ package com.rpgGame.appModule.zhangong
 			var maps:HashMap=AttValueConfig.getTypeValueMap(attValues);
 			var keys:Array=maps.keys();
 			var values:Array=maps.values();
-			setUIType(keys[0]);
+			_skin.uiName.styleName=CharAttributeType.getAttrNameUrl(keys[0]);
 			_skin.numZhanli.label="x"+AttValueConfig.getDisAttValue(keys[0],values[0]).toString();
 			updateNumber();
 		}
@@ -292,76 +292,6 @@ package com.rpgGame.appModule.zhangong
 			var scale:Number=parseFloat(cfg.q_scale);
 			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.BOSS_ITEM,_avatar,cfg.q_pointX,
 				cfg.q_pointY,scale);
-		}
-		
-		private function setUIType(type:int):void
-		{
-			switch(type)
-			{
-				case CharAttributeType.HP:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
-					break;
-				case CharAttributeType.MAX_HP:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
-					break;
-				case CharAttributeType.CRIT_PER:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baoji.png";
-					break;
-				case CharAttributeType.ANTI_CRIT_PER:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojikangxing.png";
-					break;
-				case CharAttributeType.CRIT:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojisanghai.png";
-					break;
-				case CharAttributeType.DEFENSE_PER:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/fangyu.png";
-					break;
-				case CharAttributeType.GENGU:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gengu.png";
-					break;
-				case CharAttributeType.ATT_SPEED:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gongjisudu.png";
-					break;
-				case CharAttributeType.HUIGEN:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/huigen.png";
-					break;
-				case CharAttributeType.LIDAO:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/lidao.png";
-					break;
-				case CharAttributeType.HIT:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gzhonglv.png";
-					break;
-				/*case CharAttributeType.NEI_GONG:
-				_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/neigong.png";
-				break;*/
-				case CharAttributeType.MP:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/nengliang.png";
-					break;
-				case CharAttributeType.MP_REC:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/nenglianghuifu.png";
-					break;
-				case CharAttributeType.HP:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/qixue.png";
-					break;
-				case CharAttributeType.SHENFA:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shenfa.png";
-					break;
-				case CharAttributeType.HP_REC:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengminghuifu.png";
-					break;
-				case CharAttributeType.ANTI_EFFECT:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/xiaoguodikang.png";
-					break;
-				case CharAttributeType.SPEED:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/yidongsudu.png";
-					break;
-				case CharAttributeType.WAI_GONG:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/waigong.png";
-					break;
-				default:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
-					break;
-			}
 		}
 		
 		/**

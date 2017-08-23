@@ -39,6 +39,9 @@ package com.rpgGame.appModule.storage
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	/**
 	 *仓库面板 
@@ -226,6 +229,7 @@ package com.rpgGame.appModule.storage
 		
 		private function initEvent():void
 		{
+			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.addEvent(ItemEvent.ITEM_INIT,initStorageDatas);			
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,refreshGrid);
@@ -305,6 +309,67 @@ package com.rpgGame.appModule.storage
 			}
 		}
 		
+		private static const HELPER_POINT:Point = new Point();
+		protected var touchPointID:int = -1;
+		public function onTouchItem(event:TouchEvent):void
+		{
+			if(!isSave) return;
+			if(this.touchPointID >= 0)
+			{
+				var touch:Touch = event.getTouch(this, null, this.touchPointID);
+				if(!touch || !this.stage)
+				{
+					//this should never happen
+					return;
+				}
+				
+				touch.getLocation(this.stage, HELPER_POINT);
+				var isInBounds:Boolean = this.contains(this.stage.hitTest(HELPER_POINT));
+				if(touch.phase === TouchPhase.MOVED)
+				{
+					if(isInBounds)
+					{
+						MouseCursorController.showTake();
+					}
+					else
+					{
+						MouseCursorController.showSave();
+					}
+				}else if(touch.phase === TouchPhase.ENDED){
+					this.touchPointID = -1;
+					if(isInBounds)
+					{
+						MouseCursorController.showTake();
+					}
+					else
+					{
+						MouseCursorController.showSave();
+					}
+				}
+				return;
+			}
+			else //if we get here, we don't have a saved touch ID yet
+			{
+				touch = event.getTouch(this, TouchPhase.BEGAN);
+				if(touch)
+				{
+					MouseCursorController.showTake();
+					this.touchPointID = touch.id;
+					return;
+				}
+				touch = event.getTouch(this, TouchPhase.HOVER);
+				if(touch)
+				{
+					MouseCursorController.showTake();
+					return;
+				}
+				
+				//end of hover
+				MouseCursorController.showSave();
+			}
+			
+		}
+		
 		private function enterOrLeaveSaveMode(bool:Boolean):void
 		{
 			if (bool) 
@@ -338,6 +403,7 @@ package com.rpgGame.appModule.storage
 			goodsContainer.hide();
 			enterOrLeaveSaveMode(false);
 			isSave=false;
+			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,refreshGrid);

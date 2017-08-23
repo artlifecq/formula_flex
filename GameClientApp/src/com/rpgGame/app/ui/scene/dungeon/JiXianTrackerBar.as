@@ -131,7 +131,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function updateZoneTime(msg:SCLimitTrackInfoMessage):void
 		{
-			_remainTime=msg.remainTime;
+			_remainTime=msg.remainTime/1000;
 			_skin.lb_time.text="活动结束倒计时:"+TimeUtil.format3TimeType(_remainTime);
 			TimerServer.addLoop(updateTime,1000);
 			_skin.uiJiSha.visible=msg.bossState==1;
