@@ -649,6 +649,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			setUisite();
 		}
+		
 		/**处理卡点显示*/
 		public function setKajiGoter():void
 		{
@@ -673,34 +674,41 @@ package com.rpgGame.app.ui.main.taskbar
 			extraLabel.visible=true;
 			
 		}
+		
 		public function setTreasuerCheck(check:Boolean):void
 		{
 			TaskMissionManager.treasuerCheck=check;
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{
+				clearGuildCheck();
 				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 			}
 			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行环式任务":"取消自动进行环式任务");
 		}
+		
 		public function clearTreasuerCheck():void
 		{
 			_skin.chkAuto.isSelected=false;
 		}
+		
 		public function setGuildCheck(check:Boolean):void
 		{
 			TaskMissionManager.guildCheck=check;
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{
+				clearTreasuerCheck();
 				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_GUILDDAILYTASK);
 			}
 			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行帮派任务":"取消自动进行帮派任务");
 		}
+		
 		public function clearGuildCheck():void
 		{
 			_skin.chkAuto1.isSelected=false;
 		}
+		
 		private function getKkillbut():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
