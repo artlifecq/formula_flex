@@ -194,6 +194,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.text = "BOSS名";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
 			temp.width = 82;
 			temp.x = 0;
 			temp.y = 4;
@@ -241,7 +242,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.label = "+12";
 			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.uinumber.UINumberZhangongNo;
 			temp.width = 55;
-			temp.x = 39;
+			temp.x = 50;
 			temp.y = 137;
 			return temp;
 		}
@@ -299,9 +300,9 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/beibao/zhangong/jiacheng/shengming.png";
+			temp.styleName = "ui/common/shuxing/gjl.png";
 			temp.x = 6;
-			temp.y = 134;
+			temp.y = 133;
 			return temp;
 		}
 

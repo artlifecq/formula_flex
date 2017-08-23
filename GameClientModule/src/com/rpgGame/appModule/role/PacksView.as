@@ -49,7 +49,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
