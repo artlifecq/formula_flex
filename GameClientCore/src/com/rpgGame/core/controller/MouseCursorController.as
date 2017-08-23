@@ -107,16 +107,15 @@ package com.rpgGame.core.controller
 			showNormal();
 		}
 		
-		private static var _takeing:Boolean;
 		public static function showTake() : void
 		{
-			_takeing=true;
+			_saveing=true;
 			update( MouseCursorEnum.TAKE );
 		}
 		
 		public static function exitTakeMode():void
 		{
-			_takeing = false;
+			_saveing = false;
 			showNormal();
 		}
 		
@@ -168,7 +167,7 @@ package com.rpgGame.core.controller
 				return;
 			}
 			
-			if(_saveing && mouse != MouseCursorEnum.SAVE)
+			if(_saveing && mouse != MouseCursorEnum.SAVE&&mouse != MouseCursorEnum.TAKE)
 			{
 				return;
 			}
