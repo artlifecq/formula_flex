@@ -17,7 +17,7 @@ package
 	 * @author 卢国征
 	 *
 	 */
-	public class Login extends Sprite
+	public class login extends Sprite
 	{
 		/** 角色名字面板 **/
 		private var _creatCharacterPanel : CreateRolePanel;
@@ -26,7 +26,7 @@ package
 		public var showInfoAlert : Function;
         public var baseDir : String;
 		
-		public function Login()
+		public function login()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStatge);
 		}
