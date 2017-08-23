@@ -189,7 +189,7 @@ package com.rpgGame.app.process
 		{
 			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				CONFIG::Debug {
+               if (!ClientConfig.isRelease) {
 					isShow = !isShow;
 					if(isShow)
 					{
@@ -208,7 +208,7 @@ package com.rpgGame.app.process
 		
 		private function showFrameState():void
 		{
-			CONFIG::Debug {
+			if (!ClientConfig.isRelease) {
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			}			
 //			LayerManager.showOrHideMM();
