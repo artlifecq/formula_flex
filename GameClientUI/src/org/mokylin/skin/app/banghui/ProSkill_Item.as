@@ -251,7 +251,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/banghui/word/gongjijiaqiang.png";
+			temp.styleName = "ui/app/banghui/word/1.png";
 			temp.x = 111;
 			temp.y = 21;
 			return temp;
