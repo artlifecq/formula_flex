@@ -34,6 +34,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
+	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -57,6 +58,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.skill.message.ResSkillChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
 	import com.rpgGame.netData.skill.message.SCSkillLevelUpResultMessage;
+	
+	import flash.utils.setTimeout;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.ds.HashMap;
@@ -147,6 +150,7 @@ package com.rpgGame.app.cmdlistener
 				{
 					//UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
 					AppManager.showApp(AppConstant.NEW_SKILL_ADD_PANLE,msg.skillInfo);
+					setTimeout(ShortcutsManger.getInstance().updateNewSpell,2500+6000,cfg);
 				}
 			}
 			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
@@ -333,13 +337,14 @@ package com.rpgGame.app.cmdlistener
 			roleData.spellList.setHeroData(msg);
 			//技能CD
 			//			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
+			ShortcutsManger.getInstance().setup();
 		}
 		
 		private function RecvResClientCustomTagMessage(msg:ResClientCustomTagMessage):void
 		{
 			ClientSettingManager.setup(msg.CustomTaginfos);
 			
-			ShortcutsManger.getInstance().setup();
+//			ShortcutsManger.getInstance().setup();
 		}
 		
 		private function RecvResPersonalNoticeMessage(msg:ResPersonalNoticeMessage):void
