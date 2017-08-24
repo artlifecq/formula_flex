@@ -37,7 +37,7 @@ package feathers.controls
 		/*** 总帧数	 */
 		private var _totalFrames:int;
 		
-		 
+		
 		/** 当前帧 	*/
 		private var _curFrame:int;
 		private var _repeatPlay:Boolean = true;
@@ -227,7 +227,7 @@ package feathers.controls
 				themeLoad(_themeUrl);
 			}else
 			{
-//				singleLoad();//暂不开放单帧加载
+				//				singleLoad();//暂不开放单帧加载
 			}
 		}
 		
@@ -459,7 +459,8 @@ package feathers.controls
 		
 		private function _stop():void
 		{
-			_timer.stop();
+			if(_timer)
+				_timer.stop();
 			_isPlaying = false;
 		}
 		

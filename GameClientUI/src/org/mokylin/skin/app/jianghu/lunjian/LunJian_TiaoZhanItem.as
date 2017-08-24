@@ -7,9 +7,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
-	import org.mokylin.skin.app.jianghu.button.ButtonTiaozhan;
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu;
 	import org.mokylin.skin.app.jianghu.mc.UIMovieClipNandu;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -52,8 +52,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			super();
 			
 			this.currentState = "normal";
-			this.height = 483;
-			this.width = 245;
+			this.height = 486;
+			this.width = 246;
 			this.elementsContent = [__LunJian_TiaoZhanItem_UIAsset1_i(),modeBg_i(),modeCont_i(),lbName_i(),__LunJian_TiaoZhanItem_UIAsset2_i(),__LunJian_TiaoZhanItem_Label1_i(),__LunJian_TiaoZhanItem_Label2_i(),__LunJian_TiaoZhanItem_Label3_i(),lbLevel_i(),lbZhanli_i(),mc_nandu_i(),btnTiaozhan_i(),sk_jiandan_i(),sk_kunnan_i(),sk_emeng_i(),uiOK_i()];
 			
 			states = {
@@ -72,7 +72,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 56;
-			temp.y = 273;
+			temp.y = 276;
 			return temp;
 		}
 
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 56;
-			temp.y = 252;
+			temp.y = 255;
 			return temp;
 		}
 
@@ -94,7 +94,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 56;
-			temp.y = 296;
+			temp.y = 299;
 			return temp;
 		}
 
@@ -112,7 +112,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jianghu/lunjian/zezao.png";
 			temp.x = 17;
-			temp.y = 250;
+			temp.y = 251;
 			return temp;
 		}
 
@@ -121,9 +121,14 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnTiaozhan = temp;
 			temp.name = "btnTiaozhan";
-			temp.styleClass = org.mokylin.skin.app.jianghu.button.ButtonTiaozhan;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "开始挑战";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 110;
 			temp.x = 65;
-			temp.y = 329;
+			temp.y = 328;
 			return temp;
 		}
 
@@ -134,11 +139,11 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "lbLevel";
 			temp.fontSize = 16;
 			temp.text = "Lv.45";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 82;
 			temp.x = 128;
-			temp.y = 273;
+			temp.y = 276;
 			return temp;
 		}
 
@@ -153,8 +158,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 131;
-			temp.x = 50;
-			temp.y = 16;
+			temp.x = 62;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -165,11 +170,11 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "lbZhanli";
 			temp.fontSize = 16;
 			temp.text = "123456";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
 			temp.x = 128;
-			temp.y = 251;
+			temp.y = 254;
 			return temp;
 		}
 
@@ -183,7 +188,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.styleClass = org.mokylin.skin.app.jianghu.mc.UIMovieClipNandu;
 			temp.width = 32;
 			temp.x = 128;
-			temp.y = 298;
+			temp.y = 301;
 			return temp;
 		}
 
@@ -194,7 +199,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "modeBg";
 			temp.styleName = "ui/app/jianghu/lunjian/beijing1.jpg";
 			temp.x = 18;
-			temp.y = 42;
+			temp.y = 43;
 			return temp;
 		}
 
@@ -220,7 +225,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.skin = skin
 			temp.width = 70;
 			temp.x = 155;
-			temp.y = 370;
+			temp.y = 371;
 			return temp;
 		}
 
@@ -234,7 +239,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.skin = skin
 			temp.width = 70;
 			temp.x = 12;
-			temp.y = 370;
+			temp.y = 371;
 			return temp;
 		}
 
@@ -248,7 +253,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.skin = skin
 			temp.width = 70;
 			temp.x = 84;
-			temp.y = 370;
+			temp.y = 371;
 			return temp;
 		}
 

@@ -41,7 +41,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),pageList_i(),btnP_i(),btnN_i(),btnShuoming_i()];
+			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),__LunJian_Skin_UIAsset3_i(),list_map_i(),__LunJian_Skin_UIAsset4_i(),pageList_i(),btnP_i(),btnN_i(),btnShuoming_i()];
 			
 			states = {
 			};
@@ -55,13 +55,24 @@ package org.mokylin.skin.app.jianghu.lunjian
 		private function __LunJian_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 504;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 751;
+			temp.x = 185;
+			temp.y = 86;
+			return temp;
+		}
+
+		private function __LunJian_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jianghu/lunjian/shubg.jpg";
 			temp.x = 22;
 			temp.y = 86;
 			return temp;
 		}
 
-		private function __LunJian_Skin_UIAsset3_i():feathers.controls.UIAsset
+		private function __LunJian_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jianghu/lunjian/lunjian.png";
@@ -130,6 +141,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			pageList = temp;
 			temp.name = "pageList";
 			temp.height = 481;
+			temp.visible = false;
 			temp.width = 748;
 			temp.x = 191;
 			temp.y = 95;
