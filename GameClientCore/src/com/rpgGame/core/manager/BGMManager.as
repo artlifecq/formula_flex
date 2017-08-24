@@ -72,7 +72,7 @@ package com.rpgGame.core.manager
 		
 		public static function playMusic(fileName:String):void
 		{
-			if (_disabledBgm)
+			if (_disabledBgm||true)
 			{
 				return;
 			}

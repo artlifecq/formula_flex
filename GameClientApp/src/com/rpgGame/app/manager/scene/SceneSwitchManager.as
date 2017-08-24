@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.scene
 {
+	import com.app.AudioInterface;
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
@@ -35,6 +36,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
+	import com.rpgGame.core.manager.AudioConfigType;
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -537,7 +539,11 @@ package com.rpgGame.app.manager.scene
 				AreaMapManager.updateCameraAreaMap();
 				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
 				
-				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+				//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+				//BGMManager.playMusic("Music/Mus_cfys");
+				
+				var soundUrl:String = ClientConfig.getSound("Music/Mus_cfys");
+				AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, soundUrl);
 			}
 			
 			if (SceneManager.clientMapData)
