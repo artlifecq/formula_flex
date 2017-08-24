@@ -1,11 +1,14 @@
 package com.rpgGame.appModule.hubao
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.HuBaoEvent;
+	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -26,8 +29,7 @@ package com.rpgGame.appModule.hubao
 	{
 		private var _skin:HuBaoChengGong_Skin;
 		
-		private var _beijingkuangList:Vector.<UIAsset>;
-		private var _icoList:Vector.<IconCDFace>;
+
 		private var _labList:Vector.<Label>;
 		
 		private var _towPrizePoint:Array;
@@ -35,6 +37,8 @@ package com.rpgGame.appModule.hubao
 		
 		private var _time:int=10;
 		private var _timer:GameTimer;
+		private var _rewardG:RewardGroup;
+		private var _useList:Vector.<Label>=new Vector.<Label>();
 		public function HuBaoChengGongPanelExt()
 		{
 			_skin=new HuBaoChengGong_Skin();
@@ -47,22 +51,12 @@ package com.rpgGame.appModule.hubao
 			_towPrizePoint=[212,335,0];
 			_threePrizePoint=[169,292,415];
 			
-			_beijingkuangList=new Vector.<UIAsset>();
-			_beijingkuangList.push(_skin.icon1);
-			_beijingkuangList.push(_skin.icon2);
-			_beijingkuangList.push(_skin.icon3);
+			_rewardG=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon2,1,10,50);
 			
-			_icoList=new Vector.<IconCDFace>();
-			for(var i:int=0;i<_beijingkuangList.length;i++)
-			{
-				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_64);		
-				ico.selectImgVisible=false;	
-				//				_beijingkuangList[i].addChild(ico);
-				_skin.container.addChild(ico);
-				ico.bindBg(_beijingkuangList[i]);
-				//				ico.y=_beijingkuangList[i].y;
-				_icoList.push(ico);
-			}
+			MCUtil.removeSelf(_skin.icon1);
+			MCUtil.removeSelf(_skin.icon3);
+			
+			
 			
 			_labList=new Vector.<Label>();
 			_labList.push(_skin.lbCaiLiao);
@@ -89,30 +83,37 @@ package com.rpgGame.appModule.hubao
 			super.show();
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,setDate);
 		}
-		
+		private function getlab():Label
+		{
+			if (_labList.length>0) 
+			{
+				return _labList.pop();
+			}
+			return MCUtil.clonelab(_skin.lbCaiLiao);
+		}
 		private function setDate(msg:SCSuccessInfoMessage):void
 		{
 			_skin.bg_shuangbei.visible=msg.isdouble==2;
+			for each (var lab:Label in _useList) 
+			{
+				MCUtil.removeSelf(lab);
+			}
+			_labList=_labList.concat(_useList);
+			_useList.length=0;
+			_rewardG.setRewardByItemInfo(msg.reward);
 			var len:int=msg.reward.length;
 			//			updatePoint(len);
-			for(var i:int=0;i<_beijingkuangList.length;i++)
+			var tlab:Label;
+			var rewards:Vector.<IconCDFace>=_rewardG.getIoncs();
+			for(var i:int=0;i<len;i++)
 			{
-				if(i<len)
-				{
-					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(msg.reward[i].itemModelId,1,msg.reward[i].isbind);
-					FaceUtil.SetItemGrid(_icoList[i],itemInfo);
-					_labList[i].htmlText=itemInfo.qItem.q_name+"×"+msg.reward[i].num;
-					
-					_beijingkuangList[i].visible=true;		
-					_labList[i].visible=true;
-					_icoList[i].visible=true;
-				}
-				else
-				{
-					_beijingkuangList[i].visible=false;	
-					_labList[i].visible=false;
-					_icoList[i].visible=false;
-				}
+				tlab=getlab();
+				tlab.x=rewards[i].x;
+				tlab.y=rewards[i].y+74;
+				var itemInfo:ClientItemInfo=rewards[i].faceInfo as ClientItemInfo;
+				tlab.htmlText=itemInfo.qItem.q_name+"×"+msg.reward[i].num;
+				this.addChild(tlab);
+				_useList.push(tlab);
 			}
 			_skin.lbTiShi.htmlText="您还剩"+msg.remainNum.toString()+"次护送机会，是否继续?";
 			_time=10;
@@ -133,27 +134,15 @@ package com.rpgGame.appModule.hubao
 			}
 		}
 		
-		private function updatePoint(prizeNum:int):void
-		{
-			for(var i:int=0;i<_beijingkuangList.length;i++)
-			{
-				if(prizeNum==2)
-				{
-					_beijingkuangList[i].x=_labList[i].x=_towPrizePoint[i];
-				}
-				else
-				{
-					_beijingkuangList[i].x=_labList[i].x=_threePrizePoint[i];
-				}
-				_icoList[i].x=_beijingkuangList[i].x-4;
-			}
-		}
+	
 		
 		override public function hide() : void
 		{
+			_rewardG.tweeRewardInBag();
 			super.hide();
 			TimerServer.remove(onTimer);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,setDate);
+			_rewardG.clear();
 		}
 	}
 }

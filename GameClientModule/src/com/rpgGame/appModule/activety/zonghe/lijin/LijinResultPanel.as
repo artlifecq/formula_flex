@@ -63,6 +63,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		}
 		override public function hide():void
 		{
+			icoList1Group.tweeRewardInBag();
 			super.hide();
 			//TweenLite.killDelayedCallsTo(hide);
 		}

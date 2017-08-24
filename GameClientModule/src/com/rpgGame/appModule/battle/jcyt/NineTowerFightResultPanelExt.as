@@ -86,6 +86,7 @@ package  com.rpgGame.appModule.battle.jcyt
 		}
 		override public function hide():void
 		{
+			_gReward.tweeRewardInBag();
 			super.hide();
 			Mgr.nineTowerMgr.reqQuitTower();
 		}

@@ -150,11 +150,6 @@ package com.rpgGame.coreData.info.fight
 			}
 			_spellEffectID = _spellData.q_spell_effect;
 			_spellEffectData = SpellEffectDataManager.getData(_spellEffectID);
-			if (!_spellEffectData) 
-			{
-				GameLog.addError("客户端战斗结果技能特效为空,服务器发送id:"+spellID+" skillId:"+_spellData.q_skillID+" 特效id:"+_spellEffectID);
-				AlertPanel.showMsg( "客户端战斗结果技能特效为空,服务器发送id:"+spellID+" skillId:"+_spellData.q_skillID+" 特效id:"+_spellEffectID);
-			}
 			if (_spellEffectData)
 			{
 				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurt_animation);

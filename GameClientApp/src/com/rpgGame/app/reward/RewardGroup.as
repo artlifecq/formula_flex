@@ -380,6 +380,9 @@ package  com.rpgGame.app.reward
 		{
 			return _data;
 		}
-
+		public function getIoncs():Vector.<IconCDFace>
+		{
+			return icons;
+		}
 	}
 }

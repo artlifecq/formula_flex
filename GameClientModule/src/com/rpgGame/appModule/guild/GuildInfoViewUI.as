@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.hint.TopTipManager;
@@ -223,6 +224,7 @@ package com.rpgGame.appModule.guild
 				TopTipManager.getInstance().addMouseFollowTip(0,str);
 				GuildManager.instance().changeGuildDailyGift();
 				refeashReward();
+				ItemActionManager.flyItemToBag(qitem.q_id,_skin.btnFuli);
 			}
 			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 		}
