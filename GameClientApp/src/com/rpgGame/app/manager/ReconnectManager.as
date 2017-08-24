@@ -73,7 +73,7 @@ package com.rpgGame.app.manager
 		{
 			if (ExternalInterface.available)
 			{
-				ExternalInterface.call("reload")
+				ExternalInterface.call("refresh")
 			}
 		}
 

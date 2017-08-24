@@ -56,6 +56,7 @@ package com.client.process
 		public function ServerConnect()
 		{
 			super();
+			_reTryCount = 0;
 			_connectDelay = 0;
 			EventManager.addEvent("SERVER_RECONNECT", closeSocket);
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_DROPS_TO_SERVER, socketDropsHandle);
@@ -128,6 +129,7 @@ package com.client.process
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
             
 			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 5000);
+//			_reTryCount = 0;
 //			_retryConnectCnt = 0;
 //			if (!_retryTimer)
 //			{
@@ -183,6 +185,7 @@ package com.client.process
 			completeProcess();
 		}
 		
+		private var _reTryCount:int = 0;
 		private function closeSocket(deley : int, msg : String) : void
 		{
 			_connectDelay = deley;
@@ -199,8 +202,14 @@ package com.client.process
 			if (_allowReconnect && (isProcessing || (!isProcessing && !ProcessStateMachine.getInstance().isProcessing)))
 			{
 				ResLoadingView.instance.title = "服务器连接" + msg + "，正在重新连接服务器...";
-				GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
+				_reTryCount++;
+//				GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
 				reconnect();
+				
+				if(_reTryCount > 60)
+				{
+					GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
+				}
 			}
 			else
 			{
@@ -318,7 +327,7 @@ package com.client.process
 		{
 			if (ExternalInterface.available)
 			{
-				ExternalInterface.call("reload");
+				ExternalInterface.call("refresh");
 			}
 		}
 		
