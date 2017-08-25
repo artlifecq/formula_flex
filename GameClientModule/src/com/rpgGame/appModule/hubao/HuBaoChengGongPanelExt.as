@@ -56,8 +56,9 @@ package com.rpgGame.appModule.hubao
 			MCUtil.removeSelf(_skin.icon1);
 			MCUtil.removeSelf(_skin.icon3);
 			
-			
-			
+			MCUtil.removeSelf(_skin.lbCaiLiao);
+			MCUtil.removeSelf(_skin.lbjingyan);
+			MCUtil.removeSelf(_skin.lbjiangli);
 			_labList=new Vector.<Label>();
 			_labList.push(_skin.lbCaiLiao);
 			_labList.push(_skin.lbjingyan);
@@ -112,7 +113,7 @@ package com.rpgGame.appModule.hubao
 				tlab.y=rewards[i].y+74;
 				var itemInfo:ClientItemInfo=rewards[i].faceInfo as ClientItemInfo;
 				tlab.htmlText=itemInfo.qItem.q_name+"×"+msg.reward[i].num;
-				this.addChild(tlab);
+				_rewardG.addChild(tlab);
 				_useList.push(tlab);
 			}
 			_skin.lbTiShi.htmlText="您还剩"+msg.remainNum.toString()+"次护送机会，是否继续?";

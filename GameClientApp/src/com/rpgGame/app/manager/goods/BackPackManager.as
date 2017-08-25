@@ -55,6 +55,7 @@ package com.rpgGame.app.manager.goods
 				return;
 			if (src.data is ClientItemInfo)
 			{
+				//策划强制出售了
 				if (isShowShop) 
 				{
 					if ((src.data as ClientItemInfo).qItem.q_sell==1)
@@ -68,7 +69,12 @@ package com.rpgGame.app.manager.goods
 					}
 					return;
 				}
-				dropItem(src.data as ClientItemInfo);
+				//dropItem(src.data as ClientItemInfo);
+				if ((src.data as ClientItemInfo).qItem.q_sell==1)
+				{
+					Mgr.shopMgr.sellItemCall(src.data);
+					
+				}
 			}
 		}
 		

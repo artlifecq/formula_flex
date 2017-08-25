@@ -22,6 +22,7 @@ package
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.alert.Game2dLayer;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
@@ -135,6 +136,7 @@ package
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
+			Game2dLayer.ins.init(this.stage);
 			//
 			//getWebParams();
             GameLog.addShow("游戏名:" + ClientConfig.gameName);

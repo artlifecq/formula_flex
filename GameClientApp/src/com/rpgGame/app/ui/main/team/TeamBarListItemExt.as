@@ -59,6 +59,7 @@ package   com.rpgGame.app.ui.main.team
 			TipTargetManager.show(this,TargetTipsMaker.makeSimplePropChangeTextTips(str,tipData));
 			Mgr.teamMgr.addEventListener(TeamEvent.TEAM_MEM_ATTR_CHANGE,onTeamAttrChange);
 			MCUtil.removeSelf(_skin.role_buffer);
+			
 		}	
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 
@@ -69,6 +70,10 @@ package   com.rpgGame.app.ui.main.team
 					var menus : Array = MenuUtil.getPlayerTeamMenu(_data.memberId.ToGID(), isduizhang);
 					MenuManager.showMenu(menus, [_data.memberId, _data.memberName], -1, -1, 80);
 					break;
+				default:
+				{
+					onSelectPlayer();
+				}
 			}
 		}
 		
@@ -104,18 +109,18 @@ package   com.rpgGame.app.ui.main.team
 						SceneRoleSelectManager.selectedRole=role;
 					}
 				}
-				else
-				{
-					var state:int=Mgr.teamMgr.getNearState(_data.memberId);
-					if (state==1) 
-					{
-						FloatingText.showUp("该玩家离你太远");
-					}
-					else if (state==2) 
-					{
-						FloatingText.showUp("该玩家已下线");
-					}
-				}
+//				else
+//				{
+//					var state:int=Mgr.teamMgr.getNearState(_data.memberId);
+//					if (state==1) 
+//					{
+//						FloatingText.showUp("该玩家离你太远");
+//					}
+//					else if (state==2) 
+//					{
+//						FloatingText.showUp("该玩家已下线");
+//					}
+//				}
 			}
 		}
 		private function onTeamAttrChange(event:TeamEvent):void
@@ -266,13 +271,25 @@ package   com.rpgGame.app.ui.main.team
 		public function onTouchItem(e:TouchEvent):void
 		{
 			var t:Touch=e.getTouch(this);
-			if(!t){
+			if(!t)
+			{
 				_skin.skinSelect.visible=false;
 				return;
 			}
 			t=e.getTouch(this,TouchPhase.HOVER);
-			if(t){
+			if(t)
+			{
 				_skin.skinSelect.visible=true;
+			}
+			t=e.getTouch(this,TouchPhase.BEGAN);
+			if (t) 
+			{
+				_skin.icon.scale=0.9;
+			}
+			t=e.getTouch(this,TouchPhase.ENDED);
+			if (t) 
+			{
+				_skin.icon.scale=1;
 			}
 		}
 		
