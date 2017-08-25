@@ -201,12 +201,13 @@ package com.client.process
 			//
 			if (_allowReconnect && (isProcessing || (!isProcessing && !ProcessStateMachine.getInstance().isProcessing)))
 			{
-				ResLoadingView.instance.title = "服务器连接" + msg + "，正在重新连接服务器...";
+//				ResLoadingView.instance.title = "服务器连接" + msg + "，正在重新连接服务器...";
+				ResLoadingView.instance.title = "努力连接服务器中...客官！请稍后!";
 				_reTryCount++;
 //				GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
 				reconnect();
 				
-				if(_reTryCount > 60)
+				if(_reTryCount > 100)
 				{
 					GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
 				}
