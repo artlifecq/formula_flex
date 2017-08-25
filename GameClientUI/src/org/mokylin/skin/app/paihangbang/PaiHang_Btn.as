@@ -60,7 +60,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "labelDisplay";
 			temp.height = 42;
 			temp.touchable = false;
-			temp.touchGroup = true;
+			temp.touchGroup = false;
 			temp.fontSize = 14;
 			temp.text = "按 钮";
 			temp.textAlign = "center";
