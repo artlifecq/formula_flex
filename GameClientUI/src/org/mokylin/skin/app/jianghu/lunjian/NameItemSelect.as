@@ -27,7 +27,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			
 			this.currentState = "up";
 			this.height = 31;
-			this.width = 141;
+			this.width = 155;
 			this.elementsContent = [];
 			__NameItemSelect_UIAsset1_i();
 			__NameItemSelect_UIAsset2_i();
@@ -77,7 +77,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.height = 31;
 			temp.styleName = "ui/app/jianghu/lunjian/tiaoliang.png";
 			temp.top = 0;
-			temp.width = 141;
+			temp.width = 155;
 			temp.x = 0;
 			return temp;
 		}
@@ -88,7 +88,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			__NameItemSelect_UIAsset2 = temp;
 			temp.height = 31;
 			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
-			temp.width = 141;
+			temp.width = 155;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

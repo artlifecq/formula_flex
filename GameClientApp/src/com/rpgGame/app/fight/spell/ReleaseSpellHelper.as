@@ -18,8 +18,6 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	
-	import away3d.log.Log;
-	
 	import gs.TweenLite;
 
 	/**
