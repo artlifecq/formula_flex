@@ -93,7 +93,7 @@ package org.mokylin.skin.app.tips
 			this.currentState = "normal";
 			this.height = 568;
 			this.width = 280;
-			this.elementsContent = [bg_i(),lbl_titile_i(),imgLine1_i(),imgLine2_i(),imgLine3_i(),imgLine5_i(),imgLine4_i(),imgLine6_i(),grp_icon_i(),grp_zhandouli_i(),grp_head_i(),uiShuxing_i(),uiZuomo_i(),uiXilian_i(),uiChanchu_i(),uiJiazhi_i(),uiDuibi_i(),__Tips_ZhuangBeiVS_Group1_i(),__Tips_ZhuangBeiVS_Group2_i(),yizhuangbei_i(),uiJianTou_i()];
+			this.elementsContent = [bg_i(),lbl_titile_i(),imgLine1_i(),imgLine2_i(),imgLine3_i(),imgLine5_i(),imgLine4_i(),imgLine6_i(),grp_icon_i(),grp_zhandouli_i(),grp_head_i(),uiShuxing_i(),uiZuomo_i(),uiXilian_i(),uiChanchu_i(),uiJiazhi_i(),uiDuibi_i(),__Tips_ZhuangBeiVS_Group1_i(),__Tips_ZhuangBeiVS_Group2_i(),yizhuangbei_i(),uiJianTou_i(),__Tips_ZhuangBeiVS_Label8_i()];
 			
 			states = {
 			};
@@ -166,6 +166,16 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
+		private function __Tips_ZhuangBeiVS_Label8_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "标签";
+			temp.color = 0xBBBDAA;
+			temp.x = -238;
+			temp.y = 261;
+			return temp;
+		}
+
 		private function __Tips_ZhuangBeiVS_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -187,7 +197,7 @@ package org.mokylin.skin.app.tips
 		private function __Tips_ZhuangBeiVS_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
+			temp.styleName = "ui/art_txt/common/zhandouli.png";
 			temp.x = 0;
 			temp.y = 4;
 			return temp;
@@ -496,7 +506,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiChanchu = temp;
 			temp.name = "uiChanchu";
-			temp.styleName = "ui/common/tips/zhuangbei/zhuangbeichanchu.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/zhuangbeichanchu.png";
 			temp.x = 13;
 			temp.y = 389;
 			return temp;
@@ -507,7 +517,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiDuibi = temp;
 			temp.name = "uiDuibi";
-			temp.styleName = "ui/common/tips/zhuangbei/shuxingduibi.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/shuxingduibi.png";
 			temp.x = 13;
 			temp.y = 500;
 			return temp;
@@ -529,7 +539,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiJiazhi = temp;
 			temp.name = "uiJiazhi";
-			temp.styleName = "ui/common/tips/zhuangbei/chushoujiage.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/chushoujiage.png";
 			temp.x = 13;
 			temp.y = 445;
 			return temp;
@@ -540,7 +550,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiShuxing = temp;
 			temp.name = "uiShuxing";
-			temp.styleName = "ui/common/tips/zhuangbei/jichushuxing.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/jichushuxing.png";
 			temp.x = 13;
 			temp.y = 178;
 			return temp;
@@ -551,7 +561,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiXilian = temp;
 			temp.name = "uiXilian";
-			temp.styleName = "ui/common/tips/zhuangbei/xilianshuxing.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/xilianshuxing.png";
 			temp.x = 13;
 			temp.y = 331;
 			return temp;
@@ -562,7 +572,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiZuomo = temp;
 			temp.name = "uiZuomo";
-			temp.styleName = "ui/common/tips/zhuangbei/zhuomodengji.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/zhuomodengji.png";
 			temp.x = 13;
 			temp.y = 275;
 			return temp;

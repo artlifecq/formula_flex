@@ -338,7 +338,7 @@ package com.rpgGame.coreData.type
 			{
 				return "";
 			}
-			return "ui/common/shuxing/"+res+".png";
+			return "ui/art_txt/common/shuxing/"+res+".png";
 		}
 		public static function getAttrIconUrl(attrId:int):String
 		{

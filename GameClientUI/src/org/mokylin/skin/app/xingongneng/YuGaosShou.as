@@ -3,7 +3,7 @@ package org.mokylin.skin.app.xingongneng
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
 	 * @private
@@ -46,13 +46,13 @@ package org.mokylin.skin.app.xingongneng
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			NumZhanli = temp;
 			temp.name = "NumZhanli";
-			temp.gap = -13;
-			temp.height = 33;
-			temp.label = "x1364";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
-			temp.width = 124;
-			temp.x = 133;
-			temp.y = 257;
+			temp.gap = -6;
+			temp.height = 25;
+			temp.label = "629845";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 142;
+			temp.x = 117;
+			temp.y = 261;
 			return temp;
 		}
 
@@ -68,9 +68,9 @@ package org.mokylin.skin.app.xingongneng
 		private function __YuGaosShou_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 53;
-			temp.y = 249;
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
+			temp.x = 62;
+			temp.y = 258;
 			return temp;
 		}
 

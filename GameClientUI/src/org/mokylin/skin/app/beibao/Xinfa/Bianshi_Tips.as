@@ -179,7 +179,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "uiTitle";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/bianshiliebiao.png";
+			temp.styleName = "ui/art_txt/common/background/bianshiliebiao.png";
 			temp.x = 119;
 			temp.y = 7;
 			return temp;

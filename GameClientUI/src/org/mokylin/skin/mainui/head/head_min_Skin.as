@@ -168,12 +168,12 @@ package org.mokylin.skin.mainui.head
 			role_name = temp;
 			temp.name = "role_name";
 			temp.fontSize = 12;
-			temp.text = "名字是六个字";
+			temp.text = "[9999区]名字是六个字";
 			temp.textAlign = "left";
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 97;
-			temp.x = 69;
+			temp.width = 135;
+			temp.x = 66;
 			temp.y = 32;
 			return temp;
 		}

@@ -24,17 +24,17 @@ package org.mokylin.skin.component.uinumber
 			
 			states = {
 			};
-			skinNames={"0":"ui/component/uinumber/skin_bossxuetiao_2/0.png",
-			"1":"ui/component/uinumber/skin_bossxuetiao_2/1.png",
-			"2":"ui/component/uinumber/skin_bossxuetiao_2/2.png",
-			"3":"ui/component/uinumber/skin_bossxuetiao_2/3.png",
-			"4":"ui/component/uinumber/skin_bossxuetiao_2/4.png",
-			"5":"ui/component/uinumber/skin_bossxuetiao_2/5.png",
-			"6":"ui/component/uinumber/skin_bossxuetiao_2/6.png",
-			"7":"ui/component/uinumber/skin_bossxuetiao_2/7.png",
-			"8":"ui/component/uinumber/skin_bossxuetiao_2/8.png",
-			"9":"ui/component/uinumber/skin_bossxuetiao_2/9.png",
-			"x":"ui/component/uinumber/skin_bossxuetiao_2/x.png"};
+			skinNames={"0":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/0.png",
+			"1":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/1.png",
+			"2":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/2.png",
+			"3":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/3.png",
+			"4":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/4.png",
+			"5":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/5.png",
+			"6":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/6.png",
+			"7":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/7.png",
+			"8":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/8.png",
+			"9":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/9.png",
+			"x":"ui/art_txt/component/uinumber/skin_bossxuetiao_2/x.png"};
 		}
 
 

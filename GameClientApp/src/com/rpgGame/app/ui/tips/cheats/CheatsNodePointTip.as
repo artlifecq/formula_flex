@@ -372,7 +372,7 @@ package  com.rpgGame.app.ui.tips.cheats
 			_skin.uiName2.y=startY;
 			_skin.uiName2.visible=true;
 			//_skin.lb_tile2.text="【镶嵌说明】";
-			_skin.uiName2.styleName="ui/common/tips/tipswenzi/jineng/xiangqianshuoming.png";
+			_skin.uiName2.styleName="ui/art_txt/common/tips/tipswenzi/jineng/xiangqianshuoming.png";
 			startY+=_skin.uiName2.height+2;
 			_skin.imgStone.y=startY;
 			

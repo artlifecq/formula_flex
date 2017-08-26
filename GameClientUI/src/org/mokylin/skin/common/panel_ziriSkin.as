@@ -83,7 +83,7 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/rizijilu.png";
+			temp.styleName = "ui/art_txt/common/background/rizijilu.png";
 			temp.x = 124;
 			temp.y = 7;
 			return temp;

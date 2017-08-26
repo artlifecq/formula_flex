@@ -113,7 +113,7 @@ package org.mokylin.skin.app.hunyin
 		private function __Tips_HunJie_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
+			temp.styleName = "ui/art_txt/common/zhandouli.png";
 			temp.x = 0;
 			temp.y = 4;
 			return temp;
@@ -122,7 +122,7 @@ package org.mokylin.skin.app.hunyin
 		private function __Tips_HunJie_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/dengjie.png";
+			temp.styleName = "ui/art_txt/common/dengjie.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -347,7 +347,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiShuxing = temp;
 			temp.name = "uiShuxing";
-			temp.styleName = "ui/common/tips/zhuangbei/jichushuxing.png";
+			temp.styleName = "ui/art_txt/common/tips/zhuangbei/jichushuxing.png";
 			temp.x = 13;
 			temp.y = 161;
 			return temp;

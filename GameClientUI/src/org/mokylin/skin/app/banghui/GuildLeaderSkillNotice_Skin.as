@@ -83,7 +83,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/quntichuansong.png";
+			temp.styleName = "ui/art_txt/common/background/quntichuansong.png";
 			temp.x = 121;
 			temp.y = 5;
 			return temp;

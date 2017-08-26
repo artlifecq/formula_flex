@@ -208,7 +208,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli1.png";
+			temp.styleName = "ui/art_txt/common/zhandouli1.png";
 			temp.x = 681;
 			temp.y = 465;
 			return temp;

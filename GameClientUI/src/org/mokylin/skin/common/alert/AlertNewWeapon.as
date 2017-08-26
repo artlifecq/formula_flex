@@ -90,7 +90,7 @@ package org.mokylin.skin.common.alert
 		private function __AlertNewWeapon_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 13;
 			temp.y = 10;
 			return temp;
@@ -101,7 +101,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/wxts.png";
+			temp.styleName = "ui/art_txt/common/background/wxts.png";
 			temp.x = 121;
 			temp.y = 9;
 			return temp;

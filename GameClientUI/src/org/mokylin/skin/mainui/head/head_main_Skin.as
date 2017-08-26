@@ -104,7 +104,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			UI_bingjia = temp;
 			temp.name = "UI_bingjia";
-			temp.styleName = "ui/mainui/head/zhiye/bingjia.png";
+			temp.styleName = "ui/art_txt/mainui/head/zhiye/bingjia.png";
 			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
@@ -116,7 +116,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			UI_mojia = temp;
 			temp.name = "UI_mojia";
-			temp.styleName = "ui/mainui/head/zhiye/mojia.png";
+			temp.styleName = "ui/art_txt/mainui/head/zhiye/mojia.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -127,7 +127,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			UI_yijia = temp;
 			temp.name = "UI_yijia";
-			temp.styleName = "ui/mainui/head/zhiye/yijia.png";
+			temp.styleName = "ui/art_txt/mainui/head/zhiye/yijia.png";
 			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
@@ -148,7 +148,7 @@ package org.mokylin.skin.mainui.head
 		private function __head_main_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 137;
 			temp.y = 74;
 			return temp;

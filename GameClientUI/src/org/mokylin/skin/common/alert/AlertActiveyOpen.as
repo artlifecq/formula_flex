@@ -66,7 +66,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/wxts.png";
+			temp.styleName = "ui/art_txt/common/background/wxts.png";
 			temp.x = 121;
 			temp.y = 9;
 			return temp;
@@ -127,7 +127,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icons = temp;
 			temp.name = "icons";
-			temp.styleName = "ui/common/icon/activity/open/1.png";
+			temp.styleName = "ui/icon/activity/open/25.png";
 			temp.x = 116;
 			temp.y = 56;
 			return temp;

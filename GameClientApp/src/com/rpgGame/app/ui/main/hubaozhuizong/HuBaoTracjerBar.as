@@ -89,7 +89,7 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 		private function updatePanel():void
 		{
 			_remainTime=HuBaoManager.instance().time;			
-			_skin.ico_chenhao.styleName = "ui/mainui/fubenzhuizong/icon/"+HuBaoManager.instance().level+".png";
+			_skin.ico_chenhao.styleName = "ui/icon/fubenzhuizong/icon/"+HuBaoManager.instance().level+".png";
 			_q_con=HuBaoData.getmodByLv(HuBaoManager.instance().level);
 			_skin.lbName.text=_q_con.q_girl_level;
 			var q_scene_monsnter:Q_scene_monster_area=MonsterDataManager.getAreaByAreaID(_q_con.q_destination);

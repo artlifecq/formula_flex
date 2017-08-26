@@ -135,7 +135,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			zhan_bg = temp;
 			temp.name = "zhan_bg";
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 261;
 			temp.y = 58;
 			return temp;

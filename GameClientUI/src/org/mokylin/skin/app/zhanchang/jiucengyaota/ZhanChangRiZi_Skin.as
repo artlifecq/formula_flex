@@ -94,7 +94,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/mingzi.png";
-			temp.x = 98;
+			temp.x = 109;
 			temp.y = 7;
 			return temp;
 		}
@@ -103,7 +103,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/zuigaocengshu.png";
-			temp.x = 187;
+			temp.x = 207;
 			temp.y = 7;
 			return temp;
 		}
@@ -112,7 +112,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/jisha.png";
-			temp.x = 281;
+			temp.x = 284;
 			temp.y = 7;
 			return temp;
 		}

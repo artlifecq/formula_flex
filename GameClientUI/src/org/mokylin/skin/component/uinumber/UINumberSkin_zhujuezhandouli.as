@@ -22,18 +22,18 @@ package org.mokylin.skin.component.uinumber
 			
 			states = {
 			};
-			skinNames={"-":"ui/component/uinumber/skin_zhujuezhandouli/-.png",
-			"0":"ui/component/uinumber/skin_zhujuezhandouli/0.png",
-			"1":"ui/component/uinumber/skin_zhujuezhandouli/1.png",
-			"2":"ui/component/uinumber/skin_zhujuezhandouli/2.png",
-			"3":"ui/component/uinumber/skin_zhujuezhandouli/3.png",
-			"4":"ui/component/uinumber/skin_zhujuezhandouli/4.png",
-			"5":"ui/component/uinumber/skin_zhujuezhandouli/5.png",
-			"6":"ui/component/uinumber/skin_zhujuezhandouli/6.png",
-			"7":"ui/component/uinumber/skin_zhujuezhandouli/7.png",
-			"8":"ui/component/uinumber/skin_zhujuezhandouli/8.png",
-			"9":"ui/component/uinumber/skin_zhujuezhandouli/9.png",
-			"x":"ui/component/uinumber/skin_zhujuezhandouli/x.png"};
+			skinNames={"-":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/-.png",
+			"0":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/0.png",
+			"1":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/1.png",
+			"2":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/2.png",
+			"3":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/3.png",
+			"4":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/4.png",
+			"5":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/5.png",
+			"6":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/6.png",
+			"7":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/7.png",
+			"8":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/8.png",
+			"9":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/9.png",
+			"x":"ui/art_txt/component/uinumber/skin_zhujuezhandouli/x.png"};
 		}
 
 

@@ -112,7 +112,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/sx.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sx.png";
 			temp.x = 437;
 			temp.y = 448;
 			return temp;
@@ -184,7 +184,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/sx.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sx.png";
 			temp.x = 437;
 			temp.y = 405;
 			return temp;

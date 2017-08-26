@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.navigation.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/navigation/button/tongshuaiSkill/down.png", "hover":"ui/mainui/navigation/button/tongshuaiSkill/over.png", "up":"ui/mainui/navigation/button/tongshuaiSkill/up.png"};
+			skinNames={"down":"ui/button/tongshuaiSkill/down.png", "hover":"ui/button/tongshuaiSkill/over.png", "up":"ui/button/tongshuaiSkill/up.png"};
 		}
 
 

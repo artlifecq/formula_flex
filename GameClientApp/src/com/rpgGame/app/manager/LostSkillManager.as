@@ -179,7 +179,7 @@ package com.rpgGame.app.manager
 			if (need) 
 			{
 				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6001));
-				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6001),FightFaceHelper.NUMBER_PURPLE1,0);
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6001),FightFaceHelper.NUMBER_PC_EXP,0);
 				return atf;
 			}
 			return null;
@@ -191,7 +191,7 @@ package com.rpgGame.app.manager
 			if (need) 
 			{
 				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6001));
-				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6001),FightFaceHelper.NUMBER_GOLD1,0);
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6001),FightFaceHelper.NUMBER_BIND_GOLD,0);
 				return atf;
 			}
 			return null;
@@ -222,7 +222,7 @@ package com.rpgGame.app.manager
 			if (need) 
 			{
 				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6002));
-				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6002),FightFaceHelper.NUMBER_PURPLE1,0);
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6002),FightFaceHelper.NUMBER_PC_EXP,0);
 				return atf;
 			}
 			return null;
@@ -268,7 +268,7 @@ package com.rpgGame.app.manager
 			if (need) 
 			{
 				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6006));
-				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6006),FightFaceHelper.NUMBER_PURPLE1,0);
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6006),FightFaceHelper.NUMBER_PC_EXP,0);
 				return atf;
 			}
 			return null;
@@ -281,7 +281,7 @@ package com.rpgGame.app.manager
 			if (need) 
 			{
 				var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6007));
-				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6007),FightFaceHelper.NUMBER_PURPLE1,tmp);
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6007),FightFaceHelper.NUMBER_PC_EXP,tmp);
 				atf.scaleX=atf.scaleY=1.8;
 				return atf;
 			}

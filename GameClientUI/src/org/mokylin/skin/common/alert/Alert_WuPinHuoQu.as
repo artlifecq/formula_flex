@@ -208,7 +208,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/wupinhuoqu.png";
+			temp.styleName = "ui/art_txt/common/background/wupinhuoqu.png";
 			temp.x = 80;
 			temp.y = 7;
 			return temp;
@@ -273,7 +273,7 @@ package org.mokylin.skin.common.alert
 		private function __Alert_WuPinHuoQu_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/qitalujin.png";
+			temp.styleName = "ui/art_txt/common/background/qitalujin.png";
 			temp.x = 76;
 			temp.y = 0;
 			return temp;

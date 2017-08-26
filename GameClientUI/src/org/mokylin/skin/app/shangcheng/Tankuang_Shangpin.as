@@ -120,7 +120,7 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/head_tishi.png";
+			temp.styleName = "ui/art_txt/common/background/head_tishi.png";
 			temp.x = 142;
 			temp.y = 9;
 			return temp;

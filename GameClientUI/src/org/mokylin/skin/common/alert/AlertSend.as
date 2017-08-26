@@ -65,7 +65,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/wxts.png";
+			temp.styleName = "ui/art_txt/common/background/wxts.png";
 			temp.x = 121;
 			temp.y = 9;
 			return temp;
@@ -106,7 +106,7 @@ package org.mokylin.skin.common.alert
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
-			temp.width = 100;
+			temp.width = 110;
 			temp.x = 108;
 			temp.y = 216;
 			return temp;

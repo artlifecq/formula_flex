@@ -109,14 +109,14 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbKill = temp;
 			temp.name = "lbKill";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "520";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
-			temp.width = 36;
-			temp.x = 277;
+			temp.width = 49;
+			temp.x = 273;
 			temp.y = 9;
 			return temp;
 		}
@@ -126,14 +126,14 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbLevel = temp;
 			temp.name = "lbLevel";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "9";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 34;
-			temp.x = 196;
+			temp.x = 217;
 			temp.y = 9;
 			return temp;
 		}
@@ -143,14 +143,14 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.fontSize = 12;
-			temp.text = "s1223 狼来了";
+			temp.fontSize = 14;
+			temp.text = "[9999区]玩家名称六字";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 109;
-			temp.x = 60;
+			temp.width = 152;
+			temp.x = 54;
 			temp.y = 9;
 			return temp;
 		}
@@ -160,7 +160,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNo = temp;
 			temp.name = "lbNo";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "10";
 			temp.textAlign = "center";
 			temp.color = 0xEFD872;
@@ -176,14 +176,14 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "662111";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
-			temp.width = 61;
-			temp.x = 330;
+			temp.width = 64;
+			temp.x = 328;
 			temp.y = 9;
 			return temp;
 		}

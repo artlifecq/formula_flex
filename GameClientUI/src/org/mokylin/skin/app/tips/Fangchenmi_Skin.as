@@ -55,7 +55,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/head_tishi.png";
+			temp.styleName = "ui/art_txt/common/background/head_tishi.png";
 			temp.x = 142;
 			temp.y = 9;
 			return temp;
@@ -96,8 +96,8 @@ package org.mokylin.skin.app.tips
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
-			temp.width = 110;
-			temp.x = 108;
+			temp.width = 88;
+			temp.x = 119;
 			temp.y = 216;
 			return temp;
 		}
@@ -107,14 +107,15 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_text = temp;
 			temp.name = "lb_text";
-			temp.height = 65;
+			temp.height = 147;
 			temp.leading = 4;
 			temp.fontSize = 14;
 			temp.text = "";
 			temp.color = 0xCFC6AE;
-			temp.width = 287;
-			temp.x = 24;
-			temp.y = 101;
+			temp.verticalAlign = "middle";
+			temp.width = 295;
+			temp.x = 16;
+			temp.y = 48;
 			return temp;
 		}
 

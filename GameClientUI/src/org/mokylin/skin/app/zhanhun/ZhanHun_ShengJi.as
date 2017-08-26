@@ -107,7 +107,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __ZhanHun_ShengJi_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -116,7 +116,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __ZhanHun_ShengJi_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/fyz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/fyz.png";
 			temp.x = 166;
 			temp.y = 0;
 			return temp;
@@ -125,7 +125,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __ZhanHun_ShengJi_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/qx.png";
+			temp.styleName = "ui/art_txt/common/shuxing/qx.png";
 			temp.x = 0;
 			temp.y = 27;
 			return temp;
@@ -134,7 +134,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __ZhanHun_ShengJi_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/sf.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sf.png";
 			temp.x = 166;
 			temp.y = 27;
 			return temp;
@@ -143,7 +143,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __ZhanHun_ShengJi_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/mz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/mz.png";
 			temp.x = 0;
 			temp.y = 54;
 			return temp;
@@ -342,7 +342,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandouli = temp;
 			temp.name = "ui_zhandouli";
-			temp.styleName = "ui/common/zhandouli1.png";
+			temp.styleName = "ui/art_txt/common/zhandouli1.png";
 			temp.x = 614;
 			temp.y = 244;
 			return temp;
