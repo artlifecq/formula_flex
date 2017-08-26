@@ -3,7 +3,9 @@ package com.rpgGame.app.manager
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
@@ -33,10 +35,10 @@ package com.rpgGame.app.manager
 			return _instance;
 		}
 		private var _allList:HashMap
-		public function requestDailyInfo():void
-		{
-			SocketConnection.send(new CSGetDailyZonePanelMessage());
-		}
+//		public function requestDailyInfo():void
+//		{
+//			SocketConnection.send(new CSGetDailyZonePanelMessage());
+//		}
 		
 		public function updataDailyList(list:Vector.<DailyZonePanelInfo>):void
 		{
@@ -45,7 +47,7 @@ package com.rpgGame.app.manager
 			{
 				_allList.put(info.dailyzoneId,info);
 			}
-			EventManager.dispatchEvent(UPDATEDAILYZONEINFO);
+			EventManager.dispatchEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO);
 		}
 		
 		public function getInfoById(id:int):DailyZonePanelInfo
@@ -92,19 +94,29 @@ package com.rpgGame.app.manager
 				NoticeManager.showNotifyById(21005);
 				return ;
 			}
-			
-			var msg:CSBuyCountInfoMessage = new CSBuyCountInfoMessage();
-			msg.dailyZoneId = info.dailyzoneId;
-			SocketConnection.send(msg);
+			DungeonSender.reqBuyCount(info.dailyzoneId);
 		}
 		
-		public function requestCombat(info:DailyZonePanelInfo):void
+		
+		
+		/**返回适合等级的副本id*/
+		public function getFitLevelIdbyType(type:int,level:int):int
 		{
-			var msg:ReqZoneCommonEnterMessage = new ReqZoneCommonEnterMessage();
-			var q_data:Q_daily_zone = DailyZoneCfgData.getZoneCfg(info.dailyzoneId);
-			msg.zoneModelid = q_data.q_zone_id;
-			msg.extradata = q_data.q_id;
-			SocketConnection.send(msg);
+			var list:Array=_allList.keys();
+			var id:int=0;
+			var maxlevel:int=0;
+			for(var i:int=0;i<list.length;i++)
+			{
+				var info:DailyZonePanelInfo=getInfoById(list[i]);
+				var q_mod:Q_daily_zone=DailyZoneCfgData.getZoneCfg(info.dailyzoneId);
+				if(q_mod&&q_mod.q_combat_type==type&&q_mod.q_limit_level<=level&&maxlevel<q_mod.q_limit_level&&(info.remainCount!=0||info.canBuyCount!=0))
+				{
+					id=q_mod.q_id;
+					maxlevel=q_mod.q_limit_level;
+				}
+			}
+			return id;
 		}
+		
 	}
 }

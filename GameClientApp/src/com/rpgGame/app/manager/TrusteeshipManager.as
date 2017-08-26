@@ -378,12 +378,10 @@ package com.rpgGame.app.manager
 				return;
 			stopFightTarget();
 			stopAutoFight();
-			
 		}
 		
 		private function stop() : void
 		{
-
 			nextSpell = null;
 			isNormalSpell = false;
 			
@@ -485,8 +483,11 @@ package com.rpgGame.app.manager
 				return;
 			if (_isBroken)
 				return;
-			
-			if (_isAutoFightRunning) 
+			if(PickAutoManager.getInstance().techPickItem())
+			{
+				return;
+			}
+			/*if (_isAutoFightRunning) 
 			{
 				if (PickAutoManager.getInstance().autoPickCtrl.isPicking||PickAutoManager.getInstance().autoPickCtrl.TryAutoPickItem()) 
 				{
@@ -497,7 +498,7 @@ package com.rpgGame.app.manager
 				{
 					return;
 				}
-			}
+			}*/
 		
 			/*if (_isFightTargetRunning && _targetRoles)
 			{
@@ -523,8 +524,6 @@ package com.rpgGame.app.manager
 		
 		private function setAiState(force:Boolean):void
 		{
-			
-			
 			if(_isAutoFightRunning)
 			{
 //				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
@@ -561,8 +560,8 @@ package com.rpgGame.app.manager
 					stopFightTarget();
 				}
 			}
-			//_stateMachine.transition(AIStateType.TASK_WALK, null, force);
 		}
+		
 		private function techFightActor():void
 		{
 			if(MainRoleManager.actor.stateMachine.isIdle||MainRoleManager.actor.stateMachine.isHiting||MainRoleManager.actor.stateMachine.isPrewar)
