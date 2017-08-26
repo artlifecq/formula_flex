@@ -37,7 +37,12 @@ package com.rpgGame.app.manager
 		{
 			AppManager.showApp(AppConstant.VIP_PANEL);
 		}
-
+		/**玩家是否是vip*///-----yt
+		public function get isVip():Boolean
+		{
+			return _vipLv>0;
+		}
+		
 		/**
 		 *过期剩余时间,绝对时间
 		 */

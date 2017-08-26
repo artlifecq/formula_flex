@@ -309,6 +309,7 @@ package com.rpgGame.app.cmdlistener.scene
 			role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			EventManager.dispatchEvent(UserMoveEvent.MOVE_RESCHANGE);
+			EventManager.dispatchEvent(MapEvent.MAP_FLY_COMPLETE);
 		}
 		
 		// 陷阱状态改变
@@ -411,6 +412,8 @@ package com.rpgGame.app.cmdlistener.scene
 			playerData.sceneSequence = 0;
 			
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
+
+			EventManager.dispatchEvent(MapEvent.MAP_FLY_COMPLETE);
 			
 			//			CountryWarChengMenManager.checkChengMenStatus();
 			

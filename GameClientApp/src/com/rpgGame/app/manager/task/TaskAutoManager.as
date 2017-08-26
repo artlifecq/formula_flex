@@ -3,10 +3,12 @@ package com.rpgGame.app.manager.task
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.WelcomeManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -19,6 +21,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
@@ -64,7 +67,7 @@ package com.rpgGame.app.manager.task
 		private var _taskType:int;
 		private var _taskTarget:int=0;
 		private var _missionType:int
-		
+		private var _isBroken : Boolean=false;
 		public var jumpOver:Boolean=false;
 		private var techTime:Number;
 		public var actTaskMonster:Boolean=false;
@@ -85,6 +88,7 @@ package com.rpgGame.app.manager.task
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
+			EventManager.addEvent(MapEvent.MAP_FLY_COMPLETE,flyComplete);
 			resetTechTime();
 		}
 		private function onApphide( ev:AppEvent ):void
@@ -107,12 +111,12 @@ package com.rpgGame.app.manager.task
 		}
 		public function startTaskAuto(type:int,tar:int=0) : void
 		{
+			broken();
 			_taskType=type;
 			_taskTarget=tar;
 			missionType=TaskMissionManager.getTaskDataByType(taskType).q_mission_type;
 			changeSub();
 			TrusteeshipManager.getInstance().stopAll();
-			SceneRoleSelectManager.selectedRole=null;
 			_isTaskRunning = true;
 			resetTechTime();
 			taskWalk();
@@ -217,7 +221,31 @@ package com.rpgGame.app.manager.task
 			//if(traceKey!=-2){Lyt.a("istech-2");traceKey=-2;}
 			return false;
 		}
-		
+		/**飞鞋完成*/
+		private function flyComplete():void
+		{
+			HuBaoManager.instance().onHuBaoHandler();
+			if(TaskMissionManager.flyTaskType>0)
+			{
+				taskType=TaskMissionManager.flyTaskType;
+				missionType=TaskMissionManager.flyMissionType;
+				TaskMissionManager.flyTaskType=0;
+				TaskMissionManager.flyMissionType=0;
+				TweenLite.killDelayedCallsTo(flyOnArrive);
+				TweenLite.delayedCall(1, flyOnArrive);
+			}
+		}
+		private function flyOnArrive():void
+		{
+			if(TaskMissionManager.getTaskIsFinishByType(taskType))
+			{
+				taskFilshed();
+			}
+			else
+			{
+				gotoTaskonArrive();
+			}
+		}
 		/**新任务*/
 		private function newMation(type:int):void
 		{
@@ -319,16 +347,48 @@ package com.rpgGame.app.manager.task
 		}
 		public function taskWalk() : void
 		{
+			
+			if(TaskMissionManager.getTaskIsFinishByType(taskType))
+			{
+				if(TaskMissionManager.getTaskHaveNpc(taskType))
+				{
+					walkORjump(1);
+				}
+				else
+				{
+					taskFilshed();
+				}
+			}
+			else
+			{
+				walkORjump(2);
+			}
+		}
+		private function walkORjump(key:int):void
+		{
+			if((taskType==TaskType.MAINTYPE_TREASUREBOX&&TaskMissionManager.treasuerCheck)||(taskType==TaskType.MAINTYPE_GUILDDAILYTASK&&TaskMissionManager.guildCheck))//环式或帮会任务
+			{
+				if(Mgr.vipMgr.isVip||BackPackManager.instance.haveItemById(601))//vip或有飞鞋
+				{
+					var postPath:Array=TaskMissionManager.getTaskPathingByType(taskType,0);
+					if(postPath&&postPath.length>0)
+					{
+						TaskUtil.postTaskFly(postPath,taskType,TaskUtil.getSubtypeByType(taskType));
+						return;
+					}
+				}
+			}
+			
+			
 			var post:Array;
 			if(!jumpOver)//新任务没跳才跳
 			{
 				post=TaskMissionManager.getJumpPos(taskType);
 			}
 			
-			if(TaskMissionManager.getTaskIsFinishByType(taskType))
+			switch(key)
 			{
-				if(TaskMissionManager.getTaskHaveNpc(taskType))
-				{
+				case 1:
 					if(post!=null)
 					{
 						TaskUtil.postTaskJump(post,gotoNpc);
@@ -337,29 +397,28 @@ package com.rpgGame.app.manager.task
 					{
 						gotoNpc();
 					}
-				}
-				else
-				{
-					taskFilshed(taskType);
-				}
+					break;
+				case 2:
+					if(post!=null)
+					{
+						TaskUtil.postTaskJump(post,gotoTask);
+					}
+					else
+					{
+						gotoTask();
+					}
+					break;
 			}
-			else
-			{
-				if(post!=null)
-				{
-					TaskUtil.postTaskJump(post,gotoTask);
-				}
-				else
-				{
-					gotoTask();
-				}
-			}
+			
 		}
+		
 		private function gotoNpc(data :Object=null):void
 		{
 			TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
 			
 		}
+		
+		
 		private function gotoTask(data :Object=null):void
 		{
 			
@@ -390,6 +449,8 @@ package com.rpgGame.app.manager.task
 		}
 		private function gotoTaskonArrive(data :Object=null):void
 		{
+			jumpOver=true;
+			SceneRoleSelectManager.selectedRole=null;
 			switch(missionType)
 			{
 				case TaskType.SUB_CONVERSATION:
@@ -414,13 +475,13 @@ package com.rpgGame.app.manager.task
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 			}
-			jumpOver=true;
+			
 		}
 		private function onArrive(data :Object) : void
 		{
-			taskFilshed(taskType);
+			taskFilshed();
 		}
-		private function taskFilshed(taskType:int):void
+		private function taskFilshed():void
 		{
 			switch(taskType)
 			{
@@ -467,6 +528,17 @@ package com.rpgGame.app.manager.task
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 					break;
 			}
+		}
+		public function broken() : void
+		{
+			_isBroken = true;
+			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
+			TweenLite.delayedCall(1, onDelayedUnbroken);
+		}
+		
+		private function onDelayedUnbroken() : void
+		{
+			_isBroken = false;
 		}
 		
 		
@@ -530,6 +602,16 @@ package com.rpgGame.app.manager.task
 		public function set missionType(value:int):void
 		{
 			_missionType = value;
+		}
+
+		public function get isBroken():Boolean
+		{
+			return _isBroken;
+		}
+
+		public function set isBroken(value:Boolean):void
+		{
+			_isBroken = value;
 		}
 
 

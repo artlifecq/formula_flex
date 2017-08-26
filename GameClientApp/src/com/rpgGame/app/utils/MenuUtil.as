@@ -30,6 +30,7 @@ package com.rpgGame.app.utils
 	
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
+	import flash.system.System;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -78,6 +79,7 @@ package com.rpgGame.app.utils
 				menus.push(LangMenu.INVITE_JOIN_GUILD);
 			}
 			//			menus.push(LangMenu.SEND_MAIL, LangMenu.COPY_THE_NAME, LangMenu.BLACK_FRIEND);
+			menus.push(LangMenu.COPY_THE_NAME);
 			return menus;
 		}
 		
@@ -104,6 +106,7 @@ package com.rpgGame.app.utils
 			{
 				menus.push(LangMenu.PLEASE_FROM_THE_TEAM);
 			}
+			menus.push(LangMenu.COPY_THE_NAME);
 			return menus;
 		}
 		
@@ -133,7 +136,7 @@ package com.rpgGame.app.utils
 					menus.push(LangMenu.SETUP_LEADER);
 				}
 			}
-			
+			menus.push(LangMenu.COPY_THE_NAME);
 			return menus;
 		}
 		private static var _rankMenyList:Array;
@@ -144,6 +147,7 @@ package com.rpgGame.app.utils
 				_rankMenyList = new Array();
 				_rankMenyList.push(LangMenu.LOOK_HERO);
 				_rankMenyList.push(LangMenu.THE_PRIVATE_CHAT);
+				_rankMenyList.push(LangMenu.COPY_THE_NAME);
 			}
 			return _rankMenyList;
 		}
@@ -155,6 +159,7 @@ package com.rpgGame.app.utils
 				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//任命统帅
 			{
 				menus.push(LangMenu.SETUP_LEADER);
+				menus.push(LangMenu.COPY_THE_NAME);
 			}
 			return menus;
 		}
@@ -347,8 +352,9 @@ package com.rpgGame.app.utils
 					NoticeManager.showNotify( LangTeam.TEAM_FAIL_TIP );
 					break;
 				case LangMenu.COPY_THE_NAME://复制名称
-					Clipboard.generalClipboard.clear();
-					Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,heroName,false);
+					System.setClipboard(heroName);
+					//Clipboard.generalClipboard.clear();
+				//	Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,heroName,false);
 					break;
 				case LangMenu.TEAM_EXP_MEAN_MODE://经验平均分配
 					//					TeamManager.expIndex = 0;

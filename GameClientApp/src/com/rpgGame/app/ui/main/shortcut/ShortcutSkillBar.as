@@ -71,15 +71,22 @@ package com.rpgGame.app.ui.main.shortcut
 
 		private function addEvent() : void
 		{
-			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDragDrop);
-			EventManager.addEvent(ItemEvent.ITEM_CHANG, onItemChang);
-			EventManager.addEvent(ItemEvent.ITEM_DELETE, onItemChang);
-			EventManager.addEvent(ItemEvent.ITEM_ADD, onItemChang);
-			EventManager.addEvent(ItemEvent.ITEM_INPUT_SHORTCUT, autoInputItemToShortcutGrid);
+			//EventManager.addEvent(ItemEvent.ITEM_DROPED, onDragDrop);
+			//EventManager.addEvent(ItemEvent.ITEM_CHANG, onItemChang);
+			//EventManager.addEvent(ItemEvent.ITEM_DELETE, onItemChang);
+			//EventManager.addEvent(ItemEvent.ITEM_ADD, onItemChang);
+			//EventManager.addEvent(ItemEvent.ITEM_INPUT_SHORTCUT, autoInputItemToShortcutGrid);
 			EventManager.addEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS, onClearSpell);
 			EventManager.addEvent(SpellEvent.SPELL_KEY_RELEASE, onKeySkill);
-			EventManager.addEvent(ItemEvent.ITEM_INIT,onItemInit);
+			//EventManager.addEvent(ItemEvent.ITEM_INIT,onItemInit);
 			EventManager.addEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,showSkillBtn);
+			EventManager.addEvent(SpellEvent.SPELL_ONE_UPDATE_SHORTCUTS,onOneUpdate);
+		}
+		
+		private function onOneUpdate(skill:Q_skill_model):void
+		{
+			// TODO Auto Generated method stub
+			updateGrid(skill.q_seat-1);
 		}
 		
 		private function showSkillBtn(info:ResGuildWarPersionInfoMessage=null):void

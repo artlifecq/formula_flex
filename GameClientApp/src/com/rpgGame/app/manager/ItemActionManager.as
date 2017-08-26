@@ -31,16 +31,27 @@ package com.rpgGame.app.manager
 	{
 		//道具滑动进包队列
 		private static var _tweenHT:HandleThread = new HandleThread();
+		private static const HELP_PT:Point=new Point(0,0);
+		private static const POS_PT:Point=new Point();
 		
-		
-		public static function flyItemToBag(itemId:int):void
+		public static function flyItemToBag(itemId:int,startDis:DisplayObject=null):void
 		{
 			var qItem:Q_item=ItemConfig.getQItemByID(itemId);
 			if (qItem) 
 			{
 				var iconFace:UIAsset = new UIAsset();
-				iconFace.x=Starling.current.nativeStage.mouseX;
-				iconFace.y=Starling.current.nativeStage.mouseY;
+				if (startDis&&startDis.stage!=null) 
+				{
+					startDis.localToGlobal(HELP_PT,POS_PT);
+					iconFace.x=POS_PT.x;
+					iconFace.y=POS_PT.y;
+				}
+				else
+				{
+					iconFace.x=Starling.current.nativeStage.mouseX;
+					iconFace.y=Starling.current.nativeStage.mouseY;
+				}
+				
 				iconFace.styleName =ClientConfig.getItemIcon(qItem.q_icon+"",IcoSizeEnum.ICON_48);
 				addTweenHT(null,iconFace,null);
 			}

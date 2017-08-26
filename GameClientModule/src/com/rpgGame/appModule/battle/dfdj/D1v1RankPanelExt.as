@@ -119,6 +119,7 @@ package com.rpgGame.appModule.battle.dfdj
 				case _skin.btnJiangli:
 				{
 					Mgr.d1v1Mgr.reqGetReward();
+					//_gReward.tweeRewardInBag();
 					break;
 				}
 				case _skin.btnGlass:
@@ -142,6 +143,7 @@ package com.rpgGame.appModule.battle.dfdj
 			ongetPanelData();
 			EventManager.addEvent(D1v1Event.GET_RANK_DATA,onGetRankData);
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,ongetPanelData);
+			EventManager.addEvent(D1v1Event.GET_REWARD_RESULT,getGetRewardOk);
 			//Mgr.d1v1Mgr.reqDFRankData(1);
 			if (_numCtrl.getValue()!=1) 
 			{
@@ -164,20 +166,23 @@ package com.rpgGame.appModule.battle.dfdj
 				{
 					_gReward.setRewardByJsonStr(qRank.q_reward);
 				}
-				if (data.drawAward==1) 
-				{
-					TouchableUtil.gray(_skin.btnJiangli);
-					_skin.btnJiangli.label="已领取";
-				}
-				else 
-				{
-					TouchableUtil.ungray(_skin.btnJiangli);
-					_skin.btnJiangli.label="领取奖励";
-				}
+				setBtnState(data.drawAward);
 			}
 			
 		}
-		
+		private function setBtnState(state:int):void
+		{
+			if (state==1) 
+			{
+				TouchableUtil.gray(_skin.btnJiangli);
+				_skin.btnJiangli.label="已领取";
+			}
+			else 
+			{
+				TouchableUtil.ungray(_skin.btnJiangli);
+				_skin.btnJiangli.label="领取奖励";
+			}
+		}
 		private function onGetRankData(...arg):void
 		{
 			// TODO Auto Generated method stub
@@ -212,8 +217,16 @@ package com.rpgGame.appModule.battle.dfdj
 			super.onHide();
 			EventManager.removeEvent(D1v1Event.GET_RANK_DATA,onGetRankData);
 			EventManager.removeEvent(D1v1Event.GET_PANEL_DATA,ongetPanelData);
+			EventManager.removeEvent(D1v1Event.GET_REWARD_RESULT,getGetRewardOk);
 			_gReward.clear();
 			clearModel();
+		}
+		
+		private function getGetRewardOk():void
+		{
+			// TODO Auto Generated method stub
+			_gReward.tweeRewardInBag();
+			setBtnState(1);
 		}
 		private function clearModel():void
 		{

@@ -1,7 +1,12 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.netData.cross.message.CSCancelTeamMatchMessage;
 	import com.rpgGame.netData.cross.message.CSTeamMatchMessage;
+	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
+	import com.rpgGame.netData.dailyzone.message.CSBuyCountInfoMessage;
+	import com.rpgGame.netData.dailyzone.message.CSGetDailyZonePanelMessage;
 	import com.rpgGame.netData.lunjian.message.CSLunJianPanelInfosMessage;
 	import com.rpgGame.netData.team.message.CSZoneTeamVoteMessage;
 	import com.rpgGame.netData.zone.message.CSClientTriggerValiedMessage;
@@ -103,5 +108,27 @@ package com.rpgGame.app.sender
 		}
 		
 		
+		/**
+		 *日常副本购买次数
+		 * 
+		 */
+		public static function reqBuyCount(zid:int):void
+		{
+			var msg:CSBuyCountInfoMessage = new CSBuyCountInfoMessage();
+			msg.dailyZoneId = zid;
+			SocketConnection.send(msg);
+		}
+		public static function reqCombat(zid:int,qid:int):void
+		{
+			var msg:ReqZoneCommonEnterMessage = new ReqZoneCommonEnterMessage();
+			
+			msg.zoneModelid = zid;
+			msg.extradata = qid;
+			SocketConnection.send(msg);
+		}
+		public static function reqDailyInfo():void
+		{
+			SocketConnection.send(new CSGetDailyZonePanelMessage());
+		}
 	}
 }

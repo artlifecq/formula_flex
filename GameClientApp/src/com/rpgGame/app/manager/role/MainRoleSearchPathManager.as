@@ -8,6 +8,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -147,9 +148,24 @@ package com.rpgGame.app.manager.role
 		/**打完怪后再寻路，统一延时0.5秒处理*/		
 		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
+			Lyt.a("走之前拾取物品");
+			var obj:Object=new Object();
+			obj.targetSceneId=targetSceneId;
+			obj.posx=posx;
+			obj.posy=posy;
+			obj.onArrive=onArrive;
+			obj.spacing=spacing;
+			obj.data=data;
+			obj.needSprite=needSprite;
+			PickAutoManager.getInstance().startPickAuto(pickOverScene,obj);
+		}
+		private static function pickOverScene(obj:Object):void
+		{
+			if(obj==null)
+				return;
 			TrusteeshipManager.getInstance().isAutoWalking=true;
 			TweenLite.killDelayedCallsTo(walkToSceneTween);
-			TweenLite.delayedCall(0.5, walkToSceneTween, [targetSceneId, posx, posy, onArrive, spacing,data,needSprite]);
+			TweenLite.delayedCall(0.5, walkToSceneTween, [obj.targetSceneId, obj.posx, obj.posy, obj.onArrive, obj.spacing,obj.data,obj.needSprite]);
 			
 		}
 		private static function walkToSceneTween(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void

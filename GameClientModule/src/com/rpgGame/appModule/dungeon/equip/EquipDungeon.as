@@ -7,6 +7,7 @@ package com.rpgGame.appModule.dungeon.equip
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -23,6 +24,8 @@ package com.rpgGame.appModule.dungeon.equip
 	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_ZhuangBei_Skin;
 	
@@ -31,20 +34,18 @@ package com.rpgGame.appModule.dungeon.equip
 	public class EquipDungeon extends ViewUI
 	{
 		private var _skin:FuBen_ZhuangBei_Skin;
-		private var _dailyZoneInfo:DailyZonePanelInfo;
+		private var qdataList:Array;
+		//private var _dailyZoneInfo:DailyZonePanelInfo;
 		private var icoListGroup:RewardGroup;
 		//private var gridList:Vector.<IconCDFace>;
 		public function EquipDungeon():void
 		{
 			_skin = new FuBen_ZhuangBei_Skin();
 			super(_skin);
-			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon1,RewardGroup.ALIN_RIGHT,15,6,6,true,15);
-			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+			init();
 		}
-		
-		override public function show(data:Object=null):void
+		private function init():void
 		{
-			super.show(data);
 			_skin.list.itemRendererType =EquipCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -52,87 +53,101 @@ package com.rpgGame.appModule.dungeon.equip
 			var layout:HorizontalLayout = new HorizontalLayout();
 			layout.gap = 4;
 			_skin.list.layout = layout;
-			var list:Array = DailyZoneCfgData.getTypeList(2);
+			qdataList=DailyZoneCfgData.getTypeList(2);
+			_skin.list.dataProvider = new ListCollection(qdataList);
+			//_skin.list.getItemRendererFactoryWithID(
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon1,RewardGroup.ALIN_RIGHT,15,6,6,true,15);
 			
-			_skin.list.dataProvider = new ListCollection(list);
 			
+			//_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+		}
+		private function addEvent():void
+		{
+			EventManager.addEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,updateAll);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updateAll);
 			
+		}
+		private function remvoeEvent():void
+		{
+			EventManager.removeEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,updateAll);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updateAll);
+			
+		}
+		
+		
+		override public function show(data:Object=null):void
+		{
+			super.show(data);
+			addEvent();
+			setDownNum();
+			setReWard();
+			updateAll();
+			toInitIndex();
+			EventManager.dispatchEvent(DungeonEvent.EQUIP_ITEM_INTO);
+		}
+		/**打开卷到适合的元素*/
+		private function toInitIndex():void
+		{
+			var toIndex:int=gettoIndex();
+			TweenLite.killDelayedCallsTo(refeashList);
+			TweenLite.delayedCall(0.1, refeashList,[toIndex]);
+		}
+		
+		private function refeashList(index:int):void
+		{
+			index=index>3?index-3:0;
+			_skin.btnNext.visible = (index <_skin.list.maxHorizontalPageIndex);
+			_skin.btnPrev.visible = (index >0);
+			_skin.list.scrollToPageIndex(index,0);
+		}
+		/**设置底部剩余次数*/
+		private function setDownNum():void
+		{
+			var toIndex:int=gettoIndex();
+			var q_data:Q_daily_zone = qdataList[0];//装备副本是公用的。可以顺便取一个值
+			var Info:DailyZonePanelInfo=DailyZoneDataManager.instance().getInfoById(q_data.q_id);
+			if(Info!=null)
+			{
+				_skin.lbShengyu.text = "今日剩余次数："+Info.remainCount;
+				_skin.lbGoumai.text = "剩余购买次数："+Info.canBuyCount;
+			}
+		}
+		/**设置底部奖励*/
+		private function setReWard():void
+		{
 			var reWardStr:String=GlobalSheetData.getSettingInfo(717)!=null?GlobalSheetData.getSettingInfo(717).q_string_value:"";
 			icoListGroup.setRewardByJsonStr(reWardStr);
 			_skin.jiangli_text.x=icoListGroup.x-icoListGroup.width-40;
 			
-//			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
-//			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
-//			var length:int = itemInfos.length;
-//			var startX:Number = 742;
-//			var item:ItemInfo;
-//			var icon:IconCDFace;
-//			gridList=new Vector.<IconCDFace>();
-//			for(var i:int = 0;i<length;i++)
-//			{
-//				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
-//				//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
-//				_skin.container.addChild(grid);
-//				grid.x = startX+60*i;
-//				grid.y = 532;
-//				gridList.push(grid);
-//				item = new ItemInfo();
-//				item.itemModelId = itemInfos[i]["mod"];
-//				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
-//			}
-			
-			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
-			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
-			refeashValue();
-			if (!_skin.list.hasEventListener(FeathersEventType.CREATION_COMPLETE)) 
-			{
-				onCreate();
-			}
-			
 		}
 		
-		private function onCreate():void
-		{
-			_skin.list.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
-			//			_skin.list.horizontalScrollStep=194+30;
-			
-			var list:Array=_skin.list.dataProvider.data as Array;
-			var toIndex:int=-1;
-			for(var i:int=0;i<list.length;i++){
-				var info:DailyZonePanelInfo=DailyZoneDataManager.instance().getInfoById(list[i].q_id);
-				if(info.remainCount!=0||info.canBuyCount!=0){
-					toIndex=i;
-					break;
-				}
-			}
-			if(toIndex==-1){
-				toIndex=0;
-			}
-			
-			refeashList(0);
-			var q_data:Q_daily_zone = list[toIndex] as Q_daily_zone;
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(q_data.q_id);
-			refeashValue();
-			toIndex=Math.floor(toIndex/4);
-			refeashList(toIndex);			
-			refeashValue();
-		}
-		
-		private function refeashValue():void
-		{
-			if(_dailyZoneInfo==null)
-				return ;
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(_dailyZoneInfo.dailyzoneId);
-			_skin.lbShengyu.text = "今日剩余次数："+_dailyZoneInfo.remainCount;
-			_skin.lbGoumai.text = "剩余购买次数："+_dailyZoneInfo.canBuyCount;
-		}
-		
-		private function updatePlayerLvUp():void
+		private function updateAll():void
 		{
 			if(_skin.list)
 				_skin.list.dataProvider.updateAll();
 		}
-		
+		private function gettoIndex():int
+		{
+			//var list:Array=_skin.list.dataProvider.data as Array;
+			var toIndex:int=-1;
+			if(qdataList!=null)
+			{
+				var levelid:int=DailyZoneDataManager.instance().getFitLevelIdbyType(2,MainRoleManager.actorInfo.totalStat.level);
+				for(var i:int=0;i<qdataList.length;i++){
+					if(qdataList[i].q_id==levelid)
+					{
+						toIndex=i;
+						break;
+					}
+				}
+			}
+			
+			
+			if(toIndex==-1){
+				toIndex=0;
+			}
+			return toIndex;
+		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -146,26 +161,15 @@ package com.rpgGame.appModule.dungeon.equip
 					refeashList(index-1);
 					break;
 				case _skin.btnAdd:
-					DailyZoneDataManager.instance().buyCount(_dailyZoneInfo,true);
+					var Info:DailyZonePanelInfo=DailyZoneDataManager.instance().getInfoById(qdataList[0].q_id);
+					DailyZoneDataManager.instance().buyCount(Info,true);
 					break;
 			}
 		}
-		
-		private function refeashList(index:int):void
-		{
-			_skin.btnNext.visible = (index <_skin.list.maxHorizontalPageIndex);
-			_skin.btnPrev.visible = (index >0);
-			_skin.list.scrollToPageIndex(index,0);
-		}
-		
 		override public function hide():void
 		{
-			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
-			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
-			/*while(gridList.length>0){
-				var icon:IconCDFace=gridList.pop();
-				icon.destroy();
-			}*/
+			remvoeEvent();
+			//_skin.list.scrollToPageIndex(0,0);
 			icoListGroup.clear();
 		}
 	}

@@ -17,6 +17,7 @@ package  com.rpgGame.app.ui.alert
 	
 	import flash.utils.getTimer;
 	
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.beibao.piliangshiyong;
 	
 	import starling.display.DisplayObject;
@@ -39,9 +40,10 @@ package  com.rpgGame.app.ui.alert
 		private static var BLACK_TIME:int=3*60*1000;
 		private static var blackHash:HashMap=new HashMap();
 		private static var pool:Array=[];
-		public static function checkInBlack(itemModel:int):Boolean
+		private static var _showHash:HashMap=new HashMap();
+		public static function checkInBlack(itemId:long):Boolean
 		{
-			var time:int=blackHash.getValue(itemModel);
+			var time:int=blackHash.getValue(itemId.hexValue);
 			if (time==0) 
 			{
 				return false;
@@ -50,7 +52,7 @@ package  com.rpgGame.app.ui.alert
 			{
 				return true;
 			}
-			blackHash.remove(itemModel);
+			blackHash.remove(itemId.hexValue);
 			return false;
 		}
 		public function ItemNoticePanel()
@@ -64,17 +66,21 @@ package  com.rpgGame.app.ui.alert
 		
 		public static function  show(item:ClientItemInfo):void 
 		{
-			var panel:ItemNoticePanel;
-			if (pool.length>0) 
+			var panel:ItemNoticePanel=_showHash.getValue(item.itemInfo.itemId.hexValue);
+			if (!panel) 
 			{
-				panel=pool.pop();
+				if (pool.length>0) 
+				{
+					panel=pool.pop();
+				}
+				else
+				{
+					panel=new ItemNoticePanel();
+				}
+				StarlingLayerManager.appUILayer.addChild(panel);
+				UIUtil.alignToStageRightBottom(panel);
+				_showHash.put(item.itemInfo.itemId.hexValue,panel);
 			}
-			else
-			{
-				panel=new ItemNoticePanel();
-			}
-			StarlingLayerManager.appUILayer.addChild(panel);
-			UIUtil.alignToStageRightBottom(panel);
 			panel.setData(item);
 		}
 		override protected function onStageResize(sw:int, sh:int):void
@@ -125,7 +131,7 @@ package  com.rpgGame.app.ui.alert
 			switch (target) 
 			{
 				case _skin.btnClose:
-					blackHash.put(clientItemInfo.qItem.q_id,getTimer());
+					blackHash.put(clientItemInfo.itemInfo.itemId.hexValue,getTimer());
 					break;
 				case _skin.btn_ok:
 					ItemUseManager.useItem(clientItemInfo,currentNum);
@@ -147,6 +153,7 @@ package  com.rpgGame.app.ui.alert
 		override protected function onHide():void
 		{
 			super.onHide();
+			_showHash.remove(clientItemInfo.itemInfo.itemId.hexValue);
 			_iconFace.destroy();
 			clientItemInfo=null;
 			currentNum=0;
