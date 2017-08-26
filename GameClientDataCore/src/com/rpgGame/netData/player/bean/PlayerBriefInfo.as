@@ -18,7 +18,7 @@ package com.rpgGame.netData.player.bean{
 	 * 玩家外观展示信息
 	 */
 	public class PlayerBriefInfo extends Bean {
-		
+	
 		//玩家id
 		private var _playerid: long;
 		
@@ -82,6 +82,12 @@ package com.rpgGame.netData.player.bean{
 		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		//玩家使用的加属性类道具
 		private var _playerUseItems: Vector.<com.rpgGame.netData.player.bean.PlayerUseItem> = new Vector.<com.rpgGame.netData.player.bean.PlayerUseItem>();
+		//结婚对象名字
+		private var _marriageName: String;
+		
+		//婚戒阶数
+		private var _advanceWedding: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -150,6 +156,10 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < _playerUseItems.length; i++) {
 				writeBean(_playerUseItems[i]);
 			}
+			//结婚对象名字
+			writeString(_marriageName);
+			//婚戒阶数
+			writeInt(_advanceWedding);
 			return true;
 		}
 		
@@ -221,6 +231,10 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < playerUseItems_length; i++) {
 				_playerUseItems[i] = readBean(com.rpgGame.netData.player.bean.PlayerUseItem) as com.rpgGame.netData.player.bean.PlayerUseItem;
 			}
+			//结婚对象名字
+			_marriageName = readString();
+			//婚戒阶数
+			_advanceWedding = readInt();
 			return true;
 		}
 		
@@ -567,6 +581,36 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set playerUseItems(value: Vector.<com.rpgGame.netData.player.bean.PlayerUseItem>): void{
 			this._playerUseItems = value;
+		}
+		
+		/**
+		 * get 结婚对象名字
+		 * @return 
+		 */
+		public function get marriageName(): String{
+			return _marriageName;
+		}
+		
+		/**
+		 * set 结婚对象名字
+		 */
+		public function set marriageName(value: String): void{
+			this._marriageName = value;
+		}
+		
+		/**
+		 * get 婚戒阶数
+		 * @return 
+		 */
+		public function get advanceWedding(): int{
+			return _advanceWedding;
+		}
+		
+		/**
+		 * set 婚戒阶数
+		 */
+		public function set advanceWedding(value: int): void{
+			this._advanceWedding = value;
 		}
 		
 	}

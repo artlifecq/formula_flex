@@ -75,5 +75,3 @@ package org.mokylin.skin.component.check
 		
 	}
 }
-import org.mokylin.skin.component.check;
-

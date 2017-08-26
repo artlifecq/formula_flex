@@ -14,13 +14,13 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  物品ID */
 		public var q_itemid:int;
-		 /**  商店类型 */
+		 /**  商店类型（-1为商店不进行售卖） */
 		public var q_shoptype:int;
 		 /**  商店类型（1 热销道具，2 变强道具，3礼金商城，4 Vip商城） */
 		public var q_sub_shop_type:String;
 		 /**  提示路径（路径1文字,路径2文字……） */
 		public var q_accessdeclist:String;
-		 /**  对应路径界面（界面1,界面2……） */
+		 /**  对应路径界面（对应新功能开启表中的ID） */
 		public var q_accesslist:String;
 
 	}

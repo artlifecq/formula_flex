@@ -90,6 +90,7 @@ package com.rpgGame.app.manager.task
 			_isGatherRunning = false;
 			_gTimer.reset();
 			_gTimer.stop();
+			_stateMachine.transition(AIStateType.AI_NONE);
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 		}
 		

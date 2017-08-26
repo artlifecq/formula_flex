@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_att_id:int;
 		 /**  跳转到面板的指引 */
 		public var q_windId:int;
+		 /**  军阶名字 */
+		public var q_tittle:String;
 
 	}
 }

@@ -653,16 +653,15 @@ package com.rpgGame.app.fight.spell
 				var speed:Number=animatData.speed>0?animatData.speed*0.01:1;
 				if (animatData.scene_res)
 				{
-					//暂时屏蔽，等下一次更版本，再打开
-//					if(info.posAni.is_self == 1)
-//					{
-//						_destPosition = info.atkor.position;
-//					}
-//					else
-//					{
+					if(info.posAni.is_self == 1)
+					{
+						_destPosition = info.atkor.position;
+					}
+					else
+					{
 						_destPosition.x = destX;
 						_destPosition.z = destZ;
-//					}
+					}
 					
 					rud = new RenderParamData3D(1, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					

@@ -86,17 +86,20 @@ package com.rpgGame.app.ui.main.taskbar
 				case _skin.btnContinue:
 					killWalkBut(1,0,1);
 					break;
-				
-				
 			}
 		}
 		/**目标按钮任务处理*/
 		private function killWalkBut(type:int,num:int,key:int):void
 		{
+			if(TaskAutoManager.getInstance().isBroken)
+			{
+				return;
+			}
 			TaskControl.killWalkBut(type,num,key);
 			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
 				loopCont.clearTreasuerCheck();
+				loopCont.clearGuildCheck();
 			}
 		}
 		
@@ -135,7 +138,6 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
-			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			_skin.chkAuto.addEventListener(Event.CHANGE,checkChangeHandler);
@@ -151,7 +153,6 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(TaskEvent.TASK_DROP,dropTask);
 			EventManager.removeEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
-			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.removeEvent(TaskEvent.SWITCH_TASK_BAR,setState);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
@@ -324,11 +325,7 @@ package com.rpgGame.app.ui.main.taskbar
 		
 		
 		
-		/**飞鞋完成*/
-		public static function flyComplete():void
-		{
-			TaskControl.flyComplete();
-		}
+		
 		/**领取奖励按钮*/
 		private function receiveRewordBut(type:int):void
 		{

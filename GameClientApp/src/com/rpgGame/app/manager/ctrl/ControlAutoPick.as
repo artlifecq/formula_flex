@@ -331,7 +331,7 @@ package  com.rpgGame.app.manager.ctrl
 				return false;
 			}
 			if ( CheckCanSendPick( sitem ) )
-			{
+			{Lyt.a("拾取物品："+sitem.data.qitem.q_name);
 				// 请求拾取道具
 				reqPickDropItem( sitem );
 				_curPickingItem = 0;

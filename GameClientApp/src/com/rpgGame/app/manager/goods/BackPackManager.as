@@ -16,7 +16,9 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import app.message.GoodsType;
 	
@@ -55,6 +57,7 @@ package com.rpgGame.app.manager.goods
 				return;
 			if (src.data is ClientItemInfo)
 			{
+				//策划强制出售了
 				if (isShowShop) 
 				{
 					if ((src.data as ClientItemInfo).qItem.q_sell==1)
@@ -68,7 +71,12 @@ package com.rpgGame.app.manager.goods
 					}
 					return;
 				}
-				dropItem(src.data as ClientItemInfo);
+				//dropItem(src.data as ClientItemInfo);
+				if ((src.data as ClientItemInfo).qItem.q_sell==1)
+				{
+					Mgr.shopMgr.sellItemCall(src.data);
+					
+				}
 			}
 		}
 		
@@ -205,6 +213,13 @@ package com.rpgGame.app.manager.goods
 			super.addItemInfo(info);
 			onGetedNewItem(info);
 		}
+		override public function changItem(item:ItemInfo, type:int=4):void
+		{
+			super.changItem(item,type);
+			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
+			info.setContainerId(containerId);
+			onGetedNewItem(info);
+		}
 		/**
 		 *获取一件新物品
 		 * @param info
@@ -215,7 +230,7 @@ package com.rpgGame.app.manager.goods
 			//弹新物品提示
 			if (info.qItem.q_use_prompt!=0&&info.itemInfo.num>=info.qItem.q_use_prompt) 
 			{
-				if (!ItemNoticePanel.checkInBlack(info.qItem.q_id)) 
+				if (!ItemNoticePanel.checkInBlack(info.itemInfo.itemId)) 
 				{
 					ItemNoticePanel.show(info);
 				}
@@ -415,6 +430,12 @@ package com.rpgGame.app.manager.goods
 				
 			}
 			return null;
+		}
+		
+		/**是否有某种物品*/
+		public function haveItemById(id:int):Boolean
+		{
+			return getItemById(id)!=null;
 		}
 		
 		/**返回物品*/

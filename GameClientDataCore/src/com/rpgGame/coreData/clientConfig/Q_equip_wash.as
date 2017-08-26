@@ -22,7 +22,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_item_id:int;
 		 /**  消耗的洗练道具数 */
 		public var q_item_num:int;
-		 /**  可洗炼的属性集合(属性ID,权重|属性ID,权重) */
+		 /**  可洗炼的属性集合(属性ID,权重，锁定消耗|属性ID,权重，锁定消耗) */
 		public var q_gather:String;
 
 	}

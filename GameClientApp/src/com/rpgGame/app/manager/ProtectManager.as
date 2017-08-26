@@ -14,7 +14,7 @@
     import org.client.mainCore.manager.EventManager;
 	
 	/**
-	 * 挂机设置（自动吃药，自动买药，自动复活） 
+	 * 监听主角属性事件 
 	 * @author NEIL
 	 * 
 	 */	
@@ -24,8 +24,6 @@
 
         public static function setup():void
         {
-//            CharAttributeManager.addEvent(MainRoleManager.actorID, CharAttributeType.HP, hpChange);
-//            CharAttributeManager.addEvent(MainRoleManager.actorID, CharAttributeType.MP, mpChange);
             EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE, onMainRoleLevelUp);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,onMainRoleDeathHanlder);
 			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,hpChange);
@@ -80,6 +78,9 @@
 
         private static function onMainRoleLevelUp():void
         {
+			FunctionOpenManager.openFunctionByLevel(MainRoleManager.actorInfo.totalStat.level,true);
+			FunctionOpenManager.openNoticeByLevel(MainRoleManager.actorInfo.totalStat.level);
+			ActivetyDataManager.checkOpenAct();//检测最新活动开启
 //            var goodID:int;
 //            var _local4:int;
 //            var _local1:int;

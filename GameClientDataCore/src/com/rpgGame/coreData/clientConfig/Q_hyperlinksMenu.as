@@ -10,16 +10,14 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Q_equip_polish
+	public class Q_hyperlinksMenu
 	{
-		 /**  琢磨等级 */
-		public var q_equip_polish:int;
-		 /**  备注 */
-		public var q_note:String;
-		 /**  加长属性十万分比 */
-		public var q_promote:int;
-		 /**  所需琢磨值(总值) */
-		public var q_exp:int;
+		 /**  菜单类型 */
+		public var q_show_type:String;
+		 /**  对应的字符串 */
+		public var q_show_title:String;
+		 /**  要打开的面板ID（对应新功能开放表的id） */
+		public var q_showPanelId:int;
 
 	}
 }

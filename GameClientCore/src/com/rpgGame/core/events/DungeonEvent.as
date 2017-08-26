@@ -106,7 +106,12 @@ package com.rpgGame.core.events
 		 */
 		public static const ZONE_JIXIAN_TIME:int = UNIQUEID.NEXT;
 		
-		
+		//------------------装备真气副本--------------------------------
+		public static var EQUIP_UPDATE_DAILYZONE_INFO:int = UNIQUEID.NEXT;
+		public static var EQUIP_ITEM_OVER:int = UNIQUEID.NEXT;
+		public static var EQUIP_ITEM_INTO:int = UNIQUEID.NEXT;
+		public static var GENUNE_ITEM_OVER:int = UNIQUEID.NEXT;
+		public static var GENUNE_ITEM_INTO:int = UNIQUEID.NEXT;
 		public function DungeonEvent()
 		{
 		}

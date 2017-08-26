@@ -165,7 +165,7 @@ package com.rpgGame.app.process
 				SceneCameraLensEffectManager.setup();//镜头特效初始化
 				ClientTriggerManager.setup();
 				//
-				MainRoleManager.initActor();
+				
 				GlobalSettingManager.init();
 				
 				GamePerformsManager.init();
@@ -199,23 +199,20 @@ package com.rpgGame.app.process
 					{
 						StatsUtil.hideAwayStats();
 					}
+					LayerManager.showOrHideMM();
 				}
-				LayerManager.showOrHideMM();
+				
 				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-//				Starling.current.showStats=!Starling.current.showStats;
 			}
 		}
 		
 		private function showFrameState():void
 		{
-			if (!ClientConfig.isRelease) {
+			if (!ClientConfig.isRelease) 
+			{
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			}			
-//			LayerManager.showOrHideMM();
-//				Starling.current.showStats=true;
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-            // 屏蔽未捕获信息
-//            Log.logCallBack = GameLog.logItem;
 		}
 		
 		private function tipsSetup() : void
@@ -274,34 +271,33 @@ package com.rpgGame.app.process
 
 		private function onSwitchCmp() : void
 		{
-			GameLog.addShow("进入场景完成，开始游戏...");
+			GameLog.addShow("进入场景完成，[StarGame] 开始游戏...");
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			completeProcess();
-
-            CONFIG::netDebug {
-                NetDebug.LOG("[StarGame] 开始游戏");
-            }
 		}
 
 		private function initMM() : void
 		{
-			LayerManager.addMmItem("serverSystemTime", SystemTimeManager, "sysDateTimeStr", 0xffff00, "服务器时间");
-			LayerManager.addMmItem("sceneObjCnt", SceneManager.getScene().sceneRenderLayer, "renderObjCnt", 0x00ff00, "场景渲染对象数");
-			LayerManager.addMmItem("sceneObjCnt", SceneManager.getScene().sceneRenderLayer, "baseObjCnt", 0x00ff00, "场景总对象数");
-			LayerManager.addMmItem("SceneNumChildren", SceneManager.getScene().sceneRenderLayer, "numChildren", 0x00ff00, "场景显示对象数");
-			LayerManager.addMmItem("ScenePlayerCount", SceneManager, "playerCount", 0x00ff00, "玩家数量");
-			LayerManager.addMmItem("SceneMonsterCount", SceneManager, "monsterCount", 0x00ff00, "怪物数量");
-			LayerManager.addMmItem("SceneOtherCount", SceneManager, "otherCount", 0x00ff00, "其它数量");
-			LayerManager.addMmItem("gameTimerCnt", GameTimer, "timerCnt", 0xffff00, "GameTimer个数");
-			LayerManager.addMmItem("TickCnt", Tick, "cnt", 0x00ff00, "Tick个数");
-			LayerManager.addMmItem("EventsCnt", EventManager, "eventsNum", 0xffff00, "EventManager个数");
-			LayerManager.addMmItem("SceneRole", SceneRole, "cnt", 0x00ff00, "SceneCharCnt");
-			LayerManager.addMmItem("RenderSet", RenderSet3D, "cnt", 0x00ff00, "RenderSetCnt");
-			LayerManager.addMmItem("RenderUnit", RenderUnit3D, "cnt", 0x00ff00, "RenderUnitCnt");
-			LayerManager.addMmItem("PoolContainer3DCnt", PoolContainer3D, "cnt", 0x00ff00, "PoolContainer3D统计");
-			LayerManager.addMmItem("actorGroundXYTips", MainRoleManager, "actorGroundXYTips", 0x00ff00, "主角地面坐标");
-			LayerManager.addMmItem("sceneScale", Scene.scene.sceneCamera, "scale", 0x00ff00, "场景缩放");
-            LayerManager.addMmItem("projectionHeight", Scene.scene.sceneCamera.lens, "projectionHeight", 0x00ff00, "垂直投影距离");
+			if (!ClientConfig.isRelease) 
+			{
+				LayerManager.addMmItem("serverSystemTime", SystemTimeManager, "sysDateTimeStr", 0xffff00, "服务器时间");
+				LayerManager.addMmItem("sceneObjCnt", SceneManager.getScene().sceneRenderLayer, "renderObjCnt", 0x00ff00, "场景渲染对象数");
+				LayerManager.addMmItem("sceneObjCnt", SceneManager.getScene().sceneRenderLayer, "baseObjCnt", 0x00ff00, "场景总对象数");
+				LayerManager.addMmItem("SceneNumChildren", SceneManager.getScene().sceneRenderLayer, "numChildren", 0x00ff00, "场景显示对象数");
+				LayerManager.addMmItem("ScenePlayerCount", SceneManager, "playerCount", 0x00ff00, "玩家数量");
+				LayerManager.addMmItem("SceneMonsterCount", SceneManager, "monsterCount", 0x00ff00, "怪物数量");
+				LayerManager.addMmItem("SceneOtherCount", SceneManager, "otherCount", 0x00ff00, "其它数量");
+				LayerManager.addMmItem("gameTimerCnt", GameTimer, "timerCnt", 0xffff00, "GameTimer个数");
+				LayerManager.addMmItem("TickCnt", Tick, "cnt", 0x00ff00, "Tick个数");
+				LayerManager.addMmItem("EventsCnt", EventManager, "eventsNum", 0xffff00, "EventManager个数");
+				LayerManager.addMmItem("SceneRole", SceneRole, "cnt", 0x00ff00, "SceneCharCnt");
+				LayerManager.addMmItem("RenderSet", RenderSet3D, "cnt", 0x00ff00, "RenderSetCnt");
+				LayerManager.addMmItem("RenderUnit", RenderUnit3D, "cnt", 0x00ff00, "RenderUnitCnt");
+				LayerManager.addMmItem("PoolContainer3DCnt", PoolContainer3D, "cnt", 0x00ff00, "PoolContainer3D统计");
+				LayerManager.addMmItem("actorGroundXYTips", MainRoleManager, "actorGroundXYTips", 0x00ff00, "主角地面坐标");
+				LayerManager.addMmItem("sceneScale", Scene.scene.sceneCamera, "scale", 0x00ff00, "场景缩放");
+	            LayerManager.addMmItem("projectionHeight", Scene.scene.sceneCamera.lens, "projectionHeight", 0x00ff00, "垂直投影距离");
+			}
 		}
 
 		override public function dispose() : void

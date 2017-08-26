@@ -50,7 +50,7 @@ package com.rpgGame.app.ui.tips
 			_shopVo=data as ShopItemVo;
 			_shopIco.setIconResName(ClientConfig.getItemIcon(_shopVo.getItemConfig().q_icon.toString(),IcoSizeEnum.ICON_64));
 			_skin.lbName.text=_shopVo.getItemConfig().q_name;
-			_skin.lbT1.text="效果增强:"+_shopVo.getItemConfig().q_describe;
+			_skin.lbT1.htmlText="效果增强:"+_shopVo.getItemConfig().q_describe;
 			_skin.lbT2.text="最大层数:5层";
 			_skin.lbT2.color=StaticValue.RED_TEXT;
 			_skin.lbT4.text="消耗"+_shopVo.data.price+(_shopVo.data.priceType==CharAttributeType.RES_GOLD?"元宝,":"礼金,"+"激活")+_shopVo.getItemConfig().q_name;
