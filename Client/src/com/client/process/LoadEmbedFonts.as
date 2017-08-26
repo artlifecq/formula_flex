@@ -1,7 +1,6 @@
 package com.client.process
 {
 	import com.client.loader.FontLoader;
-	import com.client.loader.SwfLoader;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
@@ -53,9 +52,9 @@ package com.client.process
 			var str:String = "开始加载字体库...";
 			GameLog.addShow(str);
 			var loader:FontLoader = new FontLoader(null);
-			loader.addEventListener("complete", handler_comp);
-			loader.addEventListener("progress", onLoaderPorgress);
-			loader.addEventListener("ioError", onLoadError);
+			loader.addEventListener(Event.COMPLETE, handler_comp);
+			loader.addEventListener(ProgressEvent.PROGRESS, onLoaderPorgress);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 			loader.load(url);
 		}
 		

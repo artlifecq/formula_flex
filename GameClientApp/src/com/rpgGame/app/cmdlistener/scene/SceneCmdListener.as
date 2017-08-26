@@ -7,10 +7,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellEffectRecordCtrl;
 	import com.rpgGame.app.graphics.HeadFace;
-	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
-	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
@@ -414,8 +412,8 @@ package com.rpgGame.app.cmdlistener.scene
 			playerData.sceneSequence = 0;
 			
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
+
 			EventManager.dispatchEvent(MapEvent.MAP_FLY_COMPLETE);
-			FunctionOpenManager.openNoticeByLevel(playerData.totalStat.level);
 			
 			//			CountryWarChengMenManager.checkChengMenStatus();
 			
@@ -1081,9 +1079,7 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				else if (msg.attributeChange.type==CharAttributeType.LV) 
 				{
-					FunctionOpenManager.openFunctionByLevel(msg.attributeChange.value,true);
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
-					ActivetyDataManager.checkOpenAct();//检测最新活动开启
 				}
 				//				ReliveManager.autoHideRelive();
 			}

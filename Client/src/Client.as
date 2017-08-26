@@ -38,7 +38,6 @@ package
 	import flash.ui.ContextMenuItem;
 	
 	import away3d.Away3D;
-	import away3d.debug.ReportUtil;
 	import away3d.loaders.parsers.Parsers;
 	import away3d.log.Log;
 	
@@ -161,9 +160,6 @@ package
 			EngineSetting.init();
 			
 			GameLog.enableTrace = !ClientConfig.isRelease;
-//			ErrorReporter.init();
-			//			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
-			//Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
 			
 			try
 			{
@@ -186,7 +182,6 @@ package
 		
 		private function stage3DLayerSetupComplete():void
 		{
-//			LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "ylzt_cc", null, true, stage);
 			var driverInfo:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
 			if (driverInfo.indexOf("software") != -1)
 			{
@@ -229,7 +224,7 @@ package
 					{
 						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
 					}
-					ReportUtil.setup(6);
+					
 					showCheckInfo();
 					runProcess();
 				}
@@ -241,7 +236,6 @@ package
 			Log.error("stage3DLayerSetupError：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
 			if (Stage3DLayerManager.stage3DProxy)
 			{
-//				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "ylzt_cc", null, true, stage);
 			}
 			GameLog.addShow("stage3DLayerSetupError");
 			if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
@@ -308,16 +302,19 @@ package
 		
 		private function initProcess() : void
 		{
-            if (null == ClientConfig.loginIP || 0 == StringUtil.trim(ClientConfig.loginIP).length) {
+            if (null == ClientConfig.loginIP || 0 == StringUtil.trim(ClientConfig.loginIP).length) 
+			{
                 ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
             }
-			ProcessStateMachine.getInstance().pushProcess(new LoginInput());
+			if(!ClientConfig.isRelease)
+			{
+				ProcessStateMachine.getInstance().pushProcess(new LoginInput());
+			}
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
 			ProcessStateMachine.getInstance().pushProcess(new RandomChangeName());
 			ProcessStateMachine.getInstance().pushProcess(new LoadDll());
-			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
 			//			ProcessStateMachine.getInstance().pushProcess(new LoadMouseAssets());
@@ -354,29 +351,25 @@ package
 		{
 			GameLog.addShow(ClientConfig.loginIP, ClientConfig.loginPort, ClientConfig.loginName, ClientConfig.loginKey, ClientConfig.isRelease);
 			//
-			if (!ClientConfig.loginIP)
+			if (!ClientConfig.loginIP && !ClientConfig.isRelease)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SELECT_DEVELOPER);
 			}
-			if (!ClientConfig.loginName)
+			if (!ClientConfig.loginName && !ClientConfig.isRelease)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0, 0.1);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
-//			var pg : ProcessGroup = new ProcessGroup();
-//			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
-//			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
-//			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			var pg:ProcessGroup = new ProcessGroup();
 			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
 			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.2, 0.25, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.25, 0.3, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.5, true);
 			//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.35, 0.5, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_WEL, 0.5, 0.55, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.5, 0.7, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_WEL, 0.7, 0.8, true);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
