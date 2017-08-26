@@ -9,7 +9,6 @@ package com.rpgGame.app
 	import com.rpgGame.app.manager.ReconnectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.process.LoadConfigData;
-	import com.rpgGame.app.process.LocalConfigData;
 	import com.rpgGame.app.process.ProcessState;
 	import com.rpgGame.app.process.StartGame;
 	import com.rpgGame.app.ui.ResLoadingView;
@@ -21,6 +20,8 @@ package com.rpgGame.app
 	
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
+	
+	import away3d.debug.ReportUtil;
 	
 	import org.client.mainCore.manager.PopUpManager;
 	import org.client.mainCore.manager.ProjectManager;
@@ -77,6 +78,8 @@ package com.rpgGame.app
 			ResLoadingView.instance.setActual(loadingActual);
 			
 			TipsInfoView2D.setActual(tipsView2DActual);
+			
+			ReportUtil.setup(6,"100001",loginData.personId.ToString(),loginData.name);
 
 			initGame();
 			initProcess();
@@ -109,24 +112,24 @@ package com.rpgGame.app
 		private function initProcess() : void
 		{
 			ProcessStateMachine.getInstance().pushProcess(new LoadConfigData());
-            if (ClientConfig.isSingle) 
-			{
-                // 如果是单机 则造假数据
-                ProcessStateMachine.getInstance().pushProcess(new LocalConfigData());
-            }
+//            if (ClientConfig.isSingle) 
+//			{
+//                // 如果是单机 则造假数据
+//                ProcessStateMachine.getInstance().pushProcess(new LocalConfigData());
+//            }
 			ProcessStateMachine.getInstance().pushProcess(new StartGame());
 		}
 
 		private function runProcess() : void
 		{
-			SceneSwitchCmdListener.fromPercent = 0.6;
+			SceneSwitchCmdListener.fromPercent = 0.9;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.55, 0.6);
-			if (ClientConfig.isSingle) 
-			{
-				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.6, 0.6);
-			}
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.6);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.8, 0.9);
+//			if (ClientConfig.isSingle) 
+//			{
+//				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.6, 0.6);
+//			}
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.9);
 			ProcessStateMachine.getInstance().run();
 		}
 
@@ -138,9 +141,9 @@ package com.rpgGame.app
 		public function reEnterGame() : void
 		{
 			GameLog.addShow("重新进入游戏...");
-			SceneSwitchCmdListener.fromPercent = 0.6;
+			SceneSwitchCmdListener.fromPercent = 0.9;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.6);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.9);
 			ProcessStateMachine.getInstance().run();
 		}
 		

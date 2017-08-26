@@ -16,6 +16,8 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  名字 */
 		public var name:String;
+		 /**  技能释放时地面特效起始点位置（0以鼠标点位置释放，1以人物自身点） */
+		public var is_self:int;
 		 /**  特效不随着人物移动（对地效果只能配成这个） */
 		public var scene_res:String;
 		 /**  特效随着人物移动 */
