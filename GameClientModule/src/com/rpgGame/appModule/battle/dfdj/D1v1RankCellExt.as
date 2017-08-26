@@ -25,7 +25,7 @@ package com.rpgGame.appModule.battle.dfdj
 			
 			//_skin.bg1.visible=index%2==0;
 			//_skin.bg2.visible=!_skin.bg1.visible;
-			_skin.lbId.width=50;
+			//_skin.lbId.width=50;
 			//_skin.bg3.visible=false;
 			_skin.selectBg.visible=false;	
 		}
@@ -70,7 +70,18 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				_skin.lbId.text=_data.rank+"";
 			}
-			
+			if (_data.rank>0&&_data.rank<4) 
+			{
+				
+				_skin.icon.styleName="ui/app/paihangbang/"+_data.rank+".png";
+				_skin.icon.visible=true;
+				_skin.lbId.visible=false;
+			}
+			else
+			{
+				_skin.icon.visible=false;
+				_skin.lbId.visible=true;
+			}
 			_skin.uiVip.visible=_data.vipLevel>0;
 			if (_data.vipLevel>0) 
 			{

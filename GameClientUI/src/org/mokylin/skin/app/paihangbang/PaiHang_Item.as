@@ -106,12 +106,13 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.text = "3";
+			temp.height = 19;
+			temp.text = "1";
 			temp.textAlign = "center";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 43;
-			temp.x = 9;
+			temp.width = 49;
+			temp.x = 6;
 			temp.y = 5;
 			return temp;
 		}

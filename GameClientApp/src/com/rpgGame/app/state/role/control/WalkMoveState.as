@@ -218,7 +218,11 @@ package com.rpgGame.app.state.role.control
 				//如果无法找到寻路路径则返回
 				if (path == null || path.length < 2)
 				{
-					(_machine.owner as SceneRole).faceToGround(targetPos3D.x, targetPos3D.z);
+					//非阻挡
+					if (PathFinderUtil.isPointInSide(_districtWithPath,targetPos3D)) 
+					{
+						(_machine.owner as SceneRole).faceToGround(targetPos3D.x, targetPos3D.z);
+					}
 					//执行行走无法到达回调
 					unable();
 					return;
@@ -242,7 +246,11 @@ package com.rpgGame.app.state.role.control
 				_stateReference.endPos = pathEndPos;
 				if (isArriveTarget(pathStartPos, pathEndPos))
 				{
-					(_machine.owner as SceneRole).faceToGround(targetPos3D.x, targetPos3D.z);
+					//非阻挡
+					if (PathFinderUtil.isPointInSide(_districtWithPath,targetPos3D)) 
+					{
+						(_machine.owner as SceneRole).faceToGround(targetPos3D.x, targetPos3D.z);
+					}
 					//执行行走到达回调
 					arrive();
 				}

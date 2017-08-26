@@ -74,7 +74,8 @@ package com.rpgGame.appModule.rank
 			}else{
 				_skin.icon.visible = false;
 				_skin.lbNum.visible = true;
-				_skin.lbNum.text = info.rank.toString();
+				_skin.lbNum.text = info.rank>0?info.rank.toString():"未上榜";
+				//_skin.lbNum.width=_skin.lbNum.textWidth;
 			}
 			
 			_skin.vip.visible = info.vipId>0;
