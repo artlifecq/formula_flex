@@ -4,8 +4,6 @@ package game.rpgGame.login.state
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 	
-	import away3d.animators.transitions.CrossfadeTransition;
-	
 	import game.rpgGame.login.scene.RenderUnitID;
 	import game.rpgGame.login.scene.RenderUnitType;
 	import game.rpgGame.login.scene.RoleActionType;
