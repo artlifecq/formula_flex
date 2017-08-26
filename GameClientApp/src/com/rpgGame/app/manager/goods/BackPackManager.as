@@ -16,7 +16,9 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import app.message.GoodsType;
 	
@@ -209,6 +211,13 @@ package com.rpgGame.app.manager.goods
 		override public function addItemInfo(info:ClientItemInfo):void
 		{
 			super.addItemInfo(info);
+			onGetedNewItem(info);
+		}
+		override public function changItem(item:ItemInfo, type:int=4):void
+		{
+			super.changItem(item,type);
+			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
+			info.setContainerId(containerId);
 			onGetedNewItem(info);
 		}
 		/**

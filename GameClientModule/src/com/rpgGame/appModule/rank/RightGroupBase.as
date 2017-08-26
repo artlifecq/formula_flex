@@ -8,6 +8,7 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -16,8 +17,10 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.VipCfg;
+	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
 	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -39,6 +42,7 @@ package com.rpgGame.appModule.rank
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.paihangbang.PaiHang_Right;
 
@@ -124,7 +128,50 @@ package com.rpgGame.appModule.rank
 			refeashSkill();
 			refeashPower();
 		}
-		
+		/**
+		 *显示戒指 
+		 * @param ring 戒指阶数
+		 * @param hasMarriage 是否结婚中，离婚置灰
+		 * 
+		 */		
+		private function setMarriageRingData(ring:int,marriageName:String):void
+		{
+			var hasMarriage:int;
+			if((marriageName==null||marriageName=="")&&ring==0)
+			{
+				hasMarriage=5;
+			}
+			else if(marriageName!=null&&marriageName!="")
+			{
+				hasMarriage=6;
+			}else if((marriageName==null||marriageName=="")&&ring!=0)
+			{
+				hasMarriage=7;
+			}
+			//TipTargetManager.remove(_marryIcon);
+			if (ring>0&&hasMarriage!=5) 
+			{
+				var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);		
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
+				FaceUtil.SetItemGrid(_marryIcon,itemInfo);
+				//_marryIcon.setIconResName(ClientConfig.getItemIcon(Mgr.hunyinMgr.getRingUrl(ring),IcoSizeEnum.ICON_48));
+				if (hasMarriage==10) 
+				{
+					GrayFilter.gray(_marryIcon);
+				}
+				else
+				{
+					_marryIcon.filter=null;
+				}
+				//TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
+			}
+			else
+			{
+				_marryIcon.clear();
+				_marryIcon.filter=null;
+				//TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+			}
+		}
 		private function setVipData(vip:int):void
 		{
 			TipTargetManager.remove(_vipIcon);
@@ -210,6 +257,7 @@ package com.rpgGame.appModule.rank
 				}
 			}
 			setVipData(_topInfo.vipId);
+			setMarriageRingData(_topInfo.playerBriefInfo.advanceWedding,_topInfo.playerBriefInfo.marriageName);
 		}
 		
 		private function setGridInfo(index:int, itemInfo:ClientItemInfo, gridIndex:int = -1):void

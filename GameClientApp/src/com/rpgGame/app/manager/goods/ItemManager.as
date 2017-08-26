@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -371,13 +372,22 @@ package com.rpgGame.app.manager.goods
 			var useEquip:EquipInfo;
 			for(var i:int=0;i<num;i++){
 				equip=allEquips[i];
-				if(isSmelt(equip)){
-					for(var j:int=0;j<num;j++){
-						useEquip=allEquips[j];
-						if(equip!=useEquip&&isSmeltUse(useEquip)){
+				if(isSmelt(equip))
+				{
+					var qWash:Q_equip_wash=EquipWashCfg.getCfgByLvAndKind(equip.qItem.q_levelnum,equip.qItem.q_kind);
+					if (qWash) 
+					{
+						if(BackPackManager.instance.getItemCount(qWash.q_item_id)>=qWash.q_item_num)
+						{
 							return true;
 						}
 					}
+//					for(var j:int=0;j<num;j++){
+//						useEquip=allEquips[j];
+//						if(equip!=useEquip&&isSmeltUse(useEquip)){
+//							return true;
+//						}
+//					}
 				}
 			}
 			return false;
