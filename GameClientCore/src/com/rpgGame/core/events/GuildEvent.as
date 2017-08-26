@@ -74,5 +74,7 @@ package com.rpgGame.core.events
 		public static const GUILD_HCZB_AVATAR_LIST:uint = UNIQUEID.NEXT;
 		/**显示统帅技能**/
 		public static const GUILD_LEADER_SKILL_SHOW:uint=UNIQUEID.NEXT;
+		/**王城争霸奖励**/
+		public static const GUILD_WCZB_GIFT:uint = UNIQUEID.NEXT;
 	}
 }

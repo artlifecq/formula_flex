@@ -15,7 +15,6 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
@@ -41,8 +40,6 @@ package com.rpgGame.appModule.activety.boss
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.activety.shijieboss.ShiJieBoss_Skin;
-	
-	import utils.TimerServer;
 	
 	/**
 	 *boss标签 
@@ -245,18 +242,23 @@ package com.rpgGame.appModule.activety.boss
 			var text:String;
 			num=refreshList.length;
 			var time:Date=SystemTimeManager.sysDateTime;
-			var h:int=time.hours;
-			var m:int=time.minutes;
-			var ms:String=m.toString();
-			ms=ms.length!=2?"0"+ms:ms;
-			var v:int=int(h+""+ms);
+			var nh:int=time.hours;
+			var nm:int=time.minutes;
 			var isFind:Boolean;
 			for(i=1;i<num;i++){
 				text=TimeUtil.changeIntHM2Str(refreshList[i]);
+				var ls:Array=text.split(":");
+				var ah:int=int(ls[0]);
+				var am:int=int(ls[1]);
 				var t:int=int(timeList[i]);
-				if(v<t&&!isFind){
+				if(nh<ah){
 					text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,text);
 					isFind=true;
+				}else if(nh==ah){
+					if(nm<=am){
+						text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,text);
+						isFind=true;
+					}
 				}
 				_skin.lbTime.htmlText+=text+"     ";
 			}

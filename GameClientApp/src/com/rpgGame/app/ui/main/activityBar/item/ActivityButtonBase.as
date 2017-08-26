@@ -14,11 +14,16 @@
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     
+    import feathers.controls.ButtonState;
+    import feathers.themes.GuiTheme;
+    
     import gs.TweenMax;
     
+    import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
     
     import starling.display.DisplayObject;
+    import starling.textures.IStarlingTexture;
     
     import utils.TimerServer;
 
@@ -41,11 +46,24 @@
         private var _runing:Boolean;
         private var _effect3D:InterObject3D;
 		protected var _openState:Boolean=true;
+		protected var _btnRes:String;
+		
+		protected static var stateToName:HashMap;
+		protected static var stateToIndex:HashMap;
 
         public function ActivityButtonBase(skin)
         {
             super(skin);
-			
+			if(!stateToName){
+				stateToName=new HashMap();
+				stateToName.add(ButtonState.UP,"/up.png");
+				stateToName.add(ButtonState.HOVER,"/over.png");
+				stateToName.add(ButtonState.DOWN,"/down.png");
+				stateToIndex=new HashMap();
+				stateToIndex.add(0,ButtonState.UP);
+				stateToIndex.add(1,ButtonState.HOVER);
+				stateToIndex.add(2,ButtonState.DOWN);
+			}
         }
 		
 		private var _info:FunctionBarInfo;
@@ -73,6 +91,34 @@
 		{
 			
 		}
+		
+		public function set styleName(res:String):void
+		{
+			_btnRes=res;
+			_currentLoadIndex=0;
+			var state:String=stateToIndex.getValue(_currentLoadIndex);
+			var stateName:String=stateToName.getValue(state);
+			GuiTheme.ins.LoadAsset("ui/button/"+_btnRes+stateName, onImgLoad, 6000, 0);
+		}
+		
+		private function onImgLoad(texture:IStarlingTexture):void
+		{
+			setBtnState(texture);
+			_currentLoadIndex++;
+			if(_currentLoadIndex<3){
+				var state:String=stateToIndex.getValue(_currentLoadIndex);
+				var stateName:String=stateToName.getValue(state);
+				GuiTheme.ins.LoadAsset("ui/button/"+_btnRes+stateName, onImgLoad, 6000, 0);
+			}
+		}
+		
+		protected function setBtnState(texture:IStarlingTexture):void
+		{
+			// TODO Auto Generated method stub
+			
+		}		
+
+		
         public function get openTimeData():TimeData
         {
             return _openTimeData;
@@ -105,6 +151,9 @@
 		}
         public function playEffect():void
         {
+			if(!_info){
+				return;
+			}
 			if(_info.showEft==0)
 				return ;
 			if(this.parent == null)
@@ -349,6 +398,7 @@
 		}
 		
 		private var _tweenmax:TweenMax;
+		protected var _currentLoadIndex:int;
 		public function runAnimation():void
 		{
 			if(_tweenmax!=null)

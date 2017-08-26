@@ -57,27 +57,27 @@ package com.rpgGame.app.ui.alert
 			{
 				case SYS_HORSE:
 				{
-					url="ui/common/icon/erjikuang/zuoqijinjie.png";
+					url="ui/icon/erjikuang/zuoqijinjie.png";
 					break;
 				}
 				case SYS_ZHANQI:
 				{
-					url="ui/common/icon/erjikuang/zhanqijinjie.png";
+					url="ui/icon/erjikuang/zhanqijinjie.png";
 					break;
 				}
 				case SYS_ZHANHUN:
 				{
-					url="ui/common/icon/erjikuang/zhanhun.png";
+					url="ui/icon/erjikuang/zhanhun.png";
 					break;
 				}
 				case SYS_SKILLL_LEVEL_UP:
 				{
-					url="ui/common/icon/erjikuang/skill1.png";
+					url="ui/icon/erjikuang/skill1.png";
 					break;
 				}
 				case SYS_SKILLL_GRADE_UP:
 				{
-					url="ui/common/icon/erjikuang/skill2.png";
+					url="ui/icon/erjikuang/skill2.png";
 					break;
 				}
 			}

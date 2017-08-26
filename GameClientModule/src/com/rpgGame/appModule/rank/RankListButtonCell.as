@@ -1,13 +1,10 @@
 package com.rpgGame.appModule.rank
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
-	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.core.events.RankListEvent;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.paihangbang.PaiHang_Btn;
 	
 	public class RankListButtonCell extends DefaultListItemRenderer

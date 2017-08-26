@@ -205,7 +205,7 @@ package org.mokylin.skin.mainui.tishi
 		private function __HuoDe_ZhuangBei2_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/tishi/chuangdai.png";
+			temp.styleName = "ui/art_txt/mainui/tishi/chuangdai.png";
 			temp.x = 63;
 			temp.y = 0;
 			return temp;

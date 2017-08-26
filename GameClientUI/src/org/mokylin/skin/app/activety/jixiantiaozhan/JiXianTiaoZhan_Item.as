@@ -94,7 +94,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpNo = temp;
 			temp.name = "grpNo";
-			temp.x = 33;
+			temp.x = 32;
 			temp.y = 2;
 			temp.elementsContent = [__JiXianTiaoZhan_Item_UIAsset1_i(),numZhanli_i()];
 			return temp;
@@ -106,13 +106,13 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lbName = temp;
 			temp.name = "lbName";
 			temp.fontSize = 14;
-			temp.text = "s1223 狼来了";
+			temp.text = "[9999区]玩家名称六字";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 124;
-			temp.x = 74;
+			temp.width = 155;
+			temp.x = 63;
 			temp.y = 7;
 			return temp;
 		}
@@ -128,7 +128,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 30;
-			temp.x = 30;
+			temp.x = 29;
 			temp.y = 7;
 			return temp;
 		}

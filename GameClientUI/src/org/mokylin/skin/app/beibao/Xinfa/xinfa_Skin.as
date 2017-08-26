@@ -200,7 +200,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/mz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/mz.png";
 			temp.x = 12;
 			temp.y = 60;
 			return temp;
@@ -209,7 +209,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/fyz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/fyz.png";
 			temp.x = 12;
 			temp.y = 89;
 			return temp;
@@ -218,7 +218,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/qx.png";
+			temp.styleName = "ui/art_txt/common/shuxing/qx.png";
 			temp.x = 135;
 			temp.y = 2;
 			return temp;
@@ -227,7 +227,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/sb.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sb.png";
 			temp.x = 135;
 			temp.y = 31;
 			return temp;
@@ -236,7 +236,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/bjz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/bjz.png";
 			temp.x = 135;
 			temp.y = 60;
 			return temp;
@@ -245,7 +245,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/bjjc.png";
+			temp.styleName = "ui/art_txt/common/shuxing/bjjc.png";
 			temp.x = 135;
 			temp.y = 89;
 			return temp;
@@ -344,7 +344,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/zqz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/zqz.png";
 			temp.x = 36;
 			temp.y = 56;
 			return temp;
@@ -403,7 +403,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/sf.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sf.png";
 			temp.x = 12;
 			temp.y = 2;
 			return temp;
@@ -412,7 +412,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __xinfa_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 12;
 			temp.y = 31;
 			return temp;
@@ -898,7 +898,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli1.png";
+			temp.styleName = "ui/art_txt/common/zhandouli1.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

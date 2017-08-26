@@ -76,7 +76,7 @@ package com.rpgGame.app.ui.tips
 			var uiasset:UIAsset=new UIAsset();
 			uiasset.name = name;
 			uiasset.height = 17;
-			uiasset.styleName = "ui/common/tips/tipswenzi/jineng/"+name+".png";
+			uiasset.styleName = "ui/art_txt/common/tips/tipswenzi/jineng/"+name+".png";
 			uiasset.x = curX;
 			uiasset.y = curY;
 			uititles.push(uiasset);

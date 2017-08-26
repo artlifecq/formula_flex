@@ -62,7 +62,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/wxts.png";
+			temp.styleName = "ui/art_txt/common/background/wxts.png";
 			temp.x = 121;
 			temp.y = 9;
 			return temp;

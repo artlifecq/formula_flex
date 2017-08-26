@@ -147,7 +147,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/plsy.png";
+			temp.styleName = "ui/art_txt/common/background/plsy.png";
 			temp.x = 122;
 			temp.y = 9;
 			return temp;

@@ -1,16 +1,21 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.utils.GSUtil;
+	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_kindomname;
+	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	import com.rpgGame.coreData.enum.EnumCity;
+	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.info.tip.WczbTipsData;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -22,6 +27,7 @@ package com.rpgGame.appModule.guild.war
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.wangcheng.Cont_WangCheng;
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item;
 	import org.mokylin.skin.app.banghui.wangcheng.WangCheng_BaoXiang;
@@ -48,6 +54,7 @@ package com.rpgGame.appModule.guild.war
 		
 		private var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
 		private var wczb_citys:Array=[EnumCity.XI_WEI,EnumCity.DONG_WEI,EnumCity.ZHONG_WEI,EnumCity.WANG_CHENG];
+		private var myCityInfo:GuildWarCityInfo;
 		
 		public function WczbMapUI()
 		{
@@ -105,6 +112,9 @@ package com.rpgGame.appModule.guild.war
 			initCity(EnumCity.DONG_WEI);
 			
 			initEvent();
+			if(_msg){
+				setCityData(_msg);
+			}
 		}
 		
 		private function initEvent():void
@@ -113,6 +123,14 @@ package com.rpgGame.appModule.guild.war
 			TipTargetManager.show( _skin.grpCheng1, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.XI_WEI)));
 			TipTargetManager.show( _skin.grpCheng2, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.ZHONG_WEI)));
 			TipTargetManager.show( _skin.grpCheng3, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.DONG_WEI)));
+			EventManager.addEvent(GuildEvent.GUILD_WCZB_GIFT,showGift);
+		}
+		
+		private function showGift():void
+		{
+			var cfg:Q_singlecitybase=QSinglecitybaseCfgData.getCityCfg(myCityInfo.id);
+			var reward:String=GuildManager.instance().selfMemberInfo.memberType==EnumGuildPost.GUILDPOST_OTHER?cfg.q_rewards1:cfg.q_rewards2;
+			ItemActionManager.tweenItemByJsonStr(reward,baoXiang.localToGlobal(new Point(0,0)));
 		}
 		
 		override protected function onHide():void
@@ -122,6 +140,7 @@ package com.rpgGame.appModule.guild.war
 			TipTargetManager.remove( _skin.grpCheng1);
 			TipTargetManager.remove( _skin.grpCheng2);
 			TipTargetManager.remove( _skin.grpCheng3);
+			EventManager.removeEvent(GuildEvent.GUILD_WCZB_GIFT,showGift);
 		}
 		
 		private function setGetReward(city:int,state:Boolean):void
@@ -190,6 +209,7 @@ package com.rpgGame.appModule.guild.war
 				
 				if(cityInfo.occupyGuildId.hexValue==myGuildId){//是自己的城
 					cityHold=_cityIcon.getValue(cityInfo.id);
+					myCityInfo=cityInfo;
 					baoXiang=_rewardMap.getValue(cityInfo.id).uiBaoXiang;
 					if(_msg.haveDailyGift!=-1){
 						setGetReward(cityInfo.id,_msg.haveDailyGift==0);

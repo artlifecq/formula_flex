@@ -597,13 +597,13 @@ package com.rpgGame.coreData.cfg
 
 		public static function getItemIcon(id : String, size : int = 40) : String
 		{
-			var url : String = "icon/item/" + size + "/" + id + eName_PNG;
+			var url : String = "ui/icon/item/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
 		public static function getItemTab(tab : int) : String
 		{
-			var url : String = "icon/tab_ico/" + tab + eName_PNG;
+			var url : String = "ui/icon/tab_ico/" + tab + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -632,7 +632,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getPanelIcon(name:String):String
 		{
-			var url : String = "icon/panel/" + name + eName_PNG;
+			var url : String = "ui/icon/panel/" + name + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		
@@ -657,12 +657,12 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSkillIcon(id : String, size : int = 40) : String
 		{
-			var url : String = "icon/skill/" + size + "/" + id + eName_PNG;
+			var url : String = "ui/icon/skill/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		public static function getCheatsIcon(id : int, size : int = 40) : String
 		{
-			var url : String = "icon/item/" + size + "/" +(id) + eName_PNG;
+			var url : String = "ui/icon/item/" + size + "/" +(id) + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		/**
@@ -674,7 +674,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getRiseSkillIcon(id : String, size : int = 40) : String
 		{
-			var url : String = "icon/skill/rise/" + size + "/" + id + eName_PNG;
+			var url : String = "ui/icon/skill/rise/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -687,7 +687,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getBuffIcon(id : String, size : int = 40) : String
 		{
-			var url : String = "icon/buff/" + size + "/" + id + eName_PNG;
+			var url : String = "ui/icon/buff/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -699,7 +699,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSpellBg(race : int, index : int) : String
 		{
-			var url : String = "icon/spell/bg/" + race + "_" + index + eName_JPG;
+			var url : String = "ui/icon/spell/bg/" + race + "_" + index + eName_JPG;
 			return baseDir + resURL + url;
 		}
 
@@ -711,7 +711,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSpellInfo(race : int, index : int) : String
 		{
-			var url : String = "icon/spell/shuxing/" + race + "_" + index + eName_PNG;
+			var url : String = "ui/icon/spell/shuxing/" + race + "_" + index + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -723,7 +723,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSpellInfoIco(stat : int) : String
 		{
-			var url : String = "icon/spell/ico/" + stat + eName_PNG;
+			var url : String = "ui/icon/spell/ico/" + stat + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -734,7 +734,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSpellChar(race : int) : String
 		{
-			var url : String = "icon/spell/raceChar/" + race + eName_PNG;
+			var url : String = "ui/icon/spell/raceChar/" + race + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		
@@ -745,7 +745,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSpellCharTypeById( type:int ):String
 		{
-			var url : String = "icon/spell/charType/" + type + eName_PNG;
+			var url : String = "ui/icon/spell/charType/" + type + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		
@@ -756,7 +756,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getSpellTipsCharTypeById( type:int ):String
 		{
-			var url : String = "icon/spell/tipsCharType/" + type + eName_PNG;
+			var url : String = "ui/icon/spell/tipsCharType/" + type + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -779,7 +779,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getTaskDiailogIcon(ico : String) : String
 		{
-			var url : String = "icon/task/diailog/" + ico + eName_PNG;
+			var url : String = "ui/icon/task/diailog/" + ico + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -791,7 +791,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getTaskIcon(type : int) : String
 		{
-			var url : String = "icon/task/" + type + eName_PNG;
+			var url : String = "ui/icon/task/" + type + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -803,7 +803,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getMapIcon(type : String) : String
 		{
-			var url : String = "icon/map/" + type + eName_PNG;
+			var url : String = "ui/icon/map/" + type + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -815,7 +815,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getTaskNPCIcon() : String
 		{
-			var url : String = "icon/task/task" + eName_PNG;
+			var url : String = "ui/icon/task/task" + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -827,7 +827,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getCommonIcon(type : String) : String
 		{
-			var url : String = "icon/common/" + type + eName_PNG;
+			var url : String = "ui/icon/common/" + type + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -839,7 +839,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getPromptTabUrl(type : String) : String
 		{
-			return baseDir + resURL + "icon/tab_ico/" + type + ".png";
+			return baseDir + resURL + "ui/icon/tab_ico/" + type + ".png";
 		}
 		
 		/**
@@ -901,11 +901,11 @@ package com.rpgGame.coreData.cfg
 			var path : String = "";
 			if (size == 24)
 			{
-				path = "icon/buff/" + size + "/" + value + eName_PNG;
+				path = "ui/icon/buff/" + size + "/" + value + eName_PNG;
 			}
 			else
 			{
-				path = "icon/buff/" + size + "/" + value + eName_PNG;
+				path = "ui/icon/buff/" + size + "/" + value + eName_PNG;
 			}
 			return baseDir + resURL + path;
 		}
@@ -966,13 +966,13 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getMountIconByMountSpeciesId( speciesId:int ):String
 		{
-			var url:String = "icon/mount/icon/" + speciesId + eName_PNG;
+			var url:String = "ui/icon/mount/icon/" + speciesId + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		
 		public static function getDynAlphaTexture(name:String):String
 		{
-			var url : String = "icon/common/" + name + eName_PNG;
+			var url : String = "ui/icon/common/" + name + eName_PNG;
 			return baseDir + resURL + url;
 		}
 

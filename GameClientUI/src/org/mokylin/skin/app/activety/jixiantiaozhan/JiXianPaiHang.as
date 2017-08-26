@@ -205,7 +205,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 141;
+			temp.width = 148;
 			temp.x = 62;
 			temp.y = 0;
 			return temp;
@@ -215,8 +215,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 83;
-			temp.x = 203;
+			temp.width = 76;
+			temp.x = 210;
 			temp.y = 0;
 			return temp;
 		}

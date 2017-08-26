@@ -117,6 +117,7 @@ package com.rpgGame.app.cmdlistener
 			switch(msg.opaque){
 				case OpaqueEnum.GUILDWAR_GIFT:
 					GuildWarSender.reqGuildWarCityInfo(-1);//领取帮会战奖励成功之后
+					EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_GIFT);
 					break;
 			}
 		}

@@ -88,7 +88,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/cf.png";
+			temp.styleName = "ui/art_txt/common/background/cf.png";
 			temp.x = 144;
 			temp.y = 9;
 			return temp;

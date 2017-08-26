@@ -96,7 +96,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpNo = temp;
 			temp.name = "grpNo";
-			temp.x = 22;
+			temp.x = 18;
 			temp.y = 2;
 			temp.elementsContent = [__Active_LiJinPaiHang_Item_UIAsset1_i(),numZhanli_i()];
 			return temp;
@@ -107,14 +107,14 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbKill = temp;
 			temp.name = "lbKill";
-			temp.fontSize = 12;
-			temp.text = "[1000区]一二三四五六";
+			temp.fontSize = 14;
+			temp.text = "[9999区]帮派名六个字";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
-			temp.width = 136;
-			temp.x = 190;
+			temp.width = 149;
+			temp.x = 192;
 			temp.y = 9;
 			return temp;
 		}
@@ -125,14 +125,14 @@ package org.mokylin.skin.app.activety.zonghe
 			lbName = temp;
 			temp.name = "lbName";
 			temp.height = 17;
-			temp.fontSize = 12;
-			temp.text = "[1000区]一二三四五六";
+			temp.fontSize = 14;
+			temp.text = "[9999区]玩家名六个字";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 140;
-			temp.x = 57;
+			temp.width = 149;
+			temp.x = 49;
 			temp.y = 9;
 			return temp;
 		}
@@ -148,7 +148,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 30;
-			temp.x = 19;
+			temp.x = 15;
 			temp.y = 9;
 			return temp;
 		}
@@ -158,14 +158,14 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "662111";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 61;
-			temp.x = 326;
+			temp.x = 332;
 			temp.y = 9;
 			return temp;
 		}

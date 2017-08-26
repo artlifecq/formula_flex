@@ -83,7 +83,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/bianshiliebiao.png";
+			temp.styleName = "ui/art_txt/common/background/bianshiliebiao.png";
 			temp.x = 119;
 			temp.y = 7;
 			return temp;
