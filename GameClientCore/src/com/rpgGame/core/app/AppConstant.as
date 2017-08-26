@@ -120,20 +120,20 @@ package com.rpgGame.core.app
 		/**
 		 *多人副本倒计时面板
 		 */
-		public static var MULTY_ENTERTIME_PANL:String = createAppInfo( "dungeon.multy.MultyEnterTimePanel");
+		public static var MULTY_ENTERTIME_PANL:String = createAppInfo( "dungeon.multy.MultyEnterTimePanel","fuben");
 		/**
 		 *多人副本退出倒计时面板
 		 */
-		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel");
+		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel","fuben");
 		
 		/**
 		 *多人副本队伍投票面板
 		 */
-		public static var MULTY_TEAM_PANL:String = createAppInfo( "dungeon.multy.MultyTeamPanel");
+		public static var MULTY_TEAM_PANL:String = createAppInfo( "dungeon.multy.MultyTeamPanel","fuben");
 		/**
 		 *多人副本队员拒绝
 		 */
-		public static var MULTY_TEAM_CANCEL_PANL:String = createAppInfo( "dungeon.multy.MultyTeamCancelPanel");
+		public static var MULTY_TEAM_CANCEL_PANL:String = createAppInfo( "dungeon.multy.MultyTeamCancelPanel","fuben");
 		
 		/**
 		 *活动面板

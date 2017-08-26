@@ -88,6 +88,8 @@ package org.mokylin.skin.mainui.chat
 
 		public var tab_Type:feathers.controls.TabBar;
 
+		public var uiTips:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -99,7 +101,7 @@ package org.mokylin.skin.mainui.chat
 			this.currentState = "normal";
 			this.height = 335;
 			this.width = 365;
-			this.elementsContent = [grp_txt_i(),btn_lock_i(),grp_buttom_i(),lb_tishi_i(),grp_laba_i(),tab_Type_i(),btns_i()];
+			this.elementsContent = [grp_txt_i(),btn_lock_i(),grp_buttom_i(),lb_tishi_i(),grp_laba_i(),tab_Type_i(),btns_i(),uiTips_i()];
 			
 			states = {
 			};
@@ -331,7 +333,7 @@ package org.mokylin.skin.mainui.chat
 			grp_laba = temp;
 			temp.name = "grp_laba";
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = -25;
 			temp.elementsContent = [grp_laba_bg_i()];
 			return temp;
 		}
@@ -409,6 +411,17 @@ package org.mokylin.skin.mainui.chat
 			temp.y = 53;
 			temp.layout = __chat_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __chat_Skin_ArrayCollection1_i();
+			return temp;
+		}
+
+		private function uiTips_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiTips = temp;
+			temp.name = "uiTips";
+			temp.styleName = "ui/mainui/chat/danqianbanben.png";
+			temp.x = 3;
+			temp.y = 6;
 			return temp;
 		}
 
