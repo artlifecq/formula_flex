@@ -79,7 +79,7 @@ package org.mokylin.skin.app.paihangbang.button
 						}
 					]
 				,
-				hoverAndSelected:[
+				hhoverAndSelected:[
 						{target:"__ButtonZhanliPaiHang_UIAsset6",
 							name:"x",
 							value:45

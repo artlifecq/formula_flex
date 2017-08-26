@@ -89,8 +89,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 40;
-			temp.x = 26;
+			temp.width = 50;
+			temp.x = 21;
 			temp.y = 7;
 			return temp;
 		}

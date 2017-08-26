@@ -5,7 +5,6 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 	import feathers.controls.Radio;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.ItemBg;
 	import org.mokylin.skin.component.button.ButtonSelect2_Skin;
 
@@ -25,8 +24,6 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var selectedBtn:feathers.controls.Radio;
 
-		public var ui_tishi:feathers.controls.UIAsset;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -38,7 +35,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.currentState = "normal";
 			this.height = 32;
 			this.width = 245;
-			this.elementsContent = [bg_i(),lb_Dispaly_i(),selectedBtn_i(),ui_tishi_i()];
+			this.elementsContent = [bg_i(),lb_Dispaly_i(),selectedBtn_i()];
 			
 			states = {
 			};
@@ -92,17 +89,6 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.width = 245;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function ui_tishi_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ui_tishi = temp;
-			temp.name = "ui_tishi";
-			temp.styleName = "ui/common/tubiao/tishi.png";
-			temp.x = 227;
-			temp.y = 3;
 			return temp;
 		}
 

@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.equip.combo
 {
+	import com.game.engine3D.vo.IFrameRender;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -40,7 +41,7 @@ package com.rpgGame.appModule.equip.combo
 		private var _skin:HeChengMenuItemSkin;
 		private var _renderHeight:Number;
 		private var _mainListStyles:Array=[ButtonJianding,ButtonBianshi,ButtonShuye];
-		
+		private var _data:INodeData;
 		public function EquipComboTreeItemRender()
 		{
 			super();
@@ -84,9 +85,18 @@ package com.rpgGame.appModule.equip.combo
 				tree.dataProvider.updateItemAt(oldindex);
 			}
 		}
-		
+		override public function dispose():void
+		{
+			super.dispose();
+			if (_data) 
+			{
+				RewardTipTree.ins.removeNode(_data.getRTNkey());
+				_data=null;
+			}
+		}
 		override protected function renderTreeNode(node:TreeNode):void
 		{
+			this._data=node.data as INodeData;
 			var hechengData:Q_hecheng;
 			if(node.data is MainNodeInfo){
 				this.addChild(_skin.main_item);
@@ -103,7 +113,7 @@ package com.rpgGame.appModule.equip.combo
 					mainSkin.btnFlag.styleClass=ButtonJiahao;
 					mainSkin.btnFlag.y=12;
 				}
-				var nodeKey:String=RTNodeID.EQUIP_HC+MainNodeInfo(node.data).type;
+				var nodeKey:String=MainNodeInfo(node.data).getRTNkey();
 				if (!RewardTipTree.ins.getNode(nodeKey)) 
 				{
 					RewardTipTree.ins.addNode(RTNodeID.EQUIP_HC,nodeKey,this,244,ItemManager.checkEquip2HCByType,false,node.data.type);
@@ -116,8 +126,13 @@ package com.rpgGame.appModule.equip.combo
 				_renderHeight=_skin.sub_item.height;
 				var subSkin:HedSub_Item=_skin.sub_item.skin as HedSub_Item;
 				var subInfo:SubNodeInfo=node.data as SubNodeInfo;
+				if (!RewardTipTree.ins.getNode(subInfo.getRTNkey())) 
+				{
+					RewardTipTree.ins.addNode(subInfo.getParentKey(),subInfo.getRTNkey(),_skin.sub_item,244,null);
+				}
 				subSkin.labelDisplay.text=HeChengData.getSubName(subInfo.type,subInfo.subType);
-				subSkin.ui_tishi.visible=ItemManager.chackIsCanHC(subInfo.type,subInfo.subType);
+				var has:Boolean=ItemManager.chackIsCanHC(subInfo.type,subInfo.subType);
+				RewardTipTree.ins.setState(subInfo.getRTNkey(),has);
 				if(node.expanded){
 					subSkin.btnFlag.styleClass=ButtonSanjiao_down;
 				}else{
@@ -141,8 +156,13 @@ package com.rpgGame.appModule.equip.combo
 				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
 				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(itemId);
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
-				qianSkin.ui_tishi.visible=max>0&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
+				var has:Boolean=max>0&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
 					pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY));
+				if (!RewardTipTree.ins.getNode(detailInfo.getRTNkey())) 
+				{
+					RewardTipTree.ins.addNode(detailInfo.getParentKey(),detailInfo.getRTNkey(),_skin.detail_item,244,null);
+				}
+				RewardTipTree.ins.setState(detailInfo.getRTNkey(),has);
 				(qianSkin.bg.skin as ItemBg).bg1.visible=detailInfo.data.q_subson_type%2==0;
 				(qianSkin.bg.skin as ItemBg).bg2.visible=!(qianSkin.bg.skin as ItemBg).bg1.visible;
 				var isSelected:Boolean
