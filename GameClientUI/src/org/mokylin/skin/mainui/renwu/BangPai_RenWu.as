@@ -74,7 +74,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/bangpairenwu.png";
+			temp.styleName = "ui/art_txt/common/background/bangpairenwu.png";
 			temp.x = 106;
 			temp.y = 9;
 			return temp;

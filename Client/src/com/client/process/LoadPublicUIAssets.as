@@ -21,6 +21,7 @@ package com.client.process
 	{
 		private static const UI_ASSETS : String = "theme";
 		private static const UI_AlphaPng:String = "alphapng.png";
+		private static const ART_TXT:String = "art_txt";
 
 		private var _url : String;
 
@@ -44,7 +45,7 @@ package com.client.process
 //			loader.load(_url, loadAplahaPNg, onProgress, onResError);
 			
 			var loader:ThemeBatchLoader = new ThemeBatchLoader();
-			loader.loadBatch([_url, ClientConfig.getUI(UI_AlphaPng)], onFinish, onProgress, onResError);
+			loader.loadBatch([_url, ClientConfig.getUI(UI_AlphaPng),ClientConfig.getUI(ART_TXT)], onFinish, onProgress, onResError);
 		}
 		
 		override public function switchMaster():void

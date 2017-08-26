@@ -99,7 +99,7 @@ package org.mokylin.skin.app.beibao.junjie
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiname = temp;
 			temp.name = "uiname";
-			temp.styleName = "ui/common/shuxing/sbz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sbz.png";
 			temp.x = 17;
 			temp.y = 2;
 			return temp;

@@ -96,7 +96,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.height = 214;
 			temp.x = 6;
 			temp.y = 105;
-			temp.elementsContent = [uiCh1_i(),uiFlag1_i(),skinName1_i(),skinBaoXiang1_i()];
+			temp.elementsContent = [uiCh1_i(),skinName1_i(),skinBaoXiang1_i(),uiFlag2_i()];
 			return temp;
 		}
 
@@ -108,7 +108,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.height = 197;
 			temp.x = 389;
 			temp.y = 257;
-			temp.elementsContent = [uiCh2_i(),uiFlag2_i(),skinName2_i(),skinBaoXiang2_i()];
+			temp.elementsContent = [uiCh2_i(),skinName2_i(),skinBaoXiang2_i(),uiFlag1_i()];
 			return temp;
 		}
 
@@ -287,8 +287,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 			uiFlag1 = temp;
 			temp.name = "uiFlag1";
 			temp.styleName = "ui/app/banghui/wangcheng/kuaiji.png";
-			temp.x = 74;
-			temp.y = 139;
+			temp.x = 71;
+			temp.y = 135;
 			return temp;
 		}
 
@@ -298,8 +298,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 			uiFlag2 = temp;
 			temp.name = "uiFlag2";
 			temp.styleName = "ui/app/banghui/wangcheng/qufu.png";
-			temp.x = 78;
-			temp.y = 137;
+			temp.x = 67;
+			temp.y = 142;
 			return temp;
 		}
 

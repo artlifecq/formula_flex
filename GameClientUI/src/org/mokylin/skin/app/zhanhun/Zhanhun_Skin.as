@@ -315,7 +315,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __Zhanhun_Skin_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/lv.png";
+			temp.styleName = "ui/art_txt/common/shuxing/lv.png";
 			temp.x = 14;
 			temp.y = 5;
 			return temp;
@@ -324,7 +324,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __Zhanhun_Skin_UIAsset17_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/lv.png";
+			temp.styleName = "ui/art_txt/common/shuxing/lv.png";
 			temp.x = 10;
 			temp.y = 7;
 			return temp;
@@ -1016,7 +1016,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiFy = temp;
 			temp.name = "uiFy";
-			temp.styleName = "ui/common/shuxing/fyz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/fyz.png";
 			temp.x = 277;
 			temp.y = 0;
 			return temp;
@@ -1027,7 +1027,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiGg = temp;
 			temp.name = "uiGg";
-			temp.styleName = "ui/common/shuxing/mz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/mz.png";
 			temp.x = 136;
 			temp.y = 28;
 			return temp;
@@ -1038,7 +1038,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiGj = temp;
 			temp.name = "uiGj";
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -1049,7 +1049,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLd = temp;
 			temp.name = "uiLd";
-			temp.styleName = "ui/common/shuxing/sf.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sf.png";
 			temp.x = 0;
 			temp.y = 28;
 			return temp;
@@ -1060,7 +1060,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLv = temp;
 			temp.name = "uiLv";
-			temp.styleName = "ui/common/shuxing/lv.png";
+			temp.styleName = "ui/art_txt/common/shuxing/lv.png";
 			temp.x = 34;
 			temp.y = 0;
 			return temp;
@@ -1082,7 +1082,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiQx = temp;
 			temp.name = "uiQx";
-			temp.styleName = "ui/common/shuxing/qx.png";
+			temp.styleName = "ui/art_txt/common/shuxing/qx.png";
 			temp.x = 136;
 			temp.y = 0;
 			return temp;
@@ -1105,7 +1105,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 4;
 			temp.y = 7;
 			return temp;

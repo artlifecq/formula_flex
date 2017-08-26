@@ -30,7 +30,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			
 			this.currentState = "normal";
 			this.height = 20;
-			this.width = 217;
+			this.width = 246;
 			this.elementsContent = [lbNo_i(),lbName_i(),lbNum_i()];
 			
 			states = {
@@ -47,12 +47,12 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "玩家名六个字";
+			temp.text = "[9999区]玩家名六个字";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 92;
-			temp.x = 34;
+			temp.width = 145;
+			temp.x = 22;
 			temp.y = 0;
 			return temp;
 		}
@@ -64,9 +64,9 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.name = "lbNo";
 			temp.text = "1";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 34;
+			temp.width = 25;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -79,10 +79,10 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.name = "lbNum";
 			temp.text = "250024(52%)";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
-			temp.x = 129;
+			temp.x = 163;
 			temp.y = 0;
 			return temp;
 		}

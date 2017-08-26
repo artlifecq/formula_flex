@@ -14,6 +14,8 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  窗口ID */
 		public var id:int;
+		 /**  按钮皮肤 */
+		public var btn_res:String;
 		 /**  按钮区域(0:功能区域,1:活动区域,9:其他区域) */
 		public var type:int;
 		 /**  功能行 */

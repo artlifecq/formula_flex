@@ -122,7 +122,7 @@ package org.mokylin.skin.app.tips
 		private function __Tips_ZhuDongJiNeng_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/jinengshuoming.png";
+			temp.styleName = "ui/art_txt/common/tips/tipswenzi/jineng/jinengshuoming.png";
 			temp.x = 13;
 			temp.y = 116;
 			return temp;
@@ -131,7 +131,7 @@ package org.mokylin.skin.app.tips
 		private function __Tips_ZhuDongJiNeng_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/jinjiexiaoguo.png";
+			temp.styleName = "ui/art_txt/common/tips/jinjiexiaoguo.png";
 			temp.x = 77;
 			temp.y = 0;
 			return temp;

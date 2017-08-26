@@ -170,7 +170,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		private function __KuaFuPaiHang_Skin_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zongzhanli.png";
+			temp.styleName = "ui/art_txt/common/zongzhanli.png";
 			temp.x = 651;
 			temp.y = 548;
 			return temp;

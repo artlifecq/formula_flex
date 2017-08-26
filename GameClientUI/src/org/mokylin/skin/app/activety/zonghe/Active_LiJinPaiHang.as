@@ -129,7 +129,7 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/banghui.png";
-			temp.x = 242;
+			temp.x = 249;
 			temp.y = 7;
 			return temp;
 		}
@@ -138,7 +138,7 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/bangdingyuanbao.png";
-			temp.x = 341;
+			temp.x = 343;
 			temp.y = 7;
 			return temp;
 		}

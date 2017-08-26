@@ -419,7 +419,7 @@ package com.rpgGame.app.manager
 			if( player == null )
 				return;
 			
-			var numberRes:String = FightFaceHelper.NUMBER_RED2;
+			var numberRes:String = FightFaceHelper.NUMBER_NPC_HIT;
 			var time:int;
 			var reliveGameTime:GameTimer = new GameTimer( "Relive" + heroId.toString() );
 			reliveGameTime.onUpdate = function timeUpdate():void

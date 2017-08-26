@@ -54,7 +54,7 @@ package org.mokylin.skin.mainui.renwu
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/renwu/xuanzhong.png", "hover":"ui/mainui/renwu/xuanzhong.png", "up":"ui/mainui/renwu/xuanzhong_alpha.png"};
+			skinNames={"down":"ui/mainui/renwu/xuanzhong.png", "hover":"ui/mainui/renwu/xuanzhong.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
 		}
 
 
@@ -83,6 +83,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
+			temp.visible = false;
 			return temp;
 		}
 

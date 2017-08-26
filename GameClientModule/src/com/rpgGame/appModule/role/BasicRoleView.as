@@ -66,10 +66,10 @@ package com.rpgGame.appModule.role
 			
 			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
-				_skin.uiLd.styleName="ui/common/shuxing/hg.png";
+				_skin.uiLd.styleName="ui/art_txt/common/shuxing/hg.png";
 			}else{
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.LIDAO);
-				_skin.uiLd.styleName="ui/common/shuxing/ld.png";
+				_skin.uiLd.styleName="ui/art_txt/common/shuxing/ld.png";
 			}
 		}
 		

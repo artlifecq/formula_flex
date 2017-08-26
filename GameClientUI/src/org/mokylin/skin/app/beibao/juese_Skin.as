@@ -512,7 +512,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/lv.png";
+			temp.styleName = "ui/art_txt/common/shuxing/lv.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -795,7 +795,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			name_by = temp;
 			temp.name = "name_by";
-			temp.styleName = "ui/common/shuxing/by.png";
+			temp.styleName = "ui/art_txt/common/shuxing/by.png";
 			temp.x = 185;
 			temp.y = 2;
 			return temp;
@@ -806,7 +806,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			name_lj = temp;
 			temp.name = "name_lj";
-			temp.styleName = "ui/common/shuxing/lj.png";
+			temp.styleName = "ui/art_txt/common/shuxing/lj.png";
 			temp.x = 185;
 			temp.y = 27;
 			return temp;
@@ -817,7 +817,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			name_yb = temp;
 			temp.name = "name_yb";
-			temp.styleName = "ui/common/shuxing/yb.png";
+			temp.styleName = "ui/art_txt/common/shuxing/yb.png";
 			temp.x = 25;
 			temp.y = 27;
 			return temp;
@@ -828,7 +828,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			name_yz = temp;
 			temp.name = "name_yz";
-			temp.styleName = "ui/common/shuxing/yl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/yl.png";
 			temp.x = 25;
 			temp.y = 2;
 			return temp;
@@ -1112,7 +1112,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 362;
 			temp.x = 3;
-			temp.y = 20;
+			temp.y = 35;
 			return temp;
 		}
 
@@ -1200,11 +1200,12 @@ package org.mokylin.skin.app.beibao
 			temp.name = "txt_team";
 			temp.letterSpacing = 0;
 			temp.text = "【帮会名字七个字】";
+			temp.textAlign = "center";
 			temp.color = 0x14A3F3;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 140;
-			temp.x = 225;
-			temp.y = 2;
+			temp.width = 362;
+			temp.x = 3;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -1274,7 +1275,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBj = temp;
 			temp.name = "uiBj";
-			temp.styleName = "ui/common/shuxing/bjz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/bjz.png";
 			temp.x = 0;
 			temp.y = 230;
 			return temp;
@@ -1285,7 +1286,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBs = temp;
 			temp.name = "uiBs";
-			temp.styleName = "ui/common/shuxing/bjjc.png";
+			temp.styleName = "ui/art_txt/common/shuxing/bjjc.png";
 			temp.x = 0;
 			temp.y = 249;
 			return temp;
@@ -1296,7 +1297,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiFy = temp;
 			temp.name = "uiFy";
-			temp.styleName = "ui/common/shuxing/fyz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/fyz.png";
 			temp.x = 0;
 			temp.y = 140;
 			return temp;
@@ -1307,7 +1308,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiGj = temp;
 			temp.name = "uiGj";
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 0;
 			temp.y = 118;
 			return temp;
@@ -1318,7 +1319,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiGs = temp;
 			temp.name = "uiGs";
-			temp.styleName = "ui/common/shuxing/gjsd.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjsd.png";
 			temp.x = 0;
 			temp.y = 270;
 			return temp;
@@ -1329,7 +1330,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiHg = temp;
 			temp.name = "uiHg";
-			temp.styleName = "ui/common/shuxing/gg.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gg.png";
 			temp.x = 0;
 			temp.y = 79;
 			return temp;
@@ -1340,7 +1341,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiJy = temp;
 			temp.name = "uiJy";
-			temp.styleName = "ui/common/shuxing/jyz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/jyz.png";
 			temp.x = 0;
 			temp.y = 39;
 			return temp;
@@ -1351,7 +1352,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLd = temp;
 			temp.name = "uiLd";
-			temp.styleName = "ui/common/shuxing/ld.png";
+			temp.styleName = "ui/art_txt/common/shuxing/ld.png";
 			temp.x = 0;
 			temp.y = 59;
 			return temp;
@@ -1362,7 +1363,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiMz = temp;
 			temp.name = "uiMz";
-			temp.styleName = "ui/common/shuxing/mz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/mz.png";
 			temp.x = 0;
 			temp.y = 189;
 			return temp;
@@ -1373,7 +1374,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiSb = temp;
 			temp.name = "uiSb";
-			temp.styleName = "ui/common/shuxing/sb.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sb.png";
 			temp.x = 0;
 			temp.y = 209;
 			return temp;
@@ -1384,7 +1385,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiSf = temp;
 			temp.name = "uiSf";
-			temp.styleName = "ui/common/shuxing/sf.png";
+			temp.styleName = "ui/art_txt/common/shuxing/sf.png";
 			temp.x = 0;
 			temp.y = 98;
 			return temp;
@@ -1395,7 +1396,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiSm = temp;
 			temp.name = "uiSm";
-			temp.styleName = "ui/common/shuxing/qx.png";
+			temp.styleName = "ui/art_txt/common/shuxing/qx.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -1406,7 +1407,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiZq = temp;
 			temp.name = "uiZq";
-			temp.styleName = "ui/common/shuxing/zqz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/zqz.png";
 			temp.x = 0;
 			temp.y = 19;
 			return temp;
@@ -1417,7 +1418,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli1.png";
+			temp.styleName = "ui/art_txt/common/zhandouli1.png";
 			temp.x = 0;
 			temp.y = 3;
 			return temp;

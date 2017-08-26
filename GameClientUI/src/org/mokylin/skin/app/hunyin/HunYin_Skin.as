@@ -545,7 +545,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli1.png";
+			temp.styleName = "ui/art_txt/common/zhandouli1.png";
 			temp.x = 715;
 			temp.y = 103;
 			return temp;

@@ -51,7 +51,7 @@ package com.rpgGame.coreData.type
 		/**
 		 *装备阶数 
 		 */
-		public static const EQUIP_LV : String = "ui/common/grid/equip/";
+		public static const EQUIP_LV : String = "ui/art_txt/common/grid/equip/";
 		
 		/** 组队--经验平局分配 **/
 		public static const TEAM_EXP_MEAN_MODE:String = "ui/app/team/jun.png";

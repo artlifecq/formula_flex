@@ -4,12 +4,17 @@
     
     import away3d.events.Event;
     
+    import feathers.controls.ButtonState;
+    import feathers.themes.GuiTheme;
+    
     import gs.TweenLite;
     
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
     import org.mokylin.skin.mainui.activityBar.ActivityItem;
     
     import starling.display.DisplayObject;
+    import starling.display.Image;
+    import starling.textures.IStarlingTexture;
 
     public class ActivityButton extends ActivityButtonBase 
     {
@@ -25,6 +30,26 @@
 			ui.btnBar.addEventListener(Event.RESIZE,sizeHandler);
         }
 		
+		override protected function setBtnState(texture:IStarlingTexture):void
+		{
+			var upImg:Image=new Image(GuiTheme.ins.getTexture(texture.key));
+			
+			/*	var overC:uint=0xf9f3e7;
+			overImg.setVertexColor(0,overC);
+			overImg.setVertexColor(1,overC);
+			overImg.setVertexColor(2,overC);
+			overImg.setVertexColor(3,overC);
+			var downC:uint=0xc6bfb3;
+			downImg.setVertexColor(0,downC);
+			downImg.setVertexColor(1,downC);
+			downImg.setVertexColor(2,downC);
+			downImg.setVertexColor(3,downC);*/
+			var state:String=stateToIndex.getValue(_currentLoadIndex);
+			ui.btnBar.setSkinForState(state,upImg);
+//			ui.btnBar.setSkinForState(ButtonState.HOVER,overImg);
+//			ui.btnBar.setSkinForState(ButtonState.DOWN,downImg);
+		}
+		
 		private function sizeHandler(e:Event):void
 		{
 			ui.btnBar.x = (this.width-ui.btnBar.width)/2;
@@ -37,7 +62,7 @@
         {
             ui.btnBar.styleClass = cl;
         }
-
+		
         override public function set title(value:String):void
         {
             super.title = value;
@@ -69,6 +94,9 @@
 
         protected function onButtonClick():void
         {
+			if(!info){
+				return;
+			}
 			if(info.showEft!=0)
 			{
 				stopEffect();

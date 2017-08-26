@@ -71,7 +71,7 @@ package org.mokylin.skin.common.alert
 		private function __Alert_LiBao_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/libaozhanshi.png";
+			temp.styleName = "ui/art_txt/common/background/libaozhanshi.png";
 			temp.x = 119;
 			temp.y = 8;
 			return temp;

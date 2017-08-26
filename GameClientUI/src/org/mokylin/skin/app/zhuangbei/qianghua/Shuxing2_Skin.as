@@ -87,7 +87,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_name = temp;
 			temp.name = "ui_name";
-			temp.styleName = "ui/common/shuxing/ld.png";
+			temp.styleName = "ui/art_txt/common/shuxing/ld.png";
 			temp.x = 0;
 			temp.y = -1;
 			return temp;

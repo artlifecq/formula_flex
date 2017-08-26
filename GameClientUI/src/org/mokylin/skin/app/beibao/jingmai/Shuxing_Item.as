@@ -58,7 +58,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgAttr = temp;
 			temp.name = "imgAttr";
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 56;
 			temp.y = 0;
 			return temp;
@@ -69,7 +69,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgIco = temp;
 			temp.name = "imgIco";
-			temp.styleName = "ui/common/shuxingIcon/tubiao/gongji.png";
+			temp.styleName = "ui/art_txt/common/shuxingIcon/tubiao/gongji.png";
 			temp.x = 29;
 			temp.y = 1;
 			return temp;

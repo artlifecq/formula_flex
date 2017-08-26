@@ -95,12 +95,12 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "【墨家】玩家名六个字";
+			temp.text = "[9999区]玩家名六个字";
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 150;
-			temp.x = 27;
+			temp.width = 155;
+			temp.x = 31;
 			temp.y = 6;
 			return temp;
 		}

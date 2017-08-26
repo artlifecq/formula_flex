@@ -54,7 +54,7 @@ package com.rpgGame.app.ui.scene
 		private function updateView():void
 		{
 			_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"下次刷新时间:14:00");
-			_skin.lbHeadName.text=actInfo.actCfg.q_activity_name;
+			_skin.headName.text=actInfo.actCfg.q_activity_name;
 			
 			
 			

@@ -59,7 +59,7 @@ package org.mokylin.skin.app.vip
 		private function __Tips_VipSelect_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/vip/pdzqsx.png";
+			temp.styleName = "ui/art_txt/common/vip/pdzqsx.png";
 			temp.x = 13;
 			temp.y = 41;
 			return temp;

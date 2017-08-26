@@ -75,8 +75,6 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function setHead(diff:int):void
 		{
-			//var name:Array=["jd","pt","kunlan"];
-			//_skin.ui_head.styleName="ui/mainui/fubenzhuizong/lunjian/"+name[diff-1]+".png";
 			var name:Array=["简单","普通","困难"];
 			_skin.ui_head.text=name[diff-1]+"·江湖论剑";
 		}
