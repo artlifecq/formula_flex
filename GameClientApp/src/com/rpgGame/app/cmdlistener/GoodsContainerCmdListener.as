@@ -226,6 +226,7 @@ package com.rpgGame.app.cmdlistener
 		private function onResOpenCellResultMessage(msg:ResOpenCellResultMessage):void
 		{
 			if(msg.isSuccess==1){
+				EventManager.dispatchEvent(ItemEvent.ITEM_GRID_CANLOCK_CHENGGONG,msg);
 				GoodsContainerMamager.setUnlocked(GoodsContainerMamager.getGoodsType(msg.type),msg.cellId);
 			}
 		}

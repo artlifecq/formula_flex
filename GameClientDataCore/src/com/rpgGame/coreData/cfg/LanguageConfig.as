@@ -10,7 +10,6 @@ package com.rpgGame.coreData.cfg
 	{
 		private static var _textDic : Dictionary;
 		private static var _alertDic : Dictionary;
-		private static var _menus:Array;
 		public function LanguageConfig()
 		{
 		}
@@ -19,19 +18,6 @@ package com.rpgGame.coreData.cfg
 		{
 			_textDic = dic;
 			_alertDic = new Dictionary();
-			inithyperLinkMenu();
-		}
-		
-		private static function inithyperLinkMenu():void
-		{
-			_menus=new Array();
-			_menus=[LangHyperlinksMenu.WOYAOJIERUDUIWU,LangHyperlinksMenu.WOYAOJINJIEZHANQI,LangHyperlinksMenu.WOYAOJINJIEZUOQI,
-				LangHyperlinksMenu.WOYAOQIANGHUA,LangHyperlinksMenu.WOYAORUBANG];
-		}
-		
-		public static function get menus():Array
-		{
-			return _menus;
 		}
 		
 		public static function getLanguage($key : *, ... args) : Object

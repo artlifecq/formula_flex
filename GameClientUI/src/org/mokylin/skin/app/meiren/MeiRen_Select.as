@@ -39,7 +39,7 @@ package org.mokylin.skin.app.meiren
 		private function __MeiRen_Select_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/meirenHead/select_bg.png";
+			temp.styleName = "ui/pet/select_bg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.meiren
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.scaleX = -1;
-			temp.styleName = "ui/mainui/meirenHead/select_bg.png";
+			temp.styleName = "ui/pet/select_bg.png";
 			temp.x = 121;
 			temp.y = 0;
 			return temp;

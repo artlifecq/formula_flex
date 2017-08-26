@@ -28,7 +28,7 @@ package com.rpgGame.appModule.role
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
-			if(data&&data.roleData&&data.info){
+			if(data&&!(data is int)&&data.roleData&&data.info){
 				showCompareData(data);	
 				attChangeTypes=[];
 			}else{
@@ -36,6 +36,10 @@ package com.rpgGame.appModule.role
 				_roleData=MainRoleManager.actorInfo;
 				attConstrastView.onHide();
 				ItemManager.getBackEquip(initItem);
+				if(data!=null){
+					var type:int=data as int;
+					packsView.openThis(type);
+				}
 			}
 		}
 		

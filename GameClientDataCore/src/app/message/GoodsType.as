@@ -117,6 +117,11 @@ package app.message {
 		public static const SPECIAL:int = 22;
 		
 		/**
+		 *婚戒类的道具
+		 */
+		public static const HUNJIE:int = 23;
+		
+		/**
 		 *坐骑技能书
 		 */
 		public static const SKILL_BOOK_MOUNT:int = 30;

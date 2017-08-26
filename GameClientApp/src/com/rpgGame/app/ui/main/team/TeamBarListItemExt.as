@@ -257,8 +257,8 @@ package   com.rpgGame.app.ui.main.team
 						TipTargetManager.show(icon, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 						buffIcon.push(icon);
 					}
-					else{
-					trace("这个BUFF为空了，看看是什么原因······························");
+					else if(q_buff==null){
+						trace("这个BUFF为空了，看看是什么原因······························BUFFID："+buff[i]);
 					}
 				}
 			}

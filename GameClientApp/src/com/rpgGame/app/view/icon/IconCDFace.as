@@ -9,6 +9,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.text.TextFieldAutoSize;
@@ -24,7 +25,7 @@ package com.rpgGame.app.view.icon
 	
 	import starling.text.TextField;
 	import starling.text.TextFormat;
-
+	
 	/**
 	 * 1、带cd的ico
 	 * 2、显示快捷键
@@ -37,7 +38,7 @@ package com.rpgGame.app.view.icon
 	public class IconCDFace extends BgIcon implements IDragSource, IDropTarget
 	{
 		protected var _faceInfo : IBaseFaceInfo;
-
+		
 		private var _cdFace : CDFace;
 		private var _needCD : Boolean = false;
 		protected var _isGary : Boolean = false;
@@ -71,7 +72,7 @@ package com.rpgGame.app.view.icon
 			_cnt--;
 			_pool.recycleObj(role);
 		}
-
+		
 		/**
 		 * 图标尺寸
 		 * @param $iconSize		参考：IcoSizeEnum
@@ -119,12 +120,12 @@ package com.rpgGame.app.view.icon
 			}
 			this.setBg(bg);
 		}
-
+		
 		public function get cdFace():CDFace
 		{
 			return _cdFace;
 		}
-
+		
 		private function onAddToStg(event : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
@@ -135,16 +136,16 @@ package com.rpgGame.app.view.icon
 			else
 				removeCdEvent();
 		}
-
+		
 		private function onRemoveFromStg(event : Event) : void
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
 			removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStg);
-
+			
 			removeCdEvent();
 			removeCDFace();
 		}
-
+		
 		/**----------------------------------------------------------------------------------*/
 		/**
 		 * 得到CD的剩余时间
@@ -159,7 +160,7 @@ package com.rpgGame.app.view.icon
 			}
 			return 0;
 		}
-
+		
 		//------------------------------------------------CD实现------------------------------------------------
 		public function get coolID() : String
 		{
@@ -169,7 +170,7 @@ package com.rpgGame.app.view.icon
 			}
 			return _faceInfo.coolID;
 		}
-
+		
 		public function get faceID() : *
 		{
 			if (_faceInfo == null)
@@ -178,34 +179,44 @@ package com.rpgGame.app.view.icon
 			}
 			return _faceInfo.cfgId;
 		}
-
+		
 		public function get faceInfo() : IBaseFaceInfo
 		{
 			return _faceInfo;
 		}
-
+		
 		public function set faceInfo(value : IBaseFaceInfo) : void
 		{
 			if (value == null)
 				return;
-
+			
 			if (value == _faceInfo)
 				return;
-
+			
 			_faceInfo = value;
-
+			
 			registerCD();
 		}
-
-
+		
+		
 		protected function registerCD() : void
 		{
 			removeCDFace();
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
-
-			needCD = true;
+			
+			needCD = isNeedShowCD();
 		}
-
+		
+		private function isNeedShowCD():Boolean
+		{
+			if(_faceInfo is ClientItemInfo)
+			{
+				if((_faceInfo as ClientItemInfo).qItem.q_cooldown==0)
+					return false;
+			}
+			return true;
+		}
+		
 		public function set needCD(value : Boolean) : void
 		{
 			_needCD = value;
@@ -223,7 +234,7 @@ package com.rpgGame.app.view.icon
 				removeCdEvent();
 			}
 		}
-
+		
 		public function addCdEvent() : void
 		{
 			if (!_isAlreadyListenerCd)
@@ -233,14 +244,14 @@ package com.rpgGame.app.view.icon
 				EventManager.addEvent(CDDataEvent.COMPLETE, onCdComplete);
 			}
 		}
-
+		
 		public function removeCdEvent() : void
 		{
 			_isAlreadyListenerCd = false;
 			EventManager.removeEvent(CDDataEvent.UPDATE, onCdUpdate);
 			EventManager.removeEvent(CDDataEvent.COMPLETE, onCdComplete);
 		}
-
+		
 		private function onCdUpdate(cdData : CDData) : void
 		{
 			if (_faceInfo != null && cdData.id == _faceInfo.coolID&&_showCD)
@@ -248,7 +259,7 @@ package com.rpgGame.app.view.icon
 				cdUpdate(cdData.now, cdData.cd);
 			}
 		}
-
+		
 		private function onCdComplete(cdData : CDData) : void
 		{
 			if (_faceInfo != null && cdData.id == _faceInfo.coolID&&_showCD)
@@ -257,7 +268,7 @@ package com.rpgGame.app.view.icon
 				cdComplete();
 			}
 		}
-
+		
 		public function cdComplete():void
 		{
 			
@@ -271,7 +282,7 @@ package com.rpgGame.app.view.icon
 				_cdFace = null;
 			}
 		}
-
+		
 		public function cdUpdate($now : Number, $cdTotal : Number) : void
 		{
 			if (!_cdFace || !_cdFace.parent)
@@ -279,7 +290,7 @@ package com.rpgGame.app.view.icon
 			_cdFace.isCdShow=_showCircle;
 			_cdFace.update($now, $cdTotal);
 		}
-
+		
 		public function addCdFace() : void
 		{
 			if (_cdFace == null)
@@ -297,7 +308,7 @@ package com.rpgGame.app.view.icon
 			_cdFace.setTimeTxt("");
 			addChild(_cdFace);
 		}
-
+		
 		/**
 		 * 显示快捷栏提示
 		 * @param value			显示内容
@@ -320,15 +331,15 @@ package com.rpgGame.app.view.icon
 			_shortcutKeyLab.text = value;
 			addChild(_shortcutKeyLab);
 		}
-
+		
 		private var _isShwoTm : Boolean = false;
-
+		
 		public function setIsShowCdTm(isShow : Boolean,txtFormat : flash.text.TextFormat = null) : void
 		{
 			_isShwoTm = isShow;
 			if (_cdFace == null)
 				return;
-
+			
 			if (isShow)
 				_cdFace.showTmTxt(txtFormat);
 			else
@@ -338,25 +349,25 @@ package com.rpgGame.app.view.icon
 		{
 			_showCircle=isShow;
 			
-				
+			
 		}
 		override public function sortLayer() : void
 		{
 			super.sortLayer();
-
+			
 			if (_cdFace != null)
 				addChild(_cdFace);
-
+			
 			if (_shortcutKeyLab != null)
 				addChild(_shortcutKeyLab);
 		}
-
+		
 		public function set isGary(value : Boolean) : void
 		{
 			_isGary=value;
 			if (_iconImage == null)
 				return;
-
+			
 			if (value)
 			{
 				GrayFilter.gray(_iconImage);
@@ -374,13 +385,13 @@ package com.rpgGame.app.view.icon
 		override public function clear() : void
 		{
 			isGary = false;
-
+			
 			removeCdEvent();
 			removeCDFace();
-
+			
 			
 			hideQuality();
-
+			
 			if (_cdFace != null)
 			{
 				_cdFace.dispose();
@@ -388,7 +399,7 @@ package com.rpgGame.app.view.icon
 			}
 			
 			_faceInfo = null;
-
+			
 			if(_shortcutKeyLab){
 				this.removeChild(_shortcutKeyLab);
 			}
@@ -411,14 +422,14 @@ package com.rpgGame.app.view.icon
 			super.destroy();
 			recycle(this);
 		}
-
+		
 		//-------------------------------------------
-
+		
 		public function get showCD():Boolean
 		{
 			return _showCD;
 		}
-
+		
 		public function set showCD(value:Boolean):void
 		{
 			_showCD = value;

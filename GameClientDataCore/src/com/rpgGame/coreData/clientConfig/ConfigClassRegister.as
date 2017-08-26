@@ -156,6 +156,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_horse:String = "data.Q_horse";
 		/**  坐骑技能数据库		 */
 		public static const Q_horse_skills:String = "data.Q_horse_skills";
+		/**  Menu		 */
+		public static const Q_hyperlinksMenu:String = "data.Q_hyperlinksMenu";
 		/**  婚姻互动消耗表				 */
 		public static const Q_interaction:String = "data.Q_interaction";
 		/**  2物品基本信息数据库																																																																																									 */
@@ -254,7 +256,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																												 */
+		/**  技能基本信息配置数据表																																																																																																																																													 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  预警技能关联表			 */
 		public static const Q_skill_warning:String = "data.spell.Q_skill_warning";
@@ -340,6 +342,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
+			regClass("data.Q_hyperlinksMenu", com.rpgGame.coreData.clientConfig.Q_hyperlinksMenu);
 			regClass("data.Q_interaction", com.rpgGame.coreData.clientConfig.Q_interaction);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_junjie", com.rpgGame.coreData.clientConfig.Q_junjie);

@@ -329,6 +329,13 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			enterZone();
 			setUisite();
+			autoWalk();
+		}
+		
+		private function autoWalk():void
+		{
+			TweenLite.killDelayedCallsTo(walkTo);
+			TweenLite.delayedCall(1, walkTo);
 		}
 		
 		private function setKillInfo():void

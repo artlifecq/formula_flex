@@ -15,15 +15,9 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var __erjiItem_Skin_UIAsset1:feathers.controls.UIAsset;
-
-		public var __erjiItem_Skin_UIAsset2:feathers.controls.UIAsset;
-
-		public var __erjiItem_Skin_UIAsset3:feathers.controls.UIAsset;
-
-		public var iconDisplay:feathers.controls.UIAsset;
-
 		public var labelDisplay:feathers.controls.Label;
+
+		public var uiBg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -34,63 +28,54 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "down";
-			this.height = 18;
-			this.width = 41;
-			this.elementsContent = [labelDisplay_i(),iconDisplay_i()];
-			__erjiItem_Skin_UIAsset1_i();
-			__erjiItem_Skin_UIAsset2_i();
-			__erjiItem_Skin_UIAsset3_i();
-			
+			this.height = 20;
+			this.width = 60;
+			this.elementsContent = [uiBg_i(),labelDisplay_i()];
 			
 			states = {
 				down:[
 						{target:"labelDisplay",
-							name:"color",
-							value:0x868276
-						}
-						,
-						{target:"labelDisplay",
 							name:"width",
-							value:40
+							value:60
 						}
 						,
 						{target:"labelDisplay",
 							name:"horizontalCenter",
 							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"height",
+							value:18
 						}
 					]
 				,
 				hover:[
 						{target:"labelDisplay",
-							name:"color",
-							value:0xcfc6ae
-						}
-						,
-						{target:"labelDisplay",
 							name:"width",
-							value:40
+							value:60
 						}
 						,
 						{target:"labelDisplay",
 							name:"horizontalCenter",
 							value:0
 						}
+						,
+						{target:"labelDisplay",
+							name:"height",
+							value:18
+						}
 					]
 				,
 				up:[
 						{target:"labelDisplay",
-							name:"color",
-							value:0x8b8d7b
-						}
-						,
-						{target:"labelDisplay",
 							name:"width",
-							value:40
+							value:60
 						}
 						,
 						{target:"labelDisplay",
 							name:"height",
-							value:20
+							value:18
 						}
 						,
 						{target:"labelDisplay",
@@ -104,73 +89,40 @@ package org.mokylin.skin.common
 						}
 					]
 			};
-			skinNames={"down":"ui/common/tips/tips_di.png", "hover":"ui/common/tips/tips_di.png", "up":"ui/common/tips/tips_di.png"};
+			skinNames={};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __erjiItem_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__erjiItem_Skin_UIAsset1 = temp;
-			temp.alpha = 0;
-			temp.height = 18;
-			temp.left = 0;
-			temp.right = -1;
-			temp.styleName = "ui/common/tips/tips_di.png";
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __erjiItem_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__erjiItem_Skin_UIAsset2 = temp;
-			temp.height = 18;
-			temp.left = 0;
-			temp.right = -1;
-			temp.styleName = "ui/common/tips/tips_di.png";
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __erjiItem_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__erjiItem_Skin_UIAsset3 = temp;
-			temp.alpha = 0.8;
-			temp.height = 18;
-			temp.left = 0;
-			temp.right = -1;
-			temp.styleName = "ui/common/tips/tips_di.png";
-			temp.y = 0;
-			return temp;
-		}
-
-		private function iconDisplay_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
-			return temp;
-		}
-
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.height = 20;
-			temp.text = "文本";
+			temp.text = "使用";
 			temp.textAlign = "center";
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.verticalAlign = "middle";
-			temp.verticalCenter = 0;
-			temp.width = 40;
-			temp.y = -2;
+			temp.width = 60;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function uiBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiBg = temp;
+			temp.name = "uiBg";
+			temp.alpha = 0.8;
+			temp.height = 20;
+			temp.left = 0;
+			temp.styleName = "ui/common/tips/xialatiaoditu.png";
+			temp.width = 60;
+			temp.y = 0;
 			return temp;
 		}
 

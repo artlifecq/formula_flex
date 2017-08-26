@@ -221,7 +221,7 @@ package com.rpgGame.appModule.common
 		/**
 		 * 依据下标获取格子
 		 * */
-		private function getGridIndex(index:int):DragDropItem
+		public function getGridIndex(index:int):DragDropItem
 		{
 			for(var i:int=0;i<dndGrids.length;i++)
 			{
@@ -296,6 +296,12 @@ package com.rpgGame.appModule.common
 					return (dragDropItem.gridInfo.data as ClientItemInfo);
 			}
 			return null;
+		}
+		
+		/**定位到指定格子*/
+		public function atoGrid(index):void
+		{
+			goodsList.scrollToDisplayIndex(index);
 		}
 		
 		protected function getGridInfoByItemInfo(iteminfo : ClientItemInfo):GridInfo

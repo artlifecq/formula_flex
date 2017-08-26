@@ -309,6 +309,7 @@ package com.rpgGame.appModule.equip
 			var grid:DragDropItem = render.getGrid();
 			grid.onTouchEndCallBack = onTouchGrid;
 			grid.checkDrag=checkDrag;
+			grid.showCD=false;
 			//			grid.dragAble=false;
 			/*	grid.doubleClickFun = onDoubleClick;
 			grid.rightMouseClickFun = onRightMouse;
@@ -994,7 +995,7 @@ package com.rpgGame.appModule.equip
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
 				}
-//				GameAlert.showAlert(alertOk);
+				//				GameAlert.showAlert(alertOk);
 				
 				ChatManager.onShowChatInChatBar(alertOk.alertInfo.value, EnumChatChannelType.CHAT_CHANNEL_SYSTEM);
 			}

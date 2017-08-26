@@ -5,14 +5,11 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.utils.StatsUtil;
-	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
-	import com.rpgGame.app.fight.spell.NewSkillAddPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
-	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
@@ -47,8 +44,8 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -65,6 +62,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.backpack.message.ResOpenCellResultMessage;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
@@ -310,17 +308,18 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".pet", function (...arg):void
 			{
+				//								AppManager.showAppNoHide(AppConstant.GRID_OPEM);
 				AppManager.showApp(AppConstant.PET_PANLE);
-//				var mod:int = arg[0];				
-//				var petInfo:PetInfo=new PetInfo();
-//				petInfo.petId=new long(9999);
-//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
-//				petInfo.petModelId=mod;
-//				petInfo.x=MainRoleManager.actor.pos.x;
-//				petInfo.y=MainRoleManager.actor.pos.y;
-//				var data:GirlPetData=new GirlPetData();
-//				data.setServerData(petInfo);
-//				SceneRoleManager.getInstance().createGirlPet(data);
+				//				var mod:int = arg[0];				
+				//				var petInfo:PetInfo=new PetInfo();
+				//				petInfo.petId=new long(9999);
+				//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+				//				petInfo.petModelId=mod;
+				//				petInfo.x=MainRoleManager.actor.pos.x;
+				//				petInfo.y=MainRoleManager.actor.pos.y;
+				//				var data:GirlPetData=new GirlPetData();
+				//				data.setServerData(petInfo);
+				//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 			commandList.put( ".sset", function (...arg):void
 			{
