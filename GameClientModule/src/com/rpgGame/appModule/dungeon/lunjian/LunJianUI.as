@@ -49,7 +49,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		private function initView():void
 		{
 			_skin.list_map.itemRendererType = NpcMapItemRender;
-			_skin.list_map.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_skin.list_map.scrollBarDisplayMode=ScrollBarDisplayMode.NONE;
 			pageContainer=new PageContainerUI(3,_skin.btnP,_skin.btnN);
 			pageContainer.itemRendererType=LunJianItemRender;
 			pageContainer.x=_skin.list_map.x+_skin.list_map.width+5;
