@@ -342,7 +342,8 @@ package com.rpgGame.coreData.role
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
 			data.totalStat.setResDatas(heroInfo.resourceData);
-			
+			//因为跨服也会发这个，所以先把buff清了 by yfl
+			data.buffList.length=0;
 			for(var i:int=0;i<heroInfo.buffs.length;i++)
 			{
 				var buffData:BuffData = new BuffData(data.id);

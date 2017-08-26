@@ -3,7 +3,10 @@ package com.rpgGame.appModule.dungeon.equip
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.DungeonSender;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
@@ -11,6 +14,7 @@ package com.rpgGame.appModule.dungeon.equip
 	import away3d.events.Event;
 	
 	import feathers.controls.ButtonState;
+	import feathers.controls.Label;
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
@@ -19,6 +23,9 @@ package com.rpgGame.appModule.dungeon.equip
 	import org.mokylin.skin.app.fuben.mc.UIMovieClipTiaozhan_dao;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	public class EquipCell extends DefaultListItemRenderer
 	{
@@ -43,12 +50,15 @@ package com.rpgGame.appModule.dungeon.equip
 			_groupList2=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon_2,RewardGroup.ALIN_CENTER,3,13,13,true,6,false,false);
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnReset.addEventListener(Event.TRIGGERED,resetHandler);
-			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
-			
+			//
+			EventManager.addEvent(DungeonEvent.EQUIP_ITEM_INTO,itemInto);
+			EventManager.addEvent(DungeonEvent.EQUIP_ITEM_OVER,itemOver);
 			_skin.resetgroup.visible = false;
 			_skin.combatgroup.visible = false;
+			_skin.uiOver.visible=false;
 			MCUtil.removeSelf(_skin.lbshenyuName);
 			MCUtil.removeSelf(_skin.lbNum);
+			
 		}
 		
 		override protected function draw():void
@@ -56,12 +66,14 @@ package com.rpgGame.appModule.dungeon.equip
 			var stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
 			if(stateInvalid)
 			{
-				refeashState()
+				refeashState();
+				monseHandler();
 			}
 			super.draw();
 		}
 		private function refeashState():void
 		{
+			
 			if(_dailyZoneInfo==null)
 				return ;
 			if(_dailyZoneInfo.remainCount<=0)
@@ -87,6 +99,7 @@ package com.rpgGame.appModule.dungeon.equip
 				}
 			}
 		}
+		
 		private function resetHandler(e:Event):void
 		{
 			if(_dailyZoneInfo==null)
@@ -102,7 +115,8 @@ package com.rpgGame.appModule.dungeon.equip
 				return ;
 			if(_dailyZoneInfo.remainCount>0)
 			{
-				DailyZoneDataManager.instance().requestCombat(_dailyZoneInfo);
+				var q_data:Q_daily_zone = DailyZoneCfgData.getZoneCfg(_dailyZoneInfo.dailyzoneId);
+				DungeonSender.reqCombat(q_data.q_zone_id,q_data.q_id);
 			}
 		}
 		override protected function commitData():void
@@ -122,11 +136,11 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.lxin1.visible = (1<=_dailyZoneInfo.star);
 			_skin.lxin2.visible = (2<=_dailyZoneInfo.star);
 			_skin.lxin3.visible = (3<=_dailyZoneInfo.star);			
-			
 			updatabuttonState();
 			refeashOpenState();
 			refeashCombatState();
 			refeashBuyState();
+			itemInto();
 		}
 		private var _effect:UIMovieClip;
 		private function updatabuttonState():void
@@ -209,8 +223,32 @@ package com.rpgGame.appModule.dungeon.equip
 				this.removeChild(_effect,true);
 				_effect = null;
 			}
-			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
+			//EventManager.removeEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,commitData);
+			EventManager.removeEvent(DungeonEvent.EQUIP_ITEM_INTO,itemInto);
+			EventManager.removeEvent(DungeonEvent.EQUIP_ITEM_OVER,itemOver);
 		}
+		private function monseHandler():void
+		{
+			if(this._currentState== ButtonState.HOVER)
+			{
+				EventManager.dispatchEvent(DungeonEvent.EQUIP_ITEM_OVER);
+				_skin.uiOver.visible=true;
+			}else if(this._currentState == ButtonState.UP){
+				_skin.uiOver.visible=false;
+			}
+		}
+		private function itemInto():void
+		{
+			var levelid:int=DailyZoneDataManager.instance().getFitLevelIdbyType(2,MainRoleManager.actorInfo.totalStat.level);
+			_skin.uiOver.visible=(levelid==_data.q_id);
+			
+		}
+		private function itemOver():void
+		{
+			_skin.uiOver.visible=false;
+		}
+		
+		
 		override public function get height():Number
 		{
 			return _skin.height;

@@ -41,6 +41,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.OpenPanel;
 	import com.rpgGame.app.ui.alert.EquipAutoDressEffectPanelExt;
+	import com.rpgGame.app.ui.alert.ItemOpenResultShowPanelExt;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -480,6 +481,10 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".debugpos", function (...arg):void
 			{
 				HeadFace.debug=true;
+			});
+			commandList.put( ".openitem", function (...arg):void
+			{
+				ItemOpenResultShowPanelExt.onShowNotice(arg);
 			});
 		}
 		

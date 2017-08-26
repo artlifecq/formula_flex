@@ -57,9 +57,11 @@ package com.rpgGame.appModule.guild.war
 		
 		override public function hide():void
 		{
+			rewardGrp.tweeRewardInBag();
 			super.hide();
 			TimerManager.deleteTimer(timer);
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
+			rewardGrp.clear();
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

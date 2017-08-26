@@ -113,10 +113,10 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			super.onTouchTarget(target);
 			switch(target){
-				case _skin.killbut_0:
+				case MeiRenBoss_Item(_skin.killbut_0.skin).labelDisplay:
 					touchBut(0);
 					break;
-				case _skin.killbut_1:				
+				case MeiRenBoss_Item(_skin.killbut_1.skin).labelDisplay:				
 					touchBut(1);
 					break;
 				case _skin.sec_subbut2:				

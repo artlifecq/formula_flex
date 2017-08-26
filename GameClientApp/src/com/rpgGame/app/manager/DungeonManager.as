@@ -59,6 +59,10 @@ package com.rpgGame.app.manager
 		}
 		public static function setPanelInfos(zoneId:int,count:int,rewardCount:int):void
 		{
+			if(panelInfos==null)
+			{
+				panelInfos=new Vector.<MultiZonePanelInfo>();
+			}
 			if(panelInfos&&panelInfos.length>0)
 			{
 				for(var i:int;i<panelInfos.length;i++)
@@ -71,6 +75,11 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
+			var info:MultiZonePanelInfo=new MultiZonePanelInfo();
+			info.zoneId=zoneId;
+			info.count=count;
+			info.rewardCount=rewardCount;
+			panelInfos.push(info);
 		}
 		public static function getPanelInfo(zoneId:int):MultiZonePanelInfo
 		{
@@ -173,6 +182,28 @@ package com.rpgGame.app.manager
 			}
 			return 0;	
 		}
+		/**返回当前阶段是否是最后一波怪*/
+		public static function isLostWave():Boolean
+		{
+			var zmonstrList:Array=DailyZoneMonsterCfgData.getTypeList(curryZoneId);
+			if(zmonstrList&&zmonstrList.length>0)
+			{
+				var zmonster:Q_dailyzone_monster;
+				var add:int=0;
+				for(var i:int=0;i<zmonstrList.length;i++)
+				{
+					zmonster=zmonstrList[i];
+					if(zmonster&&zmonster.q_wave>zoneWave)
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+		
+		
 		
 		/**创建进入匹配队伍投票列表*/
 		public static function createZoneTeam(zid:int,pid:long,result:int):void

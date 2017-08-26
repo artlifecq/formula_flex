@@ -43,12 +43,13 @@ package com.rpgGame.app.manager.fight
 		public function clear():void
 		{
 			waitEftDatas.length=0;
-			while(playList.length>0){
-				var attackFace : AttackFace=playList.shift();
-				var myTimeline: TimelineLite=timeLineMap.getValue(attackFace);
-				myTimeline.killTweensOf(attackFace);
-				AttackFace.recycleAttackFace(attackFace);
-			}
+			
+//			while(playList.length>0){
+//				var attackFace : AttackFace=playList.pop();
+//				var myTimeline: TimelineLite=timeLineMap.remove(attackFace);
+//				myTimeline.killTweensOf(attackFace);
+//				FightFaceHelper.onAtackFaceComplete(attackFace);
+//			}
 		}
 		
 		public function addChangeHandler(hash:HashMap):void
@@ -137,8 +138,14 @@ package com.rpgGame.app.manager.fight
 		
 		private function contTweenComplete(attackFace:AttackFace):void
 		{
-			playList.shift();
-			AttackFace.recycleAttackFace(attackFace);
+			timeLineMap.remove(attackFace);
+			var index:int=playList.indexOf(attackFace);
+			if (index==-1) 
+			{
+				trace("gg");
+			}
+			playList.removeAt(index);
+			FightFaceHelper.onAtackFaceComplete(attackFace);
 			if(playList.length==0){
 				playNextEft();
 			}

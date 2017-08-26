@@ -1,12 +1,10 @@
 package com.rpgGame.app.fight.spell
 {
-	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
-	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.AnimatorLocusPoint;
@@ -26,7 +24,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.GameScene3DType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -625,6 +622,7 @@ package com.rpgGame.app.fight.spell
 		 * @param info
 		 * 
 		 */		
+		private static var _destPosition:Vector3D = new Vector3D();
 		public static function addDestEffect(destX : int, destZ : int, rotationY : int, info : ReleaseSpellInfo) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
@@ -655,13 +653,23 @@ package com.rpgGame.app.fight.spell
 				var speed:Number=animatData.speed>0?animatData.speed*0.01:1;
 				if (animatData.scene_res)
 				{
+					if(info.posAni.is_self == 1)
+					{
+						_destPosition = info.atkor.position;
+					}
+					else
+					{
+						_destPosition.x = destX;
+						_destPosition.z = destZ;
+					}
+					
 					rud = new RenderParamData3D(1, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);
 					effectRu.repeat = repeat;
-					effectRu.x = destX;
-					effectRu.z = destZ;
+					effectRu.x = _destPosition.x;
+					effectRu.z = _destPosition.z;
 					effectRu.scaleX=animatData.scale_x>0?animatData.scale_x*0.01:1;
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;

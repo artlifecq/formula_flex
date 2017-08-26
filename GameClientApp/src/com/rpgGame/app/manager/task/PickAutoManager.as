@@ -31,6 +31,8 @@ package com.rpgGame.app.manager.task
 		private var _gTimer : GameTimer;
 		private var _isPickRunning : Boolean=false;
 		private var _autoPickCtrl:ControlAutoPick;
+		private var _onArrive:Function;
+		private var _onArriveData:Object;
 		public function PickAutoManager()
 		{
 			_gTimer = new GameTimer("PickAutoManager", 500, 0, onUpdate);
@@ -40,14 +42,17 @@ package com.rpgGame.app.manager.task
 		{
 			_autoPickCtrl=new ControlAutoPick(role);			
 		}
-		public function startPickAuto() : void
+		public function startPickAuto(onArrive:Function=null,data:Object = null) : void
 		{
 			if(!_isPickRunning)
 			{
 				_gTimer.start();
 				_isPickRunning = true;
+				_onArrive=onArrive;
+				_onArriveData=data;
 				onUpdate();
 			}
+			
 		}
 		
 		public function stopPickAuto() : void
@@ -67,7 +72,12 @@ package com.rpgGame.app.manager.task
 		{
 			if (!_isPickRunning)
 				return;
-			if (_autoPickCtrl.isPicking||autoPickCtrl.TryAutoPickItem()) 
+			autoPickCtrl.TryAutoPickItem();
+			if(!hasPickItem())
+			{
+				pickOnArrive();
+			}
+			/*if (_autoPickCtrl.isPicking||autoPickCtrl.TryAutoPickItem()) 
 			{
 				//stopFightTarget();
 				return;
@@ -75,11 +85,43 @@ package com.rpgGame.app.manager.task
 			if (_autoPickCtrl.isArrivePk) 
 			{
 				return;
+			}*/
+			
+			
+			
+		}
+		/**检测掉落物并开始捡，用于自动战斗中*/
+		public function techPickItem():Boolean
+		{
+			if(hasPickItem()&&!isPickRunning)
+			{
+				startPickAuto();
 			}
 			
+			return isPickRunning;
+		}
+		
+		private function pickOnArrive():void
+		{Lyt.a("拾取完成");
+			stopPickAuto();
+			if(_onArrive!=null)
+			{
+				if(_onArriveData!=null)
+				{
+					_onArrive(_onArriveData);
+				}
+				else
+				{
+					_onArrive();
+				}
+			}
 		}
 		
 		
+		public function hasPickItem():Boolean
+		{
+			return autoPickCtrl.hasSth2Pick();
+		}
 		
 		
 		
@@ -87,5 +129,16 @@ package com.rpgGame.app.manager.task
 		{
 			return _autoPickCtrl;
 		}
+
+		public function get isPickRunning():Boolean
+		{
+			return _isPickRunning;
+		}
+
+		public function set isPickRunning(value:Boolean):void
+		{
+			_isPickRunning = value;
+		}
+
 	}
 }

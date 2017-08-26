@@ -16,7 +16,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_equip_polish:int;
 		 /**  备注 */
 		public var q_note:String;
-		 /**  加长属性万分比 */
+		 /**  加长属性十万分比 */
 		public var q_promote:int;
 		 /**  所需琢磨值(总值) */
 		public var q_exp:int;

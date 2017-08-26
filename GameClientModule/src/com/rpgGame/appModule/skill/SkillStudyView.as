@@ -227,6 +227,24 @@ package com.rpgGame.appModule.skill
 		
 		override public function hide():void
 		{
+		
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			_skin.tab_zizhi.addEventListener(Event.CHANGE, onTab);
+			EventManager.addEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
+			EventManager.addEvent(SpellEvent.SPELL_ADD,updateSkillList);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,addItem);
+			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
+			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
+			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
+			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
+		}
+		override protected function onHide():void
+		{
+			super.onHide();
 			_skin.tab_zizhi.removeEventListener(Event.CHANGE, onTab);
 			EventManager.removeEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
@@ -239,20 +257,11 @@ package com.rpgGame.appModule.skill
 			skillUpgrade.onHide();
 			skillRise.onHide();
 		}
-		
 		override public function show(data:Object=null):void
 		{
 			updateZhenqi();
 			updateSkillList();
-			_skin.tab_zizhi.addEventListener(Event.CHANGE, onTab);
-			EventManager.addEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
-			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
-			EventManager.addEvent(SpellEvent.SPELL_ADD,updateSkillList);
-			EventManager.addEvent(ItemEvent.ITEM_ADD,addItem);
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
-			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
-			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
-			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
+		
 		}
 		
 		private function addItem(itemInfo : ClientItemInfo) : void
