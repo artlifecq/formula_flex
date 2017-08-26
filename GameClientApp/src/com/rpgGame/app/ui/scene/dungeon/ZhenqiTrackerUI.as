@@ -183,6 +183,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			_endTime = lastTime/1000;
 			currentStateEnd();
+			setTime();
 		}
 		/**更新击杀数量*/
 		private function updateWaveInfoHandler(currentWaveId:int,killerCount:int):void

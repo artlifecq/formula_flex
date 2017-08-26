@@ -16,7 +16,7 @@ package com.rpgGame.core.manager
 	 */
 	public class BGMManager
 	{
-		private static var _disabledBgm:Boolean = true;
+		private static var _disabledBgm:Boolean = false;
 		private static var _muteDic:Object = {};
 		private static var _soundVolume:Number = 100;
 		private static var _musicVolume:Number = 100;
@@ -72,7 +72,7 @@ package com.rpgGame.core.manager
 		
 		public static function playMusic(fileName:String):void
 		{
-			if (_disabledBgm||true)
+			if (_disabledBgm)
 			{
 				return;
 			}

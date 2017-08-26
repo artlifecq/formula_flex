@@ -3,6 +3,9 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.DungeonSender;
+	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -10,6 +13,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.ButtonState;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -31,11 +35,16 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin = new FuBenItem_Zhenqi();
 			_skin.toSprite(this);
 			this.setSize(_skin.width,_skin.height);
+			
 			_groupList1=new RewardGroup(IcoSizeEnum.ICON_48,_skin.iconFirst,RewardGroup.ALIN_CENTER,1,2,2,true,1,false,false);
 			_groupList2=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon_2,RewardGroup.ALIN_CENTER,3,13,13,true,5,false,false);
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnReset.addEventListener(Event.TRIGGERED,triggeredHandler);
-			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
+			//EventManager.addEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,commitData);
+			
+			EventManager.addEvent(DungeonEvent.GENUNE_ITEM_INTO,itemInto);
+			EventManager.addEvent(DungeonEvent.GENUNE_ITEM_OVER,itemOver);
+			_skin.uiOver.visible=false;
 		}
 		private function triggeredHandler(e:Event):void
 		{
@@ -43,10 +52,20 @@ package com.rpgGame.appModule.dungeon.genuine
 				return ;
 			if(_dailyZoneInfo.remainCount>0)
 			{
-				DailyZoneDataManager.instance().requestCombat(_dailyZoneInfo);
+				var q_data:Q_daily_zone = DailyZoneCfgData.getZoneCfg(_dailyZoneInfo.dailyzoneId);
+				DungeonSender.reqCombat(q_data.q_zone_id,q_data.q_id);
 			}else{
 				DailyZoneDataManager.instance().buyCount(_dailyZoneInfo);
 			}
+		}
+		override protected function draw():void
+		{
+			var stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
+			if(stateInvalid)
+			{
+				monseHandler();
+			}
+			super.draw();
 		}
 		override protected function commitData():void
 		{
@@ -127,11 +146,32 @@ package com.rpgGame.appModule.dungeon.genuine
 				_skin.grpXin.visible = true;
 			}
 		}
-		
+		private function monseHandler():void
+		{
+			if(this._currentState== ButtonState.HOVER)
+			{
+				EventManager.dispatchEvent(DungeonEvent.GENUNE_ITEM_OVER);
+				_skin.uiOver.visible=true;
+			}else if(this._currentState == ButtonState.UP){
+				_skin.uiOver.visible=false;
+			}
+		}
+		private function itemInto():void
+		{
+			var levelid:int=DailyZoneDataManager.instance().getFitLevelIdbyType(1,MainRoleManager.actorInfo.totalStat.level);
+			_skin.uiOver.visible=(levelid==_data.q_id);
+			
+		}
+		private function itemOver():void
+		{
+			_skin.uiOver.visible=false;
+		}
 		override public function dispose():void
 		{
 			super.dispose();
-			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
+			//EventManager.removeEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,commitData);
+			EventManager.removeEvent(DungeonEvent.GENUNE_ITEM_INTO,itemInto);
+			EventManager.removeEvent(DungeonEvent.GENUNE_ITEM_OVER,itemOver);
 		}
 		
 		override public function get height():Number

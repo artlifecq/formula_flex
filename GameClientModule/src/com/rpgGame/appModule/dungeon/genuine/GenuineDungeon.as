@@ -1,10 +1,12 @@
 package com.rpgGame.appModule.dungeon.genuine
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -20,6 +22,8 @@ package com.rpgGame.appModule.dungeon.genuine
 	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_ZhenQi_Skin;
 	
@@ -28,28 +32,17 @@ package com.rpgGame.appModule.dungeon.genuine
 	public class GenuineDungeon extends ViewUI
 	{
 		private var _skin:FuBen_ZhenQi_Skin;
+		private var qdataList:Array;
 		//private var gridList:Vector.<IconCDFace>;
 		private var icoListGroup:RewardGroup;
 		public function GenuineDungeon():void
 		{
 			_skin = new FuBen_ZhenQi_Skin();
 			super(_skin);
-			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon1,RewardGroup.ALIN_RIGHT,15,6,6,true,15);
-			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+			init();
+			//_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 		}
-		
-		override public function hide():void
-		{
-			super.hide();
-//			while(gridList.length>0){
-//				var icon:IconCDFace=gridList.pop();
-//				icon.destroy();
-//			}
-			icoListGroup.clear();
-			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
-		}
-		
-		override public function show(data:Object=null):void
+		private function init():void
 		{
 			_skin.list.itemRendererType =GenuineCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -58,61 +51,54 @@ package com.rpgGame.appModule.dungeon.genuine
 			var layout:HorizontalLayout = new HorizontalLayout();
 			layout.gap = 4;
 			_skin.list.layout = layout;
-			var list:Array = DailyZoneCfgData.getTypeList(1);
+			qdataList= DailyZoneCfgData.getTypeList(1);
+			_skin.list.dataProvider = new ListCollection(qdataList);
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.icon1,RewardGroup.ALIN_RIGHT,15,6,6,true,15);
+			
+		}
+		private function addEvent():void
+		{
+			EventManager.addEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,updateAll);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updateAll);
+			
+		}
+		private function remvoeEvent():void
+		{
+			EventManager.removeEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,updateAll);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updateAll);
+			
+		}
 		
-			_skin.list.dataProvider = new ListCollection(list);
+		override public function hide():void
+		{
+			super.hide();
+			remvoeEvent();
+			icoListGroup.clear();
+		}
+		
+		override public function show(data:Object=null):void
+		{
+			addEvent();
+			setReWard();
+			updateAll();
+			toInitIndex();
+			EventManager.dispatchEvent(DungeonEvent.GENUNE_ITEM_INTO);
+		}
+		/**设置底部奖励*/
+		private function setReWard():void
+		{
 			var reWardStr:String=GlobalSheetData.getSettingInfo(716)!=null?GlobalSheetData.getSettingInfo(716).q_string_value:"";
 			icoListGroup.setRewardByJsonStr(reWardStr);
 			_skin.jiangli_text.x=icoListGroup.x-icoListGroup.width-40;
-			
-//			var qglob:Q_global = GlobalSheetData.getSettingInfo(716);
-//			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
-//			var length:int = itemInfos.length;
-//			var startX:Number = 742;
-//			var item:ItemInfo;
-//			var icon:IconCDFace;
-//			gridList=new Vector.<IconCDFace>();
-//			for(var i:int = 0;i<length;i++)
-//			{
-//				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
-//				grid.setBg( GridBGType.GRID_SIZE_42,1 );
-////				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
-//				_skin.container.addChild(grid);
-//				grid.x = startX+60*i;
-//				grid.y = 532;
-//				item = new ItemInfo();
-//				item.itemModelId = itemInfos[i]["mod"];
-//				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
-//				gridList.push(grid);
-//			}
-			if (!_skin.list.hasEventListener(FeathersEventType.CREATION_COMPLETE)) 
-			{
-				onCreate();
-			}
-			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updatePlayerLvUp);
 		}
 		
-		private function onCreate():void
+		/**打开卷到适合的元素*/
+		private function toInitIndex():void
 		{
-			_skin.list.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
-//			_skin.list.horizontalScrollStep=194+30;
-			
-			var list:Array=_skin.list.dataProvider.data as Array;
-			var toIndex:int=-1;
-			for(var i:int=0;i<list.length;i++){
-				var info:DailyZonePanelInfo=DailyZoneDataManager.instance().getInfoById(list[i].q_id);
-				if(info.remainCount!=0||info.canBuyCount!=0){
-					toIndex=i;
-					break;
-				}
-			}
-			if(toIndex==-1){
-				toIndex=0;
-			}
-			toIndex=Math.floor(toIndex/4);
-			refeashList(toIndex);			
+			var toIndex:int=gettoIndex();
+			TweenLite.killDelayedCallsTo(refeashList);
+			TweenLite.delayedCall(0.1, refeashList,[toIndex]);
 		}
-		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -128,7 +114,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			}
 		}
 		
-		private function updatePlayerLvUp():void
+		private function updateAll():void
 		{
 			if(_skin.list)
 				_skin.list.dataProvider.updateAll();
@@ -136,9 +122,32 @@ package com.rpgGame.appModule.dungeon.genuine
 		
 		private function refeashList(index:int):void
 		{
+			index=index>3?index-3:0;
 			_skin.btnNext.visible = (index <_skin.list.maxHorizontalPageIndex);
 			_skin.btnPrev.visible = (index >0);
 			_skin.list.scrollToPageIndex(index,0);
+		}
+		private function gettoIndex():int
+		{
+			//var list:Array=_skin.list.dataProvider.data as Array;
+			var toIndex:int=-1;
+			if(qdataList!=null)
+			{
+				var levelid:int=DailyZoneDataManager.instance().getFitLevelIdbyType(1,MainRoleManager.actorInfo.totalStat.level);
+				for(var i:int=0;i<qdataList.length;i++){
+					if(qdataList[i].q_id==levelid)
+					{
+						toIndex=i;
+						break;
+					}
+				}
+			}
+			
+			
+			if(toIndex==-1){
+				toIndex=0;
+			}
+			return toIndex;
 		}
 	}
 }

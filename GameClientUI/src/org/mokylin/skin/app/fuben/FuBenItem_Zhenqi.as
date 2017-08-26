@@ -65,6 +65,8 @@ package org.mokylin.skin.app.fuben
 
 		public var uiName:feathers.controls.UIAsset;
 
+		public var uiOver:feathers.controls.UIAsset;
+
 		public var uiTishi:feathers.controls.UIAsset;
 
 		public var xin1:feathers.controls.UIAsset;
@@ -84,7 +86,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 418;
 			this.width = 221;
-			this.elementsContent = [uiBg_i(),__FuBenItem_Zhenqi_UIAsset1_i(),uiName_i(),uiLevel_i(),grpFirst_i(),uiJiangli_i(),icon_2_i(),grpXin_i(),grpXinL_i(),grp_Tuijian_i(),combatgroup_i(),resetgroup_i(),uiTishi_i()];
+			this.elementsContent = [uiBg_i(),uiOver_i(),__FuBenItem_Zhenqi_UIAsset1_i(),uiName_i(),uiLevel_i(),grpFirst_i(),uiJiangli_i(),icon_2_i(),grpXin_i(),grpXinL_i(),grp_Tuijian_i(),combatgroup_i(),resetgroup_i(),uiTishi_i()];
 			
 			states = {
 			};
@@ -349,6 +351,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			resetgroup = temp;
 			temp.name = "resetgroup";
+			temp.visible = false;
 			temp.x = 52;
 			temp.y = 356;
 			temp.elementsContent = [__FuBenItem_Zhenqi_Label1_i(),lbYuanbao_i(),__FuBenItem_Zhenqi_UIAsset3_i(),btnReset_i()];
@@ -406,6 +409,19 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/app/fuben/mc/zhenqi/50.png";
 			temp.x = 53;
 			temp.y = 5;
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.height = 418;
+			temp.styleName = "ui/common/hover/liangkuang2.png";
+			temp.width = 221;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

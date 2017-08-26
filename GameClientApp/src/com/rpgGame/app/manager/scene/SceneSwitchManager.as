@@ -539,11 +539,6 @@ package com.rpgGame.app.manager.scene
 				AreaMapManager.updateCameraAreaMap();
 				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
 				
-				//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-				//BGMManager.playMusic("Music/Mus_cfys");
-				
-				var soundUrl:String = ClientConfig.getSound("Music/Mus_cfys");
-				AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, soundUrl);
 			}
 			
 			if (SceneManager.clientMapData)
@@ -554,9 +549,17 @@ package com.rpgGame.app.manager.scene
 				var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
 				SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
 			}
-			
 			sendSceneLoaded();
+			playBackMusic();
 		}
+		private static function playBackMusic() : void
+		{
+			
+			
+			//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+			BGMManager.playMusic(MapDataManager.currentScene.sound);
+		}
+		
 		
 		private static function onMiniMapComplete(scene : GameScene3D) : void
 		{

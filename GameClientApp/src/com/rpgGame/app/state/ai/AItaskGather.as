@@ -3,6 +3,7 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -59,6 +60,8 @@ package com.rpgGame.app.state.ai
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
 			if (nextState.type == AIStateType.AI_NONE)
+				return true;
+			if (MainRoleManager.actor.stateMachine.isIdle)
 				return true;
 			return false;
 		}

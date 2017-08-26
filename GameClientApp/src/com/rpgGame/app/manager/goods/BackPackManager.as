@@ -417,6 +417,12 @@ package com.rpgGame.app.manager.goods
 			return null;
 		}
 		
+		/**是否有某种物品*/
+		public function haveItemById(id:int):Boolean
+		{
+			return getItemById(id)!=null;
+		}
+		
 		/**返回物品*/
 		public function getItemById(id:int):ClientItemInfo
 		{
