@@ -37,7 +37,6 @@ package  com.rpgGame.app.ctrl
 		}
 		private function onTouch(e:TouchEvent):void
 		{
-		
 			var target : DisplayObject = e.currentTarget as DisplayObject;
 			var touch : Touch;
 			touch = e.getTouch(target);

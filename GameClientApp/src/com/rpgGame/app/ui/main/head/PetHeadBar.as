@@ -121,10 +121,10 @@ package com.rpgGame.app.ui.main.head
 			TipTargetManager.remove(this);
 			if(Mgr.petMgr.curPetId==0) return;
 			_petMod=PetCfg.getPet(Mgr.petMgr.curPetId);
-			_skin.uiName.styleName = "ui/mainui/meirenHead/head_icon/name"+Mgr.petMgr.curPetId+"s.png";
-			_skin.icon.styleName = "ui/mainui/meirenHead/head_icon/head"+Mgr.petMgr.curPetId+"s.png";	
+			_skin.uiName.styleName = "ui/pet/petName/name"+Mgr.petMgr.curPetId+"s.png";
+			_skin.icon.styleName = "ui/pet/petHead/head"+Mgr.petMgr.curPetId+"s.png";	
 			var info:PetInfo=PetManager.ins.getPet(Mgr.petMgr.curPetId);
-			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, info ,true) );
+			TipTargetManager.show(_skin.icon, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, info ,true) );
 		}
 	}
 }

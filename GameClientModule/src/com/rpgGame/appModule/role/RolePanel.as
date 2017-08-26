@@ -8,13 +8,10 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.junjie.JunJiePanelExt;
 	import com.rpgGame.appModule.xinfa.XinFaMainPanelExt;
 	import com.rpgGame.appModule.zhangong.ZhanGongPanelExt;
-	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.beibao_Skin;
-	import org.mokylin.skin.app.beibao.daohang_Skin;
 	import org.mokylin.skin.app.beibao.button.ButtonJingmai;
 	import org.mokylin.skin.app.beibao.button.ButtonJuese;
 	import org.mokylin.skin.app.beibao.button.ButtonJunjie;

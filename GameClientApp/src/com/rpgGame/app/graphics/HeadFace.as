@@ -113,10 +113,10 @@ package com.rpgGame.app.graphics
 		private var _title : HeadFaceEffect;
 		
 		/**护宝称号*/
-		private var _huabotitle : InterObject3D;
+		private var _huabotitle : HeadFaceEffect;
 		
 		/**NPC称号*/
-		private var _NPCtitle : InterObject3D;
+		private var _NPCtitle : HeadFaceEffect;
 		
 		private var _moodTween : TweenLite;
 		
@@ -1381,23 +1381,26 @@ package com.rpgGame.app.graphics
 				if (_huabotitle)
 				{
 					_huabotitle.removeFromParent();
+					_huabotitle.dispose();
 					_huabotitle = null;
 				}
-				_huabotitle = new InterObject3D();
+				_huabotitle = new HeadFaceEffect();
 				
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=HuBaoData.getEffByLv(titleID);
-				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
-				_huabotitle.addRenderUnitWith(rud, 0);
+				_huabotitle.playEffect(170,65,ClientConfig.getEffect(effName),0,0,0);
+//				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
+//				_huabotitle.addRenderUnitWith(rud, 0);
 				//				this.addChild(_huabotitle);
 				this.deCtrl.addTop(_huabotitle,DecorCtrl.TOP_HUBAOCHENGHAO);
-				_huabotitle.start();
+//				_huabotitle.start();
 			}
 			else
 			{
 				if (_huabotitle)
 				{
 					_huabotitle.removeFromParent();
+					_huabotitle.dispose();
 					_huabotitle = null;
 				}
 			}
@@ -1415,15 +1418,16 @@ package com.rpgGame.app.graphics
 					_NPCtitle.removeFromParent();
 					_NPCtitle = null;
 				}
-				_NPCtitle = new InterObject3D();
+				_NPCtitle = new HeadFaceEffect();
 				var effName:String=(_role.data as MonsterData).monsterData.q_chenhao;
 				if(effName!=null&&effName!="")
 				{
-					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
-					_NPCtitle.addRenderUnitWith(rud, 0);
+					_NPCtitle.playEffect(170,65,ClientConfig.getEffect(effName),0,65,0);
+//					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
+//					_NPCtitle.addRenderUnitWith(rud, 0);
 					//					this.addChild(_NPCtitle);
 					this.deCtrl.addTop(_NPCtitle,DecorCtrl.TOP_NPCCHENGHAO);
-					_NPCtitle.start();
+//					_NPCtitle.start();
 				}
 				updateAllBarPosition();
 			}

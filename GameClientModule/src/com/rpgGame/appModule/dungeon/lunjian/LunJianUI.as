@@ -177,6 +177,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			for(var i:int=0;i<num;i++){
 				var data:LunJianItemData=new LunJianItemData();
 				data.diff=diffMap.getValue(list[i].q_type);
+				data.num=i;
 				if(data.diff<3){
 					data.cfg=LunJianCfg.getCfgByInfo(selected.sceneData.sceneId,list[i].q_type,data.diff+1);
 					if(firstCanFight==-1){

@@ -80,10 +80,13 @@ RichTextCustomUtil.updateRichUnit
 package com.rpgGame.app.richText
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.FaceLoadManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
@@ -106,6 +109,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
@@ -323,11 +327,11 @@ package com.rpgGame.app.richText
 					else
 						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
 					break;
-				case RichTextCustomLinkType.JINJIE_SHOW_TYPE:
-					var t:String=unitData.linkData;
-					var id:String=ChatUtil.getPanel(t);
-					FunctionOpenManager.openAppPaneById(id,null,false);
-//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
+				case RichTextCustomLinkType.SHOW_PANEL_TYPE:
+					var panelID:String=unitData.linkData;
+					//					var id:String=ChatUtil.getPanel(t);
+					FunctionOpenManager.openAppPaneById(panelID,null,false);
+					//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
 					var npcId : int = parseInt(unitData.linkData); //任务，npc的id
@@ -403,6 +407,34 @@ package com.rpgGame.app.richText
 						return;
 					}
 					Mgr.hunyinMgr.showQiuHunTiShiPanel(1,null,name[0]);
+					break;
+				
+				case RichTextCustomLinkType.TEAM_APPLY:
+					var teamId:Number=(new long(unitData.linkData)).ToGID();
+					var id:long = new long(teamId);
+					TeamManager.ins.reqJoinToTeam(id);
+					break;
+				case RichTextCustomLinkType.RALLY:
+					scenePosArr = unitData.linkData.split(",");
+					sceneId = scenePosArr[0];
+					x = scenePosArr[1];
+					y = scenePosArr[2];
+					var shenxingfuNum:int=BackPackManager.instance.getItemCount(601);
+					if(shenxingfuNum>0||Mgr.vipMgr.vipLv>0)
+						SceneSender.sceneMapTransport(sceneId, x, y);
+					else
+						MainRoleSearchPathManager.walkToScene(sceneId,x, y, null, 200);
+					break;
+				case RichTextCustomLinkType.HUBAO:
+					scenePosArr = unitData.linkData.split(",");
+					sceneId = scenePosArr[0];
+					x = scenePosArr[1];
+					y = scenePosArr[2];
+					shenxingfuNum=BackPackManager.instance.getItemCount(601);
+					if(shenxingfuNum>0||Mgr.vipMgr.vipLv>0)
+						SceneSender.sceneMapTransport(sceneId, x, y);
+					else
+						HuBaoManager.instance().onwalkToNpc(HuBaoData.acceptNpc);
 					break;
 			}
 		}

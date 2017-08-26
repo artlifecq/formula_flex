@@ -12,7 +12,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	
 	import flash.geom.Point;
-
+	
 	/**
 	 * 技能伤害结果info 
 	 * @author NEIL
@@ -59,78 +59,78 @@ package com.rpgGame.app.fight.spell
 			var resultInfo:AttackResultInfo;
 			var isState : Boolean = false;//现在还没有技能触发buff的功能，暂时不走这里面的逻辑
 			
-//			for(var i:uint = 0;i<msg.infos.length;i++)
-//			{
-				resultInfo = msg.state;
-				
-				var hurtResultVO : FightHurtResult = new FightHurtResult();
-				
-				hurtResultVO.readSpellEffectData(resultInfo.skillId);
-				
-				hurtResultVO.curLife = resultInfo.damage;
-				
-//				var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
-				hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
-				
-				trace(resultInfo.newPos.x + "\t" +  resultInfo.newPos.y);
-				
-				hurtResultVO.hasPositionChange = resultInfo.fightResult == 8;
-				hurtResultVO.hasPositionFly = resultInfo.fightResult == 16;
-				hurtResultVO.stiffTime = hurtResultVO.deadLaunchDistance/hurtResultVO.deadLaunchSpeed * 1000;
-				
-				hurtResultVO.targetID = resultInfo.targetId.ToGID();//目标
-				hurtResultVO.targetRole = SceneManager.getSceneObjByID(hurtResultVO.targetID) as BaseRole;
-				if(hurtResultVO.targetRole == null)
+			//			for(var i:uint = 0;i<msg.infos.length;i++)
+			//			{
+			resultInfo = msg.state;
+			
+			var hurtResultVO : FightHurtResult = new FightHurtResult();
+			trace("技能伤害的创建："+resultInfo.skillId);
+			hurtResultVO.readSpellEffectData(resultInfo.skillId);
+			
+			hurtResultVO.curLife = resultInfo.damage;
+			
+			//				var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
+			hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
+			
+			trace(resultInfo.newPos.x + "\t" +  resultInfo.newPos.y);
+			
+			hurtResultVO.hasPositionChange = resultInfo.fightResult == 8;
+			hurtResultVO.hasPositionFly = resultInfo.fightResult == 16;
+			hurtResultVO.stiffTime = hurtResultVO.deadLaunchDistance/hurtResultVO.deadLaunchSpeed * 1000;
+			
+			hurtResultVO.targetID = resultInfo.targetId.ToGID();//目标
+			hurtResultVO.targetRole = SceneManager.getSceneObjByID(hurtResultVO.targetID) as BaseRole;
+			if(hurtResultVO.targetRole == null)
+			{
+				GameLog.addShow("被攻击者为空!攻击者服务器ID为：\t " + resultInfo.targetId.ToString());
+			}
+			
+			if(hurtResultVO.targetRole && hurtResultVO.targetRole.usable)
+			{
+				hurtResultVO.targetPos = new Point(hurtResultVO.targetRole.x, hurtResultVO.targetRole.z);
+			}
+			
+			///攻击者的信息
+			hurtResultVO.atkorID = resultInfo.attackerId.ToGID();//攻击者
+			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
+			if(hurtResultVO.atkor == null)
+			{
+				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId.ToString());
+			}
+			
+			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)
+			{
+				hurtResultVO.atkorPos = new Point(hurtResultVO.atkor.x, hurtResultVO.atkor.z);
+			}
+			
+			if (hurtResultVO.targetRole)
+			{
+				hurtCharList.push(hurtResultVO.targetRole);
+			}
+			if (hurtResultVO.atkorID != MainRoleManager.actorID && hurtResultVO.targetID == MainRoleManager.actorID) //判定主角是否被攻击
+			{
+				if (hurtResultVO.atkor /*&& hurtResultVO.atkor.data is HeroData*/) //是玩家才自动反击
 				{
-					GameLog.addShow("被攻击者为空!攻击者服务器ID为：\t " + resultInfo.targetId.ToString());
+					isHited = true;
 				}
-				
-				if(hurtResultVO.targetRole && hurtResultVO.targetRole.usable)
+			}
+			
+			var hurtType : int = resultInfo.fightResult
+			var hurtAmount : int = resultInfo.damage / hurtResultVO.hurtTimes; //本次
+			var remainderAmount : int = resultInfo.damage % hurtResultVO.hurtTimes;
+			
+			for (var hurtTimeI : int = 0; hurtTimeI < hurtResultVO.hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
+			{
+				if(hurtTimeI == (hurtResultVO.hurtTimes-1) && remainderAmount > 0)
 				{
-					hurtResultVO.targetPos = new Point(hurtResultVO.targetRole.x, hurtResultVO.targetRole.z);
+					hurtAmount += remainderAmount;
 				}
-				
-				///攻击者的信息
-				hurtResultVO.atkorID = resultInfo.attackerId.ToGID();//攻击者
-				hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
-				if(hurtResultVO.atkor == null)
-				{
-					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId.ToString());
-				}
-							
-				if(hurtResultVO.atkor && hurtResultVO.atkor.usable)
-				{
-					hurtResultVO.atkorPos = new Point(hurtResultVO.atkor.x, hurtResultVO.atkor.z);
-				}
-				
-				if (hurtResultVO.targetRole)
-				{
-					hurtCharList.push(hurtResultVO.targetRole);
-				}
-				if (hurtResultVO.atkorID != MainRoleManager.actorID && hurtResultVO.targetID == MainRoleManager.actorID) //判定主角是否被攻击
-				{
-					if (hurtResultVO.atkor /*&& hurtResultVO.atkor.data is HeroData*/) //是玩家才自动反击
-					{
-						isHited = true;
-					}
-				}
-				
-				var hurtType : int = resultInfo.fightResult
-				var hurtAmount : int = resultInfo.damage / hurtResultVO.hurtTimes; //本次
-				var remainderAmount : int = resultInfo.damage % hurtResultVO.hurtTimes;
-				
-				for (var hurtTimeI : int = 0; hurtTimeI < hurtResultVO.hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
-				{
-					if(hurtTimeI == (hurtResultVO.hurtTimes-1) && remainderAmount > 0)
-					{
-						hurtAmount += remainderAmount;
-					}
-					var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, hurtResultVO.targetID);
-					hurtResultVO.addHurt(sVo);
-				}
-				hurtList.push(hurtResultVO);
-				info.hurtDelay = hurtResultVO.hurtDelay;
-//			}
+				var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, hurtResultVO.targetID);
+				hurtResultVO.addHurt(sVo);
+			}
+			hurtList.push(hurtResultVO);
+			info.hurtDelay = hurtResultVO.hurtDelay;
+			//			}
 			
 			info.hurtList = hurtList;
 			info.isMainCharHited = isHited;

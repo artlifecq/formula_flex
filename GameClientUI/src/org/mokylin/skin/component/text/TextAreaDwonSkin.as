@@ -63,8 +63,8 @@ package org.mokylin.skin.component.text
 			textDisplay = temp;
 			temp.name = "textDisplay";
 			temp.bottom = 5;
-			temp.left = 5;
-			temp.right = 7;
+			temp.left = 4;
+			temp.right = 18;
 			temp.top = 5;
 			return temp;
 		}

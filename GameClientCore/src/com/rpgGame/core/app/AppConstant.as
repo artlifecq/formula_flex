@@ -4,7 +4,7 @@ package com.rpgGame.core.app
 	import com.rpgGame.core.app.enum.PanelPosType;
 	
 	import flash.utils.Dictionary;
-
+	
 	/**
 	 * app模块常量定义，
 	 * AppManager打开面板的AppInfo参数都需要在这里定义，外部不可定义
@@ -61,7 +61,7 @@ package com.rpgGame.core.app
 			var info:AppInfo = appNameDic[ appName ];
 			return info;
 		}
-
+		
 		/**
 		 * 横块名应该使用包名.+类名形式
 		 */		
@@ -185,7 +185,7 @@ package com.rpgGame.core.app
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
 		/** 
-		*战魂
+		 *战魂
 		 */
 		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
 		
@@ -232,7 +232,7 @@ package com.rpgGame.core.app
 		
 		/**国家讨逆任务条面板**/
 		public static var COUNTRY_TAO_NI_TASK_BAR_PANEL:String = createAppInfo( "taoni.CountryTaoNiTaskBarPanel" , null,PanelPosType.MIDDLE_RIGHT); 
-	
+		
 		/**采集条**/
 		public static var COLLECT_PANEL:String = createAppInfo( "collect.CollectBar" ); 
 		
@@ -266,7 +266,7 @@ package com.rpgGame.core.app
 		public static var FAMILY_MSG_INFO_PANEL:String = createAppInfo( "family.FamilyMsgInfoPanel" ); 
 		/**掉落物品列表**/
 		public static var DROP_GOODS_LIST_PANEL:String = createAppInfo( "dropGoods.DropGoodsListPanel" , null, PanelPosType.MIDDLE_LEFT , 200); 
-
+		
 		/**随身商店/NPC商店面板**/
 		public static var SHOP_PANEL:String = createAppInfo( "shop.ShopPanel", "shop" ); 
 		/**商店购买确认框**/
@@ -331,7 +331,7 @@ package com.rpgGame.core.app
 		public static var COUNTRY_WAR_PROGRESS_TEXT_PANEL:String = createAppInfo( "countryWar.CountryWarProgressTextPanel","countryWar",PanelPosType.BOTTOM_CENTRAL,0,-390);
 		
 		
-	
+		
 		
 		/**
 		 * 装备打造 
@@ -531,7 +531,7 @@ package com.rpgGame.core.app
 		public static var HUNYIN_FUBEN:String = createAppInfo("hunyin.FuQiFuBenPanelExt","hunyin");
 		/**夫妻邀请提示**/
 		public static var HUNYIN_FUBENYAOQING:String = createAppInfo("hunyin.FuQiYaoQingPanel","hunyin");
-
+		
 		/**红包拆开**/
 		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao");
 		/**发送红包**/
@@ -552,13 +552,20 @@ package com.rpgGame.core.app
 		
 		/**副本结算通用**/
 		public static var COMMON_ZONE_RESULT_PANLE:String = createAppInfo("zone.CommonZoneResultPanelExt");
-	
-		/**开格提示*/
+		
+		/**开格提示（解锁提示）*/
 		public static var GRID_OPEN_TISHI:String = createAppInfo("role.GridOpenTiShiPanel");
+		
 		/**副本结算通用**/
 		public static var NEW_SKILL_ADD_PANLE:String = createAppInfo("skill.NewSkillAddPanelExt","xinjineng");
 		
 		/**提示*/
 		public static var ALERT_TEXT_PANEL:String = createAppInfo("alert.AlertTextPanel");
+		
+		/**开格提示（右下）*/
+		public static var GRID_OPEM:String = createAppInfo("role.GridKaiQiTiShiPanel","msg");
+		
+		/**背包快满了提示*/
+		public static var BACK_FULL_TISHI:String = createAppInfo("role.BaoGuoTiShiPanel","baoguo");
 	}
 }

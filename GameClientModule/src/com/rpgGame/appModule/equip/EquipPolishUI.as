@@ -360,6 +360,7 @@ package com.rpgGame.appModule.equip
 			var grid:DragDropItem = render.getGrid();
 			grid.onTouchEndCallBack = onTouchGrid;
 			grid.checkDrag=checkDrag;
+			grid.showCD=false;
 			return render;
 		}
 		

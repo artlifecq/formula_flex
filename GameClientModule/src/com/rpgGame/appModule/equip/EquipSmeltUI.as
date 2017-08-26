@@ -178,6 +178,7 @@ package com.rpgGame.appModule.equip
 			var grid:DragDropItem = render.getGrid();
 			grid.onTouchEndCallBack = onTouchGrid;
 			grid.checkDrag=checkDrag;
+			grid.showCD=false;
 			return render;
 		}
 		
@@ -300,7 +301,7 @@ package com.rpgGame.appModule.equip
 				alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT30)+needMon;
 				alertOk.isShowCBox=true;
 				alertOk.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
-				alertOk.alertInfo.align="left";
+//				alertOk.alertInfo.align="left";
 				GameAlert.showAlert(alertOk,onAlert,[type]);
 				return;
 			}

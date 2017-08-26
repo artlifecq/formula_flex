@@ -16,12 +16,18 @@ package com.rpgGame.app.richText
 		public static const POSITION_FLY_TYPE : String = "3";
 		/** 物品展示	需要参数：data:cfgid,quality */
 		public static const ITEM_SHOW_TYPE : String = "4";
-		/** 文本类型超链接（liaotianlan）*/
-		public static const JINJIE_SHOW_TYPE : String = "5";
+		/** 文本类型超链接（打开相应的面板）*/
+		public static const SHOW_PANEL_TYPE : String = "5";
 		/** 称号展示	需要参数：data:TitleTreeData */
 		public static const TITLE_TYPE : String = "6";
 		/** 坐骑展示	需要参数：坐骑数据id */
 		public static const SHOW_MOUNT_TYPE : String = "7";
+		/** 申请组队	需要参数：data:id */
+		public static const TEAM_APPLY : String = "8";
+		/** 集结	需要参数：data:id */
+		public static const RALLY : String = "9";
+		/** 护宝	需要参数：data:id */
+		public static const HUBAO : String = "10";
 		/** 任务，到某个地方打开NPC对话面板	需要参数：data:NPCID */
 		public static const TASK_NPC_NAME_TYPE : String = "100";
 		/** 任务，到某个地方杀怪物	需要参数：data:monsterId */

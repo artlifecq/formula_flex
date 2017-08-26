@@ -1,11 +1,14 @@
 package com.rpgGame.appModule.storage
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -16,6 +19,7 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.MouseCursorEnum;
@@ -24,6 +28,7 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.netData.backpack.message.ResOpenCellResultMessage;
 	
 	import flash.geom.Point;
 	import flash.ui.Mouse;
@@ -56,11 +61,15 @@ package com.rpgGame.appModule.storage
 		private var currentListData:ListCollection;
 		
 		private var isSave:Boolean;
+		private var _tishiEff:InterObject3D;
+		private var _tishiEffContaner:Inter3DContainer;
 		
 		public function StoragePanel()
 		{
 			this._skin = new cangku_Skin();
 			super(_skin);
+			_tishiEffContaner=new Inter3DContainer();
+			_skin.container.addChild(_tishiEffContaner);
 			this.dragAble=false;
 			initGoodsPanel();
 		}
@@ -238,6 +247,7 @@ package com.rpgGame.appModule.storage
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
 			EventManager.addEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
 			EventManager.addEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
+			EventManager.addEvent(ItemEvent.ITEM_GRID_CANLOCK_CHENGGONG,jiesuochenggong);//解锁成功
 		}
 		
 		private function getItem(info:GridInfo):void
@@ -397,6 +407,24 @@ package com.rpgGame.appModule.storage
 			}
 		}
 		
+		public function autoGrid():void
+		{
+			goodsContainer.atoGrid(StorageManager.instance.curUnlockIndex); 
+		}
+		
+		private function jiesuochenggong(msg:ResOpenCellResultMessage):void
+		{
+			if(GoodsContainerMamager.getGoodsType(msg.type)==ItemContainerID.Storage){
+				var grid:DragDropItem=goodsContainer.getGridIndex(msg.cellId);
+				if(grid){
+					var p:Point=new Point(grid.x+grid.width/2,grid.y+grid.height/2);
+					p=grid.parent.localToGlobal(p);
+					p=this._skin.container.globalToLocal(p);
+					_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_gezi_4"),p.x,p.y,1,null);
+				}
+			}
+		}
+		
 		override public function hide():void
 		{
 			super.hide();
@@ -409,6 +437,7 @@ package com.rpgGame.appModule.storage
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
+			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK_CHENGGONG,jiesuochenggong);//解锁成功
 			EventManager.dispatchEvent(ItemEvent.CHANGE_ACCESS_STATE,false);		
 		}
 	}
