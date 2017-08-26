@@ -98,7 +98,6 @@ package com.rpgGame.app.ui.scene.dungeon
 			EventManager.addEvent(ItemEvent.ITEM_ADD,updateshow);
 			EventManager.addEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
 			updateshow(null);
-			doFindMonsterWork();
 		}
 		
 		override protected function onHide():void
@@ -137,6 +136,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			_skin.uiJiSha.visible=msg.bossState==1;
 			var monsterName:String=MonsterDataManager.getMonsterName(msg.monsterModelId);
 			_skin.lbName.text=monsterName;
+			doFindMonsterWork();
 		}
 		
 		private function updateTime():void

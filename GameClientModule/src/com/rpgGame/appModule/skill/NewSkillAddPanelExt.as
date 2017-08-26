@@ -19,6 +19,7 @@ package  com.rpgGame.appModule.skill
 	
 	import flash.geom.Point;
 	import flash.utils.getTimer;
+	import flash.utils.setTimeout;
 	
 	import feathers.controls.UIAsset;
 	
@@ -143,7 +144,7 @@ package  com.rpgGame.appModule.skill
 			{
 				var index:int=cfg.q_seat-1;//配置从1开始的 
 				toP=MainUIManager.mainui.shortcutBar.getSkillGridSeat(index);
-				ShortcutsManger.getInstance().setShortData(index,ShortcutsTypeEnum.SKILL_TYPE,cfg.q_skillID);
+				setTimeout(ShortcutsManger.getInstance().updateNewSpell,500,cfg,true);
 			}
 			else
 			{
@@ -155,6 +156,7 @@ package  com.rpgGame.appModule.skill
 		}
 		private function flytoShortcutComplete():void
 		{
+			
 			MCUtil.removeSelf(_flyIcon);
 		}
 		private function reset():void

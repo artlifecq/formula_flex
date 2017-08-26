@@ -65,7 +65,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			lb_type = temp;
 			temp.name = "lb_type";
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 12;
 			temp.y = 39;
 			return temp;
@@ -90,7 +90,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLevel = temp;
 			temp.name = "uiLevel";
-			temp.styleName = "ui/mainui/meirenHead/jieshu/12.png";
+			temp.styleName = "ui/pet/jieshu/12.png";
 			temp.x = 119;
 			temp.y = 4;
 			return temp;
@@ -101,7 +101,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/mainui/meirenHead/head_icon/name2s.png";
+			temp.styleName = "ui/pet/petName/name2s.png";
 			temp.x = 8;
 			temp.y = 10;
 			return temp;

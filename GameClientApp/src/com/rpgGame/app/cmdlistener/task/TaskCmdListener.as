@@ -1,11 +1,13 @@
 package com.rpgGame.app.cmdlistener.task
 {
 	import com.rpgGame.app.manager.collect.CollectManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
+	import com.rpgGame.app.state.role.action.CollectStateReference;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -18,6 +20,7 @@ package com.rpgGame.app.cmdlistener.task
 	import com.rpgGame.coreData.clientConfig.Q_npc;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.npc.message.ResStartGatherMessage;
 	import com.rpgGame.netData.npc.message.ResStopGatherMessage;
@@ -161,13 +164,16 @@ package com.rpgGame.app.cmdlistener.task
 		/**开始采集	*/
 		private function onResStartGatherMessage(msg:ResStartGatherMessage):void
 		{
-			if(msg!=null)
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if (null == role) {
+				return;
+			}
+			if (role.isMainChar||role.ownerIsMainChar) 
 			{
-				//msg.tatget
 				var singStr:String="采集中";
-				var role:SceneRole = SceneManager.getSceneObjByID(msg.tatget.ToGID()) as SceneRole;
-				if (role!=null && role.data!=null) {
-					var collectData : SceneCollectData = role.data as SceneCollectData;
+				var tatgetRole:SceneRole = SceneManager.getSceneObjByID(msg.tatget.ToGID()) as SceneRole;
+				if (tatgetRole!=null && tatgetRole.data!=null) {
+					var collectData : SceneCollectData = tatgetRole.data as SceneCollectData;
 					if (collectData != null)
 					{
 						var monsterData:Q_monster=MonsterDataManager.getData(collectData.modelID);
@@ -179,17 +185,16 @@ package com.rpgGame.app.cmdlistener.task
 								singStr=collect.q_collect_singbar;
 							}
 						}
-						
 					}
-					
-					
 				}
 				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,singStr,2);
-				CollectManager.show("caiji",msg.costtime,null);
 				//TweenLite.killDelayedCallsTo(sendFinishGather);
 				TweenLite.delayedCall(msg.costtime*0.001, sendFinishGather,[msg.tatget]);
-				
 			}
+			//CollectManager.show("caiji",msg.costtime,null);
+			var ref : CollectStateReference = role.stateMachine.getReference(CollectStateReference) as CollectStateReference;
+			ref.setParams(msg.costtime);
+			role.stateMachine.transition(RoleStateType.ACTION_COLLECT, ref);
 		}
 		private function sendFinishGather(tid:long):void
 		{
@@ -200,7 +205,15 @@ package com.rpgGame.app.cmdlistener.task
 		/**停止采集	*/
 		private function onResStopGatherMessage(msg:ResStopGatherMessage):void
 		{
-			EventManager.dispatchEvent(SkillEvent.SING_STOP);
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if (null == role) {
+				return;
+			}
+			if (role.isMainChar||role.ownerIsMainChar) 
+			{
+				EventManager.dispatchEvent(SkillEvent.SING_STOP);	
+			}
+			
 		}
 		
 		

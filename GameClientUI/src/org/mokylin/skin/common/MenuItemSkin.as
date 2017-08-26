@@ -23,6 +23,7 @@ package org.mokylin.skin.common
 			
 			this.currentState = "normal";
 			this.height = 18;
+			this.width = 123;
 			this.elementsContent = [btn_i()];
 			
 			states = {

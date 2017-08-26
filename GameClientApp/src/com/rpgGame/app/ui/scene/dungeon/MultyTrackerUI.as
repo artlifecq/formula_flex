@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -262,6 +263,7 @@ package com.rpgGame.app.ui.scene.dungeon
 				killButList[i].visible=false;
 			}
 			//getMonsterModeidByAreaid
+			var isKillAll:Boolean=true;
 			var killList:Vector.<KillMonsterInfo>=DungeonManager.killInfos;
 			var rItme:Renwu_Item2;
 			var qzm:Q_dailyzone_monster;
@@ -275,12 +277,21 @@ package com.rpgGame.app.ui.scene.dungeon
 						rItme=killButList[i].skin as Renwu_Item2;
 						rItme.labelDisplay.htmlText="<font color='#eaeabc'>击杀：</font><u><u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#eaeabc'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
 						killButList[i].visible=true;
+						if(killList[i].count<qzm.q_monsterNum)
+						{
+							isKillAll=false;
+						}
 					}
 					
 				}
 			}
 			
 			setUisite();
+			
+			if(DungeonManager.isLostWave()&&isKillAll)
+			{
+				PickAutoManager.getInstance().startPickAuto();
+			}
 		}
 		
 		/**设置奖励物品*/

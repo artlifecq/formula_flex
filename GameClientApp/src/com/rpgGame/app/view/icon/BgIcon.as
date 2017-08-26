@@ -162,9 +162,9 @@ package com.rpgGame.app.view.icon
 			}
 			_luckEff.touchable=false;
 			if(type==1)
-				EftMcManager.setMcStyle(_luckEff,Quality.getQualityStyleName(5));
+				EftMcManager.setMcStyle(_luckEff,"UIMovieClipGridLock_1");
 			else if(type==2)
-				EftMcManager.setMcStyle(_luckEff,Quality.getQualityStyleName(4));
+				EftMcManager.setMcStyle(_luckEff,"UIMovieClipGridLock_2");
 			_luckEff.width=this.width;
 			_luckEff.height=this.width;
 			this.addChild(_luckEff);

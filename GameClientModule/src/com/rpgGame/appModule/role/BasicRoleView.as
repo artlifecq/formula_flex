@@ -66,10 +66,10 @@ package com.rpgGame.appModule.role
 			
 			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
-				_skin.uiLd.styleName="ui/common/shuxing/hg.png";
+				_skin.uiLd.styleName="ui/art_txt/common/shuxing/hg.png";
 			}else{
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.LIDAO);
-				_skin.uiLd.styleName="ui/common/shuxing/ld.png";
+				_skin.uiLd.styleName="ui/art_txt/common/shuxing/ld.png";
 			}
 		}
 		
@@ -161,7 +161,7 @@ package com.rpgGame.appModule.role
 			}
 			_skin.txt_shengmin.text=_roleData.totalStat.hp+"/"+_roleData.totalStat.life;
 			_skin.txt_zhenqi.text=_roleData.curZhenqi+"/"+_roleData.maxZhenqi;			
-			_skin.txt_jinyan.text=_roleData.curExp+"/"+_roleData.maxExp;
+			_skin.txt_jinyan.text=((_roleData.curExp/_roleData.maxExp)*100).toFixed(2)+"%";
 			_skin.pro_shengmin.maximum=_roleData.totalStat.life;
 			_skin.pro_shengmin.value=_roleData.totalStat.hp;
 			

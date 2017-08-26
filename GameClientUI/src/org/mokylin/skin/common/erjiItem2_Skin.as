@@ -15,11 +15,7 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var __erjiItem2_Skin_UIAsset1:feathers.controls.UIAsset;
-
-		public var __erjiItem2_Skin_UIAsset2:feathers.controls.UIAsset;
-
-		public var __erjiItem2_Skin_UIAsset3:feathers.controls.UIAsset;
+		public var iconDisplay:feathers.controls.UIAsset;
 
 		public var labelDisplay:feathers.controls.Label;
 
@@ -32,76 +28,121 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "down";
-			this.elementsContent = [labelDisplay_i()];
-			__erjiItem2_Skin_UIAsset1_i();
-			__erjiItem2_Skin_UIAsset2_i();
-			__erjiItem2_Skin_UIAsset3_i();
-			
+			this.height = 20;
+			this.width = 60;
+			this.elementsContent = [];
 			
 			states = {
 				down:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0x868276
+							value:0xEAEABC
+						}
+						,
+						{target:"labelDisplay",
+							name:"width",
+							value:60
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
+						}
+						,
+						{target:"labelDisplay",
+							name:"text",
+							value:"文 本"
+						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:1
 						}
 					]
 				,
 				hover:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xcfc6ae
+							value:0xEAEABC
+						}
+						,
+						{target:"labelDisplay",
+							name:"width",
+							value:60
+						}
+						,
+						{target:"labelDisplay",
+							name:"text",
+							value:"文 本"
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
+						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:1
 						}
 					]
 				,
 				up:[
 						{target:"labelDisplay",
 							name:"color",
+							value:0xEAEABC
+						}
+						,
+						{target:"labelDisplay",
+							name:"width",
+							value:60
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
+						}
+						,
+						{target:"labelDisplay",
+							name:"text",
+							value:"文 本"
+						}
+						,
+						{target:"labelDisplay",
+							name:"y",
+							value:1
+						}
+					]
+				,
+				init:[
+						{target:"labelDisplay",
+							name:"textAlign",
+							value:"center"
+						}
+						,
+						{target:"labelDisplay",
+							name:"color",
 							value:0x8b8d7b
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["labelFilterBlack"]
 						}
 					]
 			};
-			skinNames={"down":"ui/common/tips/tips_di2.png", "hover":"ui/common/tips/tips_di2.png", "up":"ui/common/tips/tips_di2.png"};
+			skinNames={"down":"ui/common/tips/xialatiaoditu.png", "hover":"ui/common/tips/xialatiaoditu.png", "up":"ui/common/tips/xialatiaoditu.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __erjiItem2_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function iconDisplay_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__erjiItem2_Skin_UIAsset1 = temp;
-			temp.alpha = 0;
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = -1;
-			temp.styleName = "ui/common/tips/tips_di2.png";
-			temp.top = 0;
-			return temp;
-		}
-
-		private function __erjiItem2_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__erjiItem2_Skin_UIAsset2 = temp;
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = -1;
-			temp.styleName = "ui/common/tips/tips_di2.png";
-			temp.top = 0;
-			return temp;
-		}
-
-		private function __erjiItem2_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__erjiItem2_Skin_UIAsset3 = temp;
-			temp.alpha = 0.8;
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = -1;
-			temp.styleName = "ui/common/tips/tips_di2.png";
-			temp.top = 0;
+			iconDisplay = temp;
+			temp.name = "iconDisplay";
 			return temp;
 		}
 

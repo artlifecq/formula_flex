@@ -105,7 +105,7 @@ package org.mokylin.skin.app.shangcheng
 		private function __ShangCheng_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/yb.png";
+			temp.styleName = "ui/art_txt/common/shuxing/yb.png";
 			temp.x = 25;
 			temp.y = 3;
 			return temp;
@@ -124,7 +124,7 @@ package org.mokylin.skin.app.shangcheng
 		private function __ShangCheng_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/lj.png";
+			temp.styleName = "ui/art_txt/common/shuxing/lj.png";
 			temp.x = 25;
 			temp.y = 3;
 			return temp;

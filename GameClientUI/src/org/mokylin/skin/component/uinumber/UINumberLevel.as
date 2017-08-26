@@ -22,16 +22,16 @@ package org.mokylin.skin.component.uinumber
 			
 			states = {
 			};
-			skinNames={"0":"ui/component/uinumber/level/0.png",
-			"1":"ui/component/uinumber/level/1.png",
-			"2":"ui/component/uinumber/level/2.png",
-			"3":"ui/component/uinumber/level/3.png",
-			"4":"ui/component/uinumber/level/4.png",
-			"5":"ui/component/uinumber/level/5.png",
-			"6":"ui/component/uinumber/level/6.png",
-			"7":"ui/component/uinumber/level/7.png",
-			"8":"ui/component/uinumber/level/8.png",
-			"9":"ui/component/uinumber/level/9.png"};
+			skinNames={"0":"ui/art_txt/component/uinumber/level/0.png",
+			"1":"ui/art_txt/component/uinumber/level/1.png",
+			"2":"ui/art_txt/component/uinumber/level/2.png",
+			"3":"ui/art_txt/component/uinumber/level/3.png",
+			"4":"ui/art_txt/component/uinumber/level/4.png",
+			"5":"ui/art_txt/component/uinumber/level/5.png",
+			"6":"ui/art_txt/component/uinumber/level/6.png",
+			"7":"ui/art_txt/component/uinumber/level/7.png",
+			"8":"ui/art_txt/component/uinumber/level/8.png",
+			"9":"ui/art_txt/component/uinumber/level/9.png"};
 		}
 
 

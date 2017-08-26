@@ -7,9 +7,7 @@ package com.rpgGame.appModule.hubao
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;

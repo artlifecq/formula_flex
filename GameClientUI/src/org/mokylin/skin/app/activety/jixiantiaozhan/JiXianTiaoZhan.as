@@ -157,7 +157,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/paiming.png";
-			temp.x = 30;
+			temp.x = 29;
 			temp.y = 7;
 			return temp;
 		}

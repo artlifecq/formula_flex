@@ -67,7 +67,7 @@ package org.mokylin.skin.app.paihangbang
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/app/paihangbang/1.png";
-			temp.x = 17;
+			temp.x = 13;
 			temp.y = 2;
 			return temp;
 		}
@@ -81,8 +81,8 @@ package org.mokylin.skin.app.paihangbang
 			temp.textAlign = "center";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
-			temp.x = 254;
+			temp.width = 136;
+			temp.x = 259;
 			temp.y = 6;
 			return temp;
 		}
@@ -92,11 +92,11 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "姓名六个字的";
+			temp.text = "[9999区]姓名六个字的";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 97;
-			temp.x = 96;
+			temp.width = 148;
+			temp.x = 82;
 			temp.y = 6;
 			return temp;
 		}
@@ -111,7 +111,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 43;
-			temp.x = 9;
+			temp.x = 5;
 			temp.y = 5;
 			return temp;
 		}
@@ -125,7 +125,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 42;
-			temp.x = 208;
+			temp.x = 230;
 			temp.y = 6;
 			return temp;
 		}
@@ -140,6 +140,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.right = 0;
 			temp.styleName = "ui/common/hover/liangkuang2.png";
 			temp.top = 0;
+			temp.visible = false;
 			return temp;
 		}
 
@@ -149,7 +150,7 @@ package org.mokylin.skin.app.paihangbang
 			vip = temp;
 			temp.name = "vip";
 			temp.styleName = "ui/common/tubiao/vips1.png";
-			temp.x = 64;
+			temp.x = 51;
 			temp.y = 4;
 			return temp;
 		}

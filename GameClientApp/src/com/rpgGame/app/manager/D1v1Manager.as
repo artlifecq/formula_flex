@@ -138,6 +138,7 @@ package com.rpgGame.app.manager
 			// TODO Auto Generated method stub
 			if (msg.result==1) 
 			{
+				_data.drawAward=1;
 				EventManager.dispatchEvent(D1v1Event.GET_REWARD_RESULT);
 			}
 		}

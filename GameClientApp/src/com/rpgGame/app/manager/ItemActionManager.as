@@ -6,11 +6,13 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.game.mainCore.libCore.handle.HandleThread;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
@@ -31,16 +33,27 @@ package com.rpgGame.app.manager
 	{
 		//道具滑动进包队列
 		private static var _tweenHT:HandleThread = new HandleThread();
+		private static const HELP_PT:Point=new Point(0,0);
+		private static const POS_PT:Point=new Point();
 		
-		
-		public static function flyItemToBag(itemId:int):void
+		public static function flyItemToBag(itemId:int,startDis:DisplayObject=null):void
 		{
 			var qItem:Q_item=ItemConfig.getQItemByID(itemId);
 			if (qItem) 
 			{
 				var iconFace:UIAsset = new UIAsset();
-				iconFace.x=Starling.current.nativeStage.mouseX;
-				iconFace.y=Starling.current.nativeStage.mouseY;
+				if (startDis&&startDis.stage!=null) 
+				{
+					startDis.localToGlobal(HELP_PT,POS_PT);
+					iconFace.x=POS_PT.x;
+					iconFace.y=POS_PT.y;
+				}
+				else
+				{
+					iconFace.x=Starling.current.nativeStage.mouseX;
+					iconFace.y=Starling.current.nativeStage.mouseY;
+				}
+				
 				iconFace.styleName =ClientConfig.getItemIcon(qItem.q_icon+"",IcoSizeEnum.ICON_48);
 				addTweenHT(null,iconFace,null);
 			}
@@ -97,6 +110,23 @@ package com.rpgGame.app.manager
 			iconFace.y = startPos.y;
 			//添加进滑动队列
 			addTweenHT(endPoint,iconFace,onCmpFun,time);
+		}
+		
+		public static function tweenItemByJsonStr(reward:String,startPos:Point,size:int=IcoSizeEnum.ICON_42):void
+		{
+			if (reward==null||reward=="") 
+			{
+				return;
+			}
+			var arr:Array=TaskMissionCfgData.getRewordByJobsex(reward,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
+			for (var i:int = 0; i < arr.length; i++) 
+			{
+				var iconFace:UIAsset = new UIAsset();
+				iconFace.styleName =ClientConfig.getItemIcon(arr[i].mod, size );
+				iconFace.x = startPos.x;
+				iconFace.y = startPos.y;
+				addTweenHT(null,iconFace,null,1);
+			}
 		}
 		
 		public static function tweenMode(startPos:Point,onCmpFun:Function = null,time:Number = 1):void

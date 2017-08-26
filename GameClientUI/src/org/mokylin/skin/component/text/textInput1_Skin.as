@@ -28,6 +28,7 @@ package org.mokylin.skin.component.text
 			super();
 			
 			this.currentState = "focused";
+			this.height = 22;
 			this.width = 65;
 			this.elementsContent = [textDisplay_i()];
 			bg_i();
@@ -63,6 +64,7 @@ package org.mokylin.skin.component.text
 			temp.left = 5;
 			temp.right = 15;
 			temp.text = "标签";
+			temp.textAlign = "center";
 			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.y = 2;

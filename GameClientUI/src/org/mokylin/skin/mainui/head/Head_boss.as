@@ -102,8 +102,8 @@ package org.mokylin.skin.mainui.head
 			temp.fontSize = 16;
 			temp.text = "角色名六个字 (120级)";
 			temp.textAlign = "center";
-			temp.color = 0xC3C198;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 213;
 			temp.x = 157;
 			temp.y = 0;
@@ -117,7 +117,7 @@ package org.mokylin.skin.mainui.head
 			temp.name = "lbl_num";
 			temp.text = "标签";
 			temp.textAlign = "center";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 363;
 			temp.x = 78;
@@ -216,7 +216,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			zhan_bg = temp;
 			temp.name = "zhan_bg";
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 342;
 			temp.y = 63;
 			return temp;

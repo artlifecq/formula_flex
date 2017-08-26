@@ -71,7 +71,7 @@ package org.mokylin.skin.app.paihangbang
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/app/paihangbang/1.png";
-			temp.x = 31;
+			temp.x = 28;
 			temp.y = 2;
 			return temp;
 		}
@@ -86,7 +86,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
-			temp.x = 401;
+			temp.x = 404;
 			temp.y = 6;
 			return temp;
 		}
@@ -101,7 +101,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 68;
-			temp.x = 243;
+			temp.x = 261;
 			temp.y = 6;
 			return temp;
 		}
@@ -111,11 +111,11 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "姓名六个字的";
+			temp.text = "[9999区]姓名六个字的";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 97;
-			temp.x = 122;
+			temp.width = 149;
+			temp.x = 111;
 			temp.y = 6;
 			return temp;
 		}
@@ -130,7 +130,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 43;
-			temp.x = 23;
+			temp.x = 19;
 			temp.y = 5;
 			return temp;
 		}
@@ -144,7 +144,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 42;
-			temp.x = 340;
+			temp.x = 351;
 			temp.y = 6;
 			return temp;
 		}
@@ -159,6 +159,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.right = 0;
 			temp.styleName = "ui/common/hover/liangkuang2.png";
 			temp.top = 0;
+			temp.visible = false;
 			return temp;
 		}
 
@@ -168,7 +169,7 @@ package org.mokylin.skin.app.paihangbang
 			vip = temp;
 			temp.name = "vip";
 			temp.styleName = "ui/common/tubiao/vips1.png";
-			temp.x = 89;
+			temp.x = 78;
 			temp.y = 4;
 			return temp;
 		}

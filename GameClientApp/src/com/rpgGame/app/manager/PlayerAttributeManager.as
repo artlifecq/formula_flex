@@ -117,7 +117,7 @@ package com.rpgGame.app.manager
 				fromPoint = new Point(40, -100);
 				endPoint = new Point(120, 0);
 				
-				numberType = FightFaceHelper.NUMBER_RED1;
+				numberType = FightFaceHelper.NUMBER_PC_HPSUB;
 			}
 			
 			var afType:String = FightFaceHelper.getAttributeUrl( spType, chgValue > 0 );

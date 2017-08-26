@@ -135,7 +135,7 @@ package org.mokylin.skin.app.beibao.jingmai
 		private function __Jingmai_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/zqz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/zqz.png";
 			temp.x = 36;
 			temp.y = 56;
 			return temp;
@@ -154,7 +154,7 @@ package org.mokylin.skin.app.beibao.jingmai
 		private function __Jingmai_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 33;
 			temp.y = 95;
 			return temp;

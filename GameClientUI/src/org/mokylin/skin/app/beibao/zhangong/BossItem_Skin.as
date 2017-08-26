@@ -300,7 +300,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.styleName = "ui/art_txt/common/shuxing/gjl.png";
 			temp.x = 6;
 			temp.y = 133;
 			return temp;

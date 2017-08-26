@@ -59,7 +59,7 @@ package org.mokylin.skin.mainui.map
 			uiJi = temp;
 			temp.name = "uiJi";
 			temp.height = 34;
-			temp.styleName = "ui/common/ji.png";
+			temp.styleName = "ui/art_txt/common/ji.png";
 			temp.width = 34;
 			temp.x = 46;
 			temp.y = 0;

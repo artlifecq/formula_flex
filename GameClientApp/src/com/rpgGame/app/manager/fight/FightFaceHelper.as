@@ -54,7 +54,7 @@ package com.rpgGame.app.manager.fight
 			layer.bind(mainPlayer);
 		}
 		/** 根路径 **/
-		public static const ROOT : String = "ui/pngx/fight/";
+		public static const ROOT : String = "ui/art_txt/fight/";
 		//---------------------------文字------------------------------------------//
 		/** 有用，正面特效，其实就是图片是绿色的**/
 		public static const USESFUL_EFFECT : String = "fight_effect/usesful_effect/";
@@ -107,22 +107,6 @@ package com.rpgGame.app.manager.fight
 		
 		/** 蓝 数字**/
 		public static const NUMBER_BULE : String = "bule1_num/";
-		/** 金 数字**/
-		public static const NUMBER_GOLD1 : String = "gold1_num/";
-		/** 绿 数字**/
-		public static const NUMBER_GREEN1 : String = "green1_num/";
-		/** 红1 数字**/
-		public static const NUMBER_RED1 : String = "red1_num/";
-		/** 红2 数字**/
-		public static const NUMBER_RED2 : String = "red2_num/";
-		/** 橙色 数字**/
-		public static const NUMBER_ORANGE1 : String = "orange1_num/";
-		/** 紫 数字**/
-		public static const NUMBER_PURPLE1 : String = "purple1_num/";
-		/** 黄1 数字**/
-		public static const NUMBER_YELLOW1 : String = "yellow1_num/";
-		/** 黄2 数字**/
-		public static const NUMBER_YELLOW2 : String = "yellow2_num/";
 
 		
 		/**
@@ -565,7 +549,7 @@ package com.rpgGame.app.manager.fight
 				return;
 			}
 			var typeRes:String = ROOT+USESFUL_EFFECT+qSkill.q_icon+".png";
-			showQueueAttackFaceNew(attacker,null,attacker.headFace, typeRes, NUMBER_PURPLE1, value,  null, null,SpellResultTweenUtil.TweenHead)
+			showQueueAttackFaceNew(attacker,null,attacker.headFace, typeRes, NUMBER_PC_EXP, value,  null, null,SpellResultTweenUtil.TweenHead)
 		}
 		/**
 		 *这个主要是角色战斗力相关属性 

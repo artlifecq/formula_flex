@@ -225,14 +225,14 @@ package com.rpgGame.app.manager.chat
 							else
 							{
 								words = LanguageConfig.replaceStr1(notiMsg.q_content,args);
-								words=ChatUtil.replaceStr2(words);
+								words=ChatUtil.replaceStr2(words,false);
 								notify(tp, words);
 							}
 						}
 					}
 				}else{
 					words= LanguageConfig.replaceStr1(notiMsg.q_content,args);
-					words=ChatUtil.replaceStr2(words);
+					words=ChatUtil.replaceStr2(words,false);
 					notify(tp, words);
 				}
 			}
@@ -266,7 +266,7 @@ package com.rpgGame.app.manager.chat
 							else
 							{
 								var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
-								words=ChatUtil.replaceStr2(words);
+								words=ChatUtil.replaceStr2(words,false);
 								notify(tp, words);
 							}
 						}					

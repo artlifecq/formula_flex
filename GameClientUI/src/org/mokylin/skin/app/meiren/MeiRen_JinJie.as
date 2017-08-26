@@ -275,7 +275,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLevel = temp;
 			temp.name = "uiLevel";
-			temp.styleName = "ui/mainui/meirenHead/jieshu/12.png";
+			temp.styleName = "ui/pet/jieshu/12.png";
 			temp.x = 267;
 			temp.y = 49;
 			return temp;

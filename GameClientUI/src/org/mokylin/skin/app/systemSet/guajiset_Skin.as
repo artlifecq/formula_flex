@@ -14,6 +14,7 @@ package org.mokylin.skin.app.systemSet
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
+	import org.mokylin.skin.component.combobox.ComboBox1_Skin;
 	import org.mokylin.skin.component.combobox.ComboBox2_Skin;
 	import org.mokylin.skin.component.slider.skin_Slider;
 	import org.mokylin.skin.component.text.textInput3_Skin;
@@ -322,8 +323,11 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.ComboBox = new feathers.controls.ComboBox();
 			cmb_dengjie = temp;
 			temp.name = "cmb_dengjie";
-			temp.styleClass = org.mokylin.skin.component.combobox.ComboBox2_Skin;
-			temp.color = 0xCFC6AE;
+			temp.height = 24;
+			temp.fontSize = 14;
+			temp.styleClass = org.mokylin.skin.component.combobox.ComboBox1_Skin;
+			temp.textAlign = "left";
+			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 123;
 			temp.x = 181;
@@ -336,8 +340,11 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.ComboBox = new feathers.controls.ComboBox();
 			cmb_zhiye = temp;
 			temp.name = "cmb_zhiye";
+			temp.height = 24;
+			temp.fontSize = 14;
 			temp.styleClass = org.mokylin.skin.component.combobox.ComboBox2_Skin;
-			temp.color = 0xCFC6AE;
+			temp.textAlign = "left";
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 91;
 			temp.x = 90;

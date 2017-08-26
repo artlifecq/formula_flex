@@ -70,7 +70,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_guide:int;
 		 /**  左上角icon */
 		public var q_lt_res:String;
-		 /**  元素资源id */
+		 /**  活动面板名称资源和背景资源 */
 		public var q_res_id:String;
 		 /**  详情背景 */
 		public var q_des_bg:String;

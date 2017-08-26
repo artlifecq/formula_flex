@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.chat
 {
-	import com.game.engine2D.config.MapConfig;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
@@ -8,14 +7,14 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.LinkCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.clientConfig.Q_hyperlinksMenu;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangChat;
-	import com.rpgGame.coreData.lang.LangHyperlinksMenu;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -23,8 +22,6 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
-	
-	import org.game.netCore.data.long;
 	
 	public class ChatUtil
 	{
@@ -338,6 +335,27 @@ package com.rpgGame.app.ui.main.chat
 			return str;
 		}
 		
+		public static function replaceTeamShow(name:String,color:*,team:String):String
+		{
+			var str:String=name;
+			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.TEAM_APPLY,team);
+			return str;
+		}
+		
+		public static function replaceRallyShow(name:String,color:*,content:String):String
+		{
+			var str:String=name;
+			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.RALLY,content);
+			return str;
+		}
+		
+		public static function replaceHuBaoShow(name:String,color:*,content:String):String
+		{
+			var str:String=name;
+			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.HUBAO,content);
+			return str;
+		}
+		
 		public static function replaceShowByType(name:String,color:*,tragetName:String):String
 		{
 			var str:String=name;
@@ -469,14 +487,21 @@ package com.rpgGame.app.ui.main.chat
 		/**
 		 * 替换超链接
 		 * */
-		public static function replaceStr2(str : String):String
+		public static function replaceStr2(str : String,islink:Boolean=false):String
 		{
-			var arr:Array=LanguageConfig.menus;
+			var arr:Array=LinkCfg.keys;//LanguageConfig.menus;
 			for(var i:int=0;i<arr.length;i++)
 			{
-				var name:String=LanguageConfig.getText( arr[i]);
-				var linkname:String=RichTextCustomUtil.getTextLinkCode(name,StaticValue.GREEN_TEXT,RichTextCustomLinkType.JINJIE_SHOW_TYPE,arr[i]);
-				str = str.replace("{"+arr[i]+"}",linkname);
+				var cfg:Q_hyperlinksMenu=LinkCfg.getCfgByType(arr[i]);
+				if(cfg){
+					var name:String=cfg.q_show_title;
+					if(islink){
+						var linkname:String=RichTextCustomUtil.getTextLinkCode(name,StaticValue.GREEN_TEXT,RichTextCustomLinkType.SHOW_PANEL_TYPE,cfg.q_showPanelId.toString());
+						str = str.replace("{"+arr[i]+"}",linkname);
+					}else{
+						str = str.replace("{"+arr[i]+"}",name);
+					}
+				}
 			}
 			return str;
 		}
@@ -491,7 +516,7 @@ package com.rpgGame.app.ui.main.chat
 			if(attribute==""||attribute==null)
 			{
 				txt = LanguageConfig.replaceStr1(text,arrq);
-				txt = replaceStr2(txt);
+				txt = replaceStr2(txt,true);
 			}
 			else{
 				arr = JSONUtil.decode(attribute);
@@ -506,20 +531,19 @@ package com.rpgGame.app.ui.main.chat
 						case 2: //物品
 							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
 							break;
-						case 3: //强化
-							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+						case 3: //组队
+							arrq[arr[i].i]=replaceTeamShow(str,0xFFFFFF,arr[i].p.id);
 							break;
-						case 4: //进阶
-							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+						case 4: //入帮
+							//							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
 							break;
-						case 5: //招募
-							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+						case 5: //集结
+							var content:String=arr[i].p.mod+","+arr[i].p.x+","+arr[i].p.y;
+							arrq[arr[i].i]=replaceRallyShow(str,0xBC5AF4,content);
 							break;
-						case 6: //暂定
-							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
-							break;
-						case 7: //挑战
-							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+						case 6: //护宝
+							content=arr[i].p.mod+","+arr[i].p.x+","+arr[i].p.y;
+							arrq[arr[i].i]=replaceHuBaoShow(str,0xBC5AF4,content);
 							break;
 						case 8: //求婚
 							var jobType:int=arrq[2];
@@ -531,30 +555,9 @@ package com.rpgGame.app.ui.main.chat
 					}
 				}
 				txt = LanguageConfig.replaceStr1(text,arrq);
-				txt = replaceStr2(txt);
+				txt = replaceStr2(txt,true);
 			}
 			return txt;
-		}
-		
-		/**
-		 * 依据文本类型返回相应的功能id
-		 * */
-		public static function getPanel(text:String):String
-		{
-			switch(text)
-			{
-				case LangHyperlinksMenu.WOYAOJIERUDUIWU:
-					return "50";
-				case LangHyperlinksMenu.WOYAOJINJIEZHANQI:
-					return "11";
-				case LangHyperlinksMenu.WOYAOJINJIEZUOQI:
-					return "10";
-				case LangHyperlinksMenu.WOYAOQIANGHUA:
-					return "20";
-				case LangHyperlinksMenu.WOYAORUBANG:
-					return "51";
-			}
-			return "1";
 		}
 	}
 }

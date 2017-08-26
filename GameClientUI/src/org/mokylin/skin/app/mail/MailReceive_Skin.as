@@ -166,8 +166,8 @@ package org.mokylin.skin.app.mail
 			imgNO = temp;
 			temp.name = "imgNO";
 			temp.styleName = "ui/app/mail/dangqian.png";
-			temp.x = 73;
-			temp.y = 247;
+			temp.x = 125;
+			temp.y = 256;
 			return temp;
 		}
 

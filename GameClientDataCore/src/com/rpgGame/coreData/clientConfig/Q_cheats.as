@@ -20,7 +20,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  名字 */
 		public var q_name:String;
-		 /**    */
+		 /**  边线边框颜色调用 */
 		public var q_default:int;
 		 /**  激活道具条件 */
 		public var q_needitem:String;

@@ -34,7 +34,7 @@ package com.rpgGame.app.ui.tips
 			}
 			var skillId:int = skillOpenData.q_id;
 			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(skillId);
-			var skillNameUrl:String="ui/common/tips/name/"+skillOpenData.q_name+".png";
+			var skillNameUrl:String="ui/art_txt/common/tips/name/"+skillOpenData.q_name+".png";
 			_skin.skillName.styleName = skillNameUrl;
 			var icoUrl:String="ui/common/tips/icon/"+skillOpenData.q_name+".png";
 			_skin.icon.styleName = icoUrl;

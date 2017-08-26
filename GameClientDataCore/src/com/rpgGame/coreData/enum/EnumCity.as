@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.enum
 {
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
+
 	public class EnumCity
 	{
 		/**
@@ -42,8 +44,8 @@ package com.rpgGame.coreData.enum
 		
 		public static var wangChengFlags:Array=["handan","daliang","chengdu","linzi"];
 		public static var wangchangCitys:Array=["wangcheng3","wangcheng4","wangcheng1","wangcheng2"];
-		public static var weichengCitys:Array=["weicheng1","weicheng2","weicheng3"];
-		public static var weichengFlags:Array=["gusu","qufu","kuaiji"];
+		public static var weichengCitys:Array=["weicheng1","weicheng3","weicheng2"];
+		public static var weichengFlags:Array=["gusu","kuaiji","qufu"];
 		
 		public function EnumCity()
 		{
@@ -57,14 +59,10 @@ package com.rpgGame.coreData.enum
 					name=getCityWCName(wcId);
 					break;
 				case EnumCity.XI_WEI:
-					name="【会稽】";
-					break;
 				case EnumCity.ZHONG_WEI:
-					name="【曲阜】";
-					break;
 				case EnumCity.DONG_WEI:
-					name="【姑苏】";
-					break;
+					name="【"+QSinglecitybaseCfgData.getCityNameById(city)+"】";
+				break;
 				case EnumCity.HUANG_CHENG:
 					name="【咸阳】";
 					break;

@@ -24,7 +24,8 @@ package com.rpgGame.app.manager
 	 */	
 	public class ShortcutsManger
 	{
-		public static const SHORTCUTS_LEN : uint = 10;
+		//8个
+		public static const SHORTCUTS_LEN : uint = 8;
 		private var shortcutsDataMap : HashMap;
 		private var _tempSpells:HashMap;
 		private var _isUsed : Boolean = false;
@@ -51,7 +52,7 @@ package com.rpgGame.app.manager
 		 * @param spellProto
 		 *
 		 */
-		public function updateNewSpell(spellProto : Q_skill_model, saveToServer:Boolean = true) : void
+		public function updateNewSpell(spellProto : Q_skill_model, dispatchEvent:Boolean = true) : void
 		{
 			if (spellProto.q_trigger_type != 1)
 				return;
@@ -59,23 +60,11 @@ package com.rpgGame.app.manager
 			{
 				return;
 			}
-			var i : int = 0;
-			var shortcuts : ShortcutsData;
-			while (i < SHORTCUTS_LEN)
+			setShortData(spellProto.q_seat-1, ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID,false);
+			if (dispatchEvent) 
 			{
-				shortcuts = getShortcutsDataByPos(i);
-				if (!shortcuts)
-				{
-					setShortData(i, ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID,saveToServer);
-					EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
-					return;
-				}
-				else
-				{
-					i++;
-				}
+				EventManager.dispatchEvent(SpellEvent.SPELL_ONE_UPDATE_SHORTCUTS,spellProto);
 			}
-
 		}
 
 		/**
@@ -112,8 +101,7 @@ package com.rpgGame.app.manager
 		}
 
 		/**
-		 *格式如下： 
-		 * {t :vo.type , mid :vo.id , k :vo.shortcutPos}
+		 *技能栏只需要放技能。所以不用从服务器获取保存的数据了
 		 */		
 		private function initShortcutData() : void
 		{
@@ -126,9 +114,11 @@ package com.rpgGame.app.manager
 			
 			for (var i : int = 0; i < max; i++)
 			{
-				if(i<len){//将已经学习的技能加到快捷栏
+				if(i<len)
+				{//将已经学习的技能加到快捷栏
 					var cfg:Q_skill_model= spellList[i];
-					if(cfg.q_seat==0){
+					if(cfg.q_seat==0)
+					{
 						continue;
 					}
 					shortData = new ShortcutsData();
@@ -136,20 +126,25 @@ package com.rpgGame.app.manager
 					shortData.shortcutPos = cfg.q_seat-1;
 					shortData.id = cfg.q_skillID;
 					shortData.itemBind=0;
-				}else{
-					shorts = ClientSettingManager.getShortCutDataByKey(i);
-					if (shorts == null)
-					{
-						continue;
-					}else{
-						shortData = new ShortcutsData();
-						shortData.type = shorts.t;
-						shortData.shortcutPos = shorts.k;
-						shortData.id = shorts.mid;
-						shortData.itemBind=shorts.bind;
-					}
+					shortcutsDataMap.add(shortData.shortcutPos, shortData);
 				}
-				shortcutsDataMap.add(shortData.shortcutPos, shortData);
+//				else
+//				{
+//					shorts = ClientSettingManager.getShortCutDataByKey(i);
+//					if (shorts == null)
+//					{
+//						continue;
+//					}
+//					else
+//					{
+//						shortData = new ShortcutsData();
+//						shortData.type = shorts.t;
+//						shortData.shortcutPos = shorts.k;
+//						shortData.id = shorts.mid;
+//						shortData.itemBind=shorts.bind;
+//					}
+//				}
+				
 			}
 		}
 		
@@ -181,10 +176,10 @@ package com.rpgGame.app.manager
 		private function addShortcutsData(shortData : ShortcutsData, saveToServer:Boolean = true) : void
 		{
 			shortcutsDataMap.add(shortData.shortcutPos, shortData);
-			if(saveToServer)
-			{
-				sendShortMsg();
-			}
+//			if(saveToServer)
+//			{
+//				sendShortMsg();
+//			}
 		}
 
 		/**

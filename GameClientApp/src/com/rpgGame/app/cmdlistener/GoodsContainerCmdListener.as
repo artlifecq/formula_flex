@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.EquipAutoDressEffectPanelExt;
+	import com.rpgGame.app.ui.alert.ItemOpenResultShowPanelExt;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -17,6 +18,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResCellTimeMessage;
 	import com.rpgGame.netData.backpack.message.ResChangeBindItemMessage;
 	import com.rpgGame.netData.backpack.message.ResChangeLimitItemMessage;
+	import com.rpgGame.netData.backpack.message.ResGiftItemInfoMessage;
 	import com.rpgGame.netData.backpack.message.ResItemAddMessage;
 	import com.rpgGame.netData.backpack.message.ResItemChangeMessage;
 	import com.rpgGame.netData.backpack.message.ResItemInfoMessage;
@@ -65,6 +67,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108115, onResChangeBindItemMessage );
 			SocketConnection.addCmdListener(108116, onResChangeLimitItemMessage );
 			SocketConnection.addCmdListener(108117,onFlyItems);
+			SocketConnection.addCmdListener(108118,onOpenGiftItem);
 			SocketConnection.addCmdListener(105100, onResStoreItemInfosMessage );
 			SocketConnection.addCmdListener(105101, onResStoreItemAddMessage );
 			SocketConnection.addCmdListener(105102, onResStoreItemChangeMessage );
@@ -82,6 +85,12 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108109, onResOpenCellResultMessage );
 			
 			finish();
+		}
+		
+		private function onOpenGiftItem(msg:ResGiftItemInfoMessage):void
+		{
+			// TODO Auto Generated method stub
+			ItemOpenResultShowPanelExt.onShowNotice(msg);
 		}
 		
 		private function onFlyItems(msg:SCFlyItemsMessage):void
@@ -226,6 +235,7 @@ package com.rpgGame.app.cmdlistener
 		private function onResOpenCellResultMessage(msg:ResOpenCellResultMessage):void
 		{
 			if(msg.isSuccess==1){
+				EventManager.dispatchEvent(ItemEvent.ITEM_GRID_CANLOCK_CHENGGONG,msg);
 				GoodsContainerMamager.setUnlocked(GoodsContainerMamager.getGoodsType(msg.type),msg.cellId);
 			}
 		}

@@ -130,7 +130,7 @@ package org.mokylin.skin.app.shangcheng
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.name = "确 认";
-			temp.styleName = "ui/common/background/head_tishi.png";
+			temp.styleName = "ui/art_txt/common/background/head_tishi.png";
 			temp.x = 142;
 			temp.y = 9;
 			return temp;

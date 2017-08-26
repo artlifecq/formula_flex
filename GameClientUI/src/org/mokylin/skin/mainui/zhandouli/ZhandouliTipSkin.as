@@ -44,7 +44,7 @@ package org.mokylin.skin.mainui.zhandouli
 		private function __ZhandouliTipSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl.png";
+			temp.styleName = "ui/art_txt/common/zdl.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

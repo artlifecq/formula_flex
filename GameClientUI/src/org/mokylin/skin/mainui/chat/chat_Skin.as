@@ -381,7 +381,7 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			lb_tishi = temp;
 			temp.name = "lb_tishi";
-			temp.styleName = "ui/mainui/chat/meishuzi.png";
+			temp.styleName = "ui/art_txt/mainui/chat/meishuzi.png";
 			temp.x = 5;
 			temp.y = 30;
 			return temp;
@@ -419,7 +419,7 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiTips = temp;
 			temp.name = "uiTips";
-			temp.styleName = "ui/mainui/chat/danqianbanben.png";
+			temp.styleName = "ui/art_txt/mainui/chat/danqianbanben.png";
 			temp.x = 3;
 			temp.y = 6;
 			return temp;

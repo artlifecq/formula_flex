@@ -133,7 +133,7 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 86;
+			temp.width = 75;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -143,8 +143,8 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 151;
-			temp.x = 86;
+			temp.width = 185;
+			temp.x = 75;
 			temp.y = 0;
 			return temp;
 		}
@@ -153,8 +153,8 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 79;
-			temp.x = 237;
+			temp.width = 72;
+			temp.x = 260;
 			temp.y = 0;
 			return temp;
 		}
@@ -163,8 +163,8 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 79;
-			temp.x = 316;
+			temp.width = 74;
+			temp.x = 332;
 			temp.y = 0;
 			return temp;
 		}
@@ -182,8 +182,8 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 151;
-			temp.x = 395;
+			temp.width = 140;
+			temp.x = 406;
 			temp.y = 0;
 			return temp;
 		}
@@ -192,7 +192,7 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/paihangbang/word/paiming.png";
-			temp.x = 29;
+			temp.x = 25;
 			temp.y = 5;
 			return temp;
 		}
@@ -210,7 +210,7 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/paihangbang/word/dengji.png";
-			temp.x = 262;
+			temp.x = 279;
 			temp.y = 5;
 			return temp;
 		}
@@ -219,7 +219,7 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/paihangbang/word/zhiye.png";
-			temp.x = 341;
+			temp.x = 352;
 			temp.y = 5;
 			return temp;
 		}
@@ -228,7 +228,7 @@ package org.mokylin.skin.app.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/paihangbang/word/zhanli.png";
-			temp.x = 456;
+			temp.x = 459;
 			temp.y = 5;
 			return temp;
 		}

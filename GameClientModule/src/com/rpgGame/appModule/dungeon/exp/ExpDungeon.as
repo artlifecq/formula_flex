@@ -3,7 +3,9 @@ package com.rpgGame.appModule.dungeon.exp
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -35,7 +37,7 @@ package com.rpgGame.appModule.dungeon.exp
 			_groupList1.setRewardByJsonStr(qdata.q_special_rewards_show);
 			
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(qdata.q_id);
-			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			EventManager.addEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,refeashValue);
 			refeashValue();
 		}
 		
@@ -54,7 +56,10 @@ package com.rpgGame.appModule.dungeon.exp
 			{
 				case _skin.btnEnter:
 					if(_dailyZoneInfo.remainCount>0)
-						DailyZoneDataManager.instance().requestCombat(_dailyZoneInfo);
+					{
+						var q_data:Q_daily_zone = DailyZoneCfgData.getZoneCfg(_dailyZoneInfo.dailyzoneId);
+						DungeonSender.reqCombat(q_data.q_zone_id,q_data.q_id);
+					}
 					else if(_dailyZoneInfo.canBuyCount>0)
 						DailyZoneDataManager.instance().buyCount(_dailyZoneInfo,true);
 					else
@@ -67,7 +72,7 @@ package com.rpgGame.appModule.dungeon.exp
 		}
 		override public function hide():void
 		{
-			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			EventManager.removeEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,refeashValue);
 			_groupList1.clear();
 		}
 	}

@@ -3,6 +3,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -86,7 +87,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			super.onTouchTarget(target);
 			if(target==_skin.btnEixt){
 				DungeonSender.reqQuitDungeon();
-				this.onHide();
+				this.hide();
 			}
 		}
 		
@@ -103,10 +104,14 @@ package com.rpgGame.appModule.dungeon.lunjian
 			leftTime--;
 			if(leftTime<=0){
 				TimerServer.remove(updateTime);
-				this.onHide();
+				this.hide();
 			}
 		}
-		
+		override public function hide():void
+		{
+			ItemActionManager.flyItemToBag((_icon.faceInfo as ClientItemInfo).cfgId,_icon);
+			super.hide();
+		}
 		override protected function onHide():void
 		{
 			super.onHide();

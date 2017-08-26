@@ -187,7 +187,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName1 = temp;
 			temp.name = "uiName1";
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuotiaojian.png";
+			temp.styleName = "ui/art_txt/common/tips/tipswenzi/jineng/jihuotiaojian.png";
 			temp.x = 13;
 			temp.y = 51;
 			return temp;
@@ -198,7 +198,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName2 = temp;
 			temp.name = "uiName2";
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuoshuxing.png";
+			temp.styleName = "ui/art_txt/common/tips/tipswenzi/jineng/jihuoshuxing.png";
 			temp.x = 13;
 			temp.y = 109;
 			return temp;

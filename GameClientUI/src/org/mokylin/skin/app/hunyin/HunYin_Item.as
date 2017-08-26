@@ -91,7 +91,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/common/shuxing/bjz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/bjz.png";
 			temp.x = 8;
 			temp.y = 2;
 			return temp;

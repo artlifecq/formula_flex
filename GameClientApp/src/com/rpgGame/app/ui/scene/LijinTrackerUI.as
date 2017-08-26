@@ -221,7 +221,6 @@ package com.rpgGame.app.ui.scene
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
-			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			
 		}
 		private function removeEvent():void
@@ -242,7 +241,6 @@ package com.rpgGame.app.ui.scene
 			EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
-			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			
 		}
 		
@@ -614,11 +612,6 @@ package com.rpgGame.app.ui.scene
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(TaskType.LIJIN_TASK).taskId);
 			}
-		}
-		/**飞鞋完成*/
-		private function flyComplete():void
-		{
-			TaskControl.flyComplete();
 		}
 		
 		private function allFilish():void

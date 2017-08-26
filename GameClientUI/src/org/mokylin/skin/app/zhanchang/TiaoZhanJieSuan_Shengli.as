@@ -296,7 +296,7 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiExp = temp;
 			temp.name = "uiExp";
-			temp.styleName = "ui/common/tubiao/exp.png";
+			temp.styleName = "ui/art_txt/common/tubiao/exp.png";
 			temp.x = 0;
 			temp.y = 3;
 			return temp;

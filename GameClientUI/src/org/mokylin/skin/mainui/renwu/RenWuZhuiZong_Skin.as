@@ -183,7 +183,7 @@ package org.mokylin.skin.mainui.renwu
 		private function __RenWuZhuiZong_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/renwuzhuizong.png";
+			temp.styleName = "ui/art_txt/mainui/renwu/renwuzhuizong.png";
 			temp.x = 67;
 			temp.y = 6;
 			return temp;
@@ -293,6 +293,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.text = "本任务需要60级开启";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.visible = false;
 			temp.width = 206;
 			temp.x = 12;
 			temp.y = 24;
@@ -357,7 +358,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			pri_navi0 = temp;
 			temp.name = "pri_navi0";
-			temp.styleName = "ui/mainui/renwu/renwumingchen.png";
+			temp.styleName = "ui/art_txt/mainui/renwu/renwumingchen.png";
 			temp.x = 18;
 			temp.y = 40;
 			return temp;
@@ -368,7 +369,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			pri_navi1 = temp;
 			temp.name = "pri_navi1";
-			temp.styleName = "ui/mainui/renwu/zhangjiejindu.png";
+			temp.styleName = "ui/art_txt/mainui/renwu/zhangjiejindu.png";
 			temp.x = 18;
 			temp.y = 89;
 			return temp;
@@ -393,7 +394,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			pri_navi2 = temp;
 			temp.name = "pri_navi2";
-			temp.styleName = "ui/mainui/renwu/renwumiaoshu.png";
+			temp.styleName = "ui/art_txt/mainui/renwu/renwumiaoshu.png";
 			temp.x = 18;
 			temp.y = 140;
 			return temp;
@@ -404,7 +405,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			pri_navi3 = temp;
 			temp.name = "pri_navi3";
-			temp.styleName = "ui/mainui/renwu/renwujindu.png";
+			temp.styleName = "ui/art_txt/mainui/renwu/renwujindu.png";
 			temp.x = 18;
 			temp.y = 212;
 			return temp;
@@ -780,6 +781,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.text = "推荐：";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.visible = false;
 			temp.width = 53;
 			temp.x = 12;
 			temp.y = 39;
@@ -796,7 +798,6 @@ package org.mokylin.skin.mainui.renwu
 			temp.text = "描述任务描述任务描述任务描述任务描述任务描述任务";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.visible = false;
 			temp.width = 199;
 			temp.x = 12;
 			temp.y = 23;

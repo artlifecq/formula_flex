@@ -137,7 +137,7 @@ package org.mokylin.skin.app.tips
 		private function __Tips_ZhuangBei_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
+			temp.styleName = "ui/art_txt/common/zhandouli.png";
 			temp.x = 0;
 			temp.y = 4;
 			return temp;

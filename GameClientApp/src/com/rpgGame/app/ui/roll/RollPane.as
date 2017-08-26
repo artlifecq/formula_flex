@@ -177,13 +177,18 @@ package com.rpgGame.app.ui.roll
 		private var saiziRender:RenderUnit3D;
 		public function setEndHandler():void
 		{
-			_isRandomEnd = true;
-			_roleskin.btnRandom.isEnabled = false;
-			_currentFun = runRemoveHandler;
-			_endRunTime = SystemTimeManager.curtTm+DURATION_REMOVE_TIME;
-			var stopTime:Number=stopTimes[int(Math.random()*6)];
-			saiziRender.stop(stopTime);
-			_roleskin.btnRandom.visible=false;
+			try{
+				_isRandomEnd = true;
+				_roleskin.btnRandom.isEnabled = false;
+				_currentFun = runRemoveHandler;
+				_endRunTime = SystemTimeManager.curtTm+DURATION_REMOVE_TIME;
+				var stopTime:Number=stopTimes[int(Math.random()*6)];
+				saiziRender.stop(stopTime);
+				_roleskin.btnRandom.visible=false;
+			}
+			catch(e:Error){
+				trace("####  ROLL点报错  ####"+e.message);
+			}
 		}
 		private function runRemoveHandler():void
 		{
@@ -213,7 +218,7 @@ package com.rpgGame.app.ui.roll
 			if(saiziRender){
 				saiziRender.stop();
 				saiziRender.dispose();
-//				this.saiziRender.visible=false;
+				//				this.saiziRender.visible=false;
 			}
 			_roleskin.btnRandom.visible=true;
 		}

@@ -2,6 +2,7 @@ package com.rpgGame.app.display2D
 {
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	
 	import flash.geom.Point;
@@ -156,6 +157,10 @@ package com.rpgGame.app.display2D
 			startX=0;
 			if (_extendsData) 
 			{
+				if (_extendsData==this||_extendsData.contains(this)) 
+				{
+					GameLog.addError("ggggg");
+				}
 				startX=_extendsData.width/2+2;
 				_extendsData.x=0;
 				_extendsData.y=_extendsData.height/2;

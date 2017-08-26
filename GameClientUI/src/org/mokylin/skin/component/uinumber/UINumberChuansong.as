@@ -22,16 +22,16 @@ package org.mokylin.skin.component.uinumber
 			
 			states = {
 			};
-			skinNames={"0":"ui/component/uinumber/chuansong/0.png",
-			"1":"ui/component/uinumber/chuansong/1.png",
-			"2":"ui/component/uinumber/chuansong/2.png",
-			"3":"ui/component/uinumber/chuansong/3.png",
-			"4":"ui/component/uinumber/chuansong/4.png",
-			"5":"ui/component/uinumber/chuansong/5.png",
-			"6":"ui/component/uinumber/chuansong/6.png",
-			"7":"ui/component/uinumber/chuansong/7.png",
-			"8":"ui/component/uinumber/chuansong/8.png",
-			"9":"ui/component/uinumber/chuansong/9.png"};
+			skinNames={"0":"ui/art_txt/component/uinumber/chuansong/0.png",
+			"1":"ui/art_txt/component/uinumber/chuansong/1.png",
+			"2":"ui/art_txt/component/uinumber/chuansong/2.png",
+			"3":"ui/art_txt/component/uinumber/chuansong/3.png",
+			"4":"ui/art_txt/component/uinumber/chuansong/4.png",
+			"5":"ui/art_txt/component/uinumber/chuansong/5.png",
+			"6":"ui/art_txt/component/uinumber/chuansong/6.png",
+			"7":"ui/art_txt/component/uinumber/chuansong/7.png",
+			"8":"ui/art_txt/component/uinumber/chuansong/8.png",
+			"9":"ui/art_txt/component/uinumber/chuansong/9.png"};
 		}
 
 

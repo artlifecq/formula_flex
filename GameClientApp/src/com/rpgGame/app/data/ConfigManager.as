@@ -43,6 +43,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LijinCfgData;
+	import com.rpgGame.coreData.cfg.LinkCfg;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
@@ -107,6 +108,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.clientConfig.Config;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.netData.chat.bean.HyperInfo;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
@@ -264,6 +266,8 @@ package com.rpgGame.app.data
 			HuBaoData.setup(dic[ConfigClassRegister.Q_convoy]);
 			//格子配置
 			GridOpenCfg.setup(dic[ConfigClassRegister.Q_backpack_grid]);
+			//超链接配置
+			LinkCfg.setup(dic[ConfigClassRegister.Q_hyperlinksMenu]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);

@@ -89,7 +89,7 @@ package org.mokylin.skin.app.wuxue.jineng
 		private function __jineng_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/zqz.png";
+			temp.styleName = "ui/art_txt/common/shuxing/zqz.png";
 			temp.x = 35;
 			temp.y = 54;
 			return temp;
