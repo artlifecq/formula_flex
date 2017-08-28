@@ -25,7 +25,14 @@ package com.rpgGame.appModule.rank
 		private static const HELPER_POINT : Point = new Point();
 		private var _skin:PaiHang_Item;
 		private var _topInfo:TopInfo;
-
+		override public function get height():Number
+		{
+			return _skin.height;
+		}
+		override public function get width():Number	
+		{
+			return _skin.width;
+		}
 		public function get topInfo():TopInfo
 		{
 			return _topInfo;
