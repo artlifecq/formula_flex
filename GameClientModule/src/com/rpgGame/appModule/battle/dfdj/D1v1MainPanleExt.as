@@ -37,6 +37,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin=new DianFeng_Skin();
 			super(_skin);
 			_skin.btnOpen.touchable=false;
+			_skin.btnStart.touchable=false;
 		
 			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 			TipTargetManager.show(_skin.icoSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
