@@ -144,7 +144,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icons = temp;
 			temp.name = "icons";
-			temp.styleName = "ui/common/icon/erjikuang/zuoqijinjie.png";
+			temp.styleName = "ui/icon/erjikuang/zuoqijinjie.png";
 			temp.x = 116;
 			temp.y = 55;
 			return temp;

@@ -40,6 +40,12 @@ package com.rpgGame.appModule.role
 			}
 		}
 		
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			this._skin.container.x=(sw-this._skin.width);
+			this._skin.container.y=(sh-this._skin.height-150);
+		}
+		
 		private function onToDu(type:int):void
 		{
 			switch(type){

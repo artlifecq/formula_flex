@@ -52,7 +52,7 @@ package org.mokylin.skin.mainui.head
 			temp.name = "Icon_heping";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/mainui/head/mode/he.png";
+			temp.styleName = "ui/art_txt/mainui/head/mode/he.png";
 			temp.x = 4;
 			temp.y = 2;
 			return temp;
