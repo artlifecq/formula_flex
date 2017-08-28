@@ -6,9 +6,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.team.bean.MapTeamInfo;

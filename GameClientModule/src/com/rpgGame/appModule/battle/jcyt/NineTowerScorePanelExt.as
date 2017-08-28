@@ -3,7 +3,6 @@ package com.rpgGame.appModule.battle.jcyt
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.main.dungeon.NineTowerTrackUIExt;
 	import com.rpgGame.core.events.NineTowerEvent;
 	import com.rpgGame.netData.yaota.message.SCYaoTaIntegralMessage;
 	

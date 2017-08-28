@@ -153,7 +153,7 @@ package com.rpgGame.appModule.rank
 			{
 				var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);		
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
-				FaceUtil.SetItemGrid(_marryIcon,itemInfo);
+				FaceUtil.SetItemGrid(_marryIcon,itemInfo,true,{"lv":ring});
 				//_marryIcon.setIconResName(ClientConfig.getItemIcon(Mgr.hunyinMgr.getRingUrl(ring),IcoSizeEnum.ICON_48));
 				if (hasMarriage==10) 
 				{

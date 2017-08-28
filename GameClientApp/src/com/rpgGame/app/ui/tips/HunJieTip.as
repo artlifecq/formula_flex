@@ -67,7 +67,7 @@ package com.rpgGame.app.ui.tips
 			_iconFace.alwayShowCount=false;
 			_skin.grp_icon.addChild(_iconFace);
 			_hunjieLv=data as int;
-			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);		
+			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(_hunjieLv);		
 			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
 			
 			var obj:DisplayObject=_skin.bg.getChildAt(itemInfo.qItem.q_default-2);

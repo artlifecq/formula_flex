@@ -2,15 +2,12 @@ package com.rpgGame.core.ui
 {
 
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.gameClient.utils.HashMap;
 	import com.rpgGame.core.controller.MouseCursorController;
-	import com.rpgGame.core.ui.tip.RewardTipNode;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.core.utils.AudioPlayUtil;
 	
 	import flash.display.Stage;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	
 	import away3d.events.Event;
 	

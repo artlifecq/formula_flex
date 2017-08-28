@@ -67,7 +67,7 @@ package org.mokylin.skin.app.paihangbang
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/app/paihangbang/1.png";
-			temp.x = 13;
+			temp.x = 17;
 			temp.y = 2;
 			return temp;
 		}
@@ -81,8 +81,8 @@ package org.mokylin.skin.app.paihangbang
 			temp.textAlign = "center";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 136;
-			temp.x = 259;
+			temp.width = 139;
+			temp.x = 254;
 			temp.y = 6;
 			return temp;
 		}
@@ -92,11 +92,12 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "[9999区]姓名六个字的";
+			temp.height = 20;
+			temp.text = "胖涌胖涌胖涌啊";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 148;
-			temp.x = 82;
+			temp.width = 109;
+			temp.x = 96;
 			temp.y = 6;
 			return temp;
 		}
@@ -106,12 +107,13 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.text = "3";
+			temp.height = 19;
+			temp.text = "1";
 			temp.textAlign = "center";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 43;
-			temp.x = 5;
+			temp.width = 49;
+			temp.x = 6;
 			temp.y = 5;
 			return temp;
 		}
@@ -125,7 +127,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 42;
-			temp.x = 230;
+			temp.x = 208;
 			temp.y = 6;
 			return temp;
 		}
@@ -140,7 +142,6 @@ package org.mokylin.skin.app.paihangbang
 			temp.right = 0;
 			temp.styleName = "ui/common/hover/liangkuang2.png";
 			temp.top = 0;
-			temp.visible = false;
 			return temp;
 		}
 
@@ -150,7 +151,7 @@ package org.mokylin.skin.app.paihangbang
 			vip = temp;
 			temp.name = "vip";
 			temp.styleName = "ui/common/tubiao/vips1.png";
-			temp.x = 51;
+			temp.x = 64;
 			temp.y = 4;
 			return temp;
 		}
