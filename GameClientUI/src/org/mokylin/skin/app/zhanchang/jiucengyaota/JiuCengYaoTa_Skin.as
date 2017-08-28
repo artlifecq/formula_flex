@@ -56,7 +56,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),gBtn_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),iconSw_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),grp_icon_i(),lbRank_i(),skinTips_i(),btnStart_i()];
+			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),gBtn_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),iconSw_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),grp_icon_i(),lbRank_i(),skinTips_i()];
 			
 			states = {
 			};
@@ -132,8 +132,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			btnStart = temp;
 			temp.name = "btnStart";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonKaishitiaozhan;
-			temp.x = 428;
-			temp.y = 395;
+			temp.x = 66;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -144,7 +144,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.name = "gBtn";
 			temp.x = 363;
 			temp.y = 479;
-			temp.elementsContent = [uiCon_i(),btnOpen_i()];
+			temp.elementsContent = [uiCon_i(),btnOpen_i(),btnStart_i()];
 			return temp;
 		}
 
