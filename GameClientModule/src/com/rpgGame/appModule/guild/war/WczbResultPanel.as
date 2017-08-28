@@ -1,13 +1,14 @@
 package com.rpgGame.appModule.guild.war
 {
-	import com.game.mainCore.core.manager.TimerManager;
-	import com.game.mainCore.libCore.timer.TimerData;
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -29,13 +30,13 @@ package com.rpgGame.appModule.guild.war
 	 **/
 	public class WczbResultPanel extends SkinUIPanel
 	{
-		private var showTime:int=500;
+		private var showTime:int=15;
 		
 		private var _skin:WangChengJieSuan;
 		private var _rankDatas:ListCollection;
 
 		private var rankList:WangChengPaiHangList;
-		private var timer:TimerData;
+		private var timer:GameTimer;
 		private var rewardGrp:RewardGroup;
 		
 		public function WczbResultPanel()
@@ -59,7 +60,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			rewardGrp.tweeRewardInBag();
 			super.hide();
-			TimerManager.deleteTimer(timer);
+			timer.stop();
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 			rewardGrp.clear();
 		}
@@ -98,7 +99,7 @@ package com.rpgGame.appModule.guild.war
 				all=updateResultResult(attackRe,all);
 			}
 			rewardGrp.setRewardByArray(all);
-//			timer=TimerManager.createTimer(1000,showTime,updateTime);
+			timer=new GameTimer("WczbResultPanel",1000,0,updateTime);
 		}
 		
 		private function updateResultResult(listA:Array,listB:Array):Array
@@ -127,7 +128,8 @@ package com.rpgGame.appModule.guild.war
 			showTime--;
 			_skin.lbTime.text=showTime+"秒后自动退出";
 			if(showTime<=0){
-				this.hide();
+				timer.stop();
+				AppManager.hideApp(AppConstant.GUILD_WCZB_RESULT);
 			}
 		}
 		

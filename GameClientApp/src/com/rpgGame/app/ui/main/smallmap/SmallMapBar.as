@@ -1,7 +1,6 @@
 package com.rpgGame.app.ui.main.smallmap 
 {
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.rpgGame.app.manager.BGMManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -13,6 +12,7 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
+	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;

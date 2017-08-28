@@ -73,7 +73,7 @@ package com.rpgGame.appModule.activety.zonghe
 			_richText.multiline = true;
 			
 			_defaultFormat = new TextFormat(Fontter.FONT_Hei);
-			_defaultFormat.color = 0xF9F0CC;
+			_defaultFormat.color = StaticValue.BEIGE_TEXT;
 			_defaultFormat.size = 14;
 			_defaultFormat.align = TextFieldAutoSize.LEFT;
 			_defaultFormat.letterSpacing = 1;
@@ -82,6 +82,7 @@ package com.rpgGame.appModule.activety.zonghe
 			this.addChild(_richText);
 			_richText.x=_skin.lbMsg.x;
 			_richText.y=_skin.lbMsg.y;
+			_richText.filters=Fontter.filterObj["textFilterBlackGreen"];
 			_skin.lbMsg.visible=false;
 		}
 		
