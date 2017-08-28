@@ -37,14 +37,18 @@ package com.rpgGame.appModule.huanying
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_kaishiyouxi"),455,287,1);
 			super.show(data,openTable,parentContiner);
-			eft=this.playInter3DAt(ClientConfig.getEffect("ui_kaishiyouxi"),this.x,this.y,1,playCom);
 		}
 		
 		private function playCom(target:InterObject3D):void
 		{
 			TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 			this.hide();
+		}
+		override  protected function onStageResize(sw : int, sh : int) : void
+		{
+			super.onStageResize(sw,sh);
 		}
 		
 		override public function hide():void

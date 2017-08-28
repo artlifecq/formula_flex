@@ -948,7 +948,7 @@ package com.rpgGame.coreData.cfg
 
 		public static function getSound($name : String) : String
 		{
-			var path : String = "sound/" + $name + ".mp3";
+			var path : String = resURL + "sound/" + $name + ".mp3";
 			return /*getVersionPath(*/path/*)*/;
 		}
 
