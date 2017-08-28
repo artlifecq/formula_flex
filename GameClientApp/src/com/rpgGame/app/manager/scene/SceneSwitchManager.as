@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.scene
 {
+	import com.app.infos.AudioInfo;
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
@@ -554,9 +555,9 @@ package com.rpgGame.app.manager.scene
 		private static function playBackMusic() : void
 		{
 			//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-			BGMManager.playMusic(MapDataManager.currentScene.sound);
+//			BGMManager.playMusic(MapDataManager.currentScene.sound);
 		}
-		
+
 //		public static function updateSceneSound():void
 //		{
 //			var _local1:ClientMapAreaData = AreaMapManager.getRoleInMapDataSoundArea(MainRoleManager.actor);

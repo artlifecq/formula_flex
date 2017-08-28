@@ -1,9 +1,9 @@
 package com.client.manager
 {
 	import com.app.AudioInterface;
+	import com.app.infos.AudioInfo;
 	import com.client.AudioConfigType;
 	import com.gameClient.log.GameLog;
-	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.display.Stage;
@@ -52,6 +52,11 @@ package com.client.manager
 				return;
 			}
 			var soundUrl:String = ClientConfig.getSound(fileName);
+			var info : AudioInfo = new AudioInfo(soundUrl);
+			info.fadeInTime = 500;
+			info.fadeOutTime = 500;
+			info.loops = 0;
+			AudioInterface.setAudioInfo(AudioConfigType.ENV2D_CHANNEL,info);
 			AudioInterface.playAudio(AudioConfigType.ENV2D_CHANNEL, soundUrl);
 		}
 		
@@ -72,6 +77,11 @@ package com.client.manager
 				return;
 			}
 			var soundUrl:String = ClientConfig.getSound(fileName);
+			var info : AudioInfo = new AudioInfo(soundUrl);
+			info.fadeInTime = 500;
+			info.fadeOutTime = 500;
+			info.loops = 0;
+			AudioInterface.setAudioInfo(AudioConfigType.MUSIC_CHANNEL,info);
 			AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, soundUrl);
 		}
 		
@@ -87,6 +97,11 @@ package com.client.manager
 				return;
 			}
 			var soundUrl:String = ClientConfig.getSound(fileName);
+			var info : AudioInfo = new AudioInfo(soundUrl);
+			info.fadeInTime = 0;
+			info.fadeOutTime = 0;
+			info.loops = 1;
+			AudioInterface.setAudioInfo(AudioConfigType.UI_EFFECT_CHANNEL,info);
 			AudioInterface.playSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL, soundUrl);
 		}
 	}

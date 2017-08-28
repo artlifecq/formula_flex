@@ -721,7 +721,7 @@ package com.rpgGame.appModule.role
 					ItemSender.clearUpItem(ItemContainerID.BackPack);
 					return true;
 				case _skin.btn_cangku:
-					return openThis(1);
+					return openThis(2);
 				case _skin.btn_shangdian:
 					enterOrLeaveSellMode(false);
 					if (shopPanel.parent) 
