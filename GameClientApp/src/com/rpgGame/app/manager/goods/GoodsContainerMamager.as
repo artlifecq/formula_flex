@@ -12,6 +12,8 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.view.icon.DragDropItem;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GridOpenCfg;
@@ -1515,7 +1517,8 @@ package com.rpgGame.app.manager.goods
 				TimerServer.remove(updateTime);
 				unlockTime=0;
 				isMianFei=true;
-				EventManager.dispatchEvent(ItemEvent.ITEM_GRID_CANLOCK,this.containerId);
+//				EventManager.dispatchEvent(ItemEvent.ITEM_GRID_CANLOCK,this.containerId);
+				AppManager.showAppNoHide(AppConstant.GRID_OPEM);
 			}
 			else
 			{		

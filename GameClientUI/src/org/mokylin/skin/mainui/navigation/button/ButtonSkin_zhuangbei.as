@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.navigation.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/navigation/button/skin_zhuangbei/down.png", "hover":"ui/mainui/navigation/button/skin_zhuangbei/over.png", "up":"ui/mainui/navigation/button/skin_zhuangbei/up.png"};
+			skinNames={"down":"ui/button/skin_zhuangbei/down.png", "hover":"ui/button/skin_zhuangbei/over.png", "up":"ui/button/skin_zhuangbei/up.png"};
 		}
 
 

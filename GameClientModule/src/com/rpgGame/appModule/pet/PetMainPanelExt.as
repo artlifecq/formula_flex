@@ -354,7 +354,7 @@ package com.rpgGame.appModule.pet
 			if (data.actived) 
 			{
 				_skin.uiLevel.visible=true;
-				_skin.uiLevel.styleName="ui/mainui/meirenHead/jieshu/"+data.rank+".png";
+				_skin.uiLevel.styleName="ui/pet/jieshu/"+data.rank+".png";
 			}
 			else
 			{

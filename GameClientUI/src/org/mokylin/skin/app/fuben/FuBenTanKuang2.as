@@ -54,7 +54,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/head_tishi.png";
+			temp.styleName = "ui/art_txt/common/background/head_tishi.png";
 			temp.x = 142;
 			temp.y = 9;
 			return temp;
@@ -85,7 +85,7 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 100;
-			temp.x = 108;
+			temp.x = 114;
 			temp.y = 216;
 			return temp;
 		}
@@ -112,7 +112,6 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/fuben/duorenfuben/fuben_name/changpinjiucheng/normal.png";
 			temp.x = 161;
 			temp.y = 117;
 			return temp;

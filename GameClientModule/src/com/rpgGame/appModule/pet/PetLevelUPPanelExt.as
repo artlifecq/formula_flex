@@ -73,7 +73,7 @@ package com.rpgGame.appModule.pet
 			this._data=data;
 			initModEff();
 			if(data.rank>=_qPet.q_max_grade) return;
-			_skin.uiLevel.styleName="ui/mainui/meirenHead/jieshu/"+data.rank+".png";
+			_skin.uiLevel.styleName="ui/icon/pet/jieshu/"+data.rank+".png";
 			updateNeedItems();
 			updateBlessData();
 			setAutoState(false);		

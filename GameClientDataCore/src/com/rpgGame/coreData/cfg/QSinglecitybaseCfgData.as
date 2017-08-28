@@ -40,6 +40,15 @@ package com.rpgGame.coreData.cfg
 			return _typeMap.getValue(cityID);
 		}
 		
+		public static function getCityNameById(cityID:int):String
+		{
+			var cfg:Q_singlecitybase=getCityCfg(cityID);
+			if(cfg){
+				return cfg.q_name;
+			}
+			return null;
+		}
+		
 		/**
 		 * 通过配置和阵营获取上交位置
 		 * @param cfg

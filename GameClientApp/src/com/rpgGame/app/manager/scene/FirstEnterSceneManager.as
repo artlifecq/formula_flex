@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.hud.ActivityBarManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.society.SocietyManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
@@ -49,13 +50,16 @@ package com.rpgGame.app.manager.scene
 		}
 
 		/**
-		 * 游戏公共模块初始化，在第一次进入游戏时，都要初始化好 
+		 * 游戏公共模块初始化，在第一次进入    游戏场景     时，都要初始化好 
 		 * 
 		 */		
 		private static function init() : void
 		{
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.PRIVILEGE_MARK_TYPE, 1);
 			//暂时放这里测试用，@L.L.M.Sunny 20160113
+			//主角初始化
+			MainRoleManager.initActor();
+			
 
 			AppMergeManager.instace.setup();
 			MouseCursorController.setup();

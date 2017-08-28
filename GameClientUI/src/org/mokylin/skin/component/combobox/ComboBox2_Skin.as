@@ -21,6 +21,8 @@ package org.mokylin.skin.component.combobox
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var __ComboBox2_Skin_VerticalLayout1:feathers.layout.VerticalLayout;
+
 		public var dropDown:feathers.controls.List;
 
 		public var openButton:feathers.controls.Button;
@@ -54,6 +56,13 @@ package org.mokylin.skin.component.combobox
 							value:false
 						}
 					]
+				,
+				init:[
+						{target:"__ComboBox2_Skin_VerticalLayout1",
+							name:"paddingLeft",
+							value:3
+						}
+					]
 			};
 			skinNames={};
 		}
@@ -65,7 +74,14 @@ package org.mokylin.skin.component.combobox
 		private function __ComboBox2_Skin_VerticalLayout1_i():feathers.layout.VerticalLayout
 		{
 			var temp:feathers.layout.VerticalLayout = new feathers.layout.VerticalLayout();
-			temp.gap = 2;
+			temp.gap = 4;
+			temp.horizontalAlign = "center";
+			temp.padding = 3;
+			temp.paddingBottom = 3;
+			__ComboBox2_Skin_VerticalLayout1 = temp;
+			temp.paddingRight = 3;
+			temp.paddingTop = 3;
+			temp.verticalAlign = "top";
 			return temp;
 		}
 

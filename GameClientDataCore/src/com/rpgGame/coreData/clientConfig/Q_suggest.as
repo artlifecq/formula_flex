@@ -18,9 +18,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_level:int;
 		 /**  地图ID */
 		public var q_map_id:int;
-		 /**  跳跃点资源X坐标 */
+		 /**  挂机点X坐标 */
 		public var q_move_x:int;
-		 /**  跳跃点资源Y坐标 */
+		 /**  挂机点Y坐标 */
 		public var q_move_y:int;
 
 	}

@@ -44,9 +44,9 @@ package org.mokylin.skin.app.systemSet
 			super();
 			
 			this.currentState = "normal";
-			this.height = 580;
-			this.width = 425;
-			this.elementsContent = [bg_i(),__systemSet_Skin_UIAsset2_i(),guaji_i(),xitong_i(),pingbi_i(),kuaijie_i(),tab_set_i()];
+			this.height = 565;
+			this.width = 437;
+			this.elementsContent = [bg_i(),__systemSet_Skin_UIAsset1_i(),__systemSet_Skin_UIAsset2_i(),__systemSet_Skin_UIAsset3_i(),guaji_i(),xitong_i(),pingbi_i(),kuaijie_i(),tab_set_i()];
 			
 			states = {
 			};
@@ -60,23 +60,45 @@ package org.mokylin.skin.app.systemSet
 		private function __systemSet_Skin_ArrayCollection1_i():feathers.data.ListCollection
 		{
 			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['挂机设置','系统设置','屏蔽设置','快捷键'];
+			temp.data = ['挂机设置','画面设置','快捷键'];
 			return temp;
 		}
 
 		private function __systemSet_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -1;
+			temp.gap = 1;
+			return temp;
+		}
+
+		private function __systemSet_Skin_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 476;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 405;
+			temp.x = 16;
+			temp.y = 81;
 			return temp;
 		}
 
 		private function __systemSet_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/systemSet/bg.png";
+			temp.x = 19;
+			temp.y = 102;
+			return temp;
+		}
+
+		private function __systemSet_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/systemSet/shezhi.png";
-			temp.x = 190;
-			temp.y = 15;
+			temp.x = 198;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -85,7 +107,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 580;
+			temp.height = 565;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
 			temp.x = 0;
@@ -103,7 +125,7 @@ package org.mokylin.skin.app.systemSet
 			temp.skin = skin
 			temp.width = 403;
 			temp.x = 16;
-			temp.y = 82;
+			temp.y = 81;
 			return temp;
 		}
 
@@ -161,8 +183,8 @@ package org.mokylin.skin.app.systemSet
 			temp.skin = skin
 			temp.visible = false;
 			temp.width = 400;
-			temp.x = 15;
-			temp.y = 82;
+			temp.x = 16;
+			temp.y = 81;
 			return temp;
 		}
 

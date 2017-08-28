@@ -84,12 +84,12 @@ package com.rpgGame.app.view.uiComponent.menu
 //				menuItem.setWidth( menuWidth, 5 );
 				
 				menuItem.setData( menus[i] );
-				menuItem.width=menuWidth-8;
+				menuItem.width=menuWidth-4;
 				menuItem.x=4;
 				menuItem.visible = true;
 			}
 			
-			_menuBG.width = menuWidth;
+			_menuBG.width = menuWidth+4;
 			_menuBG.height = menusLen * MenuItemView.LAB_MAX_HEIGHT + 12;
 			
 			updatePos( fixPosx, fixPosy );

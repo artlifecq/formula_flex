@@ -1,6 +1,5 @@
 package   com.rpgGame.appModule.social.team.mediator
 {
-	import com.game.engine2D.config.MapConfig;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
@@ -12,18 +11,12 @@ package   com.rpgGame.appModule.social.team.mediator
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangMenu;
-	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
-	
-	import flash.desktop.Clipboard;
-	import flash.desktop.ClipboardFormats;
-	import flash.geom.Point;
 	
 	import feathers.controls.Group;
 	import feathers.controls.Label;

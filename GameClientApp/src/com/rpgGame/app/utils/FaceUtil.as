@@ -171,29 +171,23 @@ package com.rpgGame.app.utils
 					case GoodsType.EQUIPMENT://装备
 					case GoodsType.EQUIPMENT1://装备
 					case GoodsType.EQUIPMENT2://装备
-						if(itemInfo.qItem.q_type==GoodsType.EQUIPMENT2&&itemInfo.qItem.q_location==5)
-						{
-							TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP,extObj?extObj.lv:1));
-						}
-						else{
-							TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
-							if(itemInfo.containerID==ItemContainerID.BackPack){
-								if((hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0)||(hero.sex!=itemInfo.qItem.q_sex&&itemInfo.qItem.q_sex!=0)||hero.totalStat.level<itemInfo.qItem.q_level){
-									grid.setJobState(AssetUrl.EQUIP_JOB_NO);
+						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+						if(itemInfo.containerID==ItemContainerID.BackPack){
+							if((hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0)||(hero.sex!=itemInfo.qItem.q_sex&&itemInfo.qItem.q_sex!=0)||hero.totalStat.level<itemInfo.qItem.q_level){
+								grid.setJobState(AssetUrl.EQUIP_JOB_NO);
+							}else{
+								var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
+								var equipFight:int;
+								if(equipItemInfo){
+									equipFight=equipItemInfo.itemInfo.fightPower;
+								}
+								var targetFight:int=itemInfo.itemInfo.fightPower;
+								if(equipFight>targetFight){
+									grid.setJobState(AssetUrl.EQUIP_JOB_DOWN);
+								}else if(equipFight<targetFight){
+									grid.setJobState(AssetUrl.EQUIP_JOB_UP);
 								}else{
-									var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
-									var equipFight:int;
-									if(equipItemInfo){
-										equipFight=equipItemInfo.itemInfo.fightPower;
-									}
-									var targetFight:int=itemInfo.itemInfo.fightPower;
-									if(equipFight>targetFight){
-										grid.setJobState(AssetUrl.EQUIP_JOB_DOWN);
-									}else if(equipFight<targetFight){
-										grid.setJobState(AssetUrl.EQUIP_JOB_UP);
-									}else{
-										grid.setJobState(null);
-									}
+									grid.setJobState(null);
 								}
 							}
 						}
@@ -202,6 +196,9 @@ package com.rpgGame.app.utils
 					grid.setIsBind(itemInfo.binded);
 					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
 					break;*/
+					case GoodsType.HUNJIE://婚戒
+						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP, ,extObj?extObj.lv:1));
+						break;
 					default:
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
 						break;

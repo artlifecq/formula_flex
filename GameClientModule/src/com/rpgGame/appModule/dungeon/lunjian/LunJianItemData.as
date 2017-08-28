@@ -14,6 +14,10 @@ package com.rpgGame.appModule.dungeon.lunjian
 		 *当前该打的打过的难度 
 		 */
 		public var diff:int;
+		/**
+		 * 位子计数
+		 * */
+		public var num:int;
 		
 		public function LunJianItemData()
 		{

@@ -6,7 +6,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import org.mokylin.skin.app.meiren.Tips_MeiRen;
@@ -30,21 +29,25 @@ package com.rpgGame.app.ui.tips
 		 */
 		public function setTipData(data : *) : void
 		{
-			_info=data as PetInfo;
-			_skin.uiName.styleName = "ui/mainui/meirenHead/head_icon/name"+_info.modelId+"s.png";
-			_skin.uiLevel.styleName = "ui/mainui/meirenHead/jieshu/"+_info.rank+".png";
-			var qPetAdv:Q_girl_advance=PetAdvanceCfg.getPet(_info.modelId,_info.rank);
-			var attrHash:HashMap=AttValueConfig.getAttrHash(qPetAdv.q_attid_self);
-			if(attrHash!=null&&attrHash.keys()!=null)
-			{
-				var type:int=attrHash.keys()[0];
-//				_skin.lb_type.styleName = CharAttributeType.getAttrNameUrl(type);
-				_skin.lbl_gongj1.text=attrHash.getValue(type);
-			}
-			else
-			{
-				_skin.lb_type.visible=false;
-				_skin.lbl_gongj1.visible=false;
+			if(data!=null){
+				_info=data as PetInfo;
+				_skin.uiName.styleName = "ui/pet/petName/name"+_info.modelId+"s.png";
+				_skin.uiLevel.styleName = "ui/pet/jieshu/"+_info.rank+".png";
+				var qPetAdv:Q_girl_advance=PetAdvanceCfg.getPet(_info.modelId,_info.rank);
+				var attrHash:HashMap=AttValueConfig.getAttrHash(qPetAdv.q_attid_self);
+				if(attrHash!=null&&attrHash.keys()!=null)
+				{
+					var type:int=14;
+					//				_skin.lb_type.styleName = CharAttributeType.getAttrNameUrl(type);
+					_skin.lbl_gongj1.text=attrHash.getValue(type);
+				}
+				else
+				{
+					_skin.lb_type.visible=false;
+					_skin.lbl_gongj1.visible=false;
+				}
+			}else{
+				trace("美人没得值哦。看看");
 			}
 		}
 		

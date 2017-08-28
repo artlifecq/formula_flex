@@ -30,7 +30,7 @@ package com.rpgGame.app.manager
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
-
+	
 	
 	
 	
@@ -66,7 +66,7 @@ package com.rpgGame.app.manager
 		private var _captain:TeamMemberInfo;
 		private var _teamMemberMap:HashMap = new HashMap();
 		
-	
+		
 		
 		
 		/**
@@ -121,13 +121,13 @@ package com.rpgGame.app.manager
 				{
 					continue;
 				}
-			
-//				dis=MathUtil.getDistanceNoSqrt(tmp.pos.x,tmp.pos.y,MainRoleManager.actor.pos.x,MainRoleManager.actor.pos.y);
-//				if (dis<minDis) 
-//				{
-//					minDis=dis;
-//					ret=tmp;
-//				}
+				
+				//				dis=MathUtil.getDistanceNoSqrt(tmp.pos.x,tmp.pos.y,MainRoleManager.actor.pos.x,MainRoleManager.actor.pos.y);
+				//				if (dis<minDis) 
+				//				{
+				//					minDis=dis;
+				//					ret=tmp;
+				//				}
 				data=tmp.data as HeroData;
 				hpPer=data.totalStat.hp/data.totalStat.getMaxValue(CharAttributeType.MAX_HP);
 				if (hpPer<minDis) 
@@ -179,19 +179,19 @@ package com.rpgGame.app.manager
 		 */		
 		public function ShowSearchPanel(type:int = 2, isAutoShow:Boolean = true , show:Boolean = true ):void
 		{
-//			if(isAutoShow)
-//			{
-//				show = !Mgr.uiMgr.isPanelShowByType( SearchPlayerPanelExt );
-//			}
-//			if(show)
-//			{
-//				var panel:SearchPlayerPanelExt = Mgr.uiMgr.showPanelbyType( SearchPlayerPanelExt );
-//				if(panel != null)
-//					panel.SetType( type );
-//			}else
-//			{
-//				Mgr.uiMgr.hidePanelByType( SearchPlayerPanelExt );
-//			}
+			//			if(isAutoShow)
+			//			{
+			//				show = !Mgr.uiMgr.isPanelShowByType( SearchPlayerPanelExt );
+			//			}
+			//			if(show)
+			//			{
+			//				var panel:SearchPlayerPanelExt = Mgr.uiMgr.showPanelbyType( SearchPlayerPanelExt );
+			//				if(panel != null)
+			//					panel.SetType( type );
+			//			}else
+			//			{
+			//				Mgr.uiMgr.hidePanelByType( SearchPlayerPanelExt );
+			//			}
 		}
 		
 		public function ShowTeamAskPanel(type:int, teamId:long , member:TeamMemberInfo):void
@@ -215,11 +215,11 @@ package com.rpgGame.app.manager
 		}
 		public function FuncPrompRelationTimeOut(type:int , teamId:long, member:TeamMemberInfo):void
 		{
-//			if(Mgr.uiMgr.isPanelShowByType( TeamAskPanelExt))
-//			{
-//				var ask:TeamAskPanelExt = Mgr.uiMgr.getPanelShowByType( TeamAskPanelExt ) as TeamAskPanelExt;
-//				ask.Confirm();
-//			}
+			//			if(Mgr.uiMgr.isPanelShowByType( TeamAskPanelExt))
+			//			{
+			//				var ask:TeamAskPanelExt = Mgr.uiMgr.getPanelShowByType( TeamAskPanelExt ) as TeamAskPanelExt;
+			//				ask.Confirm();
+			//			}
 		}
 		
 		public function UpdateAutoOpration():void
@@ -279,11 +279,11 @@ package com.rpgGame.app.manager
 		public function AppointCaptain(teamId:long , member:TeamMemberInfo):void
 		{
 			ShowTeamAskPanel(TYPE_TEAM_APPOINT_CAPTAIN,teamId,member);
-//			Mgr.promptMgr.AddFuncPromptWithSameCheck( EnumFunctionPrompt.TYPE_TEAM_APPOINT_CAPTAIN,[EnumFunctionPrompt.TYPE_TEAM_APPOINT_CAPTAIN,teamId,member],
-//				function(param:Array):Boolean
-//				{
-//					return true;
-//				});
+			//			Mgr.promptMgr.AddFuncPromptWithSameCheck( EnumFunctionPrompt.TYPE_TEAM_APPOINT_CAPTAIN,[EnumFunctionPrompt.TYPE_TEAM_APPOINT_CAPTAIN,teamId,member],
+			//				function(param:Array):Boolean
+			//				{
+			//					return true;
+			//				});
 		}
 		
 		/**
@@ -379,20 +379,20 @@ package com.rpgGame.app.manager
 		private var recommandTimeoutId:int;
 		private function CheckRecommandAddFriend():void
 		{
-//			if(teamInfo != null && teamInfo.memberinfo.length > 1)
-//			{
-//				for each( var mem:TeamMemberInfo in teamInfo.memberinfo )
-//				{
-//					if( !mem.memberId.EqualTo( Mgr.mainPlayer.sid ) )
-//					{
-//						if( !Mgr.friendMgr.IsFriend( mem.memberId ) )
-//						{
-//							Mgr.promptMgr.AddFuncPrompt( EnumFunctionPrompt.TYPE_SYSTEM_ADDFRIEND , []);
-//							break;
-//						}
-//					}
-//				}
-//			}
+			//			if(teamInfo != null && teamInfo.memberinfo.length > 1)
+			//			{
+			//				for each( var mem:TeamMemberInfo in teamInfo.memberinfo )
+			//				{
+			//					if( !mem.memberId.EqualTo( Mgr.mainPlayer.sid ) )
+			//					{
+			//						if( !Mgr.friendMgr.IsFriend( mem.memberId ) )
+			//						{
+			//							Mgr.promptMgr.AddFuncPrompt( EnumFunctionPrompt.TYPE_SYSTEM_ADDFRIEND , []);
+			//							break;
+			//						}
+			//					}
+			//				}
+			//			}
 		}
 		/**
 		 * 是否是队友
@@ -421,7 +421,7 @@ package com.rpgGame.app.manager
 			{
 				return false;
 			}
-		
+			
 		}
 		
 		public function isTeamateById(teamId:long):Boolean
@@ -446,15 +446,17 @@ package com.rpgGame.app.manager
 		public function SynMemberPositionInfo(playerId:long , x:int , y:int):void
 		{
 			var gid:int = playerId.ToGID();
-			var len:int = teamInfo.memberinfo.length
-			for (var i:int = 0; i < teamInfo.memberinfo.length; i++ )
-			{
-				if ( teamInfo.memberinfo[i].memberId.ToGID() == gid)
+			if(teamInfo!=null){
+				var len:int = teamInfo.memberinfo.length
+				for (var i:int = 0; i < teamInfo.memberinfo.length; i++ )
 				{
-					teamInfo.memberinfo[i].x = x;
-					teamInfo.memberinfo[i].y = y;
-					MapUnitDataManager.updateTeammatePos(gid,x,y,teamInfo.memberinfo[i].memberName);
-					break;
+					if ( teamInfo.memberinfo[i].memberId.ToGID() == gid)
+					{
+						teamInfo.memberinfo[i].x = x;
+						teamInfo.memberinfo[i].y = y;
+						MapUnitDataManager.updateTeammatePos(gid,x,y,teamInfo.memberinfo[i].memberName);
+						break;
+					}
 				}
 			}
 		}

@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
+	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
@@ -11,40 +12,19 @@ package com.rpgGame.app.ui.main.buttons
 	
 	import away3d.log.Log;
 	
+	import feathers.controls.Button;
+	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonDianfengduijue;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonFangChenMiSkin;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonFubendating;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonFubenduilie;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonHongbao;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonHuangchengzhengba;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonHuodongtating;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonJiucengyaota;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonJixianboss;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonMeiren;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonQinlingmibao;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonShijieboss;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonShuangbeihubao;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonTianjianglijing;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonWangchengzhengba;
-	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_bangpai;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_meiren;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
-	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zudui;
 
-	/**
-	 *主按钮配置管理器 
-	 * @author dik
-	 * 
-	 */
 	public class MainButtonManager
 	{
 		private static var _classMap:HashMap;
@@ -53,36 +33,29 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			_initializeMap = new HashMap();
 			_classMap = new  HashMap();
-			regClass(1,MainButton_Role,ButtonSkin_renwu);
-			regClass(2,MainButton_Mount,ButtonSkin_jinjie);
-			regClass(3,MainButton_Equip,ButtonSkin_zhuangbei);
-			regClass(4,MainButton_WuXue,ButtonSkin_wuxue);
-			regClass(5,MainButton_ZhanHun,ButtonSkin_zhanhun);
-			regClass(6,MainButton_Gang,ButtonSkin_bangpai);
-			regClass(7,MainButtonBases,ButtonSkin_shangcheng);
-			regClass(8,MainButton_Team,ButtonSkin_zudui);
-			regClass(101,ActivityButton,ButtonHuodongtating);
-			regClass(102,ActivityButton,ButtonLunjian);
-			regClass(103,ActivityButton,ButtonFubendating);
-			regClass(104,ActivityButton,ButtonZhanchangdating);
-			regClass(105,ActivityRedRewardButton,ButtonHongbao);
-			regClass(9,MainButton_MeiRen,ButtonSkin_meiren);
-			regClass(120,ActivityButton,ButtonFangChenMiSkin);
-			regClass(300,MultyActivityButton,ButtonFubenduilie);
-			regClass(301,LimitTimeActivityButton,ButtonShijieboss);
-			regClass(302,LimitTimeActivityButton,ButtonDianfengduijue);
-			regClass(303,LimitTimeActivityButton,ButtonShuangbeihubao);
-			regClass(304,LimitTimeActivityButton,ButtonJiucengyaota);
-			regClass(305,LimitTimeActivityButton,ButtonHuangchengzhengba);
-			regClass(306,LimitTimeActivityButton,ButtonWangchengzhengba);
-			regClass(307,LimitTimeActivityButton,ButtonWangchengzhengba);
-			regClass(308,LimitTimeActivityButton,ButtonQinlingmibao);
-			regClass(309,LimitTimeActivityButton,ButtonTianjianglijing);
-			regClass(310,LimitTimeActivityButton,ButtonJixianboss);
+			
+			//主界面
+			regClass(1,ButtonSkin_renwu);
+			regClass(2,ButtonSkin_jinjie);
+			regClass(3,ButtonSkin_zhuangbei);
+			regClass(4,ButtonSkin_wuxue);
+			regClass(5,ButtonSkin_zhanhun);
+			regClass(6,ButtonSkin_bangpai);
+			regClass(7,ButtonSkin_shangcheng);
+			regClass(8,ButtonSkin_zudui);
+			regClass(9,ButtonSkin_meiren);
+			
+			var btnLists:Array=FuncionBarCfgData.getAllBarInfos();
+			for(var i:int=0;i<btnLists.length;i++){
+				var info:FunctionBarInfo=btnLists[i];
+				if(info.btn_res){
+					regClass(info.id,info.btn_res);
+				}
+			}
 		}
-		private static function regClass(id:int,cls:Class,skinui:Class):void
+		private static function regClass(id:int,skinui:*):void
 		{
-			_classMap.add(id,[cls,skinui]);
+			_classMap.add(id,skinui);
 		}
 		
 		public static function getButtonBuyInfo(info:FunctionBarInfo):IOpen
@@ -93,20 +66,73 @@ package com.rpgGame.app.ui.main.buttons
 			var button:IOpen = _initializeMap.getValue(info.id);
 			if(button == null)
 			{
-				var clsNames:Array= _classMap.getValue(info.id);
-				if(clsNames==null)
+				var styleName:*= _classMap.getValue(info.id);
+				if(styleName==null)
 				{
 					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.id);
 					return null;
 				}
-				var cls : Class = clsNames[0] as Class;
-				button = new cls();
+				button = getBtnById(info.id);
 				button.info = info;
-				button.styleClass = clsNames[1] as Class
+				if(styleName is String){
+					if((button as ActivityButtonBase)){
+						(button as ActivityButtonBase).styleName=styleName;
+					}
+				}else{
+					button.styleClass=styleName;
+				}
 				button.name = info.id.toString();
 				_initializeMap.add(info.id,button);
 			}
 			return button as IOpen;
+		}
+		
+		private static function getBtnById(id:int):IOpen
+		{
+			
+			switch(id){
+				case 1:
+					return new MainButton_Role();
+				case 2:
+					return new MainButton_Mount();
+				case 3:
+					return new MainButton_Equip();
+				case 4:
+					return new MainButton_WuXue();
+				case 5:
+					return new MainButton_ZhanHun();
+				case 6:
+					return new MainButton_Gang();
+				case 7:
+					return new MainButtonBases();
+				case 8:
+					return new MainButton_Team();
+				case 9:
+					return new MainButton_MeiRen();
+				case 101:
+				case 102:
+				case 103:
+				case 104:
+				case 120:
+					return new ActivityButton();
+				case 105:
+					return new ActivityRedRewardButton();
+				case 300:
+					return new MultyActivityButton();
+				case 301:
+				case 302:
+				case 303:
+				case 304:
+				case 305:
+				case 306:
+				case 307:
+				case 308:
+				case 309:
+				case 310:
+					return new LimitTimeActivityButton();
+			}
+			
+			return new ActivityButton();
 		}
 		
 		public static function getButtonName(id:int):String

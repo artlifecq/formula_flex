@@ -60,7 +60,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		private function __RoleItem_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli2.png";
+			temp.styleName = "ui/art_txt/common/zhandouli2.png";
 			temp.x = 17;
 			temp.y = 354;
 			return temp;

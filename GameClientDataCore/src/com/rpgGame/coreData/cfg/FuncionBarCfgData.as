@@ -53,6 +53,16 @@ package com.rpgGame.coreData.cfg
 			}
 		}
 		
+		
+		/**
+		 *获取所有功能信息 
+		 * @return 
+		 * 
+		 */
+		public static function getAllBarInfos():Array
+		{
+			return _map.getValues();
+		}
 
 		/**
 		 * 根据功能id获取活动条的信息

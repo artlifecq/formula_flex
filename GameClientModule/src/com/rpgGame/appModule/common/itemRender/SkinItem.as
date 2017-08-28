@@ -6,6 +6,8 @@ package com.rpgGame.appModule.common.itemRender
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	
+	import org.mokylin.skin.common.subItem_Skin;
+	
 	import starling.display.DisplayObject;
 	
 	/**
@@ -45,7 +47,7 @@ package com.rpgGame.appModule.common.itemRender
 				return;
 			}
 			lb.htmlText=_text;
-			lb.textAlign="left"
+			lb.textAlign="left";
 //			lb.width=this.width;
 		}
 		
@@ -53,7 +55,7 @@ package com.rpgGame.appModule.common.itemRender
 		{
 			super.onTouchTarget(target);
 			_comboBox.selectedIndex=_comboBox.dataProvider.getItemIndex(_text);
-			_comboBox.getTextInput().htmlText=_text;
+			_comboBox.getTextInput().text=_text;
 		}
 		
 		public function set text(value:String):void

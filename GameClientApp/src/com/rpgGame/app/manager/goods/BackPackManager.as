@@ -24,14 +24,13 @@ package com.rpgGame.app.manager.goods
 	
 	import org.client.mainCore.manager.EventManager;
 	
-	import utils.TimerServer;
-	
 	/**
 	 * 背包物品管理
 	 * @author wewell
 	 */
 	public class BackPackManager extends GoodsContainerMamager
 	{
+		public var isshowBaoGuoTiShi:Boolean=true;
 		public var isShowShop:Boolean;
 		public var isShowRole:Boolean;
 		//		/**当前待解锁的ID*/

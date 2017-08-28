@@ -110,7 +110,10 @@ package com.rpgGame.app.manager
 		
 		public function resPetZoneResultHandler(msg:ResPetZoneResultMessage):void
 		{
-			AppManager.showApp(AppConstant.PET_TIAOZHAN_PANLE,msg);
+			if(msg.success==1)
+				AppManager.showApp(AppConstant.PET_TIAOZHAN_PANLE,msg);
+			else
+				AppManager.showApp(AppConstant.SWORD_RESULT_FAIL);
 		}
 		
 		public function resPetDebutResultMessage(msg:ResPetDebutResultMessage):void

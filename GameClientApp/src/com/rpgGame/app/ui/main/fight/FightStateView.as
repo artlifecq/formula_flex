@@ -49,7 +49,7 @@ package com.rpgGame.app.ui.main.fight
 				if (!_enterImg) 
 				{
 					_enterImg=new UIAsset();
-					_enterImg.styleName="ui/mainui/guaji/jinruzhandou.png";
+					_enterImg.styleName="ui/art_txt/mainui/guaji/jinruzhandou.png";
 				}
 				this.addChild(_enterImg);
 				tmp=_enterImg;
@@ -59,7 +59,7 @@ package com.rpgGame.app.ui.main.fight
 				if (!_leaveImg) 
 				{
 					_leaveImg=new UIAsset();
-					_leaveImg.styleName="ui/mainui/guaji/tuolizhandou.png";
+					_leaveImg.styleName="ui/art_txt/mainui/guaji/tuolizhandou.png";
 				}
 				this.addChild(_leaveImg);
 				tmp=_leaveImg;

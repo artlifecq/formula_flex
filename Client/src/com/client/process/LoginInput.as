@@ -59,7 +59,7 @@ package com.client.process
 				setProcessPercent(1);
 				ResLoadingView.instance.hide();
 
-//				BGMManager.playMusic("Music/music_start");
+				BGMManager.playMusic("Music/music_start");
 			}
 			catch (e : Error)
 			{

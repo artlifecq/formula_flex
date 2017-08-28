@@ -93,7 +93,7 @@ package com.rpgGame.app.ui.tips
 			if(_item.clientItemInfo.cfgId!=403&&_item.clientItemInfo.cfgId!=406)
 				return ;
 			if(_item is HorseExtraItemInfo)
-				_skin.lbShuxing.text = "每颗资质丹永久增加战旗属性：";
+				_skin.lbShuxing.text = "每颗资质丹永久增加坐骑属性：";
 			else if(_item is ZhanQiExtraItemInfo)
 				_skin.lbShuxing.text = "每颗资质丹永久增加战旗属性：";
 			_skin.grp_type.visible = true; 

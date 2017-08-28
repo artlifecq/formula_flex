@@ -129,12 +129,13 @@ package
 
 		public function get errorChecking() : Boolean
 		{
-			return Stage3DLayerManager.errorChecking;
+			return false;
+//			return Stage3DLayerManager.errorChecking;
 		}
 
 		public function set errorChecking(value : Boolean) : void
 		{
-			Stage3DLayerManager.errorChecking = value;
+//			Stage3DLayerManager.errorChecking = value;
 		}
 
 		public function get useRingDepthOfFieldFilter() : Boolean

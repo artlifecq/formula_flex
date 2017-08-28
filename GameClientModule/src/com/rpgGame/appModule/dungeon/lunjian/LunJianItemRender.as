@@ -57,7 +57,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		private var _avatar : InterAvatar3D;
 		private var _avatarContainer:Inter3DContainer;
 		private var _avatardata:MonsterData;
-
+		
 		private var alertOk:AlertSetInfo;
 		private var bgList:Vector.<UIAsset>;
 		private var points:Vector.<Point>;
@@ -152,6 +152,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 				var mapId:int=itemData.cfg.q_npc_map;
 				var roleData:HeroData=MainRoleManager.actorInfo;
 				_skin.uiOK.visible=itemData.diff==3;
+				//设置背景
+				var bgNum:int=itemData.num%3+1;
+				_skin.modeBg.styleName="ui/app/jianghu/lunjian/beijing"+bgNum+".jpg";
 				if(roleData.totalStat.level>=itemData.cfg.q_level){
 					_skin.lbLevel.color=StaticValue.GREEN_TEXT;
 				}else{
@@ -172,8 +175,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 				var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(npcCfg.q_body_res);
 				var fadeX : int = RoleFaceMaskEffectUtil.getFaceMaskX(avatarResConfig.dialogFaceMask);
 				var fadeY : int = RoleFaceMaskEffectUtil.getFaceMaskY(avatarResConfig.dialogFaceMask);
-//				fadeX=130;
-//				fadeY=-198;
+				//				fadeX=130;
+				//				fadeY=-198;
 				var scale:Number=RoleFaceMaskEffectUtil.getFaceMaskScale(avatarResConfig.dialogFaceMask);
 				RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,fadeX,
 					fadeY,scale);
