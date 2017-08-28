@@ -1457,7 +1457,10 @@ package com.rpgGame.app.fight.spell
 			//ChatManager.addMsgInChat("释放技能："+castSpell.q_skillID,0);
 			return castSpell;
 		}
-		
+		public static function isCanCancelByMainPlayer(cancelType:int):Boolean
+		{
+			return cancelType==1||cancelType==3||cancelType==4;
+		}
 		/**技能是否满足是否条件*/
 		public static function getspellIsOK(spell : Q_skill_model):Boolean
 		{

@@ -356,6 +356,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				MCUtil.removeSelf(_roleModel);
 				_roleModel=null;
 			}
+			_member=null;
 		}
 	}
 }

@@ -472,7 +472,7 @@ package com.rpgGame.appModule.role
 			{
 				var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);		
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
-				FaceUtil.SetItemGrid(_marryIcon,itemInfo);
+				FaceUtil.SetItemGrid(_marryIcon,itemInfo,true,{"lv":Mgr.hunyinMgr.JieZiLv});
 				//_marryIcon.setIconResName(ClientConfig.getItemIcon(Mgr.hunyinMgr.getRingUrl(ring),IcoSizeEnum.ICON_48));
 				if (hasMarriage==10) 
 				{

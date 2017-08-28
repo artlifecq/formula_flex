@@ -3,6 +3,7 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -78,7 +79,7 @@ package com.rpgGame.app.state.role.action
 						_speed = ((_machine.owner as SceneRole).data as RoleData).totalStat.attackSpeed;
 					}
 					_canWalkRelease = _stateReference.spellInfo.canWalkRelease;
-					_canWalkBreak=(_stateReference.spellInfo.spellData.q_cancel==1||_stateReference.spellInfo.spellData.q_cancel==3);
+					_canWalkBreak=CastSpellHelper.isCanCancelByMainPlayer(_stateReference.spellInfo.spellData.q_cancel);
 				}
 				else
 					throw new Error("攻击状态引用必须是AttackStateReference类型！");
