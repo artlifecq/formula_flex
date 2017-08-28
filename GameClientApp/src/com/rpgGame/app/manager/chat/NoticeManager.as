@@ -217,7 +217,7 @@ package com.rpgGame.app.manager.chat
 						for(i=0;i<showType.length;i++)
 						{
 							tp=showType[i];
-							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO||tp==BATTLE_CHUANWEN)
 							{
 								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.parameters,args);
 								notify(tp, words);
