@@ -43,8 +43,8 @@ package org.mokylin.skin.app.baoguo
 			super();
 			
 			this.currentState = "normal";
-			this.height = 253;
-			this.width = 505;
+			this.height = 276;
+			this.width = 560;
 			this.elementsContent = [bg_i(),btnDuanzao_i(),btnChushou_i(),btnZhengli_i(),btnClose_i(),chkTips_i(),__BaoGuo_Skin_Label1_i()];
 			
 			states = {
@@ -62,8 +62,8 @@ package org.mokylin.skin.app.baoguo
 			temp.text = "本次操作不再提示";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 282;
-			temp.y = 206;
+			temp.x = 299;
+			temp.y = 228;
 			return temp;
 		}
 
@@ -84,8 +84,8 @@ package org.mokylin.skin.app.baoguo
 			btnChushou = temp;
 			temp.name = "btnChushou";
 			temp.styleClass = org.mokylin.skin.app.baoguo.button.ButtonChoushou;
-			temp.x = 293;
-			temp.y = 122;
+			temp.x = 308;
+			temp.y = 145;
 			return temp;
 		}
 
@@ -95,8 +95,8 @@ package org.mokylin.skin.app.baoguo
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.app.baoguo.button.ButtonGuanbi;
-			temp.x = 470;
-			temp.y = 32;
+			temp.x = 503;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -106,8 +106,8 @@ package org.mokylin.skin.app.baoguo
 			btnDuanzao = temp;
 			temp.name = "btnDuanzao";
 			temp.styleClass = org.mokylin.skin.app.baoguo.button.ButtonDuanzao;
-			temp.x = 209;
-			temp.y = 122;
+			temp.x = 224;
+			temp.y = 145;
 			return temp;
 		}
 
@@ -117,8 +117,8 @@ package org.mokylin.skin.app.baoguo
 			btnZhengli = temp;
 			temp.name = "btnZhengli";
 			temp.styleClass = org.mokylin.skin.app.baoguo.button.ButtonZhengli;
-			temp.x = 382;
-			temp.y = 122;
+			temp.x = 397;
+			temp.y = 145;
 			return temp;
 		}
 
@@ -129,8 +129,8 @@ package org.mokylin.skin.app.baoguo
 			temp.name = "chkTips";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.width = 23;
-			temp.x = 254;
-			temp.y = 204;
+			temp.x = 271;
+			temp.y = 226;
 			return temp;
 		}
 

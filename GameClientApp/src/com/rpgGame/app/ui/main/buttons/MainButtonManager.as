@@ -12,8 +12,6 @@ package com.rpgGame.app.ui.main.buttons
 	
 	import away3d.log.Log;
 	
-	import feathers.controls.Button;
-	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_bangpai;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
@@ -104,7 +102,7 @@ package com.rpgGame.app.ui.main.buttons
 				case 6:
 					return new MainButton_Gang();
 				case 7:
-					return new MainButtonBases();
+					return new MainButton_ShangCheng();
 				case 8:
 					return new MainButton_Team();
 				case 9:
