@@ -31,9 +31,9 @@ package com.rpgGame.app.manager
 		 */
 		public static function checkWelcomeState():void
 		{
-			AppManager.showApp(AppConstant.WELCOME_PANEL);
+			/*AppManager.showApp(AppConstant.WELCOME_PANEL);
 			isDestory=true;
-			return;
+			return;*/
 			if(isDestory){
 				return;
 			}
