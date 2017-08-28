@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.huanying
 {
 	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.WelcomeManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -37,7 +38,7 @@ package com.rpgGame.appModule.huanying
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			eft=this.playInter3DAt(ClientConfig.getEffect("ui_kaishiyouxi"),455,287,1);
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_kaishiyouxi"),455,287,1,playCom);
 			super.show(data,openTable,parentContiner);
 		}
 		
@@ -59,6 +60,7 @@ package com.rpgGame.appModule.huanying
 				eft.dispose();
 				eft=null;
 			}
+			WelcomeManager.desoryWelcome();
 		}
 	}
 }

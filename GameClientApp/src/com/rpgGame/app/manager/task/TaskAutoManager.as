@@ -120,10 +120,6 @@ package com.rpgGame.app.manager.task
 			_isTaskRunning = true;
 			resetTechTime();
 			taskWalk();
-			
-			if(TaskType.MAINTYPE_MAINTASK==_taskType){
-				WelcomeManager.desoryWelcome();
-			}
 		}
 		
 		
