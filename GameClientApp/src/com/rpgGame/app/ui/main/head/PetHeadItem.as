@@ -99,8 +99,9 @@ package com.rpgGame.app.ui.main.head
 		{
 			_info=info;
 			updateJIhuo(_info.modelId);
-			_skin.icon.styleName = "ui/pet/petHead/head"+_info.modelId+"s.png";
-			_skin.uiName.styleName =  "ui/pet/petName/name"+_info.modelId+"s.png";
+			var cfg:Q_girl_pet=PetCfg.getPet(_info.modelId);
+			_skin.icon.styleName = "ui/pet/petHead/"+cfg.q_head_name+".png";
+			_skin.uiName.styleName =  "ui/pet/petName/"+cfg.q_head_word+".png";
 			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, _info ,true) );
 		}
 	}
