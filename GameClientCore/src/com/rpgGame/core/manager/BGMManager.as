@@ -1,4 +1,4 @@
-﻿package com.rpgGame.app.manager
+﻿package com.rpgGame.core.manager
 {
     import com.app.AudioInterface;
     import com.rpgGame.core.events.GameSettingEvent;
@@ -17,7 +17,7 @@
 
         public static function initProtoC(soundSet:Object):void
         {
-			_soundSet = soundSet;
+			_soundSet = soundSet || new Object();
             applySetting();
         }
 
@@ -115,23 +115,23 @@
 
         public static function set soundMute(value:Boolean):void
         {
-            var _local2:Number;
-            if (_soundSet.openSound != !(value))
+            var mute:Number;
+            if (_soundSet.openSound != !value)
             {
-				_soundSet.openSound = !(value);
+				_soundSet.openSound = !value;
 //                ClientSettingGameSetMananger.saveMainToServer();
             }
             if (!soundMute)
             {
-                _local2 = (soundVolume / 100);
+				mute = (soundVolume / 100);
             }
             else
             {
-                _local2 = 0;
+				mute = 0;
             }
-            SoundUtil.volume = _local2;
-            AudioInterface.setAudioVolume(AudioConfigType.UI_EFFECT_CHANNEL, _local2);
-            AudioInterface.setAudioVolume(AudioConfigType.ENV2D_CHANNEL, _local2);
+            SoundUtil.volume = mute;
+            AudioInterface.setAudioVolume(AudioConfigType.UI_EFFECT_CHANNEL, mute);
+            AudioInterface.setAudioVolume(AudioConfigType.ENV2D_CHANNEL, mute);
             EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ONE);
         }
 
@@ -160,7 +160,7 @@
 
         public static function set soundVolume(value:uint):void
         {
-            var _local2:Number;
+            var volume:Number;
             if (_soundSet.soundVolume != value)
             {
 				_soundSet.soundVolume = value;
@@ -168,10 +168,10 @@
             }
             if (!soundMute)
             {
-                _local2 = (soundVolume / 100);
-                SoundUtil.volume = _local2;
-                AudioInterface.setAudioVolume(AudioConfigType.UI_EFFECT_CHANNEL, _local2);
-                AudioInterface.setAudioVolume(AudioConfigType.ENV2D_CHANNEL, _local2);
+				volume = soundVolume / 100;
+                SoundUtil.volume = volume;
+                AudioInterface.setAudioVolume(AudioConfigType.UI_EFFECT_CHANNEL, volume);
+                AudioInterface.setAudioVolume(AudioConfigType.ENV2D_CHANNEL, volume);
             }
         }
     }

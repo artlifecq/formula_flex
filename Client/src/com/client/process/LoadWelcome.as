@@ -65,7 +65,7 @@ package com.client.process
 		private function onFinish(loader : ThemeLoader) : void
 		{
 			GameLog.addShow("欢迎UI素材加载完成...");
-			var _renderParamData:RenderParamData3D=new RenderParamData3D(0,"effect_ui",ClientConfig.getEffect("ui_jixurenwu"));
+			var _renderParamData:RenderParamData3D=new RenderParamData3D(0,"effect_ui",ClientConfig.getEffect("ui_kaishiyouxi"));
 			var uint:RenderUnit3D=RenderUnit3D.create(_renderParamData);
 			var _renderResourceData:RenderResourceData=SceneRenderCache.installRenderResourceData(_renderParamData.sourcePath,_renderParamData.animatorSourchPath,uint);
 			_renderResourceData.setResCompleteCallBack(onSetRenderResourceData);

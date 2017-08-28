@@ -12,7 +12,6 @@ package com.rpgGame.app.manager.scene
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.interfaces.IMapProcess;
 	import com.rpgGame.app.manager.AreaMapManager;
-	import com.rpgGame.app.manager.BGMManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
@@ -36,6 +35,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
+	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
@@ -258,13 +258,14 @@ package com.rpgGame.app.manager.scene
 			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
 			Scene.scene.mapConfig.smallMapTexture = bmpData;
 			Scene.scene.drawSmallMap();
+			curtMapInfo.mapConfig.smallMapTexture = bmpData;
 			onSmallMapCmp(bmpData);
 		}
 		
 		/**小地图加载完成*/
 		private static function onSmallMapCmp(bmpData:AsyncMapTexture):void
 		{
-			//			EventManager.dispatchEvent(MapEvent.LOAD_SMALL_MAP_COMPLETE,{mapID:curtMapInfo.id,mapBG:bmpData});
+//			EventManager.dispatchEvent(MapEvent.MINI_MAP_COMPLETE);
 		}
 		
 		private static function destroy():void

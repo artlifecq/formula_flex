@@ -6,11 +6,15 @@ package com.rpgGame.appModule.equip.combo
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
@@ -41,7 +45,8 @@ package com.rpgGame.appModule.equip.combo
 		private var _skin:HeChengMenuItemSkin;
 		private var _renderHeight:Number;
 		private var _mainListStyles:Array=[ButtonJianding,ButtonBianshi,ButtonShuye];
-		private var _data:INodeData;
+		private var _ndata:INodeData;
+		private var _rewardTip:RewardMarkTip;
 		public function EquipComboTreeItemRender()
 		{
 			super();
@@ -61,7 +66,10 @@ package com.rpgGame.appModule.equip.combo
 			detailskin.selectedBtn.selectedHoverSkin=btnSkin.__SelectBtn_UIAsset1;
 			detailskin.selectedBtn.downSkin=btnSkin.__SelectBtn_UIAsset1;
 			detailskin.selectedBtn.isSelected=false;
+			_rewardTip=new RewardMarkTip(this,244);
 		}
+		
+		
 		
 		override public function get height():Number
 		{
@@ -88,15 +96,11 @@ package com.rpgGame.appModule.equip.combo
 		override public function dispose():void
 		{
 			super.dispose();
-			if (_data) 
-			{
-				RewardTipTree.ins.removeNode(_data.getRTNkey());
-				_data=null;
-			}
+			
 		}
 		override protected function renderTreeNode(node:TreeNode):void
 		{
-			this._data=node.data as INodeData;
+			this._ndata=node.data as INodeData;
 			var hechengData:Q_hecheng;
 			if(node.data is MainNodeInfo){
 				this.addChild(_skin.main_item);
@@ -113,12 +117,15 @@ package com.rpgGame.appModule.equip.combo
 					mainSkin.btnFlag.styleClass=ButtonJiahao;
 					mainSkin.btnFlag.y=12;
 				}
-				var nodeKey:String=MainNodeInfo(node.data).getRTNkey();
-				if (!RewardTipTree.ins.getNode(nodeKey)) 
-				{
-					RewardTipTree.ins.addNode(RTNodeID.EQUIP_HC,nodeKey,this,244,ItemManager.checkEquip2HCByType,false,node.data.type);
-				}
-				RewardTipTree.ins.updateNode(nodeKey);
+			//	var nodeKey:String=MainNodeInfo(node.data).getRTNkey();
+//				if (!RewardTipTree.ins.getNode(nodeKey)) 
+//				{
+//					RewardTipTree.ins.addNode(RTNodeID.EQUIP_HC,nodeKey,this,244,ItemManager.checkEquip2HCByType,false,node.data.type);
+//				}
+//				RewardTipTree.ins.updateNode(nodeKey);
+				var has:Boolean=ItemManager.checkEquip2HCByType(node.data.type);
+				_rewardTip.hasReward=has;
+				RewardTipTree.ins.updateNode(RTNodeID.EQUIP_HC);
 			}else if(node.data is SubNodeInfo){
 				this.addChild(_skin.sub_item);
 				_skin.main_item.removeFromParent();
@@ -126,19 +133,22 @@ package com.rpgGame.appModule.equip.combo
 				_renderHeight=_skin.sub_item.height;
 				var subSkin:HedSub_Item=_skin.sub_item.skin as HedSub_Item;
 				var subInfo:SubNodeInfo=node.data as SubNodeInfo;
-				if (!RewardTipTree.ins.getNode(subInfo.getRTNkey())) 
-				{
-					RewardTipTree.ins.addNode(subInfo.getParentKey(),subInfo.getRTNkey(),_skin.sub_item,244,null);
-				}
+//				if (!RewardTipTree.ins.getNode(subInfo.getRTNkey())) 
+//				{
+//					RewardTipTree.ins.addNode(subInfo.getParentKey(),subInfo.getRTNkey(),_skin.sub_item,244,null);
+//				}
 				subSkin.labelDisplay.text=HeChengData.getSubName(subInfo.type,subInfo.subType);
 				var has:Boolean=ItemManager.chackIsCanHC(subInfo.type,subInfo.subType);
-				RewardTipTree.ins.setState(subInfo.getRTNkey(),has);
+//				RewardTipTree.ins.setState(subInfo.getRTNkey(),has);
+				_rewardTip.hasReward=has;
 				if(node.expanded){
 					subSkin.btnFlag.styleClass=ButtonSanjiao_down;
 				}else{
 					subSkin.btnFlag.styleClass=ButtonSanjiao_right;
 				}
-			}else if(node.data is DetailNodeInfo){
+			}
+			else if(node.data is DetailNodeInfo)
+			{
 				this.addChild(_skin.detail_item);
 				_skin.main_item.removeFromParent();
 				_skin.sub_item.removeFromParent();
@@ -158,11 +168,12 @@ package com.rpgGame.appModule.equip.combo
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
 				var has:Boolean=max>0&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
 					pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY));
-				if (!RewardTipTree.ins.getNode(detailInfo.getRTNkey())) 
-				{
-					RewardTipTree.ins.addNode(detailInfo.getParentKey(),detailInfo.getRTNkey(),_skin.detail_item,244,null);
-				}
-				RewardTipTree.ins.setState(detailInfo.getRTNkey(),has);
+//				if (!RewardTipTree.ins.getNode(detailInfo.getRTNkey())) 
+//				{
+//					RewardTipTree.ins.addNode(detailInfo.getParentKey(),detailInfo.getRTNkey(),_skin.detail_item,244,null);
+//				}
+//				RewardTipTree.ins.setState(detailInfo.getRTNkey(),has);
+				_rewardTip.hasReward=has;
 				(qianSkin.bg.skin as ItemBg).bg1.visible=detailInfo.data.q_subson_type%2==0;
 				(qianSkin.bg.skin as ItemBg).bg2.visible=!(qianSkin.bg.skin as ItemBg).bg1.visible;
 				var isSelected:Boolean
@@ -175,6 +186,7 @@ package com.rpgGame.appModule.equip.combo
 					qianSkin.selectedBtn.toggleGroup.selectedIndex=-1;
 				}
 			}
+			_rewardTip.setTip2Top();
 		}
 	}
 }

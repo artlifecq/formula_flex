@@ -1,5 +1,6 @@
 package  com.rpgGame.app.ui.alert
 {
+	import com.game.mainCore.core.manager.LayerManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.manager.StarlingLayerManager;
@@ -70,7 +71,7 @@ package  com.rpgGame.app.ui.alert
 			_gReward.setRewardByTeamItemInfo(tmps);
 			_skin.gBtn.y=_gReward.y+_gReward.height+15;
 			_skin.bg.height=_skin.gBtn.y+_skin.gBtn.height+15;
-			_endTime=getTimer()+30000;
+			_endTime=getTimer()+10000;
 			TimerServer.addSecTick(onTime);
 			onTime();
 		}
@@ -111,12 +112,15 @@ package  com.rpgGame.app.ui.alert
 				panel=new ItemOpenResultShowPanelExt();
 			}
 			StarlingLayerManager.appUILayer.addChild(panel);
-			UIUtil.alignToStageRightBottom(panel);
+			
 			panel.setData(data);
+			//UIUtil.alignToStageRightBottom(panel);
+			panel.onStageResize(0,0);
 		}
 		override protected function onStageResize(sw:int, sh:int):void
 		{
-			UIUtil.alignToStageRightBottom(this);
+			this.x = LayerManager.stage.stageWidth - this.width;
+			this.y = LayerManager.stage.stageHeight - _skin.bg.height - 100;
 		}
 	}
 }
