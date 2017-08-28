@@ -54,9 +54,11 @@ package com.rpgGame.appModule.huanying
 		override public function hide():void
 		{
 			super.hide();
-			eft.stop();
-			eft.dispose();
-			eft=null;
+			if(eft){
+				eft.stop();
+				eft.dispose();
+				eft=null;
+			}
 		}
 	}
 }
