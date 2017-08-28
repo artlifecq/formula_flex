@@ -24,8 +24,8 @@ package com.rpgGame.appModule.pet
 			this._config=config;
 			_skin.uiZhan.visible=false;
 			_skin.uiSelect.visible=false;
-			_skin.icon.styleName="ui/pet/petHead/head"+_config.q_id+"s.png";
-			_skin.uiName.styleName="ui/pet/petName/name"+_config.q_id+"s.png";
+			_skin.icon.styleName="ui/pet/petHead/"+_config.q_head_name+".png";
+			_skin.uiName.styleName="ui/pet/petName/"+_config.q_head_word+".png";
 		}
 		public function setServerData(data:PetInfo):void
 		{

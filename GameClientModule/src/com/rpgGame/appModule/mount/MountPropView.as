@@ -44,13 +44,14 @@ package com.rpgGame.appModule.mount
 		{
 			if(_attpropId==0)
 			{
+				
 				_skin.container.visible = false;
 				return ;
 			}
 			_skin.container.visible = true;		
 //			var attname:String = CharAttributeType.getCNName(_attpropId);
 //			_skin.lbName.text = attname;
-			_skin.lbCurrent.text = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
+			_skin.lbCurrent.text = AttValueConfig.getDisAttValue(_attpropId,_currentatt).toString();
 			if(_addatt>0)
 			{
 				var num:Number = AttValueConfig.getDisAttValue(_attpropId,_addatt);
@@ -65,7 +66,7 @@ package com.rpgGame.appModule.mount
 			
 			if(_nextAtt>0)
 			{
-				_skin.lbUp.text = AttValueConfig.getDisAttValueStr(_attpropId,_nextAtt);
+				_skin.lbUp.text = AttValueConfig.getDisAttValue(_attpropId,_nextAtt).toString();
 			}else{
 				_skin.lbUp.text = "";
 				_skin.ico_up.visible = false;

@@ -189,7 +189,7 @@ package com.rpgGame.app.manager.mount
 					type = currentatt["q_type"+i];
 					if(type==0)
 						continue;
-					value = AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
+					value = currentatt["q_value"+i];
 					_addProp[type] = value;
 				}
 			}

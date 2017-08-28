@@ -1,5 +1,7 @@
 package com.rpgGame.core.utils
 {
+	import com.rpgGame.core.manager.BGMManager;
+	
 	import feathers.controls.Button;
 	
 	import starling.display.DisplayObject;
@@ -23,22 +25,22 @@ package com.rpgGame.core.utils
 
 		public static function playUIPanelOpen() : void
 		{
-//			BGMManager.playUIEffectSound("UI/open");
+			BGMManager.playUIEffectSound("UI/open");
 		}
 
 		public static function playUIPanelClose() : void
 		{
-//			BGMManager.playUIEffectSound("UI/close");
+			BGMManager.playUIEffectSound("UI/close");
 		}
 
 		public static function playUIButtonOver() : void
 		{
-//			BGMManager.playUIEffectSound("UI/ui_touch2");
+			BGMManager.playUIEffectSound("UI/ui_touch2");
 		}
 
 		public static function playUIButtonDown() : void
 		{
-//			BGMManager.playUIEffectSound("UI/click");
+			BGMManager.playUIEffectSound("UI/click");
 		}
 
 		private static var _lastHoverTarget : DisplayObject;

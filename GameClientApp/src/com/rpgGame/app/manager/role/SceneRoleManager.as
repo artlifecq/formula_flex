@@ -40,6 +40,9 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.BiaoCheData;
 	import com.rpgGame.coreData.role.GirlPetData;
@@ -141,6 +144,12 @@ package com.rpgGame.app.manager.role
 				{
 					role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 				}
+			}
+			
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1){
+				data.sizeScale=1.5;//帮会战统帅放大到1.5倍
 			}
 			
 			role.setScale(data.sizeScale);
