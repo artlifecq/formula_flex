@@ -515,7 +515,7 @@ package com.rpgGame.app.ui.tips
 			var uiasset:UIAsset=new UIAsset();
 			uiasset.name = name;
 			uiasset.height = 17;
-			uiasset.styleName = "ui/common/tips/zhuangbei/"+name+".png";
+			uiasset.styleName = "ui/art_txt/common/tips/zhuangbei/"+name+".png";
 			titles.push(uiasset);
 			_itemTip.container.addChild(uiasset);
 			return uiasset;
