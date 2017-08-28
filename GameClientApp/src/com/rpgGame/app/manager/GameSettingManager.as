@@ -6,7 +6,6 @@
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.sender.HeroMiscSender;
     import com.rpgGame.core.events.GameSettingEvent;
-    import com.rpgGame.core.manager.BGMManager;
     import com.rpgGame.coreData.enum.EnumCustomTagType;
     import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
     import com.rpgGame.coreData.role.BiaoCheData;
@@ -63,7 +62,7 @@
 				soundSetData = getSoundSet();
 				displaySetData = getDisplaySet();
 				
-                BGMManager.applySetting(soundSetData);
+                BGMManager.initProtoC(soundSetData);
                 DisplaySetUpManager.applySetting(displaySetData);
 //                FunctionSetManager.applySetting(_local1);
             }

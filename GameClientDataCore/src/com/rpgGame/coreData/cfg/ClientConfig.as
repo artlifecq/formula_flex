@@ -949,7 +949,7 @@ package com.rpgGame.coreData.cfg
 		public static function getSound($name : String) : String
 		{
 			var path : String = "sound/" + $name + ".mp3";
-			return getVersionPath(path);
+			return /*getVersionPath(*/path/*)*/;
 		}
 
 		/** 获取res/swf目录下的文件 */
