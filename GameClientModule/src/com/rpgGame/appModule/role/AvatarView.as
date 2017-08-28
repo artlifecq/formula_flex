@@ -354,7 +354,7 @@ package com.rpgGame.appModule.role
 			
 			if(bool){
 				if(_tishiEff==null)
-					_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_juesezhuangbeikuang"),item.x+item.width/2+3,item.y+item.height/2+3,0);
+					_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_juesezhuangbeikuang"),item.x+item.width/2,item.y+item.height/2,0);
 				else {
 					_tishiEff.start();
 					_tishiEff.x=item.x+item.width/2;

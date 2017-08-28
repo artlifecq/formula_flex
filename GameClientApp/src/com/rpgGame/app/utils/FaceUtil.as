@@ -197,7 +197,7 @@ package com.rpgGame.app.utils
 					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
 					break;*/
 					case GoodsType.HUNJIE://婚戒
-						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP, ,extObj?extObj.lv:1));
+						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP,extObj?extObj.lv:1));
 						break;
 					default:
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
