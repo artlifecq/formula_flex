@@ -258,13 +258,14 @@ package com.rpgGame.app.manager.scene
 			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
 			Scene.scene.mapConfig.smallMapTexture = bmpData;
 			Scene.scene.drawSmallMap();
+			curtMapInfo.mapConfig.smallMapTexture = bmpData;
 			onSmallMapCmp(bmpData);
 		}
 		
 		/**小地图加载完成*/
 		private static function onSmallMapCmp(bmpData:AsyncMapTexture):void
 		{
-			//			EventManager.dispatchEvent(MapEvent.LOAD_SMALL_MAP_COMPLETE,{mapID:curtMapInfo.id,mapBG:bmpData});
+//			EventManager.dispatchEvent(MapEvent.MINI_MAP_COMPLETE);
 		}
 		
 		private static function destroy():void

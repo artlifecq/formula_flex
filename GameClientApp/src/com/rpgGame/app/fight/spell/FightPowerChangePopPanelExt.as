@@ -73,12 +73,12 @@ package com.rpgGame.app.fight.spell
 		private function init():void
 		{
 			MCUtil.removeSelf(_skin.num_yellow1);
-			fightText=new SlotMachineCon("ui/component/uinumber/skin_zhandouli_yellow/",43,1);
+			fightText=new SlotMachineCon("ui/art_txt/component/uinumber/skin_zhandouli_yellow/",43,1);
 			fightText.x=_skin.num_yellow1.x;
 			fightText.y=_skin.num_yellow1.y;
 			this.addChild(fightText);
 			
-			addText = new SlotMachineCon("ui/component/uinumber/skin_zhandouli_yellow/",43,1);
+			addText = new SlotMachineCon("ui/art_txt/component/uinumber/skin_zhandouli_yellow/",43,1);
 			addText.y=_skin.num_yellow1.y;
 			addText.isZeroHide=true;
 			this.addChild(addText);
