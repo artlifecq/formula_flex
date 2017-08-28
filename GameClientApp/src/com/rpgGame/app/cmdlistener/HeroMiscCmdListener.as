@@ -3,7 +3,6 @@ package com.rpgGame.app.cmdlistener
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
-	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.ClientSettingManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
@@ -11,7 +10,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -34,7 +32,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
-	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;

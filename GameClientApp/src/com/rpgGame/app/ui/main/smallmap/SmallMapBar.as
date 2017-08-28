@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.smallmap 
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.BGMManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -9,9 +10,9 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.app.view.uiComponent.menu.ShieldingMenu;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
-	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -69,6 +70,9 @@ package com.rpgGame.app.ui.main.smallmap
 			
 			EventManager.addEvent(SystemTimeEvent.SEVER_TIMR,updateTime);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, this.onMapSwitchCompleteHandler);
+			
+//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
+//			sound_mute_one();
 		}
 		
 		public function resize(w : int, h : int) : void {
@@ -113,11 +117,8 @@ package com.rpgGame.app.ui.main.smallmap
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSound://打开声音
-					BGMManager.isMuteAll = !(BGMManager.isMuteAll);
-//					isPlay=!isPlay;
-//					BGMManager.setMusicIsPlay(isPlay);
-//					if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-//					else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+					setAllMute(!(BGMManager.isMuteAll));
+//					ClientSettingGameSetMananger.saveMainToServer();
 					break;
 				case this._skin.btnPaiHang://打开排行榜
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_FIGHTFLAGRANK);
@@ -138,6 +139,25 @@ package com.rpgGame.app.ui.main.smallmap
 					break;
 			}
 		}
+		
+		public function setAllMute(isMute:Boolean):void
+		{
+			BGMManager.musicMute = isMute;
+			BGMManager.soundMute = isMute;
+			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ALL);
+		}
+		
+//		private function sound_mute_one():void
+//		{
+//			if (BGMManager.isMuteAll)
+//			{
+//				miniSkin.btnShengYin.styleClass = ButtonShengyinMute;
+//			}
+//			else
+//			{
+//				miniSkin.btnShengYin.styleClass = ButtonShengyin;
+//			}
+//		}
 		
 		// event
 		private function onMapSwitchCompleteHandler() : void {

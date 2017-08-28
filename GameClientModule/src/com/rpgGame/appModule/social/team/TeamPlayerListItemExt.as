@@ -3,7 +3,6 @@ package  com.rpgGame.appModule.social.team
 
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
