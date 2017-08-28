@@ -234,7 +234,7 @@ package com.rpgGame.app.manager.goods
 		public function setItemsInfo(cellnum:int,items:Vector.<ItemInfo>):void
 		{
 			hasOpenCount = cellnum;
-			curUnlockIndex = hasOpenCount;
+			curUnlockIndex = hasOpenCount+1;
 			
 			_goodsList=[];
 			for(var i:int=0; i<items.length; i++)
@@ -1503,7 +1503,8 @@ package com.rpgGame.app.manager.goods
 		/**设置待开启格子*/
 		public function setGridUnLuck(index:int,tiem:int):void
 		{
-			curUnlockIndex=index-1;
+			curUnlockIndex=index;
+			hasOpenCount = index-1;
 			unlockTime=tiem;
 			updateTime();
 			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_ONLOCK,this.containerId);
