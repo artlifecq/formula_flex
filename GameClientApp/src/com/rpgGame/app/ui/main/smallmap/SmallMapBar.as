@@ -68,7 +68,7 @@ package com.rpgGame.app.ui.main.smallmap
 			this.startTimer();			
 			
 			EventManager.addEvent(SystemTimeEvent.SEVER_TIMR,updateTime);
-			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, this.onMapSwitchCompleteHandler);
+			EventManager.addEvent(MapEvent.MINI_MAP_COMPLETE, this.onMapSwitchCompleteHandler);
 		}
 		
 		public function resize(w : int, h : int) : void {

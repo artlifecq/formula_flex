@@ -75,7 +75,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sub_item = temp;
 			temp.name = "sub_item";
-			temp.height = 36;
+			temp.height = 30;
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.hecheng.HedSub_Item()
 			temp.skin = skin
 			temp.width = 248;
