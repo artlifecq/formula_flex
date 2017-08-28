@@ -47,7 +47,7 @@ package org.mokylin.skin.app.huanying.button
 						}
 					]
 			};
-			skinNames={};
+			skinNames={"down":"ui/app/huanying/button/kaishijinru/down.png", "hover":"ui/app/huanying/button/kaishijinru/over.png", "up":"ui/app/huanying/button/kaishijinru/up.png"};
 		}
 
 
