@@ -5,6 +5,7 @@ package com.rpgGame.appModule.pet
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -41,7 +42,6 @@ package com.rpgGame.appModule.pet
 		private var _skin:MeiRenTiaoZhan;
 		
 		private var _zoneBalls:Vector.<PetZoneBall>;
-		private var _items:Vector.<IconCDFace>;
 		private var _info:PetInfo;
 		private var _msg:ResPetZoneResultMessage;
 		private var _time:int=0;
@@ -50,6 +50,7 @@ package com.rpgGame.appModule.pet
 		private var _avatar : InterAvatar3D;
 		private var _avatarData : RoleData;
 		private var _q_girl_pet:Q_girl_pet;
+		private var _groupList1:RewardGroup;
 		
 		public function MeiRenTiaoZhanChengGongPanel()
 		{
@@ -62,22 +63,12 @@ package com.rpgGame.appModule.pet
 		private function initPanel():void
 		{
 			_zoneBalls=new Vector.<PetZoneBall>();
-			_items=new Vector.<IconCDFace>();
+			_groupList1=new RewardGroup(IcoSizeEnum.ICON_48,_skin.ic1,RewardGroup.ALIN_CENTER,6,13,0,true,6,false,false);
 			_modContaner=new Inter3DContainer();
 			this._skin.container.addChildAt(_modContaner,1);
 			for (var j:int = 0; j < 9; j++) 
 			{
 				_zoneBalls.push(new PetZoneBall(_skin["icon"+(j+1)]));
-			}
-			
-			for(var i:int=1;i<=4;i++)
-			{
-				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_48);
-				var uiasset:UIAsset=_skin["ic"+(i)] as UIAsset;
-				ico.selectImgVisible=false;
-				_skin.grpIcon1.addChild(ico);
-				_items.push(ico);
-				ico.bindBg(uiasset);
 			}
 			
 			_bgEff=_modContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MEIREN_JIESUAN),255,250,0);
@@ -167,67 +158,19 @@ package com.rpgGame.appModule.pet
 		
 		private function showPrize():void
 		{
-			var showNum:int=0;
 			if(_info.passlevel<_msg.level)
 			{
 				var arr:Array=JSONUtil.decode(_q_girl_pet.q_zone_reward);
 				arr=arr[(_msg.level-1)]; 
 				if(arr is Array)
 				{
-					for(var i:int=0;i<_items.length;i++)
-					{
-						if(i<arr.length)
-						{
-							var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr[i].mod,arr[i].num);
-							FaceUtil.SetItemGrid(_items[i],itemInfo);
-							_items[i].visible=true;
-							showNum++;
-						}
-						else
-						{
-							_items[i].visible=false;
-						}
-					}
+					_groupList1.setRewardByArray(arr);
 				}
 				_skin.grpIcon1.visible=true;
 			}
 			else
 			{
 				_skin.grpIcon1.visible=false;
-			}
-			shortItems(showNum);
-		}
-		
-		private function shortItems(number:int):void
-		{
-			switch(number)
-			{
-				case 1:
-				{
-					_items[0].x=136;				
-					break;
-				}
-				case 2:
-				{
-					_items[0].x=107;	
-					_items[1].x=168;	
-					break;
-				}
-				case 3:
-				{
-					_items[0].x=75;	
-					_items[1].x=136;	
-					_items[2].x=197;	
-					break;
-				}
-				case 4:
-				{
-					_items[0].x=47;	
-					_items[1].x=107;	
-					_items[2].x=168;	
-					_items[3].x=228;	
-					break;
-				}
 			}
 		}
 		
