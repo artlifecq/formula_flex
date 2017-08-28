@@ -37,7 +37,7 @@ package com.client.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
-//			BGMManager.playMusic("Music/music_start2");
+			BGMManager.playMusic("Music/music_start2");
 			loadDLL();
 		}
 

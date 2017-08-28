@@ -223,7 +223,7 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico_chenhao = temp;
 			temp.name = "ico_chenhao";
-			temp.styleName = "ui/mainui/fubenzhuizong/icon/inlvyi.png";
+			temp.styleName = "ui/icon/fubenzhuizong/icon/1.png";
 			temp.x = 24;
 			temp.y = 36;
 			return temp;

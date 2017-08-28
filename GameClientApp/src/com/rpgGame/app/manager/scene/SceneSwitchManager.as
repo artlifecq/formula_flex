@@ -1,6 +1,5 @@
 package com.rpgGame.app.manager.scene
 {
-	import com.app.AudioInterface;
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
@@ -13,6 +12,7 @@ package com.rpgGame.app.manager.scene
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.interfaces.IMapProcess;
 	import com.rpgGame.app.manager.AreaMapManager;
+	import com.rpgGame.app.manager.BGMManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
@@ -36,8 +36,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
-	import com.rpgGame.core.manager.AudioConfigType;
-	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;

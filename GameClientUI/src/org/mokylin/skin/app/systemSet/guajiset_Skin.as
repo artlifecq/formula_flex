@@ -434,7 +434,7 @@ package org.mokylin.skin.app.systemSet
 			temp.value = 10;
 			temp.width = 91;
 			temp.x = 127;
-			temp.y = 37;
+			temp.y = 48;
 			return temp;
 		}
 

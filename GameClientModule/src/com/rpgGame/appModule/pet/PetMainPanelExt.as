@@ -350,7 +350,7 @@ package com.rpgGame.appModule.pet
 			{
 				return;
 			}
-			_skin.uiName.styleName="ui/app/meiren/head_icon/name"+qPet.q_id+".png"
+			_skin.uiName.styleName="ui/app/meiren/head_icon/"+qPet.q_head_word+".png";
 			if (data.actived) 
 			{
 				_skin.uiLevel.visible=true;

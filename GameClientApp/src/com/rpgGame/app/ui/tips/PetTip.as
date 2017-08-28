@@ -5,7 +5,9 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
+	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
+	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import org.mokylin.skin.app.meiren.Tips_MeiRen;
@@ -31,7 +33,8 @@ package com.rpgGame.app.ui.tips
 		{
 			if(data!=null){
 				_info=data as PetInfo;
-				_skin.uiName.styleName = "ui/pet/petName/name"+_info.modelId+"s.png";
+				var cfg:Q_girl_pet=PetCfg.getPet(_info.modelId);
+				_skin.uiName.styleName = "ui/pet/petName/"+cfg.q_head_word+".png";
 				_skin.uiLevel.styleName = "ui/pet/jieshu/"+_info.rank+".png";
 				var qPetAdv:Q_girl_advance=PetAdvanceCfg.getPet(_info.modelId,_info.rank);
 				var attrHash:HashMap=AttValueConfig.getAttrHash(qPetAdv.q_attid_self);

@@ -99,9 +99,9 @@ package com.rpgGame.appModule.equip
 		private var washCfg:Q_equip_wash;
 		
 		private var _sharedObject:SharedObject;
-		private var needMon:int;
+		private var needMon:Number;
 		
-		private var userMon:int;
+		private var userMon:Number;
 		
 		private var lock:int;
 		private var _getPanel:ItemGetPathPanel;

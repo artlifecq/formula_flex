@@ -31,7 +31,7 @@ package com.rpgGame.appModule.systemset
 			_viewList = new Vector.<BasePaneView>();
 			_viewList.push(new HookSetingView(this._skin.guaji));
 			_viewList.push(new SystemSetView(this._skin.xitong));
-			_viewList.push(new HideSetView(this._skin.pingbi));
+//			_viewList.push(new HideSetView(this._skin.pingbi));
 			_viewList.push(new BasePaneView(this._skin.kuaijie));
 			closeAll();
 		}

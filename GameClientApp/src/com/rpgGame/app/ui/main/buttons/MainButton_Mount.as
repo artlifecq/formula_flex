@@ -52,11 +52,14 @@ package com.rpgGame.app.ui.main.buttons
 			_skin.qi_mc.visible=false;
 			_skin.qi_mc.gotoAndStop("m");
 			}*/
-			if(leftGrid<=3&&BackPackManager.instance.isshowBaoGuoTiShi&&!_isRun)
+			if(leftGrid<=3&&BackPackManager.instance.isshowBaoGuoTiShi)
 			{
-				showTishi();
-				timer.start();
-				_isRun=true;
+				if(!_isRun)
+				{
+					showTishi();
+					timer.start();
+					_isRun=true;
+				}
 			}
 			else{
 				if(_isRun){
