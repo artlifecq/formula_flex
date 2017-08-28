@@ -553,11 +553,27 @@ package com.rpgGame.app.manager.scene
 		}
 		private static function playBackMusic() : void
 		{
-			
-			
 			//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
 			BGMManager.playMusic(MapDataManager.currentScene.sound);
 		}
+		
+//		public static function updateSceneSound():void
+//		{
+//			var _local1:ClientMapAreaData = AreaMapManager.getRoleInMapDataSoundArea(MainRoleManager.actor);
+//			if (((_local1) && ((_local1.type == 10))))
+//			{
+//				BGMManager.playMusic(_local1.bgSound);
+//				BGMManager.playEnv2D(_local1.envSound);
+//			}
+//			else
+//			{
+//				if (SceneManager.clientMapData)
+//				{
+//					BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+//					BGMManager.playEnv2D(SceneManager.clientMapData.envSoundRes);
+//				};
+//			};
+//		}
 		
 		
 		private static function onMiniMapComplete(scene : GameScene3D) : void
