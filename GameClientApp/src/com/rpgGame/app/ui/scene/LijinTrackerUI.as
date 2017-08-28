@@ -42,6 +42,7 @@ package com.rpgGame.app.ui.scene
 	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
 	
+	import gs.TweenLite;
 	import gs.TweenMax;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -326,6 +327,9 @@ package com.rpgGame.app.ui.scene
 				TimerServer.remove(updateTime);
 				TimerServer.addLoop(updateTime,1000);
 			}
+			
+			TweenLite.killDelayedCallsTo(taskAuto);
+			TweenLite.delayedCall(1, taskAuto,[true]);
 		}
 		
 		private function updateTime():void
