@@ -310,7 +310,7 @@ package com.rpgGame.app.manager.chat
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_PARTY] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_WORLD] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_LABA] = true;
-			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SYSTEM] = true;
+//			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SYSTEM] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_NOTICE] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_HEARSAY] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_KUA_FU] = true;
