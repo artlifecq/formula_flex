@@ -275,7 +275,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);		
 			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
-			FaceUtil.SetItemGrid(_itemFace,itemInfo);
+			FaceUtil.SetItemGrid(_itemFace,itemInfo,true,{"lv":Mgr.hunyinMgr.JieZiLv});
 			_skin.numJie.label=Mgr.hunyinMgr.JieZiLv.toString();
 		}
 		

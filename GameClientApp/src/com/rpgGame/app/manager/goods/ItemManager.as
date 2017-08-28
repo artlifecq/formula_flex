@@ -417,35 +417,12 @@ package com.rpgGame.app.manager.goods
 		 */
 		public static function checkHasEquip2HC():Boolean
 		{
-			BackPackManager.instance.setCheckType(null);
-			var backDatas:Array=BackPackManager.instance.getAllItem();
-			var num:int=backDatas.length;
-			var itemInfo:ClientItemInfo;
-			var targetHeCheng:Q_hecheng;
-			var caiList:Array;
-			var pice:int;
-			for(var i:int=0;i<num;i++){
-				itemInfo=backDatas[i];
-				if(!itemInfo){
-					continue;
-				}
-				targetHeCheng=HeChengData.getHeChengTargetByTragetId(itemInfo.qItem.q_id); 				
-				if(targetHeCheng){
-					pice=targetHeCheng.q_money;
-					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
-					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
-						pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY))){
+			var types:Array=HeChengData.getTypeList();
+			for each (var t:int in types) 
+			{
+				if (checkEquip2HCByType(t)) 
+				{
 						return true;
-					}
-				}
-				targetHeCheng=HeChengData.getHeChengTargetByCaiLiao(itemInfo.qItem.q_id);
-				if(targetHeCheng){
-					pice=targetHeCheng.q_money;
-					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
-					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
-						pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY))){
-						return true;
-					}
 				}
 			}
 			return false;

@@ -381,7 +381,7 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ATTACK_HARD);
 				//主玩家自己走路打断
-				if (qSkill.q_cancel==1||qSkill.q_cancel==3&&MainRoleManager.actor.stateMachine.isWalkMoving&&msg.selfCancel==1) 
+				if (CastSpellHelper.isCanCancelByMainPlayer(qSkill.q_cancel)&&MainRoleManager.actor.stateMachine.isWalkMoving&&msg.selfCancel==1) 
 				{
 					//自己取消
 				}
