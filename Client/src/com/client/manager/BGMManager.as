@@ -2,6 +2,7 @@ package com.client.manager
 {
 	import com.app.AudioInterface;
 	import com.client.AudioConfigType;
+	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
@@ -31,6 +32,7 @@ package com.client.manager
 			AudioInterface.createAudioSound(AudioConfigType.MUSIC_CHANNEL);
 			AudioInterface.createAudioSound(AudioConfigType.ENV2D_CHANNEL);
 			AudioInterface.createSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL);
+			GameLog.addShow("AudioInterface.baseDir \t" + AudioInterface.baseDir);
 		}
 		
 		public static function playEnv2D(fileName:String):void
