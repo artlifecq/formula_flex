@@ -5,8 +5,6 @@
     import com.rpgGame.coreData.cfg.item.ItemConfig;
     import com.rpgGame.coreData.clientConfig.Q_item;
     
-    import app.message.GoodsDataProto;
-    
     import away3d.events.Event;
     
     import feathers.controls.List;
