@@ -98,6 +98,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.richText.component.RichTextUnit;
 	import com.rpgGame.app.richText.component.RichTextUnitConfigData;
 	import com.rpgGame.app.richText.component.RichTextUnitData;
+	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
@@ -432,7 +433,8 @@ package com.rpgGame.app.richText
 					y = scenePosArr[2];
 					shenxingfuNum=BackPackManager.instance.getItemCount(601);
 					if(shenxingfuNum>0||Mgr.vipMgr.vipLv>0)
-						SceneSender.sceneMapTransport(sceneId, x, y);
+						//						SceneSender.sceneMapTransport(sceneId, x, y);
+						HuBaoSender.upCSGoConvoyMessage();
 					else
 						HuBaoManager.instance().onwalkToNpc(HuBaoData.acceptNpc);
 					break;
