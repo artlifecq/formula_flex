@@ -359,17 +359,17 @@ package
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0, 0.1);
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0.8, 0.85);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.85, 0.9);
 			
 			var pg:ProcessGroup = new ProcessGroup();
-			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
-			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.2, 0.25, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.25, 0.3, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.5, true);
+			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.9);
+			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.9, 0.91, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.91, 0.95, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.95, 0.96, true);
 			//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.5, 0.7, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_WEL, 0.7, 0.8, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.96, 0.97, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_WEL, 0.97, 0.98, true);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
