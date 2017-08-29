@@ -122,14 +122,14 @@ package com.rpgGame.app
 
 		private function runProcess() : void
 		{
-			SceneSwitchCmdListener.fromPercent = 0.9;
+			SceneSwitchCmdListener.fromPercent = 0.98;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.8, 0.9);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.98, 0.99);
 //			if (ClientConfig.isSingle) 
 //			{
 //				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.6, 0.6);
 //			}
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.9);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.99);
 			ProcessStateMachine.getInstance().run();
 		}
 
@@ -141,9 +141,9 @@ package com.rpgGame.app
 		public function reEnterGame() : void
 		{
 			GameLog.addShow("重新进入游戏...");
-			SceneSwitchCmdListener.fromPercent = 0.9;
+			SceneSwitchCmdListener.fromPercent = 0.98;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.9);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.99);
 			ProcessStateMachine.getInstance().run();
 		}
 		
