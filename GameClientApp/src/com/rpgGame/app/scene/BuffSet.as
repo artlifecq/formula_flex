@@ -7,6 +7,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
 	import com.rpgGame.app.state.role.control.FlyUpStateReference;
+	import com.rpgGame.app.state.role.control.HeadBleedStateReference;
 	import com.rpgGame.app.state.role.control.HiddingStateReference;
 	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HushStateReference;
@@ -315,6 +316,9 @@ package com.rpgGame.app.scene
 					case 7://减少技能cd
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_RESET_SKILLCD);
 						break;
+					case 130://头顶流血特效 数字叠加效果
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_BLEED);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
@@ -495,6 +499,11 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(SkillCDResetStateReference) as SkillCDResetStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_RESET_SKILLCD,buffRef);
+						break;
+					case 130://头顶流血特效 数字叠加效果
+						buffRef = _role.stateMachine.getReference(HeadBleedStateReference) as HeadBleedStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_BLEED,buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

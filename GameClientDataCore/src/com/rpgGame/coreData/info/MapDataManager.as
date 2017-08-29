@@ -268,7 +268,7 @@ package com.rpgGame.coreData.info
 						bmpData = new AsyncMapTexture();
 						bmpData.userData = mapID;
 						bmpData.addEventListener(away3d.events.Event.COMPLETE, onMiniMapLoaded);
-						bmpData.load(url);
+						bmpData.load(url,LoadPriorityType.LEVEL_CUSTOM_4);
 					}
 				}
 				else//已经有了,直接返回撒
