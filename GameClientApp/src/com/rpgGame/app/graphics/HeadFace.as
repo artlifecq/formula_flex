@@ -1388,7 +1388,7 @@ package com.rpgGame.app.graphics
 				
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=HuBaoData.getEffByLv(titleID);
-				_huabotitle.playEffect(170,65,ClientConfig.getEffect(effName),0,0,0);
+				_huabotitle.playEffect(256,64,ClientConfig.getEffect(effName),0,64,0);
 //				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 //				_huabotitle.addRenderUnitWith(rud, 0);
 				//				this.addChild(_huabotitle);

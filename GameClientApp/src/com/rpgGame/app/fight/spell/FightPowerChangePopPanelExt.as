@@ -67,7 +67,7 @@ package com.rpgGame.app.fight.spell
 			this.alpha=1;
 			onResize();
 			TweenLite.to(this,0.1,{scaleX:1,scaleY:1});
-			TweenLite.to(this,0.3,{onComplete:scaleComplete});
+			TweenLite.to(this,0.8,{onComplete:scaleComplete});
 		}
 		
 		private function init():void
