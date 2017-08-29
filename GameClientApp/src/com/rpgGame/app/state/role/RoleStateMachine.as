@@ -37,6 +37,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.FastingState;
 	import com.rpgGame.app.state.role.control.FightLeaveEnterBuffState;
 	import com.rpgGame.app.state.role.control.FlyUpState;
+	import com.rpgGame.app.state.role.control.HeadBleedBuffState;
 	import com.rpgGame.app.state.role.control.HiddingState;
 	import com.rpgGame.app.state.role.control.HunLuanState;
 	import com.rpgGame.app.state.role.control.HurtState;
@@ -167,6 +168,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_BUFF_RESET_SKILLCD] = SkillCDResetState;
 		stateMapping[RoleStateType.CONTROL_BUFF_REDUCE_SKILLCD] = SkillCDReduceState;
 		stateMapping[RoleStateType.CONTROL_ENTER_LEAVE_FIGHT] = FightLeaveEnterBuffState;
+		stateMapping[RoleStateType.CONTROL_BUFF_BLEED] = HeadBleedBuffState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		

@@ -87,5 +87,8 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_BUFF_RESET_SKILLCD:int = rEnum.next;// 技能cd,已施放技能cd时间减少
 		public static const CONTROL_BUFF_REDUCE_SKILLCD:int = rEnum.next;// 技能cd,未释放技能cd时间减少
 		public static const CONTROL_ENTER_LEAVE_FIGHT:int = rEnum.next;// 战斗状态
+		public static const CONTROL_BUFF_BLEED:int = rEnum.next;// BUFF流血状态
+		
+		
 	}
 }
