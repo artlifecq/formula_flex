@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.top {
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -44,13 +45,16 @@ package com.rpgGame.app.ui.main.top {
 						AppManager.showApp(AppConstant.MAIL_PANEL);
 						break;
 					case this._skin.btn_sound:
-						BGMManager.isMuteAll = !(BGMManager.isMuteAll);
-//						isPlay=!isPlay;
-//						BGMManager.setMusicIsPlay(isPlay);
-//						if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-//						else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+						setAllMute(!(BGMManager.isMuteAll));
 						break;
 				}
+		}
+		
+		public function setAllMute(isMute:Boolean):void
+		{
+			BGMManager.musicMute = isMute;
+			BGMManager.soundMute = isMute;
+			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ALL);
 		}
 		
 		public function updateTime(msg:ResHeartMessage):void

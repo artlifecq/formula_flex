@@ -54,6 +54,10 @@ package  com.rpgGame.core.ui.tip
 					_mark.y=2;
 					_dis.addChild(_mark);
 				}
+				if (_mark.parent==null) 
+				{
+					_dis.addChild(_mark);
+				}
 				_mark.visible=true;
 				MCUtil.BringToTop(_mark);
 			}

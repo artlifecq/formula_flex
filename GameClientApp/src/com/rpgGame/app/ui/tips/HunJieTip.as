@@ -27,6 +27,8 @@ package com.rpgGame.app.ui.tips
 	
 	import org.mokylin.skin.app.hunyin.Tips_HunJie;
 	
+	import starling.display.DisplayObject;
+	
 	public class HunJieTip extends SkinUI implements ITip
 	{
 		private var _skin:Tips_HunJie;
@@ -65,9 +67,12 @@ package com.rpgGame.app.ui.tips
 			_iconFace.alwayShowCount=false;
 			_skin.grp_icon.addChild(_iconFace);
 			_hunjieLv=data as int;
-			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);		
+			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(_hunjieLv);		
 			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
-			var ui_bg:UIAsset=_skin.bg.getChildAt(itemInfo.qItem.q_default-2) as UIAsset;
+			
+			var obj:DisplayObject=_skin.bg.getChildAt(itemInfo.qItem.q_default-2);
+			if(!obj) obj=_skin.bg.getChildAt(0);
+			var ui_bg:UIAsset=obj as UIAsset;
 			ui_bg.visible=true;
 			FaceUtil.SetItemGrid(_iconFace,itemInfo);
 			//名字

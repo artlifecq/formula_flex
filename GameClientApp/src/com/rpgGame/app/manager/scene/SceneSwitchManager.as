@@ -1,6 +1,6 @@
 package com.rpgGame.app.manager.scene
 {
-	import com.app.AudioInterface;
+	import com.app.infos.AudioInfo;
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
@@ -36,7 +36,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
-	import com.rpgGame.core.manager.AudioConfigType;
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -260,13 +259,14 @@ package com.rpgGame.app.manager.scene
 			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
 			Scene.scene.mapConfig.smallMapTexture = bmpData;
 			Scene.scene.drawSmallMap();
+			curtMapInfo.mapConfig.smallMapTexture = bmpData;
 			onSmallMapCmp(bmpData);
 		}
 		
 		/**小地图加载完成*/
 		private static function onSmallMapCmp(bmpData:AsyncMapTexture):void
 		{
-			//			EventManager.dispatchEvent(MapEvent.LOAD_SMALL_MAP_COMPLETE,{mapID:curtMapInfo.id,mapBG:bmpData});
+//			EventManager.dispatchEvent(MapEvent.MINI_MAP_COMPLETE);
 		}
 		
 		private static function destroy():void
@@ -554,11 +554,27 @@ package com.rpgGame.app.manager.scene
 		}
 		private static function playBackMusic() : void
 		{
-			
-			
 			//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-			BGMManager.playMusic(MapDataManager.currentScene.sound);
+//			BGMManager.playMusic(MapDataManager.currentScene.sound);
 		}
+
+//		public static function updateSceneSound():void
+//		{
+//			var _local1:ClientMapAreaData = AreaMapManager.getRoleInMapDataSoundArea(MainRoleManager.actor);
+//			if (((_local1) && ((_local1.type == 10))))
+//			{
+//				BGMManager.playMusic(_local1.bgSound);
+//				BGMManager.playEnv2D(_local1.envSound);
+//			}
+//			else
+//			{
+//				if (SceneManager.clientMapData)
+//				{
+//					BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+//					BGMManager.playEnv2D(SceneManager.clientMapData.envSoundRes);
+//				};
+//			};
+//		}
 		
 		
 		private static function onMiniMapComplete(scene : GameScene3D) : void

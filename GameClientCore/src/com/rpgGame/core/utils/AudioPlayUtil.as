@@ -1,9 +1,9 @@
 package com.rpgGame.core.utils
 {
 	import com.rpgGame.core.manager.BGMManager;
-
+	
 	import feathers.controls.Button;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.events.Touch;

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.huanying
 {
 	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.WelcomeManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -9,6 +10,7 @@ package com.rpgGame.appModule.huanying
 	import org.mokylin.skin.app.huanying.HuanYing_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 	/**
 	 *欢迎界面 
@@ -23,12 +25,6 @@ package com.rpgGame.appModule.huanying
 		{
 			_skin=new HuanYing_Skin();
 			super(_skin);
-			initView();
-		}
-		
-		private function initView():void
-		{
-			eft=this.playInter3DAt(ClientConfig.getEffect("ui_jixurenwu"),_skin.startBtn.x+_skin.startBtn.width/2,_skin.startBtn.y+_skin.startBtn.height/2,0);		
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -40,12 +36,31 @@ package com.rpgGame.appModule.huanying
 			}
 		}
 		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_kaishiyouxi"),455,287,1,playCom);
+			super.show(data,openTable,parentContiner);
+		}
+		
+		private function playCom(target:InterObject3D):void
+		{
+			TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
+			this.hide();
+		}
+		override  protected function onStageResize(sw : int, sh : int) : void
+		{
+			super.onStageResize(sw,sh);
+		}
+		
 		override public function hide():void
 		{
 			super.hide();
-			eft.stop();
-			eft.dispose();
-			eft=null;
+			if(eft){
+				eft.stop();
+				eft.dispose();
+				eft=null;
+			}
+			WelcomeManager.desoryWelcome();
 		}
 	}
 }

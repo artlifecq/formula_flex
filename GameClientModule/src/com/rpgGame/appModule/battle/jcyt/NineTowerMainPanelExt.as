@@ -38,6 +38,7 @@ package com.rpgGame.appModule.battle.jcyt
 			super(_skin);
 			//_skin.gBtn.touchGroup=true;
 			_skin.btnOpen.touchable=false;
+			_skin.btnStart.touchable=false;
 			_gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0);
 			TipTargetManager.show(_skin.iconSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}

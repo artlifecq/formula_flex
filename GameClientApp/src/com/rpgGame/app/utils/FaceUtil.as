@@ -103,11 +103,11 @@ package com.rpgGame.app.utils
 		 * @param grid 格子
 		 * @param itemInfo 物品数据
 		 * @param isTips 是否需要tips显示<br><br>
-		 * 
+		 * @param extObj 额外数据<br>
 		 * 方法未完成，慎用。。。。<br>
 		 * 期望做成可以一键完成所有物品的设置，如TIPS、图标、CD、数量等
 		 */		
-		public static function SetItemGrid( grid:IconCDFace, itemInfo:ClientItemInfo, isTips:Boolean = true ):void
+		public static function SetItemGrid( grid:IconCDFace, itemInfo:ClientItemInfo, isTips:Boolean = true,extObj:Object=null):void
 		{
 			if(!grid)
 				return;
@@ -197,7 +197,7 @@ package com.rpgGame.app.utils
 					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
 					break;*/
 					case GoodsType.HUNJIE://婚戒
-						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP, Mgr.hunyinMgr.JieZiLv>0? Mgr.hunyinMgr.JieZiLv:1));
+						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP,extObj?extObj.lv:1));
 						break;
 					default:
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );

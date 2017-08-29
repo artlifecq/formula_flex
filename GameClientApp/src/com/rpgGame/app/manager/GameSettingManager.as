@@ -63,7 +63,7 @@
 				soundSetData = getSoundSet();
 				displaySetData = getDisplaySet();
 				
-                BGMManager.applySetting(soundSetData);
+                BGMManager.initProtoC(soundSetData);
                 DisplaySetUpManager.applySetting(displaySetData);
 //                FunctionSetManager.applySetting(_local1);
             }

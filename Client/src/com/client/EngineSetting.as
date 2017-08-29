@@ -67,7 +67,7 @@ package com.client
 			
 			Away3D.PURE_COLOR_PASS = false;
 			Away3D.MIN_HEAP_SIZE = 104857600;//给heap分配100兆的空间  1024*1024*100
-			MultiUrlLoadManager.maxQueueSize = 3;
+			MultiUrlLoadManager.maxQueueSize = 5;
 			
 			SoundUtil.volume = 1;
 			SoundUtil.SOUND_REDUCTION_ALGORITHM_MIN_VOLUMN = 0.75;
@@ -117,7 +117,7 @@ package com.client
 			GuiTheme.decodeURL = VersionUtils.getVersionPath;
 			GuiTheme.useCompressedTexture = false;
 			
-			GuiTheme.ATFX_ROOT_PATH = "../res/ui/big_bg";
+//			GuiTheme.ATFX_ROOT_PATH = "../res/ui/big_bg";
 		}
 	}
 }

@@ -10,6 +10,8 @@ package com.rpgGame.app.view.uiComponent.menu
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.common.erjiItem_Skin;
 	
@@ -38,6 +40,13 @@ package com.rpgGame.app.view.uiComponent.menu
 			_skin=new erjiItem_Skin();//new MenuItemSkin();
 			super(_skin);
 			_skin.uiBg.visible=false;
+			this.addEventListener(Event.REMOVED_FROM_STAGE,onRemoved);
+		}
+		
+		private function onRemoved(eve:Event):void
+		{
+			// TODO Auto Generated method stub
+			_skin.uiBg.visible=false;
 		}
 		
 		public function setData( type:String ):void
@@ -61,6 +70,8 @@ package com.rpgGame.app.view.uiComponent.menu
 					_clipHitArea.graphics.drawRect(0, 0, 1, 1);
 					_clipHitArea.graphics.endFill();
 					_clipHitArea.addEventListener(MouseEvent.CLICK, clipText);
+					_clipHitArea.addEventListener(MouseEvent.ROLL_OVER,onClipOver);
+					_clipHitArea.addEventListener(MouseEvent.ROLL_OVER,onClipOut);
 				}
 				_clipHitArea.scaleX=this._skin.uiBg.width;
 				_clipHitArea.scaleY=this._skin.uiBg.height;
@@ -74,6 +85,18 @@ package com.rpgGame.app.view.uiComponent.menu
 				
 			}
 		}
+		
+		private function onClipOver(event:MouseEvent):void
+		{
+			// TODO Auto-generated method stub
+			_skin.uiBg.visible=true;
+		}
+		
+		private function onClipOut(event:MouseEvent):void
+		{
+			// TODO Auto-generated method stub
+			_skin.uiBg.visible=false;
+		}
 		override protected function onHide():void
 		{
 			super.onHide();
@@ -81,6 +104,8 @@ package com.rpgGame.app.view.uiComponent.menu
 			if (_clipHitArea&&_clipHitArea.stage) 
 			{
 				_clipHitArea.removeEventListener(MouseEvent.CLICK,clipText);
+				_clipHitArea.removeEventListener(MouseEvent.ROLL_OUT,onClipOut);
+				_clipHitArea.removeEventListener(MouseEvent.ROLL_OVER,onClipOver);
 				_clipHitArea.parent.removeChild(_clipHitArea);
 				_clipHitArea=null;
 			}
