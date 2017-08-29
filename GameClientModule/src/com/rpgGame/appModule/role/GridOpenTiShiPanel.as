@@ -31,7 +31,7 @@ package com.rpgGame.appModule.role
 		{
 			_skin=new GridOpenTiShiSkin();
 			super(_skin);
-			this.model=true;
+//			this.model=true;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

@@ -18,6 +18,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import app.message.GoodsType;
@@ -376,7 +377,16 @@ package com.rpgGame.app.manager.goods
 				if(buyItem!=null)
 				{
 					var maxBuy:int;
-					var allRes:Number=Mgr.shopMgr.getCurrency(buyItem.data.priceType);
+					var priceType:int=buyItem.data.priceType;
+					var allRes:Number=Mgr.shopMgr.getCurrency(priceType);
+					if (CharAttributeType.RES_BIND_MONEY==priceType) 
+					{
+						allRes+=Mgr.shopMgr.getCurrency(CharAttributeType.RES_MONEY);
+					}
+					else if (CharAttributeType.RES_BIND_GOLD==priceType)
+					{
+						allRes+=Mgr.shopMgr.getCurrency(CharAttributeType.RES_GOLD);
+					}
 					var maxCount:int=int(allRes/buyItem.data.price);
 					var qmax:int=buyItem.getItemConfig()!=null&&buyItem.getItemConfig().q_max>0?buyItem.getItemConfig().q_max:99;
 					maxCount=Math.min(qmax,maxCount);//999
@@ -401,6 +411,7 @@ package com.rpgGame.app.manager.goods
 					{
 						Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null);
 					}
+					
 					
 				}
 				

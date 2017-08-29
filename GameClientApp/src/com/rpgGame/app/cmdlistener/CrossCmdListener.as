@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.sender.CrossSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -12,6 +13,7 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.net.BeanConfig;
 	
 	/**
 	 *跨服相关处理
@@ -34,16 +36,24 @@ package com.rpgGame.app.cmdlistener
 		private function onResChangeServerGameToClient( msg:ResChangeServerGameToClientMessage ):void
 		{
 			Log.debug("通知前端登录战斗服ResChangeServerGameToClientMessage");
-			var time:int=GlobalSheetData.getSettingInfo(849)!=null?GlobalSheetData.getSettingInfo(849).q_int_value:15;
-			if(msg.fighttype==2)
+			var time:int;
+			if(!FirstEnterSceneManager.isEnterScene)//第一次进入场景 只用延迟2秒就可以了
 			{
-				AppManager.showAppNoHide(AppConstant.BATTLE_D1V1_MATCH_PANEL,[1,time]);
+				time=2;
 			}
 			else
 			{
-				AppManager.showAppNoHide(AppConstant.MULTY_ENTERTIME_PANL,msg.fighttype);
+				time=GlobalSheetData.getSettingInfo(849)!=null?GlobalSheetData.getSettingInfo(849).q_int_value:15;
+				if(msg.fighttype==2)
+				{
+					AppManager.showAppNoHide(AppConstant.BATTLE_D1V1_MATCH_PANEL,[1,time]);
+				}
+				else
+				{
+					AppManager.showAppNoHide(AppConstant.MULTY_ENTERTIME_PANL,msg.fighttype);
+				}
 			}
-			
+			TweenLite.killDelayedCallsTo(sendEnterCrossFight);
 			TweenLite.delayedCall(time,sendEnterCrossFight,[msg]);
 		}
 		private function sendEnterCrossFight(msg:ResChangeServerGameToClientMessage):void
