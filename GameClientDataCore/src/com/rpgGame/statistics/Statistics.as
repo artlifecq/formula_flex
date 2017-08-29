@@ -8,6 +8,8 @@ package com.rpgGame.statistics
 
     public class Statistics
     {
+		//loader加载
+		public static const STEP_LOADER:int=1;
 		//启动部分
 		/**启动添加到舞台**/
 		public static const STEP_CLIENT:int=100;
@@ -62,7 +64,9 @@ package com.rpgGame.statistics
 		
 		//手动关闭
 		/**手动关闭**/
-		public static const STEP_MANUAL_CLOSE:int=141
+		public static const STEP_MANUAL_CLOSE:int=141;
+		/**手动关闭**/
+		public static const STEP_CANT_CONNECT:int=142;
         public static const intance : Statistics = new Statistics();
         
         // nodeId
@@ -83,7 +87,7 @@ package com.rpgGame.statistics
         }
         
         public function pushNode(nodeId : int,tip:String="") : void {
-            if(!ClientConfig.isRelease)return;
+  //          if(!ClientConfig.isRelease)return;
 //            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
 //            if (null == nodeInfo) {
 //                return;

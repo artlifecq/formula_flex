@@ -211,6 +211,7 @@ package com.client.process
 				if(_reTryCount > 100)
 				{
 					GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
+					Statistics.intance.pushNode(Statistics.STEP_CANT_CONNECT,"无法连接服务器，尝试100次");
 				}
 			}
 			else
