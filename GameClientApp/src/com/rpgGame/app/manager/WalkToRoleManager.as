@@ -1,7 +1,6 @@
 package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
-	import com.rpgGame.app.cmdlistener.enum.EnumItemlId;
 	import com.rpgGame.app.cmdlistener.enum.EnumfFaction;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -30,6 +29,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
+	
+	import app.message.EnumItemId;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -232,7 +233,7 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					if(collectData.faction==MainRoleManager.actorInfo.faction||collectData.faction==EnumfFaction.COMMON||collectData.modelID==EnumItemlId.ZHUFUSHI)//祝福石特殊处理
+					if(collectData.faction==MainRoleManager.actorInfo.faction||collectData.faction==EnumfFaction.COMMON||collectData.modelID==EnumItemId.ZHUFUSHI)//祝福石特殊处理
 					{
 						TaskSender.sendStartGatherMessage(collectData.serverID);
 					}else{

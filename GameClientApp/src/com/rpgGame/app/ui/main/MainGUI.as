@@ -156,6 +156,11 @@ package com.rpgGame.app.ui.main
 			init();
 		}
 		
+		public function get headBar():MainRoleHeadBar
+		{
+			return _headBar;
+		}
+
 		public function get shortcutBar():ShortcutBar
 		{
 			return _shortcutBar;
