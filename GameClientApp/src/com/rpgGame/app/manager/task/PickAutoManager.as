@@ -42,14 +42,17 @@ package com.rpgGame.app.manager.task
 		{
 			_autoPickCtrl=new ControlAutoPick(role);			
 		}
-		public function startPickAuto(onArrive:Function=null,data:Object = null) : void
+		public function startPickAuto(onArrive:Function=null,data:Object = null,fore:Boolean=false) : void
 		{
+			if(!_isPickRunning||fore)
+			{
+				_onArrive=onArrive;
+				_onArriveData=data;
+			}
 			if(!_isPickRunning)
 			{
 				_gTimer.start();
 				_isPickRunning = true;
-				_onArrive=onArrive;
-				_onArriveData=data;
 				onUpdate();
 			}
 			
