@@ -157,7 +157,7 @@ package com.rpgGame.app.manager.role
 			obj.spacing=spacing;
 			obj.data=data;
 			obj.needSprite=needSprite;
-			PickAutoManager.getInstance().startPickAuto(pickOverScene,obj);
+			PickAutoManager.getInstance().startPickAuto(pickOverScene,obj,true);
 		}
 		private static function pickOverScene(obj:Object):void
 		{
