@@ -10,6 +10,7 @@ package com.client.process
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	
@@ -56,7 +57,11 @@ package com.client.process
 			var loader:ThemeLoader = new ThemeLoader();
 			loader.load( ClientConfig.getUI(UI_WEL), onFinish, onProgress, onResError);
 		}
-		
+		override public function completeProcess():void
+		{
+			super.completeProcess();
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_WELCOME,"欢迎ui加载成功");
+		}
 		private function onProgress(progress:Number) : void
 		{
 			setProcessPercent(progress);

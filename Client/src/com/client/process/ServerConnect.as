@@ -11,6 +11,7 @@ package com.client.process
 	import com.gameClient.utils.adobe.Base64;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.MessagePool;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	import flash.external.ExternalInterface;
@@ -148,7 +149,7 @@ package com.client.process
 			GameAlert.hide();
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
-			
+			Statistics.intance.pushNode(Statistics.STEP_CONNECT,"服务器链接成功");
 //			if (_retryTimer)
 //			{
 //				_retryTimer.stop();

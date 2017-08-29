@@ -27,6 +27,7 @@ package
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
@@ -100,6 +101,7 @@ package
 		 */
 		protected function onAddToStg(event : Event) : void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_CLIENT,"启动添加到舞台");
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
 			ClientConfig.urlParmar = urlParmar || loaderInfo.parameters;
 			ClientConfig.baseDir = baseDir;
@@ -224,7 +226,7 @@ package
 					{
 						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
 					}
-					
+					Statistics.intance.pushNode(Statistics.STEP_ENGINE_OK,"3D环境检测成功");
 					showCheckInfo();
 					runProcess();
 				}
@@ -373,6 +375,7 @@ package
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
+			Statistics.intance.pushNode(Statistics.STPE_START_LOAD_RES,"开始加载资源");
 			ProcessStateMachine.getInstance().run();
 			
 			if (!ClientConfig.isRelease)

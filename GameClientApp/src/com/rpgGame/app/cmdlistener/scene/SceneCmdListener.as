@@ -113,6 +113,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.player.message.ResPlayerStateChangeMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	import com.rpgGame.netData.structs.Position;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -397,6 +398,10 @@ package com.rpgGame.app.cmdlistener.scene
 		private function RecvEnterMapMessage(msg:ResEnterMapMessage):void
 		{
 			GameLog.addShow("收到成功进入地图消息");
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STEP_ENTER_MAP,"首次登陆成功进入场景");
+			}
 			//			var infoID : uint = buffer.readVarint32();
 			//			var pkMode : uint = infoID & 15;
 			var line : uint = msg.line;

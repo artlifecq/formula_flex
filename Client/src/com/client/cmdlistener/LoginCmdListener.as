@@ -13,6 +13,7 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
 	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
+	import com.rpgGame.statistics.Statistics;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
@@ -91,7 +92,7 @@ package com.client.cmdlistener
 				onGetMyPlayerInfoHandler();
 				onGetMyPlayerInfoHandler = null;
 			}
-			
+			Statistics.intance.pushNode(Statistics.STEP_MAIN_PLAYER_DATA,"获取到主玩家数据");
 			if(MessageMgr.Ins.isCrossSocket){//跨服登陆
 				ClientConfig.mainEntry.updateLogindata();
 			}else{
@@ -113,6 +114,7 @@ package com.client.cmdlistener
 			// 这里启动心跳吧
 			StartHeart();*/
 			GameLog.addShow("收到登录成功消息 ");
+			Statistics.intance.pushNode(Statistics.STEP_LOGIN_SUCCESS,"玩家登陆成功");
 //			ClientConfig.loginData.mapModelId=msg.mapModelId;
 			ClientConfig.hasHero = true;
 			onCreateHeroSuccess();

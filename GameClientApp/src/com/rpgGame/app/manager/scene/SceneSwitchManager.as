@@ -48,6 +48,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.utils.getDefinitionByName;
 	
@@ -138,6 +139,10 @@ package com.rpgGame.app.manager.scene
 		 */
 		private static function onConfigLoaded(mapConfig:MapConfig):void
 		{
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STPE_LOAD_MAP_CFG,"首次加载地图cfg配置数据完成");
+			}
 			curtMapInfo.mapConfig = mapConfig;
 			mapConfig.mapID = curtMapInfo.sceneId;
 			var bmpData:AsyncMapTexture = MapDataManager.getCacheMiniMapBmpData(curtMapInfo.sceneId);
@@ -485,6 +490,10 @@ package com.rpgGame.app.manager.scene
 		{
 			--needLoadCmpCnt;
 			onLoadSceneCmpParam = scene;
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STPE_LOAD_MAP_AWD,"首次加载场景awd完成");
+			}
 			onLoadSceneComplete();
 			//			if (SceneManager.clientMapData)
 			//			{
@@ -507,6 +516,10 @@ package com.rpgGame.app.manager.scene
 		private static function onMapDataComplete(mapData : SceneMapData) : void
 		{
 			--needLoadCmpCnt;
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STEP_LOAD_MAP_DAT,"首次加载地图dat数据完成");
+			}
 			onLoadSceneComplete();
 			//			if (SceneManager.clientMapData)
 			//			{
@@ -623,6 +636,10 @@ package com.rpgGame.app.manager.scene
 		private static function onLoadComplete(_appUrl:* = null) : void
 		{
 			SceneSender.SendLoadFinishMessage();
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STEP_SEND_LOAD_MAP_COMPLETE,"首次发送加载完成消息");
+			}
 		}
 		
 		private static function onError(url : String) : void
