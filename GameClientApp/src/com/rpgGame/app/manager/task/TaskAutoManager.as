@@ -191,7 +191,7 @@ package com.rpgGame.app.manager.task
 			{
 				return false;
 			}
-			if(WelcomeManager.isDestory)//处在欢迎页阶段的时候不拉
+			if(!WelcomeManager.isDestory)//处在欢迎页阶段的时候不拉
 			{
 				return false;
 			}
