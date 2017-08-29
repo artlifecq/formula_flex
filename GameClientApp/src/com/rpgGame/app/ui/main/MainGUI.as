@@ -8,6 +8,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+	import com.rpgGame.app.ui.main.buttons.MainButton_Kadun;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
 	import com.rpgGame.app.ui.main.head.MainRoleHeadBar;
@@ -150,6 +151,7 @@ package com.rpgGame.app.ui.main
 		private var _cdTime : int = TIME;
 		private var selectedRole:SceneRole;
 		private var lowBloodTween:TweenLite;
+		private var kaBtn:MainButton_Kadun;
 		
 		public function MainGUI()
 		{
@@ -171,6 +173,7 @@ package com.rpgGame.app.ui.main
 			nativeStage.addEventListener(Event.RESIZE, onStageResize);
 			starlingStage = Starling.current.stage;
 			MainButtonManager.init();
+			
 			initBar();
 			FunctionOpenManager.openNoticeByLevel(MainRoleManager.actorInfo.totalStat.level);
 			//isShowEventTrackPanel();
@@ -198,13 +201,15 @@ package com.rpgGame.app.ui.main
 			this.addChild(this._navigationBar);
 			this._chatBar = new ChatBar();
 			this.addChild(this._chatBar);
+			
 			this._systemMsgBar=new SystemMsgBar();
 			this.addChild(this._systemMsgBar);
 			this._taskBar=new TaskBar();
 			_trackerBar=new DungeonTrackerBar();
 			_hubaoTrackerBar=new HuBaoTracjerBar();
 			
-			
+			kaBtn=new MainButton_Kadun();
+			this.addChild(kaBtn);
 			
 			_buffBar=new BuffBar();
 			this.addChild(_buffBar);
@@ -576,6 +581,9 @@ package com.rpgGame.app.ui.main
 			//			_taskTrackPanel.resize(sWidth, _taskBar.y + _taskBar.height);
 			ShortcutMessageBar.instence.resize(sWidth, sHeight);
 			//			_yuMaChangActivityBar.resize(sWidth, _taskBar.y);
+			
+			kaBtn.x=_chatBar.x+_chatBar.width;
+			kaBtn.y=_chatBar.y-kaBtn.height;
 		}
 		
 		public function getBtnGlobalPos(btnName : String) : Point
