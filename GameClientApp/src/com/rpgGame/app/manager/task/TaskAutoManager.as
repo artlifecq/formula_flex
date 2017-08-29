@@ -186,8 +186,12 @@ package com.rpgGame.app.manager.task
 			if(testStopKey)
 			{
 				return false;
-			}	
+			}
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
+			{
+				return false;
+			}
+			if(WelcomeManager.isDestory)//处在欢迎页阶段的时候不拉
 			{
 				return false;
 			}
