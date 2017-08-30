@@ -152,7 +152,7 @@ package
 			_urlParmar = loaderInfo.parameters;
 			if (ExternalInterface.available)
 			{
-				ExternalInterface.addCallback("closeBrower", closure );
+				ExternalInterface.addCallback("closeBrower", closeBrower );
 				_urlParmar = ExternalInterface.call("config");
                 if (null == _urlParmar) {
                     return;
@@ -237,7 +237,7 @@ package
 			}
 		}
 		
-		private function closure():void
+		private function closeBrower():void
 		{
 			// TODO Auto Generated method stub
 			pushNode(200,"无角色手动关闭的");
