@@ -8,6 +8,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.display2D.ResChangeEffect;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -76,6 +77,8 @@ package   com.rpgGame.app.manager.debug
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.setTimeout;
+	
+	import app.message.EnumItemId;
 	
 	import gs.TweenLite;
 	
@@ -485,6 +488,13 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".openitem", function (...arg):void
 			{
 				ItemOpenResultShowPanelExt.onShowNotice(arg);
+			});
+			commandList.put( ".fly", function (...arg):void
+			{
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					setTimeout(ResChangeEffect.fly,150*i,EnumItemId.GOLD,MainRoleManager.actor.headFace);
+				}	
 			});
 		}
 		

@@ -15,10 +15,13 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
+	
+	import app.message.EnumItemId;
 	
 	import feathers.controls.UIAsset;
 	
@@ -35,29 +38,46 @@ package com.rpgGame.app.manager
 		private static var _tweenHT:HandleThread = new HandleThread();
 		private static const HELP_PT:Point=new Point(0,0);
 		private static const POS_PT:Point=new Point();
+		private static const _parent3d:Inter3DContainer=new Inter3DContainer();
 		
 		public static function flyItemToBag(itemId:int,startDis:DisplayObject=null):void
 		{
+			if (itemId==EnumItemId.BIND_GOLD||itemId==EnumItemId.GOLD) 
+			{
+				return;
+			}
 			var qItem:Q_item=ItemConfig.getQItemByID(itemId);
 			if (qItem) 
 			{
 				var iconFace:UIAsset = new UIAsset();
-				if (startDis&&startDis.stage!=null) 
-				{
-					startDis.localToGlobal(HELP_PT,POS_PT);
-					iconFace.x=POS_PT.x;
-					iconFace.y=POS_PT.y;
-				}
-				else
-				{
-					iconFace.x=Starling.current.nativeStage.mouseX;
-					iconFace.y=Starling.current.nativeStage.mouseY;
-				}
+				getStartPos(startDis,iconFace);
 				
 				iconFace.styleName =ClientConfig.getItemIcon(qItem.q_icon+"",IcoSizeEnum.ICON_48);
 				addTweenHT(null,iconFace,null);
 			}
 			
+		}
+		private static function getStartPos(startDis:DisplayObject,flyObj:DisplayObject):void
+		{
+			if (startDis&&startDis.stage!=null) 
+			{
+				startDis.localToGlobal(HELP_PT,POS_PT);
+				flyObj.x=POS_PT.x;
+				flyObj.y=POS_PT.y;
+			}
+			else
+			{
+				flyObj.x=Starling.current.nativeStage.mouseX;
+				flyObj.y=Starling.current.nativeStage.mouseY;
+			}
+		}
+		public static function flyGold(itemId:int,startDis:DisplayObject=null):void
+		{
+			if (EnumItemId.BIND_GOLD!=itemId&&EnumItemId.GOLD!=itemId) 
+			{
+				return;
+			}
+			//var obj3d:InterObject3D=parent3D.addInter3D(,
 		}
 		public static function flyItemsToBag(itemsIdArr:Array):void
 		{
@@ -66,9 +86,16 @@ package com.rpgGame.app.manager
 				return;
 			}
 			var len:int=itemsIdArr.length;
+			var time:Number=0;
 			for (var i:int = 0; i <len; i++) 
 			{
-				setTimeout(flyItemToBag,0.2*i,itemsIdArr[i]);
+				var itemId:int=itemsIdArr[i];
+				if (itemId==EnumItemId.BIND_GOLD||itemId==EnumItemId.GOLD) 
+				{
+					continue;
+				}
+				setTimeout(flyItemToBag,time,itemsIdArr[i]);
+				time+=0.2;
 			}
 		}
 		public static function flyItemsToBagByList(itemsIdArr:Vector.<int>):void
@@ -78,9 +105,16 @@ package com.rpgGame.app.manager
 				return;
 			}
 			var len:int=itemsIdArr.length;
+			var time:Number=0;
 			for (var i:int = 0; i <len; i++) 
 			{
-				setTimeout(flyItemToBag,0.2*i,itemsIdArr[i]);
+				var itemId:int=itemsIdArr[i];
+				if (itemId==EnumItemId.BIND_GOLD||itemId==EnumItemId.GOLD) 
+				{
+					continue;
+				}
+				setTimeout(flyItemToBag,time,itemsIdArr[i]);
+				time+=0.2;
 			}
 		}
 		/**
@@ -91,6 +125,23 @@ package com.rpgGame.app.manager
 		 */		
 		public static function tweenItemInBag(icon:IconCDFace,startPos:Point = null,onCmpFun:Function = null,time:Number = 1):void
 		{
+			if (icon==null) 
+			{
+				if (onCmpFun) 
+				{
+					onCmpFun();
+				}
+				return;
+			}
+			var mid:int=(icon.faceInfo as ClientItemInfo).cfgId;
+			if (mid==EnumItemId.BIND_GOLD||mid==EnumItemId.GOLD) 
+			{
+				if (onCmpFun) 
+				{
+					onCmpFun();
+				}
+				return;
+			}
 			tweenItemByIcon(icon,startPos,null,onCmpFun,time);
 		}
 		
@@ -121,8 +172,13 @@ package com.rpgGame.app.manager
 			var arr:Array=TaskMissionCfgData.getRewordByJobsex(reward,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
 			for (var i:int = 0; i < arr.length; i++) 
 			{
+				if (arr[i].mod==EnumItemId.BIND_GOLD||arr[i].mod==EnumItemId.GOLD) 
+				{
+					continue;
+				}
 				var iconFace:UIAsset = new UIAsset();
 				iconFace.styleName =ClientConfig.getItemIcon(arr[i].mod, size );
+				
 				iconFace.x = startPos.x;
 				iconFace.y = startPos.y;
 				addTweenHT(null,iconFace,null,1);
@@ -191,7 +247,14 @@ package com.rpgGame.app.manager
 		{
 			return StarlingLayerManager.topUILayer;
 		}
-		
+		private static function get parent3D():Inter3DContainer
+		{
+			if (_parent3d.parent==null) 
+			{
+				StarlingLayerManager.topUILayer.addChild(_parent3d);
+			}
+			return _parent3d;
+		}
 		
 		public static function getBackPackBtnPos():Point
 		{
