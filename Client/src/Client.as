@@ -101,7 +101,7 @@ package
 		 */
 		protected function onAddToStg(event : Event) : void
 		{
-			Statistics.intance.pushNode(Statistics.STEP_CLIENT,"启动添加到舞台");
+			
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
             ClientConfig.urlParmar = urlParmar || loaderInfo.parameters;
 			ClientConfig.baseDir = baseDir;
@@ -154,7 +154,7 @@ package
 			ClientConfig.init(this);
 			ClientUrlManager.setup(ClientConfig.baseDir, version, ClientConfig.decodeFun);
 			VersionUtils.setup(versionMap, baseDir, version, ClientConfig.useVersion);
-			
+			Statistics.intance.pushNode(Statistics.STEP_CLIENT,"启动添加到舞台");
 			initProcess();
 			//initMenu();
 			BGMManager.setup(this.stage);
@@ -196,6 +196,7 @@ package
 				{
 					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
 				}
+				Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_ERROR,"硬件加速开启失败");
 			}
 			else
 			{
@@ -210,6 +211,7 @@ package
 					{
 						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡，或点击确定下载微端进入游戏。", onDownWeiDuan);
 					}
+					Statistics.intance.pushNode(Statistics.STEP_XCARD_ERROR,"系统显卡配置太低");
 				}
 				else
 				{	

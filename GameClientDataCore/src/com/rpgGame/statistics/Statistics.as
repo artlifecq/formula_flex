@@ -64,9 +64,13 @@ package com.rpgGame.statistics
 		
 		//手动关闭
 		/**手动关闭**/
-		public static const STEP_MANUAL_CLOSE:int=141;
-		/**手动关闭**/
-		public static const STEP_CANT_CONNECT:int=142;
+		public static const STEP_MANUAL_CLOSE:int=200;
+		/**无法连接服务器**/
+		public static const STEP_CANT_CONNECT:int=201;
+		/**硬件加速失败**/
+		public static const STEP_HARD_DRIVE_ERROR:int=202;
+		/**显卡配置太低**/
+		public static const STEP_XCARD_ERROR:int=203;
         public static const intance : Statistics = new Statistics();
         
         // nodeId
@@ -84,8 +88,12 @@ package com.rpgGame.statistics
 //			nodeInfoList[STEP_LOAD_DLL]="加载dll成功";
 //			nodeInfoList[STEP_PUBLIC_UI]="加载公共资源成功";
 //			nodeInfoList[STEP_LOAD_FONT]="加载字体";
+			HttpUtil.jsCallBack("closeBrower",closeBrower);
         }
-        
+		private function closeBrower():void
+		{
+			pushNode(STEP_MANUAL_CLOSE,"手动关闭");
+		}
         public function pushNode(nodeId : int,tip:String="") : void {
   //          if(!ClientConfig.isRelease)return;
 //            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
@@ -93,7 +101,7 @@ package com.rpgGame.statistics
 //                return;
 //            }
             var params : Dictionary = new Dictionary();
-            params["game"] = ClientConfig.gameName;
+            params["game"] = ClientConfig.isRelease?ClientConfig.gameName:"xqj";
             //params["logType"] = nodeInfo.desc;
             params["os"] = Capabilities.os;
             params["nodeId"] = nodeId+ "";
@@ -101,10 +109,17 @@ package com.rpgGame.statistics
             params["browser"] = ClientConfig.browser;
             params["account"] = ClientConfig.loginName;
             params["resolution"] = Capabilities.screenResolutionX + "X" + Capabilities.screenResolutionY;
-            params["serverId"] = ClientConfig.loginAreaId;
+            params["serverId"] = ClientConfig.isRelease?ClientConfig.loginAreaId:"30001";
             params["ip"] = ClientConfig.clientIp;
             params["time"] = (new Date()).getTime();
-            HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
+			if (ClientConfig.isRelease) 
+			{
+				HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
+			}
+			else
+			{
+				HttpUtil.doGet("http://192.168.5.178:8080/front-node/node", params);
+			}
         }
     }
 }

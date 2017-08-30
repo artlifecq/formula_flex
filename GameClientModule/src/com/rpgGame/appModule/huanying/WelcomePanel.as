@@ -56,13 +56,15 @@ package com.rpgGame.appModule.huanying
 		override protected function onHide():void
 		{
 			super.onHide();
-			if (MainRoleManager.actorInfo.totalStat.level==1) 
-			{
-				Statistics.intance.pushNode(Statistics.STEP_CLICK_START,"首次点击开始游戏");
-			}
+			
+//			if (MainRoleManager.actorInfo.totalStat.level==1) 
+//			{
+//				
+//			}
 		}
 		override public function hide():void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_CLICK_START,"首次点击开始游戏");
 			super.hide();
 			if(eft){
 				eft.stop();
