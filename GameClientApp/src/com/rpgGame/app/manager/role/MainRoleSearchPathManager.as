@@ -752,6 +752,10 @@ package com.rpgGame.app.manager.role
 				{
 					_onJumpArrive(_data);
 				}
+				else
+				{
+					Lyt.a("onJumpArrive为null了。不正常");
+				}
 				clearJumpPath();
 				return;
 			}
@@ -777,6 +781,10 @@ package com.rpgGame.app.manager.role
 			if (_isAutoJumping)
 			{
 				TweenLite.delayedCall(0.1, onNextJump);
+			}
+			else
+			{
+				Lyt.a("isAutoJumping为false了。不正常");
 			}
 		}
 		/**

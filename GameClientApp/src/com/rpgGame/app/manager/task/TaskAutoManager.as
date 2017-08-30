@@ -212,6 +212,7 @@ package com.rpgGame.app.manager.task
 			}
 			if(TrusteeshipManager.getInstance().isAutoing&&!actTaskMonster)
 			{//if(traceKey!=1){Lyt.a("istech1");traceKey=1;}
+				actTaskMonster=false;
 				return true;
 			}
 			if(MainRoleManager.actor.stateMachine.isIdle)
