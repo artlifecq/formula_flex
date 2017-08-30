@@ -21,7 +21,7 @@ package com.rpgGame.app.manager
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
 	
-	import app.message.EnumItemId;
+
 	
 	import feathers.controls.UIAsset;
 	
@@ -42,10 +42,7 @@ package com.rpgGame.app.manager
 		
 		public static function flyItemToBag(itemId:int,startDis:DisplayObject=null):void
 		{
-			if (itemId==EnumItemId.BIND_GOLD||itemId==EnumItemId.GOLD) 
-			{
-				return;
-			}
+			
 			var qItem:Q_item=ItemConfig.getQItemByID(itemId);
 			if (qItem) 
 			{
@@ -71,14 +68,7 @@ package com.rpgGame.app.manager
 				flyObj.y=Starling.current.nativeStage.mouseY;
 			}
 		}
-		public static function flyGold(itemId:int,startDis:DisplayObject=null):void
-		{
-			if (EnumItemId.BIND_GOLD!=itemId&&EnumItemId.GOLD!=itemId) 
-			{
-				return;
-			}
-			//var obj3d:InterObject3D=parent3D.addInter3D(,
-		}
+	
 		public static function flyItemsToBag(itemsIdArr:Array):void
 		{
 			if (itemsIdArr==null||itemsIdArr.length==0) 
@@ -90,10 +80,7 @@ package com.rpgGame.app.manager
 			for (var i:int = 0; i <len; i++) 
 			{
 				var itemId:int=itemsIdArr[i];
-				if (itemId==EnumItemId.BIND_GOLD||itemId==EnumItemId.GOLD) 
-				{
-					continue;
-				}
+				
 				setTimeout(flyItemToBag,time,itemsIdArr[i]);
 				time+=0.2;
 			}
@@ -109,10 +96,7 @@ package com.rpgGame.app.manager
 			for (var i:int = 0; i <len; i++) 
 			{
 				var itemId:int=itemsIdArr[i];
-				if (itemId==EnumItemId.BIND_GOLD||itemId==EnumItemId.GOLD) 
-				{
-					continue;
-				}
+				
 				setTimeout(flyItemToBag,time,itemsIdArr[i]);
 				time+=0.2;
 			}
@@ -126,15 +110,6 @@ package com.rpgGame.app.manager
 		public static function tweenItemInBag(icon:IconCDFace,startPos:Point = null,onCmpFun:Function = null,time:Number = 1):void
 		{
 			if (icon==null) 
-			{
-				if (onCmpFun) 
-				{
-					onCmpFun();
-				}
-				return;
-			}
-			var mid:int=(icon.faceInfo as ClientItemInfo).cfgId;
-			if (mid==EnumItemId.BIND_GOLD||mid==EnumItemId.GOLD) 
 			{
 				if (onCmpFun) 
 				{
@@ -172,10 +147,7 @@ package com.rpgGame.app.manager
 			var arr:Array=TaskMissionCfgData.getRewordByJobsex(reward,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
 			for (var i:int = 0; i < arr.length; i++) 
 			{
-				if (arr[i].mod==EnumItemId.BIND_GOLD||arr[i].mod==EnumItemId.GOLD) 
-				{
-					continue;
-				}
+				
 				var iconFace:UIAsset = new UIAsset();
 				iconFace.styleName =ClientConfig.getItemIcon(arr[i].mod, size );
 				

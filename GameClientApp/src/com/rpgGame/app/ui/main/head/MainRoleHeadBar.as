@@ -470,7 +470,8 @@ package com.rpgGame.app.ui.main.head {
 		{
 			if (!_goldGlobal) 
 			{
-				_goldGlobal=_skin.uiYuanbao.localToGlobal(new Point());
+				_goldGlobal=new Point();
+				_goldGlobal=_skin.uiYuanbao.localToGlobal(new Point(12,12),_goldGlobal);
 			}
 			return _goldGlobal;
 		}
@@ -479,7 +480,8 @@ package com.rpgGame.app.ui.main.head {
 		{
 			if (!_bindGoldGlobal) 
 			{
-				_bindGoldGlobal=_skin.uiLijin.localToGlobal(new Point());
+				_bindGoldGlobal=new Point();
+				_bindGoldGlobal=_skin.uiLijin.localToGlobal(new Point(12,12),_bindGoldGlobal);
 			}
 			return _bindGoldGlobal;
 		}

@@ -88,12 +88,8 @@ package com.rpgGame.statistics
 //			nodeInfoList[STEP_LOAD_DLL]="加载dll成功";
 //			nodeInfoList[STEP_PUBLIC_UI]="加载公共资源成功";
 //			nodeInfoList[STEP_LOAD_FONT]="加载字体";
-			HttpUtil.jsCallBack("closeBrower",closeBrower);
-        }
-		private function closeBrower():void
-		{
-			pushNode(STEP_MANUAL_CLOSE,"手动关闭");
-		}
+			
+		}	
         public function pushNode(nodeId : int,tip:String="") : void {
   //          if(!ClientConfig.isRelease)return;
 //            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];

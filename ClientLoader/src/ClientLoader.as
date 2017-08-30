@@ -99,7 +99,7 @@ package
 		public var GlobalBridge : Class = null;
 		
 		private var _key:String = "12,66,78";
-
+	
 		public function ClientLoader()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
@@ -152,6 +152,7 @@ package
 			_urlParmar = loaderInfo.parameters;
 			if (ExternalInterface.available)
 			{
+				ExternalInterface.addCallback("closeBrower", closure );
 				_urlParmar = ExternalInterface.call("config");
                 if (null == _urlParmar) {
                     return;
@@ -235,7 +236,13 @@ package
 				startLoadClient();
 			}
 		}
-
+		
+		private function closure():void
+		{
+			// TODO Auto Generated method stub
+			pushNode(200,"无角色手动关闭的");
+		}
+		
 		private function initStage() : void
 		{
 			//将黄色焦点框隐藏掉
@@ -427,7 +434,7 @@ package
             client["browser"] = _browser;
             client["gameName"] = _gameName;
             client["clientIp"] = _clientIp;
-            
+            client
 			this.stage.addChild(client);
 			//
 			loaderInfo.loader.unload();

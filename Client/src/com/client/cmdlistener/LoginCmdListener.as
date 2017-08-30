@@ -3,6 +3,7 @@ package com.client.cmdlistener
 	import com.client.EnumErrorConst;
 	import com.client.ui.alert.GameAlert;
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.HttpUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
@@ -77,9 +78,13 @@ package com.client.cmdlistener
 			SocketConnection.messageMgr.isReplace=true;
 			SocketConnection.messageMgr.replaceIP=msg.ip;
 		}
-		
+		private static function nullCall():void
+		{
+			trace("覆盖js回调");
+		}
 		public static function RecvMyPlayerInfoMessage(msg:ResMyPlayerInfoMessage):void
 		{
+			HttpUtil.jsCallBack("closeBrower",nullCall);
 			ClientConfig.loginData = msg.myPlayerInfo;
 			if (onLoginSuccessHandler != null)
 			{

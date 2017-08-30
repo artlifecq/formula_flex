@@ -493,7 +493,8 @@ package   com.rpgGame.app.manager.debug
 			{
 				for (var i:int = 0; i < arg[0]; i++) 
 				{
-					setTimeout(ResChangeEffect.fly,150*i,EnumItemId.GOLD,MainRoleManager.actor.headFace);
+					//setTimeout(ResChangeEffect.fly,150*i,EnumItemId.GOLD,MainRoleManager.actor.headFace);
+					ResChangeEffect.fly(arg[1],arg[2]);
 				}	
 			});
 		}
