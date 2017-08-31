@@ -48,6 +48,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.utils.getDefinitionByName;
 	
@@ -138,13 +139,13 @@ package com.rpgGame.app.manager.scene
 		 */
 		private static function onConfigLoaded(mapConfig:MapConfig):void
 		{
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STPE_LOAD_MAP_CFG,"首次加载地图cfg配置数据完成");
+			}
 			curtMapInfo.mapConfig = mapConfig;
 			mapConfig.mapID = curtMapInfo.sceneId;
-			var bmpData:AsyncMapTexture = MapDataManager.getCacheMiniMapBmpData(curtMapInfo.sceneId);
-			
-			curtMapInfo.mapConfig.smallMapTexture = bmpData;
-			
-			onEnterScene();
+			mapSwitchComplete();//地图切换结束
 		}
 		
 		private static var needLoadCmpCnt : int = 0;
@@ -242,25 +243,32 @@ package com.rpgGame.app.manager.scene
 				
 			}
 			//前面有上张地图的死亡状态判断，所以复活要在这里处理
-			mapSwitchComplete();//地图切换结束
 			//
 			_isReconnect = false;
+			
+			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
+			
 		}
 		
 		/**地图切换结束*/
 		private static function mapSwitchComplete():void
 		{
 			//加载马赛克小地图
-			MapDataManager.getMiniMapBmpData(curtMapInfo.sceneId,onMiniMapCmp);
+			var bmpData:AsyncMapTexture = MapDataManager.getCacheMiniMapBmpData(curtMapInfo.sceneId);
+			if(bmpData){
+				onMiniMapCmp(bmpData,curtMapInfo.sceneId);
+			}else{
+				MapDataManager.getMiniMapBmpData(curtMapInfo.sceneId,onMiniMapCmp);
+			}
 		}
 		
 		private static function onMiniMapCmp(bmpData:AsyncMapTexture,mapID:uint):void
 		{
-			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
-			Scene.scene.mapConfig.smallMapTexture = bmpData;
-			Scene.scene.drawSmallMap();
 			curtMapInfo.mapConfig.smallMapTexture = bmpData;
+			Scene.scene.mapConfig=curtMapInfo.mapConfig;
 			onSmallMapCmp(bmpData);
+			Scene.scene.drawSmallMap();
+			onEnterScene();
 		}
 		
 		/**小地图加载完成*/
@@ -485,6 +493,10 @@ package com.rpgGame.app.manager.scene
 		{
 			--needLoadCmpCnt;
 			onLoadSceneCmpParam = scene;
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STPE_LOAD_MAP_AWD,"首次加载场景awd完成");
+			}
 			onLoadSceneComplete();
 			//			if (SceneManager.clientMapData)
 			//			{
@@ -507,6 +519,10 @@ package com.rpgGame.app.manager.scene
 		private static function onMapDataComplete(mapData : SceneMapData) : void
 		{
 			--needLoadCmpCnt;
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STEP_LOAD_MAP_DAT,"首次加载地图dat数据完成");
+			}
 			onLoadSceneComplete();
 			//			if (SceneManager.clientMapData)
 			//			{
@@ -623,6 +639,10 @@ package com.rpgGame.app.manager.scene
 		private static function onLoadComplete(_appUrl:* = null) : void
 		{
 			SceneSender.SendLoadFinishMessage();
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STEP_SEND_LOAD_MAP_COMPLETE,"首次发送加载完成消息");
+			}
 		}
 		
 		private static function onError(url : String) : void

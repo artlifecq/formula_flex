@@ -5,7 +5,8 @@ package com.rpgGame.app.process
 	import com.rpgGame.app.data.ConfigManager;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-
+	import com.rpgGame.statistics.Statistics;
+	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
@@ -60,7 +61,7 @@ package com.rpgGame.app.process
 			ConfigManager.recClientConfig(byteArray.readObject());
 			_stream.close();
 			_stream = null;
-
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_CONFIG,"加载游戏配置成功");
 			completeProcess();
 		}
 

@@ -2,6 +2,7 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.display2D.ResChangeEffect;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.ClientSettingManager;
@@ -221,6 +222,10 @@ package com.rpgGame.app.cmdlistener
 			switch(msg.curType){
 				case CharAttributeType.RES_GOLD:
 					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);
+					if (change>0) 
+					{
+						ResChangeEffect.fly(msg.curType,change);
+					}
 					noticeId=change>0?11:15;
 					break;
 				case CharAttributeType.RES_BIND_GOLD:
@@ -229,6 +234,10 @@ package com.rpgGame.app.cmdlistener
 					if(change>0)
 					{
 						FightFaceHelper.showAttChange(EnumHurtType.BIND_GOLD,change);
+					}
+					if (change>0) 
+					{
+						ResChangeEffect.fly(msg.curType,change);
 					}
 					break;
 				case CharAttributeType.RES_MONEY:

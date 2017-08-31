@@ -2,7 +2,6 @@ package org.mokylin.skin.app.vip
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -24,7 +23,7 @@ package org.mokylin.skin.app.vip
 
 		public var btnGoumai:feathers.controls.Button;
 
-		public var lb1:feathers.controls.Label;
+		public var imgPoint:feathers.controls.UIAsset;
 
 		public var lbFY:feathers.controls.Label;
 
@@ -49,7 +48,7 @@ package org.mokylin.skin.app.vip
 			this.currentState = "normal";
 			this.height = 425;
 			this.width = 237;
-			this.elementsContent = [uiName_i(),__VipLevels_UIAsset1_i(),__VipLevels_UIAsset2_i(),__VipLevels_UIAsset3_i(),lb1_i(),lbSM_i(),lbGJ_i(),lbFY_i(),__VipLevels_UIAsset4_i(),NumYuanbao_i(),btnGoumai_i(),__VipLevels_Group1_i(),uiSelect_i(),uiOver_i()];
+			this.elementsContent = [uiSelect_i(),uiOver_i(),uiName_i(),__VipLevels_UIAsset1_i(),__VipLevels_UIAsset2_i(),__VipLevels_UIAsset3_i(),lbSM_i(),lbGJ_i(),lbFY_i(),__VipLevels_UIAsset4_i(),NumYuanbao_i(),btnGoumai_i(),imgPoint_i()];
 			
 			states = {
 			};
@@ -72,33 +71,6 @@ package org.mokylin.skin.app.vip
 			temp.width = 123;
 			temp.x = 98;
 			temp.y = 331;
-			return temp;
-		}
-
-		private function __VipLevels_Group1_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 19;
-			temp.y = 168;
-			temp.elementsContent = [__VipLevels_UIAsset5_i(),__VipLevels_UIAsset6_i(),__VipLevels_UIAsset7_i(),__VipLevels_UIAsset8_i(),__VipLevels_UIAsset9_i(),__VipLevels_UIAsset10_i(),__VipLevels_UIAsset11_i()];
-			return temp;
-		}
-
-		private function __VipLevels_UIAsset10_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 90;
-			return temp;
-		}
-
-		private function __VipLevels_UIAsset11_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 108;
 			return temp;
 		}
 
@@ -138,51 +110,6 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __VipLevels_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __VipLevels_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 18;
-			return temp;
-		}
-
-		private function __VipLevels_UIAsset7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 36;
-			return temp;
-		}
-
-		private function __VipLevels_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 54;
-			return temp;
-		}
-
-		private function __VipLevels_UIAsset9_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyefu.png";
-			temp.x = 0;
-			temp.y = 72;
-			return temp;
-		}
-
 		private function btnGoumai_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -199,18 +126,14 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function lb1_i():feathers.controls.Label
+		private function imgPoint_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb1 = temp;
-			temp.name = "lb1";
-			temp.height = 131;
-			temp.text = "打怪";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 196;
-			temp.x = 31;
-			temp.y = 161;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgPoint = temp;
+			temp.name = "imgPoint";
+			temp.styleName = "ui/common/fenyefu.png";
+			temp.x = 20;
+			temp.y = 153;
 			return temp;
 		}
 

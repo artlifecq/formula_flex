@@ -157,7 +157,10 @@ package   com.rpgGame.appModule.social.team.mediator
 					showArr.push(LangMenu.TRANSFER_THE_CAPTAIN);
 					showArr.push(LangMenu.PLEASE_FROM_THE_TEAM);
 				}
-				showArr.push(LangMenu.MOVE_TO_HERO);
+				if (_member.isonline) 
+				{
+					showArr.push(LangMenu.MOVE_TO_HERO);
+				}
 			//	showArr.push(LangMenu.COPY_THE_NAME);
 				var y : Number = Stage3DLayerManager.stage.mouseY;
 				var x : Number = Stage3DLayerManager.stage.mouseX;

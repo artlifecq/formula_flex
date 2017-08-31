@@ -17,6 +17,7 @@ package com.rpgGame.app
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
@@ -80,7 +81,7 @@ package com.rpgGame.app
 			TipsInfoView2D.setActual(tipsView2DActual);
 			
 			ReportUtil.setup(6,"100001",loginData.personId.ToString(),loginData.name);
-
+			Statistics.intance.pushNode(Statistics.STEP_MAIN_ENTRY,"成功进入游戏主入口");
 			initGame();
 			initProcess();
 			runProcess();
@@ -122,14 +123,14 @@ package com.rpgGame.app
 
 		private function runProcess() : void
 		{
-			SceneSwitchCmdListener.fromPercent = 0.9;
+			SceneSwitchCmdListener.fromPercent = 0.98;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.8, 0.9);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.98, 0.99);
 //			if (ClientConfig.isSingle) 
 //			{
 //				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.6, 0.6);
 //			}
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.9);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.99);
 			ProcessStateMachine.getInstance().run();
 		}
 
@@ -141,9 +142,9 @@ package com.rpgGame.app
 		public function reEnterGame() : void
 		{
 			GameLog.addShow("重新进入游戏...");
-			SceneSwitchCmdListener.fromPercent = 0.9;
+			SceneSwitchCmdListener.fromPercent = 0.98;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.9);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.99);
 			ProcessStateMachine.getInstance().run();
 		}
 		

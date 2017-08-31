@@ -1,6 +1,9 @@
 package
 {
 
+	import com.gameClient.utils.HttpUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
@@ -14,11 +17,15 @@ package
 	import flash.events.ProgressEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
 	import flash.net.URLStream;
 	import flash.net.navigateToURL;
+	import flash.net.sendToURL;
+	import flash.system.Capabilities;
 	import flash.system.IME;
 	import flash.system.LoaderContext;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	import flash.utils.Endian;
 
 	/**
@@ -92,7 +99,7 @@ package
 		public var GlobalBridge : Class = null;
 		
 		private var _key:String = "12,66,78";
-
+	
 		public function ClientLoader()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
@@ -141,10 +148,11 @@ package
 		private function onAddToStg(e : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
-
+			pushNode(1,"加载ClientLoader");
 			_urlParmar = loaderInfo.parameters;
 			if (ExternalInterface.available)
 			{
+				ExternalInterface.addCallback("closeBrower", closeBrower );
 				_urlParmar = ExternalInterface.call("config");
                 if (null == _urlParmar) {
                     return;
@@ -228,7 +236,13 @@ package
 				startLoadClient();
 			}
 		}
-
+		
+		private function closeBrower():void
+		{
+			// TODO Auto Generated method stub
+			pushNode(200,"无角色手动关闭的");
+		}
+		
 		private function initStage() : void
 		{
 			//将黄色焦点框隐藏掉
@@ -420,7 +434,7 @@ package
             client["browser"] = _browser;
             client["gameName"] = _gameName;
             client["clientIp"] = _clientIp;
-            
+            client
 			this.stage.addChild(client);
 			//
 			loaderInfo.loader.unload();
@@ -462,6 +476,48 @@ package
 				}
 			}
 			return ret;
+		}
+		public function pushNode(nodeId : int,tip:String="") : void {
+			//          if(!ClientConfig.isRelease)return;
+			//            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
+			//            if (null == nodeInfo) {
+			//                return;
+			//            }
+			var params : Dictionary = new Dictionary();
+			params["game"] = _gameName;
+			//params["logType"] = nodeInfo.desc;
+			params["os"] = Capabilities.os;
+			params["nodeId"] = nodeId+ "";
+			params["platformName"] = _agent;
+			params["browser"] = _browser;
+			params["account"] =_loginName;
+			params["resolution"] = Capabilities.screenResolutionX + "X" + Capabilities.screenResolutionY;
+			params["serverId"] = _server;
+			params["ip"] = _clientIp;
+			params["time"] = (new Date()).getTime();
+			doGet("http://front.moloong.com/front-node/node", params);
+		}
+		
+		public  function doGet(url : String, params : Object) : void {
+			var req : URLRequest = new URLRequest(url);
+			if (params is Dictionary) {
+				var str : String = "";
+				var index : int = 0;
+				for(var key : * in params) {
+					if (0 != index) {
+						str += "&";
+					}
+					str += key + "=" + params[key];
+					++index;
+				}
+				req.data = str;
+			} else {
+				req.data = params;
+			}
+			req.method = URLRequestMethod.GET;
+			//  var load : URLLoader = new URLLoader();
+			//  load.load(req);
+			sendToURL(req);
 		}
 	}
 }

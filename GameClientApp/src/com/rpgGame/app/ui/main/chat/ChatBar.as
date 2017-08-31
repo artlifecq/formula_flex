@@ -14,6 +14,7 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.ui.main.buttons.MainButton_Kadun;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -110,7 +111,6 @@ package com.rpgGame.app.ui.main.chat {
 		private var _vipChatCanvas:VipChatCanvas;
 		private var _curShowTab:int;
 		private var testRole:SceneRole;
-		
 		
 		public function ChatBar() {
 			this._skin = new chat_Skin();
