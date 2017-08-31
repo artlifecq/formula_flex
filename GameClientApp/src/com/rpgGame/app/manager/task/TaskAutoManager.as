@@ -2,6 +2,8 @@ package com.rpgGame.app.manager.task
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.DungeonManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -11,8 +13,10 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.app.ui.main.taskbar.TaskControl;
@@ -21,6 +25,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -33,6 +38,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	
+	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
 	import gs.TweenLite;
@@ -132,6 +138,8 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopTaskAuto() : void
 		{
+			_taskType=0;
+			_taskTarget=0;
 			_isTaskRunning = false;
 			//stop();
 		}
@@ -204,7 +212,25 @@ package com.rpgGame.app.manager.task
 				return false;
 			}
 			
-			
+			if(taskType==TaskType.MAINTYPE_WORSHIP&&AppManager.isAppInScene(AppConstant.WORSHIP_PANLE))
+			{
+				return false;
+			}
+			if(taskType==TaskType.MAINTYPE_DAILYTASK)
+			{
+				if(AppManager.isHaveAppShowing())
+				{
+					return false;
+				}
+				else
+				{
+					taskType=0;
+				}
+			}
+			if(missionType==TaskType.SUB_QUIT_ZONE&&AppManager.isAppInScene(AppConstant.MULTY_PANL))
+			{
+				return false;
+			}
 			if(isOpenPanel())
 			{//Lyt.a("istech-1");
 				//if(traceKey!=-1){Lyt.a("istech-1");traceKey=-1;}
@@ -212,6 +238,7 @@ package com.rpgGame.app.manager.task
 			}
 			if(TrusteeshipManager.getInstance().isAutoing&&!actTaskMonster)
 			{//if(traceKey!=1){Lyt.a("istech1");traceKey=1;}
+				actTaskMonster=false;
 				return true;
 			}
 			if(MainRoleManager.actor.stateMachine.isIdle)
@@ -224,15 +251,20 @@ package com.rpgGame.app.manager.task
 		/**飞鞋完成*/
 		private function flyComplete():void
 		{
+			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
 			HuBaoManager.instance().onHuBaoHandler();
 			if(TaskMissionManager.flyTaskType>0)
 			{
-				taskType=TaskMissionManager.flyTaskType;
-				missionType=TaskMissionManager.flyMissionType;
-				TaskMissionManager.flyTaskType=0;
-				TaskMissionManager.flyMissionType=0;
-				TweenLite.killDelayedCallsTo(flyOnArrive);
-				TweenLite.delayedCall(1, flyOnArrive);
+				var postPath:Array=TaskMissionManager.getTaskPathingByType(TaskMissionManager.flyTaskType,0);
+				if(postPath[0]==SceneSwitchManager.currentMapId&&Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(postPath[1],-Math.abs(postPath[2])))<100)
+				{
+					taskType=TaskMissionManager.flyTaskType;
+					missionType=TaskMissionManager.flyMissionType;
+					TaskMissionManager.flyTaskType=0;
+					TaskMissionManager.flyMissionType=0;
+					TweenLite.killDelayedCallsTo(flyOnArrive);
+					TweenLite.delayedCall(1, flyOnArrive);
+				}
 			}
 		}
 		private function flyOnArrive():void
@@ -443,12 +475,20 @@ package com.rpgGame.app.manager.task
 				case TaskType.SUB_SPEAK:
 					TaskUtil.postTaskWalk(postPath,gotoTaskonArrive);
 					break;
-				
+				case TaskType.SUB_QUIT_ZONE:
+					FunctionOpenManager.openAppPaneById(TaskMissionManager.getTaskDataByType(taskType).q_emid);
+					TweenLite.killDelayedCallsTo(teamMatchVote);
+					TweenLite.delayedCall(5, teamMatchVote);
+					break;
+				default:
+					FunctionOpenManager.openAppPaneById(TaskMissionManager.getTaskDataByType(taskType).q_emid);
+					break;
 			}
 			
 		}
 		private function gotoTaskonArrive(data :Object=null):void
 		{
+			
 			jumpOver=true;
 			SceneRoleSelectManager.selectedRole=null;
 			switch(missionType)
@@ -534,6 +574,16 @@ package com.rpgGame.app.manager.task
 			_isBroken = true;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.delayedCall(1, onDelayedUnbroken);
+		}
+		private function teamMatchVote():void
+		{
+			if(DungeonManager.teamZid==0&&AppManager.isAppInScene(AppConstant.MULTY_PANL))
+			{
+				var zid:int=TaskUtil.getMonsterByType(taskType,0);
+				DungeonSender.reqTeamMatchVote(zid,1);
+				EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_TIME,0);
+			}
+			
 		}
 		
 		private function onDelayedUnbroken() : void

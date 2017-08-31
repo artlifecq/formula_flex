@@ -26,6 +26,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_init_animation:int;
 		 /**  角色中了buff后， 身上的特效。 填animation表中的名字 */
 		public var q_animation:String;
+		 /**  特效层数显示。 填animation表中的名字 */
+		public var q_animation_num:String;
 		 /**  状态消失后的动画 */
 		public var q_disappear_animation:int;
 		 /**  角色中了buff后被攻击， 身上的特效。 填animation表中的名字 */

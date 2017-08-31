@@ -1,8 +1,11 @@
 package com.rpgGame.app.controller.keyboard
 {
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -14,6 +17,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
+	import com.rpgGame.app.sender.RankTopSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
@@ -21,10 +25,12 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.EmFunctionID;
+	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.type.EnumHurtType;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	
 	import flash.geom.Point;
 	import flash.utils.getTimer;
@@ -35,7 +41,7 @@ package com.rpgGame.app.controller.keyboard
 	{
 		private static var _keyDownTm : uint;
 		private static var _keyDownTabTm : uint;
-
+		private static var text : String="";
 		public static function exec(info : KeyInfo,isdown : Boolean = false) : void
 		{
 			var moduleStr : String;

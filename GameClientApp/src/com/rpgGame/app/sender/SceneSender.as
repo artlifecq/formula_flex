@@ -98,9 +98,9 @@ package com.rpgGame.app.sender
 			
 		}
 		
-		public static function transportChgMap(transId : uint):void
+		public static function transportChgMap(transId : uint,force:Boolean=false):void
 		{
-			if (ReqLockUtil.isReqLocked(101206))
+			if (ReqLockUtil.isReqLocked(101206)&&!force)
 				return;
 			ReqLockUtil.lockReq(101206, 3000);
 			//切换场景
@@ -111,10 +111,10 @@ package com.rpgGame.app.sender
 			SocketConnection.send(msg);
 		}
 		/**向服务器发送触发跳跃点*/
-		public static function jumppointTrigger(jumpId : uint):void
+		public static function jumppointTrigger(jumpId : uint,force:Boolean=false):void
 		{
 			Lyt.a("请求跳跃消息:"+ReqLockUtil.isReqLocked(101220));
-			if (ReqLockUtil.isReqLocked(101220))
+			if (ReqLockUtil.isReqLocked(101220)&&!force)
 				return;
 			ReqLockUtil.lockReq(101220, 3000);
 			

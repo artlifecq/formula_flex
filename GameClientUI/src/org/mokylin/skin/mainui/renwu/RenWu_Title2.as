@@ -54,7 +54,7 @@ package org.mokylin.skin.mainui.renwu
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/renwu/xuanzhong.png", "hover":"ui/mainui/renwu/xuanzhong.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
+			skinNames={"down":"ui/mainui/renwu/xuanzhong.png", "hover":"ui/mainui/renwu/xuanzhong.png", "up":"ui/common/hover/xuanzhong_bg_alpha.png"};
 		}
 
 

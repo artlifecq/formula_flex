@@ -2,12 +2,12 @@ package com.rpgGame.app.scene
 {
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
 	import com.rpgGame.app.state.role.control.FlyUpStateReference;
-	import com.rpgGame.app.state.role.control.HeadBleedStateReference;
 	import com.rpgGame.app.state.role.control.HiddingStateReference;
 	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HushStateReference;
@@ -215,21 +215,46 @@ package com.rpgGame.app.scene
 				return;
 			removeBuffEffect(buffData.cfgId);
 			var data : Q_buff = buffData.buffData;
-			
-			var animations:Array = data.q_animation.split(";");
-			if (data && animations)
+			if (data)
 			{
-				var len : int = animations.length;
-				for (var i : int = 0; i < len; i++)
+				var len : int;
+				var i : int;
+				var animation : int;
+				var animatData : Q_SpellAnimation;
+				var animationsNum:Array = data.q_animation_num.split(";");
+				if (animationsNum)
 				{
-					var animation : int = animations[i];
-					var animatData : Q_SpellAnimation = animation > 0 ? AnimationDataManager.getData(animation) : null;
-					if (animatData)
+					len = animationsNum.length;
+					for (i = 0; i < len; i++)
 					{
-						SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
+						animation = animationsNum[i];
+						animatData = animation > 0 ? AnimationDataManager.getData(animation) : null;
+						if (animatData)
+						{
+							var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
+							ru.stop(buffData.curtStackCount*1000+1100);
+						}
+					}
+				}
+				
+				var animations:Array = data.q_animation.split(";");
+				if (animations)
+				{
+					len = animations.length;
+					for (i = 0; i < len; i++)
+					{
+						animation = animations[i];
+						animatData = animation > 0 ? AnimationDataManager.getData(animation) : null;
+						if (animatData)
+						{
+							SpellAnimationHelper.addBuffEffect(_role, i+animationsNum.length, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
+						}
 					}
 				}
 			}
+			
+			
+			
 		}
 		
 		/**
@@ -315,9 +340,6 @@ package com.rpgGame.app.scene
 						break;
 					case 7://减少技能cd
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_RESET_SKILLCD);
-						break;
-					case 130://头顶流血特效 数字叠加效果
-						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_BLEED);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
@@ -499,11 +521,6 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(SkillCDResetStateReference) as SkillCDResetStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_RESET_SKILLCD,buffRef);
-						break;
-					case 130://头顶流血特效 数字叠加效果
-						buffRef = _role.stateMachine.getReference(HeadBleedStateReference) as HeadBleedStateReference;
-						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_BLEED,buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

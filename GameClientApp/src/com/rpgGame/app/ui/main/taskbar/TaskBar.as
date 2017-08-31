@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -7,7 +8,6 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
-	import com.rpgGame.app.ui.main.head.NpcSpeakBubble;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
@@ -194,11 +194,12 @@ package com.rpgGame.app.ui.main.taskbar
 				var role:SceneRole = SceneManager.getSceneObjByID(serverID.ToGID()) as SceneRole;
 				if (role != null&& role.data !=null&&role.headFace!=null) 
 				{
-					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+					(role.headFace as HeadFace).updateMonserSpeakBar();
+					/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
 					if(speak!=null&&speak!="")
 					{
 						role.headFace.addChild(NpcSpeakBubble.speakBubble(speak));
-					}
+					}*/
 					
 				}
 			}
