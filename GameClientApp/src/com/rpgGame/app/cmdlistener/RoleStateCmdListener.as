@@ -68,7 +68,7 @@ package com.rpgGame.app.cmdlistener
 			EventManager.addEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, onCharDeath);
 			EventManager.addEvent(UserMoveEvent.MOVE_START, mainCharMoveThroughHandler);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, mainCharMoveThroughHandler);
-			EventManager.addEvent(UserMoveEvent.MOVE_END, mainCharMoveThroughHandler);
+			EventManager.addEvent(UserMoveEvent.MOVE_END, mainCharMoveEndHandler);
 			EventManager.addEvent(UserMoveEvent.FOLLOW_MOVE_ENTER, followMainCharMoveThroughHandler);
 			EventManager.addEvent(UserMoveEvent.FOLLOW_MOVE_THROUGH, followMainCharMoveThroughHandler);
 			//
@@ -90,13 +90,23 @@ package com.rpgGame.app.cmdlistener
 				SceneRoleSelectManager.selectedRole = null;
 		}
 		private var jumpBink:Boolean=false;
-		private function sendJump(jumpid:int):void
+		private function sendJump(jumpid:int,force:Boolean=false):void
 		{
 			jumpBink=false;
 			HorseManager.instance().setMountRideDown();//跳跃之前下马
-			SceneSender.jumppointTrigger(jumpid);
+			SceneSender.jumppointTrigger(jumpid,force);
 		}
-		private function mainCharMoveThroughHandler() : void
+		private function transportChgMap(tranportid:int,force:Boolean=false):void
+		{
+			SceneSender.transportChgMap(tranportid,force);
+		}
+		
+		
+		private function mainCharMoveEndHandler() : void
+		{
+			mainCharMoveThroughHandler(true);
+		}
+		private function mainCharMoveThroughHandler(force:Boolean=false) : void
 		{
 			var actor : SceneRole = MainRoleManager.actor;
 			if (!_otherAreaMap)
@@ -114,7 +124,9 @@ package com.rpgGame.app.cmdlistener
 					switch (tranportData.type)
 					{
 						case RoleType.TYPE_TRANPORT_NORMAL:
-							SceneSender.transportChgMap(tranportData.id);
+							TweenLite.killDelayedCallsTo(transportChgMap);
+							TweenLite.delayedCall(0.2, transportChgMap,[tranportData.id,force]);
+							
 							break;
 						case RoleType.TYPE_TRANPORT_MAZE:
 							MazeSender.tryTrans(tranportData.id);
@@ -133,7 +145,7 @@ package com.rpgGame.app.cmdlistener
 						{
 							jumpBink=true;
 							TweenLite.killDelayedCallsTo(sendJump);
-							TweenLite.delayedCall(0.2, sendJump,[jumpData.id]);
+							TweenLite.delayedCall(0.2, sendJump,[jumpData.id,force]);
 						}
 					}
 					

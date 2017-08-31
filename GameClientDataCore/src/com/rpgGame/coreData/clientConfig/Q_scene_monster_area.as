@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_buff_time:String;
 		 /**  NPC闲话 */
 		public var q_speak:String;
+		 /**  NPC闲话出现概率百分比 */
+		public var q_speak_probability:int;
 		 /**  重生时间脱离怪物数据库控制变更为：0本规则不启用， >0则为变更后的重生时间，单位：秒 */
 		public var q_relive:int;
 		 /**  攻击类型脱离怪物数据库控制变更为：0本规则不启用，1变更为被动攻击类怪物，2变更为主动攻击类怪物 */

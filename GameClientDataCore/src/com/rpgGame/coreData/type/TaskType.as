@@ -17,7 +17,8 @@ package com.rpgGame.coreData.type
 		public static var LIJIN_TASK:int = 5;
 		/**每日引导任务*/
 		public static var MAINTYPE_GUIDETASK:int = 6;
-		
+		/**膜拜任务*/
+		public static var MAINTYPE_WORSHIP:int = 7;
 		
 		/** 任务子类型（1为NPC类型，2打怪数量，3收集物品，4采集任务,5使用道具,6进入副本*/
 		/**1为对话类型*/
