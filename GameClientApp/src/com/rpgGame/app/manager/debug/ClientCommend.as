@@ -497,6 +497,15 @@ package   com.rpgGame.app.manager.debug
 					ResChangeEffect.fly(arg[1],arg[2]);
 				}	
 			});
+			commandList.put( ".title", function (...arg):void
+			{
+				var ids:Vector.<int>=new Vector.<int>()
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					ids.push(arg[i+1]);
+				}
+				(MainRoleManager.actor.headFace as HeadFace).addAndUpdataRankTitle(ids);
+			});
 		}
 		
 		

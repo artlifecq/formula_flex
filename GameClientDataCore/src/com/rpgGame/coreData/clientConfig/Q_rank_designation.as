@@ -28,6 +28,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_hero_scale:int;
 		 /**  雕塑缩放比例 */
 		public var q_modle_scale:int;
+		 /**  称号特效高度（px） */
+		public var q_effects_high:int;
 
 	}
 }
