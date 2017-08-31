@@ -20,7 +20,7 @@ package com.rpgGame.appModule.guild
 	{
 		private var _skin:BangHui_Home;
 		private var _cratePanel:CreateGuildPanel;
-	
+		
 		private var _pageCtrl:D1v1RankPageSelectCtrl;
 		private var _cellList:Vector.<GuildListInfoCell>=new Vector.<GuildListInfoCell>();
 		private const MAX_COUNT:int=12;
@@ -75,6 +75,11 @@ package com.rpgGame.appModule.guild
 			}
 		}
 		
+		public function showOneGuildById(guildId:long):void
+		{
+			GuildSender.reqGuildBriefnessInfo(guildId,0);
+		}
+		
 		private function refeashList():void
 		{
 			var msg:ResGuildListInfoMessage = GuildManager.instance().currentPageInfo;
@@ -87,7 +92,7 @@ package com.rpgGame.appModule.guild
 			_pageCtrl.resetText();
 		}
 		
-
+		
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

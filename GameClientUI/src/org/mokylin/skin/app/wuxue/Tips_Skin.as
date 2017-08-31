@@ -168,7 +168,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName1 = temp;
 			temp.name = "uiName1";
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuotiaojian.png";
+			temp.styleName = "ui/art_txt/common/tips/tipswenzi/jineng/jihuotiaojian.png";
 			temp.x = 13;
 			temp.y = 87;
 			return temp;
@@ -179,7 +179,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName2 = temp;
 			temp.name = "uiName2";
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/xiaoguo.png";
+			temp.styleName = "ui/art_txt/common/tips/tipswenzi/jineng/xiaoguo.png";
 			temp.x = 13;
 			temp.y = 145;
 			return temp;

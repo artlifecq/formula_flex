@@ -194,7 +194,7 @@ package com.rpgGame.appModule.maps
 			npcList.y=30;
 			npcItemSpr.addChild(npcList);
 			var npcBar:SkinnableContainer=getItemBar();
-			npcSkin=getItemSkin("NPC");
+			npcSkin=getItemSkin("npc");
 			npcBar.skin=npcSkin;
 			npcItemSpr.addChild(npcBar);
 			
@@ -212,7 +212,7 @@ package com.rpgGame.appModule.maps
 			monsterList.y=30;
 			monsterItemSpr.addChild(monsterList);
 			var monsterBar:SkinnableContainer=getItemBar();
-			monsterSkin=getItemSkin("怪物");
+			monsterSkin=getItemSkin("guaiwu");
 			monsterBar.skin=monsterSkin;
 			monsterItemSpr.addChild(monsterBar);
 			
@@ -228,7 +228,7 @@ package com.rpgGame.appModule.maps
 			thansItemSpr.addChild(thansList);
 			//thansItenSpr.addChild(getItemBar("传送地点"));
 			var thansBar:SkinnableContainer=getItemBar();
-			thansSkin=getItemSkin("传送地点");
+			thansSkin=getItemSkin("chuansongdidian");
 			thansBar.skin=thansSkin;
 			thansItemSpr.addChild(thansBar);
 			
@@ -268,7 +268,7 @@ package com.rpgGame.appModule.maps
 		private function getItemSkin(name:String):mapItems
 		{
 			var skin:mapItems = new mapItems();
-			skin.lbl_name.text=name;
+			skin.lbl_name.styleName="ui/app/maps/"+name+".png";
 			return skin;
 		}
 		private function getBackBar(data:Vector.<BigMapIocnDataMode>):Sprite

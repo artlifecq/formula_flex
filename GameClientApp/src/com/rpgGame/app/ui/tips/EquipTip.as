@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.tips
 {
+	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -121,6 +122,10 @@ package com.rpgGame.app.ui.tips
 			_iconFace.y=39;
 			_itemTip.container.addChild(_iconFace);
 			_itemInfo = data as EquipInfo;
+			if(_itemInfo==null){
+				GameLog.addError( "装备TIP错误 ：MODID_"+(data as ClientItemInfo).qItem.q_id );
+				return;
+			}
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
 			var info:HeroData=MainRoleManager.actorInfo;
 			_itemTip.uiKuang.visible=false;

@@ -197,7 +197,7 @@ package com.rpgGame.appModule.equip
 			for(i=0;i<6;i++){
 				_useEquipGrids.push(new DragDropItem(IcoSizeEnum.ICON_42,i));
 				_useEquipGrids[i].gridInfo=new GridInfo(ItemContainerID.POLIST_USE,i);
-				_useEquipGrids[i].bindBg(_skin["use"+i]);
+				_useEquipGrids[i].bindBg(_skin["use"+(i+1)]);
 				_skin.use_grp.addChild(_useEquipGrids[i]);
 				_useEquipGrids[i].onTouchEndCallBack=onCancelUse;
 				//				_useEquipGrids[i].x=_skin["use"+i].x;

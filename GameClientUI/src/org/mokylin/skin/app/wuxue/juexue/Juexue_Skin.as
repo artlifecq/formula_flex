@@ -87,11 +87,11 @@ package org.mokylin.skin.app.wuxue.juexue
 		private function __Juexue_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 445;
+			temp.height = 449;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 650;
-			temp.x = 23;
-			temp.y = 86;
+			temp.width = 653;
+			temp.x = 20;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -265,8 +265,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo()
 			temp.skin = skin
 			temp.width = 258;
-			temp.x = 674;
-			temp.y = 86;
+			temp.x = 673;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -293,8 +293,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji()
 			temp.skin = skin
 			temp.width = 260;
-			temp.x = 674;
-			temp.y = 86;
+			temp.x = 673;
+			temp.y = 84;
 			return temp;
 		}
 
