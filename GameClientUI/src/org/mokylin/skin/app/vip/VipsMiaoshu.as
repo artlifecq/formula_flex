@@ -52,8 +52,8 @@ package org.mokylin.skin.app.vip
 			temp.name = "lbDec";
 			temp.leading = 3;
 			temp.text = "1111";
-			temp.color = 0x55BD15;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 250;
 			temp.x = 11;
 			temp.y = 0;
