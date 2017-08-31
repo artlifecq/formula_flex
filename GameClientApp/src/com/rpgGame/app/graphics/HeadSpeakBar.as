@@ -111,7 +111,6 @@ package com.rpgGame.app.graphics
 		{
 			_skin.lable.height=0;
 			_skin.lable.htmlText=text;
-			Lyt.a("textHeight"+_skin.lable.textHeight);
 			if(_skin.lable.textHeight<20)
 			{
 				_skin.lable.y=28;

@@ -252,7 +252,7 @@ package com.rpgGame.appModule.task
 		}
 		private function setPlanText():void
 		{
-			planLabel.htmlText="已完成环数：第"+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+"环";
+			planLabel.htmlText="已完成环数：第"+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum(TaskMissionManager.treasuerTaskInfo.loopRewardId)+"环";
 		}
 		private function setReward():void
 		{

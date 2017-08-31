@@ -50,13 +50,10 @@ package com.rpgGame.app.controller.keyboard
 			switch (funcID)
 			{
 				case "1": //G GM命令面板
-					text+="一二三四五六七八九十";
-					(MainRoleManager.actor.headFace as HeadFace).showHeroSpeakBar(text);
+					
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
-					text="一二三四五六七八九十";
-					//RankTopSender.reqRankListTopInfo(RankListType.COMBATPOWER_TYPE);
-					(MainRoleManager.actor.headFace as HeadFace).showHeroSpeakBar(text);
+					
 					break;
 				case "65": //A 自动挂机   挂机改到A去了
 					if (TrusteeshipManager.getInstance().isAutoFightRunning)
