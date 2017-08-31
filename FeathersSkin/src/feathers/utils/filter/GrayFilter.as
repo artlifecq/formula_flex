@@ -12,7 +12,6 @@ package feathers.utils.filter
 	 */	
 	public class GrayFilter
 	{
-		private static var weekDict:Dictionary = new Dictionary(true);
 		/** @private */
 		public function GrayFilter() { throw new AbstractClassError(); }
 		
@@ -23,7 +22,7 @@ package feathers.utils.filter
 		{
 			if(starlingDisplay != null)
 			{
-				starlingDisplay.filter = weekDict[starlingDisplay] ||=  FilterPool.getGrayFilter();
+				starlingDisplay.filter =  FilterPool.getGrayFilter();
 			}
 		}
 		

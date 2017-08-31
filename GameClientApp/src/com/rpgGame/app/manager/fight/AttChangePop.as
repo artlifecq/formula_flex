@@ -154,7 +154,7 @@ package com.rpgGame.app.manager.fight
 }
 
 class AttEftData{
-	public var typeRes:String;
-	public var numberRes:String;
+	public var typeRes:int;
+	public var numberRes:int;
 	public var value:int;
 }

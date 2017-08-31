@@ -14,7 +14,6 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.ui.main.buttons.MainButton_Kadun;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -210,7 +209,7 @@ package com.rpgGame.app.ui.main.chat {
 			EventManager.addEvent(ChatEvent.SHOW_GOODS,onShowGoods);
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showTest);
-			
+			_skin.listBar.addEventListener(Event.SCROLL,scrollToBottom);
 			/*	
 			//测试飘字代码
 			EventManager.addEvent(MapEvent.UPDATE_MAP_ROLE_ADD, onadd);
@@ -299,9 +298,8 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				_skin.listBar.dataProvider.removeItemAt(0);
 			}
-			scrollToBottom();
-			//			_skin.listBar.dataProvider.updateAll();
 		}
+		
 		
 		/**
 		 * 刷新显示 频道改变后的内容显示
@@ -327,15 +325,14 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				_skin.listBar.dataProvider.addItem(msgs[i]);
 			}
-			scrollToBottom();
 		}
 		
-		private function scrollToBottom() : void
+		private function scrollToBottom(event:Event) : void
 		{
 			if(!iskeepOrto)
 			{
-//				_skin.listBar.scrollToBottom(0);
-				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
+				_skin.listBar.scrollToBottom(0);
+//				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
 			}
 		}
 		
@@ -798,18 +795,6 @@ package com.rpgGame.app.ui.main.chat {
 			ChatManager.reqSendChat( sendMsg, _curSendChannel,  ChatManager.currentSiLiaoTargetName );
 			_inputText.text="";
 			//AvatarManager.callEquipmentChange(MainRoleManager.actor);
-		}
-		
-		private function updateScroller() : void {
-			//			this._skin.vscrollbar.addChild(this._chatText);
-			if(!iskeepOrto)
-			{
-				//				var scrollerPos : int = Math.max(0, this._chatText.height - this._skin.vscrollbar.height);
-				CONFIG::netDebug {
-					NetDebug.LOG("[ChatBar] [UpdateScroller] scrollerPos:" + scrollerPos + ", height:" + this._chatText.height + ", x:" + this._chatText.x);
-				}
-					//					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
-			}
 		}
 	}
 }

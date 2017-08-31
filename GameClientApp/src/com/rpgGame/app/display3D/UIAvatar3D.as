@@ -365,13 +365,12 @@ package com.rpgGame.app.display3D
 				deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
 			}
 			
-			//战旗暂时没给
-			/*var zhanqiResID:String = "";
-			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(info.warFlagModelId);
+			var zhanqiResID:String = "";
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(info.warflag);
 			if(zhanqiInfo)
 			{
 				zhanqiResID=zhanqiInfo.q_panel_show_id;
-			}*/
+			}
 			
 			avatarInfo.setBodyResID(bodyResID, animatResID);
 			avatarInfo.hairResID = hairResID;

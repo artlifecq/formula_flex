@@ -150,10 +150,12 @@ package com.rpgGame.app.manager.role
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1){
-				data.sizeScale=1.5;//帮会战统帅放大到1.5倍
+				role.setScale(data.sizeScale*1.5);//帮会战统帅放大到1.5倍
+			}else{
+				role.setScale(data.sizeScale);
 			}
 			
-			role.setScale(data.sizeScale);
+			
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);

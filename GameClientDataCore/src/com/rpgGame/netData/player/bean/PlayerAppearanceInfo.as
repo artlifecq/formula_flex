@@ -38,6 +38,9 @@ package com.rpgGame.netData.player.bean{
 		//坐骑
 		private var _mount: int;
 		
+		//战旗
+		private var _warflag: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -58,6 +61,8 @@ package com.rpgGame.netData.player.bean{
 			writeInt(_second_weapon);
 			//坐骑
 			writeInt(_mount);
+			//战旗
+			writeInt(_warflag);
 			return true;
 		}
 		
@@ -81,6 +86,8 @@ package com.rpgGame.netData.player.bean{
 			_second_weapon = readInt();
 			//坐骑
 			_mount = readInt();
+			//战旗
+			_warflag = readInt();
 			return true;
 		}
 		
@@ -202,6 +209,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set mount(value: int): void{
 			this._mount = value;
+		}
+		
+		/**
+		 * get 战旗
+		 * @return 
+		 */
+		public function get warflag(): int{
+			return _warflag;
+		}
+		
+		/**
+		 * set 战旗
+		 */
+		public function set warflag(value: int): void{
+			this._warflag = value;
 		}
 		
 	}
