@@ -79,6 +79,7 @@ package com.rpgGame.core.app
 		public static var BACK_PACK_PANEL:String = createAppInfo("bag.BagPanel","beibao");
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
 		public static var RELIVE_PANEL:String = createAppInfo( "relive.RelivePanel","relive");
+		public static var KADUN_PANEL:String = createAppInfo( "kadun.KaDunPanel");
 		
 		/** 大地图面板 **/
 		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps");

@@ -23,3 +23,4 @@ ctags.sh
 # information for Eclipse / Flash Builder.
 /.project
 /.metadata
+/GameEngine2.5D/.project

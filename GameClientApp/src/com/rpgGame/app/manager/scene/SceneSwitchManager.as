@@ -145,11 +145,7 @@ package com.rpgGame.app.manager.scene
 			}
 			curtMapInfo.mapConfig = mapConfig;
 			mapConfig.mapID = curtMapInfo.sceneId;
-			var bmpData:AsyncMapTexture = MapDataManager.getCacheMiniMapBmpData(curtMapInfo.sceneId);
-			
-			curtMapInfo.mapConfig.smallMapTexture = bmpData;
-			
-			onEnterScene();
+			mapSwitchComplete();//地图切换结束
 		}
 		
 		private static var needLoadCmpCnt : int = 0;
@@ -247,25 +243,32 @@ package com.rpgGame.app.manager.scene
 				
 			}
 			//前面有上张地图的死亡状态判断，所以复活要在这里处理
-			mapSwitchComplete();//地图切换结束
 			//
 			_isReconnect = false;
+			
+			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
+			
 		}
 		
 		/**地图切换结束*/
 		private static function mapSwitchComplete():void
 		{
 			//加载马赛克小地图
-			MapDataManager.getMiniMapBmpData(curtMapInfo.sceneId,onMiniMapCmp);
+			var bmpData:AsyncMapTexture = MapDataManager.getCacheMiniMapBmpData(curtMapInfo.sceneId);
+			if(bmpData){
+				onMiniMapCmp(bmpData,curtMapInfo.sceneId);
+			}else{
+				MapDataManager.getMiniMapBmpData(curtMapInfo.sceneId,onMiniMapCmp);
+			}
 		}
 		
 		private static function onMiniMapCmp(bmpData:AsyncMapTexture,mapID:uint):void
 		{
-			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
-			Scene.scene.mapConfig.smallMapTexture = bmpData;
-			Scene.scene.drawSmallMap();
 			curtMapInfo.mapConfig.smallMapTexture = bmpData;
+			Scene.scene.mapConfig=curtMapInfo.mapConfig;
 			onSmallMapCmp(bmpData);
+			Scene.scene.drawSmallMap();
+			onEnterScene();
 		}
 		
 		/**小地图加载完成*/

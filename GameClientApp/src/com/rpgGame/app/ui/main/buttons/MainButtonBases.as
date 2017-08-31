@@ -8,22 +8,16 @@ package com.rpgGame.app.ui.main.buttons
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.Button;
 	import feathers.controls.ButtonState;
-	import feathers.controls.StateSkin;
-	import feathers.themes.GuiTheme;
 	
 	import gs.TweenMax;
 	
-	import starling.display.Image;
-	import starling.textures.IStarlingTexture;
-	
-	public class MainButtonBases extends Button implements IOpen
+	public class MainButtonBases extends IconButton implements IOpen
 	{
 		private var _info:FunctionBarInfo;
 		
 		protected var _openState:Boolean=true;
-		private var resList:Array=[];
+	
 		
 		public function get info():FunctionBarInfo
 		{
@@ -56,47 +50,6 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			super();
 			this.width=this.height=60;//默认设置为60
-		}
-		
-		override public function set styleClass(cls:Class):void
-		{
-			var styles:StateSkin=new cls();
-			var skinNames:Object=styles.skinNames;
-			resList.push(skinNames.up);
-			resList.push(skinNames.hover);
-			resList.push(skinNames.down);
-			loadSkin();
-		}
-		
-		private function loadSkin():void
-		{
-			GuiTheme.ins.LoadAsset(resList.pop(), onImgLoad, 6000, 0);			
-		}
-		
-		private function onImgLoad(texture:IStarlingTexture):void
-		{
-			setBtnState(texture);
-			if(resList.length!=0){
-				loadSkin();
-			}
-		}
-		
-		protected function setBtnState(texture:IStarlingTexture):void
-		{
-			var img:Image=new Image(GuiTheme.ins.getTexture(texture.key));
-			switch(resList.length){
-				case 2:
-					this.setSkinForState(ButtonState.DOWN,img);
-					break;
-				case 1:
-					this.setSkinForState(ButtonState.HOVER,img);
-					break;
-				case 0:
-					this.setSkinForState(ButtonState.UP,img);
-					this.width=img.width;
-					this.height=img.height;
-					break;
-			}
 		}
 		
 		override protected function feathersControl_addedToStageHandler(event:Event):void

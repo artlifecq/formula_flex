@@ -170,7 +170,7 @@ package com.rpgGame.app.process
 				GlobalSettingManager.init();
 				
 				GamePerformsManager.init();
-				GamePerformsManager.autoDisplayAdjust = false;
+				GamePerformsManager.autoDisplayAdjust = true;
 				TabManager.init();
 				//
 
