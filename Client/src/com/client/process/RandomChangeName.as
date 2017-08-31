@@ -7,6 +7,7 @@ package com.client.process
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	import com.rpgGame.statistics.Statistics;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -43,7 +44,11 @@ package com.client.process
 //			}
 			completeProcess();
 		}
-		
+		override public function completeProcess():void
+		{
+			super.completeProcess();
+			Statistics.intance.pushNode(Statistics.STEP_RANDOM_NAME,"压测随机名字成功");
+		}
 		private function randomName():void
 		{
 			var info:MyPlayerInfo=ClientConfig.loginData;

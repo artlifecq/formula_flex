@@ -7,6 +7,7 @@ package com.client.process
 	import com.gameClient.utils.StringFilter;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -85,7 +86,7 @@ package com.client.process
 			var femaleNameStr : String = lang ? lang.value : "";
 			
 			RandomNick.setup(lastNameStr.split(","), flagNameStr.split(","), maleNameStr.split(","), femaleNameStr.split(","));
-
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_WORD,"屏蔽字库加载完成");
 			completeProcess();
 		}
 

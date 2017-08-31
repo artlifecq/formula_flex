@@ -48,8 +48,8 @@ package com.rpgGame.appModule.skill
 		{
 			//升级效果
 			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
-			var myMp:int=MainRoleManager.actorInfo.curZhenqi;
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+			var myMp:Number=MainRoleManager.actorInfo.curZhenqi;
+			var myMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			var upNum:int=1;
 			var needMp:int=0;
 			var needMy:int=0;

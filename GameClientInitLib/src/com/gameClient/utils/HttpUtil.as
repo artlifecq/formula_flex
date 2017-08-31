@@ -7,6 +7,7 @@ package com.gameClient.utils
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
 	import flash.net.navigateToURL;
+	import flash.net.sendToURL;
 	import flash.utils.Dictionary;
 	
 	public class HttpUtil
@@ -120,8 +121,9 @@ package com.gameClient.utils
                 req.data = params;
             }
             req.method = URLRequestMethod.GET;
-            var load : URLLoader = new URLLoader();
-            load.load(req);
+          //  var load : URLLoader = new URLLoader();
+          //  load.load(req);
+			sendToURL(req);
         }
 	}
 }

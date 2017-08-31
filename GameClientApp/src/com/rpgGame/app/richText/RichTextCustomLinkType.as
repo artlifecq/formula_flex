@@ -28,6 +28,8 @@ package com.rpgGame.app.richText
 		public static const RALLY : String = "9";
 		/** 护宝	需要参数：data:id */
 		public static const HUBAO : String = "10";
+		/** 申请入帮	需要参数：data:id */
+		public static const GUILD_APPLY : String = "11";
 		/** 任务，到某个地方打开NPC对话面板	需要参数：data:NPCID */
 		public static const TASK_NPC_NAME_TYPE : String = "100";
 		/** 任务，到某个地方杀怪物	需要参数：data:monsterId */

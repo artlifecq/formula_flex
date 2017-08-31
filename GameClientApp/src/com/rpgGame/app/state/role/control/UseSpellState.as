@@ -39,16 +39,18 @@ package com.rpgGame.app.state.role.control
 		{
 			return getQualifiedClassName(UseSpellState);
 		}
-		
-		override public function leave():void
+		override public function afterLeave():void
 		{
-			super.leave();
-			
+			super.afterLeave();
 			transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
 			if ((_machine as RoleStateMachine).isPrewarWaiting)
 				transition(RoleStateType.ACTION_PREWAR);
 			else
 				transition(RoleStateType.ACTION_IDLE);
+		}
+		override public function leave():void
+		{
+			super.leave();
 		}
 	}
 }

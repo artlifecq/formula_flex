@@ -335,7 +335,7 @@ package com.rpgGame.app.manager.guild
 			var money : Number = MainRoleManager.actorInfo.totalStat.getResData(item["type"]);
 			if(money < item["num"])
 			{
-				NoticeManager.showNotifyById(60029,"",ItemConfig.getItemName(item["type"]));
+				NoticeManager.showNotifyById(60029,null,ItemConfig.getItemName(item["type"]));
 				return;
 			}
 			

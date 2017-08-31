@@ -52,8 +52,8 @@ package com.rpgGame.app.manager
 			var canUp:Boolean=true;
 			var canRise:Boolean=true;
 			var myLv:int=data.totalStat.level;
-			var myMp:int=data.curZhenqi;
-			var myMon:int=data.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ data.totalStat.getResData(CharAttributeType.RES_MONEY);
+			var myMp:Number=data.curZhenqi;
+			var myMon:Number=data.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ data.totalStat.getResData(CharAttributeType.RES_MONEY);
 			var key:String=skillId+"_"+skillInfo.skillChildLv;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);
 			var needMp:int;

@@ -25,7 +25,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_rank_designation;
-	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
@@ -140,11 +139,8 @@ package com.rpgGame.app.graphics
 		private var _teamCaptainFlag:UIAsset;
 		private var _towerFlag:UIAsset;
 		private var _vipFlag:UIAsset;
+		
 		private var _meirenTitle:HeadNameBar;
-		/**闲话*/
-		private var _speakBar : HeadSpeakBar;
-		
-		
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -1169,12 +1165,6 @@ package com.rpgGame.app.graphics
 				_meirenTitle.dispose();
 				_meirenTitle = null;
 			}
-			if(	_speakBar!=null)
-			{
-				deCtrl.removeTop(_speakBar);
-				HeadSpeakBar.recycle(_speakBar);
-				_speakBar = null;
-			}
 			removeIco();
 			removeBodyIco();
 			TweenLite.killDelayedCallsTo(hideMoodMC);
@@ -1442,164 +1432,141 @@ package com.rpgGame.app.graphics
 				updateAllBarPosition();
 			}
 		}
-		/**
-		 *概率怪物闲话框
-		 * 
-		 */
-		public function probabilityMonserSpeakBar():void
+		
+		private function onSort(a:int,b:int):int
 		{
-			var monsterData : MonsterData = _role.data as MonsterData;
-			var areaData : Q_scene_monster_area =MonsterDataManager.getAreaByAreaID(monsterData.distributeId);
-			if(areaData!=null)
+			if (a>b) 
 			{
-				var prob:int = Math.random()*100;
-				if(prob<areaData.q_speak_probability)//概率闲话
+				return -1;
+			}
+			else if (a<b) 
+			{
+				return 1;
+			}
+			return 0;
+		}
+	
+		private var _rankTitle1:HeadFaceEffect;
+		private var _rankTitle2:HeadFaceEffect;
+		
+		private function updateSubRankTile(list:Vector.<int>):void
+		{
+			if(list==null||list.length==0)
+			{
+				if (_rankTitle1!=null) 
 				{
-					updateMonserSpeakBar();
+					deCtrl.removeTop(_rankTitle1);
+					_rankTitle1.dispose();
+					_rankTitle1=null;
 				}
 			}
-		}
-		/**
-		 *创建闲话框
-		 * 
-		 */
-		public function updateMonserSpeakBar():void
-		{
-			var monsterData : MonsterData = _role.data as MonsterData;
-			var speak:String=MonsterDataManager.getNpcSpeak(monsterData.distributeId);
-			if(speak!=null&&speak!="")
+			else
 			{
-				if(_speakBar==null){
-					
-					_speakBar=HeadSpeakBar.create();
+				list=list.sort(onSort);
+				var tileId:int=list[0];
+				
+				var qTile:Q_rank_designation=RankDesignationData.getinfoById(tileId);
+				if (!qTile||qTile.q_effects=="") 
+				{
+					return;
 				}
-				_speakBar.setMonsterLable(speak);
-				addElement(_speakBar);
-				_speakBar.x=0;
-				_speakBar.y=0;
+				if (_rankTitle1) 
+				{
+					if (_rankTitle1.url==ClientConfig.getEffect(qTile.q_effects)) 
+					{
+						return;
+					}
+					deCtrl.removeTop(_rankTitle1);
+					_rankTitle1.dispose();
+					_rankTitle1=null;
+				}
+				
+				if (!_rankTitle1) 
+				{
+					_rankTitle1=new HeadFaceEffect();
+				}
+				var toScale:Number=1;
+				if (SceneCharType.SCULPTURE==this._role.type) 
+				{
+					toScale=qTile.q_modle_scale/100;
+				}
+				else
+				{
+					toScale=(qTile.q_hero_scale/100);
+				}
+				var obj:InterObject3D=_rankTitle1.playEffect(0,qTile.q_effects_high*toScale,ClientConfig.getEffect(qTile.q_effects),0,qTile.q_effects_high/2*toScale,0);
+				obj.baseObj3D.setScale(toScale);
+				deCtrl.addTop(_rankTitle1,DecorCtrl.TOP_RANKDESIGNATION);
 			}
-			
-//			if(_speakBar==null){
-//				
-//				_speakBar=HeadSpeakBar.create();
-//			}
-//			_speakBar.setMonsterLable("一二三四五六七八九十");
-//			addElement(_speakBar);
-//			_speakBar.x=0;
-//			_speakBar.y=0;
 		}
 		/**
-		 *显示闲话框
-		 */
-		public function showHeroSpeakBar(text:String):void
+		 *皇城争霸 
+		 * @param list
+		 * 
+		 */		
+		private function updateHCZBTile(list:Vector.<int>):void
 		{
-			if(_speakBar==null){
-				
-				_speakBar=HeadSpeakBar.create();
+			if(list==null||list.length==0)
+			{
+				if (_rankTitle2!=null) 
+				{
+					deCtrl.removeTop(_rankTitle2);
+					_rankTitle2.dispose();
+					_rankTitle2=null;
+				}
 			}
-			_speakBar.setHeroLable(text);
-			addElement(_speakBar);
-			_speakBar.x=0;
-			_speakBar.y=0;
+			else
+			{
+				list=list.sort(onSort);
+				var tileId:int=list[0];
+				
+				var qTile:Q_rank_designation=RankDesignationData.getinfoById(tileId);
+				if (!qTile||qTile.q_effects=="") 
+				{
+					return;
+				}
+				if (_rankTitle2) 
+				{
+					if (_rankTitle2.url==ClientConfig.getEffect(qTile.q_effects)) 
+					{
+						return;
+					}
+					deCtrl.removeTop(_rankTitle2);
+					_rankTitle2.dispose();
+					_rankTitle2=null;
+				}
+				
+				if (!_rankTitle2) 
+				{
+					_rankTitle2=new HeadFaceEffect();
+				}
+				var toScale:Number=1;
+				if (SceneCharType.SCULPTURE==this._role.type) 
+				{
+					toScale=qTile.q_modle_scale/100;
+				}
+				else
+				{
+					toScale=(qTile.q_hero_scale/100);
+				}
+				var obj:InterObject3D=_rankTitle2.playEffect(0,qTile.q_effects_high*toScale,ClientConfig.getEffect(qTile.q_effects),0,qTile.q_effects_high/2*toScale,0);
+				obj.baseObj3D.setScale(toScale);
+				deCtrl.addTop(_rankTitle2,DecorCtrl.TOP_RANKDESIGNATION1);
+			}
 		}
-		private static var RankTypeOriderList:Vector.<int>;
-		private var _lastType:int;
-		private var _rankTitle1:InterObject3D;
-		private var _rankTitle2:InterObject3D;
 		/** 排行榜称号 */
 		public function addAndUpdataRankTitle(list:Vector.<int>):void
 		{
-			if(list==null)
-				return ;
-			if(RankTypeOriderList==null)
+			var index:int=list.indexOf(108);
+			var tmp:Vector.<int>=new Vector.<int>();
+			//皇城争霸108
+			if (index!=-1) 
 			{
-				RankTypeOriderList = new Vector.<int>();
-				RankTypeOriderList.push(RankListType.All_COMBATPOWER_TYPE);
-				RankTypeOriderList.push(RankListType.All_MOUNT_TYPE);
-				RankTypeOriderList.push(RankListType.All_WARFLAG_TYPE);
-				RankTypeOriderList.push(RankListType.All_BEAUTY_TYPE);
-				RankTypeOriderList.push(RankListType.COMBATPOWER_TYPE);
+				tmp.push(108);
+				list.removeAt(index);
 			}
-			
-			var type:int = 0;
-			var length:int = RankTypeOriderList.length;
-			for(var i:int = 0;i<length;i++)
-			{
-				if(list.indexOf(RankTypeOriderList[i])>=0)
-				{
-					type = RankTypeOriderList[i];
-					break;
-				}
-			}
-			//			type = 3;
-			var q_info:Q_rank_designation;
-			var rud:RenderParamData3D;
-			var scale:int;
-			//其它称号
-			if (type > 0)
-			{
-				if(type != _lastType)
-				{
-					if (_rankTitle1)
-					{
-						_rankTitle1.removeFromParent();
-						_rankTitle1 = null;
-					}
-					_rankTitle1 = new InterObject3D();
-					q_info= RankDesignationData.getinfoById(type);
-					if(_role.type == SceneCharType.SCULPTURE)
-					{
-						scale = q_info.q_modle_scale;
-					}else{
-						scale = q_info.q_hero_scale;
-					}
-					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_effects));
-					_rankTitle1.addRenderUnitWith(rud, 0);
-					_rankTitle1.scale = scale/100;
-					this.deCtrl.addTop(_rankTitle1,DecorCtrl.TOP_RANKDESIGNATION);
-					_rankTitle1.start();
-					_lastType = type;
-				}
-			}else{
-				if (_rankTitle1)
-				{
-					_rankTitle1.removeFromParent();
-					_rankTitle1 = null;
-				}
-			}
-			type =  RankListType.ALL_DIANFENG_TYPE;
-			if(list.indexOf(type)<0)
-			{
-				type = 0;
-			}
-			//			type = 8;
-			if (type > 0)
-			{
-				if (_rankTitle2 == null)
-				{
-					_rankTitle2 = new InterObject3D();
-					q_info= RankDesignationData.getinfoById(type);
-					if(_role.type == SceneCharType.SCULPTURE)
-					{
-						scale = q_info.q_modle_scale;
-					}else{
-						scale = q_info.q_hero_scale;
-					}
-					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_effects));
-					_rankTitle2.addRenderUnitWith(rud, 0);
-					_rankTitle2.scale = scale/100;
-					this.deCtrl.addTop(_rankTitle2,DecorCtrl.TOP_RANKDESIGNATION1);
-					_rankTitle2.start();
-				}
-				
-			}else{
-				if (_rankTitle2)
-				{
-					_rankTitle2.removeFromParent();
-					_rankTitle2 = null;
-				}
-			}
-			
+			updateHCZBTile(tmp);
+			updateSubRankTile(list);
 			updateAllBarPosition();
 		}
 		

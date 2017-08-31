@@ -86,7 +86,9 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.FaceLoadManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
@@ -298,17 +300,18 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.ROLE_NAME_TYPE:
 					//获取人物名;
 					//trace( "点击打开这个人的属性面板，id：",data.id," 英雄名字：",data.data1 );
-					var userID : String = unitData.linkData;
-					var uise:Number=(new long(userID)).ToGID();
-					if (MainRoleManager.isSelf(uise))
+//					var userID : String = unitData.linkData;
+					var id:long = new long(unitData.linkData);
+//					var uise:Number=(new long(userID)).ToGID();
+					if (MainRoleManager.isSelf(id.fValue))
 					{
 						return;
 					}
 					var lng:long=new long();
 					//					var poswr:Point = unit.displayObj.parent.localToGlobal(new Point(unit.displayObj.x+2,unit.displayObj.y));
 					var userName : String = unitData.label;
-					var menus : Array = MenuUtil.getPlayerTargetMenu(uise, true);
-					MenuManager.showMenu(menus, [userID, userName], -1, -1, 80);
+					var menus : Array = MenuUtil.getPlayerTargetMenu(id.fValue, true);
+					MenuManager.showMenu(menus, [id.hexValue, userName], -1, -1, 80);
 					break;
 				case RichTextCustomLinkType.POSITION_TYPE:
 					//获取XY坐标
@@ -401,18 +404,22 @@ package com.rpgGame.app.richText
 					break;
 				case RichTextCustomLinkType.QIUHUN:
 					var name:Array=unitData.linkData.split(',');
-					var gid:Number=parseInt(name[1]);
-					
-					if (MainRoleManager.actorInfo.serverID.fValue==gid)
+					id = new long(name[1]);
+					if (MainRoleManager.isSelf(id.fValue))
 					{
+						//自己
 						return;
-					}
+					}else if(Mgr.hunyinMgr.marriageInfos!=null||Mgr.hunyinMgr.marriageInfos.state==6)
+					{
+						//已婚人士
+						return;
+					}					
 					Mgr.hunyinMgr.showQiuHunTiShiPanel(1,null,name[0]);
 					break;
 				
 				case RichTextCustomLinkType.TEAM_APPLY:
-					var teamId:Number=(new long(unitData.linkData)).ToGID();
-					var id:long = new long(teamId);
+//					var teamId:Number=(new long(unitData.linkData)).ToGID();
+					id = new long(unitData.linkData);
 					TeamManager.ins.reqJoinToTeam(id);
 					break;
 				case RichTextCustomLinkType.RALLY:
@@ -438,6 +445,16 @@ package com.rpgGame.app.richText
 					else
 						HuBaoManager.instance().onwalkToNpc(HuBaoData.acceptNpc);
 					break;
+				case RichTextCustomLinkType.GUILD_APPLY:
+					if(!GuildManager.instance().haveGuild)
+					{
+//						var guildId:Number=parseInt(unitData.linkData);
+						id = new long(unitData.linkData);
+						FunctionOpenManager.openAppPaneById("51",id,false);
+					}else{
+						NoticeManager.showNotifyById(60202,null,"");
+					}			
+					break;	
 			}
 		}
 		

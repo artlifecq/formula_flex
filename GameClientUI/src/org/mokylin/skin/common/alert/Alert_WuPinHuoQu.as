@@ -246,7 +246,7 @@ package org.mokylin.skin.common.alert
 		private function __Alert_WuPinHuoQu_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/shangdianhuode..png";
+			temp.styleName = "ui/art_txt/common/background/shangdianhuode.png";
 			temp.x = 76;
 			temp.y = 0;
 			return temp;

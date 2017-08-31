@@ -29,6 +29,8 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
+	import flash.geom.Point;
+	
 	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.utils.filter.GrayFilter;
@@ -463,5 +465,26 @@ package com.rpgGame.app.ui.main.head {
 				icon.y=row*gridW;
 			}
 		}
+		private var _goldGlobal:Point;
+		public function getGoldPos():Point
+		{
+			if (!_goldGlobal) 
+			{
+				_goldGlobal=new Point();
+				_goldGlobal=_skin.uiYuanbao.localToGlobal(new Point(12,12),_goldGlobal);
+			}
+			return _goldGlobal;
+		}
+		private var _bindGoldGlobal:Point;
+		public function getBindGoldPos():Point
+		{
+			if (!_bindGoldGlobal) 
+			{
+				_bindGoldGlobal=new Point();
+				_bindGoldGlobal=_skin.uiLijin.localToGlobal(new Point(12,12),_bindGoldGlobal);
+			}
+			return _bindGoldGlobal;
+		}
+		
 	}
 }

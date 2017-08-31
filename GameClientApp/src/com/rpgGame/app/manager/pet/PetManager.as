@@ -1,4 +1,4 @@
-package com.rpgGame.app.manager
+package com.rpgGame.app.manager.pet
 {
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;

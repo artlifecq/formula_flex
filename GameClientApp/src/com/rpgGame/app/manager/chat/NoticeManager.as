@@ -7,10 +7,8 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
-	import com.rpgGame.coreData.utils.ByteUtil;
+	import com.rpgGame.netData.player.bean.HyperlinkInfo;
 	import com.rpgGame.netData.player.message.SCNoticeMessage;
-	
-	import flash.utils.ByteArray;
 	
 	/**
 	 *提示消息管理器
@@ -204,9 +202,9 @@ package com.rpgGame.app.manager.chat
 			var tp:int=(msg.noticeIndex>>24)&0xff;
 			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
 			var words : String;
-			if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+			if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO||tp==SYSTEM_SWITCH||tp==SYSTEM_ROLL||tp==CENTER_BOTTOM)
 			{
-				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.parameters,args);
+				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.hyperlinkInfos,args);
 				notify(tp, words);
 			}
 			else
@@ -217,9 +215,16 @@ package com.rpgGame.app.manager.chat
 						for(i=0;i<showType.length;i++)
 						{
 							tp=showType[i];
-							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO||tp==BATTLE_CHUANWEN)
+							if(args!=null){
+								args = [];
+								for(var j:int = 0;j<msg.values.length;j++)
+								{
+									args.push(msg.values[j]);
+								}
+							}
+							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO||tp==BATTLE_CHUANWEN||tp==SYSTEM_SWITCH||tp==SYSTEM_ROLL||tp==CENTER_BOTTOM)
 							{
-								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.parameters,args);
+								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.hyperlinkInfos,args);
 								notify(tp, words);
 							}
 							else
@@ -243,7 +248,7 @@ package com.rpgGame.app.manager.chat
 		 *显示一个提示 根据配置id 
 		 * 
 		 */
-		public static function showNotifyById(id:int,attribute:String="",... args):void
+		public static function showNotifyById(id:int,infos:Vector.<HyperlinkInfo>=null,... args):void
 		{
 			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
 			if(notiMsg!=null)
@@ -258,9 +263,9 @@ package com.rpgGame.app.manager.chat
 						var tp:int=int(showType[i])
 						if(tp>0)
 						{
-							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO||tp==SYSTEM_SWITCH||tp==SYSTEM_ROLL||tp==CENTER_BOTTOM)
 							{
-								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,attribute,args);
+								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,infos,args);
 								notify(tp, words);
 							}
 							else

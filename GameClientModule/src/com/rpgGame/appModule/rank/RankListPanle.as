@@ -62,7 +62,7 @@ package com.rpgGame.appModule.rank
 				return ;
 			if(!FunctionOpenManager.functionIsOpen(q_data.q_id.toString()))
 			{
-				NoticeManager.showNotifyById(90203,"",q_data.q_string_name,q_data.q_level);
+				NoticeManager.showNotifyById(90203,null,q_data.q_string_name,q_data.q_level);
 				_skin.list.selectedIndex = _selectIndex;
 			}else{
 				_selectIndex = index;
