@@ -168,7 +168,6 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_BUFF_RESET_SKILLCD] = SkillCDResetState;
 		stateMapping[RoleStateType.CONTROL_BUFF_REDUCE_SKILLCD] = SkillCDReduceState;
 		stateMapping[RoleStateType.CONTROL_ENTER_LEAVE_FIGHT] = FightLeaveEnterBuffState;
-		stateMapping[RoleStateType.CONTROL_BUFF_BLEED] = HeadBleedBuffState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		

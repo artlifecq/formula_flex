@@ -122,7 +122,8 @@ package com.rpgGame.appModule.dungeon.genuine
 		
 		private function refeashList(index:int):void
 		{
-			index=index>3?index-3:0;
+			index=index>_skin.list.maxHorizontalPageIndex?_skin.list.maxHorizontalPageIndex:index;
+			index=index<0?0:index;
 			_skin.btnNext.visible = (index <_skin.list.maxHorizontalPageIndex);
 			_skin.btnPrev.visible = (index >0);
 			_skin.list.scrollToPageIndex(index,0);

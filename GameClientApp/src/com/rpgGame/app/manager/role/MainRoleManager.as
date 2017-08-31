@@ -20,6 +20,9 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -210,6 +213,15 @@ package com.rpgGame.app.manager.role
 			}
 			EventManager.dispatchEvent(BuffEvent.UPDATE_BUFF, MainRoleManager.actorID);
 			AreaMapManager.updateActorEnterAreaInfo();
+			
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			var data:HeroData=MainRoleManager.actor.data as HeroData;
+			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1){
+				MainRoleManager.actor.setScale(data.sizeScale*1.5);//帮会战统帅放大到1.5倍
+			}else{
+				MainRoleManager.actor.setScale(data.sizeScale);
+			}
 		}
 		
 		/**

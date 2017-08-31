@@ -11,6 +11,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.RankTopSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.utils.TaskUtil;
@@ -22,6 +23,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.EmFunctionID;
+	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
@@ -154,38 +156,37 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				return;
 			}
-			
-			if(key==1&&type==TaskType.MAINTYPE_MAINTASK/*&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE*/)//
+			if(key==1&&(type==TaskType.MAINTYPE_MAINTASK||type==TaskType.MAINTYPE_TREASUREBOX||type==TaskType.MAINTYPE_GUILDDAILYTASK||type==TaskType.LIJIN_TASK))//
 			{
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
-			if(key==1&&(type==TaskType.MAINTYPE_TREASUREBOX||type==TaskType.MAINTYPE_GUILDDAILYTASK||type==TaskType.LIJIN_TASK))//
-			{
-				TaskAutoManager.getInstance().startTaskAuto(type,num);
-				return;
-			}
-			
-			if(type==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.dailyTaskData.q_emid!="")//支线打开面板任务
-			{
-				var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
-				if(emidArr.length>num)
-				{
-					FunctionOpenManager.openAppPaneById(emidArr[num]);
-				}
-				return;
-			}
-			if(type==TaskType.MAINTYPE_DAILYTASK&&TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//支线护宝任务
+			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//支线护宝任务
 			{
 				TaskUtil.npcTaskFly(TaskMissionManager.getTaskNpcAreaId(type),type,TaskType.SUB_HUBAO);
 				return;
 			}
-			
-			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
+			if(type==TaskType.MAINTYPE_DAILYTASK)//支线打开面板任务
 			{
-				showBagPanel();
+				if(TaskMissionManager.dailyTaskData.q_emid!="")
+				{
+					TaskAutoManager.getInstance().taskType=TaskType.MAINTYPE_DAILYTASK;
+					var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
+					if(emidArr.length>num)
+					{
+						FunctionOpenManager.openAppPaneById(emidArr[num]);
+					}
+				}
 				return;
 			}
+			
+			if(type==TaskType.MAINTYPE_WORSHIP)//膜拜任务任务
+			{
+				TaskAutoManager.getInstance().taskType=TaskType.MAINTYPE_WORSHIP;
+				RankTopSender.reqRankListTopInfo(RankListType.COMBATPOWER_TYPE);
+				return;
+			}
+			
 			if(key==2)
 			{
 				var postPath:Array=TaskMissionManager.getTaskPathingByType(type,num);
@@ -194,96 +195,6 @@ package com.rpgGame.app.ui.main.taskbar
 					TaskUtil.postTaskFly(postPath,type,TaskUtil.getSubtypeByType(type));
 				}
 				return;
-			}
-			
-			if(TaskUtil.getIsfinishByType(type))//任务完成
-			{
-				if(type==TaskType.MAINTYPE_MAINTASK)//主任务且主任务完成
-				{
-					if(TaskMissionManager.getMainTaskHaveNpc())
-					{
-						if(key==1)
-						{
-							TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk);
-						}
-						else
-						{
-							TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),type);
-						}
-					}
-					else
-					{
-						//showLeadPanel();主线任务没有回复npc不弹框了
-						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
-					}
-				}
-				else if(type==TaskType.MAINTYPE_GUILDDAILYTASK)
-				{
-					if(TaskMissionManager.getMainTaskHaveNpc())
-					{
-						if(key==1)
-						{
-							TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk);
-						}
-						else
-						{
-							TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),type);
-						}
-					}
-					else
-					{
-						//showLeadPanel();主线任务没有回复npc不弹框了
-						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
-					}
-				}
-					
-			}
-			else
-			{
-				if(type==TaskType.MAINTYPE_TREASUREBOX)// 环式任务寻怪取刷新点
-				{
-					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(num);
-					if(key==1)
-					{
-						TaskUtil.monsterTaskWalk(monsterId,startFight);
-					}
-					else
-					{
-						TaskUtil.monsterTaskFly(monsterId,type);
-					}
-					
-				}
-				else if(type==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.dailyTaskData.q_emid!="")//支线打开面板任务
-				{
-					var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
-					if(emidArr.length>num)
-					{
-						FunctionOpenManager.openAppPaneById(emidArr[num]);
-					}					
-				}
-				else//主线和支线的怪取配置坐标点
-				{
-					var postPath:Array=TaskMissionManager.getPathingByType(type,num);
-					if(key==1)
-					{
-						var modeid:int=TaskUtil.getMonsterByType(type,num);
-						var obj:Object=new Object();
-						obj.subType=TaskUtil.getSubtypeByType(type);
-						obj.modeid=modeid;
-						if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_GATHER)//采集任务寻路完成开始采集
-						{
-							TaskUtil.postTaskWalk(postPath,walkStartGather,obj);
-						}
-						else
-						{
-							TaskUtil.postTaskWalk(postPath,startFight,null,true);
-						}
-					}
-					else
-					{
-						TaskUtil.postTaskFly(postPath,type);
-					}
-				}
 			}
 		}
 		
@@ -300,33 +211,7 @@ package com.rpgGame.app.ui.main.taskbar
 				showLeadPanel();
 			}
 		}
-		/**飞鞋完成*/
-		public static function flyComplete():void
-		{		
-			HuBaoManager.instance().onHuBaoHandler();
-			
-			if(TaskMissionManager.flyTaskType>0)
-			{
-				TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
-				TaskMissionManager.flyTaskType=0;
-				TaskMissionManager.flyMissionType=0;
-				/*if(TaskMissionManager.flyTaskType!=TaskType.MAINTYPE_DAILYTASK)
-				{
-					
-				}*/
-				
-				/*if(TaskMissionManager.flyTaskType==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.flyMissionType==TaskType.SUB_HUBAO)
-				{
-					
-				}
-				else
-				{
-					TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
-					TaskMissionManager.flyTaskType=0;
-					TaskMissionManager.flyMissionType=0;
-				}*/
-			}
-		}
+		
 		public static function taskFlishOk(taskType:int):void
 		{
 			if(taskType==TaskType.MAINTYPE_MAINTASK)

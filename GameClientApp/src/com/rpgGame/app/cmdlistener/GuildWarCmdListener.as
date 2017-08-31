@@ -114,6 +114,9 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getResGuildWarOperateResultMessage(msg:ResGuildWarOperateResultMessage):void
 		{
+			if(msg.result==0){
+				return;
+			}
 			switch(msg.opaque){
 				case OpaqueEnum.GUILDWAR_GIFT:
 					GuildWarSender.reqGuildWarCityInfo(-1);//领取帮会战奖励成功之后

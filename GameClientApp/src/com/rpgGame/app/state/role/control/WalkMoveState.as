@@ -477,6 +477,18 @@ package com.rpgGame.app.state.role.control
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			if ((_machine as RoleStateMachine).isJumping||(_machine as RoleStateMachine).isJumpRising)//跳跃的时候比自动走路的优先级还要高
+			{Lyt.a("walk-100");
+				return false;
+			}
+			else if ((_machine as RoleStateMachine).isDead)
+			{
+				return false;
+			}
+			else if ((_machine as RoleStateMachine).isDeadLaunch)
+			{
+				return false;
+			}
 			if(((_machine as RoleStateMachine).owner as SceneRole).isMainChar&&TrusteeshipManager.getInstance().isAutoWalking)
 			{
 				TrusteeshipManager.getInstance().isAutoWalking=false;
@@ -490,14 +502,7 @@ package com.rpgGame.app.state.role.control
 				}
 			}
 
-			if ((_machine as RoleStateMachine).isDead)
-			{
-				return false;
-			}
-			else if ((_machine as RoleStateMachine).isDeadLaunch)
-			{
-				return false;
-			}
+			
 			else if ((_machine as RoleStateMachine).isAttackHarding)
 			{Lyt.a("walk-201");
 				if (!force)

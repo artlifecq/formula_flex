@@ -49,10 +49,6 @@ package com.client.process
 		
 		public static const STATE_LOAD_FONTS:String = "STATE_LOAD_FONTS";
 		/**
-		 *加载欢迎信息 
-		 */
-		public static const STATE_LOAD_WEL:String = "STATE_LOAD_WELCOME";
-		/**
 		 *随机名字 
 		 */
 		public static const STATE_RANDOM_NAME:String = "STATE_RANDOM_NAME";

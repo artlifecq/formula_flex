@@ -5,6 +5,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
@@ -50,7 +51,7 @@ package com.rpgGame.appModule.activety.boss
 	{
 		private var _skin:ShiJieBoss_Skin;
 		private var _activeData:ListCollection;
-		private var rewardIcon:Vector.<IconCDFace>;
+		private var _reward:RewardGroup;
 		
 		private var _avatar : UIAvatar3D;
 		private var selectedInfo:BossActInfo;
@@ -81,7 +82,7 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.dataProvider=_activeData;
 			
 			_avatar = new UIAvatar3D(_skin.avatarGrp);
-			rewardIcon=new Vector.<IconCDFace>();
+			_reward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon1,0,5,15);
 			
 			_richText= RichTextArea3D.getFromPool();
 			_richText.setSize(_skin.lastSkiller.width);
@@ -114,13 +115,7 @@ package com.rpgGame.appModule.activety.boss
 		override public function show(data:Object=null):void
 		{
 			var icon:IconCDFace;
-			for(var i:int=1;i<6;i++){
-				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
-				rewardIcon.push(icon);
-				icon.x=_skin["icon"+i].x;
-				icon.y=_skin["icon"+i].y;
-				_skin.container.addChild(icon);
-			}
+			var i:int;
 			initEvent();
 			updateList();
 			var len:int=_activeData.length;
@@ -209,21 +204,8 @@ package com.rpgGame.appModule.activety.boss
 			}
 			selectedInfo=info;
 			
-			var arr:Array;
-			if(info.actCfg.q_rewards){
-				arr=JSONUtil.decode(info.actCfg.q_rewards);
-			}else{
-				arr=[];
-			}
-			var num:int=arr.length;
-			for(var i:int=0;i<4;i++){
-				if(i<num){
-					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr[i].mod,arr[i].num,arr[i].bind);
-					FaceUtil.SetItemGrid(rewardIcon[i],itemInfo);
-				}else{
-					rewardIcon[i].clear();
-				}
-			}
+			_reward.setRewardByJsonStr(info.actCfg.q_rewards);
+			
 			
 			updateBoss(selectedInfo.actCfg.q_npc);
 			
@@ -231,9 +213,9 @@ package com.rpgGame.appModule.activety.boss
 			var timeList:Array=ActivetyDataManager.getTimeList(info.actCfg);
 			timeList=timeList[4];//第四个才是刷新段
 			_skin.lbTime.htmlText="";
-			num=timeList.length;
+			var num:int=timeList.length;
 			var refreshList:Array=[];
-			for(i=0;i<num;i++){
+			for(var i:int=0;i<num;i++){
 				if(i%2==0){
 					refreshList.push(timeList[i]);
 				}
@@ -290,12 +272,7 @@ package com.rpgGame.appModule.activety.boss
 		
 		override public function hide():void
 		{
-			var icon:IconCDFace;
-			while(rewardIcon.length>0){
-				icon=rewardIcon.pop();
-				icon.destroy();
-			}
-			
+			_reward.clear();
 			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateList);
 			EventManager.removeEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);

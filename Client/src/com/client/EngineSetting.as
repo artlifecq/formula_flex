@@ -49,8 +49,8 @@ package com.client
 
 		public static function initAway3D() : void
 		{
-			AwayStats.alertLogPanelOnError = !ClientConfig.isRelease;
-			Away3D.throwErrorForDeveloper = !ClientConfig.isRelease;
+//			AwayStats.alertLogPanelOnError = !ClientConfig.isRelease;
+//			Away3D.throwErrorForDeveloper = !ClientConfig.isRelease;
 			Away3D.LOAD_FILE_WITH_LIB = true;
 			GuiTheme.ENABLE_TEXT_BATCH = true;
 //			Away3D.USE_ASYNC_TEXTURES = true;

@@ -37,6 +37,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -149,10 +150,12 @@ package com.rpgGame.app.manager.role
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1){
-				data.sizeScale=1.5;//帮会战统帅放大到1.5倍
+				role.setScale(data.sizeScale*1.5);//帮会战统帅放大到1.5倍
+			}else{
+				role.setScale(data.sizeScale);
 			}
 			
-			role.setScale(data.sizeScale);
+			
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
@@ -224,6 +227,8 @@ package com.rpgGame.app.manager.role
 			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
 			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
+			//
+			(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
 			if (bornData.q_animation>0)
 			{
 				role.updateBodyEft(AnimationDataManager.getData(bornData.q_animation).role_res);

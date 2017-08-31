@@ -5,6 +5,7 @@ package com.rpgGame.appModule.activety.zonghe
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	
+	import feathers.controls.UIAsset;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
 	
@@ -45,6 +46,9 @@ package com.rpgGame.appModule.activety.zonghe
 			_skin=new Active_Item();
 			_skin.toSprite(this);
 			
+			_skin.state_icon.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
+			_skin.uiName.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
+			
 			var btnSkin:ActiveItemSelecteSkin=new ActiveItemSelecteSkin();
 			_skin.selectedBtn.upSkin=btnSkin.__ActiveItemSelecteSkin_UIAsset2;
 			_skin.selectedBtn.hoverSkin=btnSkin.__ActiveItemSelecteSkin_UIAsset1;
@@ -67,6 +71,7 @@ package com.rpgGame.appModule.activety.zonghe
 				}
 				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_res_id+".png";
 				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.actCfg.q_res_id+".png";
+				_skin.uiBg.onImageLoaded=bgLoad;
 				_skin.lbMsg.htmlText=info.actCfg.q_desc;
 				
 				if(info.info.joinState==ActivityJoinStateEnum.JOINING){
@@ -94,28 +99,35 @@ package com.rpgGame.appModule.activety.zonghe
 				}
 				
 //				info.info.joinState=ActivityJoinStateEnum.UN_TODAY;
-				
-				switch(info.info.joinState){
-					case ActivityJoinStateEnum.UN_TODAY:
-						_skin.state_icon.styleName="ui/app/activety/feidangri.png";
-						grayItem();
-						break;
-					case ActivityJoinStateEnum.UN_OPEN:
-						_skin.state_icon.styleName="ui/app/activety/weikaiqi.png";
-						ungrayItem();
-						break;
-					case ActivityJoinStateEnum.JOINING:
-						_skin.state_icon.styleName="ui/app/activety/jinxingzhong2.png";
-						ungrayItem();
-						break;
-					case ActivityJoinStateEnum.OVER:
-						_skin.state_icon.styleName="ui/app/activety/yijieshu.png";
-						grayItem();
-						break;
-					default:
-						break;
-				}
 			}
+		}
+		
+		private function bgLoad(ui:UIAsset):void
+		{
+			var info:ActivetyInfo=_data as ActivetyInfo;
+			if(!info||info.info==null){
+				return;
+			}
+			switch(info.info.joinState){
+				case ActivityJoinStateEnum.UN_TODAY:
+					_skin.state_icon.styleName="ui/app/activety/feidangri.png";
+					grayItem();
+					break;
+				case ActivityJoinStateEnum.UN_OPEN:
+					_skin.state_icon.styleName="ui/app/activety/weikaiqi.png";
+					ungrayItem();
+					break;
+				case ActivityJoinStateEnum.JOINING:
+					_skin.state_icon.styleName="ui/app/activety/jinxingzhong2.png";
+					ungrayItem();
+					break;
+				case ActivityJoinStateEnum.OVER:
+					_skin.state_icon.styleName="ui/app/activety/yijieshu.png";
+					grayItem();
+					break;
+				default:
+					break;
+			}			
 		}
 		
 		private function grayItem():void

@@ -241,14 +241,14 @@ package com.rpgGame.appModule.guild.war
 					if(info.id==EnumCity.WANG_CHENG){
 						for(var i:int=0;i<_msg.citys.length;i++){
 							var cityInfo:GuildWarCityInfo=_msg.citys[i];
-							if(cityInfo.id!=EnumCity.WANG_CHENG){
+							if(cityInfo.id!=EnumCity.WANG_CHENG&&cityInfo.occupyGuildName){
 								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"[攻]");
 								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,GSUtil.unAreaName(cityInfo.occupyGuildName)+"\n");
 							}
 						}
 					}else{
 						htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"[攻]");
-						htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,info.attackGuildName);
+						htmlStr+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,GSUtil.unAreaName(info.attackGuildName));
 					}
 				}else{
 					htmlStr=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"[占领时间]:");
