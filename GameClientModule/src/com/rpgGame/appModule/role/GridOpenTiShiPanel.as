@@ -31,7 +31,7 @@ package com.rpgGame.appModule.role
 		{
 			_skin=new GridOpenTiShiSkin();
 			super(_skin);
-//			this.model=true;
+			//			this.model=true;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -58,11 +58,17 @@ package com.rpgGame.appModule.role
 			}
 			_buyPice=GoodsContainerMamager.getOpenGridMoney(_itemContainerID,_index);
 			_skin.lb_num.text=_buyNum.toString()+"格";
-			_skin.lb_pice.text=_buyPice.toString()+"元宝";
-			if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)){
-				_skin.lb_pice.color=StaticValue.RED_TEXT;
-			}else{
+			if(_index==GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex&&GoodsContainerMamager.getMrg(_itemContainerID).isMianFei)
+			{
+				_skin.lb_pice.text="免费";
 				_skin.lb_pice.color=StaticValue.GREEN_TEXT;
+			}else{
+				_skin.lb_pice.text=_buyPice.toString()+"元宝";
+				if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)){
+					_skin.lb_pice.color=StaticValue.RED_TEXT;
+				}else{
+					_skin.lb_pice.color=StaticValue.GREEN_TEXT;
+				}
 			}
 		}
 		
@@ -84,11 +90,11 @@ package com.rpgGame.appModule.role
 		{
 			if(_index==GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex&&GoodsContainerMamager.getMrg(_itemContainerID).isMianFei)
 			{
-				if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
-				{
-					NoticeManager.showNotifyById(2008);
-					return;
-				}
+				//				if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
+				//				{
+				//					NoticeManager.showNotifyById(2008);
+				//					return;
+				//				}
 				ItemSender.reqOpenTimeCellMessage(_type);
 			}
 			else{
