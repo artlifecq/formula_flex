@@ -101,7 +101,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/pet/petName/name2s.png";
+			temp.styleName = "ui/pet/petName/name2.png";
 			temp.x = 8;
 			temp.y = 10;
 			return temp;
