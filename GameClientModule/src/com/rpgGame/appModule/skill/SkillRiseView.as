@@ -176,8 +176,8 @@ package com.rpgGame.appModule.skill
 			}
 			
 			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
-			var myMp:int=MainRoleManager.actorInfo.curZhenqi;
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+			var myMp:Number=MainRoleManager.actorInfo.curZhenqi;
+			var myMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			var needLv:int=riseData.q_level_up;
 			var needMp:int=riseData.q_energy_up;
 			var needMon:int=riseData.q_cost_up;

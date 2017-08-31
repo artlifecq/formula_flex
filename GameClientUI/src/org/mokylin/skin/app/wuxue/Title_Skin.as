@@ -41,7 +41,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/titilebg/Item_bg2.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.y = 0;
 			return temp;
 		}
@@ -57,8 +57,8 @@ package org.mokylin.skin.app.wuxue
 			temp.left = 29;
 			temp.letterSpacing = -1;
 			temp.text = "职业技能";
-			temp.color = 0xA6A07B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.y = 4;
 			return temp;
 		}

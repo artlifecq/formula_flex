@@ -11,6 +11,7 @@ package com.client.process
 	import com.gameClient.utils.adobe.Base64;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.MessagePool;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	import flash.external.ExternalInterface;
@@ -148,7 +149,7 @@ package com.client.process
 			GameAlert.hide();
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
-			
+			Statistics.intance.pushNode(Statistics.STEP_CONNECT,"服务器链接成功");
 //			if (_retryTimer)
 //			{
 //				_retryTimer.stop();
@@ -210,6 +211,7 @@ package com.client.process
 				if(_reTryCount > 100)
 				{
 					GameAlert.show("服务器连接" + msg + "，正在重新连接服务器，如果长时间未连接成功，请刷新后重新登录。", "提示", onOkFunc);
+					Statistics.intance.pushNode(Statistics.STEP_CANT_CONNECT,"无法连接服务器，尝试100次");
 				}
 			}
 			else

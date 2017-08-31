@@ -87,7 +87,7 @@ package com.rpgGame.appModule.skill.lostskill
 			var updata:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(_stateinfo.skillId,_stateinfo.level);
 			var itemInfo:Object = JSONUtil.decode( updata.q_cost)[0];
 			var qItem:Q_item=ItemConfig.getQItemByID(itemInfo["mod"]);
-			NoticeManager.showNotifyById(7020,"",qItem.q_name,itemInfo["num"]);
+			NoticeManager.showNotifyById(7020,null,qItem.q_name,itemInfo["num"]);
 		}
 	}
 }

@@ -90,7 +90,7 @@ package com.rpgGame.app.manager
 		
 		public function activitSkill(data:Q_lostskill_open):void
 		{
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
+			var myMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
 			if(myMon<data.q_yuanbao)
 			{
 				NoticeManager.showNotifyById(7011);

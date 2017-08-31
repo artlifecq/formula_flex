@@ -260,7 +260,7 @@ package com.rpgGame.app.manager.yunBiao
 					}
 					else
 					{
-						NoticeManager.showNotifyById(11002,"",cheat.cheatsConfig.q_name,cheat.level+1);
+						NoticeManager.showNotifyById(11002,null,cheat.cheatsConfig.q_name,cheat.level+1);
 					}
 					
 				}
@@ -271,7 +271,7 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				if (bShowNotice) 
 				{
-					NoticeManager.showNotifyById(12000,"",node.levelUpNeedPlayerLevel);
+					NoticeManager.showNotifyById(12000,null,node.levelUpNeedPlayerLevel);
 				}
 				return false;
 			}

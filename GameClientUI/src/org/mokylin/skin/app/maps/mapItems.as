@@ -1,13 +1,11 @@
 package org.mokylin.skin.app.maps
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -19,12 +17,12 @@ package org.mokylin.skin.app.maps
 		//                                定义成员变量
 		//==========================================================================
 		public var btn_jia:feathers.controls.Button;
-		
+
 		public var btn_jian:feathers.controls.Button;
-		
-		public var lbl_name:feathers.controls.Label;
-		
-		
+
+		public var lbl_name:feathers.controls.UIAsset;
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -39,8 +37,8 @@ package org.mokylin.skin.app.maps
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -49,11 +47,11 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/titilebg/Item_bg.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.top = 0;
 			return temp;
 		}
-		
+
 		private function btn_jia_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -65,7 +63,7 @@ package org.mokylin.skin.app.maps
 			temp.y = 3;
 			return temp;
 		}
-		
+
 		private function btn_jian_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -76,21 +74,17 @@ package org.mokylin.skin.app.maps
 			temp.y = 3;
 			return temp;
 		}
-		
-		private function lbl_name_i():feathers.controls.Label
+
+		private function lbl_name_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			lbl_name = temp;
 			temp.name = "lbl_name";
-			temp.letterSpacing = 0;
-			temp.text = "NPC";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen3"];
-			temp.width = 167;
-			temp.x = 33;
-			temp.y = 4;
+			temp.styleName = "ui/app/maps/npc.png";
+			temp.x = 32;
+			temp.y = 6;
 			return temp;
 		}
-		
+
 	}
 }

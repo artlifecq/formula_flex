@@ -126,8 +126,8 @@ package com.rpgGame.app.manager
 		{
 			var num:int=0;
 			if(_meritoriousInfos==null) return num;			
-			var haveNum:int=0;
-			var useNum:int=0;
+			var haveNum:Number=0;
+			var useNum:Number=0;
 			var q_meritorious:Q_meritorious;
 			for(var i:int=0;i<_meritoriousInfos.length;i++)
 			{

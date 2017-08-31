@@ -1,16 +1,20 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.RankTopSender;
 	import com.rpgGame.core.events.RankListEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.RankListType;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.SculptureData;
 	import com.rpgGame.netData.top.bean.TopInfo;
 	import com.rpgGame.netData.top.message.ResToplistToClientMessage;
+	import com.rpgGame.netData.top.message.SCUpdateTopLeaderTitleMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -147,6 +151,17 @@ package com.rpgGame.app.manager
 				return  ;
 			}
 			RankTopSender.reqWorship(_worshTopInfo.playerid,type);
+		}
+		
+		public function playerRankTileChange(msg:SCUpdateTopLeaderTitleMessage):void
+		{
+			// TODO Auto Generated method stub
+			var player:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if (player) 
+			{
+				(player.data as HeroData).topLeaderTypes=msg.topLeaderTypes;
+				(player.headFace as HeadFace).addAndUpdataRankTitle(msg.topLeaderTypes);
+			}
 		}
 	}
 }

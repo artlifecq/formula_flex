@@ -191,8 +191,8 @@ package com.rpgGame.appModule.task
 		{
 			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
 			{
-				var golo:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
-				var noney:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)+MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
+				var golo:Number= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
+				var noney:Number= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)+MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
 				switch(type)
 				{
 					case 1:

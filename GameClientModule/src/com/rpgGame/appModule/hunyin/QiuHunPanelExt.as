@@ -26,10 +26,13 @@ package com.rpgGame.appModule.hunyin
 	
 	import feathers.controls.UIAsset;
 	import feathers.events.FeathersEventType;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.hunyin.QiuHun_Skin;
 	
 	import starling.display.DisplayObject;
+	
+	import utils.TimerServer;
 	
 	public class QiuHunPanelExt extends SkinUIPanel 
 	{
@@ -62,7 +65,9 @@ package com.rpgGame.appModule.hunyin
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.lbZhenHun: //征婚
-					onlbZhenHunHandler();
+					if(_skin.lbZhenHun.filter==null)
+						onlbZhenHunHandler();
+					else NoticeManager.showNotifyById(22000);
 					break;
 				case _skin.btnQiuHun://求婚
 					onBtnQiuHunHandler();
@@ -82,6 +87,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			super.onHide();
 			closeEvent();
+			TimerServer.remove(updateTimeBtnShow);			
 		}
 		
 		private function initEvent():void
@@ -157,11 +163,29 @@ package com.rpgGame.appModule.hunyin
 		private function onlbZhenHunHandler():void
 		{		
 			HunYinSender.upCSMarriageSeekingMessage();
+			_timenum=60;
+			TimerServer.addLoop(updateTimeBtnShow,1000);
+			updateTimeBtnShow();
 			//			var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
 			//			if(MainRoleManager.actorInfo.sex==1) str+=boyText;
 			//			else str+=grilText;
-//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
+			//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
 			//			ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
+		}
+		
+		private var _timenum:int=5;
+		private function updateTimeBtnShow():void
+		{
+			_timenum--;
+			if(_timenum==0)
+			{
+				TimerServer.remove(updateTimeBtnShow);			
+				_skin.lbZhenHun.filter=null;
+			}
+			else
+			{
+				GrayFilter.gray(_skin.lbZhenHun);
+			}
 		}
 		
 		private function onBtnQiuHunHandler():void

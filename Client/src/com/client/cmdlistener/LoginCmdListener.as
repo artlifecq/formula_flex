@@ -3,6 +3,7 @@ package com.client.cmdlistener
 	import com.client.EnumErrorConst;
 	import com.client.ui.alert.GameAlert;
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.HttpUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
@@ -13,6 +14,7 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
 	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
+	import com.rpgGame.statistics.Statistics;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
@@ -76,9 +78,13 @@ package com.client.cmdlistener
 			SocketConnection.messageMgr.isReplace=true;
 			SocketConnection.messageMgr.replaceIP=msg.ip;
 		}
-		
+		private static function nullCall():void
+		{
+			trace("覆盖js回调");
+		}
 		public static function RecvMyPlayerInfoMessage(msg:ResMyPlayerInfoMessage):void
 		{
+			HttpUtil.jsCallBack("closeBrower",nullCall);
 			ClientConfig.loginData = msg.myPlayerInfo;
 			if (onLoginSuccessHandler != null)
 			{
@@ -91,7 +97,7 @@ package com.client.cmdlistener
 				onGetMyPlayerInfoHandler();
 				onGetMyPlayerInfoHandler = null;
 			}
-			
+			Statistics.intance.pushNode(Statistics.STEP_MAIN_PLAYER_DATA,"获取到主玩家数据");
 			if(MessageMgr.Ins.isCrossSocket){//跨服登陆
 				ClientConfig.mainEntry.updateLogindata();
 			}else{
@@ -113,6 +119,7 @@ package com.client.cmdlistener
 			// 这里启动心跳吧
 			StartHeart();*/
 			GameLog.addShow("收到登录成功消息 ");
+			Statistics.intance.pushNode(Statistics.STEP_LOGIN_SUCCESS,"玩家登陆成功");
 //			ClientConfig.loginData.mapModelId=msg.mapModelId;
 			ClientConfig.hasHero = true;
 			onCreateHeroSuccess();

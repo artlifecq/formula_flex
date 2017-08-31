@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.manager.yunBiao.CheatsMgr;
+	import com.rpgGame.app.manager.pet.PetManager;
 	
 	public class Mgr
 	{

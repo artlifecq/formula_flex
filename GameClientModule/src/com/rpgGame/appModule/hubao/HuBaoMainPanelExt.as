@@ -257,7 +257,7 @@ package com.rpgGame.appModule.hubao
 					sp.graphics.endFill();
 					_chenhaoEftContaner1.addChild(sp);
 					_moxing1.x=100;
-					_moxing1.y=280;
+					_moxing1.y=300;
 					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner1.addChild3D(_moxing1);
@@ -275,7 +275,7 @@ package com.rpgGame.appModule.hubao
 					sp.graphics.endFill();
 					_chenhaoEftContaner2.addChild(sp);
 					_moxing2.x=100;
-					_moxing2.y=280;
+					_moxing2.y=300;
 					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner2.addChild3D(_moxing2);
@@ -293,7 +293,7 @@ package com.rpgGame.appModule.hubao
 					sp.graphics.endFill();
 					_chenhaoEftContaner3.addChild(sp);
 					_moxing3.x=100;
-					_moxing3.y=280;
+					_moxing3.y=300;
 					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner3.addChild3D(_moxing3);
@@ -311,7 +311,7 @@ package com.rpgGame.appModule.hubao
 					sp.graphics.endFill();
 					_chenhaoEftContaner4.addChild(sp);
 					_moxing4.x=100;
-					_moxing4.y=280;
+					_moxing4.y=300;
 					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner4.addChild3D(_moxing4);
@@ -334,29 +334,29 @@ package com.rpgGame.appModule.hubao
 			{
 				case 1:
 				{
-					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
-					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,55,0);
+					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,320,0);
 					_traget=_moxing1;
 					break;
 				}
 				case 2:
 				{
-					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
-					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,55,0);
+					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,320,0);
 					_traget=_moxing2;
 					break;
 				}
 				case 3:
 				{
-					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
-					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,55,0);
+					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,320,0);
 					_traget=_moxing3;
 					break;
 				}
 				case 4:
 				{
-					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
-					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,55,0);
+					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,320,0);
 					_traget=_moxing4;
 					break;
 				}			
