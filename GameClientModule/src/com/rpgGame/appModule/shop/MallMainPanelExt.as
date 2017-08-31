@@ -15,8 +15,11 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.coreData.info.shop.ShopVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
+	import flash.display3D.IndexBuffer3D;
+	
 	import away3d.events.Event;
 	
+	import feathers.controls.Radio;
 	import feathers.data.ListCollection;
 	
 	import gs.TweenMax;
@@ -36,6 +39,7 @@ package com.rpgGame.appModule.shop
 		private var maxCount:int=9;
 		private var cellList:Vector.<MallItemExt>=new Vector.<MallItemExt>();
 		private var shopVo:ShopVo;
+		private var _shopBtns:Array;
 		public function MallMainPanelExt()
 		{
 			_skin=new ShangCheng_Skin();
@@ -47,9 +51,10 @@ package com.rpgGame.appModule.shop
 		}
 		private function init():void
 		{
+			_shopBtns=[_skin.btnRexiao,_skin.btnBianqiang,_skin.btnLijin,_skin.btnVip];
 			var cell:MallItemExt;
-			var startX:int=267;
-			var startY:int=145;
+			var startX:int=410;
+			var startY:int=231;
 			for (var i:int = 0; i < maxCount; i++) 
 			{
 				cell=new MallItemExt(startX+int(i%3)*232,startY+int(i/3)*150);
@@ -63,7 +68,7 @@ package com.rpgGame.appModule.shop
 		}
 		private function initEvent():void
 		{
-			_skin.tab_nv.addEventListener(Event.CHANGE, onTab);
+//			_skin.tab_nv.addEventListener(Event.CHANGE, onTab);
 			
 		}
 		
@@ -91,11 +96,8 @@ package com.rpgGame.appModule.shop
 				showSubPanel(_curMallType);
 			}
 		}
-		private function onTab(e:Event):void
-		{
-			var index:int = this._skin.tab_nv.selectedIndex;
-			showSubPanel(index);
-		}
+		
+		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
@@ -103,7 +105,7 @@ package com.rpgGame.appModule.shop
 			if (shopVo) 
 			{
 				var types:Array=shopVo.shopPageTypes;
-				this._skin.tab_nv.dataProvider=new ListCollection(shopVo.shopPageTitles);
+				//this._skin.tab_nv.dataProvider=new ListCollection(shopVo.shopPageTitles);
 				if (data==null) 
 				{
 					if (_curMallType==-1) 
@@ -158,6 +160,14 @@ package com.rpgGame.appModule.shop
 			if (target==this._skin.btnChongZhi) 
 			{
 				GlobalFunction.iWantRecharge();
+			}
+			if (target is Radio) 
+			{
+				var index:int=_shopBtns.indexOf(target);
+				if (index!=-1) 
+				{
+					showSubPanel(index);
+				}
 			}
 		}
 		override protected function onShow():void
