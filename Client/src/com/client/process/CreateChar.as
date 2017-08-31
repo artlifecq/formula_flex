@@ -13,6 +13,7 @@ package com.client.process
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.login.message.ResErrorMessage;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -68,6 +69,7 @@ package com.client.process
 				GameLog.addShow("已有角色，继续进入游戏");
 				toPercent = 0.2;
 				completeProcess();
+				Statistics.intance.pushNode(Statistics.STEP_CREATE_CHAR,"创角成功");
 			}
 			else
 			{
@@ -147,6 +149,7 @@ package com.client.process
 			_createRoleLoader.content["showInfoAlert"] = onShowInfoAlert;
 			setProcessPercent(1);
 			ResLoadingView.instance.hide();
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_CREAT_RES,"加载创角资源成功");
 		}
 
 		private function onCreateCharProgress(event : ProgressEvent) : void
@@ -226,6 +229,7 @@ package com.client.process
 		{
 			GameLog.addShow("创建新角色完成...");
 			completeProcess();
+			Statistics.intance.pushNode(Statistics.STEP_CREATE_CHAR,"创角完成");
 		}
 
 		private function onCreateCharFailHandler(msg : ResErrorMessage) : void

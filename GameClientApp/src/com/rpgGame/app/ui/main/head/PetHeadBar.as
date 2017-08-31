@@ -1,7 +1,7 @@
 package com.rpgGame.app.ui.main.head
 {
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.PetManager;
+	import com.rpgGame.app.manager.pet.PetManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;

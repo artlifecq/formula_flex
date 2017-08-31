@@ -61,7 +61,7 @@ package com.client
 			Away3D.PARSE_PNG_IN_WORKER = !ClientConfig.useAtfFormat && !ClientConfig.useBpgFormat;
 			Away3D.USE_ATF_FOR_TEXTURES = ClientConfig.useAtfFormat;
 			Away3D.ATF_ASYNC_UPLOAD = ClientConfig.useAtfFormat;
-			Away3D.ENABLE_SOUND_PAN = true;
+//			Away3D.ENABLE_SOUND_PAN = true;
 
 			MultiUrlLoadManager.getUrlWithVersion = VersionUtils.getVersionPath;
 			

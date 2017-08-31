@@ -1,22 +1,25 @@
 package com.rpgGame.app.manager.hint
 {
+	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.HintTypeSetInfo;
 	import com.rpgGame.coreData.enum.HintMoveDirectionEnum;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	import flash.utils.getDefinitionByName;
 	
 	import feathers.controls.Button;
-	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	import feathers.controls.text.Fontter;
 	import feathers.layout.HorizontalAlign;
-	import feathers.layout.VerticalAlign;
 	import feathers.themes.GuiThemeStyle;
 	
 	import starling.display.Sprite;
-
+	
 	/**
 	 * 单行显示精灵， 集成底图，文字，还有mask
 	 * @author Mandragora
@@ -27,7 +30,7 @@ package com.rpgGame.app.manager.hint
 	public class HintLineSprite extends Sprite
 	{
 		private var _itemBg : UIAsset;
-		protected var _label : Label;
+		protected var _label : RichTextArea3D;
 		private var closeBtn : Button;
 		private var _hintTypeSet : HintTypeSetInfo;
 		private var _bgMarginTop : int;
@@ -38,21 +41,21 @@ package com.rpgGame.app.manager.hint
 		public var preTime : int;
 		
 		private var initHeight:int;
-
+		
 		public function HintLineSprite(hintTypeSet : HintTypeSetInfo)
 		{
 			super();
 			_hintTypeSet = hintTypeSet;
 			initSprite();
 		}
-
+		
 		private function initSprite() : void
 		{
 			if (!_hintTypeSet)
 			{
 				return;
 			}
-
+			
 			var bgMargins : Array = _hintTypeSet.bgMargin.split(";");
 			if (bgMargins.length > 0)
 				_bgMarginTop = bgMargins[0];
@@ -70,7 +73,7 @@ package com.rpgGame.app.manager.hint
 				_bgMarginRight = bgMargins[3];
 			else
 				_bgMarginRight = 0;
-
+			
 			if (_hintTypeSet.itemBg)
 			{
 				_itemBg = new UIAsset();
@@ -79,16 +82,24 @@ package com.rpgGame.app.manager.hint
 				_itemBg.setSize(_hintTypeSet.itemWidth || _hintTypeSet.width, _hintTypeSet.height);
 				addChild(_itemBg);
 			}
-			_label = new Label();
-			_label.verticalAlign = VerticalAlign.MIDDLE;
-			_label.fontSize = _hintTypeSet.textSize;
-			_label.fontName = Fontter.DEFAULT_FONT_NAME;
-			_label.touchable = false;
-			_label.isHtmlText = true;
-			_label.nativeFilters = ColorUtils.getDefaultStrokeFilter();
-			_label.y=-2;
+			//			_label = new Label();
+			//			_label.verticalAlign = VerticalAlign.MIDDLE;
+			//			_label.fontSize = _hintTypeSet.textSize;
+			//			_label.fontName = Fontter.DEFAULT_FONT_NAME;
+			//			_label.touchable = false;
+			//			_label.isHtmlText = true;
+			//			_label.nativeFilters = ColorUtils.getDefaultStrokeFilter();
+			//			_label.y=-2;
+			_label=RichTextArea3D.getFromPool();
+			_label.setSize(2000,24); 
+			_label.filters = ColorUtils.getDefaultStrokeFilter();
+			_label.breakLineManual = false;
+			_label.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
+			_label.wordWrap = false;
+			_label.multiline = false;
+			_label.y=4;
 			this.addChild(_label);
-
+			
 			if (_hintTypeSet.canClose && _hintTypeSet.closeBtnSkin != "")
 			{
 				var closeBtnMarginTop : int;
@@ -112,7 +123,7 @@ package com.rpgGame.app.manager.hint
 					closeBtnMarginRight = closeBtnMargins[3];
 				else
 					closeBtnMarginRight = 0;
-
+				
 				closeBtn = new Button();
 				if (closeBtnMarginRight > 0)
 					closeBtn.x = _hintTypeSet.width - closeBtnMarginRight;
@@ -127,7 +138,7 @@ package com.rpgGame.app.manager.hint
 			}
 			resetLine();
 		}
-
+		
 		public function updateLabel(lastLine : HintLineSprite, topOffset : int) : void
 		{
 			if (!_hintTypeSet)
@@ -214,7 +225,7 @@ package com.rpgGame.app.manager.hint
 					break;
 			}
 		}
-
+		
 		public function resetLine() : void
 		{
 			if (!_hintTypeSet)
@@ -222,6 +233,7 @@ package com.rpgGame.app.manager.hint
 				return;
 			}
 			var textAlign : String = _hintTypeSet.textAlign;
+			var defaultFormat:TextFormat;
 			switch (textAlign)
 			{
 				case HorizontalAlign.LEFT:
@@ -234,38 +246,50 @@ package com.rpgGame.app.manager.hint
 					textAlign = HorizontalAlign.LEFT;
 					break;
 			}
+			
+			defaultFormat = new TextFormat(Fontter.FONT_Hei);
+			defaultFormat.color = StaticValue.BEIGE_TEXT;
+			defaultFormat.size = 14;
+			defaultFormat.letterSpacing = 1;
+			defaultFormat.leading = 10;
 			switch (_hintTypeSet.showMoveDirection)
 			{
 				case HintMoveDirectionEnum.ENUM_NORMAL:
-					_label.textAlign = textAlign;
+					//					_label.textAlign = textAlign;
+					defaultFormat.align = textAlign;
 					this.x = _bgMarginLeft;
 					this.y = _bgMarginTop;
 					break;
 				case HintMoveDirectionEnum.ENUM_LEFT_TO_RIGHT:
-					_label.textAlign = HorizontalAlign.LEFT;
+					//					_label.textAlign = HorizontalAlign.LEFT;
+					defaultFormat.align = TextFieldAutoSize.LEFT;
 					this.x = -_label.width + _bgMarginLeft;
 					this.y = _bgMarginTop;
 					break;
 				case HintMoveDirectionEnum.ENUM_RIGHT_TO_LEFT:
-					_label.textAlign = HorizontalAlign.LEFT;
+					//					_label.textAlign = HorizontalAlign.LEFT;
+					defaultFormat.align = TextFieldAutoSize.LEFT;
 					this.x = (_hintTypeSet.itemWidth || _hintTypeSet.width) - _bgMarginRight;
 					this.y = _bgMarginTop;
 					break;
 				case HintMoveDirectionEnum.ENUM_TOP_TO_LOW:
-					_label.textAlign = textAlign;
+					//					_label.textAlign = textAlign;
+					defaultFormat.align = textAlign;
 					this.x = _bgMarginLeft;
 					this.y = -_label.height + _bgMarginTop;
 					break;
 				case HintMoveDirectionEnum.ENUM_LOW_TO_TOP:
-					_label.textAlign = textAlign;
+					//					_label.textAlign = textAlign;
+					defaultFormat.align = textAlign;
 					this.x = _bgMarginLeft;
 					this.y = (_hintTypeSet.height > 0 ? _hintTypeSet.height : _label.height) - _bgMarginBottom;
 					break;
 			}
+			_label.defaultTextFormat=defaultFormat;
 			_isFinished = false;
 			preTime = 0;
 		}
-
+		
 		public function setText(text : String, color : uint) : void
 		{
 			if (!_hintTypeSet)
@@ -276,43 +300,46 @@ package com.rpgGame.app.manager.hint
 			var useTextHeight : Boolean = false;
 			if ((_hintTypeSet.itemWidth == 0 && _hintTypeSet.width == 0) || _hintTypeSet.showMoveDirection == HintMoveDirectionEnum.ENUM_LEFT_TO_RIGHT || _hintTypeSet.showMoveDirection == HintMoveDirectionEnum.ENUM_RIGHT_TO_LEFT)
 			{
-				_label.width = _label.maxWidth = 2000;
+				_label.width /*= _label.maxWidth*/ = 2000;
 				useTextWidth = true;
 			}
 			else
 			{
-				_label.width = _label.maxWidth = (_hintTypeSet.itemWidth || _hintTypeSet.width) - _bgMarginLeft - _bgMarginRight;
+				_label.width /*= _label.maxWidth*/ = (_hintTypeSet.itemWidth || _hintTypeSet.width) - _bgMarginLeft - _bgMarginRight;
 			}
 			if (_hintTypeSet.height > 0)
 			{
-				_label.height = _label.maxHeight = _hintTypeSet.height - _bgMarginTop - _bgMarginBottom;
+				_label.height /*= _label.maxHeight */= _hintTypeSet.height - _bgMarginTop - _bgMarginBottom;
 			}
 			else
 			{
-				_label.height = _label.maxHeight = 2000;
+				_label.height /*= _label.maxHeight */= 2000;
 				useTextHeight = true;
 			}
-			_label.color = color;
-			_label.htmlText = text;
+			//			_label.color = color;
+			var defaultFormat:TextFormat= _label.defaultTextFormat;
+			defaultFormat.color=color;
+			_label.defaultTextFormat=defaultFormat;
+			_label.text = text;
 			if (useTextWidth)
 			{
-				_label.width = _label.textWidth;
+				_label.width = _label.textWidth+15;
 			}
-
+			
 			if (_hintTypeSet.maxWidth > 0)
 			{
 				if (_label.width > _hintTypeSet.maxWidth)
 				{
-					_label.width = _label.maxWidth = _hintTypeSet.maxWidth;
-					_label.htmlText = text;
+					_label.width /*= _label.maxWidth*/ = _hintTypeSet.maxWidth;
+					_label.text = text;
 				}
 			}
-
+			
 			if (useTextHeight)
 			{
 				_label.height = _label.textHeight;
 			}
-
+			
 			if (_itemBg)
 			{
 				var bgWidth : int = _hintTypeSet.itemWidth || _hintTypeSet.width;
@@ -334,12 +361,12 @@ package com.rpgGame.app.manager.hint
 			}
 			resetLine();
 		}
-
+		
 		public function get isFinished() : Boolean
 		{
 			return _isFinished;
 		}
-
+		
 		public function get lineWidth() : int
 		{
 			if (_hintTypeSet.width == 0)
@@ -353,7 +380,7 @@ package com.rpgGame.app.manager.hint
 				return _hintTypeSet.itemWidth || _hintTypeSet.width;
 			}
 		}
-
+		
 		public function get lineHeight() : int
 		{
 			if (_hintTypeSet.height == 0)

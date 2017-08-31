@@ -1,7 +1,5 @@
 ﻿package org.game.netCore.net
 {
-    import com.gameClient.alert.AlertPanel;
-    
     import flash.utils.Dictionary;
 
     public class GameSocketDispatcher 

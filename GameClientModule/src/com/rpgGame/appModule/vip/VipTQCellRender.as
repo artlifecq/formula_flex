@@ -1,28 +1,20 @@
 package com.rpgGame.appModule.vip
 {
-	import feathers.controls.renderers.BaseDefaultListItemRenderer;
+	import com.rpgGame.core.ui.SkinUI;
 	
 	import org.mokylin.skin.app.vip.VipsMiaoshu;
 	
-	public class VipTQCellRender extends BaseDefaultListItemRenderer
+	public class VipTQCellRender extends SkinUI
 	{
 		private var _skin:VipsMiaoshu;
 		public function VipTQCellRender()
 		{
-			super();
 			_skin=new VipsMiaoshu();
-			_skin.toSprite(this);
+			super(_skin);
 		}
-		override protected function commitData():void
+		public function setData(data:String):void
 		{
-			if(this._data && this._owner)
-			{
-				this._skin.lbDec.text=String(this.data)
-			}
-		}
-		override public function dispose():void
-		{
-			super.dispose();
+			this._skin.lbDec.text=data;
 		}
 	}
 }

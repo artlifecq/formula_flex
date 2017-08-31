@@ -1,4 +1,5 @@
 package com.rpgGame.netData.player.message{
+	import com.rpgGame.netData.player.bean.HyperlinkInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -18,8 +19,7 @@ package com.rpgGame.netData.player.message{
 		//参数列表
 		private var _values: Vector.<String> = new Vector.<String>();
 		//子参数
-		private var _parameters: String;
-		
+		private var _hyperlinkInfos: Vector.<HyperlinkInfo> = new Vector.<HyperlinkInfo>();
 		
 		/**
 		 * 写入字节缓存
@@ -34,7 +34,10 @@ package com.rpgGame.netData.player.message{
 				writeString(_values[i]);
 			}
 			//子参数
-			writeString(_parameters);
+			writeShort(_hyperlinkInfos.length);
+			for (i = 0; i < _hyperlinkInfos.length; i++) {
+				writeBean(_hyperlinkInfos[i]);
+			}
 			return true;
 		}
 		
@@ -51,7 +54,10 @@ package com.rpgGame.netData.player.message{
 				_values[i] = readString();
 			}
 			//子参数
-			_parameters = readString();
+			var hyperlinkInfos_length : int = readShort();
+			for (i = 0; i < hyperlinkInfos_length; i++) {
+				_hyperlinkInfos[i] = readBean(HyperlinkInfo) as HyperlinkInfo;
+			}
 			return true;
 		}
 		
@@ -97,15 +103,15 @@ package com.rpgGame.netData.player.message{
 		 * get 子参数
 		 * @return 
 		 */
-		public function get parameters(): String{
-			return _parameters;
+		public function get hyperlinkInfos(): Vector.<HyperlinkInfo>{
+			return _hyperlinkInfos;
 		}
 		
 		/**
 		 * set 子参数
 		 */
-		public function set parameters(value: String): void{
-			this._parameters = value;
+		public function set hyperlinkInfos(value: Vector.<HyperlinkInfo>): void{
+			this._hyperlinkInfos = value;
 		}
 		
 	}

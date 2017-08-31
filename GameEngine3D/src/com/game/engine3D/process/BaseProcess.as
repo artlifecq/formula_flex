@@ -77,7 +77,7 @@ package com.game.engine3D.process
 		public function startProcess() : void
 		{
 			_isProcessing = true;
-			setProcessPercent(0);
+			setProcessPercent(0.8);
 		}
 
 		public function completeProcess() : void

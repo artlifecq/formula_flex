@@ -5,6 +5,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.top.message.ResToplistToClientMessage;
 	import com.rpgGame.netData.top.message.ResWorshipCountMessage;
 	import com.rpgGame.netData.top.message.SCTopLeaderMessage;
+	import com.rpgGame.netData.top.message.SCUpdateTopLeaderTitleMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
@@ -21,7 +22,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(141102, getResListLeaderToClient);
 			SocketConnection.addCmdListener(141105, getResWorshipCount);
 			SocketConnection.addCmdListener(141107, getSCTopLeader);
+			SocketConnection.addCmdListener(141110, playerRankTileChange);
 			finish();
+		}
+		
+		private function playerRankTileChange(msg:SCUpdateTopLeaderTitleMessage):void
+		{
+			// TODO Auto Generated method stub
+			RankListManager.instance.playerRankTileChange(msg);
 		}
 		
 		private function getResToplistToClientMessage(msg:ResToplistToClientMessage):void

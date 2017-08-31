@@ -130,7 +130,7 @@ package com.rpgGame.app.ui.main.shortcut
 			var func:Q_newfunc = NewFuncCfgData.getdataById(EmFunctionID.EM_JUEXUE);
 			if(!FunctionOpenManager.checkOpenByLevel(func.q_level))
 			{
-				NoticeManager.showNotifyById(90203,"",func.q_string_name,func.q_level);
+				NoticeManager.showNotifyById(90203,null,func.q_string_name,func.q_level);
 				return ;
 			}
 			if(this.parent==null)

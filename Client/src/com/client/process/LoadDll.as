@@ -8,6 +8,7 @@ package com.client.process
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
@@ -72,6 +73,7 @@ package com.client.process
 		private function onDLLComplete(e : Event) : void
 		{
 			GameLog.addShow("加载代码库完成...");
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_DLL,"DLL加载成功");
 			completeProcess();
 		}
 

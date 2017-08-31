@@ -1,4 +1,5 @@
 package com.rpgGame.app.ui.main.chat {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatInputManager;
@@ -227,8 +228,13 @@ package com.rpgGame.app.ui.main.chat {
 			}
 		}
 		
-		private function onShowGoods(item:ClientItemInfo):void
+		private function onShowGoods(item:ClientItemInfo=null):void
 		{
+			if(item==null)
+			{
+				GameLog.addError( "物品展示错误引发的异常！ " );
+				return;
+			}
 			if(_inputText.text == DEFAULT_CHAT_TEXT)
 			{
 				_inputText.text = "";

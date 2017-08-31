@@ -154,6 +154,11 @@
             }
         }
 
+		/**
+		 * 调整同屏显示多少个玩家 
+		 * @param currTime
+		 * 
+		 */		
         private static function checkViewAdjust(currTime:int):void
         {
             var frameRate:int;
@@ -238,6 +243,12 @@
             }
         }
 
+		
+		/**
+		 * 动态调整游戏的渲染品质 
+		 * @param currTime
+		 * 
+		 */		
         private static function checkDisplayAdjust(currTime:int):void
         {
             var diffTime:int;
@@ -254,7 +265,7 @@
 						fps = minute_1_averageFps;
                         if (fps > 0)
                         {
-                            if (fps < 20)
+                            if (fps < 30)
                             {
                                 reducedDisplayPerforms();
                             }

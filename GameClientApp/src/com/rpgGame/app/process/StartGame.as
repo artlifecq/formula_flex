@@ -74,6 +74,7 @@ package com.rpgGame.app.process
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.type.TipType;
+    import com.rpgGame.statistics.Statistics;
     
     import flash.events.Event;
     import flash.events.KeyboardEvent;
@@ -169,7 +170,7 @@ package com.rpgGame.app.process
 				GlobalSettingManager.init();
 				
 				GamePerformsManager.init();
-				GamePerformsManager.autoDisplayAdjust = false;
+				GamePerformsManager.autoDisplayAdjust = true;
 				TabManager.init();
 				//
 
@@ -180,6 +181,10 @@ package com.rpgGame.app.process
 
 			DisplaySetUpManager.setToHigh();
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+			if (MainRoleManager.actorInfo.totalStat.level==1) 
+			{
+				Statistics.intance.pushNode(Statistics.STEP_FISRT_CHANGE_MAP,"首次切换地图");
+			}
 			SceneSwitchManager.changeMap();
 			isInitMap = true;
 		}

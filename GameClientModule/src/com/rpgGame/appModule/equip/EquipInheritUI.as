@@ -467,7 +467,7 @@ package com.rpgGame.appModule.equip
 					var useMon:int=q_jicheng.q_cast;
 				else
 					useMon=0;
-				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
+				var userMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
 					
 					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
@@ -690,7 +690,7 @@ package com.rpgGame.appModule.equip
 				if(q_jicheng)
 					var useMon:int=q_jicheng.q_cast;
 				else useMon=0;
-				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
+				var userMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
 					
 					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 				if(useMon>userMon)

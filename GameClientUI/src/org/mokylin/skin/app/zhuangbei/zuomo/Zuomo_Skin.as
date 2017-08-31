@@ -69,8 +69,6 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 
 		public var up_title:feathers.controls.Label;
 
-		public var use0:feathers.controls.UIAsset;
-
 		public var use1:feathers.controls.UIAsset;
 
 		public var use2:feathers.controls.UIAsset;
@@ -80,6 +78,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		public var use4:feathers.controls.UIAsset;
 
 		public var use5:feathers.controls.UIAsset;
+
+		public var use6:feathers.controls.UIAsset;
 
 		public var use_grp:feathers.controls.Group;
 
@@ -510,24 +510,13 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			return temp;
 		}
 
-		private function use0_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			use0 = temp;
-			temp.name = "use0";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 47;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function use1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			use1 = temp;
 			temp.name = "use1";
 			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 245;
+			temp.x = 47;
 			temp.y = 0;
 			return temp;
 		}
@@ -538,7 +527,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			use2 = temp;
 			temp.name = "use2";
 			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 287;
+			temp.x = 0;
 			temp.y = 89;
 			return temp;
 		}
@@ -549,7 +538,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			use3 = temp;
 			temp.name = "use3";
 			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 246;
+			temp.x = 47;
 			temp.y = 178;
 			return temp;
 		}
@@ -560,8 +549,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			use4 = temp;
 			temp.name = "use4";
 			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 47;
-			temp.y = 178;
+			temp.x = 245;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -571,8 +560,19 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			use5 = temp;
 			temp.name = "use5";
 			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 0;
+			temp.x = 287;
 			temp.y = 89;
+			return temp;
+		}
+
+		private function use6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			use6 = temp;
+			temp.name = "use6";
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 246;
+			temp.y = 178;
 			return temp;
 		}
 
@@ -583,7 +583,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "use_grp";
 			temp.x = 477;
 			temp.y = 115;
-			temp.elementsContent = [use0_i(),use1_i(),use4_i(),use3_i(),use5_i(),use2_i()];
+			temp.elementsContent = [use1_i(),use4_i(),use3_i(),use6_i(),use2_i(),use5_i()];
 			return temp;
 		}
 
