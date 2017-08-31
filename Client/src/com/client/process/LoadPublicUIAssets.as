@@ -4,6 +4,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	
@@ -70,6 +71,7 @@ package com.client.process
 		{
 			GameLog.addShow("公共UI素材加载完成...");
 			completeProcess();
+			Statistics.intance.pushNode(Statistics.STEP_PUBLIC_UI,"公共ui加载成功");
 		}
 
 		private function onResError(ld : MultiLoadData, e : Event) : void
