@@ -47,7 +47,8 @@ package com.rpgGame.app.manager.task
 		private static var _treasuerTaskData : Q_mission_base;
 		/**当前引导任务信息*/
 		private static var _guideTaskInfo : Vector.<TaskInfo>;
-		
+		/**当前膜拜任务信息*/
+		private static var _worshipTaskInfo : Vector.<TaskInfo>;
 		
 		
 		private static var _otherTaskInfoList :Dictionary=new Dictionary();
@@ -140,6 +141,10 @@ package com.rpgGame.app.manager.task
 				{
 					setGuideTaskInfo(task,taskData);
 				}
+				else if(taskData.q_mission_mainType==TaskType.MAINTYPE_WORSHIP)
+				{
+					setOtherTaskInfo(task,taskData);
+				}
 				else
 				{
 					setOtherTaskInfo(task,taskData);
@@ -199,6 +204,10 @@ package com.rpgGame.app.manager.task
 			else if(getTaskInfoByType(TaskType.LIJIN_TASK)!=null&&taskid.ToGID()==getTaskInfoByType(TaskType.LIJIN_TASK).taskId.ToGID())
 			{
 				return TaskType.LIJIN_TASK;
+			}
+			else if(getTaskInfoByType(TaskType.MAINTYPE_WORSHIP)!=null&&taskid.ToGID()==getTaskInfoByType(TaskType.MAINTYPE_WORSHIP).taskId.ToGID())
+			{
+				return TaskType.MAINTYPE_WORSHIP;
 			}
 			return 0;
 			
@@ -629,6 +638,10 @@ package com.rpgGame.app.manager.task
 			{
 				return false;
 			}
+			if(_worshipTaskInfo&&_worshipTaskInfo.length>0)
+			{
+				return false;
+			}
 			return true;
 		}
 		
@@ -777,6 +790,7 @@ package com.rpgGame.app.manager.task
 			_guideTaskInfo.push(value);
 			_guideTaskInfo.sort(onguideTaskSort); 
 		}
+		
 		private static function onguideTaskSort(guideTaskA : TaskInfo, guideTaskB : TaskInfo) : int
 		{
 			if (guideTaskA.taskModelId> guideTaskB.taskModelId)
@@ -784,6 +798,23 @@ package com.rpgGame.app.manager.task
 			else if (guideTaskA.taskModelId< guideTaskB.taskModelId)
 				return -1;
 			return 0;
+		}
+		/**设置膜拜任务信息*/
+		public static function setWorshipTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
+		{
+			if(!_worshipTaskInfo)
+			{
+				_worshipTaskInfo=new Vector.<TaskInfo>(); 
+			}
+			for(var i:int=0;i<_worshipTaskInfo.length;i++)
+			{
+				if(_worshipTaskInfo[i].taskModelId==value.taskModelId)
+				{
+					_worshipTaskInfo[i]=value;
+					return;
+				}
+			}
+			_worshipTaskInfo.push(value);
 		}
 		/**设置其它任务类型 任务信息*/
 		public static function setOtherTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
@@ -800,9 +831,9 @@ package com.rpgGame.app.manager.task
 		}
 		
 		/**获取环式任务总环数*/
-		public static function getTreasuerAllNum():int
+		public static function getTreasuerAllNum(exId:String):int
 		{
-			var exId:String=treasuerTaskInfo.loopRewardId;
+			
 			var taskSection:Q_mission_section=TaskMissionCfgData.getSectionByID(exId);
 			if(taskSection!=null)
 			{

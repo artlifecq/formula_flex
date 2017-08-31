@@ -147,14 +147,14 @@ package com.rpgGame.app.manager.mount
 			var useCount:int = showdata.getUseExtralItem(type);
 			if(!extraItemInfo.canUseItem(showdata.zhanqiLevel,useCount))
 			{
-				NoticeManager.showNotifyById(9004,"",extraItemInfo.clientItemInfo.qItem.q_name);
+				NoticeManager.showNotifyById(9004,null,extraItemInfo.clientItemInfo.qItem.q_name);
 				return false;
 			}
 			
 			var clientitem:ClientItemInfo = extraItemInfo.clientItemInfo;
 			if(BackPackManager.instance.getBagItemsCountById(clientitem.cfgId)<=0)
 			{
-				NoticeManager.showNotifyById(9002,"",clientitem.qItem.q_name);
+				NoticeManager.showNotifyById(9002,null,clientitem.qItem.q_name);
 				return false;
 			}
 			HorseSender.onCSUseWarFlagAddtionMessage(extraItemInfo.eatType);
@@ -173,7 +173,7 @@ package com.rpgGame.app.manager.mount
 			}
 			if(!showdata.isAutoBuyItem&&!showdata.canUpLevel())
 			{
-				NoticeManager.showNotifyById(9002,"",showdata.upLevelItem.qItem.q_name);
+				NoticeManager.showNotifyById(9002,null,showdata.upLevelItem.qItem.q_name);
 				return false;
 			}
 			if(showdata.isAutoBuyItem&&!showdata.canUpLevel())
@@ -188,7 +188,7 @@ package com.rpgGame.app.manager.mount
 				var needNum:int=showdata.upLevelNeedItemCount-showdata.bagHaveItemCount;
 				if(!ShopManager.ins.isCanBuy(shopItems,needNum))
 				{
-					NoticeManager.showNotifyById(9002,"","元宝");
+					NoticeManager.showNotifyById(9002,null,"元宝");
 					return false;
 				}
 			}

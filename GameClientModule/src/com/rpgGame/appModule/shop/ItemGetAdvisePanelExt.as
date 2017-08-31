@@ -11,9 +11,9 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_source;
@@ -31,7 +31,6 @@ package com.rpgGame.appModule.shop
 	import feathers.core.ToggleGroup;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.zuoqi.huoquSkin;
 	import org.mokylin.skin.common.alert.Alert_WuPinHuoQu;
 	
 	import starling.core.Starling;
@@ -66,6 +65,7 @@ package com.rpgGame.appModule.shop
 		private var gTimer:GameTimer;
 		private var _group:ToggleGroup;
 		private var bindGoldInitPt:Point;
+		private var _isRight:Boolean;
 		public function ItemGetAdvisePanelExt(skin:StateSkin=null)
 		{
 			_skin=new Alert_WuPinHuoQu();
@@ -73,7 +73,7 @@ package com.rpgGame.appModule.shop
 			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_grid.bindBg(_skin.itembg);
 			this._skin.container.addChild(_grid);
-//			this._skin.itembg.touchGroup=false;
+			//			this._skin.itembg.touchGroup=false;
 			bindGoldInitPt=new Point(_skin.gBindGold.x,_skin.gBindGold.y);
 			initEvent();
 			gTimer=new GameTimer("ItemGetAdvisePanelExt",100,0,onTime);
@@ -220,14 +220,19 @@ package com.rpgGame.appModule.shop
 		}
 		
 		private function setBuyNum(num:int):void
-		{
-			
+		{			
 			buyNum=Math.min(num,MAX_ALLOW);
 			buyNum=Math.max(buyNum,1);
 			this._skin.lbBuyNum.text=buyNum+"";
 			this._skin.lab_num.text=buyNum*price+"";
-			this._skin.lab_num.color=buyNum*price>Mgr.shopMgr.getCurrency(getSelectShopItem().data.priceType)?GameColorUtil.COLOR_RED:GameColorUtil.COLOR_GREEN;
+			updateLBcolor();
 		}
+		
+		private function updateLBcolor():void
+		{
+			this._skin.lab_num.color=buyNum*price>Mgr.shopMgr.getCurrency(getSelectShopItem().data.priceType)?StaticValue.RED_TEXT:StaticValue.GREEN_TEXT;
+		}
+		
 		private function onSetMax(eve:Event):void
 		{
 			// TODO Auto Generated method stub
@@ -262,7 +267,7 @@ package com.rpgGame.appModule.shop
 		{
 			if (target == _skin.btnClose) 
 			{
-				if (this.parent) 
+				if (this.parent&&_isRight) 
 				{
 					this.parent.x+=this.width/2;
 				}
@@ -301,6 +306,7 @@ package com.rpgGame.appModule.shop
 			{
 				MAX_ALLOW=999;
 			}
+			updateLBcolor();
 		}
 		private function updateBuyCount():void
 		{
@@ -308,7 +314,7 @@ package com.rpgGame.appModule.shop
 		}
 		
 		
-		public static function showBuyItem(itemMod:int,container:DisplayObjectContainer,forceBuyNum:int=0):int
+		public static function showBuyItem(itemMod:int,container:DisplayObjectContainer,forceBuyNum:int=0,isRight:Boolean=true):int
 		{
 			var qSource:Q_source=SourceGetCfg.getSource(itemMod);
 			if (!qSource) 
@@ -324,17 +330,24 @@ package com.rpgGame.appModule.shop
 			{
 				_ins=new ItemGetAdvisePanelExt();
 			}
-			if (container) 
+			_ins._isRight=isRight;
+			if (container&&isRight) 
 			{
 				_ins.x=container.width;
-				_ins.y=(container.height-_ins.height)/2;
+				_ins.y=(container.height-_ins.height)/2+23;
+				container.addChild(_ins);
+			}
+			else if(container&&!isRight) 
+			{
+				_ins.x=container.width-_ins.width;
+				_ins.y=0;
 				container.addChild(_ins);
 			}
 			else
 			{
 				StarlingLayerManager.topUILayer.addChild(_ins);
 				_ins.x=(Starling.current.nativeStage.width-_ins.width)/2;
-				_ins.y=(Starling.current.nativeStage.height-_ins.height)/2;
+				_ins.y=(Starling.current.nativeStage.height-_ins.height)/2+23;
 			}
 			_ins.setData(shopItems,qSource,forceBuyNum);
 			return _ins.width;

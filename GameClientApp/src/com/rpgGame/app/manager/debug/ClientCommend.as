@@ -8,6 +8,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.display2D.ResChangeEffect;
 	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -76,6 +77,8 @@ package   com.rpgGame.app.manager.debug
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.setTimeout;
+	
+	import app.message.EnumItemId;
 	
 	import gs.TweenLite;
 	
@@ -469,7 +472,7 @@ package   com.rpgGame.app.manager.debug
 				//CDDataManager.playCD("sd",1000);
 				for (var i:int = 0; i < arg[0]; i++) 
 				{
-					FightFaceHelper.showAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace,"",FightFaceHelper.NUMBER_PC_HPSUB,-100-i*10,null,null,SpellResultTweenUtil.TweenDiaoXue);
+					FightFaceHelper.showAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace,-1,FightFaceHelper.NUMBER_PC_HPSUB,-100-i*10,null,null,SpellResultTweenUtil.TweenDiaoXue);
 				}
 				
 			});
@@ -485,6 +488,23 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".openitem", function (...arg):void
 			{
 				ItemOpenResultShowPanelExt.onShowNotice(arg);
+			});
+			commandList.put( ".fly", function (...arg):void
+			{
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					//setTimeout(ResChangeEffect.fly,150*i,EnumItemId.GOLD,MainRoleManager.actor.headFace);
+					ResChangeEffect.fly(arg[1],arg[2]);
+				}	
+			});
+			commandList.put( ".title", function (...arg):void
+			{
+				var ids:Vector.<int>=new Vector.<int>()
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					ids.push(arg[i+1]);
+				}
+				(MainRoleManager.actor.headFace as HeadFace).addAndUpdataRankTitle(ids);
 			});
 		}
 		

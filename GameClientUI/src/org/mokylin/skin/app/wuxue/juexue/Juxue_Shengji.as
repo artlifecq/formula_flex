@@ -7,10 +7,9 @@ package org.mokylin.skin.app.wuxue.juexue
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.wuxue.Title_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Item_shuxing;
-	import org.mokylin.skin.app.wuxue.juexue.button.ButtonSj;
-	import org.mokylin.skin.app.wuxue.juexue.button.ButtonYingyong;
+	import org.mokylin.skin.app.wuxue.juexue.JuexueHead;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -55,9 +54,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			super();
 			
 			this.currentState = "normal";
-			this.height = 445;
-			this.width = 260;
-			this.elementsContent = [__Juxue_Shengji_UIAsset1_i(),tile_1_i(),tile_2_i(),grp_dengji_i(),currentLevel_i(),nexttLevel_i(),grp_xiaohao_i(),isopen_i(),btn_shengji_i(),btn_yinyong_i()];
+			this.height = 449;
+			this.width = 265;
+			this.elementsContent = [__Juxue_Shengji_UIAsset1_i(),__Juxue_Shengji_UIAsset2_i(),tile_1_i(),tile_2_i(),grp_dengji_i(),currentLevel_i(),nexttLevel_i(),grp_xiaohao_i(),isopen_i(),btn_shengji_i(),btn_yinyong_i()];
 			
 			states = {
 			};
@@ -93,9 +92,9 @@ package org.mokylin.skin.app.wuxue.juexue
 		private function __Juxue_Shengji_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 445;
+			temp.height = 449;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 260;
+			temp.width = 265;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -104,13 +103,22 @@ package org.mokylin.skin.app.wuxue.juexue
 		private function __Juxue_Shengji_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/wuxue/juexue/youbeijing.jpg";
+			temp.x = 3;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function __Juxue_Shengji_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/wuxue/juexue/diandian.png";
 			temp.x = 0;
 			temp.y = 5;
 			return temp;
 		}
 
-		private function __Juxue_Shengji_UIAsset3_i():feathers.controls.UIAsset
+		private function __Juxue_Shengji_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/wuxue/juexue/diandian.png";
@@ -124,9 +132,14 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shengji = temp;
 			temp.name = "btn_shengji";
-			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.button.ButtonSj;
-			temp.x = 73;
-			temp.y = 332;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "升 级";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 110;
+			temp.x = 78;
+			temp.y = 329;
 			return temp;
 		}
 
@@ -135,8 +148,13 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_yinyong = temp;
 			temp.name = "btn_yinyong";
-			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.button.ButtonYingyong;
-			temp.x = 72;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "点击启用";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 110;
+			temp.x = 78;
 			temp.y = 366;
 			return temp;
 		}
@@ -150,8 +168,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Item_shuxing()
 			temp.skin = skin
 			temp.width = 235;
-			temp.x = 16;
-			temp.y = 71;
+			temp.x = 20;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -160,9 +178,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_dengji = temp;
 			temp.name = "grp_dengji";
-			temp.x = 16;
-			temp.y = 38;
-			temp.elementsContent = [__Juxue_Shengji_Label1_i(),lb_dengji_i(),__Juxue_Shengji_UIAsset2_i()];
+			temp.x = 20;
+			temp.y = 45;
+			temp.elementsContent = [__Juxue_Shengji_Label1_i(),lb_dengji_i(),__Juxue_Shengji_UIAsset3_i()];
 			return temp;
 		}
 
@@ -171,9 +189,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_xiaohao = temp;
 			temp.name = "grp_xiaohao";
-			temp.x = 15;
-			temp.y = 235;
-			temp.elementsContent = [__Juxue_Shengji_Label2_i(),lb_xiaohao_i(),__Juxue_Shengji_UIAsset3_i(),lb_lujing_i()];
+			temp.x = 20;
+			temp.y = 227;
+			temp.elementsContent = [__Juxue_Shengji_Label2_i(),lb_xiaohao_i(),__Juxue_Shengji_UIAsset4_i(),lb_lujing_i()];
 			return temp;
 		}
 
@@ -184,7 +202,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.name = "isopen";
 			temp.styleName = "ui/app/wuxue/juexue/yqyong.png";
 			temp.x = 4;
-			temp.y = 363;
+			temp.y = 387;
 			return temp;
 		}
 
@@ -239,8 +257,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Item_shuxing()
 			temp.skin = skin
 			temp.width = 235;
-			temp.x = 16;
-			temp.y = 116;
+			temp.x = 20;
+			temp.y = 143;
 			return temp;
 		}
 
@@ -250,11 +268,11 @@ package org.mokylin.skin.app.wuxue.juexue
 			tile_1 = temp;
 			temp.name = "tile_1";
 			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Title_Skin()
+			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.JuexueHead()
 			temp.skin = skin
-			temp.width = 253;
+			temp.width = 258;
 			temp.x = 4;
-			temp.y = 4;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -264,11 +282,11 @@ package org.mokylin.skin.app.wuxue.juexue
 			tile_2 = temp;
 			temp.name = "tile_2";
 			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Title_Skin()
+			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.JuexueHead()
 			temp.skin = skin
-			temp.width = 253;
+			temp.width = 258;
 			temp.x = 4;
-			temp.y = 197;
+			temp.y = 190;
 			return temp;
 		}
 

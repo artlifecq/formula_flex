@@ -43,7 +43,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__HuangChengJiangLi_UIAsset2_i(),__HuangChengJiangLi_UIAsset3_i(),__HuangChengJiangLi_UIAsset4_i(),btnClose1_i(),__HuangChengJiangLi_UIAsset5_i(),__HuangChengJiangLi_UIAsset6_i(),__HuangChengJiangLi_UIAsset7_i(),__HuangChengJiangLi_UIAsset8_i(),__HuangChengJiangLi_UIAsset9_i(),__HuangChengJiangLi_UIAsset10_i(),__HuangChengJiangLi_UIAsset11_i(),__HuangChengJiangLi_UIAsset12_i(),grpGrid1_i(),grpGrid2_i(),grpGrid3_i()];
+			this.elementsContent = [__HuangChengJiangLi_UIAsset2_i(),__HuangChengJiangLi_UIAsset3_i(),__HuangChengJiangLi_UIAsset4_i(),btnClose1_i(),__HuangChengJiangLi_UIAsset5_i(),__HuangChengJiangLi_UIAsset6_i(),__HuangChengJiangLi_UIAsset7_i(),__HuangChengJiangLi_UIAsset8_i(),__HuangChengJiangLi_UIAsset9_i(),__HuangChengJiangLi_UIAsset10_i(),grpGrid1_i(),grpGrid2_i(),grpGrid3_i()];
 			
 			states = {
 			};
@@ -57,44 +57,26 @@ package org.mokylin.skin.app.banghui.huangcheng
 		private function __HuangChengJiangLi_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/fuwuqijiangli.png";
-			temp.x = 642;
-			temp.y = 476;
+			temp.styleName = "ui/app/banghui/wangcheng/bangzhongjiangli.png";
+			temp.x = 660;
+			temp.y = 161;
 			return temp;
 		}
 
 		private function __HuangChengJiangLi_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/xiaodiandi.png";
-			temp.x = 620;
-			temp.y = 162;
-			return temp;
-		}
-
-		private function __HuangChengJiangLi_UIAsset12_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/bangzhongjiangli.png";
-			temp.x = 647;
-			temp.y = 162;
-			return temp;
-		}
-
-		private function __HuangChengJiangLi_UIAsset13_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/wangcheng/zhanlinghuangcheng.png";
 			temp.x = 0;
-			temp.y = 18;
+			temp.y = 25;
 			return temp;
 		}
 
 		private function __HuangChengJiangLi_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/xiaban.png";
-			temp.x = 21;
+			temp.styleName = "ui/app/banghui/wangcheng/xiaban.jpg";
+			temp.x = 22;
 			temp.y = 86;
 			return temp;
 		}
@@ -102,7 +84,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 		private function __HuangChengJiangLi_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/banghui/wcjs_bg.jpg";
+			temp.styleName = "ui/big_bg/banghui/wcjs_bg3.jpg";
 			temp.x = 22;
 			temp.y = 135;
 			return temp;
@@ -121,8 +103,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/wangcheng/xiaodiandi.png";
-			temp.x = 214;
-			temp.y = 162;
+			temp.x = 207;
+			temp.y = 157;
 			return temp;
 		}
 
@@ -131,25 +113,25 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/wangcheng/guanyuanjiangli.png";
 			temp.x = 241;
-			temp.y = 163;
+			temp.y = 162;
 			return temp;
 		}
 
 		private function __HuangChengJiangLi_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/xiaodiandi.png";
-			temp.x = 207;
-			temp.y = 475;
+			temp.styleName = "ui/app/banghui/wangcheng/canyujiangli.png";
+			temp.x = 29;
+			temp.y = 531;
 			return temp;
 		}
 
 		private function __HuangChengJiangLi_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/wangcheng/jinggongjiangli.png";
-			temp.x = 234;
-			temp.y = 476;
+			temp.styleName = "ui/app/banghui/wangcheng/fuwuqijiangli.png";
+			temp.x = 544;
+			temp.y = 531;
 			return temp;
 		}
 
@@ -157,8 +139,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/wangcheng/xiaodiandi.png";
-			temp.x = 623;
-			temp.y = 475;
+			temp.x = 629;
+			temp.y = 157;
 			return temp;
 		}
 
@@ -178,8 +160,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			gid1_1 = temp;
 			temp.name = "gid1_1";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 94;
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 91;
 			temp.y = 0;
 			return temp;
 		}
@@ -189,8 +171,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			gid1_6 = temp;
 			temp.name = "gid1_6";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 499;
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 509;
 			temp.y = 0;
 			return temp;
 		}
@@ -222,9 +204,9 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpGrid1 = temp;
 			temp.name = "grpGrid1";
-			temp.x = 38;
-			temp.y = 253;
-			temp.elementsContent = [__HuangChengJiangLi_UIAsset13_i(),gid1_1_i(),gid1_6_i()];
+			temp.x = 32;
+			temp.y = 302;
+			temp.elementsContent = [__HuangChengJiangLi_UIAsset11_i(),gid1_1_i(),gid1_6_i()];
 			return temp;
 		}
 
@@ -233,8 +215,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpGrid2 = temp;
 			temp.name = "grpGrid2";
-			temp.x = 132;
-			temp.y = 511;
+			temp.x = 122;
+			temp.y = 516;
 			temp.elementsContent = [gid2_1_i()];
 			return temp;
 		}
@@ -244,8 +226,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpGrid3 = temp;
 			temp.name = "grpGrid3";
-			temp.x = 629;
-			temp.y = 511;
+			temp.x = 656;
+			temp.y = 516;
 			temp.elementsContent = [gid3_1_i()];
 			return temp;
 		}

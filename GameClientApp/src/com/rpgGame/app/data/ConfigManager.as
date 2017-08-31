@@ -58,6 +58,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
+	import com.rpgGame.coreData.cfg.QVertexColorCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
@@ -222,6 +223,7 @@ package com.rpgGame.app.data
 			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
 			QBattleRewardCfgData.setup(dic[ConfigClassRegister.Q_battle_reward]);
 			QKindomnameCfgData.setup(dic[ConfigClassRegister.Q_kindomname]);
+			QVertexColorCfgData.setup(dic[ConfigClassRegister.Q_vertex_color]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//

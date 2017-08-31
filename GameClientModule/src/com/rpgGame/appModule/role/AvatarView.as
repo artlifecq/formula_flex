@@ -562,7 +562,6 @@ package com.rpgGame.appModule.role
 			_skin.txt_roleName.text=_roleData.name;
 			//			_skin.txt_qu.text=zone;
 			//			_skin.txt_type.text=_roleData.jobName;//新版没有职业了
-			_skin.txt_team.text=_roleData.societyName;
 			
 			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
 			_skin.txt_roleName.x=(_skin.headMsg.width-_skin.txt_roleName.width)/2;
@@ -576,8 +575,8 @@ package com.rpgGame.appModule.role
 			_skin.numLevel.label=_roleData.totalStat.level.toString();
 			
 			//			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
-			
-			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"";
+			_skin.txt_team.text=_roleData.guildName;
+			_skin.txt_loveName.text="伴侣:"+(_roleData.loveName!=null&&_roleData.loveName.length!=0?_roleData.loveName:"无");
 			_skin.NumZhanli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			//			_skin.NumZhanli.width=_skin.NumZhanli.bounds.width;
 			_skin.NumZhanli.bounds.width=_skin.NumZhanli.width;

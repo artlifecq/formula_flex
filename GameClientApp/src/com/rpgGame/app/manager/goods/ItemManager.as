@@ -444,7 +444,7 @@ package com.rpgGame.app.manager.goods
 			var list:Vector.<Q_hecheng>=new Vector.<Q_hecheng>();
 			list=HeChengData.getQ_HeChengListBySonType(type,subType);
 			var arr:Array;
-			var pice:int;
+			var pice:Number;
 			if(list==null||list.length==0) return false;
 			for(var i:int=0;i<list.length;i++)
 			{

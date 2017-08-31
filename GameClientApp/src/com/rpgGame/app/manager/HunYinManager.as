@@ -11,6 +11,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.HunYinEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
@@ -232,6 +233,9 @@ package com.rpgGame.app.manager
 				if (role.headFace is HeadFace)
 					(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
 			}
+			if(_marriageInfo)
+				MainRoleManager.actorInfo.loveName=_marriageInfo.marriagePlayerName;
+			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
 			EventManager.dispatchEvent(HunYinEvent.HUNYIN_HUNYIN);
 		}
 		

@@ -90,7 +90,7 @@ package com.rpgGame.app.cmdlistener.task
 				{
 					TaskMissionManager.setTaskInfo(msg.taskInfo);
 					EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION,taskData.q_mission_mainType);
-					if(taskData.q_fly==1&&taskData.q_pathing!="")//系统神行符
+					if(taskData.q_fly==1)//系统神行符
 					{
 						if(TaskAutoManager.FLYTIME>0)
 						{

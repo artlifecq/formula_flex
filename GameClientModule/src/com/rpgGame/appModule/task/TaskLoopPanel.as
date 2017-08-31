@@ -191,8 +191,8 @@ package com.rpgGame.appModule.task
 		{
 			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
 			{
-				var golo:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
-				var noney:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)+MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
+				var golo:Number= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
+				var noney:Number= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)+MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
 				switch(type)
 				{
 					case 1:
@@ -252,7 +252,7 @@ package com.rpgGame.appModule.task
 		}
 		private function setPlanText():void
 		{
-			planLabel.htmlText="已完成环数：第"+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+"环";
+			planLabel.htmlText="已完成环数：第"+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum(TaskMissionManager.treasuerTaskInfo.loopRewardId)+"环";
 		}
 		private function setReward():void
 		{

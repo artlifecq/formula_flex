@@ -15,7 +15,9 @@ package org.mokylin.skin.app.npc
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg1:feathers.controls.UIAsset;
+
+		public var bg2:feathers.controls.UIAsset;
 
 		public var lable:feathers.controls.Label;
 
@@ -28,9 +30,9 @@ package org.mokylin.skin.app.npc
 			super();
 			
 			this.currentState = "normal";
-			this.height = 56;
-			this.width = 199;
-			this.elementsContent = [bg_i(),lable_i()];
+			this.height = 103;
+			this.width = 196;
+			this.elementsContent = [bg2_i(),bg1_i(),lable_i()];
 			
 			states = {
 			};
@@ -41,14 +43,30 @@ package org.mokylin.skin.app.npc
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bg_i():feathers.controls.UIAsset
+		private function bg1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg = temp;
-			temp.name = "bg";
+			bg1 = temp;
+			temp.name = "bg1";
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleName = "ui/mainui/tishi/qpb.png";
+			temp.top = 0;
+			return temp;
+		}
+
+		private function bg2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg2 = temp;
+			temp.name = "bg2";
+			temp.height = 103;
+			temp.scaleX = -1;
+			temp.styleName = "ui/mainui/tishi/qpb.png";
+			temp.visible = false;
+			temp.width = 196;
+			temp.x = 196;
 			temp.y = 0;
 			return temp;
 		}
@@ -58,14 +76,15 @@ package org.mokylin.skin.app.npc
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lable = temp;
 			temp.name = "lable";
-			temp.height = 32;
-			temp.text = "你到时说话啊你到时说你到时说话啊你到时说你到时说话啊你到时说";
+			temp.height = 21;
+			temp.leading = 2;
+			temp.text = "你到时说话啊";
 			temp.textAlign = "left";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 186;
-			temp.x = 6;
-			temp.y = 9;
+			temp.width = 164;
+			temp.x = 22;
+			temp.y = 31;
 			return temp;
 		}
 

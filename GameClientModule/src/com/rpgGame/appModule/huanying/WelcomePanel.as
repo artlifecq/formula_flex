@@ -2,10 +2,12 @@ package com.rpgGame.appModule.huanying
 {
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.WelcomeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.statistics.Statistics;
 	
 	import org.mokylin.skin.app.huanying.HuanYing_Skin;
 	
@@ -51,9 +53,18 @@ package com.rpgGame.appModule.huanying
 		{
 			super.onStageResize(sw,sh);
 		}
-		
+		override protected function onHide():void
+		{
+			super.onHide();
+			
+//			if (MainRoleManager.actorInfo.totalStat.level==1) 
+//			{
+//				
+//			}
+		}
 		override public function hide():void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_CLICK_START,"首次点击开始游戏");
 			super.hide();
 			if(eft){
 				eft.stop();

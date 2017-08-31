@@ -182,15 +182,21 @@
 			myTimeline.insert(new TweenLite(showobj, 0.5, {alpha:0.6,y:"-80"}),"step3");//,ease:Expo.easeOut
 		}
 		
-		private static function getRand(num:Number):Number
+		public static function getRand(num:Number):Number
 		{
 			return Math.random()*num;
 		}
-		private static function getRMRand(num:Number):Number
+		/**
+		 *获取正负 
+		 * @param num
+		 * @return 
+		 * 
+		 */		
+		public static function getRMRand(num:Number):Number
 		{
 			return num*(1-Math.random()*2);
 		}
-		private static function getRandBewtten(min:Number,max:Number):Number
+		public static function getRandBewtten(min:Number,max:Number):Number
 		{
 			return min+(max-min)*Math.random();
 		}

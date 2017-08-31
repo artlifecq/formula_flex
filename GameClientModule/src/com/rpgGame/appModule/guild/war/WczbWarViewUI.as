@@ -527,7 +527,7 @@ package com.rpgGame.appModule.guild.war
 			}
 			var result:int=1;
 			fightInfo=info;
-			info.id=EnumCity.WANG_CHENG;
+//			info.id=EnumCity.WANG_CHENG;
 			switch(info.state){
 				case 1://未申请
 					if(info.occupyGuildId.hexValue==myGuildId){//自己占领

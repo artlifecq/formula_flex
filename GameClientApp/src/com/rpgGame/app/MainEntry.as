@@ -17,6 +17,7 @@ package com.rpgGame.app
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
@@ -80,7 +81,7 @@ package com.rpgGame.app
 			TipsInfoView2D.setActual(tipsView2DActual);
 			
 			ReportUtil.setup(6,"100001",loginData.personId.ToString(),loginData.name);
-
+			Statistics.intance.pushNode(Statistics.STEP_MAIN_ENTRY,"成功进入游戏主入口");
 			initGame();
 			initProcess();
 			runProcess();

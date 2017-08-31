@@ -94,6 +94,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleX=animatData.scale_x>0?animatData.scale_x*0.01:1;
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
@@ -121,6 +122,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = atkor.rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
@@ -185,6 +187,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = 0;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
@@ -212,6 +215,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = atkor.rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
@@ -260,6 +264,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = 0;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, role.avatar);
 					effectRu.play(0,speed);
@@ -285,6 +290,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = role.rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
@@ -331,6 +337,7 @@ package com.rpgGame.app.fight.spell
 				effectRu.z = offset.z;
 				effectRu.setScale(sizeScale);
 				effectRu.rotationY = 0;
+				effectRu.castsShadows = false;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
 				effectRu.play(0,speed);
                 return effectRu;
@@ -436,6 +443,7 @@ package com.rpgGame.app.fight.spell
 						effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 						effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 						effectRu.rotationY = 0;
+						effectRu.castsShadows = false;
 						effectRu.completeWhenInvisible = true;
 						effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, targetRole.avatar);
 						effectRu.play(0,speed);
@@ -463,6 +471,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = targetRole.rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
@@ -496,6 +505,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleX=animatData.scale_x>0?animatData.scale_x*0.01:1;
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu, true);
 					if(finishFunc!=null)
@@ -523,6 +533,7 @@ package com.rpgGame.app.fight.spell
 						effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 						effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 						effectRu.rotationY = 0;
+						effectRu.castsShadows = false;
 						effectRu.completeWhenInvisible = true;
 						effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, role.avatar);
 						effectRu.play(0,speed);
@@ -584,6 +595,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = atkor.rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
@@ -600,6 +612,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu, true);
 					
@@ -674,6 +687,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.scaleY=animatData.scale_y>0?animatData.scale_y*0.01:1;
 					effectRu.scaleZ=animatData.scale_z>0?animatData.scale_z*0.01:1;
 					effectRu.rotationY = rotationY;
+					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu, true);
 					

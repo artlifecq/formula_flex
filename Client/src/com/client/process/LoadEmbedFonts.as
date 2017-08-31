@@ -5,6 +5,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -104,7 +105,7 @@ package com.client.process
 			{
 				trace("未知嵌入字体：" + className);
 			}
-
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_FONT,"字体加载成功");
 			completeProcess();
 		}
 

@@ -7,12 +7,15 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.hint.FloatingText;
+	import com.rpgGame.app.manager.pet.PetShowData;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
@@ -24,6 +27,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
@@ -49,6 +53,7 @@ package com.rpgGame.appModule.pet
 		private var _avatarData : RoleData;
 		
 		private var autoReq:TweenLite;
+		private var _petShowData:PetShowData;
 		
 		public function PetLevelUPPanelExt()
 		{
@@ -66,6 +71,7 @@ package com.rpgGame.appModule.pet
 			_avatar.y =430;
 			_modContaner.addChild3D(_avatar);
 			_avatarData=new RoleData(0);
+			_petShowData=new PetShowData();
 		}
 		
 		public function setData(data:PetInfo):void
@@ -73,7 +79,7 @@ package com.rpgGame.appModule.pet
 			this._data=data;
 			initModEff();
 			if(data.rank>=_qPet.q_max_grade) return;
-			_skin.uiLevel.styleName="ui/icon/pet/jieshu/"+data.rank+".png";
+			_skin.uiLevel.styleName="ui/pet/jieshu/"+data.rank+".png";
 			updateNeedItems();
 			updateBlessData();
 			setAutoState(false);		
@@ -115,6 +121,8 @@ package com.rpgGame.appModule.pet
 				}
 			}
 			_skin.barJindu.value=_data.rankExp;
+			_petShowData.exp=_data.rankExp;
+			TipTargetManager.show(_skin.lbJindu,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_petShowData));
 			updateItem();
 		}
 		private function updateItem():void
@@ -181,7 +189,7 @@ package com.rpgGame.appModule.pet
 			if (_skin.cboxTip.isSelected==false&&itemNum<_needItemNum)
 			{
 				//				FloatingText.showUp("材料不足");
-				NoticeManager.showNotifyById(9002,"",itemName);
+				NoticeManager.showNotifyById(9002,null,itemName);
 				return false;
 			}
 			PetSender.reqPetLevelUp(_data.modelId,1,_skin.cboxTip.isSelected?1:0);
@@ -189,14 +197,14 @@ package com.rpgGame.appModule.pet
 		}
 		private function showBuyPanel():void
 		{
-			var retw:int=ItemGetAdvisePanelExt.showBuyItem(_needItem,this);
-			if (retw!=0) 
-			{
-				if (this.parent) 
-				{
-					(this.parent as PetMainPanelExt).updatePos();
-				}
-			}
+			var retw:int=ItemGetAdvisePanelExt.showBuyItem(_needItem,this,0,false);
+//			if (retw!=0) 
+//			{
+//				if (this.parent) 
+//				{
+//					(this.parent as PetMainPanelExt).updatePos();
+//				}
+//			}
 		}
 		override protected function onStageResize(sw:int, sh:int):void
 		{
