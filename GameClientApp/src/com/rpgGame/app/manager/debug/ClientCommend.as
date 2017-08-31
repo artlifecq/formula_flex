@@ -469,7 +469,7 @@ package   com.rpgGame.app.manager.debug
 				//CDDataManager.playCD("sd",1000);
 				for (var i:int = 0; i < arg[0]; i++) 
 				{
-					FightFaceHelper.showAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace,"",FightFaceHelper.NUMBER_PC_HPSUB,-100-i*10,null,null,SpellResultTweenUtil.TweenDiaoXue);
+					FightFaceHelper.showAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace,-1,FightFaceHelper.NUMBER_PC_HPSUB,-100-i*10,null,null,SpellResultTweenUtil.TweenDiaoXue);
 				}
 				
 			});

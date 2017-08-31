@@ -419,7 +419,7 @@ package com.rpgGame.app.manager
 			if( player == null )
 				return;
 			
-			var numberRes:String = FightFaceHelper.NUMBER_NPC_HIT;
+			var numberRes:int = FightFaceHelper.NUMBER_NPC_HIT;
 			var time:int;
 			var reliveGameTime:GameTimer = new GameTimer( "Relive" + heroId.toString() );
 			reliveGameTime.onUpdate = function timeUpdate():void
@@ -433,7 +433,7 @@ package com.rpgGame.app.manager
 					return;
 				}
 				
-				FightFaceHelper.showAttackFace(player.boneNameContainer, "", numberRes, time, null, null, FightFaceHelper.tweenTypeEnemyHpDecrease, null, null, 1, 0.8);
+				FightFaceHelper.showAttackFace(player.boneNameContainer, -1, numberRes, time, null, null, FightFaceHelper.tweenTypeEnemyHpDecrease, null, null, 1, 0.8);
 			}
 			
 			reliveGameTime.start();

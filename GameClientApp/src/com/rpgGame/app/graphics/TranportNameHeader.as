@@ -3,7 +3,6 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	
-	import org.mokylin.skin.app.roll.Roll_DaojuDi;
 	import org.mokylin.skin.mainui.map.TranpprtLevel;
 	
 	import starling.display.Sprite;

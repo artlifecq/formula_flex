@@ -10,6 +10,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.utils.GSUtil;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
@@ -726,6 +727,7 @@ package com.rpgGame.app.graphics
 		{
 			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
 			var guildName : String = (_role.data as HeroData).guildName;
+			guildName=GSUtil.unAreaName(guildName);
 			if (guildMemberType<=0||guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
@@ -744,11 +746,7 @@ package com.rpgGame.app.graphics
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
-				//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				_guildNameBar.setName(guildName);
 				_guildNameBar.setColor(StaticValue.GREEN_TEXT);
-				updateAllBarPosition();
-				return;
 			}
 			
 			//更新一下数据

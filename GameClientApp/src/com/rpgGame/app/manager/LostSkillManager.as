@@ -14,8 +14,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
+	import com.rpgGame.coreData.cfg.QVertexColorCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.clientConfig.Q_vertex_color;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -196,15 +198,20 @@ package com.rpgGame.app.manager
 			}
 			return null;
 		}
-		public function getEffectNameUrl(id:int):String
+		public function getEffectNameUrl(id:int):int
 		{
 			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(id);
 			if (!qSkill) 
 			{
-				return "";
+				return -1;
 			}
 			var typeRes:String = FightFaceHelper.ROOT+FightFaceHelper.USESFUL_EFFECT+qSkill.q_icon+".png";
-			return typeRes;
+			var info:Q_vertex_color=QVertexColorCfgData.getVertexColorCfgByUrl(typeRes);
+			if(info){
+				return info.q_id;
+			}
+			
+			return -1;
 		}
 		public function hasBossHurtAddAtf(bossId:long,heroId:long,value:int):AttackFace
 		{

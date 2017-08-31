@@ -253,7 +253,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 			//攻击方打的血量
 			var hurt:int=arg[1];
 			
-			var attackFace : AttackFace = AttackFace.createAttackFace("", FightFaceHelper.NUMBER_PC_HPSUB, -hurt, null, null,null);
+			var attackFace : AttackFace = AttackFace.createAttackFace(-1, FightFaceHelper.NUMBER_PC_HPSUB, -hurt, null, null,null);
 			attackFace.touchAcross = true;
 			attackFace.touchable = false;
 			attackFace.touchGroup = false;

@@ -319,7 +319,6 @@ package
 			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
 			//			ProcessStateMachine.getInstance().pushProcess(new LoadMouseAssets());
 			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
-			ProcessStateMachine.getInstance().pushProcess(new LoadWelcome());
 		}
 		
 		private function getWebParams() : void
@@ -368,8 +367,7 @@ package
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.91, 0.95, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.95, 0.96, true);
 			//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.96, 0.97, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_WEL, 0.97, 0.98, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.96, 0.98, true);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);

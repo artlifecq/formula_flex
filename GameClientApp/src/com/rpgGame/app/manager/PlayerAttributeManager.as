@@ -70,59 +70,8 @@ package com.rpgGame.app.manager
 				change.add(key,AttValueConfig.getDisAttValue(key,newV-oldV));
 			}
 			FightFaceHelper.showPlayerBaseAttrChange(change);
-//			showChangeAttribute( CharAttributeType.MAX_HP, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.MAX_MP, oldMap, newMap );
-////			showChangeAttribute( CharAttributeType.PHYSICAL_ATTACK_LOWER, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.WAI_GONG, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.PHYSICAL_DEFENCE, oldMap, newMap );
-////			showChangeAttribute( CharAttributeType.MAGICAL_ATTACK_LOWER, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.NEI_GONG, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.MAGICAL_DEFENCE, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.HIT, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.CRIT, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.SPEED, oldMap, newMap );
 		}
 		
-		private static function showChangeAttribute( spType:int, oldMap:HashMap, newMap:HashMap ):void
-		{
-			var chgValue:int = oldMap.getValue( spType ) - newMap.getValue( spType );
-			if (chgValue != 0)
-			{
-				showChgAnimation( spType, chgValue );
-			}
-		}
-		
-		/**
-		 * 播放属性飘字动画
-		 * @param spType
-		 * @param chgValue
-		 * 
-		 */		
-		private static function showChgAnimation( spType:int, chgValue:int ):void
-		{
-			var numberType:String;
-			var fromPoint:Point;
-			var endPoint:Point;
-			var scaleAgo:Number = 0;
-			var scaleLater:Number = 0;
-			if(chgValue > 0)
-			{
-				fromPoint = new Point(40, -100);
-				endPoint = new Point(120, -180);
-				
-				numberType = FightFaceHelper.NUMBER_BULE;
-			}
-			else
-			{
-				fromPoint = new Point(40, -100);
-				endPoint = new Point(120, 0);
-				
-				numberType = FightFaceHelper.NUMBER_PC_HPSUB;
-			}
-			
-			var afType:String = FightFaceHelper.getAttributeUrl( spType, chgValue > 0 );
-			FightFaceHelper.showQueueAttackFace( MainRoleManager.actor, afType, FightFaceHelper.NUMBER_BULE , chgValue, scaleAgo, scaleLater, fromPoint,endPoint, null,null, FightFaceHelper.tweenTypeAttribute );
-		}
 		
 		/**
 		 * 获取的增加的属性，累加描述
