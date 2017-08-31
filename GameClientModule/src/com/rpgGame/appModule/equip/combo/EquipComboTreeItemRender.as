@@ -138,7 +138,7 @@ package com.rpgGame.appModule.equip.combo
 //					RewardTipTree.ins.addNode(subInfo.getParentKey(),subInfo.getRTNkey(),_skin.sub_item,244,null);
 //				}
 				subSkin.labelDisplay.text=HeChengData.getSubName(subInfo.type,subInfo.subType);
-				var has:Boolean=ItemManager.chackIsCanHC(subInfo.type,subInfo.subType);
+				has=ItemManager.chackIsCanHC(subInfo.type,subInfo.subType);
 //				RewardTipTree.ins.setState(subInfo.getRTNkey(),has);
 				_rewardTip.hasReward=has;
 				if(node.expanded){
@@ -166,7 +166,7 @@ package com.rpgGame.appModule.equip.combo
 				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
 				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(itemId);
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
-				var has:Boolean=max>0&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
+				has=max>0&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
 					pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY));
 //				if (!RewardTipTree.ins.getNode(detailInfo.getRTNkey())) 
 //				{

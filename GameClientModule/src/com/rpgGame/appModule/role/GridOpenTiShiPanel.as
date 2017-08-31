@@ -57,8 +57,8 @@ package com.rpgGame.appModule.role
 					break;
 			}
 			_buyPice=GoodsContainerMamager.getOpenGridMoney(_itemContainerID,_index);
-			_skin.lb_num.text=_buyNum.toString();
-			_skin.lb_pice.text=_buyPice.toString();
+			_skin.lb_num.text=_buyNum.toString()+"格";
+			_skin.lb_pice.text=_buyPice.toString()+"元宝";
 			if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)){
 				_skin.lb_pice.color=StaticValue.RED_TEXT;
 			}else{

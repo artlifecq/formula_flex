@@ -210,7 +210,7 @@ package  com.rpgGame.app.manager.hint
             }       
             else if (_type == TYPE_MOUSE_UP)
             {
-                x = stage.mouseX - width / 2;
+                x = stage.mouseX - width / 2+45;
                 y = stage.mouseY - height;
 				if( x + width > stage.stageWidth)
 				{

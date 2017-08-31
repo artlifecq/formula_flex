@@ -22,12 +22,15 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	import com.rpgGame.netData.lostSkill.message.CSLostSkillLeveUpMessage;
 	
+	import away3d.events.Event;
+	
+	import feathers.core.ui_internal;
+	
 	import org.game.netCore.connection.SocketConnection;
 	import org.mokylin.skin.app.wuxue.Title_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Item_shuxing;
+	import org.mokylin.skin.app.wuxue.juexue.JuexueHead;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
-	
-	import away3d.events.Event;
 
 	public class LostSkillUpLevelView
 	{
@@ -46,13 +49,13 @@ package com.rpgGame.appModule.skill.lostskill
 			content.lb_name.text = LanguageConfig.getText(LangUI_2.Lostskill_title2);
 			_skin.btn_shengji.addEventListener(Event.TRIGGERED,uplevelTrigeredHandler);
 			_skin.btn_yinyong.addEventListener(Event.TRIGGERED,changeStateHandler);
-			setTitleValue(_skin.tile_1.skin as Title_Skin,"职业技能");
-			setTitleValue(_skin.tile_2.skin as Title_Skin,"升级条件");
+			setTitleValue(_skin.tile_1.skin as JuexueHead,"dqhzb");
+			setTitleValue(_skin.tile_2.skin as JuexueHead,"sjtj");
 		}
 		
-		private function setTitleValue(skin:Title_Skin,title:String):void
+		private function setTitleValue(skin:JuexueHead,title:String):void
 		{
-			skin.labelDisplay.text = title;
+			skin.uiName.styleName = "ui/app/wuxue/juexue/"+title+".png";
 		}
 		private function changeStateHandler(e:Event):void
 		{

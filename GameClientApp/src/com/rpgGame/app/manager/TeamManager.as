@@ -539,17 +539,17 @@ package com.rpgGame.app.manager
 					if (qMap.q_map_public!=1&&qMap.q_map_public!=2&&qMap.q_map_public!=3) 
 					{
 						//NoticeManager.mouseFollowNotify(qMap.q_map_name+"无法寻路到达");
-						NoticeManager.showNotifyById(13040,"",qMap.q_map_name);
+						NoticeManager.showNotifyById(13040,null,qMap.q_map_name);
 					}
 					if (qMap.q_map_min_level>MainRoleManager.actorInfo.totalStat.level) 
 					{
 						//NoticeManager.mouseFollowNotify("等级不足,无法进入地图{0}"+qMap.q_map_name);
-						NoticeManager.showNotifyById(13041,"",qMap.q_map_name);
+						NoticeManager.showNotifyById(13041,null,qMap.q_map_name);
 					}
 					else if (qMap.q_map_max_level<MainRoleManager.actorInfo.totalStat.level) 
 					{
 						//NoticeManager.mouseFollowNotify("等级大于"+qMap.q_map_max_level+"级，无法进入地图"+qMap.q_map_name);
-						NoticeManager.showNotifyById(13042,"",qMap.q_map_max_level,qMap.q_map_name);
+						NoticeManager.showNotifyById(13042,null,qMap.q_map_max_level,qMap.q_map_name);
 					}
 					else
 					{
@@ -559,7 +559,7 @@ package com.rpgGame.app.manager
 				else
 				{
 					//NoticeManager.mouseFollowNotify("找不到地图"+mem.memberMapModelID);
-					NoticeManager.showNotifyById(13043,"",mem.memberMapModelID);
+					NoticeManager.showNotifyById(13043,null,mem.memberMapModelID);
 				}
 			}
 		}

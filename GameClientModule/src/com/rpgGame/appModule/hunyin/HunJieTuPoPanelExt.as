@@ -127,7 +127,7 @@ package com.rpgGame.appModule.hunyin
 			var bagNum:int=BackPackManager.instance.getBagItemsCountById(_cailiaoMod);	
 			if(_needcailiaoNum>bagNum&&!_skin.cboxCailiao.isSelected) 
 			{
-				NoticeManager.showNotifyById(9002,"",ItemConfig.getItemName(_cailiaoMod));
+				NoticeManager.showNotifyById(9002,null,ItemConfig.getItemName(_cailiaoMod));
 				return false;
 			}
 			else if(_needcailiaoNum>bagNum&&_skin.cboxCailiao.isSelected)
@@ -142,7 +142,7 @@ package com.rpgGame.appModule.hunyin
 				var needNum:int=_needcailiaoNum-bagNum;
 				if(!ShopManager.ins.isCanBuy(shopItems,needNum))
 				{
-					NoticeManager.showNotifyById(9002,"","元宝");
+					NoticeManager.showNotifyById(9002,null,"元宝");
 					return false;
 				}
 			}

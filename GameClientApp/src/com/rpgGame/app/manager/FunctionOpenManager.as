@@ -186,7 +186,7 @@
 			if(!checkOpenByLevel(info.q_level))
 			{
 				if(isError)
-					NoticeManager.showNotifyById(90203,"",info.q_string_name,info.q_level);
+					NoticeManager.showNotifyById(90203,null,info.q_string_name,info.q_level);
 				return ;
 			}
 			openFunctionId(info,data,isAutoHide,isError);
@@ -224,7 +224,7 @@
 			if(!checkOpenByLevel(minlevel))
 			{
 				if(isError)
-					NoticeManager.showNotifyById(90203,"",info.name,minlevel);
+					NoticeManager.showNotifyById(90203,null,info.name,minlevel);
 				return ;
 			}
 			var openId:String=id?id:"";

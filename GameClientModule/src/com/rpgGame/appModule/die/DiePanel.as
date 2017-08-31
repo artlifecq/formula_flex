@@ -13,6 +13,7 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -139,7 +140,8 @@ package com.rpgGame.appModule.die
 			var mapCfg:Q_map=sceneData.getData();
 			
 			var danyaoNum:int=BackPackManager.instance.getItemCount(300);
-			_skin.lbDanyao.text="1/"+danyaoNum;
+			var name:String=ItemConfig.getItemName(300);
+			_skin.lbDanyao.text=name+"  1/"+danyaoNum;
 			if(danyaoNum>0) _skin.lbDanyao.color=StaticValue.BEIGE_TEXT;
 			else _skin.lbDanyao.color=StaticValue.RED_TEXT;
 			

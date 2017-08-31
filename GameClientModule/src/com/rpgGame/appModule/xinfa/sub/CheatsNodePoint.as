@@ -381,11 +381,11 @@ package  com.rpgGame.appModule.xinfa.sub
 						//
 						if (config.q_type==0) 
 						{
-							NoticeManager.showNotifyById(11001,"",[config.q_name]);
+							NoticeManager.showNotifyById(11001,null,[config.q_name]);
 						}
 						else
 						{
-							NoticeManager.showNotifyById(11006,"",[config.q_name]);
+							NoticeManager.showNotifyById(11006,null,[config.q_name]);
 						}
 						return;
 					}

@@ -9,17 +9,21 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LinkCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.clientConfig.Q_hyperlinksMenu;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangChat;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.chat.bean.HyperInfo;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
+	import com.rpgGame.netData.player.bean.HyperlinkInfo;
 	
 	import flash.utils.ByteArray;
 	
@@ -342,6 +346,13 @@ package com.rpgGame.app.ui.main.chat
 			return str;
 		}
 		
+		public static function replaceGuildShow(name:String,color:*,guild:String):String
+		{
+			var str:String=name;
+			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.GUILD_APPLY,guild);
+			return str;
+		}
+		
 		public static function replaceRallyShow(name:String,color:*,content:String):String
 		{
 			var str:String=name;
@@ -509,55 +520,67 @@ package com.rpgGame.app.ui.main.chat
 		/**
 		 * 组装通知消息富文本
 		 * */
-		public static function getNoticeMessageHtml(text:String,attribute:String,arrq:Array):String
+		public static function getNoticeMessageHtml(text:String,infos:Vector.<HyperlinkInfo>,arrq:Array):String
 		{
-			var arr:Array;
 			var txt:String;
-			if(attribute==""||attribute==null)
+			var arr:Array;
+			arr=arrq;
+			if(infos==null||infos.length==0)
 			{
-				txt = LanguageConfig.replaceStr1(text,arrq);
+				txt = LanguageConfig.replaceStr1(text,arr);
 				txt = replaceStr2(txt,true);
 			}
 			else{
-				arr = JSONUtil.decode(attribute);
-				for(var i:int=0;i<arr.length;i++)
+				for(var i:int=0;i<infos.length;i++)
 				{
-					var str:String=arrq[arr[i].i];
-					switch(arr[i].t)
+					var str:String=arr[infos[i].i];
+					switch(infos[i].t)
 					{
 						case 1: //人物
-							arrq[arr[i].i]=replacePlayerShow(str,0xFFFFFF,arr[i].p.id);
+							arr[infos[i].i]=replacePlayerShow(str,0xFFFFFF,infos[i].parameterInfos[0].id.hexValue);
 							break;
 						case 2: //物品
-							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							arr[infos[i].i]=replaceItemShowByMod(infos[i].parameterInfos[0].mod);
 							break;
 						case 3: //组队
-							arrq[arr[i].i]=replaceTeamShow(str,0xFFFFFF,arr[i].p.id);
+							var id:String=infos[i].parameterInfos[0].id.hexValue;
+							arr[infos[i].i]=replaceTeamShow(str,0xFFFFFF,id);
 							break;
 						case 4: //入帮
-							//							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							id=infos[i].parameterInfos[0].id.hexValue;
+							arr[infos[i].i]=replaceGuildShow(str,0xFFFFFF,id);
 							break;
 						case 5: //集结
-							var content:String=arr[i].p.mod+","+arr[i].p.x+","+arr[i].p.y;
-							arrq[arr[i].i]=replaceRallyShow(str,0xBC5AF4,content);
+							var content:String=infos[i].parameterInfos[0].mod+","+infos[i].parameterInfos[0].x+","+infos[i].parameterInfos[0].y;
+							arr[infos[i].i]=replaceRallyShow(str,0xBC5AF4,content);
 							break;
 						case 6: //护宝
-							content=arr[i].p.mod+","+arr[i].p.x+","+arr[i].p.y;
-							arrq[arr[i].i]=replaceHuBaoShow(str,0xBC5AF4,content);
+							content=infos[i].parameterInfos[0].mod+","+infos[i].parameterInfos[0].x+","+infos[i].parameterInfos[0].y;
+							arr[infos[i].i]=replaceHuBaoShow(str,0xBC5AF4,content);
+							break;
+						case 7: //洗炼
+							arr[infos[i].i]=getAttById(infos[i].parameterInfos[0].mod);
 							break;
 						case 8: //求婚
-							var jobType:int=arrq[2];
-							arrq[2]=ItemUtil.getJobName(jobType);
-							var id:Number=arr[i].p.id;
-							var name:String=MainRoleManager.getPlayerName(arr[i].p.name);
-							arrq[arr[i].i]=replaceShowByType(str,StaticValue.GREEN_TEXT,name+","+id);
+							var jobType:int=arr[2];
+							arr[2]=ItemUtil.getJobName(jobType);
+							id=infos[i].parameterInfos[0].id.hexValue;
+							var name:String=MainRoleManager.getPlayerName(infos[i].parameterInfos[0].name);
+							arr[infos[i].i]=replaceShowByType(str,StaticValue.GREEN_TEXT,name+","+id);
 							break;
 					}
 				}
-				txt = LanguageConfig.replaceStr1(text,arrq);
+				txt = LanguageConfig.replaceStr1(text,arr);
 				txt = replaceStr2(txt,true);
 			}
 			return txt;
+		}
+		
+		private static function getAttById(id:int):String
+		{
+			var str:String="";
+			str=CharAttributeType.getWashAttDes(id);
+			return str;
 		}
 	}
 }

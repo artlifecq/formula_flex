@@ -126,9 +126,9 @@ package com.rpgGame.appModule.equip
 		private var allExp:int;
 		private var currentExp:int;
 		
-		private var useMon:int;
+		private var useMon:Number;
 		
-		private var userMon:int;
+		private var userMon:Number;
 		private var isToUp:Boolean;
 		private var _progressBar:AwdProgressBar;
 		private var _progressBar_lv:AwdProgressBar;
