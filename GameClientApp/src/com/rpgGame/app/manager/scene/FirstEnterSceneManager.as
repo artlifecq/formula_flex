@@ -17,7 +17,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -92,10 +91,6 @@ package com.rpgGame.app.manager.scene
 //			CountryTaoNiManager.setup();
 			ProtectManager.setup();
 //			GameSettingManager.setup();
-			BGMManager.initProtoC({"openSound":true,
-				"openMusic":true,
-				"soundVolume":100,
-				"musicVolume":100});
 		}
 
 		public static function get isEnterScene() : Boolean
