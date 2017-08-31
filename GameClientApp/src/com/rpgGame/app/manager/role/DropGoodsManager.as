@@ -1,5 +1,9 @@
 package com.rpgGame.app.manager.role
 {
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.SceneRenderCache;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.engine3D.scene.render.vo.RenderResourceData;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.graphics.DropItemHeadFace;
@@ -8,7 +12,9 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.roll.RollGetItemPane;
 	import com.rpgGame.app.ui.roll.RollPane;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppLoadManager;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -19,6 +25,7 @@ package com.rpgGame.app.manager.role
 	
 	import flash.utils.Dictionary;
 	
+	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	
 	import org.game.netCore.connection.SocketConnection;
@@ -87,17 +94,37 @@ package com.rpgGame.app.manager.role
 			AppLoadManager.instace().loadByUrl(loadUrl, "", onLoadComplete, onError);
 		}
 		
-		public function onLoadComplete(_appUrl : String = null) : void
+		private function onLoadComplete(_appUrl : String = null) : void
 		{
-			trace("roll点资源加载成功！！！");
-			DropGoodsManager.rollPanelIsLoad = true;
-			DropGoodsManager.isLoading=false;
-			for(var i:int=0;i<_infos.length;i++)
+			var _renderParamData:RenderParamData3D=new RenderParamData3D(0,"effect_ui",ClientConfig.getEffect("ui_shaizi"));
+			_renderParamData.priority=LoadPriorityType.LEVEL_CUSTOM_4;
+			var uint:RenderUnit3D=RenderUnit3D.create(_renderParamData);
+			var _renderResourceData:RenderResourceData=SceneRenderCache.installRenderResourceData(_renderParamData.sourcePath,_renderParamData.animatorSourchPath,uint);
+			_renderResourceData.setResCompleteCallBack(onSetRenderResourceData);
+			_renderResourceData.setResErrorCallBack(onRenderResourceDataError);
+			_renderResourceData.loadSource(_renderParamData.sourcePath, _renderParamData.animatorSourchPath, _renderParamData.priority);
+		}
+		
+		private  function onSetRenderResourceData(resData : RenderResourceData) : void
+		{
+			if (resData)
 			{
-				var info:RollItemInfo=_infos.shift();
-				showRollPanel(info);
+				trace("roll点资源加载成功！！！");
+				DropGoodsManager.rollPanelIsLoad = true;
+				DropGoodsManager.isLoading=false;
+				for(var i:int=0;i<_infos.length;i++)
+				{
+					var info:RollItemInfo=_infos.shift();
+					showRollPanel(info);
+				}
+				_infos.length=0;
 			}
-			_infos.length=0;
+		}
+		
+		private  function onRenderResourceDataError(resData : RenderResourceData) : void
+		{
+			//执行错误回调
+			GameLog.addShow("加载roll点素材错误...");
 		}
 		
 		private function onError(url : String) : void

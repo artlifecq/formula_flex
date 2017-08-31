@@ -19,6 +19,9 @@ package com.rpgGame.app.utils
 		 */
 		public static function unAreaName(name:String):String
 		{
+			if(!name){
+				return null;
+			}
 			var index:int=name.indexOf("]");
 			if(index==-1){
 				return name;

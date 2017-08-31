@@ -149,7 +149,9 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBg = temp;
 			temp.name = "uiBg";
+			temp.height = 71;
 			temp.styleName = "ui/big_bg/activety/item/changchengcanyuan.png";
+			temp.width = 516;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
