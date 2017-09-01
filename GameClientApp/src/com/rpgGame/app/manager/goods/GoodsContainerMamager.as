@@ -298,8 +298,11 @@ package com.rpgGame.app.manager.goods
 			info.setContainerId(containerId);
 			
 			switch(type){
+				//?为毛之前要走添加？
 				case ItemChangeType.ADD_ITEM:
-					addItemInfo(info);
+					//addItemInfo(info);
+					_goodsList[info.index] = info;
+					EventManager.dispatchEvent(ItemEvent.ITEM_CHANG,info);
 					break;
 				case ItemChangeType.MOVE_ITEM:
 					_goodsList[info.index] = info;

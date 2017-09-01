@@ -62,7 +62,7 @@ package com.rpgGame.appModule.shop
 				NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(61025));
 				return;
 			}
-			if (isNoNotice||item.quality<=Quality.BLUE) 
+			if (isNoNotice/*||item.quality<=Quality.BLUE*/) 
 			{
 				Mgr.shopMgr.ReqSellItem(item.itemInfo.itemId);
 				return;
