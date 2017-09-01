@@ -3,6 +3,7 @@ package com.rpgGame.app.utils
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.FadeAlphaRectData;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -13,6 +14,7 @@ package com.rpgGame.app.utils
 	import org.client.mainCore.ds.HashMap;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
 
 	/**
@@ -27,6 +29,7 @@ package com.rpgGame.app.utils
 		private static var POINT:Point=new Point();
 		
 		private static var roleMap:HashMap=new HashMap();
+		private static var fadeMap:HashMap=new HashMap();
 		private static var checkPos:Boolean;
 		private static var maskWH:int=256;
 		
@@ -57,6 +60,59 @@ package com.rpgGame.app.utils
 			if(roleMap.length==0&&checkPos){
 				checkPos=false;
 				Starling.current.stage.removeEventListener(Event.ENTER_FRAME,onUpdateMaskPos);
+			}
+		}
+		
+		/**
+		 *添加ui3d模型遮罩 
+		 * @param type
+		 * @param avatar
+		 * @param fadeX
+		 * @param fadeY
+		 * @param scale
+		 * @param rotationY
+		 * 
+		 */
+		public static function addUIAvatarMask(type:String,avatar:UIAvatar3D,fadeX:int,fadeY:int,scale:Number=1,rotationY:Number=0):void
+		{
+			var role:SceneRole=avatar.role;
+			if(!role){
+				return;
+			}
+			
+			role.setScale(scale);
+			role.rotationY =rotationY;
+			POINT.x=avatar.x;
+			POINT.y=avatar.y;
+			var point : Point = avatar.parent.localToGlobal(POINT);
+//			role.x=fadeX;
+//			role.z=fadeY;
+			
+			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+			{
+				switch (render.type)
+				{
+					case RenderUnitType.BODY:
+					case RenderUnitType.HAIR:
+					case RenderUnitType.WEAPON:
+					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.MOUNT:
+					case RenderUnitType.WEAPON_EFFECT:
+						render.addFadeAlpha(ClientConfig.getDynTexture(type),0);
+						break;
+				}
+			});
+			
+			
+			POINT.x=avatar.x;
+			POINT.y=avatar.y;
+			point=avatar.parent.localToGlobal(POINT);
+			updateFadeAlphaRectPos(role,point.x,point.y );
+			
+			roleMap.add(role,avatar);
+			fadeMap.add(role,[fadeX,fadeY]);
+			if(roleMap.length!=0&&!checkPos){
+				startCheckPos();
 			}
 		}
 		
@@ -118,15 +174,20 @@ package com.rpgGame.app.utils
 			var num:int=roles.length;
 			var role:SceneRole;
 			var point : Point;
-			var avatar:InterAvatar3D;
+			var avatar:DisplayObject;
 			var preX:int;
 			var preY:int;
 			for(var i:int=0;i<num;i++){
 				role=roles[i] as SceneRole;
-				avatar=infos[i] as InterAvatar3D;
+				avatar=infos[i] as DisplayObject;
+				var fadeList:Array=fadeMap.getValue(role);
 				POINT.x=avatar.x;
 				POINT.y=avatar.y;
 				point=avatar.parent.localToGlobal(POINT);
+				if(fadeList){
+					point.x=point.x-fadeList[0];
+					point.y=point.y+fadeList[1];
+				}
 				updateFadeAlphaRectPos(role,point.x,point.y );
 			}
 		}

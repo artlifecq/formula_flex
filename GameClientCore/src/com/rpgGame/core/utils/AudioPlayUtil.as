@@ -1,6 +1,8 @@
 package com.rpgGame.core.utils
 {
 	import com.rpgGame.core.manager.BGMManager;
+	import com.rpgGame.core.manager.sound.SimpleMp3Player;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import feathers.controls.Button;
 	
@@ -25,22 +27,22 @@ package com.rpgGame.core.utils
 
 		public static function playUIPanelOpen() : void
 		{
-			BGMManager.playUIEffectSound("UI/open");
+			SimpleMp3Player.playOnce(ClientConfig.getSound("UI/open"));
 		}
 
 		public static function playUIPanelClose() : void
 		{
-			BGMManager.playUIEffectSound("UI/close");
+			SimpleMp3Player.playOnce(ClientConfig.getSound("UI/close"));
 		}
 
 		public static function playUIButtonOver() : void
 		{
-			BGMManager.playUIEffectSound("UI/ui_touch2");
+			SimpleMp3Player.playOnce(ClientConfig.getSound("UI/ui_touch2"));
 		}
 
 		public static function playUIButtonDown() : void
 		{
-			BGMManager.playUIEffectSound("UI/click");
+			SimpleMp3Player.playOnce(ClientConfig.getSound("UI/click"));
 		}
 
 		private static var _lastHoverTarget : DisplayObject;

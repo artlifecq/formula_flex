@@ -310,13 +310,13 @@ package com.rpgGame.app.manager.fight
 							}
 							break;
 						case EnumHurtType.SPELL_ZHANHUN:
-							typeRes = 14;
+							typeRes = 16;
 							tweenFun=SpellResultTweenUtil.TweenZhanHun;
 							numberType = NUMBER_NPC_ZHANHUN;
 							break;
 						case EnumHurtType.SPELL_SHEILD_XISHOU:
 						//case EnumHurtType.SPELL_HURT_TYPE_ABSORB:
-							typeRes = 15;
+							typeRes = 17;
 							tweenFun=SpellResultTweenUtil.TweenXiShou;
 							numberType =NUMBER_FIGHT_XISHOU;
 							break;

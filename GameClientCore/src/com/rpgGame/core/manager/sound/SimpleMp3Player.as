@@ -324,9 +324,14 @@ package com.rpgGame.core.manager.sound
 		//
 		
 		/**是否开放声音,设为false,则全部声音不能播放**/
-		public static function openSound(open:Boolean=true):void
+		public static function set openSound(open:Boolean):void
 		{
 			_openSound = open;
+		}
+		
+		public static function get openSound():Boolean
+		{
+			return _openSound;
 		}
 		
 		/**静态共享单例,用于场景背景音乐等不会并发的场合**/
