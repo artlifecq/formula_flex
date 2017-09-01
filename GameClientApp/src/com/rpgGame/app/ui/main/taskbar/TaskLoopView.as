@@ -629,7 +629,14 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			icoList4Group.visible=false;
 		}
-		
+		/**膜拜任务领取奖励*/
+		public function gaveWorshipTaskReward():void
+		{
+			if(icoList4Group.visible)
+			{
+				icoList4Group.tweeRewardInBag();
+			}
+		}
 		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,navSkin:SkinnableContainer,subBut:Button=null,describe:String=""):void
 		{
 			navSkin.visible=true;

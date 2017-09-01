@@ -6,6 +6,7 @@ package com.rpgGame.appModule.maps
 	
 	import org.mokylin.skin.app.maps.maps_Skin;
 	import org.mokylin.skin.component.text.textInput2_Skin;
+	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.DisplayObject;
 
@@ -94,16 +95,6 @@ package com.rpgGame.appModule.maps
 					_bigMap.roleWalk(releData.x,releData.y);
 				}
 			}
-			else if(name==_skin.btn_go.name)
-			{
-				var wx:Number=Number(textInput2_Skin(_skin.locat_x.skin).textDisplay.text);
-				var wy:Number=-Number(textInput2_Skin(_skin.locat_y.skin).textDisplay.text);
-				if(wx&&wy)
-				{
-					_bigMap.roleWalk(wx,wy);
-				}
-				
-			}
 			
 		}
 		
@@ -118,8 +109,8 @@ package com.rpgGame.appModule.maps
 		protected function clearMapsView() : void 
 		{
 			this._skin.lbl_mapName.text="";
-			textInput2_Skin(_skin.locat_x.skin).textDisplay.text="";
-			textInput2_Skin(_skin.locat_y.skin).textDisplay.text="";
+			_skin.locat_x.text="";
+			_skin.locat_y.text="";
 			_bigMap.clearView();
 			_scoll.clearItem();
 		}
@@ -141,8 +132,8 @@ package com.rpgGame.appModule.maps
 			var player : SceneRole = MainRoleManager.actor;
 			if (player)
 			{
-				textInput2_Skin(_skin.locat_x.skin).textDisplay.text=""+int(player.position.x);
-				textInput2_Skin(_skin.locat_y.skin).textDisplay.text=""+int(-player.position.z);
+				_skin.locat_x.text=""+int(player.position.x);
+				_skin.locat_y.text=""+int(-player.position.z);
 				
 			}
 			
