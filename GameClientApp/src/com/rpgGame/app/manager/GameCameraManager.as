@@ -55,6 +55,7 @@ package com.rpgGame.app.manager
 				////测试代码////
 				CameraFrontController.startControl(Stage3DLayerManager.stage);
 				CameraFrontController.sceneCamera = SceneManager.scene.sceneCamera;
+				CameraFrontController.sceneCamera.updateScale(1.15);
 			}
 			else
 			{
