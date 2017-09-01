@@ -5,7 +5,6 @@ package com.game.engine3D.scene.layers
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.log.ZLog;
 	
-	import flash.display.BlendMode;
 	import flash.utils.Dictionary;
 	
 	import away3d.containers.ObjectContainer3D;

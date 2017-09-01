@@ -84,7 +84,9 @@ package com.game.engine3D.utils
 		
 		public static function getDistanceNoSqrt(ax : Number, ay : Number, bx : Number, by : Number) : Number
 		{
-			return ((ax - bx) * (ax - bx)) + ((ay - by) * (ay - by));
+			var dx:Number = ax - bx; 
+			var dy:Number = ay - by;
+			return (dx * dx) + (dy * dy);
 		}
 		
 		/**

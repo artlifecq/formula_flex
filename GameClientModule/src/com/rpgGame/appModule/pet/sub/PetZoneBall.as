@@ -7,16 +7,13 @@ package com.rpgGame.appModule.pet.sub
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.MeiRenGuanQiaData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
-	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import feathers.controls.UIAsset;
-	import feathers.utils.filter.GrayFilter;
 	
 	public class PetZoneBall
 	{
@@ -62,9 +59,10 @@ package com.rpgGame.appModule.pet.sub
 		}
 		public function setEffect(bool:Boolean):void
 		{
-			if (bool==_effectState) 
+			if (_effCon) 
 			{
-				return;
+				_effCon.dispose();
+				_effCon=null;
 			}
 			_effectState=bool;
 			if (bool) 
@@ -75,17 +73,20 @@ package com.rpgGame.appModule.pet.sub
 					_effCon.x=_ball.width/2;
 					_effCon.y=_ball.height/2;
 					this._ball.addChild(_effCon);
-					_effCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_PET_BALL),0,0,0,null,addEft);
 				}
-				this._ball..styleName=this._ball.styleName= "ui/app/meiren/icon/guangqiu.png";
+				_effCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_PET_DAQIU),0,0,0,null,addEft);
+				this._ball.styleName=this._ball.styleName= "ui/app/meiren/icon/guangqiu.png";
 			}
 			else
 			{
-				if (_effCon) 
+				if (!_effCon) 
 				{
-					_effCon.dispose();
-					_effCon=null;
+					_effCon=new Inter3DContainer();
+					_effCon.x=_ball.width/2;
+					_effCon.y=_ball.height/2;
+					this._ball.addChild(_effCon);
 				}
+				_effCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_PET_BALL),0,0,0,null,addEft);
 				this._ball.styleName=this._ball.styleName= "ui/app/meiren/icon/guangqiuxiao.png";;
 			}
 		}

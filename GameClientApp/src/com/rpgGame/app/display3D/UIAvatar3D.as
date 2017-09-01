@@ -6,6 +6,7 @@ package com.rpgGame.app.display3D
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
@@ -13,13 +14,16 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
 	import com.rpgGame.coreData.cfg.model.HeroModelCfgData;
+	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarClothesRes;
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
 	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
+	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.clientConfig.HeroModel;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
@@ -128,6 +132,30 @@ package com.rpgGame.app.display3D
 			}
 		}
 		
+		/**
+		 *半生遮罩 
+		 * @param type
+		 * 
+		 */
+		public function setDialogMask():void
+		{
+			if(!avatarInfo){
+				return;
+			}
+			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(avatarInfo.bodyResID);
+			if(!avatarResConfig){
+				return;
+			}
+			var fadeX : int = RoleFaceMaskEffectUtil.getFaceMaskX(avatarResConfig.dialogFaceMask);
+			var fadeY : int = RoleFaceMaskEffectUtil.getFaceMaskY(avatarResConfig.dialogFaceMask);
+			var scale:Number=RoleFaceMaskEffectUtil.getFaceMaskScale(avatarResConfig.dialogFaceMask);
+			RoleFaceMaskEffectUtil.addUIAvatarMask(AvatarMaskType.DIALOG_MASK,this,fadeX,
+				fadeY,scale);
+			if(touchZone){
+				touchZone.y=fadeY+touchZone.height;
+			}
+		}
+		
 		private function onTouch(e : TouchEvent) : void
 		{
 			if(!this.touchable){
@@ -214,6 +242,7 @@ package com.rpgGame.app.display3D
 			{
 				SceneRole.recycle(_role);
 				_role = null;
+				RoleFaceMaskEffectUtil.removeFaceMaskEffect(_role);
 			}
 			if(avatar3d){
 				avatar3d.dispose();
@@ -223,6 +252,7 @@ package com.rpgGame.app.display3D
 				touchZone.removeEventListener(TouchEvent.TOUCH,onTouch);
 				touchZone=null;
 			}
+			
 			super.dispose();
 		}
 		

@@ -17,21 +17,30 @@ package com.rpgGame.app.manager
 		
 		private static const MAX_CONFIG_LEVEL:int = 3;
 		
+		/**显示等级（1 2 3）*/
 		private static var _configLevel:int;
+		/**自动*/
 		private static var _autoSetting:Boolean = true;
+		/**幻影效果*/
 		private static var _openPhantom:Boolean;
+		/**扭曲效果*/
 		private static var _openHeat:Boolean;
+		/**发光效果*/
 		private static var _openGlow:Boolean;
+		/**增强效果*/
 		private static var _openHeightEffect:Boolean;
+		/**阴影效果（这个只有开关）*/
 		private static var _shadowLevel:int;
+		/**渲染倍数*/
 		private static var _filterQuality:int;
 		
-		
+		/**自动*/
 		public static function get autoSetting():Boolean
 		{
 			return _autoSetting;
 		}
 		
+		/**自动*/
 		public static function set autoSetting(value:Boolean):void
 		{
 			_autoSetting = value;
@@ -46,7 +55,7 @@ package com.rpgGame.app.manager
 		public static function applySetting(dispaySet:Object):void
 		{
 			if (dispaySet != null)
-			{
+			{ 
 				DisplaySetUpManager.configLevel = dispaySet.quality;
 				DisplaySetUpManager.viewAntiAlias = dispaySet.antiAlias;
 				DisplaySetUpManager.displayLevel = dispaySet.displayLevel;
@@ -98,6 +107,7 @@ package com.rpgGame.app.manager
 			return false;
 		}
 		
+		/**显示等级*/
 		public static function get configLevel():int
 		{
 			if (DisplaySetUpManager.autoSetting == true)
@@ -107,6 +117,7 @@ package com.rpgGame.app.manager
 			return _configLevel;
 		}
 		
+		/**显示等级*/
 		public static function set configLevel(value:int):void
 		{
 			switch (value)
@@ -130,6 +141,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**低*/
 		public static function setToLow():void
 		{
 			_configLevel = 1;
@@ -144,6 +156,7 @@ package com.rpgGame.app.manager
 			filterQuality = 70;
 		}
 		
+		/**中*/
 		public static function setToMid():void
 		{
 			_configLevel = 2;
@@ -158,6 +171,7 @@ package com.rpgGame.app.manager
 			filterQuality = 100;
 		}
 		
+		/**高*/
 		public static function setToHigh():void
 		{
 			_configLevel = 3;
@@ -172,21 +186,25 @@ package com.rpgGame.app.manager
 			filterQuality = 100;
 		}
 		
+		/**混合通道*/
 		public static function set openBlend(value:Boolean):void
 		{
 			Away3D.BLEND_PASS = value;
 		}
 		
+		/**混合通道*/
 		public static function get openBlend():Boolean
 		{
 			return Away3D.BLEND_PASS;
 		}
 		
+		/**抗锯齿*/
 		public static function set viewAntiAlias(value:int):void
 		{
 			Stage3DLayerManager.viewAntiAlias = value;
 		}
 		
+		/**抗锯齿*/
 		public static function get viewAntiAlias():int
 		{
 			return Stage3DLayerManager.viewAntiAlias;
@@ -202,6 +220,7 @@ package com.rpgGame.app.manager
 			return Away3D.DISPLAY_LEVEL;
 		}
 		
+		/**阴影效果（这个只有开关）*/
 		public static function set shadowLevel(value:int):void
 		{
 			_shadowLevel = value;
@@ -218,11 +237,13 @@ package com.rpgGame.app.manager
 			AvatarManager.updateSimpleShadow();
 		}
 		
+		/**阴影效果（这个只有开关）*/
 		public static function get shadowLevel():int
 		{
 			return _shadowLevel;
 		}
 		
+		/**渲染倍数*/
 		public static function set filterQuality(value:int):void
 		{
 			_filterQuality = value;
@@ -233,11 +254,13 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**渲染倍数*/
 		public static function get filterQuality():int
 		{
 			return _filterQuality;
 		}
 		
+		/**发光效果*/
 		public static function set openGlow(value:Boolean):void
 		{
 			_openGlow = value;
@@ -248,11 +271,13 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**发光效果*/
 		public static function get openGlow():Boolean
 		{
 			return _openGlow;
 		}
 		
+		/**幻影效果*/
 		public static function set openPhantom(value:Boolean):void
 		{
 			_openPhantom = value;
@@ -263,11 +288,13 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**幻影效果*/
 		public static function get openPhantom():Boolean
 		{
 			return _openPhantom;
 		}
 		
+		/**扭曲效果*/
 		public static function set openHeat(value:Boolean):void
 		{
 			_openHeat = value;
@@ -278,11 +305,13 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**扭曲效果*/
 		public static function get openHeat():Boolean
 		{
 			return _openHeat;
 		}
 		
+		/**增强效果*/
 		public static function set openHeightEffect(value:Boolean):void
 		{
 			_openHeightEffect = value;
@@ -295,6 +324,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**增强效果*/
 		public static function get openHeightEffect():Boolean
 		{
 			return _openHeightEffect;

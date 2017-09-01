@@ -9,6 +9,8 @@ package com.rpgGame.appModule.maps
 		
 		private var _type:String
 		private var _name:String
+		private var _level:int;
+		private var _show:Boolean;
 		private var _x:Number
 		private var _y:Number
 		
@@ -66,6 +68,26 @@ package com.rpgGame.appModule.maps
 		public function set name(value:String):void
 		{
 			_name = value;
+		}
+
+		public function get level():int
+		{
+			return _level;
+		}
+
+		public function set level(value:int):void
+		{
+			_level = value;
+		}
+
+		public function get show():Boolean
+		{
+			return _show;
+		}
+
+		public function set show(value:Boolean):void
+		{
+			_show = value;
 		}
 
 		

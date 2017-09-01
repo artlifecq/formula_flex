@@ -6,7 +6,6 @@
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.sender.HeroMiscSender;
     import com.rpgGame.core.events.GameSettingEvent;
-    import com.rpgGame.core.manager.BGMManager;
     import com.rpgGame.coreData.enum.EnumCustomTagType;
     import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
     import com.rpgGame.coreData.role.BiaoCheData;
@@ -56,14 +55,10 @@
 
         public static function setup():void
         {
-            var soundSetData:Object = null;
             var displaySetData:Object = null;
             if (_initedData)
             {
-				soundSetData = getSoundSet();
 				displaySetData = getDisplaySet();
-				
-                BGMManager.initProtoC(soundSetData);
                 DisplaySetUpManager.applySetting(displaySetData);
 //                FunctionSetManager.applySetting(_local1);
             }
@@ -77,21 +72,6 @@
         public static function getGameSet():Object
         {
             return gameSetObj || (gameSetObj = new Object());
-        }
-
-        public static function getSoundSet():Object
-        {
-            var soundSetObj:Object = getGameSet();
-            if (soundSetObj.soundSet == null)
-            {
-				soundSetObj.soundSet = new Object();
-                BGMManager.defaultSetting();
-				soundSetObj.soundSet.openSound = BGMManager.soundMute;
-				soundSetObj.soundSet.openMusic = BGMManager.musicMute;
-				soundSetObj.soundSet.soundVolume = BGMManager.soundVolume;
-				soundSetObj.soundSet.musicVolume = BGMManager.musicVolume;
-            }
-            return soundSetObj.soundSet;
         }
 
         public static function getDisplaySet():Object
@@ -154,6 +134,7 @@
             EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
         }
 
+		/**屏蔽设置*/
         public static function viewFilter(baseObj:BaseObj3D):Boolean
         {
             if (baseObj is BaseRole)

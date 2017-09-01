@@ -12,7 +12,7 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
-	import com.rpgGame.core.manager.BGMManager;
+	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -117,7 +117,7 @@ package com.rpgGame.app.ui.main.smallmap
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSound://打开声音
-					setAllMute(!(BGMManager.isMuteAll));
+					setAllMute(!(SimpleMp3Player.openSound));
 //					ClientSettingGameSetMananger.saveMainToServer();
 					break;
 				case this._skin.btnPaiHang://打开排行榜
@@ -142,8 +142,7 @@ package com.rpgGame.app.ui.main.smallmap
 		
 		public function setAllMute(isMute:Boolean):void
 		{
-			BGMManager.musicMute = isMute;
-			BGMManager.soundMute = isMute;
+			SimpleMp3Player.openSound=isMute;
 			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ALL);
 		}
 		
