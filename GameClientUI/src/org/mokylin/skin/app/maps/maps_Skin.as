@@ -8,6 +8,7 @@ package org.mokylin.skin.app.maps
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
+	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
 	import feathers.controls.ScrollContainer;
 	import feathers.layout.HorizontalLayout;
@@ -16,7 +17,7 @@ package org.mokylin.skin.app.maps
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-	import org.mokylin.skin.component.text.textInput2_Skin;
+	import org.mokylin.skin.component.text.textInput3_Skin;
 
 	/**
 	 * @private
@@ -44,9 +45,9 @@ package org.mokylin.skin.app.maps
 
 		public var lbl_mapName:feathers.controls.Label;
 
-		public var locat_x:feathers.controls.SkinnableContainer;
+		public var locat_x:feathers.controls.TextInput;
 
-		public var locat_y:feathers.controls.SkinnableContainer;
+		public var locat_y:feathers.controls.TextInput;
 
 		public var scroll_Bar:feathers.controls.ScrollContainer;
 
@@ -119,7 +120,7 @@ package org.mokylin.skin.app.maps
 		private function __maps_Skin_ArrayCollection1_i():feathers.data.ListCollection
 		{
 			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['世界地图','当前地图'];
+			temp.data = ['当前地图'];
 			return temp;
 		}
 
@@ -238,10 +239,10 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_cont = temp;
 			temp.name = "grp_cont";
-			temp.height = 450;
-			temp.width = 640;
-			temp.x = 19;
-			temp.y = 84;
+			temp.height = 449;
+			temp.width = 638;
+			temp.x = 23;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -252,7 +253,7 @@ package org.mokylin.skin.app.maps
 			temp.name = "grp_msg";
 			temp.x = 23;
 			temp.y = 547;
-			temp.elementsContent = [__maps_Skin_UIAsset4_i(),__maps_Skin_Label1_i(),lbl_mapName_i(),__maps_Skin_Label2_i(),__maps_Skin_Label3_i(),locat_x_i(),locat_y_i(),btn_go_i()];
+			temp.elementsContent = [__maps_Skin_UIAsset4_i(),__maps_Skin_Label1_i(),lbl_mapName_i(),__maps_Skin_Label2_i(),__maps_Skin_Label3_i(),locat_y_i(),locat_x_i(),btn_go_i()];
 			return temp;
 		}
 
@@ -269,28 +270,36 @@ package org.mokylin.skin.app.maps
 			return temp;
 		}
 
-		private function locat_x_i():feathers.controls.SkinnableContainer
+		private function locat_x_i():feathers.controls.TextInput
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
 			locat_x = temp;
 			temp.name = "locat_x";
 			temp.height = 25;
-			var skin:StateSkin = new org.mokylin.skin.component.text.textInput2_Skin()
-			temp.skin = skin
+			temp.maxChars = 5;
+			temp.restrict = "\"0-9\"";
+			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
+			temp.textAlign = "center";
+			temp.color = 0x55BD15;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
 			temp.x = 552;
 			temp.y = 9;
 			return temp;
 		}
 
-		private function locat_y_i():feathers.controls.SkinnableContainer
+		private function locat_y_i():feathers.controls.TextInput
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
 			locat_y = temp;
 			temp.name = "locat_y";
 			temp.height = 25;
-			var skin:StateSkin = new org.mokylin.skin.component.text.textInput2_Skin()
-			temp.skin = skin
+			temp.maxChars = 5;
+			temp.restrict = "\"0-9\"";
+			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
+			temp.textAlign = "center";
+			temp.color = 0x55BD15;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
 			temp.x = 679;
 			temp.y = 9;

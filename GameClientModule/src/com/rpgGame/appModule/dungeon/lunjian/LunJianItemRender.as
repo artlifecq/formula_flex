@@ -1,8 +1,7 @@
 package com.rpgGame.appModule.dungeon.lunjian
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
@@ -16,8 +15,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
-	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -28,11 +25,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleType;
-	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import flash.geom.Point;
 	
@@ -54,9 +47,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		private var _skin:LunJian_TiaoZhanItem;
 		private var rewardList:Vector.<LunJian_Nandu>;
 		private var rewardIcon:Vector.<IconCDFace>;
-		private var _avatar : InterAvatar3D;
-		private var _avatarContainer:Inter3DContainer;
-		private var _avatardata:MonsterData;
+		private var _avatar3d : UIAvatar3D;
 		
 		private var alertOk:AlertSetInfo;
 		private var bgList:Vector.<UIAsset>;
@@ -71,12 +62,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			rewardList.push(_skin.sk_kunnan.skin);
 			rewardList.push(_skin.sk_emeng.skin);
 			rewardIcon=new Vector.<IconCDFace>();
-			_avatarContainer=new Inter3DContainer();
-			_avatar = new InterAvatar3D();
-			_avatarContainer.addChild3D(_avatar);
-			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
-			_avatarContainer.x=-28;
-			_skin.modeCont.addChild(_avatarContainer);
+			_avatar3d=new UIAvatar3D(_skin.modeCont);
 			bgList=new Vector.<UIAsset>();
 			points=new Vector.<Point>();
 			for(var i:int=0;i<3;i++){
@@ -96,6 +82,12 @@ package com.rpgGame.appModule.dungeon.lunjian
 				icon.y=points[i].y;
 			}
 			alertOk=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
+		}
+		
+		override protected function onHide() : void
+		{
+			super.onHide();
+			RoleFaceMaskEffectUtil.removeFaceMaskEffect(_avatar3d.role);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -170,16 +162,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 				_skin.lbLevel.text=itemData.cfg.q_level+"";
 				_skin.lbZhanli.text=itemData.cfg.q_attack_power+"";
 				
-				_avatardata.avatarInfo.setBodyResID(npcCfg ? npcCfg.q_body_res : "", null);
-				_avatar.setRoleData(this._avatardata);
-				var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(npcCfg.q_body_res);
-				var fadeX : int = RoleFaceMaskEffectUtil.getFaceMaskX(avatarResConfig.dialogFaceMask);
-				var fadeY : int = RoleFaceMaskEffectUtil.getFaceMaskY(avatarResConfig.dialogFaceMask);
-				//				fadeX=130;
-				//				fadeY=-198;
-				var scale:Number=RoleFaceMaskEffectUtil.getFaceMaskScale(avatarResConfig.dialogFaceMask);
-				RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,fadeX,
-					fadeY,scale);
+				_avatar3d.updateBodyWithRes(npcCfg ? npcCfg.q_body_res : "");
+				_avatar3d.setDialogMask();
 				
 				var rewardItemList:Array;
 				for(var i:int=0;i<3;i++){

@@ -80,6 +80,26 @@ package com.rpgGame.app.manager
 		public  static const SYSTEMSET_AUOT_GET_DENGJIE:int = 40;
 		/**自动拾取品质**/
 		public  static const SYSTEMSET_AUOT_GET_PINZHI:int = 41;
+		
+		/**幻影效果*/
+		public  static const SYSTEMSET_HUANYING:int = 42;
+		/**混合通道*/
+		public  static const SYSTEMSET_HUNHE:int = 43;
+		/**增强效果*/
+		public  static const SYSTEMSET_ZENGQIANG:int = 44;
+		/**扭曲效果*/
+		public  static const SYSTEMSET_NIUQU:int = 45;
+		/**发光效果*/
+		public  static const SYSTEMSET_FAGUANG:int = 46;
+		/**阴影品质*/
+		public  static const SYSTEMSET_YINYING:int = 47;
+		/**渲染倍数*/
+		public  static const SYSTEMSET_XUANRAN:int = 48;
+		/**抗锯齿*/
+		public  static const SYSTEMSET_JUCHI:int = 49;
+		/**显示等级*/
+		public  static const SYSTEMSET_XIANSHIDENGJI:int = 50;
+		
 		/**血量百分比**/
 		public static const SYSTEMSET_HP_PERCENT:int = 101;
 		/**内力百分比**/

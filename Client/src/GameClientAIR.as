@@ -1,14 +1,12 @@
 package
 {
 	import com.client.EngineSetting;
-	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
 	import com.client.process.LoadDll;
 	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
 	import com.client.process.LoadPublicUIAssets;
-	import com.client.process.LoadWelcome;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
 	import com.client.process.RandomChangeName;
@@ -157,7 +155,6 @@ package
 			Statistics.intance.pushNode(Statistics.STEP_CLIENT,"启动添加到舞台");
 			initProcess();
 			//initMenu();
-			BGMManager.setup(this.stage);
 			//引擎设置
 			EngineSetting.init();
 			

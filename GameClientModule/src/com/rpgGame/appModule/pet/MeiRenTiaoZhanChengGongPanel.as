@@ -9,15 +9,11 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.pet.sub.PetZoneBall;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -25,8 +21,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.netData.pet.message.ResPetZoneResultMessage;
 	
 	import flash.events.MouseEvent;
-	
-	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.meiren.BtnTiaoZhan;
 	import org.mokylin.skin.app.meiren.BtnTiaoZhan2;
@@ -71,7 +65,7 @@ package com.rpgGame.appModule.pet
 				_zoneBalls.push(new PetZoneBall(_skin["icon"+(j+1)]));
 			}
 			
-			_bgEff=_modContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MEIREN_JIESUAN),255,250,0);
+			_bgEff=_modContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MEIREN_JIESUAN),290,250,0);
 			_bgEff.stop();
 		}
 		

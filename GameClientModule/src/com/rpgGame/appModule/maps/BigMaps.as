@@ -2,9 +2,11 @@ package com.rpgGame.appModule.maps
 {
 	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.MapTextureLoader;
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapData;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -21,8 +23,11 @@ package com.rpgGame.appModule.maps
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import away3d.pathFinding.DistrictWithPath;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.maps.maps_Skin;
+	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.Image;
 	import starling.display.Shape;
@@ -93,16 +98,12 @@ package com.rpgGame.appModule.maps
 			baseSpr.addChild(thumbnaiSpr);
 			roadSpr=new BigMapRoad();
 			baseSpr.addChild(roadSpr);
-			
-			myselfSpr =new BigMapIcon(SceneCharType.PLAYER);
-			myselfSpr.visible = false;
-			baseSpr.addChild(myselfSpr);
-			
-			
 			roleSpr=new Sprite();
 			roleSpr.visible=false;
 			baseSpr.addChild(roleSpr);
-			
+			myselfSpr =new BigMapIcon(SceneCharType.PLAYER);
+			myselfSpr.visible = false;
+			baseSpr.addChild(myselfSpr);
 			var mask : Shape = new Shape();
 			mask.graphics.beginFill(0x00FF00);
 			mask.graphics.drawRoundRect(0, 0, _mapWidth, this._mapHeight, 5);
@@ -256,15 +257,16 @@ package com.rpgGame.appModule.maps
 		{
 			clearAllRole();
 			var i:int,length:int;
-			length=BigMapsData.mapsNpcData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsNpcData[i]);
-			}
+			
 			length=BigMapsData.mapsMonsterData.length
 			for(i=0;i<length;i++)
 			{
 				updateRolePosShow(BigMapsData.mapsMonsterData[i]);
+			}
+			length=BigMapsData.mapsNpcData.length
+			for(i=0;i<length;i++)
+			{
+				updateRolePosShow(BigMapsData.mapsNpcData[i]);
 			}
 			length=BigMapsData.mapsThansData.length
 			for(i=0;i<length;i++)
@@ -275,12 +277,14 @@ package com.rpgGame.appModule.maps
 		}
 		private function updateRolePosShow(roleData:BigMapIocnDataMode) : void
 		{
+			if(!roleData.show)
+				return;
 			var point:Point;
 			var pos3d : Vector3D = new Vector3D();
 			pos3d.x = roleData.x;
 			pos3d.z = roleData.y;
 			point=getChangeSceneToMap(pos3d);
-			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,point.x,point.y);
+			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
 			
 			roleSpr.addChild(roleIcon);
 			roleSpr.visible = true;
@@ -342,14 +346,23 @@ package com.rpgGame.appModule.maps
 			var point:Point=getChangeMapToScene((x-baseSpr.x),(y-baseSpr.y));
 			if(point)
 			{
+				_skin.locat_x.text=""+int(point.x);
+				_skin.locat_y.text=""+int(Math.abs(point.y));
 				roleWalk(point.x,point.y);
 			}
 		}
 		public function roleWalk(x:Number,y:Number):void
 		{
 			roadSpr.openRoad();
-			//RoleStateUtil.walk(MainRoleManager.actor,x,y);
-			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, 100,null);
+			var position : Vector3D = new Vector3D(x, -Math.abs(y), 0);
+			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))//阻挡点正常寻路
+			{
+				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, 100,null);
+			}
+			else
+			{
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"该目标点不可到达");
+			}
 		}
 		
 		public function clearView():void

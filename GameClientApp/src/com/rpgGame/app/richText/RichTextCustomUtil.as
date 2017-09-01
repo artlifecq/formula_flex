@@ -143,7 +143,6 @@ package com.rpgGame.app.richText
 	 */
 	public class RichTextCustomUtil
 	{
-		
 		/**配置回调函数*/
 		RichTextArea3D.onMouseClickUnit = onClickFunc;
 		RichTextArea3D.onMouseMoveUnit = onMouseMove;
@@ -409,7 +408,7 @@ package com.rpgGame.app.richText
 					{
 						//自己
 						return;
-					}else if(Mgr.hunyinMgr.marriageInfos!=null||Mgr.hunyinMgr.marriageInfos.state==6)
+					}else if(Mgr.hunyinMgr.marriageInfos!=null&&Mgr.hunyinMgr.marriageInfos.state==6)
 					{
 						//已婚人士
 						return;
@@ -452,7 +451,7 @@ package com.rpgGame.app.richText
 						id = new long(unitData.linkData);
 						FunctionOpenManager.openAppPaneById("51",id,false);
 					}else{
-						NoticeManager.showNotifyById(60202,null,"");
+						NoticeManager.showNotifyById(60218);
 					}			
 					break;	
 			}
