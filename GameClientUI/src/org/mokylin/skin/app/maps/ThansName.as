@@ -10,7 +10,7 @@ package org.mokylin.skin.app.maps
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class NpcName2 extends feathers.controls.StateSkin
+	public class ThansName extends feathers.controls.StateSkin
 	{
 		public var lbl_name:feathers.controls.Label;
 
@@ -18,14 +18,12 @@ package org.mokylin.skin.app.maps
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function NpcName2()
+		public function ThansName()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 33;
-			this.width = 124;
-			this.elementsContent = [__NpcName2_UIAsset1_i(),lbl_name_i()];
+			this.elementsContent = [__ThansName_UIAsset1_i(),lbl_name_i()];
 			
 			states = {
 			};
@@ -36,12 +34,12 @@ package org.mokylin.skin.app.maps
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __NpcName2_UIAsset1_i():feathers.controls.UIAsset
+		private function __ThansName_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/maps/hong.png";
-			temp.x = 53.5;
-			temp.y = 16;
+			temp.styleName = "ui/app/maps/lan.png";
+			temp.x = 34;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -52,9 +50,9 @@ package org.mokylin.skin.app.maps
 			temp.name = "lbl_name";
 			temp.height = 16;
 			temp.fontSize = 12;
-			temp.text = "npc名字";
+			temp.text = "通往马贼营寨";
 			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
+			temp.color = 0x14A3F3;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 124;
 			temp.x = 0;
