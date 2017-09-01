@@ -154,6 +154,7 @@
             EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
         }
 
+		/**屏蔽设置*/
         public static function viewFilter(baseObj:BaseObj3D):Boolean
         {
             if (baseObj is BaseRole)

@@ -42,7 +42,7 @@ package com.rpgGame.app.manager
 	public class HunYinManager
 	{
 		//结婚数据
-		private var _marriageInfo: MarriageInfo;
+		private var _marriageInfo: MarriageInfo=null;
 		
 		public  static var ins:HunYinManager=new HunYinManager();
 		
