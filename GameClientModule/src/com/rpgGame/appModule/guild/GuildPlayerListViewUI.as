@@ -139,7 +139,7 @@ package com.rpgGame.appModule.guild
 					GuildSender.guildConvene();
 					break;
 				case _skin.btnZhaoMu:
-					GuildSender.guildConvene();
+					GuildSender.reqGuildNeedMember();
 					break;
 				case _skin.btnJoin:
 					if(GuildManager.instance().canDissolve)

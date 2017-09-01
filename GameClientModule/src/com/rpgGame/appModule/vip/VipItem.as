@@ -79,7 +79,7 @@ package com.rpgGame.appModule.vip
 				cell.setData(arr[i]);
 			}
 			
-			TipTargetManager.show(this._con,TargetTipsMaker.makeTips(TipType.ITEM_TIP,new ClientItemInfo(itemId)));
+			//TipTargetManager.show(this._con,TargetTipsMaker.makeTips(TipType.ITEM_TIP,new ClientItemInfo(itemId)));
 			var touch:TouchCtrl=new TouchCtrl(this._con,onVipClick,onOver,onOut);
 			_skin.uiOver.visible=false;
 		}

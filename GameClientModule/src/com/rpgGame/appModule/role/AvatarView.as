@@ -274,7 +274,7 @@ package com.rpgGame.appModule.role
 		private function setGridInfo(index:int, itemInfo:ClientItemInfo, gridIndex:int = -1):void
 		{
 			var gridInfo:GridInfo = listDatas.getItemAt(index) as GridInfo;
-			if(!gridInfo)
+			if(!gridInfo||gridInfo.data==itemInfo)
 				return;
 			gridInfo.data = itemInfo;
 			gridInfo.isEnabled = _mgr.isEnabled(index);
@@ -402,7 +402,8 @@ package com.rpgGame.appModule.role
 		}
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
-			if(info&&info.containerID!=ItemContainerID.Role){
+			//主玩家的才更新，查看面板不更新
+			if(info&&info.containerID!=ItemContainerID.Role&&isMainRole==false){
 				return;
 			}
 			updateRoleEquip();
