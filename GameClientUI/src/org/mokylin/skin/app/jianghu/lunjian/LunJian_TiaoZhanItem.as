@@ -211,7 +211,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.height = 200;
 			temp.width = 200;
 			temp.x = 18;
-			temp.y = 42;
+			temp.y = 170;
 			return temp;
 		}
 

@@ -120,7 +120,7 @@ package com.rpgGame.app.manager.sound
 				else
 				{
 					var url : String = ClientConfig.getSound(name);
-					switch ($type)
+					/*switch ($type)
 					{
 						case GameSoundType.COUNTRY_WAR_ATTACEK:
 						case GameSoundType.COUNTRY_WAR_DEFENDER:
@@ -136,8 +136,21 @@ package com.rpgGame.app.manager.sound
 						default:
 							SimpleMp3Player.playOnce(url);
 							break;
-					}
+					}*/
 				}
+			}
+		}
+		
+		/**
+		 *播放背景音乐 
+		 * @param $name
+		 * 
+		 */
+		public static function playBgSound($name : String):void
+		{
+			if ($name && $name.length)
+			{
+				SimpleMp3Player.player.play(ClientConfig.getSound($name))
 			}
 		}
 
