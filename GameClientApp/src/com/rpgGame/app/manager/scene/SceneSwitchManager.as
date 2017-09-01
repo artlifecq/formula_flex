@@ -1,6 +1,5 @@
 package com.rpgGame.app.manager.scene
 {
-	import com.app.infos.AudioInfo;
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
@@ -25,6 +24,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.sound.GameSoundManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.map.BaseMapProcess;
@@ -36,7 +36,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
-	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
@@ -389,6 +388,7 @@ package com.rpgGame.app.manager.scene
 			ClientTriggerManager.sceneClear();
 			SceneCameraLensEffectManager.sceneClear();
 			TaskManager.storyTaskInfo=null;
+			GameSoundManager.stopBgSound();
 			if(MainRoleManager.actor){
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
@@ -572,6 +572,7 @@ package com.rpgGame.app.manager.scene
 		{
 			//BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
 //			BGMManager.playMusic(MapDataManager.currentScene.sound);
+			GameSoundManager.playBgSound(MapDataManager.currentScene.sound);
 		}
 
 //		public static function updateSceneSound():void

@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.maps
 {
+	import com.rpgGame.coreData.type.SceneCharType;
+	
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
@@ -11,6 +13,7 @@ package com.rpgGame.appModule.maps
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
+
 	/**
 	 * 处理大地图上的 右边滚动框里面的相关显示和控制
 	 * @author YT
@@ -282,18 +285,22 @@ package com.rpgGame.appModule.maps
 			for(i=0;i<lenth;i++)
 			{
 				temp = new SkinnableContainer();
-				
+				var name:String=data[i].name;
+				if(data[i].type==SceneCharType.MONSTER)
+				{
+					name+=" Lv."+data[i].level;
+				}
 				if(i%2==0)
 				{
 					skin= new NpcItem();
-					skin.lbl_name.htmlText=data[i].name;
+					skin.lbl_name.htmlText=name;
 					skin.btn_over.name="ROLE_"+data[i].type+"_"+i;
 					temp.skin = skin;
 				}
 				else
 				{
 					skin2 = new NpcItem2();
-					skin2.lbl_name.htmlText=data[i].name;
+					skin2.lbl_name.htmlText=name;
 					skin2.btn_over.name="ROLE_"+data[i].type+"_"+i;
 					temp.skin = skin2;
 				}

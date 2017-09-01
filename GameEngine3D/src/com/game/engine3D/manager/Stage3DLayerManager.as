@@ -222,7 +222,8 @@ package com.game.engine3D.manager
 				view.mousePicker = PickingType.RAYCAST_BEST_HIT;
 				view.antiAlias = _viewAntiAlias;
 				_viewContainer.addChildAt(view, 0);
-				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT;
+//				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT;
+				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT | EntityLayerType.MOUSE_TRIGGER;
 				view.visible = true;
 				
 				if (_viewCount != 0)

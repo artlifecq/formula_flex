@@ -16,6 +16,7 @@ package com.rpgGame.appModule.maps
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.component.text.textInput2_Skin;
+	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -29,6 +30,7 @@ package com.rpgGame.appModule.maps
 	 */	
 	public class MapsPanel extends MapsView
 	{
+		private var gTime : GameTimer;
 		public function MapsPanel()
 		{
 			super();
@@ -68,8 +70,8 @@ package com.rpgGame.appModule.maps
 			
 			if(target.name==_skin.btn_go.name) 
 			{
-				var lx:int=int(textInput2_Skin(_skin.locat_x.skin).textDisplay.text);
-				var ly:int=int(textInput2_Skin(_skin.locat_y.skin).textDisplay.text);
+				var lx:int=int(_skin.locat_x.text);
+				var ly:int=int(_skin.locat_y.text);
 				lx=Math.abs(lx);
 				ly=Math.abs(ly);
 				if(lx>0&&ly>0)
@@ -90,19 +92,30 @@ package com.rpgGame.appModule.maps
 		{
 			_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
-			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
+			if (gTime == null)
+			{
+				gTime = new GameTimer("MapsPanel", 100, 0, onDrawPath);
+			}
+			gTime.start();
+			
+			
+			/*EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
 			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onDrawPath);
 			EventManager.addEvent(MapEvent.MAP_JUMP_COMPLETE, onDrawPath);
-			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,onDrawPath);
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,onDrawPath);*/
 		}
 		private function removeEvent() : void
 		{
 			_bigMap.skinSpr.removeEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
-			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
+			if (gTime != null)
+			{
+				gTime.stop();
+			}
+			/*EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
 			EventManager.removeEvent(UserMoveEvent.MOVE_RESCHANGE, onDrawPath);
 			EventManager.removeEvent(MapEvent.MAP_JUMP_COMPLETE, onDrawPath);
-			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,onDrawPath);
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,onDrawPath);*/
 		}
 		private function onMapChangeCompleteHandler() : void 
 		{
@@ -176,7 +189,7 @@ package com.rpgGame.appModule.maps
 			if(BigMapsData.isMapLoadComplete)//大地图是否加载
 			{
 				_bigMap.updateMyselfPos();
-				siteView();
+				//siteView();
 			}
 		}
 		
@@ -208,20 +221,19 @@ package com.rpgGame.appModule.maps
 				{
 					monsterData = monsterList[i];
 					roleMode=new BigMapIocnDataMode();
+					roleMode.name=monsterData.name;
+					roleMode.level=monsterData.level;
+					roleMode.show=monsterData.show;
+					roleMode.x=monsterData.x;
+					roleMode.y=monsterData.y;
 					if(monsterData.type==4)
 					{
 						roleMode.type=SceneCharType.NPC;
-						roleMode.name=monsterData.name;
-						roleMode.x=monsterData.x;
-						roleMode.y=monsterData.y;
 						BigMapsData.mapsNpcData.push(roleMode);
 					}
 					else
 					{
 						roleMode.type=SceneCharType.MONSTER;
-						roleMode.name=monsterData.name;
-						roleMode.x=monsterData.x;
-						roleMode.y=monsterData.y;
 						BigMapsData.mapsMonsterData.push(roleMode);
 					}
 				}
@@ -236,6 +248,7 @@ package com.rpgGame.appModule.maps
 					roleMode=new BigMapIocnDataMode();
 					roleMode.type=SceneCharType.TRANS;
 					roleMode.name=transData.q_name;
+					roleMode.show=true;
 					roleMode.x=transData.q_tran_res_x;
 					roleMode.y=transData.q_tran_res_y;
 					BigMapsData.mapsThansData.push(roleMode);

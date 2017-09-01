@@ -8,6 +8,8 @@ package com.gameClient.alert
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 	import flash.ui.Keyboard;
+	
+	import away3d.animators.AnimatorBase;
 
 	public class AlertPanel extends Sprite
 	{

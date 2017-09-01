@@ -220,8 +220,7 @@ package com.rpgGame.app.ui.main.taskbar
 		/**完成任务*/
 		private function finishMation(type:int):void
 		{
-			leadCont.hideInfo();
-			loopCont.hideTaskView(type);
+			
 			//setViewShow();
 			//leadCont.leadTaskView();
 			//loopCont.loopTaskView();
@@ -233,6 +232,11 @@ package com.rpgGame.app.ui.main.taskbar
 				loopCont.clearGuildCheck();
 				showNpcMark(false);
 			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				loopCont.gaveDailyTaskReward();
+				//loopCont.hideDailyTaskView();
+			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
 				TaskControl.hideLoopPanel();
@@ -241,7 +245,12 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskControl.hideGuildPanel();
 			}
-			
+			else if(type==TaskType.MAINTYPE_WORSHIP)
+			{
+				loopCont.gaveWorshipTaskReward();
+			}
+			leadCont.hideInfo();
+			loopCont.hideTaskView(type);
 		}
 		/**新任务*/
 		private function newMation(type:int):void
@@ -333,8 +342,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==1)//支线任务领取奖励
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
-				loopCont.gaveDailyTaskReward();
-				loopCont.hideDailyTaskView();
+				
 			}
 			//TaskControl.receiveRewordBut(type);
 			
