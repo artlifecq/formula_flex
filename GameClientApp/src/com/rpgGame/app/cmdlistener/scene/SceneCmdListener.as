@@ -259,6 +259,8 @@ package com.rpgGame.app.cmdlistener.scene
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
 			if(role){
 				(role.data as RoleData).faction=msg.faction;
+			}else if(msg.personId.ToGID()==MainRoleManager.actorInfo.id){
+				MainRoleManager.actorInfo.faction=msg.faction;
 			}
 		}
 		

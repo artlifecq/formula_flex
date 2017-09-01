@@ -7,6 +7,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.ui.main.shortcut.ShortcutGrid;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -42,7 +43,10 @@ package com.rpgGame.app.state.ai
 			{
 				return null;
 			}
-			
+			if(ShortcutGrid.fklnIsOpen)//混狂连弩开启不放其它技能
+			{
+				return null;
+			}
 			var nextSpell : Q_skill_model = TrusteeshipManager.getInstance().nextSpell;
 			if (nextSpell && CastSpellHelper.checkCanUseSpell(nextSpell))
 			{

@@ -140,7 +140,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库									前端显示对应关卡战斗力						 */
+		/**  美人基本信息数据库							前端显示对应关卡战斗力						 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -222,6 +222,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
+		/**  填色配置表					 */
+		public static const Q_vertex_color:String = "data.Q_vertex_color";
 		/**  											 */
 		public static const Q_vip:String = "data.Q_vip";
 		/**  战旗基本信息数据库																	 */
@@ -375,6 +377,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
 			regClass("data.Q_suggest", com.rpgGame.coreData.clientConfig.Q_suggest);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
+			regClass("data.Q_vertex_color", com.rpgGame.coreData.clientConfig.Q_vertex_color);
 			regClass("data.Q_vip", com.rpgGame.coreData.clientConfig.Q_vip);
 			regClass("data.Q_warflag", com.rpgGame.coreData.clientConfig.Q_warflag);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);

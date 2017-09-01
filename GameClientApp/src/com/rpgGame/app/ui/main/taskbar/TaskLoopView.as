@@ -58,7 +58,8 @@ package com.rpgGame.app.ui.main.taskbar
 		private var killLabel3List:Vector.<Label>;
 		private var killBut4List:Vector.<SkinnableContainer>;
 		private var killLabel4List:Vector.<Label>;
-		
+		private var killBut5List:Vector.<SkinnableContainer>;
+		private var killLabel5List:Vector.<Label>;
 		private var extraLabel:Label;
 		/*private var ico1BgList:Vector.<UIAsset>;
 		private var ico1List:Vector.<IconCDFace>;
@@ -67,6 +68,7 @@ package com.rpgGame.app.ui.main.taskbar
 		private var icoList1Group:RewardGroup;
 		private var icoList2Group:RewardGroup;
 		private var icoList3Group:RewardGroup;
+		private var icoList4Group:RewardGroup;
 		private var subBut1:Button;
 		//private var subBut2:Button;
 		private var guideLabelList:Vector.<SkinnableContainer>;
@@ -83,6 +85,7 @@ package com.rpgGame.app.ui.main.taskbar
 			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
 			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
 			icoList3Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico3_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
+			icoList4Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico4_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
 			
 			skinList=new Array();
 			skinList.push(_skin.sec_navi1);
@@ -108,7 +111,11 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut4_2);
 			skinList.push(_skin.sec_killbut4_3);
 			skinList.push(icoList3Group);
-			
+			skinList.push(_skin.sec_navi5);
+			skinList.push(_skin.sec_killbut5_1);
+			skinList.push(_skin.sec_killbut5_2);
+			skinList.push(_skin.sec_killbut5_3);
+			skinList.push(icoList4Group);
 			
 			
 			
@@ -167,7 +174,18 @@ package com.rpgGame.app.ui.main.taskbar
 				killLabel4List.push(Renwu_Item(killBut4List[i].skin).labelDisplay);
 				TaskUtil.setTextEvet(killBut4List[i]);
 			}
-			
+			killBut5List=new Vector.<SkinnableContainer>();
+			killBut5List.push(_skin.sec_killbut5_1);
+			killBut5List.push(_skin.sec_killbut5_2);
+			killBut5List.push(_skin.sec_killbut5_3);
+			killLabel5List=new Vector.<Label>();
+			for(i=0;i<killBut5List.length;i++)
+			{
+				Renwu_Item(killBut5List[i].skin).labelDisplay.name="KILLII"+TaskType.MAINTYPE_WORSHIP+"II"+i+"II1";
+				Renwu_Item(killBut5List[i].skin).btn_send.name="KILLII"+TaskType.MAINTYPE_WORSHIP+"II"+i+"II2";
+				killLabel5List.push(Renwu_Item(killBut5List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut5List[i]);
+			}
 			
 			extraLabel=_skin.sec_info;
 			subBut1=_skin.sec_subbut1;
@@ -235,6 +253,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setGuildTaskView();
 				setGuideTaskView();
 				setKajibutView();
+				setWorshipTaskView();
 			}
 			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
@@ -256,6 +275,10 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setGuideTaskView();
 			}
+			else if(type==TaskType.MAINTYPE_WORSHIP)
+			{
+				setWorshipTaskView();
+			}
 		}
 		public function upLoopTaskView(type:int=0):void
 		{
@@ -267,6 +290,7 @@ package com.rpgGame.app.ui.main.taskbar
 				upTreasuerTaskView();
 				upGuildTaskView();
 				setGuideTaskView();
+				setWorshipTaskView();
 			}
 			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
@@ -287,6 +311,10 @@ package com.rpgGame.app.ui.main.taskbar
 			else if(type==TaskType.MAINTYPE_GUIDETASK)
 			{
 				setGuideTaskView();
+			}
+			else if(type==TaskType.MAINTYPE_WORSHIP)
+			{
+				setWorshipTaskView();
 			}
 		}
 		public function hideTaskView(type:int=0):void
@@ -316,6 +344,11 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				hideGuideTaskView();
 			}
+			else if(type==TaskType.MAINTYPE_WORSHIP)
+			{
+				hideWorshipTaskView();
+			}
+			
 			setUisite();
 		}
 		
@@ -510,9 +543,9 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.MAINTYPE_GUILDDAILYTASK)
 			if(task!=null&&taskData!=null)
 			{
-				setNavView(TaskType.MAINTYPE_GUILDDAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),_skin.sec_navi4);
+				setNavView(TaskType.MAINTYPE_GUILDDAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK),_skin.sec_navi4);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
-				TipTargetManager.show( _skin.sec_navi4, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id,loopRewardId:task.loopRewardId,loopNumber:task.loopNumber}));
+				TipTargetManager.show( _skin.sec_navi4, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
 				setUisite();
 			}
 		}
@@ -566,7 +599,36 @@ package com.rpgGame.app.ui.main.taskbar
 				guideLabelList[i].visible=false;
 			}
 		}
+		/**设置膜拜任务显示*/
+		public function setWorshipTaskView():void
+		{
+			hideWorshipTaskView()
+			var task:TaskInfo=TaskMissionManager.getOtherTaskInfo(TaskType.MAINTYPE_WORSHIP)
+			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.MAINTYPE_WORSHIP)
+			
+			if(task!=null&&taskData!=null)
+			{
+				setNavView(TaskType.MAINTYPE_WORSHIP,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_WORSHIP), _skin.sec_navi5);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut5List,false);
+				icoList4Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
+				icoList4Group.visible=true;
+				TipTargetManager.show( _skin.sec_navi5, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
+			}
+			setUisite();
+		}
 		
+		/**设置膜拜任务隐藏*/
+		public function hideWorshipTaskView():void
+		{
+			_skin.sec_navi5.visible=false;
+			var i:int;
+			for(i=0;i<killBut5List.length;i++)
+			{
+				killBut5List[i].visible=false;
+			}
+			
+			icoList4Group.visible=false;
+		}
 		
 		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,navSkin:SkinnableContainer,subBut:Button=null,describe:String=""):void
 		{
@@ -593,11 +655,15 @@ package com.rpgGame.app.ui.main.taskbar
 					break;
 				case TaskType.MAINTYPE_TREASUREBOX:
 					lead="<font color='#ffea00'>【环式】</font>";
-					end="<font color='#eaeabc'>("+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+")</font>";
+					end="<font color='#eaeabc'>("+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum(TaskMissionManager.treasuerTaskInfo.loopRewardId)+")</font>";
 					break;
 				case TaskType.MAINTYPE_GUILDDAILYTASK:
 					lead="<font color='#ffea00'>【帮派】</font>";
-					end="<font color='#eaeabc'>("+TaskMissionManager.getOtherTaskInfo(type).loopNumber+"/"+TaskMissionCfgData.getPartyCountByPid(TaskMissionManager.getOtherTaskData(type).q_party_id)+")</font>";
+					end="<font color='#eaeabc'>("+TaskMissionManager.getOtherTaskInfo(type).loopNumber+"/"+TaskMissionManager.getTreasuerAllNum(TaskMissionManager.getOtherTaskInfo(type).loopRewardId)+")</font>";
+					break;
+				case TaskType.MAINTYPE_WORSHIP:
+					lead="<font color='#ffea00'>【膜拜】</font>";
+					end=isFinish?"<font color='#00ff0c'>(已完成)</font>":"<font color='#ff0d0d'>(未完成)</font>";
 					break;
 			}
 			nav.htmlText=lead+party+name+end;
@@ -729,7 +795,8 @@ package com.rpgGame.app.ui.main.taskbar
 			hideDailyTaskView();
 			hideTreasuerTaskView();
 			hideGuideTaskView();
-			hideGuildTaskView()
+			hideGuildTaskView();
+			hideWorshipTaskView();
 		}
 		/**设置UI位置*/
 		private function setUisite():void

@@ -177,6 +177,8 @@ package feathers.themes{
 		 *自定义的纹理集key所包含的subKeys
 		 */		
 		private var customTexturesKeyMap:Dictionary;
+		
+		private var uiNumberColorMap:Dictionary;
 
 		/**
 		 * 是否开启文本的动态合并。
@@ -264,6 +266,23 @@ package feathers.themes{
 			this.getStyleProviderForClass(Radio).defaultStyleFunction = setToggleButtonStyle;
 			this.getStyleProviderForClass(ScrollBar).defaultStyleFunction = setScrollBarStyle;
 			this.getStyleProviderForClass(NumericStepper).defaultStyleFunction = setNumericStepperStyle;
+		}
+		
+		
+		public function addUINumberColor(url:String,colors:Array):void
+		{
+			if(!uiNumberColorMap){
+				uiNumberColorMap=new Dictionary();
+			}
+			uiNumberColorMap[url]=colors;
+		}
+		
+		public function getUINumberColor(url:String):Array
+		{
+			if(uiNumberColorMap){
+				return uiNumberColorMap[url];
+			}
+			return null;	
 		}
 		
 		/**

@@ -3,7 +3,10 @@ package com.rpgGame.app.display2D
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.FillColorManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.coreData.cfg.QVertexColorCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_vertex_color;
 	
 	import flash.geom.Point;
 	
@@ -49,9 +52,9 @@ package com.rpgGame.app.display2D
 		/** 打击效果池 **/
 		private static var attackFacePool:InstancePool = new InstancePool("attackFacePool",500);
 		/** 类型资源 **/
-		private var _typeRes:String = "";
+		private var _fillTypeId:int
 		/** 数字类型 **/
-		private var _numberRes:String;
+		private var _fillNumberId:int;
 		private var _value:*=0;
 		/** 特殊类型会有组合(例如暴击...) **/
 		private var _specialType:String;
@@ -65,24 +68,24 @@ package com.rpgGame.app.display2D
 		private var _isDisposed:Boolean;
 		
 		
-		public function get typeRes():String
+		public function get typeRes():int
 		{
-			return _typeRes;
+			return _fillTypeId;
 		}
 		/**
 		 *  
-		 * @param $typeRes
-		 * @param $numberRes
+		 * @param $typeFillId
+		 * @param $numberFillId
 		 * @param $value
 		 * @param $specialType
 		 * @param $specialOffsetPos
 		 * 
 		 */		
-		public function AttackFace( $typeRes:String = "", $numberRes:String = "",  $value:* = 0, $specialType:String=null, $specialOffsetPos:Point = null,extendData:Object=null)
+		public function AttackFace(  $typeFillId:int = -1, $numberFillId:int = -1,  $value:* = 0, $specialType:String=null, $specialOffsetPos:Point = null,extendData:Object=null)
 		{
 			_isDestroyed = false;
 			_specialOffsetPos = $specialOffsetPos || new Point();
-			reSet([  $typeRes, $numberRes, $value, $specialType,_specialOffsetPos,extendData]);
+			reSet([  $typeFillId, $numberFillId, $value, $specialType,_specialOffsetPos,extendData]);
 		}
 		
 		/** 值(可以是数字,也可以是字符串) **/
@@ -93,18 +96,18 @@ package com.rpgGame.app.display2D
 
 		/**
 		 * 创建一个AttackFace
-		 * @param $typeRes 指定类型的URL
-		 * @param $numberRes 飘字数字颜色类型
+		 * @param $typeFillId 指定类型的填色id
+		 * @param $numberFillId 飘字数字填色id
 		 * @param $value 飘出的数值
 		 * @param $specialType 飘出的数值类型
 		 * @param $specialOffsetPos 飘出的数值的偏移值
 		 * @return AttackFace
 		 * 
 		 */		
-		public static function createAttackFace( $typeRes:String = "", $numberRes:String = "", $value:*=0, $specialType:String=null, $specialOffsetPos:Point=null,extendData:Object=null):AttackFace
+		public static function createAttackFace( $typeFillId:int = -1, $numberFillId:int = -1, $value:*=0, $specialType:String=null, $specialOffsetPos:Point=null,extendData:Object=null):AttackFace
 		{
 			//利用池生成AttackFace
-			return attackFacePool.createObj(AttackFace, $typeRes, $numberRes, $value, $specialType, $specialOffsetPos,extendData) as AttackFace;
+			return attackFacePool.createObj(AttackFace, $typeFillId, $numberFillId, $value, $specialType, $specialOffsetPos,extendData) as AttackFace;
 		}
 		/**
 		 * @private
@@ -135,8 +138,8 @@ package com.rpgGame.app.display2D
 		{
 			_isDisposed = false;
 			removeChildren();
-			_typeRes = $parameters[0];
-			_numberRes =  $parameters[1];
+			_fillTypeId = $parameters[0];
+			_fillNumberId =  $parameters[1];
 			_value = $parameters[2];
 			_specialType = $parameters[3];
 			_specialOffsetPos = $parameters[4] || new Point();
@@ -166,7 +169,7 @@ package com.rpgGame.app.display2D
 				_extendsData.y=_extendsData.height/2;
 				this.addChild(_extendsData);
 			}
-			if( _typeRes == "" )
+			if( _fillTypeId ==-1 )
 			{
 				if( _txtBmpStarling != null )
 				{
@@ -176,8 +179,12 @@ package com.rpgGame.app.display2D
 				return;
 			}
 			
+			var fillInfo:Q_vertex_color=QVertexColorCfgData.getVertexColorCfgById(_fillTypeId);
+			if(!fillInfo){
+				return;
+			}
 			
-			var texture:IStarlingTexture = GuiTheme.ins.getTexture( _typeRes);
+			var texture:IStarlingTexture = GuiTheme.ins.getTexture( fillInfo.q_url);
 			if( texture == null )
 			{
 				if( _txtBmpStarling != null )
@@ -201,6 +208,8 @@ package com.rpgGame.app.display2D
 			//tX = _txtBmpStarling.width;
 			_txtBmpStarling.x=startX;
 			startX+=_txtBmpStarling.width;
+			
+			FillColorManager.fillImage(_txtBmpStarling,_fillTypeId);
 		}
 		
 		/**
@@ -209,7 +218,7 @@ package com.rpgGame.app.display2D
 		 */		
 		public function addNumber():void
 		{
-			if(!_numberRes){
+			if(_fillNumberId==-1){
 				return;
 			}
 			
@@ -223,13 +232,16 @@ package com.rpgGame.app.display2D
 			var texture:IStarlingTexture;
 			var gap:Number = 5;
 			
-			
+			var fillInfo:Q_vertex_color=QVertexColorCfgData.getVertexColorCfgById(_fillNumberId);
+			if(!fillInfo){
+				return;
+			}
 			
 			var bmpUrl:String;
 			if(_value > 0)
-				bmpUrl = FightFaceHelper.getNumberURLByType( _numberRes, FightFaceHelper.NUMBER_JIA );
+				bmpUrl = FightFaceHelper.getNumberURLByType( fillInfo.q_url, FightFaceHelper.NUMBER_JIA );
 			else
-				bmpUrl = FightFaceHelper.getNumberURLByType( _numberRes, FightFaceHelper.NUMBER_JIAN );
+				bmpUrl = FightFaceHelper.getNumberURLByType( fillInfo.q_url, FightFaceHelper.NUMBER_JIAN );
 			
 			texture = GuiTheme.ins.getTexture( bmpUrl );
 			if( texture != null )
@@ -238,7 +250,7 @@ package com.rpgGame.app.display2D
 					_plusBmpStarling = new Image(texture);
 				else
 					_plusBmpStarling.texture = texture;
-				
+				FillColorManager.fillImage(_plusBmpStarling,_fillNumberId);
 				_plusBmpStarling.readjustSize();
 				addChild(_plusBmpStarling);
 				_plusBmpStarling.touchAcross = true;
@@ -259,19 +271,19 @@ package com.rpgGame.app.display2D
 			{
 				normalNum++;
 				nStr = numStr.charAt(i);
-				bmpUrl = FightFaceHelper.getNumberURLByType( _numberRes, nStr )
+				bmpUrl = FightFaceHelper.getNumberURLByType( fillInfo.q_url, nStr )
 				texture = GuiTheme.ins.getTexture( bmpUrl );
 				if(texture == null)
 					continue;
 				image = setNumberImage( i, texture);
-				
 				if(image == null)
 					continue;
 				
 				image.readjustSize();
 				addChild( image );
+				FillColorManager.fillImage(image,_fillNumberId);
 				//经验类不缩放
-				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP){
+				if(normalNum>2&&fillInfo.q_id!=FightFaceHelper.NUMBER_PC_EXP){
 					image.scale=0.8;
 					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x+10;
 				}else{
@@ -408,7 +420,7 @@ package com.rpgGame.app.display2D
 		public function putInPool():void
 		{
 			//			super.dispose();使用对象池无须完全销毁,否则会导致底层Mesh数据丢失而不可重用
-			_typeRes = "";
+			_fillTypeId=_fillNumberId=-1;
 			_value = 0;
 			_specialType = null;
 			_specialOffsetPos.x = _specialOffsetPos.y = 0;

@@ -10,6 +10,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.utils.GSUtil;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
@@ -25,6 +26,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_rank_designation;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
@@ -141,6 +143,8 @@ package com.rpgGame.app.graphics
 		private var _vipFlag:UIAsset;
 		
 		private var _meirenTitle:HeadNameBar;
+		/**闲话*/
+		private var _speakBar : HeadSpeakBar;
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -726,6 +730,7 @@ package com.rpgGame.app.graphics
 		{
 			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
 			var guildName : String = (_role.data as HeroData).guildName;
+			guildName=GSUtil.unAreaName(guildName);
 			if (guildMemberType<=0||guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
@@ -744,11 +749,7 @@ package com.rpgGame.app.graphics
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
-				//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				_guildNameBar.setName(guildName);
 				_guildNameBar.setColor(StaticValue.GREEN_TEXT);
-				updateAllBarPosition();
-				return;
 			}
 			
 			//更新一下数据
@@ -966,6 +967,63 @@ package com.rpgGame.app.graphics
 		}
 		
 		/**
+		 *概率怪物闲话框
+		 * 
+		 */
+		public function probabilityMonserSpeakBar():void
+		{
+			var monsterData : MonsterData = _role.data as MonsterData;
+			var areaData : Q_scene_monster_area =MonsterDataManager.getAreaByAreaID(monsterData.distributeId);
+			if(areaData!=null)
+			{
+				var prob:int = Math.random()*100;
+				if(prob<areaData.q_speak_probability)//概率闲话
+				{
+					updateMonserSpeakBar();
+				}
+			}
+		}
+		/**
+		 *创建闲话框
+		 * 
+		 */
+		public function updateMonserSpeakBar():void
+		{
+			var monsterData : MonsterData = _role.data as MonsterData;
+			var speak:String=MonsterDataManager.getNpcSpeak(monsterData.distributeId);
+			if(speak!=null&&speak!="")
+			{
+				if(_speakBar==null){
+					
+					_speakBar=HeadSpeakBar.create();
+				}
+				_speakBar.setMonsterLable(speak);
+				addElement(_speakBar);
+				_speakBar.x=0;
+				_speakBar.y=0;
+			}
+			
+		}
+		/**
+		 *显示闲话框
+		 */
+		public function showHeroSpeakBar(text:String):void
+		{
+			if(_speakBar==null){
+				
+				_speakBar=HeadSpeakBar.create();
+			}
+			_speakBar.setHeroLable(text);
+			addElement(_speakBar);
+			_speakBar.x=0;
+			_speakBar.y=0;
+		}
+		
+		
+		
+		
+		
+		/**
 		 * 更新body图标的位置
 		 * @param asset
 		 *
@@ -1164,6 +1222,12 @@ package com.rpgGame.app.graphics
 			{
 				_meirenTitle.dispose();
 				_meirenTitle = null;
+			}
+			if(	_speakBar!=null)
+			{
+				deCtrl.removeTop(_speakBar);
+				HeadSpeakBar.recycle(_speakBar);
+				_speakBar = null;
 			}
 			removeIco();
 			removeBodyIco();

@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.EffectUrl;
 	
@@ -61,6 +62,7 @@ package com.rpgGame.app.ui.main.shortcut
 			
 			EventManager.addEvent(TaskEvent.AUTO_WALK_START,taskEffctPlay);
 			EventManager.addEvent(TaskEvent.AUTO_WALK_STOP,taskEffctStop);
+			EventManager.addEvent(UserMoveEvent.MOVE_END,taskEffctStop);
 		}
 		
 		public function setAutoFight():void

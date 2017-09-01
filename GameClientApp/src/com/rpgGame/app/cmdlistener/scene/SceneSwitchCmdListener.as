@@ -201,8 +201,6 @@ package com.rpgGame.app.cmdlistener.scene
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
 				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,p[0],p[1]]);
 			}
-			
-			WelcomeManager.checkWelcomeState();
 		}
 		
 		/*private static function finishWalk(data:Object):void

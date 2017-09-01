@@ -4,7 +4,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.ItemActionManager;
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.hint.TopTipManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -12,7 +11,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.events.GuildEvent;
-	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;

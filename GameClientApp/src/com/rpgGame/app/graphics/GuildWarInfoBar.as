@@ -61,15 +61,17 @@ package com.rpgGame.app.graphics
 					items=weiczbItems;
 					break;
 				case maps[1]:
-					_skin=new Head_Info2();
+					_skin=new Head_Info();
 					setItemRes(_skin["skin1"].skin as HeadInfoItem,"kuang");
 					setItemRes(_skin["skin2"].skin as HeadInfoItem,"zuan");
+					setItemRes(_skin["skin3"].skin as HeadInfoItem,"zufu");
 					items=wangczbItems;
 					break;
 				case maps[1]:
-					_skin=new Head_Info2();
+					_skin=new Head_Info();
 					setItemRes(_skin["skin1"].skin as HeadInfoItem,"kuang");
 					setItemRes(_skin["skin2"].skin as HeadInfoItem,"zuan");
+					setItemRes(_skin["skin3"].skin as HeadInfoItem,"zufu");
 					items=huangczbItems;
 					break;
 			}
