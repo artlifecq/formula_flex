@@ -8,8 +8,11 @@ package com.rpgGame.app.ui.main.chat
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.renderers.BaseDefaultListItemRenderer;
 	import feathers.controls.text.Fontter;
+	import feathers.events.FeathersEventType;
 	
 	/**
 	 * 优化的聊天项(位于List中,优化渲染)

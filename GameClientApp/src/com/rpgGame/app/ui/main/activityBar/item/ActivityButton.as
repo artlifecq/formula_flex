@@ -30,6 +30,13 @@
 			ui.btnBar.addEventListener(Event.RESIZE,sizeHandler);
         }
 		
+		override public function set styleName(res:String):void
+		{
+			super.styleName=res;
+			var img:Image=new Image(GuiTheme.ins.getTexture("ui/common/waitbtn.png"));
+			ui.btnBar.setSkinForState(ButtonState.UP,img);
+		}
+		
 		override protected function setBtnState(texture:IStarlingTexture):void
 		{
 			var upImg:Image=new Image(GuiTheme.ins.getTexture(texture.key));

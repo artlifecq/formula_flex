@@ -4,6 +4,7 @@ package com.rpgGame.app.display3D
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
@@ -24,6 +25,7 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AvatarMaskType;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
@@ -185,6 +187,14 @@ package com.rpgGame.app.display3D
 				if(touch){
 					this._touchID=touch.id;
 					startX=touch.globalX;
+					outAvatar();
+				}else{
+					touch = e.getTouch(this.touchZone, TouchPhase.HOVER);
+					if(touch){
+						hoverAvatar();
+					}else{
+						outAvatar();
+					}
 				}
 			}
 			
@@ -205,6 +215,40 @@ package com.rpgGame.app.display3D
 				if (isInBounds && isEnabled)
 					onTouchTarget(t.target);
 			}
+		}
+		
+		private function hoverAvatar():void
+		{
+			_role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+			{
+				switch (render.type)
+				{
+					case RenderUnitType.BODY:
+					case RenderUnitType.HAIR:
+					case RenderUnitType.WEAPON:
+					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.ZHANQI:
+						render.setIndependentColor(1.3, 1.3, 1.3, 1);
+						break;
+				}
+			});
+		}
+		
+		private function outAvatar():void
+		{
+			_role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+			{
+				switch (render.type)
+				{
+					case RenderUnitType.BODY:
+					case RenderUnitType.HAIR:
+					case RenderUnitType.WEAPON:
+					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.ZHANQI:
+						render.restoreColor();
+						break;
+				}
+			});
 		}
 		
 		private function onTouchTarget(target : DisplayObject) : void

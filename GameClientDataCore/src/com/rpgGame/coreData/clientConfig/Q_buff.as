@@ -22,6 +22,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_icon_show:int;
 		 /**  描述 */
 		public var q_description:String;
+		 /**  前端TIPS部分数值描述值（把q_tips中的{n}字符串替换为此字段一维数组中[第n位的值*BUFF层数]） */
+		public var q_tips_value_show:String;
 		 /**  获得状态的初始化动画 */
 		public var q_init_animation:int;
 		 /**  角色中了buff后， 身上的特效。 填animation表中的名字 */
