@@ -34,6 +34,8 @@ package com.rpgGame.app.ui.main.buttons
 			resList.push(skinNames.hover);
 			resList.push(skinNames.down);
 			loadSkin();
+			var img:Image=new Image(GuiTheme.ins.getTexture("ui/common/waitbtn.png"));
+			this.setSkinForState(ButtonState.UP,img);
 		}
 		
 		override protected function trigger():void
