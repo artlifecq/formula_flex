@@ -311,6 +311,10 @@ package com.rpgGame.app.manager.fightsoul
 			if (null == player || !player.usable) {
 				return;
 			}
+			if (!_fightSoulInfo) 
+			{
+				return;
+			}
 			var modle:Q_fightsoul = FightsoulData.getInfobyId(_fightSoulInfo.curModelLv);
 			var heroData : HeroData = player.data as HeroData; 
 			heroData.fightSoulLevel =modle.q_mode;

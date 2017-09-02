@@ -302,7 +302,7 @@ package com.rpgGame.app.richText
 //					var userID : String = unitData.linkData;
 					var id:long = new long(unitData.linkData);
 //					var uise:Number=(new long(userID)).ToGID();
-					if (MainRoleManager.isSelf(id.fValue))
+					if (MainRoleManager.actorID==id.ToGID())
 					{
 						return;
 					}
