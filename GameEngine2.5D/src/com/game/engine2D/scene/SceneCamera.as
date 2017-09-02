@@ -6,7 +6,7 @@ package com.game.engine2D.scene
 	import com.game.engine2D.events.SceneCameraEvent;
 	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.vo.BaseObj;
-	import com.game.engine3D.scene.render.vo.ISceneCameraTarget;
+	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.geom.Point;
 	
@@ -15,6 +15,7 @@ package com.game.engine2D.scene
 	/**
 	 * @private
 	 * 场景镜头 
+	 * 主要根据角色当前位置，来加载对应的地图区块，及判断镜头是否已经移到边界
 	 * @author Carver
 	 */	
 	public class SceneCamera extends EventDispatcher
@@ -41,7 +42,7 @@ package com.game.engine2D.scene
 		 * 场景
 		 */
 		private var _scene:Scene;
-		private var _followTarget:com.game.engine3D.scene.render.vo.ISceneCameraTarget;
+		private var _followTarget:BaseObj3D;
 		
 
 		/**
@@ -53,7 +54,7 @@ package com.game.engine2D.scene
 		 * @private
 		 * 镜头跟随的角色
 		 */
-		public function get followTarget():com.game.engine3D.scene.render.vo.ISceneCameraTarget
+		public function get followTarget():BaseObj3D
 		{
 			return _followTarget;
 		}
@@ -199,7 +200,7 @@ package com.game.engine2D.scene
 		 * @param $lookAtCharacter
 		 * 
 		 */	
-		public function lookAt($lookAtTarget:com.game.engine3D.scene.render.vo.ISceneCameraTarget,$useTween:Boolean=false):void
+		public function lookAt($lookAtTarget:BaseObj3D,$useTween:Boolean=false):void
 		{
 			_followTarget = $lookAtTarget;
 			
@@ -230,7 +231,7 @@ package com.game.engine2D.scene
 		 * 运行
 		 * @param $useTween 是否启用缓动
 		 */	
-		final public function run($frame:int=-1):void
+		public function run($frame:int=-1):void
 		{
 			if(_isLocked)return;
 			if(_followTarget==null)return;
@@ -241,6 +242,8 @@ package com.game.engine2D.scene
 			var mapWidth:int = _scene.mapConfig.width;
 			var mapHeight:int = _scene.mapConfig.height;
 			
+//			_scP.x = _followTarget.position.x;
+//			_scP.y = -_followTarget.position.z;
 			_scP.copyFrom(_followTarget.pos);
 			_speed = _followTarget.speed;
 			//
