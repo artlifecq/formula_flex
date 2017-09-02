@@ -9,6 +9,8 @@ package com.rpgGame.appModule.maps
 		
 		public static var scaleMapX:Number=0;
 		public static var scaleMapY:Number=0;
+		public static var OffsetX:Number=0;
+		public static var OffsetY:Number=0;
 		//public static var mapsRoleData:Vector.<BigMapIocnDataMode>=new Vector.<BigMapIocnDataMode>;
 		
 		/**npc数据保存*/

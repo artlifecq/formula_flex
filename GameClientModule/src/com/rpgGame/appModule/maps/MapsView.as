@@ -92,7 +92,7 @@ package com.rpgGame.appModule.maps
 				}
 				if(releData)
 				{
-					_bigMap.roleWalk(releData.x,releData.y);
+					_bigMap.roleWalk(releData.x,releData.y,100);
 				}
 			}
 			

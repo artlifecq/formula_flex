@@ -134,7 +134,7 @@ package com.rpgGame.appModule.maps
 			
 			var temp:SkinnableContainer = new SkinnableContainer();
 			temp.x=-62;
-			temp.y=-48;
+			temp.y=-24;
 			var skin:NpcName2 = new NpcName2();
 			skin.lbl_name.htmlText=_icnName;//"Lv."+_level+" "+
 			temp.skin=skin;
@@ -168,7 +168,7 @@ package com.rpgGame.appModule.maps
 			this.touchable = false;*/
 			var temp:SkinnableContainer = new SkinnableContainer();
 			temp.x=-62;
-			temp.y=-48;
+			temp.y=-24;
 			var skin:NpcName = new NpcName();
 			skin.lbl_name.htmlText=_icnName;
 			temp.skin=skin;
