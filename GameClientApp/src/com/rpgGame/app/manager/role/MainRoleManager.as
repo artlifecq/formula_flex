@@ -10,6 +10,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
@@ -175,7 +176,11 @@ package com.rpgGame.app.manager.role
 					_actor, 
 					data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG), 
 					0);
-				
+				//没初始化,因为调整了主角init位置
+				if (data.fightSoulLevel==0) 
+				{
+					FightSoulManager.instance().updataSceneMode();
+				}
 			}
 		}
 		

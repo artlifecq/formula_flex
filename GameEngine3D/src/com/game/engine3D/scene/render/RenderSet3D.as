@@ -488,6 +488,7 @@ package com.game.engine3D.scene.render
 			ru.mouseEnable = rpd.mouseEnable && _mouseEnable;
 			ru.blendMode = _blendMode;
 			ru.alpha = _alpha;
+			ru.isAlpha=this.isAlpha;
 			ru.zOffset = _zOffset;
 			ru.planarRenderLayer = _planarRenderLayer;
 			ru.needRun = false;

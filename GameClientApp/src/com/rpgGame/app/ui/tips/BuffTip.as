@@ -1,11 +1,13 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.info.buff.BuffData;
@@ -74,6 +76,19 @@ package com.rpgGame.app.ui.tips
 			if(lostSkiLL==null)
 			{
 				desc=buffData.buffData.q_description;
+				if (buffData.buffData.q_tips_value_show!="") 
+				{
+					var arr:Array=JSONUtil.decode(buffData.buffData.q_tips_value_show);
+					if (arr) 
+					{
+						var len:int=arr.length;
+						for (var i:int = 0; i < len; i++) 
+						{
+							arr[i]=arr[i]*buffData.buffInfo.overlay;
+						}
+						desc=LanguageConfig.replaceStr(desc,arr);
+					}
+				}
 			}
 			else
 			{
