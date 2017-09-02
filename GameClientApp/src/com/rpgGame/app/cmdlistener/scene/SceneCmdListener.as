@@ -275,7 +275,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			var info:TopLeaderInfo = msg.topLeaderInfo;
 			var sculp:SculptureData = new SculptureData(RoleType.Type_SCULPTURE);
-			sculp.id = info.id.fValue;
+			sculp.id = info.id.ToGID();
 			sculp.modleId = info.modelId;
 			sculp.name = info.playerName;
 			sculp.roleId = info.playerId;
@@ -763,7 +763,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var info:TopLeaderInfo=new TopLeaderInfo();
 			info.read(buffer);
 			var sculp:SculptureData = new SculptureData(RoleType.Type_SCULPTURE);
-			sculp.id = info.id.fValue;
+			sculp.id = info.id.ToGID();
 			sculp.modleId = info.modelId;
 			sculp.name = info.playerName;
 			sculp.roleId = info.playerId;

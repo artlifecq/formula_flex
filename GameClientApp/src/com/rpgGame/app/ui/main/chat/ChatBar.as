@@ -209,7 +209,6 @@ package com.rpgGame.app.ui.main.chat {
 			EventManager.addEvent(ChatEvent.SHOW_GOODS,onShowGoods);
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showTest);
-			_skin.listBar.addEventListener(Event.SCROLL,scrollToBottom);
 			/*	
 			//测试飘字代码
 			EventManager.addEvent(MapEvent.UPDATE_MAP_ROLE_ADD, onadd);
@@ -298,6 +297,7 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				_skin.listBar.dataProvider.removeItemAt(0);
 			}
+			scrollToBottom();
 		}
 		
 		
@@ -325,13 +325,19 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				_skin.listBar.dataProvider.addItem(msgs[i]);
 			}
+			scrollToBottom();
 		}
 		
-		private function scrollToBottom(event:Event) : void
+		private function scrollToBottom() : void
 		{
 			if(!iskeepOrto)
 			{
-				_skin.listBar.scrollToBottom(0);
+				if(delayScroll){
+					delayScroll.kill();
+				}
+				delayScroll=TweenLite.delayedCall(0.3,function ():void{
+					_skin.listBar.scrollToBottom(0);
+				});
 //				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
 			}
 		}
@@ -749,6 +755,7 @@ package com.rpgGame.app.ui.main.chat {
 		}
 		
 		private var iskeepOrto:Boolean=false;
+		private var delayScroll:TweenLite;
 		private function setListIstoOrKeep():void
 		{
 //			_skin.btn_lock.isSelected=!_skin.btn_lock.isSelected;

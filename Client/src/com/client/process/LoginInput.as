@@ -1,6 +1,5 @@
 package com.client.process
 {
-	import com.client.manager.BGMManager;
 	import com.client.view.LoginInputView;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.manager.Stage3DLayerManager;

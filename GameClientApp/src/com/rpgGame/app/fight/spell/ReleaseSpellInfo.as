@@ -183,7 +183,12 @@ package com.rpgGame.app.fight.spell
 				}
 					
 				_releaseAngle = fightTargetMsg.fightDirection;
-				_releaseAngle = (_releaseAngle + 270) % 360;
+				//不改变方向
+				if (_releaseAngle!=-1) 
+				{
+					_releaseAngle = (_releaseAngle + 270) % 360;
+				}
+				
 				
 				_atkorID = fightTargetMsg.personId.ToGID();
 				
@@ -244,7 +249,11 @@ package com.rpgGame.app.fight.spell
 				_spellData = SpellDataManager.getSpellDataWithID(fightPosMsg.fightType);
 				
 				_releaseAngle = fightPosMsg.fightDirection;
-				_releaseAngle = (_releaseAngle + 270) % 360;
+				if(_releaseAngle!=-1)
+				{
+					_releaseAngle = (_releaseAngle + 270) % 360;
+				}
+				
 				
 				_atkorID = fightPosMsg.playerid.ToGID();
 				if (_atkorID > 0)
