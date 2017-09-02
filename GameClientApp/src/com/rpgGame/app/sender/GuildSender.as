@@ -20,6 +20,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.guild.message.ReqGuildLevelupMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildListMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildModifyNoteMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildRecruitMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillLevelupMessage;
@@ -64,7 +65,12 @@ package com.rpgGame.app.sender
 				return ;
 			sendMsg(new ReqGuildConveneMessage());
 		}
-		
+		public static function reqGuildNeedMember():void
+		{
+			if(!GuildManager.instance().canRecrui)
+				return ;
+			sendMsg(new ReqGuildRecruitMessage());
+		}
 		/** 获取帮派列表 **/
 		public static function reqGuildList(page:int,isfull:int,opaque:int):void
 		{

@@ -26,15 +26,17 @@ package org.mokylin.skin.app.systemSet
 		//==========================================================================
 		public var btn_ok:feathers.controls.Button;
 
-		public var chk_jujuebanghui:feathers.controls.Check;
+		public var chk_faguangxiaoguo:feathers.controls.Check;
 
-		public var chk_jujuehaoyou:feathers.controls.Check;
+		public var chk_huanyingxiaoguo:feathers.controls.Check;
 
-		public var chk_jujuesiliao:feathers.controls.Check;
+		public var chk_hunhetongdao:feathers.controls.Check;
 
-		public var chk_jujuezudui:feathers.controls.Check;
+		public var chk_niuquxiaoguo:feathers.controls.Check;
 
-		public var chk_moren:feathers.controls.Check;
+		public var chk_yinyingpinzhi:feathers.controls.Check;
+
+		public var chk_zengqiangxiaoguo:feathers.controls.Check;
 
 		public var grp_shejiao:feathers.controls.Group;
 
@@ -50,11 +52,9 @@ package org.mokylin.skin.app.systemSet
 
 		public var sld_dengji:feathers.controls.Slider;
 
-		public var sld_pinzhi:feathers.controls.Slider;
+		public var sld_kangjuchi:feathers.controls.Slider;
 
-		public var sld_yinxiao:feathers.controls.Slider;
-
-		public var sld_yinyue:feathers.controls.Slider;
+		public var sld_xuanranbeishu:feathers.controls.Slider;
 
 
 		//==========================================================================
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.systemSet
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 20;
-			temp.y = 70;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -94,7 +94,7 @@ package org.mokylin.skin.app.systemSet
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 20;
-			temp.y = 103;
+			temp.y = 117;
 			return temp;
 		}
 
@@ -105,22 +105,11 @@ package org.mokylin.skin.app.systemSet
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 20;
-			temp.y = 137;
+			temp.y = 151;
 			return temp;
 		}
 
 		private function __xitong_Skin_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "阴影品质";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
-			temp.y = 171;
-			return temp;
-		}
-
-		private function __xitong_Skin_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "开启发光效果";
@@ -131,7 +120,7 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __xitong_Skin_Label6_i():feathers.controls.Label
+		private function __xitong_Skin_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "开启幻影效果";
@@ -142,7 +131,7 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __xitong_Skin_Label7_i():feathers.controls.Label
+		private function __xitong_Skin_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "开启混合通道";
@@ -153,7 +142,7 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __xitong_Skin_Label8_i():feathers.controls.Label
+		private function __xitong_Skin_Label7_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "开启增强效果";
@@ -164,7 +153,7 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __xitong_Skin_Label9_i():feathers.controls.Label
+		private function __xitong_Skin_Label8_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "开启扭曲效果";
@@ -172,6 +161,17 @@ package org.mokylin.skin.app.systemSet
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 40;
 			temp.y = 107;
+			return temp;
+		}
+
+		private function __xitong_Skin_Label9_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "开启地面阴影";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 40;
+			temp.y = 176;
 			return temp;
 		}
 
@@ -208,55 +208,11 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function chk_jujuebanghui_i():feathers.controls.Check
+		private function chk_faguangxiaoguo_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
-			chk_jujuebanghui = temp;
-			temp.name = "chk_jujuebanghui";
-			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 0;
-			temp.y = 105;
-			return temp;
-		}
-
-		private function chk_jujuehaoyou_i():feathers.controls.Check
-		{
-			var temp:feathers.controls.Check = new feathers.controls.Check();
-			chk_jujuehaoyou = temp;
-			temp.name = "chk_jujuehaoyou";
-			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function chk_jujuesiliao_i():feathers.controls.Check
-		{
-			var temp:feathers.controls.Check = new feathers.controls.Check();
-			chk_jujuesiliao = temp;
-			temp.name = "chk_jujuesiliao";
-			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 0;
-			temp.y = 34;
-			return temp;
-		}
-
-		private function chk_jujuezudui_i():feathers.controls.Check
-		{
-			var temp:feathers.controls.Check = new feathers.controls.Check();
-			chk_jujuezudui = temp;
-			temp.name = "chk_jujuezudui";
-			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 0;
-			temp.y = 70;
-			return temp;
-		}
-
-		private function chk_moren_i():feathers.controls.Check
-		{
-			var temp:feathers.controls.Check = new feathers.controls.Check();
-			chk_moren = temp;
-			temp.name = "chk_moren";
+			chk_faguangxiaoguo = temp;
+			temp.name = "chk_faguangxiaoguo";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.iconPosition = "left";
 			temp.labelOffsetX = 10;
@@ -268,14 +224,74 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
+		private function chk_huanyingxiaoguo_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_huanyingxiaoguo = temp;
+			temp.name = "chk_huanyingxiaoguo";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function chk_hunhetongdao_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_hunhetongdao = temp;
+			temp.name = "chk_hunhetongdao";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 0;
+			temp.y = 34;
+			return temp;
+		}
+
+		private function chk_niuquxiaoguo_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_niuquxiaoguo = temp;
+			temp.name = "chk_niuquxiaoguo";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 0;
+			temp.y = 105;
+			return temp;
+		}
+
+		private function chk_yinyingpinzhi_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_yinyingpinzhi = temp;
+			temp.name = "chk_yinyingpinzhi";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.iconPosition = "left";
+			temp.labelOffsetX = 10;
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.textAlign = "left";
+			temp.color = 0xEAEABC;
+			temp.x = 0;
+			temp.y = 173;
+			return temp;
+		}
+
+		private function chk_zengqiangxiaoguo_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_zengqiangxiaoguo = temp;
+			temp.name = "chk_zengqiangxiaoguo";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 0;
+			temp.y = 70;
+			return temp;
+		}
+
 		private function grp_shejiao_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_shejiao = temp;
 			temp.name = "grp_shejiao";
 			temp.x = 31;
-			temp.y = 224;
-			temp.elementsContent = [chk_jujuehaoyou_i(),chk_jujuesiliao_i(),chk_jujuezudui_i(),chk_jujuebanghui_i(),chk_moren_i(),__xitong_Skin_Label5_i(),__xitong_Skin_Label6_i(),__xitong_Skin_Label7_i(),__xitong_Skin_Label8_i(),__xitong_Skin_Label9_i()];
+			temp.y = 204;
+			temp.elementsContent = [chk_huanyingxiaoguo_i(),chk_hunhetongdao_i(),chk_zengqiangxiaoguo_i(),chk_niuquxiaoguo_i(),chk_faguangxiaoguo_i(),chk_yinyingpinzhi_i(),__xitong_Skin_Label4_i(),__xitong_Skin_Label5_i(),__xitong_Skin_Label6_i(),__xitong_Skin_Label7_i(),__xitong_Skin_Label8_i(),__xitong_Skin_Label9_i()];
 			return temp;
 		}
 
@@ -286,7 +302,7 @@ package org.mokylin.skin.app.systemSet
 			temp.name = "grp_sound";
 			temp.x = 11;
 			temp.y = 18;
-			temp.elementsContent = [__xitong_Skin_Label1_i(),__xitong_Skin_Label2_i(),__xitong_Skin_Label3_i(),__xitong_Skin_Label4_i(),sld_yinyue_i(),sld_yinxiao_i(),sld_dengji_i(),sld_pinzhi_i(),rdoZidong_i(),rdoDi_i(),rdoZhong_i(),rdoGao_i()];
+			temp.elementsContent = [__xitong_Skin_Label1_i(),__xitong_Skin_Label2_i(),__xitong_Skin_Label3_i(),sld_xuanranbeishu_i(),sld_kangjuchi_i(),sld_dengji_i(),rdoZidong_i(),rdoDi_i(),rdoZhong_i(),rdoGao_i()];
 			return temp;
 		}
 
@@ -377,26 +393,11 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function sld_pinzhi_i():feathers.controls.Slider
+		private function sld_kangjuchi_i():feathers.controls.Slider
 		{
 			var temp:feathers.controls.Slider = new feathers.controls.Slider();
-			sld_pinzhi = temp;
-			temp.name = "sld_pinzhi";
-			temp.height = 7;
-			temp.direction = Slider.DIRECTION_HORIZONTAL
-			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider;
-			temp.value = 3;
-			temp.width = 240;
-			temp.x = 98;
-			temp.y = 179;
-			return temp;
-		}
-
-		private function sld_yinxiao_i():feathers.controls.Slider
-		{
-			var temp:feathers.controls.Slider = new feathers.controls.Slider();
-			sld_yinxiao = temp;
-			temp.name = "sld_yinxiao";
+			sld_kangjuchi = temp;
+			temp.name = "sld_kangjuchi";
 			temp.height = 7;
 			temp.direction = Slider.DIRECTION_HORIZONTAL
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider;
@@ -407,11 +408,11 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function sld_yinyue_i():feathers.controls.Slider
+		private function sld_xuanranbeishu_i():feathers.controls.Slider
 		{
 			var temp:feathers.controls.Slider = new feathers.controls.Slider();
-			sld_yinyue = temp;
-			temp.name = "sld_yinyue";
+			sld_xuanranbeishu = temp;
+			temp.name = "sld_xuanranbeishu";
 			temp.height = 7;
 			temp.direction = Slider.DIRECTION_HORIZONTAL
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider;
