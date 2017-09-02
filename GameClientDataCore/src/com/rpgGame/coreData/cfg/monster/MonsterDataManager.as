@@ -278,6 +278,8 @@ package com.rpgGame.coreData.cfg.monster
 								npcData=new Object();
 								npcData.type=mdata.q_monster_type;
 								npcData.name=mdata.q_name;
+								npcData.level=mdata.q_level;
+								npcData.show=mdata.q_isminimap==1;
 								npcData.x=sceneMonsterData.q_center_x;
 								npcData.y=sceneMonsterData.q_center_y;
 								arr.push(npcData);

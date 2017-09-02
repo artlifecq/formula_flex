@@ -9,6 +9,7 @@ package com.rpgGame.appModule.maps
 	import org.mokylin.skin.app.maps.Locations;
 	import org.mokylin.skin.app.maps.NpcName;
 	import org.mokylin.skin.app.maps.NpcName2;
+	import org.mokylin.skin.app.maps.ThansName;
 	
 	import starling.display.Sprite;
 
@@ -21,11 +22,13 @@ package com.rpgGame.appModule.maps
 		
 		private var _ico : UIAsset;
 		private var _icnName:String;//显示名称
+		private var _level:int;
 		private var _icontype:String;
-		public function BigMapIcon(icontype:String,icoName:String="",pointx:int=0,pointy:int=0)
+		public function BigMapIcon(icontype:String,icoName:String="",level:int=0,pointx:int=0,pointy:int=0)
 		{
 			_icontype=icontype;
 			_icnName=icoName;
+			_level=level;
 			this.x = pointx;
 			this.y = pointy;
 			setIconBit(icontype);
@@ -95,9 +98,10 @@ package com.rpgGame.appModule.maps
 			this.touchable = false;*/
 			
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.x=-12.5;
-			temp.y=-40;
-			var skin:Chuan = new Chuan();
+			temp.x=-62;
+			temp.y=-30;
+			var skin:ThansName = new ThansName();
+			skin.lbl_name.htmlText=_icnName;
 			temp.skin=skin;
 			addChild(temp);
 			
@@ -129,10 +133,10 @@ package com.rpgGame.appModule.maps
 			this.touchable = false;*/
 			
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.x=-83;
-			temp.y=-28;
+			temp.x=-62;
+			temp.y=-48;
 			var skin:NpcName2 = new NpcName2();
-			skin.lbl_name.htmlText=_icnName;
+			skin.lbl_name.htmlText=_icnName;//"Lv."+_level+" "+
 			temp.skin=skin;
 			addChild(temp);
 			
@@ -163,8 +167,8 @@ package com.rpgGame.appModule.maps
 			this.addChild(icnNameLabel);
 			this.touchable = false;*/
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.x=-83;
-			temp.y=-28;
+			temp.x=-62;
+			temp.y=-48;
 			var skin:NpcName = new NpcName();
 			skin.lbl_name.htmlText=_icnName;
 			temp.skin=skin;

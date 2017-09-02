@@ -62,7 +62,7 @@ package com.rpgGame.app.ui.main.shortcut
 		private var cdtime:int;
 		/**技能消耗资源*/
 		private var recoData:Array;
-		private var fklnIsOpen:Boolean;
+		public static  var fklnIsOpen:Boolean=false;
 		
 		private var renderOk:Boolean=false;
 		
@@ -138,13 +138,13 @@ package com.rpgGame.app.ui.main.shortcut
 		/**设置疯狂连弩开启关闭图标效果*/
 		private function gridChangeHandler(key:Boolean):void
 		{
+			fklnIsOpen=key;
 			if(!renderOk)
 			{
 				return;
 			}
 			if(playerJod==JobEnum.ROLE_2_TYPE)//疯狂连弩开启是否是墨家        一般其它职业不用收到这个事件
 			{
-				fklnIsOpen=key;
 				if(key)//疯狂连弩开启而
 				{
 					if(skillID==FENGKUANGLIANNU)

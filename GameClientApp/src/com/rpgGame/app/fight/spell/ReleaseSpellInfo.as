@@ -17,6 +17,8 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	
+	import away3d.log.Log;
+	
 	import org.game.netCore.net.Message;
 
 	/**
@@ -181,7 +183,12 @@ package com.rpgGame.app.fight.spell
 				}
 					
 				_releaseAngle = fightTargetMsg.fightDirection;
-				_releaseAngle = (_releaseAngle + 270) % 360;
+				//不改变方向
+				if (_releaseAngle!=-1) 
+				{
+					_releaseAngle = (_releaseAngle + 270) % 360;
+				}
+				
 				
 				_atkorID = fightTargetMsg.personId.ToGID();
 				
@@ -242,7 +249,11 @@ package com.rpgGame.app.fight.spell
 				_spellData = SpellDataManager.getSpellDataWithID(fightPosMsg.fightType);
 				
 				_releaseAngle = fightPosMsg.fightDirection;
-				_releaseAngle = (_releaseAngle + 270) % 360;
+				if(_releaseAngle!=-1)
+				{
+					_releaseAngle = (_releaseAngle + 270) % 360;
+				}
+				
 				
 				_atkorID = fightPosMsg.playerid.ToGID();
 				if (_atkorID > 0)
@@ -281,7 +292,11 @@ package com.rpgGame.app.fight.spell
 		public function readWarningFrom(skillModelId:int,skillInfo:ReleaseSpellInfo) : void
 		{
 			_spellData = SpellDataManager.getSpellData(skillModelId);
-			
+			if(_spellData==null||skillInfo==null)
+			{
+				GameLog.addShow("预警技能为空了，这个不正常：" + skillModelId);
+				return;
+			}
 			_releaseAngle = skillInfo.releaseAngle;
 			
 			_atkorID =skillInfo.atkorID;

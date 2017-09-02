@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -7,7 +8,6 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
-	import com.rpgGame.app.ui.main.head.NpcSpeakBubble;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
@@ -194,11 +194,12 @@ package com.rpgGame.app.ui.main.taskbar
 				var role:SceneRole = SceneManager.getSceneObjByID(serverID.ToGID()) as SceneRole;
 				if (role != null&& role.data !=null&&role.headFace!=null) 
 				{
-					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+					(role.headFace as HeadFace).updateMonserSpeakBar();
+					/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
 					if(speak!=null&&speak!="")
 					{
 						role.headFace.addChild(NpcSpeakBubble.speakBubble(speak));
-					}
+					}*/
 					
 				}
 			}
@@ -219,8 +220,7 @@ package com.rpgGame.app.ui.main.taskbar
 		/**完成任务*/
 		private function finishMation(type:int):void
 		{
-			leadCont.hideInfo();
-			loopCont.hideTaskView(type);
+			
 			//setViewShow();
 			//leadCont.leadTaskView();
 			//loopCont.loopTaskView();
@@ -232,6 +232,11 @@ package com.rpgGame.app.ui.main.taskbar
 				loopCont.clearGuildCheck();
 				showNpcMark(false);
 			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				loopCont.gaveDailyTaskReward();
+				//loopCont.hideDailyTaskView();
+			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
 				TaskControl.hideLoopPanel();
@@ -240,7 +245,12 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskControl.hideGuildPanel();
 			}
-			
+			else if(type==TaskType.MAINTYPE_WORSHIP)
+			{
+				loopCont.gaveWorshipTaskReward();
+			}
+			leadCont.hideInfo();
+			loopCont.hideTaskView(type);
 		}
 		/**新任务*/
 		private function newMation(type:int):void
@@ -332,8 +342,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==1)//支线任务领取奖励
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
-				loopCont.gaveDailyTaskReward();
-				loopCont.hideDailyTaskView();
+				
 			}
 			//TaskControl.receiveRewordBut(type);
 			
