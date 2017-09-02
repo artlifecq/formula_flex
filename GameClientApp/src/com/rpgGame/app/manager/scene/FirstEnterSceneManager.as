@@ -58,10 +58,7 @@ package com.rpgGame.app.manager.scene
 		{
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.PRIVILEGE_MARK_TYPE, 1);
 			//暂时放这里测试用，@L.L.M.Sunny 20160113
-			//主角初始化
 			WelcomeManager.checkWelcomeState();
-			MainRoleManager.initActor();
-			
 
 			AppMergeManager.instace.setup();
 			MouseCursorController.setup();

@@ -20,6 +20,7 @@ package com.game.engine2D.controller
 
 	/**
 	 * 2.5D 摄像机控制类 
+	 * 主要用来控制camera3d 的位置。根据主角的位置，来调整camera3d的位置
 	 * @author guoqing.wen
 	 * 
 	 */
@@ -65,6 +66,13 @@ package com.game.engine2D.controller
 		}
 		
 		static private var _lookAtPosition:Vector3D = new Vector3D();
+		
+		/**
+		 * 设置镜头的位置 
+		 * @param px
+		 * @param py
+		 * 
+		 */		
 		public static function lookAt(px:Number, py:Number) : void
 		{
 			//trace("lookAt:",px, py);
@@ -77,7 +85,7 @@ package com.game.engine2D.controller
 				_camera.y = _lookAtPosition.y;
 				_camera.z = - LOCK_DISTANCE;
 				_camera.lookAt(_lookAtPosition);
-                screenVibration();
+//                screenVibration();
 			}
 		}
 		
@@ -99,7 +107,7 @@ package com.game.engine2D.controller
 		public static function onSceneTranform(e:Object3DEvent) : void
 		{
 			var lookAtPosition:Vector3D = _target.scenePosition;
-			lookAt(lookAtPosition.x, lookAtPosition.y);
+			lookAt(lookAtPosition.x, lookAtPosition.z);
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////

@@ -8,7 +8,6 @@ package com.game.engine2D
 	import com.game.engine2D.core.AsyncMapTexture;
 	import com.game.engine2D.scene.CameraOrthographicLens;
 	import com.game.engine2D.scene.SceneCamera;
-	import com.game.engine2D.scene.SceneCameraTarget;
 	import com.game.engine2D.scene.SceneRender;
 	import com.game.engine2D.scene.SceneSmallLayer;
 	import com.game.engine2D.scene.layers.SceneInteractiveLayer;
@@ -23,8 +22,8 @@ package com.game.engine2D
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.manager.GameScene3DManager;
 	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.game.engine3D.scene.render.vo.ISceneCameraTarget;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.game.engine3D.vo.BaseRole;
 	
 	import flash.display.Sprite;
 	import flash.geom.Point;
@@ -89,13 +88,13 @@ package com.game.engine2D
 		public var sceneNameLayer:starling.display.Sprite;
 		
 		private var _viewAsset:View3DAsset;
-		private var _mainChar : ISceneCameraTarget;
+		private var _mainChar : BaseRole;
 		private var _view:View3D;
 		private var _screenView:View3D;
 		private var _scene3d:GameScene3D;
 		private var _scenePos:Point = new Point(int.MIN_VALUE, int.MIN_VALUE);
 		
-		private var _cameraTarget:ObjectContainer3D;/**虚拟目标，跟镜头绑定的，导致镜头移动的参照 */
+//		private var _cameraTarget:ObjectContainer3D;/**虚拟目标，跟镜头绑定的，导致镜头移动的参照 */
 		private var _cameraOffsetX:Number = 0;
 		private var _cameraOffsetY:Number = 0;
 		
@@ -250,21 +249,21 @@ package com.game.engine2D
 			return _view;
 		}
 		
-		public function get cameraTarget() : ObjectContainer3D
-		{
-			if (_cameraTarget == null)
-			{
-				_cameraTarget = new ObjectContainer3D();
-				_view.scene.addChild(_cameraTarget);
-			}
-			return _cameraTarget;
-		}
+//		public function get cameraTarget() : ObjectContainer3D
+//		{
+//			if (_cameraTarget == null)
+//			{
+//				_cameraTarget = new ObjectContainer3D();
+//				_view.scene.addChild(_cameraTarget);
+//			}
+//			return _cameraTarget;
+//		}
 		
 		public function cameraRun():void
 		{
 			sceneCamera.run(GlobalConfig2D.cameraTween);
-			cameraTarget.x = sceneCamera.posX + _cameraOffsetX;
-			cameraTarget.y = sceneCamera.posY + _cameraOffsetY;
+//			cameraTarget.x = sceneCamera.posX + _cameraOffsetX;
+//			cameraTarget.y = sceneCamera.posY + _cameraOffsetY;
 		}
 		
 		public function cameraOffset(offsetX:Number, offsetY:Number):void
@@ -280,7 +279,7 @@ package com.game.engine2D
 		/**
 		 * 场景主角
 		 */
-		public function set mainChar(value:ISceneCameraTarget):void
+		public function set mainChar(value:BaseRole):void
 		{
 			//设置主角
 			if(value)
@@ -298,8 +297,8 @@ package com.game.engine2D
 				//摄像机锁定
 				cameraLookAt(value);
 				
-				cameraTarget.x = _mainChar.pos.x;
-				cameraTarget.y = _mainChar.pos.y;
+//				cameraTarget.x = _mainChar.pos.x;
+//				cameraTarget.y = _mainChar.pos.y;
 			}
 		}
 
@@ -556,9 +555,9 @@ package com.game.engine2D
 			_cameraOrthographicLens.far = CameraFrontController.LOCK_NEAR_FAR;
 			if (_cameraInit)return;
 			_cameraInit = true;
-			_cameraTarget = new SceneCameraTarget();
-			this.addChild(_cameraTarget);
-			CameraFrontController.initcontroller(_view.camera, _cameraTarget);
+//			_cameraTarget = new SceneCameraTarget();
+//			this.addChild(_cameraTarget);
+			CameraFrontController.initcontroller(_view.camera, _scene3d.getCameraTarget());
 		}
 		
 		private function initLight():void
@@ -1082,7 +1081,7 @@ package com.game.engine2D
 		/**
 		 * 摄像机锁定角色
 		 */
-		public function cameraLookAt($sc:ISceneCameraTarget):void
+		public function cameraLookAt($sc:BaseRole):void
 		{
 			sceneCamera.lookAt($sc);
 		}
