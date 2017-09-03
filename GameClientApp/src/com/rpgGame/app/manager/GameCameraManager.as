@@ -50,12 +50,11 @@ package com.rpgGame.app.manager
 		{
 			if(GlobalConfig.use2DMap)
 			{
-				CameraFrontController.initcontroller(SceneManager.scene.view3d.camera, target);
+				CameraFrontController.initcontroller(SceneManager.scene, target);
 				CameraFrontController.LOCK_DISTANCE = 100000;
 				////测试代码////
 				CameraFrontController.startControl(Stage3DLayerManager.stage);
 				CameraFrontController.sceneCamera = SceneManager.scene.sceneCamera;
-				CameraFrontController.sceneCamera.updateScale(1.15);
 			}
 			else
 			{

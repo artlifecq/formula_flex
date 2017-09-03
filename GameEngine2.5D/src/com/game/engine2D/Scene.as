@@ -259,6 +259,10 @@ package com.game.engine2D
 //			return _cameraTarget;
 //		}
 		
+		/**
+		 * SceneRender类中的帧事件onSceneRender，来执行这个函数，每帧会同步的 
+		 * 
+		 */		
 		public function cameraRun():void
 		{
 			sceneCamera.run(GlobalConfig2D.cameraTween);
@@ -557,7 +561,7 @@ package com.game.engine2D
 			_cameraInit = true;
 //			_cameraTarget = new SceneCameraTarget();
 //			this.addChild(_cameraTarget);
-			CameraFrontController.initcontroller(_view.camera, _scene3d.getCameraTarget());
+			CameraFrontController.initcontroller(this, _scene3d.getCameraTarget());
 		}
 		
 		private function initLight():void
@@ -1090,6 +1094,7 @@ package com.game.engine2D
 		 */
 		public function updateCameraNow():void
 		{
+			CameraFrontController.onSceneTranform(null);
 			sceneCamera.run(-1);
 			if (sceneZoneMapLayer)sceneZoneMapLayer.strongLoadMap = true;
 		}
