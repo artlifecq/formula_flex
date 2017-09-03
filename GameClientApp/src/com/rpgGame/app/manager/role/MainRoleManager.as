@@ -149,14 +149,7 @@ package com.rpgGame.app.manager.role
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
 				
-//				if(GlobalConfig.use2DMap)
-//				{
-//					GameCameraManager.startPlayerMode(SceneManager.scene.cameraTarget);
-//				}
-//				else
-//				{
-					GameCameraManager.startPlayerMode(SceneManager.getScene().getCameraTarget());
-//				}
+				GameCameraManager.startPlayerMode(SceneManager.getScene().getCameraTarget());
 				
 				TrusteeshipManager.getInstance().setup(_actor);
 				TaskAutoManager.getInstance().setup(_actor);
