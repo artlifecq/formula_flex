@@ -1,9 +1,5 @@
 package
 {
-
-	import com.gameClient.utils.HttpUtil;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
