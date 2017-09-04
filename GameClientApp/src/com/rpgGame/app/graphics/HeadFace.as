@@ -283,9 +283,10 @@ package com.rpgGame.app.graphics
 				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
 				var isNormal:Boolean=monster.q_monster_type==MonsterType.NORMAL;
 				var isNPC:Boolean=monster.q_monster_type==MonsterType.NPC;
+				var isMyMonster:Boolean=PKMamager.isMyMonster(_role);//我的召唤怪要显示
 				//普通怪在战斗状态显示血条
 				if(!_bloodBar.parent){//没显示的情况再判定
-					var isMyMonster:Boolean=PKMamager.isMyMonster(_role);//我的召唤怪要显示
+					
 					showAndHideElement(_bloodBar, isMyMonster,DecorCtrl.TOP_HPMP);
 				}
 				
