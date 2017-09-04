@@ -119,6 +119,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 	
+	import app.message.MonsterType;
+	
 	import away3d.enum.LoadPriorityType;
 	
 	import org.client.mainCore.bean.BaseBean;
@@ -921,7 +923,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var data : MonsterData;
 			var sceneRole : SceneRole;
 			if(qData==null)return;
-			if(qData.q_monster_type==5)//如果是采集物 去走采集物创建流程
+			if(qData.q_monster_type==MonsterType.COLLECT)//如果是采集物 去走采集物创建流程
 			{
 				var collectData : SceneCollectData = new SceneCollectData();
 				collectData.serverID = info.monsterId;
@@ -941,15 +943,16 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.faction=info.faction;
 				SceneRoleManager.getInstance().createCollect(collectData);
 			}
-			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
+			else if(qData.q_monster_type==MonsterType.NPC)//npc创建流程       对应 改的东西太多了 先保留
 			{
-				data = new MonsterData(RoleType.TYPE_MONSTER);
+				//data = new MonsterData(RoleType.TYPE_MONSTER);
+				data = new MonsterData(RoleType.TYPE_NPC);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
 				data.modelID = info.modelId;
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
-				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.NPC);
 				addTaskmark(sceneRole);			
 				//				(sceneRole.headFace as HeadFace).updateNPCTitle();
 				

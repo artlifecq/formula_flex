@@ -153,14 +153,15 @@ package com.rpgGame.app.ui.main.smallmap
 					else
 					{
 						
-						if (npcData.smallMapIcon)
-						{
-							iconUrl = ClientConfig.getMapIcon(npcData.smallMapIcon);
-						}
-						else
-						{
-							iconUrl = getMapNPCIcon();
-						}
+//						if (npcData.smallMapIcon)
+//						{
+//							iconUrl = ClientConfig.getMapIcon(npcData.smallMapIcon);
+//						}
+//						else
+//						{
+//							iconUrl = getMapNPCIcon();
+//						}
+						iconUrl = getMapNPCIcon();
 					}
 					updateIco(iconUrl);
 					_tipsData.info = npcData.name + "<br/>" + npcData.x + "," + npcData.y;
@@ -191,10 +192,10 @@ package com.rpgGame.app.ui.main.smallmap
 					}
 					else
 					{
-						if(bornMonsterData.monsterType==4)
-							iconUrl = getMapNPCIcon();
-						else
-							iconUrl = getMapMonsterIcon();
+//						if(bornMonsterData.monsterType==4)
+//							iconUrl = getMapNPCIcon();
+//						else
+						iconUrl = getMapMonsterIcon();
 					}
 					updateIco(iconUrl);
 					_tipsData.info = bornMonsterData.name + "(" + bornMonsterData.level + "级)" + "<br/>" + bornMonsterData.x + "," + bornMonsterData.y;
@@ -233,10 +234,10 @@ package com.rpgGame.app.ui.main.smallmap
 				case MapIconType.SCENE_MONSTER:
 					//text.text = data;
 					var sceneMonsterData : MonsterData = _data as MonsterData;
-					if(sceneMonsterData.monsterData.q_monster_type==4)
-						iconUrl = getMapNPCIcon();
-					else
-						iconUrl = getMapMonsterIcon();
+//					if(sceneMonsterData.monsterData.q_monster_type==4)
+//						iconUrl = getMapNPCIcon();
+//					else
+					iconUrl = getMapMonsterIcon();
 					updateIco(iconUrl);
 					_tipsData.info = sceneMonsterData.name + "<br/>" + mapX + "," + mapY;
 					break;

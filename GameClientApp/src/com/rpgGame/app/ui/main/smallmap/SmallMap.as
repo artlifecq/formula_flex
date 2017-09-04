@@ -1194,7 +1194,7 @@ package com.rpgGame.app.ui.main.smallmap
 			{
 				return;
 			}
-			if (sceneRole.type == SceneCharType.MONSTER || sceneRole.type == SceneCharType.PLAYER||sceneRole.type==SceneCharType.COLLECT)
+			if (sceneRole.type == SceneCharType.NPC || sceneRole.type == SceneCharType.MONSTER || sceneRole.type == SceneCharType.PLAYER||sceneRole.type==SceneCharType.COLLECT)
 			{
 				var ico : SmallMapRoleIcon = _moveIcoMap.getValue((sceneRole.data as RoleData).type + "_" + (sceneRole.data as RoleData).id);
 				if (ico == null)
@@ -1203,6 +1203,13 @@ package com.rpgGame.app.ui.main.smallmap
 					_moveIcoMap.add((sceneRole.data as RoleData).type + "_" + (sceneRole.data as RoleData).id, ico);
 					
 					if (sceneRole.type == SceneCharType.MONSTER)
+					{
+						monsterSpr.addChild(ico);
+						ico.setData(MapIconType.SCENE_MONSTER, sceneRole.data as RoleData, sceneRole.x, sceneRole.z);
+						_sceneMonsterVect.push(ico);
+						ico.visible = true;
+					}
+					if (sceneRole.type == SceneCharType.NPC)
 					{
 						monsterSpr.addChild(ico);
 						ico.setData(MapIconType.SCENE_MONSTER, sceneRole.data as RoleData, sceneRole.x, sceneRole.z);
