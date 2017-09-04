@@ -355,6 +355,7 @@ package com.rpgGame.appModule.maps
 		}
 		public function roleWalk(x:Number,y:Number,spacing:int=0):void
 		{
+			roadSpr.onClearPath();
 			var position : Vector3D = new Vector3D(x, -Math.abs(y), 0);
 			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))
 			{

@@ -287,22 +287,23 @@ package com.rpgGame.appModule.maps
 			{
 				temp = new SkinnableContainer();
 				var name:String=data[i].name;
-				if(data[i].type==SceneCharType.MONSTER)
-				{
-					name+=" Lv."+data[i].level;
-				}
+				
 				if(i%2==0)
 				{
 					skin= new NpcItem();
 					skin.lbl_name.htmlText=name;
-					skin.btn_over.name="ROLE_"+data[i].type+"_"+i;
+					skin.lbl_level.htmlText=data[i].type==SceneCharType.MONSTER?data[i].level+"级":"";
+					skin.btn_over.name="ROLE_"+data[i].type+"_"+i+"_1";
+					skin.btnSend.name="ROLE_"+data[i].type+"_"+i+"_2";
 					temp.skin = skin;
 				}
 				else
 				{
 					skin2 = new NpcItem2();
 					skin2.lbl_name.htmlText=name;
-					skin2.btn_over.name="ROLE_"+data[i].type+"_"+i;
+					skin2.lbl_level.htmlText=data[i].type==SceneCharType.MONSTER?data[i].level+"级":"";
+					skin2.btn_over.name="ROLE_"+data[i].type+"_"+i+"_1";
+					skin2.btnSend.name="ROLE_"+data[i].type+"_"+i+"_2";
 					temp.skin = skin2;
 				}
 				temp.y=i*temp.height;

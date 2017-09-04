@@ -1,8 +1,11 @@
 package com.rpgGame.appModule.maps
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.utils.TaskUtil;
 	
 	import org.mokylin.skin.app.maps.maps_Skin;
 	import org.mokylin.skin.component.text.textInput2_Skin;
@@ -62,7 +65,7 @@ package com.rpgGame.appModule.maps
 			var name:String=target.name;
 			var nameSplit:Array=name.split("_");
 			//分解名字字符，0 标记  1 类型  2 位置ID
-			if(nameSplit.length==3&&nameSplit[0]=="ROLE")
+			if(nameSplit.length>=3&&nameSplit[0]=="ROLE")
 			{
 				var i:int,length:int,id:int;
 				var releData:BigMapIocnDataMode;
@@ -92,7 +95,14 @@ package com.rpgGame.appModule.maps
 				}
 				if(releData)
 				{
-					_bigMap.roleWalk(releData.x,releData.y,100);
+					if(nameSplit[2]==1)
+					{
+						_bigMap.roleWalk(releData.x,releData.y,100);
+					}
+					else
+					{
+						SceneSender.sceneMapTransport(SceneSwitchManager.currentMapId, releData.x, releData.y);
+					}
 				}
 			}
 			
