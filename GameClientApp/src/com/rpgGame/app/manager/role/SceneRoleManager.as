@@ -278,6 +278,7 @@ package com.rpgGame.app.manager.role
 			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
+			role.enableMask = true;
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
