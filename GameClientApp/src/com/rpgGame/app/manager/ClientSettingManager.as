@@ -54,10 +54,20 @@ package com.rpgGame.app.manager
 					//快捷键设置
 					initShortCutsConfig(value , isFirst);
 				}
-				else if ( type == EnumCustomTagType.SYSTEM_SET )
+				else if ( type == EnumCustomTagType.SYSTEM_GUAJI_SET )
 				{
-					//系统设置数据
-					SystemSetManager.getinstance().setData(value);
+					//挂机设置数据
+					SystemSetManager.initData(value);
+				}
+				else if ( type == EnumCustomTagType.SYSTEM_HUAMIAN_SET )
+				{
+					//画面设置数据
+					DisplaySetUpManager.initData(value);
+				}
+				else if ( type == EnumCustomTagType.SYSTEM_PINHBI_SET )
+				{
+					//屏蔽设置数据
+					GameSettingManager.initData(value);
 				}
 				else if(type == EnumCustomTagType.GET_JUE_MING_ATTRIBUTE_EFFECT)
 				{

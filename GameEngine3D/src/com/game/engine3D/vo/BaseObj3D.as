@@ -1435,7 +1435,9 @@ package com.game.engine3D.vo
 		
 		public function instanceDestroy() : void
 		{
-			destroy();
+			//destroy();
+			dispose();
+			_isDestroyed=true;
 		}
 		
 		public function putInPool() : void
@@ -1691,7 +1693,6 @@ package com.game.engine3D.vo
 			dispose();
 			_isDestroyed = true;
 		}
-		
 		//===========================================摄像机相关=====================================================
 		private var _speed:Number = 0;
 		public function get speed():Number

@@ -29,10 +29,11 @@ package com.rpgGame.coreData.role
 		public function updataTopType(value:int):void
 		{
 			topLeaderTypes = new Vector.<int>();
-			if (roleId!=null&&roleId.IsZero()==false) 
-			{
-				topLeaderTypes.push(value);
-			}
+//			if (roleId!=null&&roleId.IsZero()==false) 
+//			{
+//				
+//			}
+			topLeaderTypes.push(value);
 			topType = value;
 		}
 	}
