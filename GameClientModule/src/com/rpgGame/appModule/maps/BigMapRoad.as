@@ -43,13 +43,13 @@ package com.rpgGame.appModule.maps
 			addChild(pathSpr);
 			
 		}
-		private var _roadOpend:Boolean;
+		private var _roadOpend:Boolean=true;
 		public function openRoad() : void
 		{
-			closeRoad();
+			
 			_roadOpend = true;
-			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPath);
-			EventManager.addEvent(UserMoveEvent.MOVE_END, closeRoad);
+			//EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPath);
+			//EventManager.addEvent(UserMoveEvent.MOVE_END, closeRoad);
 		}
 		
 		/**
@@ -58,12 +58,13 @@ package com.rpgGame.appModule.maps
 		public function closeRoad() : void
 		{
 			_roadOpend = false;
-			EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPath);
-			EventManager.removeEvent(UserMoveEvent.MOVE_END, onClearPath);
+			//EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPath);
+			//EventManager.removeEvent(UserMoveEvent.MOVE_END, onClearPath);
 			onClearPath();
 		}
-		private function onDrawPath() : void
+		public function onDrawPathRoad() : void
 		{
+			onClearPath();
 			if (MainRoleManager.actor == null)
 				return;
 			if (KeyMoveManager.getInstance().keyMoving)

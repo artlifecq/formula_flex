@@ -169,13 +169,13 @@ package com.rpgGame.app.manager
 			if (role == null || !role.usable)
 				return;
 			
-			var monsterData : MonsterData = role.data as MonsterData;
-			if (monsterData == null)
-				return;
-			if(monsterData.monsterData.q_monster_type==4)
-			{
-				EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.distributeId,monsterData.serverID);//交任务用------YT
-			}
+//			var monsterData : MonsterData = role.data as MonsterData;
+//			if (monsterData == null)
+//				return;
+//			if(monsterData.monsterData.q_monster_type==4)
+//			{
+//				EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.distributeId,monsterData.serverID);//交任务用------YT
+//			}
 			
 		}
 		
@@ -187,16 +187,18 @@ package com.rpgGame.app.manager
 			if (role == null || !role.usable)
 				return;
 			
-			var actor : SceneRole = MainRoleManager.actor;
-			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
-			var npcData : MonsterData = role.data as MonsterData;
-			var farDistance : int = npcData.farDistance;
-			if (dist < farDistance * farDistance)
-			{
-				TaskManager.checkDialogToNpc(role.id);
-			}
-			
-			
+//			var actor : SceneRole = MainRoleManager.actor;
+//			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
+//			var npcData : MonsterData = role.data as MonsterData;
+//			var farDistance : int = npcData.farDistance;
+//			if (dist < farDistance * farDistance)
+//			{
+//				TaskManager.checkDialogToNpc(role.id);
+//			}
+			var monsterData : MonsterData = role.data as MonsterData;
+			if (monsterData == null)
+				return;
+			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.distributeId,monsterData.serverID);//交任务用------YT
 		}
 		/**
 		 * 采集物
