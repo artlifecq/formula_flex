@@ -15,7 +15,7 @@ package com.rpgGame.appModule.fightsoul
 		public function FightSoulPathInfoData(path:Q_fightsoul_path):void
 		{
 			_path = path;
-			_newFunc = NewFuncCfgData.getdataById(path.q_arg.toString());
+			_newFunc = NewFuncCfgData.getFuncCfg(path.q_arg);
 			refeash();
 		}
 		
@@ -44,7 +44,7 @@ package com.rpgGame.appModule.fightsoul
 				else
 					return false;
 			}else{
-				return FunctionOpenManager.functionIsOpen(_newFunc.q_id.toString());
+				return FunctionOpenManager.functionIsOpen(_newFunc.q_id);
 			}
 		}
 		

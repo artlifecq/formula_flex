@@ -34,7 +34,7 @@ package com.rpgGame.appModule.activety
 			super(_skin);
 		}
 		
-		override public function show(data : * = null, openTable : String = "", parentContiner : DisplayObjectContainer = null) : void
+		override public function show(data : * = null, openTable:int=0, parentContiner : DisplayObjectContainer = null) : void
 		{
 			actInfo=data as ActivetyInfo;
 			_skin.icons.styleName="ui/icon/activity/open/"+actInfo.actCfg.q_activity_id+".png";

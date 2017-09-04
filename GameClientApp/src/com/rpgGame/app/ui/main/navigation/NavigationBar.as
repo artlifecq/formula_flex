@@ -4,7 +4,9 @@ package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.enum.EnumFunctionBtnType;
 	
 	import flash.geom.Point;
 	
@@ -42,13 +44,13 @@ package com.rpgGame.app.ui.main.navigation {
 		
 		private function refeashButton(data:*=null):void
 		{
-			var buttoninfos:Array = FuncionBarCfgData.getInfoListbyType(0);
+			var buttoninfos:Vector.<Q_newfunc> = NewFuncCfgData.getFuncBtnList(EnumFunctionBtnType.MAIN_MENU);
 			var length:int = buttoninfos.length;
 			var index:int = 0;
 			_content.reset();
 			for(var i:int =0;i<length;i++)
 			{
-				var button:IOpen = MainButtonManager.getButtonBuyInfo(buttoninfos[i]);
+				var button:IOpen = MainButtonManager.getButtonByInfo(buttoninfos[i]);
 				if(button!=null&&button.canOpen())
 				{
 					_content.addButton(button);

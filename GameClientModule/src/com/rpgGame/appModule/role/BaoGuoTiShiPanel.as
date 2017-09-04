@@ -3,6 +3,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.baoguo.BaoGuo_Skin;
 	
@@ -50,13 +51,13 @@ package com.rpgGame.appModule.role
 		{
 			switch(type){
 				case 1:
-					FunctionOpenManager.openAppPaneById("20",null,false);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_QIANGHUA,null,false);
 					break;
 				case 2:
-					FunctionOpenManager.openAppPaneById("1",3,false);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,3,false);
 					break;
 				case 3:
-					FunctionOpenManager.openAppPaneById("1",4,false);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,4,false);
 					break;
 			}
 		}

@@ -10,7 +10,7 @@ package com.rpgGame.appModule
 		/** 点击执行*/
 		public static function LinkDo( key :String ):void
 		{
-			FunctionOpenManager.openAppPaneById(key);
+			FunctionOpenManager.openAppPaneById(int(key));
 		}
 	}
 }

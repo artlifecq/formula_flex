@@ -46,7 +46,7 @@ package  com.rpgGame.appModule.social.team
 			_skin.btn_cancel.addEventListener(Event.TRIGGERED, OnDisagree);
 			
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);	
 			SetData(data);

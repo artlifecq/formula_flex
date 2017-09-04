@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.tab
 	import feathers.controls.TabBar;
 	import feathers.controls.ToggleButton;
 	import feathers.core.ToggleGroup;
-	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.ds.HashMap;
 	
@@ -24,7 +23,7 @@ package com.rpgGame.app.ui.tab
 		private var _tabViewMap:HashMap;
 		protected var _data:*;
 		protected var _allDatas:Vector.<UITabBarData>;//所有的tab数据
-		protected var _currentKey:String;
+		protected var _currentKey:int;
 		protected var _currentIndex:int=-1;
 		protected var _needRefash:Boolean = true;
 		protected var _touchGroup:ToggleGroup;
@@ -79,9 +78,9 @@ package com.rpgGame.app.ui.tab
 			}
 		}*/
 		
-		public function show(data:*=null, openTable:String="0"):void
+		public function show(data:*=null, openTable:int=0):void
 		{
-			if(openTable.length==0){//没给就给个默认的
+			if(openTable==0){//没给就给个默认的
 				openTable=_allDatas[0].tabKey;
 			}
 			_touchGroup.addEventListener(Event.CHANGE,selectChangeHandler);
@@ -94,7 +93,7 @@ package com.rpgGame.app.ui.tab
 		 * @param key
 		 * 
 		 */
-		protected function getTabDataIndexByTabKey(key:String):int
+		protected function getTabDataIndexByTabKey(key:int):int
 		{
 			var num:int=_allDatas.length;
 			var i:int=0;
@@ -107,7 +106,7 @@ package com.rpgGame.app.ui.tab
 		}
 		
 		
-		public function getTabDataByTabKey(key:String):UITabBarData
+		public function getTabDataByTabKey(key:int):UITabBarData
 		{
 			var num:int=_allDatas.length;
 			var i:int=0;
@@ -122,7 +121,7 @@ package com.rpgGame.app.ui.tab
 		}
 			
 		
-		protected function getTabkeyByIndex(index:int):String
+		protected function getTabkeyByIndex(index:int):int
 		{
 			var num:int=_allDatas.length;
 			var i:int=0;
@@ -133,10 +132,10 @@ package com.rpgGame.app.ui.tab
 						return _allDatas[i].tabKey;
 				}
 			}
-			return null;
+			return 0;
 		}
 		
-		public function switchTabKey(key:String):void
+		public function switchTabKey(key:int):void
 		{
 			var index:int = getTabDataIndexByTabKey(key);
 			if(index>=0)
@@ -169,7 +168,7 @@ package com.rpgGame.app.ui.tab
 			selectChangeHandler();
 		}
 		
-		public function addTabDataWithTabKey(key:String):void
+		public function addTabDataWithTabKey(key:int):void
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
@@ -186,7 +185,7 @@ package com.rpgGame.app.ui.tab
 			}
 		}
 		
-		public function removeTabDataWithTabKey(key:String):void
+		public function removeTabDataWithTabKey(key:int):void
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;

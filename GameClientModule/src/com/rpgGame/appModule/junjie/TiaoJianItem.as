@@ -51,7 +51,7 @@ package com.rpgGame.appModule.junjie
 			switch(target)
 			{
 				case _skin.lbName:
-					FunctionOpenManager.openAppPaneById(_gongnengId.toString(),null,false);
+					FunctionOpenManager.openAppPaneById(_gongnengId,null,false);
 					break;
 			}
 		}

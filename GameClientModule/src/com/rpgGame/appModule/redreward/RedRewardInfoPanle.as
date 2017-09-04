@@ -40,7 +40,7 @@ package com.rpgGame.appModule.redreward
 			addTabDatas(TabBarSkin_pack,RedRewardLogList,EmFunctionID.EM_REDREWARDGETLOG);
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDMONTHCOUNT,refashMothCountHandler);
 			super.show(data,openTable,parentContiner);

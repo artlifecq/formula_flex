@@ -129,7 +129,7 @@ package com.rpgGame.appModule.guild
 		}
 		
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashList);

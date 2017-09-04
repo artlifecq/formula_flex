@@ -114,6 +114,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
@@ -331,7 +332,7 @@ package com.rpgGame.app.richText
 						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
 					break;
 				case RichTextCustomLinkType.SHOW_PANEL_TYPE:
-					var panelID:String=unitData.linkData;
+					var panelID:int=int(unitData.linkData);
 					//					var id:String=ChatUtil.getPanel(t);
 					FunctionOpenManager.openAppPaneById(panelID,null,false);
 					//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
@@ -449,7 +450,7 @@ package com.rpgGame.app.richText
 					{
 //						var guildId:Number=parseInt(unitData.linkData);
 						id = new long(unitData.linkData);
-						FunctionOpenManager.openAppPaneById("51",id,false);
+						FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI,id,false);
 					}else{
 						NoticeManager.showNotifyById(60218);
 					}			

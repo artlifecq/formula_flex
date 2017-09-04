@@ -42,7 +42,7 @@ package com.rpgGame.appModule.systemset
 				_viewList[i].visible = false;
 		}
 		
-		override public function show(data : * = null, openTable : String = "", parentContiner : DisplayObjectContainer = null) : void
+		override public function show(data : * = null, openTable:int=0, parentContiner : DisplayObjectContainer = null) : void
 		{
 			super.show(data,openTable,parentContiner);
 			initEvent();

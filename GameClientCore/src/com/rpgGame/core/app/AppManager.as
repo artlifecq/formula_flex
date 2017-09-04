@@ -28,7 +28,7 @@ package com.rpgGame.core.app
 		 * @param parentContiner app的父容器对象
 		 * @author 卢国征 2015-5-22
 		 */			
-		public static function showApp( appName:String, data:Object = null, openTable:String = "", parentContiner:DisplayObjectContainer = null ):void
+		public static function showApp( appName:String, data:Object = null, openTable:int = 0, parentContiner:DisplayObjectContainer = null ):void
 		{
 			var appInfo:AppInfo = AppConstant.getAppinfoByAppName( appName );
 			preTurnModule( appInfo, data, openTable, parentContiner, false, true );
@@ -41,7 +41,7 @@ package com.rpgGame.core.app
 		 * @param openTable		要打开面板的哪个标签页 ,确定面板里调用了setMainTableBar方法设置主tableBar
 		 * @author 卢国征 2015-5-22
 		 */		
-		public static function showAppNoCloseAll( appName:String, data:Object = null, openTable:String = "", parentContiner:DisplayObjectContainer = null ):void
+		public static function showAppNoCloseAll( appName:String, data:Object = null, openTable:int =0, parentContiner:DisplayObjectContainer = null ):void
 		{
 			var appInfo:AppInfo = AppConstant.getAppinfoByAppName( appName );
 			preTurnModule( appInfo, data, openTable, parentContiner, false, true );
@@ -54,7 +54,7 @@ package com.rpgGame.core.app
 		 * @param openTable		要打开面板的哪个标签页 ,确定面板里调用了setMainTableBar方法设置主tableBar
 		 * @author 卢国征 2015-5-22
 		 */		
-		public static function showAppNoHide( appName:String, data:Object = null, openTable:String = "", parentContiner:DisplayObjectContainer = null ):void
+		public static function showAppNoHide( appName:String, data:Object = null, openTable:int = 0, parentContiner:DisplayObjectContainer = null ):void
 		{
 			var appInfo:AppInfo = AppConstant.getAppinfoByAppName( appName );
 			preTurnModule( appInfo, data, openTable, parentContiner, true, false);
@@ -317,7 +317,7 @@ package com.rpgGame.core.app
 		 * @param isAutoHide
 		 * @author 卢国征 2015-5-22
 		 */		
-		private static function preTurnModule( appInfo:AppInfo, data:Object, openTable:String, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
+		private static function preTurnModule( appInfo:AppInfo, data:Object, openTable:int, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
 		{
 			if( AppOpenUtil.isCanOpenApp(appInfo.appName,data,openTable) )
 				turnModule( appInfo, data, openTable, parentContiner, isCloseAll, isAutoHide );
@@ -331,7 +331,7 @@ package com.rpgGame.core.app
 		 * @param isAutoHide	如果要打开的app已经是在打开状态，是否要执行对打开的app执行关闭
 		 * @author 卢国征 2015-5-22
 		 */		
-		private static function turnModule( appInfo:AppInfo, data:Object, openTable:String, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
+		private static function turnModule( appInfo:AppInfo, data:Object, openTable:int, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
 		{
 			if( appInfo != null )
 			{

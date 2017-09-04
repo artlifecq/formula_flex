@@ -1,7 +1,6 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.game.engine3D.display.InterObject3D;
-    import com.rpgGame.app.manager.FunctionOpenManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.ui.main.buttons.IOpen;
@@ -12,7 +11,7 @@
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
-    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+    import com.rpgGame.coreData.clientConfig.Q_newfunc;
     
     import feathers.controls.ButtonState;
     import feathers.themes.GuiTheme;
@@ -47,6 +46,7 @@
         private var _effect3D:InterObject3D;
 		protected var _openState:Boolean=true;
 		protected var _btnRes:String;
+		private var _info:Q_newfunc;
 		
 		protected static var stateToName:HashMap;
 		protected static var stateToIndex:HashMap;
@@ -66,13 +66,12 @@
 			}
         }
 		
-		private var _info:FunctionBarInfo;
-		public function get info():FunctionBarInfo
+		public function get info():Q_newfunc
 		{
 			return _info;
 		}
 		
-		public function set info(value:FunctionBarInfo):void
+		public function set info(value:Q_newfunc):void
 		{
 			_info = value;
 		}
@@ -82,7 +81,7 @@
 			if(!_openState){
 				return false;
 			}
-			if(FunctionOpenManager.getOpenLevelByFunBarInfo(_info)>MainRoleManager.actorInfo.totalStat.level)
+			if(_info.q_level>MainRoleManager.actorInfo.totalStat.level)
 				return false;
 			return true;
 		}
@@ -154,13 +153,13 @@
 			if(!_info){
 				return;
 			}
-			if(_info.showEft==0)
+			if(!_info.q_btn_eft)
 				return ;
 			if(this.parent == null)
 				return ;
             if (!_effect3D)
             {
-                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.effect_name), 42, 45, 0);
+                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.q_btn_eft), 42, 45, 0);
             }
             else
             {

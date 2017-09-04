@@ -32,7 +32,7 @@ package com.rpgGame.appModule.zone
 			_initStr="$s后自动关闭";
 			_gReward=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1);
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			var msg:SCZoneCommonResultMessage=data;

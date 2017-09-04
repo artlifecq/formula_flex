@@ -8,8 +8,9 @@
 	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.enum.EnumFunctionBtnType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	
 	import gs.TweenLite;
@@ -25,6 +26,9 @@
 		private const GRID_WIDTH:Array = [80,80,80,80]
 		private const GRID_HEIGHT:uint = 80;
 		private const ALIGN:String = "right";
+		
+		private const ACT_TYPES:Array=[EnumFunctionBtnType.NORMAL_ACT,EnumFunctionBtnType.SPECIAL_ACT,EnumFunctionBtnType.TIME_ACT];
+		
 		public function ActivityButtonList()
 		{
 			super();
@@ -55,36 +59,32 @@
 			return ActivityBarManager.buttonDics[activityType] as ActivityButtonBase;
 		}
 		
-		private static const TYPE:int = 1;
 		private function updatePositionAll(data:*=null):void
 		{
 			this.removeChildren();
 			var q_map_zones:int=MapDataManager.currentScene.getData().q_map_zones;
-			var rows:Array = FuncionBarCfgData.getinfoRows(TYPE);
-			var length:int = rows.length;
+			var length:int = ACT_TYPES.length;
 			var button:IOpen;
-			var row:int;
 			var len:int;
 			var starX:int;
-			var funinfo:FunctionBarInfo;
+			var funinfo:Q_newfunc;
 			var width:int;
 			for(var i:int=0;i<length;i++){
-				row = rows[i];
-				var list:Array=FuncionBarCfgData.getInfoListbyType(TYPE,row);
+				var list:Vector.<Q_newfunc>=NewFuncCfgData.getFuncBtnList(ACT_TYPES[i]);
 				len=list.length;
 				if(len<=0){
 					continue;
 				}
 				starX = SIZE_WIDTH;
-				width = GRID_WIDTH[row];
+				width = GRID_WIDTH[i];
 				for(var j:int=0;j<len;j++){
-					funinfo = list[j] as FunctionBarInfo;
-					if(q_map_zones==1&&funinfo.q_map_zones==q_map_zones)
+					funinfo = list[j] as Q_newfunc;
+					if(q_map_zones==1&&funinfo.q_btn_zone==q_map_zones)
 						continue;
-					button = MainButtonManager.getButtonBuyInfo(funinfo);
+					button = MainButtonManager.getButtonByInfo(funinfo);
 					if(button!=null&&button.canOpen())
 					{
-						button.y = row*GRID_HEIGHT;
+						button.y = i*GRID_HEIGHT;
 						starX -= width;
 						button.x = starX;
 						this.addChild(button as DisplayObject);

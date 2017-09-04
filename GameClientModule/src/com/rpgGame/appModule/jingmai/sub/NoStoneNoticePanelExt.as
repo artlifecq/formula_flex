@@ -20,7 +20,7 @@ package com.rpgGame.appModule.jingmai.sub
 			_skin=new Bianshi_Tips();
 			super(_skin);
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data);
 			var type:int=data;

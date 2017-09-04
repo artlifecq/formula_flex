@@ -37,10 +37,10 @@ package com.rpgGame.appModule.activety
 			addTabDatas(TabBarSkin_pack,JiXianTiaoZhanPenelExt,EmFunctionID.EM_JIXIAN);
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
-			var funcKey:String=openTable;
-			if(data&&funcKey!=""){
+			var funcKey:int=openTable;
+			if(data&&funcKey!=0){
 				var info:ActivetyInfo=data as ActivetyInfo;
 				if(info){
 					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);

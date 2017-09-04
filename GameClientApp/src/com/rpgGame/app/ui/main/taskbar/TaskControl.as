@@ -108,7 +108,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				if(taskData.q_emid!="")
 				{
-					FunctionOpenManager.openAppPaneById(taskData.q_emid);
+					FunctionOpenManager.openAppPaneById(int(taskData.q_emid));
 				}
 				else if(taskData.q_mission_type==TaskType.SUB_HUBAO)//护宝
 				{

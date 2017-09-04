@@ -3,14 +3,12 @@ package com.rpgGame.app.ui
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.gameClient.log.GameLog;
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display2D.PopSkinUI;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
@@ -38,10 +36,9 @@ package com.rpgGame.app.ui
 		private var _needCreate:Boolean= true;
 		private var _idlist:Vector.<Q_newfunc>;
 		private var _effect:InterObject3D;
-		private var _info:FunctionBarInfo;
-		private var _list:Vector.<String>;
+		private var _list:Vector.<int>;
 		private static var _isLoading:Boolean=false;
-		public function OpenPanel(list:Vector.<String>):void
+		public function OpenPanel(list:Vector.<int>):void
 		{
 			_skin = new KaiQi_Skin();
 			super(null);
@@ -76,8 +73,8 @@ package com.rpgGame.app.ui
 			var qfun:Q_newfunc;
 			for(var i:int=0;i<length;i++)
 			{
-				qfun = NewFuncCfgData.getdataById(_list[i]);
-				if(qfun.q_show_panel == 1)
+				qfun = NewFuncCfgData.getFuncCfg(_list[i]);
+				if(qfun.q_show_open == 1)
 				{
 					_idlist.push(qfun);
 				}
@@ -214,13 +211,11 @@ package com.rpgGame.app.ui
 				initView();
 			}
 			_needCreate = false;
-			var ids:Array = JSONUtil.decode(_qdata.q_main_id) as Array;
-			_info = FuncionBarCfgData.getActivityBarInfo(ids[0]);
-			_button= MainButtonManager.getButtonBuyInfo(_info);
+			_button= MainButtonManager.getButtonByInfo(_qdata);
 			if(_button==null)
-				GameLog.add("配置错误提示:图标id="+_info.id+",功能:"+_info.name+"按钮未找到");
-			m_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/145.png";
-			m_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/name.png";
+				GameLog.add("配置错误提示:图标id="+_qdata.q_id+",功能:"+_qdata.q_name+"按钮未找到");
+			m_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_res_dir+"/145.png";
+			m_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_res_dir+"/name.png";
 			m_skin.uiName.x = (this.width - m_skin.uiName.width)/2;
 			if(this._touchPointID<0)
 				this.changeState(ButtonState.UP);

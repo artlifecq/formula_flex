@@ -12,36 +12,36 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_newfunc
 	{
-		 /**  编号id */
+		 /**  功能id */
 		public var q_id:int;
-		 /**  功能名字 */
-		public var q_string_name:String;
-		 /**  按钮是否显示文字 */
-		public var q_show_buttonName:int;
-		 /**  主窗口id */
-		public var q_main_id:String;
-		 /**  排序 */
-		public var q_order:int;
-		 /**  功能预告是否显示(0:不预告) */
-		public var q_notiveneedshow:int;
+		 /**  功能名 */
+		public var q_name:String;
 		 /**  开放等级 */
 		public var q_level:int;
-		 /**  是否显示悬停 */
-		public var q_istips:int;
-		 /**  描述图片 */
-		public var q_dicpic:String;
 		 /**  需要完成任务编号 */
 		public var q_need_taskid:int;
-		 /**  表现形式（0为不弹，1为弹出，2弹出tips框，3箭头指引） */
-		public var q_show_panel:int;
-		 /**  新功能开启图标 */
-		public var q_openIcon:String;
-		 /**  新功能开启名称图片 */
-		public var q_open_name:String;
-		 /**  功能描述（支持html） */
-		public var q_info:String;
-		 /**  图片路径 */
-		public var q_img_url:String;
+		 /**  展示开启提示 */
+		public var q_show_open:int;
+		 /**  是否需要预告 */
+		public var q_need_notice:int;
+		 /**  功能开启资源目录 */
+		public var q_res_dir:String;
+		 /**  开启的按钮 */
+		public var q_open_btn:int;
+		 /**  开启的按钮类型 */
+		public var q_btn_type:int;
+		 /**  点按钮打开的面板id */
+		public var q_btn_panel:int;
+		 /**  按钮的资源 */
+		public var q_btn_res:String;
+		 /**  按钮排序id */
+		public var q_btn_order:int;
+		 /**  按钮特效 */
+		public var q_btn_eft:String;
+		 /**  按钮提示 */
+		public var q_btn_tips:String;
+		 /**  按钮在副本展示 */
+		public var q_btn_zone:int;
 
 	}
 }

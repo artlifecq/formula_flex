@@ -25,8 +25,9 @@
     public class FunctionOpenManager 
     {
         public static var funcBits:Object = null;
-        private static var _statusMap:HashMap = new HashMap();
+        private static var openedMap:HashMap = new HashMap();
 		public static var needShowOpenMode:Boolean = true;
+		
 		/**
 		 * 检查已经开启的新功能,并通知消息 
 		 * @param level
@@ -35,30 +36,31 @@
 		 */
 		public static function openFunctionByLevel(level:int,isdispatch:Boolean):void
 		{
-			var infos:Array = NewFuncCfgData.alldata();
-			var itemlist:Vector.<String> = new Vector.<String>();
-			for each(var info :Q_newfunc in infos)
-			{
-				if(_statusMap.getValue(info.q_id)!=null)
+			var funcLists:Array = NewFuncCfgData.getAllFuncList();
+			var itemlist:Vector.<int> = new Vector.<int>();
+			var num:int=funcLists.length;
+			for(var i:int=0;i<num;i++){
+				var info :Q_newfunc=funcLists[i];
+				if(openedMap.getValue(info.q_id))
 					continue;
 				if(info.q_level > level)
 					continue;
-				_statusMap.add(info.q_id,info);
+				openedMap.add(info.q_id,info);
 				itemlist.push(info.q_id);
 			}
+			
 			if(isdispatch)
 			{
 				if(needShowOpenMode)
 				{
-					/*if(itemlist.length>0)
-						AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
-					else
-						AppManager.hideApp(AppConstant.OPEN_FUNCTION);*/
 					if(itemlist.length>0)
+					{
 						UIPopManager.showAlonePopUI(OpenPanel,itemlist.concat());
+					}
 				}
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
 			}
+			
 			openNoticeByLevel(level);
 		}
 		
@@ -69,9 +71,9 @@
 		 * @return 
 		 * 
 		 */
-		public static function functionIsOpen(id:String):Boolean
+		public static function functionIsOpen(id:int):Boolean
 		{
-			var bool:Boolean = _statusMap.getValue(id) as Q_newfunc != null;
+			var bool:Boolean = openedMap.getValue(id) as Q_newfunc != null;
 			if(bool)
 			{
 				switch(id)
@@ -107,24 +109,21 @@
 		 */
 		public static function openNoticeByLevel(level:int):void
 		{
-			var infos:Vector.<Q_newfunc> = NewFuncCfgData.getSortList();
+			var infos:Vector.<Q_newfunc> = NewFuncCfgData.noticeList;
 			var length:int = infos.length;
-			var found:Q_newfunc; 
+			var noticeInfo:Q_newfunc; 
 
 			for(var i:int = 0;i<length;i++)
 			{
 				var data:Q_newfunc = infos[i];
 				if(data.q_level <= level)
 					continue;
-				if(found==null)
-				{
-					found = data;
-					break;
-				}
+				noticeInfo = data;
+				break;
 			}
 			
-			if(found!=null){
-				AppManager.showAppNoHide(AppConstant.NOTIVE_FUNCTION,found);
+			if(noticeInfo){
+				AppManager.showAppNoHide(AppConstant.NOTIVE_FUNCTION,noticeInfo);
 			}else{
 				AppManager.hideApp(AppConstant.NOTIVE_FUNCTION);
 			}
@@ -136,24 +135,9 @@
 			return level<=MainRoleManager.actorInfo.totalStat.level;
 		}
 		
-		public static function getOpenLevelByFunBarInfo(info:FunctionBarInfo):int
+		public static function checkOpenBuyFunId(id:int):Boolean
 		{
-			if(info.isshow==1)
-				return int.MAX_VALUE;
-			var list:Array = NewFuncCfgData.getListById(info.id);
-			if(list==null)
-				return int.MAX_VALUE;
-			var value:int = int.MAX_VALUE;
-			for each(var func:Q_newfunc in list)
-			{
-				value = Math.min(func.q_level,value);
-			}
-			return value;
-		}
-		
-		public static function checkOpenBuyFunId(id:String):Boolean
-		{
-			var func:Q_newfunc = NewFuncCfgData.getdataById(id);
+			var func:Q_newfunc = NewFuncCfgData.getFuncCfg(id);
 			if(func == null)
 				return false;
 			return checkOpenByLevel(func.q_level);
@@ -170,14 +154,14 @@
 		{
 			if(info==null)
 				return ;
-			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
-			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
-			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
+//			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
+//			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
+//			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
 		}
 		
-		public static function openAppPaneById(id:String,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
+		public static function openAppPaneById(id:int,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
-			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
+			/*var info:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(info==null)
 			{
 				NoticeManager.mouseFollowNotify("未找到配置:"+id);
@@ -189,22 +173,23 @@
 					NoticeManager.showNotifyById(90203,null,info.q_string_name,info.q_level);
 				return ;
 			}
-			openFunctionId(info,data,isAutoHide,isError);
+			openFunctionId(info,data,isAutoHide,isError);*/
 		}
 		
 		public static function getAppInfoByFunctionId(id:String):AppInfo
 		{
-			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
+			/*var info:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(info==null)
 			{
 				return null;
 			}
 			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
 			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
-			if(modeInfo == null)
-				return null;
-			return AppConstant.getAppinfoByAppName( modeInfo.clickarg);
+			if(modeInfo == null)*/
+			return null;
+//			return AppConstant.getAppinfoByAppName( modeInfo.clickarg);
 		}
+		
 		/**
 		 * 打开面板
 		 * @param info
@@ -213,22 +198,22 @@
 		 * @param isAutoHide
 		 * 
 		 */
-		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
+		public static function openModeByInfo(info:Q_newfunc,id:int= 0,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
-			if(info.isshow ==1)
+			if(info.q_btn_panel==0)
 			{
 				NoticeManager.showNotifyById(20);
 				return ;
 			}
-			var minlevel:int = getOpenLevelByFunBarInfo(info)
+			var minlevel:int =info.q_level;
 			if(!checkOpenByLevel(minlevel))
 			{
 				if(isError)
-					NoticeManager.showNotifyById(90203,null,info.name,minlevel);
+					NoticeManager.showNotifyById(90203,null,info.q_id,minlevel);
 				return ;
 			}
-			var openId:String=id?id:"";
-			if(info.clickType==1)
+			var openId:int=id?id:0;
+		/*	if(info.clickType==1)
 			{
 				if(info.clickarg=="")
 					return ;
@@ -257,7 +242,7 @@
 			else if(info.clickType ==4) //超链接
 			{
 				navigateToURL(new URLRequest(info.clickarg),"_blank");
-			}
+			}*/
 		}
     }
 }

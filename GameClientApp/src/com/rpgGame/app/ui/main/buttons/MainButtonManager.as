@@ -8,7 +8,9 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import away3d.log.Log;
 	
@@ -43,11 +45,11 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(8,ButtonSkin_zudui);
 			regClass(9,ButtonSkin_meiren);
 			
-			var btnLists:Array=FuncionBarCfgData.getAllBarInfos();
+			var btnLists:Array=NewFuncCfgData.getAllFuncList();
 			for(var i:int=0;i<btnLists.length;i++){
-				var info:FunctionBarInfo=btnLists[i];
-				if(info.btn_res){
-					regClass(info.id,info.btn_res);
+				var info:Q_newfunc=btnLists[i];
+				if(info.q_btn_res){
+					regClass(info.q_id,info.q_btn_res);
 				}
 			}
 		}
@@ -56,21 +58,21 @@ package com.rpgGame.app.ui.main.buttons
 			_classMap.add(id,skinui);
 		}
 		
-		public static function getButtonBuyInfo(info:FunctionBarInfo):IOpen
+		public static function getButtonByInfo(info:Q_newfunc):IOpen
 		{
-			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
+			var level:int = info.q_level;
 			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
-			var button:IOpen = _initializeMap.getValue(info.id);
+			var button:IOpen = _initializeMap.getValue(info.q_id);
 			if(button == null)
 			{
-				var styleName:*= _classMap.getValue(info.id);
+				var styleName:*= _classMap.getValue(info.q_id);
 				if(styleName==null)
 				{
-					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.id);
+					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.q_id);
 					return null;
 				}
-				button = getBtnById(info.id);
+				button = getBtnById(info.q_id);
 				button.info = info;
 				if(styleName is String){
 					if((button as ActivityButtonBase)){
@@ -79,8 +81,8 @@ package com.rpgGame.app.ui.main.buttons
 				}else{
 					button.styleClass=styleName;
 				}
-				button.name = info.id.toString();
-				_initializeMap.add(info.id,button);
+				button.name = info.q_id.toString();
+				_initializeMap.add(info.q_id,button);
 			}
 			return button as IOpen;
 		}
@@ -146,10 +148,10 @@ package com.rpgGame.app.ui.main.buttons
 		 */
 		public static function openActByData(id:int,data:Object):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.onActivityOpen(data);
@@ -160,10 +162,10 @@ package com.rpgGame.app.ui.main.buttons
 		/**开启活动按钮by id----yt*/
 		public static function openActivityButton(id:int):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.onActivityOpen();
@@ -173,10 +175,10 @@ package com.rpgGame.app.ui.main.buttons
 		/**关闭活动按钮 byid----yt*/
 		public static function closeActivityButton(id:int):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.onActivityClose();
@@ -189,10 +191,10 @@ package com.rpgGame.app.ui.main.buttons
 		 * */
 		public static function setUptimeActivityButton(id:int,startTime:int=0):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.setupActTime(0,false);
@@ -204,10 +206,10 @@ package com.rpgGame.app.ui.main.buttons
 		 * */
 		public static function clearUptimeActivityButton(id:int):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.clearTime();

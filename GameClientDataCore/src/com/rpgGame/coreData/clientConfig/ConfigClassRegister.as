@@ -32,8 +32,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
 		/**  客户端表情配置					 */
 		public static const FaceInfo:String = "data.FaceInfo";
-		/**  窗口链接信息表													 */
-		public static const FunctionBarInfo:String = "data.FunctionBarInfo";
 		/**  游戏音乐配置表							 */
 		public static const GameSoundInfo:String = "data.GameSoundInfo";
 		/**  设置的主键#设置的主键，不重复就行	设置备注#设置备注	玻璃效果颜色#玻璃效果颜色	摄像机Y偏移#摄像机Y偏移	摄像机转角#摄像机转角	摄像机仰角#摄像机仰角	摄像机最小仰角#摄像机最小仰角	摄像机最大仰角#摄像机最大仰角	摄像机距离#摄像机距离	摄像机拖拽速度#摄像机鼠标拖拽速度	摄像机最小距离#摄像机最小距离	摄像机最大距离#摄像机最大距离	摄像机滚轮速度#摄像机鼠标滚轮速度	摄像机远裁切#摄像机远裁切	智能摄像机最小距离#智能摄像机最小距离	跳跃高度#跳跃高度	二级跳跃高度#二级跳跃高度	跳跃速率#跳跃速率	二级跳跃速率#二级跳跃速率	跳跃结束时间#跳跃结束时间	二级跳跃结束时间#二级跳跃结束时间	跳跃打断时间#跳跃打断时间	二级跳跃打断时间#二级跳跃打断时间	二级跳跃概率#二级跳跃概率（0~100）	跳跃开始时间#跳跃开始时间	二级跳跃开始时间#二级跳跃开始时间	死亡效果类型#死亡效果类型	外发光强度#外发光强度	外发光大小#外发光大小	外发光品质#外发光品质	外发光敌方颜色#外发光敌方颜色	外发光友方颜色#外发光友方颜色	外发光中立方颜色#外发光中立方颜色	半身像偏移#半身像偏移	头像偏移#头像偏移	Boss头像偏移#Boss头像偏移 */
@@ -140,7 +138,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库							前端显示对应关卡战斗力						 */
+		/**  美人基本信息数据库									前端显示对应关卡战斗力						 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -198,13 +196,15 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
-		/**  功能开放表														 */
+		/**  功能开放表													 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
-		/**  排行榜称号							 */
+		/**  面板表					 */
+		public static const Q_panel:String = "data.Q_panel";
+		/**  排行榜称号								 */
 		public static const Q_rank_designation:String = "data.Q_rank_designation";
 		/**  红包配置		 */
 		public static const Q_redreward:String = "data.Q_redreward";
@@ -222,7 +222,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
-		/**  填色配置表					 */
+		/**  填色配置表						 */
 		public static const Q_vertex_color:String = "data.Q_vertex_color";
 		/**  											 */
 		public static const Q_vip:String = "data.Q_vip";
@@ -252,7 +252,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Attach:String = "data.spell.Attach";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
-		/**  BUFF效果配置数据表																																									 */
+		/**  BUFF效果配置数据表																																											 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
@@ -282,7 +282,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
-			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);
 			regClass("data.GlobalSetting", com.rpgGame.coreData.clientConfig.GlobalSetting);
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
@@ -368,6 +367,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
 			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
+			regClass("data.Q_panel", com.rpgGame.coreData.clientConfig.Q_panel);
 			regClass("data.Q_rank_designation", com.rpgGame.coreData.clientConfig.Q_rank_designation);
 			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);

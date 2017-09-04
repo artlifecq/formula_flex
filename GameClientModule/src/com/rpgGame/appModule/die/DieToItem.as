@@ -27,7 +27,7 @@ package com.rpgGame.appModule.die
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			if(target==_skin.btn&&_item.q_panel>0){
-				FunctionOpenManager.openAppPaneById(_item.q_panel.toString());
+				FunctionOpenManager.openAppPaneById(_item.q_panel);
 			}
 		}
 		

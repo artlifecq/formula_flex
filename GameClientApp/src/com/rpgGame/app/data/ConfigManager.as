@@ -25,7 +25,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -53,6 +52,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
@@ -109,7 +109,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.clientConfig.Config;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.netData.chat.bean.HyperInfo;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
@@ -285,7 +284,7 @@ package com.rpgGame.app.data
 			
 			
 			//窗口信息配置
-			FuncionBarCfgData.setup(dic[ConfigClassRegister.FunctionBarInfo]);
+			PanelCfgData.setup(dic[ConfigClassRegister.Q_panel]);
 			NewFuncCfgData.setup(dic[ConfigClassRegister.Q_newfunc]);
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
