@@ -290,7 +290,7 @@ package com.rpgGame.app.graphics
 				}
 				
 				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible),DecorCtrl.TOP_NAME);
-				//showAndHideElement(_NPCtitle,isNPC, DecorCtrl.TOP_NPCCHENGHAO);
+				showAndHideElement(_NPCtitle,false, DecorCtrl.TOP_NPCCHENGHAO);
 			}
 			else if (_role.type == SceneCharType.COLLECT) //采集物显示名称
 			{

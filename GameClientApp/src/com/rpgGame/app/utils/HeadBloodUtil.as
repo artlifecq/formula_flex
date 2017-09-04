@@ -115,7 +115,8 @@ package com.rpgGame.app.utils
 				}
 				else if (SceneCharType.NPC==_role.type) 
 				{
-					return HeadBloodStateType.NPC;
+					//return HeadBloodStateType.NPC;
+					return HeadBloodStateType.TEAM
 				}
 				else if (SceneCharType.PLAYER==_role.type) 
 				{
@@ -140,7 +141,8 @@ package com.rpgGame.app.utils
 				return StaticValue.RED_TEXT;
 
 			if (_role.type == SceneCharType.NPC)
-				return StaticValue.YELLOW_TEXT;
+				//return StaticValue.YELLOW_TEXT;
+				return StaticValue.BEIGE_TEXT;
 			if (_role.type == SceneCharType.GIRL_PET)
 				return StaticValue.BLUE_TEXT;
 			if (_role.type == SceneCharType.PROTECT_NPC)

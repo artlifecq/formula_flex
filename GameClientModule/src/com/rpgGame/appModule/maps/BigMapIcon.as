@@ -57,7 +57,8 @@ package com.rpgGame.appModule.maps
 					setMonsterIco();
 					break;
 				case SceneCharType.NPC:
-					setNpcIco();
+					//setNpcIco();
+					setMonsterIco();
 					break;
 			}
 		}

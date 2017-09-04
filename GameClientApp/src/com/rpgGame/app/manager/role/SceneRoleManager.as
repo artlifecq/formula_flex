@@ -35,6 +35,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
@@ -278,7 +279,7 @@ package com.rpgGame.app.manager.role
 			role.rotationY = (270 + data.direction) % 360;;
 			if (charType == SceneCharType.NPC)
 			{
-				SceneManager.addSceneObjToScene(role, true, false, false);
+				SceneManager.addSceneObjToScene(role, true, false, true);
 			}
 			else if(charType == SceneCharType.CLIENT_NPC)
 			{
@@ -291,7 +292,7 @@ package com.rpgGame.app.manager.role
 			MainRoleSearchPathManager.trySetSearchRoleData(data);
 			if (charType == SceneCharType.NPC)
 			{
-				TaskUtil.tryAddTaskIco(role);
+				//TaskUtil.tryAddTaskIco(role);
 			}
 			//弓弩不要鼠标事件
 			if (SceneCharType.MONSTER==charType&&(data.modelID==EnumMonsterId.BOW1||data.modelID==EnumMonsterId.BOW2)) 
