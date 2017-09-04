@@ -427,7 +427,7 @@ package com.rpgGame.app.manager.scene
 				MainRoleManager.actorInfo.mapID = 1001;
 			}
 			
-			if(/*currentMapId==mapID||*/!isChangeSceneComplete){//当前的地图就是要去的地图或者前面一张地图都没加载完
+			if(currentMapId==mapID||!isChangeSceneComplete){//当前的地图就是要去的地图或者前面一张地图都没加载完
 				return;
 			}
 			
