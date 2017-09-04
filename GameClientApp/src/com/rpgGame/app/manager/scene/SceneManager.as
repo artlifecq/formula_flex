@@ -93,6 +93,7 @@ package com.rpgGame.app.manager.scene
 			scene3d.cameraNear = 100;
 			scene3d.sceneRenderLayer.setMaxRenderNum(SceneCharType.PLAYER, _playerMaxRenderNum);
 			scene3d.sceneRenderLayer.setMaxRenderNum(SceneCharType.MONSTER, _monsterMaxRenderNum);
+			scene3d.sceneRenderLayer.setMaxRenderNum(SceneCharType.NPC, _monsterMaxRenderNum);
 			scene3d.sceneRenderLayer.setMaxOtherRenderNum(_otherMaxRenderNum);
 			scene3d.sceneRenderLayer.setMaxAttachNum(AttachDisplayType.ROLE_HEAD_NAME, _maxRoleHeadNameNum);
 

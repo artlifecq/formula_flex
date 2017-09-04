@@ -1475,7 +1475,7 @@ package com.rpgGame.app.graphics
 		/**增加NPC称号*/
 		public function updateNPCTitle() : void
 		{
-			if(_role.type==SceneCharType.MONSTER)
+			if(_role.type==SceneCharType.NPC)
 			{
 				if (_NPCtitle)
 				{

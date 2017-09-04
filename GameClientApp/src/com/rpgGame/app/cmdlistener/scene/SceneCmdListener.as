@@ -943,18 +943,15 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.faction=info.faction;
 				SceneRoleManager.getInstance().createCollect(collectData);
 			}
-			else if(qData.q_monster_type==MonsterType.NPC)//npc创建流程       对应 改的东西太多了 先保留
+			else if(qData.q_monster_type==MonsterType.NPC)//npc创建流程
 			{
-				//data = new MonsterData(RoleType.TYPE_MONSTER);
 				data = new MonsterData(RoleType.TYPE_NPC);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
 				data.modelID = info.modelId;
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
-				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.NPC);
-				addTaskmark(sceneRole);			
-				//				(sceneRole.headFace as HeadFace).updateNPCTitle();
+				sceneRole =SceneRoleManager.getInstance().createNPC(data, SceneCharType.NPC);	
 				
 				GameLog.addShow("添加NPC客户端id：" + data.id);
 				GameLog.addShow("添加NPC服务器id：" + data.serverID.ToString());
@@ -976,17 +973,6 @@ package com.rpgGame.app.cmdlistener.scene
 				var mInfo : RoleMoveInfo = new RoleMoveInfo();
 				mInfo.setValues(data.id,info.speed, SystemTimeManager.curtTm,info.position,info.positions);
 				RoleStateUtil.walkByInfos(mInfo);
-			}
-			
-		}
-		
-		/**任务npc投诉挂问号*/
-		private function addTaskmark(sceneRole : SceneRole):void
-		{
-			if(sceneRole!=null)
-			{
-				
-				TaskUtil.tryAddTaskMark(sceneRole);
 			}
 			
 		}
