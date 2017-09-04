@@ -63,6 +63,7 @@ package com.client.ui.alert
 		public static function Show():void
 		{
 			if(!_ins) _ins = new ReconnectionPanelExt();
+			_ins.tryCount=0;
 			_ins.ShowPanel();
 			_ins.showText();
 			Stage3DLayerManager.starlingLayer.getLayer("alert").addChild(_ins);
@@ -72,6 +73,7 @@ package com.client.ui.alert
 		
 		public function ShowPanel():void
 		{		
+		
 			if(_time>0)
 			{
 				if(_timer!=null) _timer.destroy();
@@ -136,7 +138,7 @@ package com.client.ui.alert
 			}
 			_timer.stop();
 			tryCount++;
-			_skin.lbTip.text=_str+"\r\n"+_time+ (((tryCount)>0) ? "(已尝试重连"+ tryCount+"次)" : "");
+			_skin.lbTip.text=_str+"\r\n"+ (((tryCount)>0) ? "(已尝试重连"+ tryCount+"次)" : "");
 			trySocket = new Socket();
 			trySocket.addEventListener("connect", tryConnectHandler);
 			trySocket.addEventListener("ioError", tryIoErrorHandler);

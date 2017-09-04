@@ -164,13 +164,15 @@ package
 			{
 				if (!ClientConfig.isRelease)
 				{
-					Away3D.REQUEST_HIGHEST_PROFILE = false;
-					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed, true,"standardConstrained");
+//					Away3D.REQUEST_HIGHEST_PROFILE = false;
+					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, 
+						CameraController.forceStopPanning, onMemoryTooHighed, true,"standardConstrained");
 				}
 				else
 				{
 					Away3D.REQUEST_HIGHEST_PROFILE = true;
-					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed);
+					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, 
+						CameraController.forceStopPanning, onMemoryTooHighed);
 				}
 			}
 			catch(error:Error)

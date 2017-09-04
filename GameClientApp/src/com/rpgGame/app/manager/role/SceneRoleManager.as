@@ -216,6 +216,7 @@ package com.rpgGame.app.manager.role
 			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
+			role.enableMask = true;
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (data.ownerName)
 			{
@@ -536,6 +537,7 @@ package com.rpgGame.app.manager.role
 			var role : SceneRole = SceneRole.create(SceneCharType.GIRL_PET, data.id);
 			//设置VO
 			role.data = data;
+			role.enableMask = true;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
 			role.headFace.show();
@@ -822,7 +824,7 @@ package com.rpgGame.app.manager.role
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
-			SceneManager.addSceneObjToScene(role, true, true, true);
+			SceneManager.addSceneObjToScene(role, true, false, false);
 		}
 		
 		/**创建战旗特效*/

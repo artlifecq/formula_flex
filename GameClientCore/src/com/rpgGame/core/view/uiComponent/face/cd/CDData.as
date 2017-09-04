@@ -52,8 +52,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		}
 		public function instanceDestroy() : void
 		{
-			putInPool();
-			dispose();
+//			putInPool();
+//			dispose();
 			_isDestroyed = true;
 		}
 		

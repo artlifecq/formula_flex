@@ -43,18 +43,18 @@ package com.rpgGame.app.manager
 		private var noticeArr:Array=[];
 		public function TeamManager()
 		{
-			EventManager.addEvent(SystemEvent.SYS_SET,onSystemSetChange);
+//			EventManager.addEvent(SystemEvent.SYS_SET,onSystemSetChange);
 		}
 		
 		private function onSystemSetChange(type:int):void
 		{
 			// TODO Auto Generated method stub
-			if (SystemSetManager.SYSTEMSET_REFUSING_TEAM==type) 
-			{
-				//同不同意和自动不自动没关系
-				var isAutoAccept:Boolean=!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM);
-				UpdateSystemSet();
-			}
+//			if (SystemSetManager.SYSTEMSET_REFUSING_TEAM==type) 
+//			{
+//				//同不同意和自动不自动没关系
+//				var isAutoAccept:Boolean=!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM);
+//				UpdateSystemSet();
+//			}
 		}	
 		
 		public static const MAXMEMBER:int = 5; // 队伍最大人数

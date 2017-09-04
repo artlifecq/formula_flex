@@ -6,7 +6,7 @@ package com.game.engine2D.scene
 	import com.game.engine2D.events.SceneCameraEvent;
 	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.vo.BaseObj;
-	import com.game.engine3D.scene.render.vo.ISceneCameraTarget;
+	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.geom.Point;
 	
@@ -15,6 +15,8 @@ package com.game.engine2D.scene
 	/**
 	 * @private
 	 * 场景镜头 
+	 * 主要根据角色当前位置，来算出posX，posY(虚拟镜头的位置值,并不是真正的镜头)，此2值是会在scenezonelayer类中，用来计算posx，posy周边的地图区块，来决定是否加载
+	 * 及判断镜头是否已经移到边界
 	 * @author Carver
 	 */	
 	public class SceneCamera extends EventDispatcher
@@ -41,7 +43,7 @@ package com.game.engine2D.scene
 		 * 场景
 		 */
 		private var _scene:Scene;
-		private var _followTarget:com.game.engine3D.scene.render.vo.ISceneCameraTarget;
+		private var _followTarget:BaseObj3D;
 		
 
 		/**
@@ -53,7 +55,7 @@ package com.game.engine2D.scene
 		 * @private
 		 * 镜头跟随的角色
 		 */
-		public function get followTarget():com.game.engine3D.scene.render.vo.ISceneCameraTarget
+		public function get followTarget():BaseObj3D
 		{
 			return _followTarget;
 		}
@@ -199,7 +201,7 @@ package com.game.engine2D.scene
 		 * @param $lookAtCharacter
 		 * 
 		 */	
-		public function lookAt($lookAtTarget:com.game.engine3D.scene.render.vo.ISceneCameraTarget,$useTween:Boolean=false):void
+		public function lookAt($lookAtTarget:BaseObj3D,$useTween:Boolean=false):void
 		{
 			_followTarget = $lookAtTarget;
 			
@@ -230,7 +232,7 @@ package com.game.engine2D.scene
 		 * 运行
 		 * @param $useTween 是否启用缓动
 		 */	
-		final public function run($frame:int=-1):void
+		public function run($frame:int=-1):void
 		{
 			if(_isLocked)return;
 			if(_followTarget==null)return;
@@ -244,7 +246,7 @@ package com.game.engine2D.scene
 			_scP.copyFrom(_followTarget.pos);
 			_speed = _followTarget.speed;
 			//
-			var useTween:Boolean = Boolean($frame!=-1);
+			var useTween:Boolean = Boolean($frame!=-1);//仅仅只有值为-1的时候，才不会使用摄像机缓动。默认为0，代表使用。
 			//
 			lookAtPos(_scP,stageWidth,stageHeight,mapWidth,mapHeight,useTween);
 		}
@@ -258,6 +260,17 @@ package com.game.engine2D.scene
 		private static const FIX_DIS_MIN:int = 80;			// 摄像机跟踪最小距离
 		private static const FOLLOW_TIME:int = 400;		// 摄像机跟踪延迟时间
 		
+		
+		/**
+		 *   
+		 * @param $pos                 角色当前所在的场景中的点
+		 * @param $stageWidth          舞台宽度
+		 * @param $stageHeight         舞台高度
+		 * @param $mapWidth            整张地图总宽度
+		 * @param $mapHeight           整张地图总高度
+		 * @param $useTween            是在移屏的时候，有缓动效果
+		 * 
+		 */		
 		final public function lookAtPos($pos:Point, $stageWidth:int, $stageHeight:int, $mapWidth:int=0, $mapHeight:int=0,$useTween:Boolean=false):void
 		{
 			var pX:Number = Math.max(Math.min($pos.x, _lockAreaEndX==0?int.MAX_VALUE:_lockAreaEndX), _lockAreaStartX);
@@ -291,7 +304,8 @@ package com.game.engine2D.scene
 				sceneX = ($stageWidth - $mapWidth) >> 1;
 				posX = $mapWidth >> 1;
 				tile_x = posX/SceneConfig.TILE_WIDTH;
-			} else if (0 != _preX)
+			} 
+			else if (0 != _preX)
 			{
 				if (len > FIX_DIS_MAX)
 				{
@@ -316,7 +330,8 @@ package com.game.engine2D.scene
 				sceneY = ($stageHeight - $mapHeight) >> 1;
 				posY = $mapHeight >> 1;
 				tile_y = posY/SceneConfig.TILE_HEIGHT;
-			} else if (0 != _preY)
+			} 
+			else if (0 != _preY)
 			{
 				if (len > FIX_DIS_MAX)
 				{

@@ -2,7 +2,6 @@ package com.client.process
 {
 	import com.client.events.VerEvent;
 	import com.client.loader.ListStreamLoader;
-	import com.client.manager.BGMManager;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
