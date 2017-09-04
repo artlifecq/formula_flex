@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.scene
 {
+	import com.game.engine2D.controller.CameraFrontController;
 	import com.rpgGame.app.manager.DailyResetManager;
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.MenuManager;
@@ -58,10 +59,9 @@ package com.rpgGame.app.manager.scene
 		{
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.PRIVILEGE_MARK_TYPE, 1);
 			//暂时放这里测试用，@L.L.M.Sunny 20160113
-			//主角初始化
-			WelcomeManager.checkWelcomeState();
-			MainRoleManager.initActor();
+			CameraFrontController.sceneCamera.updateScale(1.15);
 			
+			WelcomeManager.checkWelcomeState();
 
 			AppMergeManager.instace.setup();
 			MouseCursorController.setup();

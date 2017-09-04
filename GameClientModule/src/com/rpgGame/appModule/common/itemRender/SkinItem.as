@@ -6,8 +6,6 @@ package com.rpgGame.appModule.common.itemRender
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	
-	import org.mokylin.skin.common.subItem_Skin;
-	
 	import starling.display.DisplayObject;
 	
 	/**
@@ -19,6 +17,7 @@ package com.rpgGame.appModule.common.itemRender
 	{
 		private var _text:String;
 		private var _comboBox:ComboBox;
+		public  var callBack:Function;
 		public function SkinItem(com:ComboBox,skin:StateSkin=null)
 		{
 			_comboBox=com;
@@ -48,7 +47,7 @@ package com.rpgGame.appModule.common.itemRender
 			}
 			lb.htmlText=_text;
 			lb.textAlign="left";
-//			lb.width=this.width;
+			//			lb.width=this.width;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -56,6 +55,9 @@ package com.rpgGame.appModule.common.itemRender
 			super.onTouchTarget(target);
 			_comboBox.selectedIndex=_comboBox.dataProvider.getItemIndex(_text);
 			_comboBox.getTextInput().text=_text;
+			if(callBack){
+				callBack();
+			}
 		}
 		
 		public function set text(value:String):void

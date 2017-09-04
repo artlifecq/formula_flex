@@ -1,12 +1,10 @@
 package com.client.sender
 {
 	import com.game.engine3D.vo.SenderReferenceSet;
-	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.netData.login.message.ReqHeartMessage;
 	
 	import flash.utils.getTimer;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
