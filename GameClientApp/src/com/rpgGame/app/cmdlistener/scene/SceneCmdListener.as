@@ -34,7 +34,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.app.utils.ReqLockUtil;
-	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
