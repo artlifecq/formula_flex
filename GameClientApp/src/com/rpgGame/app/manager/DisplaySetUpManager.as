@@ -153,7 +153,7 @@ package com.rpgGame.app.manager
 			viewAntiAlias = 1;
 			displayLevel = 0;
 			shadowLevel = 0;
-			filterQuality = 70;
+			filterQuality = 100;
 		}
 		
 		/**中*/
@@ -175,7 +175,7 @@ package com.rpgGame.app.manager
 		public static function setToHigh():void
 		{
 			_configLevel = 3;
-			openHeightEffect = false;
+			openHeightEffect = true;
 			openBlend = true;
 			openPhantom = true;
 			openGlow = true;
