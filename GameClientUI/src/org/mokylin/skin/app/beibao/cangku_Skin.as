@@ -169,11 +169,11 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_Num = temp;
 			temp.name = "lb_Num";
-			temp.text = "0/48";
+			temp.text = "160/160";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 45;
-			temp.x = 94;
+			temp.width = 56;
+			temp.x = 83;
 			temp.y = 419;
 			return temp;
 		}

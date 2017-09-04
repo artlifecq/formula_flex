@@ -2,6 +2,7 @@ package com.rpgGame.app.state.role.action
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
+	import com.game.engine3D.state.role.RoleStateReference;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -113,7 +114,15 @@ package com.rpgGame.app.state.role.action
 //					{
 //						fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
 //					}
-					if (!fixDirection)
+					if (!fixDirection&&_stateReference.angle!=-1)
+					{
+						(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
+					}
+				}
+				//可边走边放但是没走
+				else
+				{
+					if ((_machine as RoleStateMachine).isWalkMoving==false&&_stateReference.angle!=-1) 
 					{
 						(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
 					}

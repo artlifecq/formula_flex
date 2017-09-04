@@ -184,7 +184,30 @@ package com.rpgGame.appModule.common
 			updateGridLen && updateGridLen();
 			if(refleshNow)refleshGrids();
 		}
-		
+		public function getFreeGridInfo():GridInfo
+		{
+			var data:Array=(dataProvider.data as Array);
+			var len:int=data.length;
+			var grid:GridInfo
+			for (var i:int=0;i<len;i++) 
+			{
+				grid=data[i];
+				if (grid.data==null&&!grid.isUnlock) 
+				{
+					return grid;
+				}
+			}
+			return null;
+		}
+		public function getFreeGridInfoIndex():int
+		{
+			var grid:GridInfo=getFreeGridInfo();
+			if (grid) 
+			{
+				return grid.index;
+			}
+			return -1;
+		}
 		//-----------------------通过一些设置，使这个容器显示指定的内容---------------
 		private var group : Array;
 		private var itemType:int = ItemTypeEnum.ENUM_TYPE_ALL;
@@ -207,16 +230,16 @@ package com.rpgGame.appModule.common
 			
 		}
 		
-		/**
-		 * 获得指定索引可拖拽格子 
-		 * @param index
-		 * @return 
-		 * 
-		 */		
-		private function getGridByIndex(index:int):DragDropItem
-		{
-			return index<dndGrids.length?dndGrids[index]:null;
-		}
+//		/**
+//		 * 获得指定索引可拖拽格子 
+//		 * @param index
+//		 * @return 
+//		 * 
+//		 */		
+//		private function getGridByIndex(index:int):DragDropItem
+//		{
+//			return index<dndGrids.length?dndGrids[index]:null;
+//		}
 		
 		/**
 		 * 依据下标获取格子
@@ -263,9 +286,9 @@ package com.rpgGame.appModule.common
 			{
 				NoticeManager.showNotify("有一个格子的数据出错了！！！");
 			}
-			var grid:DragDropItem = getGridByIndex(index);
-			if(!grid)return;
-			grid.gridInfo = gridInfo;
+//			var grid:DragDropItem = getGridByIndex(index);
+//			if(!grid)return;
+//			grid.gridInfo = gridInfo;
 			updateGridLen && updateGridLen();
 		}
 		
@@ -297,7 +320,17 @@ package com.rpgGame.appModule.common
 			}
 			return null;
 		}
-		
+		/**通过唯一ID获取一个格子信息*/
+		public function geGridInfoByLong(id : long):GridInfo
+		{
+			var dragDropItem : GridInfo;
+			for each(dragDropItem in dataProvider.data)
+			{
+				if(dragDropItem.data&&(dragDropItem.data as ClientItemInfo).itemInfo.itemId.EqualTo(id))
+					return (dragDropItem);
+			}
+			return null;
+		}
 		/**定位到指定格子*/
 		public function atoGrid(index):void
 		{
@@ -570,18 +603,18 @@ package com.rpgGame.appModule.common
 			movingFace.y = int(Starling.current.nativeStage.mouseY) - 23;
 		}
 		
-		/**
-		 * 移动失败 
-		 * 
-		 */		
-		private function onFaceMoveFail():void
-		{
-			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
-			var srcFace:DragDropItem = getGridByIndex(info.index);
-			var pos:Point = srcFace.localToGlobal(new Point(0,0));
-			if(movingFace.stage == null)Starling.current.stage.addChild(movingFace);
-			TweenLite.to(movingFace,0.5,{x:pos.x, y:pos.y, onComplete:reShowSrcFace});
-		}
+//		/**
+//		 * 移动失败 
+//		 * 
+//		 */		
+//		private function onFaceMoveFail():void
+//		{
+//			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
+//			var srcFace:DragDropItem = getGridByIndex(info.index);
+//			var pos:Point = srcFace.localToGlobal(new Point(0,0));
+//			if(movingFace.stage == null)Starling.current.stage.addChild(movingFace);
+//			TweenLite.to(movingFace,0.5,{x:pos.x, y:pos.y, onComplete:reShowSrcFace});
+//		}
 		
 		/**
 		 * 移动失败处理 
@@ -654,9 +687,9 @@ package com.rpgGame.appModule.common
 		
 		public function addEvents():void
 		{
-			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
-			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
-			EventManager.addEvent(ItemEvent.ITEM_DELETE,removeItem);
+//			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
+//			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
+//			EventManager.addEvent(ItemEvent.ITEM_DELETE,removeItem);
 			
 			EventManager.addEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
@@ -673,9 +706,9 @@ package com.rpgGame.appModule.common
 		public function hide():void
 		{
 			stopFaceMove();
-			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
-			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
-			EventManager.removeEvent(ItemEvent.ITEM_DELETE,removeItem);
+//			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
+//			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
+//			EventManager.removeEvent(ItemEvent.ITEM_DELETE,removeItem);
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.removeEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.removeEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);

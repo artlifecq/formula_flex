@@ -1,5 +1,6 @@
 package com.game.engine2D.controller
 {
+	import com.game.engine2D.Scene;
 	import com.game.engine2D.scene.SceneCamera;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	
@@ -20,6 +21,7 @@ package com.game.engine2D.controller
 
 	/**
 	 * 2.5D 摄像机控制类 
+	 * 主要用来控制camera3d 的位置。根据主角的位置，来调整camera3d的位置
 	 * @author guoqing.wen
 	 * 
 	 */
@@ -30,6 +32,7 @@ package com.game.engine2D.controller
 		
 		private static var _target : ObjectContainer3D;
 		private static var _camera : Camera3D;
+		private static var _scene : Scene;
 		
 		public function CameraFrontController()
 		{
@@ -43,28 +46,40 @@ package com.game.engine2D.controller
 		 * @param $camera 控制的镜头对象，传空会用Stage3DLayerManager.camera
 		 *
 		 */
-		public static function initcontroller($camera : Camera3D, $target : ObjectContainer3D = null) : void
+		public static function initcontroller($scene:Scene, $target : ObjectContainer3D = null) : void
 		{
 			if(_target)$target.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTranform);
 			_target = $target;
-			_camera = $camera;
-			if(_target){
+			_scene = $scene;
+			_camera = _scene.view3d.camera;
+			
+			if(_target)
+			{
 				$target.addEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTranform);
 				onSceneTranform(null);
 			}
-			
 		}
 		
 		public static function destoryController() : void
 		{
-			if(_target){
+			if(_target)
+			{
 				_target.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTranform);
 			}
+			
 			_target = null;
 			_camera = null;
+			_scene = null;
 		}
 		
 		static private var _lookAtPosition:Vector3D = new Vector3D();
+		
+		/**
+		 * 设置镜头的位置 
+		 * @param px
+		 * @param py
+		 * 
+		 */		
 		public static function lookAt(px:Number, py:Number) : void
 		{
 			//trace("lookAt:",px, py);
@@ -77,20 +92,22 @@ package com.game.engine2D.controller
 				_camera.y = _lookAtPosition.y;
 				_camera.z = - LOCK_DISTANCE;
 				_camera.lookAt(_lookAtPosition);
-                screenVibration();
+//                screenVibration();
 			}
 		}
 		
 		public static function screenVibration():void
 		{
-            if (null == _camera) {
+            if (null == _camera) 
+			{
                 return;
             }
 			_camera.y = _lookAtPosition.y;
 			for each(var animator:iCamera3DAnimator in  _camera.camera3DAnimators)
 			{
 				var cameraVibrateAnimator:CameraVibrateAnimator = animator as CameraVibrateAnimator;
-				if(cameraVibrateAnimator) {
+				if(cameraVibrateAnimator) 
+				{
 					_camera.y += animator.offset;
                 }
 			}
@@ -98,8 +115,32 @@ package com.game.engine2D.controller
 		
 		public static function onSceneTranform(e:Object3DEvent) : void
 		{
+			if(_target==null)return;
+			if(_scene.sceneConfig==null || _scene.mapConfig==null)return;
 			var lookAtPosition:Vector3D = _target.scenePosition;
-			lookAt(lookAtPosition.x, lookAtPosition.y);
+			
+			var stageWidth:Number = _scene.sceneConfig.width;
+			var stageHeight:Number = _scene.sceneConfig.height;
+			var mapWidth:int = _scene.mapConfig.width;
+			var mapHeight:int = _scene.mapConfig.height;
+			
+			var showWidth:int = Math.min(stageWidth, mapWidth);
+			var halfShowWidth:int = showWidth >> 1;
+			var showHeight:int = Math.min(stageHeight, mapHeight);
+			var halfShowHeight:int = showHeight >> 1;
+			
+			var pX:Number = lookAtPosition.x;
+			var isMinus:Boolean = false;
+			if(lookAtPosition.z < 0)
+			{
+				isMinus = true;			
+			}
+			var pY:Number = isMinus ? -lookAtPosition.z : lookAtPosition.z;
+			
+			var posX:Number = Math.min(Math.max(pX, halfShowWidth), mapWidth-halfShowWidth) >> 0;
+			var posY:Number = Math.min(Math.max(pY, halfShowHeight), mapHeight-halfShowHeight) >> 0;
+			
+			lookAt(posX, isMinus ? -posY : posY);	
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////

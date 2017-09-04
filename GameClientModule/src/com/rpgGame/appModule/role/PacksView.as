@@ -490,9 +490,9 @@ package com.rpgGame.appModule.role
 		{
 			_skin.tab_pack.addEventListener(Event.CHANGE, onTab);
 			
-			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onRemoveItem);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onChangeItem);
 			EventManager.addEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
 			EventManager.addEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
 			EventManager.addEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
@@ -523,6 +523,24 @@ package com.rpgGame.appModule.role
 			TipTargetManager.show( _skin.icon_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTip));
 			TipTargetManager.show( _skin.name_lj, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTip));
 			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTip));
+		}
+		
+		private function onChangeItem(info:ClientItemInfo):void
+		{
+			// TODO Auto Generated method stub
+			itemChange(info,1);
+		}
+		
+		private function onRemoveItem(info:ClientItemInfo):void
+		{
+			// TODO Auto Generated method stub
+			itemChange(info,2);
+		}
+		
+		private function onAddItem(info:ClientItemInfo):void
+		{
+			// TODO Auto Generated method stub
+			itemChange(info,0);
 		}
 		
 		private function levelChange():void
@@ -614,7 +632,64 @@ package com.rpgGame.appModule.role
 		{
 			onFreshItems();
 		}
-		
+		private function itemChange(info:ClientItemInfo=null,optType:int=0):void
+		{
+			if (!info) 
+			{
+				return;
+			}
+			if(info&&info.containerID!=ItemContainerID.BackPack){
+				return;
+			}
+			//所有物品
+			if (_skin.tab_pack.selectedIndex==0) 
+			{
+				goodsContainer.setGridInfo(info.itemInfo.gridId,BackPackManager.instance.getItemInfoByIndex(info.index));
+			}
+			else
+			{
+				var isNowType:Boolean=curType.indexOf(info.qItem.q_type)!=-1;
+				//是当前这种类型
+				if (isNowType) 
+				{
+					//增加
+					if (optType==0) 
+					{
+						var index:int=goodsContainer.getFreeGridInfoIndex();
+						if (index!=-1) 
+						{
+							goodsContainer.setGridInfo(index,info);
+						}
+					}
+					//改
+					else if (optType==1) 
+					{
+						var change:GridInfo=goodsContainer.geGridInfoByLong(info.itemInfo.itemId);
+						if (change) 
+						{
+							var changeIndex:int=goodsContainer.dataProvider.getItemIndex(change);
+							if (changeIndex!=-1) 
+							{
+								goodsContainer.setGridInfo(changeIndex,info);
+							}
+						}
+					}
+					//删除
+					else if (optType==2) 
+					{
+						var del:GridInfo=goodsContainer.geGridInfoByLong(info.itemInfo.itemId);
+						if (del) 
+						{
+							var delIndex:int=goodsContainer.dataProvider.getItemIndex(del);
+							if (delIndex!=-1) 
+							{
+								goodsContainer.setGridInfo(delIndex,null);
+							}
+						}
+					}
+				}
+			}
+		}
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
 			if(info&&info.containerID!=ItemContainerID.BackPack){
@@ -819,9 +894,9 @@ package com.rpgGame.appModule.role
 			
 			_skin.tab_pack.removeEventListener(Event.CHANGE, onTab);
 			
-			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onRemoveItem);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onChangeItem);
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK_CHENGGONG,jiesuochenggong);//解锁成功

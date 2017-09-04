@@ -20,6 +20,7 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.MouseCursorEnum;
@@ -241,9 +242,9 @@ package com.rpgGame.appModule.storage
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.addEvent(ItemEvent.ITEM_INIT,initStorageDatas);			
 			
-			EventManager.addEvent(ItemEvent.ITEM_ADD,refreshGrid);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,refreshGrid);
-			EventManager.addEvent(ItemEvent.ITEM_CHANG,refreshGrid);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onItemChange);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onItemChange);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemChange);
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
 			EventManager.addEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
 			EventManager.addEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
@@ -290,7 +291,18 @@ package com.rpgGame.appModule.storage
 			StorageManager.instance.setCheckType(null);
 			goodsContainer.refleshGrids();		
 		}
-		
+		private function onItemChange(info:ClientItemInfo):void
+		{
+			if (!info) 
+			{
+				return;
+			}
+			if(info&&info.containerID!=ItemContainerID.Storage){
+				return;
+			}
+			goodsContainer.setGridInfo(info.itemInfo.gridId,StorageManager.instance.getItemInfoByIndex(info.index));
+			setUseGridLen();
+		}
 		private function setLuckGridState(containerID:int):void
 		{
 			if(containerID==ItemContainerID.Storage)
@@ -432,9 +444,9 @@ package com.rpgGame.appModule.storage
 			enterOrLeaveSaveMode(false);
 			isSave=false;
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
-			EventManager.removeEvent(ItemEvent.ITEM_ADD,refreshGrid);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,refreshGrid);
-			EventManager.removeEvent(ItemEvent.ITEM_CHANG,refreshGrid);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onItemChange);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onItemChange);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemChange);
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_ONLOCK,setLuckGridState);//带解锁
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK,setLuckGridState);//可解锁
 			EventManager.removeEvent(ItemEvent.ITEM_GRID_CANLOCK_CHENGGONG,jiesuochenggong);//解锁成功

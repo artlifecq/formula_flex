@@ -50,6 +50,7 @@ package com.rpgGame.app.scene.animator
 		private var _isAttachUnit:Boolean;
 		//现在只有一个目标了
 		private var _targetId:long;
+		private  static var _offsetZ:int=10000;
 		public function RibbonAnimator()
 		{
 			_lightList = new Vector.<LightningRibbon>();
@@ -220,7 +221,7 @@ package com.rpgGame.app.scene.animator
 				var fps:int=12;
 				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, fps, 8);
 				ribbon.start();
-				
+				ribbon.zOffset=_offsetZ;
 				_lightList.push(ribbon);
 				
 				SceneManager.scene.gameScene3d.addChild(ribbon);
@@ -231,7 +232,7 @@ package com.rpgGame.app.scene.animator
 				
 				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, fps, 8);
 				ribbon.start();
-				
+				ribbon.zOffset=_offsetZ;
 				_lightList.push(ribbon);
 				
 				SceneManager.scene.gameScene3d.addChild(ribbon);

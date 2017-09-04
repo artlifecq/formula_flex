@@ -305,10 +305,14 @@ package com.rpgGame.app.manager.fightsoul
 				return BitUtil.getInt(_fightSoulInfo.rewardBit,index);
 		}
 		
-		private function updataSceneMode():void
+		public function updataSceneMode():void
 		{
 			var player : SceneRole = MainRoleManager.actor;
 			if (null == player || !player.usable) {
+				return;
+			}
+			if (!_fightSoulInfo) 
+			{
 				return;
 			}
 			var modle:Q_fightsoul = FightsoulData.getInfobyId(_fightSoulInfo.curModelLv);
