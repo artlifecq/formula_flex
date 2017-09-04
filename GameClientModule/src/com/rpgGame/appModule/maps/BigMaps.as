@@ -286,7 +286,8 @@ package com.rpgGame.appModule.maps
 			pos3d.z = roleData.y;
 			point=getChangeSceneToMap(pos3d);
 			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
-			
+			roleIcon.icoName.x=point.x<60?point.x:0;
+			roleIcon.icoName.x=point.x>(thumbnaiSpr.width-60)?(thumbnaiSpr.width-point.x-60):0;
 			roleSpr.addChild(roleIcon);
 			roleSpr.visible = true;
 		}
@@ -354,7 +355,6 @@ package com.rpgGame.appModule.maps
 		}
 		public function roleWalk(x:Number,y:Number,spacing:int=0):void
 		{
-			roadSpr.openRoad();
 			var position : Vector3D = new Vector3D(x, -Math.abs(y), 0);
 			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))
 			{
@@ -380,7 +380,10 @@ package com.rpgGame.appModule.maps
 				roleSpr.removeChildAt(0);
 			}
 		}
-		
+		public function onDrawPathRoad() : void
+		{
+			roadSpr.onDrawPathRoad();
+		}
 		/**
 		 * 场景上坐标换算成地图坐标
 		 */

@@ -59,6 +59,7 @@ package com.rpgGame.appModule.maps
 		{
 			clearItem();
 			setItem();
+			scrollChange();
 		}
 		
 		
