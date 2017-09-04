@@ -1,13 +1,11 @@
 package com.rpgGame.app.manager.role
 {
-	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
-	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
@@ -18,7 +16,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
-	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -152,14 +149,7 @@ package com.rpgGame.app.manager.role
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
 				
-				if(GlobalConfig.use2DMap)
-				{
-					GameCameraManager.startPlayerMode(SceneManager.scene.cameraTarget);
-				}
-				else
-				{
-					GameCameraManager.startPlayerMode(SceneManager.getScene().getCameraTarget());
-				}
+				GameCameraManager.startPlayerMode(SceneManager.getScene().getCameraTarget());
 				
 				TrusteeshipManager.getInstance().setup(_actor);
 				TaskAutoManager.getInstance().setup(_actor);

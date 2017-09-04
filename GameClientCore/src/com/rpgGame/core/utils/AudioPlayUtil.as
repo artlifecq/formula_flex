@@ -1,6 +1,5 @@
 package com.rpgGame.core.utils
 {
-	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
