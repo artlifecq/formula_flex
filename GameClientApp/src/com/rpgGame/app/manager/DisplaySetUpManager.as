@@ -3,7 +3,10 @@ package com.rpgGame.app.manager
 	import com.game.engine2D.Scene;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.sender.HeroMiscSender;
+	import com.rpgGame.coreData.enum.EnumCustomTagType;
 	
 	import away3d.Away3D;
 	
@@ -14,10 +17,9 @@ package com.rpgGame.app.manager
 	 */	
 	public class DisplaySetUpManager 
 	{
+		private static var gameSetObj:Object;
 		
-		private static const MAX_CONFIG_LEVEL:int = 3;
-		
-		/**显示等级（1 2 3）*/
+		/**画面设置（0 1 2 3）*/
 		private static var _configLevel:int;
 		/**自动*/
 		private static var _autoSetting:Boolean = true;
@@ -34,6 +36,25 @@ package com.rpgGame.app.manager
 		/**渲染倍数*/
 		private static var _filterQuality:int;
 		
+		public static function initData(dataStr:String):void
+		{
+			gameSetObj=JSONUtil.decode(dataStr)[0];
+			
+			if(gameSetObj!=null)
+			{
+				configLevel=gameSetObj.dispaySet.configLevel;
+				filterQuality=gameSetObj.dispaySet.filterQuality;
+				viewAntiAlias=(gameSetObj.dispaySet.viewAntiAlias*2)>0?(gameSetObj.dispaySet.viewAntiAlias*2):1;
+				displayLevel=gameSetObj.dispaySet.displayLevel;
+				openPhantom=gameSetObj.dispaySet.openPhantom;
+				openBlend=gameSetObj.dispaySet.openBlend;
+				openHeightEffect=gameSetObj.dispaySet.openHeightEffect;
+				openHeat=gameSetObj.dispaySet.openHeat;
+				openGlow=gameSetObj.dispaySet.openGlow;
+				shadowLevel=gameSetObj.dispaySet.shadowLevel;
+			}
+		}
+		
 		/**自动*/
 		public static function get autoSetting():Boolean
 		{
@@ -48,25 +69,8 @@ package com.rpgGame.app.manager
 		
 		public static function defaultSetting():void
 		{
-			DisplaySetUpManager.autoSetting = true;
+			autoSetting = true;
 			setToMid();
-		}
-		
-		public static function applySetting(dispaySet:Object):void
-		{
-			if (dispaySet != null)
-			{ 
-				DisplaySetUpManager.configLevel = dispaySet.quality;
-				DisplaySetUpManager.viewAntiAlias = dispaySet.antiAlias;
-				DisplaySetUpManager.displayLevel = dispaySet.displayLevel;
-				DisplaySetUpManager.shadowLevel = dispaySet.shadowLevel;
-				DisplaySetUpManager.openPhantom = dispaySet.openPhantom;
-				DisplaySetUpManager.openBlend = dispaySet.openBlendPass;
-				DisplaySetUpManager.openHeightEffect = dispaySet.openHeightEffect;
-				DisplaySetUpManager.openHeat = dispaySet.openHeat;
-				DisplaySetUpManager.openGlow = dispaySet.openGlow;
-				DisplaySetUpManager.filterQuality = dispaySet.filterQuality>0 ? dispaySet.filterQuality : 100;
-			}
 		}
 		
 		public static function reducedPerforms():Boolean
@@ -107,10 +111,10 @@ package com.rpgGame.app.manager
 			return false;
 		}
 		
-		/**显示等级*/
+		/**画面设置*/
 		public static function get configLevel():int
 		{
-			if (DisplaySetUpManager.autoSetting == true)
+			if (autoSetting == true)
 			{
 				return 0;
 			}
@@ -123,18 +127,18 @@ package com.rpgGame.app.manager
 			switch (value)
 			{
 				case 0:
-					DisplaySetUpManager.autoSetting = true;
+					autoSetting = true;
 					return;
 				case 1:
-					DisplaySetUpManager.autoSetting = false;
+					autoSetting = false;
 					setToLow();
 					return;
 				case 2:
-					DisplaySetUpManager.autoSetting = false;
+					autoSetting = false;
 					setToMid();
 					return;
 				case 3:
-					DisplaySetUpManager.autoSetting = false;
+					autoSetting = false;
 					setToHigh();
 				default:
 					return;
@@ -210,11 +214,13 @@ package com.rpgGame.app.manager
 			return Stage3DLayerManager.viewAntiAlias;
 		}
 		
+		/**显示等级*/
 		public static function set displayLevel(value:int):void
 		{
 			Away3D.DISPLAY_LEVEL = value;
 		}
 		
+		/**显示等级*/
 		public static function get displayLevel():int
 		{
 			return Away3D.DISPLAY_LEVEL;
@@ -328,6 +334,23 @@ package com.rpgGame.app.manager
 		public static function get openHeightEffect():Boolean
 		{
 			return _openHeightEffect;
+		}
+		
+		public static function savaData():void
+		{
+			var nowValue:String = getAllValueToString();
+			HeroMiscSender.reqSetClientCustomTag(EnumCustomTagType.SYSTEM_HUAMIAN_SET , nowValue);
+		}
+		
+		private static function getAllValueToString():String
+		{
+			var value:String;		
+			var data:Array=[];
+			data.push({dispaySet:{configLevel:configLevel,filterQuality:filterQuality,viewAntiAlias:viewAntiAlias,displayLevel:displayLevel,
+				openPhantom:openPhantom,openBlend:openBlend,openHeightEffect:openHeightEffect,
+				openHeat:openHeat,openGlow:openGlow,shadowLevel:shadowLevel}});
+			value=JSONUtil.encode(data);
+			return value;
 		}
 	}
 }

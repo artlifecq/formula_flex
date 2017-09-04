@@ -431,5 +431,6 @@ package com.rpgGame.app.utils
 		{
 			TeamSender.ReqLeaveTeam(1);
 		}
+		
 	}
 }

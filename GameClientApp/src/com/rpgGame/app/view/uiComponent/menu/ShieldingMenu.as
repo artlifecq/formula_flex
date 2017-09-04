@@ -1,5 +1,6 @@
 package com.rpgGame.app.view.uiComponent.menu
 {
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.TweenUtil;
 	
@@ -99,7 +100,7 @@ package com.rpgGame.app.view.uiComponent.menu
 			{
 				y = Starling.current.nativeStage.mouseY;
 				if( y + _menuBG.height > Starling.current.nativeStage.stageHeight )
-					y = Starling.current.nativeStage.stageHeight - _menuBG.height;
+					y = Starling.current.nativeStage.stageHeight - _menuBG.height+30;
 			}
 		}
 		
@@ -141,6 +142,7 @@ package com.rpgGame.app.view.uiComponent.menu
 			removeListener();
 			
 			TweenUtil.MenuShowAndHide( this, 0, 1, 0, removeSelf );
+			GameSettingManager.savaMainToServer();
 		}
 		
 		private function clear():void

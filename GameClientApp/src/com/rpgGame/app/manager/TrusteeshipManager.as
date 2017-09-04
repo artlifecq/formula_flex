@@ -624,7 +624,7 @@ package com.rpgGame.app.manager
 			}
 			else if(_findDist==0)
 			{
-				return int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+				return int(SystemSetManager.hookValue*50);
 			}
 			else
 			{
@@ -641,7 +641,7 @@ package com.rpgGame.app.manager
 			}
 			else if(value==0)
 			{
-				findDist=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+				findDist=int(SystemSetManager.hookValue*50);
 			}
 			else
 			{

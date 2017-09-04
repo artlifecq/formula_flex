@@ -17,22 +17,22 @@
 
         public static function get toUseGoods():Boolean
         {
-            return SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_LIFE);;
+            return SystemSetManager.hpSelect;
         }
 
         public static function get toBuyGoods():Boolean
         {
-            return SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOTBUYITEM);
+            return SystemSetManager.lifeSelect;
         }
 		
 		public static function get toAutoRelive():Boolean
 		{
-			return SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_USE_ITEM_ISDEAD);
+			return SystemSetManager.autoResurrection;
 		}
 
         public static function get hpPercentToUseGoods():int
         {
-            return SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HP_PERCENT);
+            return SystemSetManager.hpValue;
         }
 
         public static function get mpPercentToUseGoods():int
