@@ -590,24 +590,24 @@ package  com.rpgGame.app.manager.ctrl
 			{
 				return false;
 			}
-			var pickEquip:Boolean=SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_EQUIPMENT);
+			var pickEquip:Boolean=SystemSetManager.autoSelect;
 			if (!pickEquip) 
 			{
 				return false;
 			}
-			var pickJobIndex:int=SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_ZHIYE);
+			var pickJobIndex:int=SystemSetManager.job;
 			var pickJob:int=JOBARR[pickJobIndex];
 			if (pickJob!=JobEnum.ROLE_0_TYPE&&pickJob!=qItem.q_job) 
 			{
 				return false;
 			}
-			var pickLv:int=SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_DENGJIE);
-			//是大于多少阶数
-			if (qItem.q_levelnum<=pickLv) 
-			{
-				return false;
-			}
-			var qua:int=SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_PINZHI);
+//			var pickLv:int=SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_DENGJIE);
+//			//是大于多少阶数
+//			if (qItem.q_levelnum<=pickLv) 
+//			{
+//				return false;
+//			}
+			var qua:int=SystemSetManager.quality;
 			if (qItem.q_default<qua) 
 			{
 				return false;
@@ -631,15 +631,15 @@ package  com.rpgGame.app.manager.ctrl
 				return -2;
 			
 		
-			if (ItemUtil.IsCurrency( itemm.q_type )) 
-			{
-				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MONEY) )//ItemUtil.isCurrency() )
-				{
-					return -1;
-				}
-			}
+//			if (ItemUtil.IsCurrency( itemm.q_type )) 
+//			{
+//				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MONEY) )//ItemUtil.isCurrency() )
+//				{
+//					return -1;
+//				}
+//			}
 			
-			else if ( ItemUtil.IsEquip( itemm.q_type ) )
+			 if ( ItemUtil.IsEquip( itemm.q_type ) )
 			{
 				if (!checkEquipPick(itemm)) 
 				{
@@ -647,22 +647,22 @@ package  com.rpgGame.app.manager.ctrl
 				}
 				
 			}
-			else if (ItemUtil.IsMedical( itemm.q_type ) )
-			{
-				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_DRUGS) ) 
-				{
-					return -1;
-				}
-				
-			}
-			else if ( ItemUtil.IsMaterial( itemm.q_type ) )
-			{
-				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MATERIAL)) 
-				{
-					return -1;
-				}
-				
-			}
+//			else if (ItemUtil.IsMedical( itemm.q_type ) )
+//			{
+//				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_DRUGS) ) 
+//				{
+//					return -1;
+//				}
+//				
+//			}
+//			else if ( ItemUtil.IsMaterial( itemm.q_type ) )
+//			{
+//				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MATERIAL)) 
+//				{
+//					return -1;
+//				}
+//				
+//			}
 			else if (  ItemUtil.IsTaskItem( itemm.q_type ) )
 			{
 				return 0;
