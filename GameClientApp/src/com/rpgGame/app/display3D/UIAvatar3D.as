@@ -34,6 +34,8 @@ package com.rpgGame.app.display3D
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
 	import feathers.core.FeathersControl;
 	
@@ -72,6 +74,10 @@ package com.rpgGame.app.display3D
 		public function UIAvatar3D(container:DisplayObjectContainer=null,scale:Number=1.0)
 		{
 			super();
+			
+			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
+			
 			avatar3d=new InterObject3D();
 			_roleData= new RoleData(0);
 			this._role = SceneRole.create(SceneCharType.DUMMY, _roleData.id);
@@ -84,9 +90,29 @@ package com.rpgGame.app.display3D
 			_role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
 			this.addChild3D(avatar3d);
 			bindContainer(container);
-			
+		}
+		
+		private function __onAddedToStage(e : Event = null) : void
+		{
+			onShow();
+		}
+		
+		protected function onShow() : void
+		{
 			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
 			transition(RoleStateType.ACTION_SHOW); //切换到“站立状态”
+			startRender3D();
+		}
+		
+		private function __onRemoveFromStage(e : Event = null) : void
+		{
+			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
+			onHide();
+		}
+		
+		protected function onHide() : void
+		{
+			stopRender3D();
 		}
 		
 		public function get role():SceneRole
@@ -282,6 +308,11 @@ package com.rpgGame.app.display3D
 		
 		override public function dispose() : void
 		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
+			this.removeEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
+			while (this.numChildren)
+				this.removeChildAt(0);
+			
 			if (_role)
 			{
 				SceneRole.recycle(_role);
