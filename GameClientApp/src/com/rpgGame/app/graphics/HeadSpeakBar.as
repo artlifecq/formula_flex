@@ -47,6 +47,7 @@ package com.rpgGame.app.graphics
 			TweenLite.killDelayedCallsTo(hide);
 			if (parent != null)
 				parent.removeChild(this);
+			this.visible=false;
 			_isDisposed = true;
 		}
 		public function get isDestroyed():Boolean
@@ -146,7 +147,7 @@ package com.rpgGame.app.graphics
 			{
 				this.parent.removeChild(this);
 			}
-			//this.visible=false;
+			this.visible=false;
 			
 		}
 	}

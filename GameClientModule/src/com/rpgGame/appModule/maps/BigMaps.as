@@ -202,6 +202,7 @@ package com.rpgGame.appModule.maps
 			{
 				return;
 			}
+			
 			var scalex:Number= _mapWidth/thumbnaiImage.width ;
 			var scaley:Number= _mapHeight/thumbnaiImage.height;
 			_scale=scalex<scaley?scalex:scaley;
@@ -285,7 +286,8 @@ package com.rpgGame.appModule.maps
 			pos3d.z = roleData.y;
 			point=getChangeSceneToMap(pos3d);
 			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
-			
+			roleIcon.icoName.x=point.x<60?point.x:0;
+			roleIcon.icoName.x=point.x>(thumbnaiSpr.width-60)?(thumbnaiSpr.width-point.x-60):0;
 			roleSpr.addChild(roleIcon);
 			roleSpr.visible = true;
 		}
@@ -351,16 +353,17 @@ package com.rpgGame.appModule.maps
 				roleWalk(point.x,point.y);
 			}
 		}
-		public function roleWalk(x:Number,y:Number):void
+		public function roleWalk(x:Number,y:Number,spacing:int=0):void
 		{
-			roadSpr.openRoad();
+			roadSpr.onClearPath();
 			var position : Vector3D = new Vector3D(x, -Math.abs(y), 0);
-			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))//阻挡点正常寻路
+			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))
 			{
-				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, 100,null);
+				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, spacing,null);
 			}
 			else
 			{
+				MainRoleSearchPathManager.stopAutoFind();
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"该目标点不可到达");
 			}
 		}
@@ -378,7 +381,10 @@ package com.rpgGame.appModule.maps
 				roleSpr.removeChildAt(0);
 			}
 		}
-		
+		public function onDrawPathRoad() : void
+		{
+			roadSpr.onDrawPathRoad();
+		}
 		/**
 		 * 场景上坐标换算成地图坐标
 		 */
@@ -388,17 +394,20 @@ package com.rpgGame.appModule.maps
 			var mapData : ClientMapData = SceneManager.clientMapData;
 			if (mapData == null)
 				return new Point(0, 0);
-			
+			//absMaxWidth-thumbnaiImage.w
 			//投射转换
-			var posx : int = position.x * mapData.miniScaleX * BigMapsData.scaleMapX;
-			var posy : int = -position.z* mapData.miniScaleY * BigMapsData.scaleMapY;
+//			var posx : int = position.x * mapData.miniScaleX * BigMapsData.scaleMapX;
+//			var posy : int = -position.z* mapData.miniScaleY * BigMapsData.scaleMapY;
+//			var tilt : Number = MathUtil.angleToRadian(mapData.miniCorrectTilt);
+//			var pan : Number = MathUtil.angleToRadian(mapData.miniCorrectPan);
+//			var roll : Number = MathUtil.angleToRadian(mapData.miniCorrectRoll);
+//			var pos : Point = MathUtil.projection(posx, posy, tilt, pan, roll);
+//			pos.x += mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsData.scaleMapX;
+//			pos.y += mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsData.scaleMapY;
+			var posx : int = position.x *BigMapsData.scaleMapX;
+			var posy : int = -position.z*BigMapsData.scaleMapY;
 			var tilt : Number = MathUtil.angleToRadian(mapData.miniCorrectTilt);
-			var pan : Number = MathUtil.angleToRadian(mapData.miniCorrectPan);
-			var roll : Number = MathUtil.angleToRadian(mapData.miniCorrectRoll);
-			var pos : Point = MathUtil.projection(posx, posy, tilt, pan, roll);
-			pos.x += mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsData.scaleMapX;
-			pos.y += mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsData.scaleMapY;
-			
+			var pos : Point =new Point(posx,posy);
 			return pos;
 		}
 		

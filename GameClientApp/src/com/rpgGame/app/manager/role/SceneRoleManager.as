@@ -35,6 +35,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
@@ -202,12 +203,12 @@ package com.rpgGame.app.manager.role
 			}
 		}
 		/**
-		 * 创建怪物
+		 * 创建NPC
 		 * @param data
 		 * @param charType
 		 *
 		 */
-		public function createMonster(data : MonsterData, charType : String) : SceneRole
+		public function createNPC(data : MonsterData, charType : String) : SceneRole
 		{
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, charType);
@@ -217,7 +218,7 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.enableMask = true;
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
-			if (charType == SceneCharType.NPC && data.ownerName)
+			if (data.ownerName)
 			{
 				roleNameStr = roleNameStr + "(" + data.ownerName + ")";
 			}
@@ -253,49 +254,79 @@ package com.rpgGame.app.manager.role
 				ref1.setParams(mountResID, null);
 				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
 			}
-			
-			if (charType == SceneCharType.NPC)
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+			role.setScale(data.sizeScale);
+			role.setGroundXY(data.x, data.y);
+			role.rotationY = (270 + data.direction) % 360;
+			SceneManager.addSceneObjToScene(role, true, false, true);
+			MainRoleSearchPathManager.trySetSearchRoleData(data);
+			TaskUtil.tryAddTaskMark(role);
+			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
+			return role;
+		}
+		/**
+		 * 创建怪物
+		 * @param data
+		 * @param charType
+		 *
+		 */
+		public function createMonster(data : MonsterData, charType : String) : SceneRole
+		{
+			//如果场景中存在此类型此ID的角色，则移除之
+			removeSceneRoleByIdAndType(data.id, charType);
+			var role : SceneRole = SceneRole.create(charType, data.id);
+			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
+			//设置VO
+			role.data = data;
+			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
+			role.name = data.name = roleNameStr;
+			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
+			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
+			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
+			role.updateBody(bornData ? bornData.q_body_res : "", null);
+			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
+			//
+			(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
+			if (bornData.q_animation>0)
 			{
-				role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+				role.updateBodyEft(AnimationDataManager.getData(bornData.q_animation).role_res);
+				//				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
 			}
-			else if(charType == SceneCharType.CLIENT_NPC)
+			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
+			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
+			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
+			//data.direction = bornData ? bornData.q_direction : 0;
+			data.immuneDeadBeat = bornData ? (bornData.q_immune_dead_beat==0): false;
+			
+			if(bornData.q_born_animation)//有出生特效
 			{
-				role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+				trace(data.x+"   "+data.y);
+				SpellAnimationHelper.addBornEffect(role,data.x, data.y,bornData.q_born_animation);
+			}
+			var mountResID : String = bornData ? bornData.q_mount_res : "";
+			if (mountResID)
+			{
+				var ref1 : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
+				ref1.setParams(mountResID, null);
+				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
+			}
+			
+			if (data.totalStat.hp <= 0)
+			{
+				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}
 			else
 			{
-				if (data.totalStat.hp <= 0)
-				{
-					role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
-				}
-				else
-				{
-					role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
-				}
+				role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			}
-			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;;
-			if (charType == SceneCharType.NPC)
-			{
-				SceneManager.addSceneObjToScene(role, true, false, false);
-			}
-			else if(charType == SceneCharType.CLIENT_NPC)
-			{
-				SceneManager.addSceneObjToScene(role, true, data.needInViewDist, true);
-			}
-			else
-			{
-				SceneManager.addSceneObjToScene(role, true, false, true);
-			}
+			SceneManager.addSceneObjToScene(role, true, false, true);
 			MainRoleSearchPathManager.trySetSearchRoleData(data);
-			if (charType == SceneCharType.NPC)
-			{
-				TaskUtil.tryAddTaskIco(role);
-			}
 			//弓弩不要鼠标事件
-			if (SceneCharType.MONSTER==charType&&(data.modelID==EnumMonsterId.BOW1||data.modelID==EnumMonsterId.BOW2)) 
+			if ((data.modelID==EnumMonsterId.BOW1||data.modelID==EnumMonsterId.BOW2)) 
 			{
 				role.mouseEnable=false;
 			}
