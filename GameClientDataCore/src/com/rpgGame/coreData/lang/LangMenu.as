@@ -60,11 +60,11 @@ package com.rpgGame.coreData.lang
 		public static const INVITE_TEAM_VOICE:String = "INVITE_TEAM_VOICE";
 		 /**  赠送鲜花 */
 		public static const SEND_FLOWERS:String = "SEND_FLOWERS";
-		 /**  私聊 */
+		 /**  发送私聊 */
 		public static const THE_PRIVATE_CHAT:String = "THE_PRIVATE_CHAT";
-		 /**  组队 */
+		 /**  邀请组队 */
 		public static const INVITE_TEAM:String = "INVITE_TEAM";
-		 /**  切磋 */
+		 /**  邀请切磋 */
 		public static const PLAY:String = "PLAY";
 		 /**  复制名称 */
 		public static const COPY_THE_NAME:String = "COPY_THE_NAME";
@@ -80,11 +80,11 @@ package com.rpgGame.coreData.lang
 		public static const TEAM_KILLER_MODE:String = "TEAM_KILLER_MODE";
 		 /**  自由拾取 */
 		public static const TEAM_FEED_PICK_UP_MODE:String = "TEAM_FEED_PICK_UP_MODE";
-		 /**  私聊 */
+		 /**  发送私聊 */
 		public static const SI_LIAO:String = "SI_LIAO";
 		 /**  对话 */
 		public static const DUI_HUA:String = "DUI_HUA";
-		 /**  邀请加入帮派 */
+		 /**  邀请入帮 */
 		public static const INVITE_JOIN_GUILD:String = "INVITE_JOIN_GUILD";
 		 /**  开除出帮 */
 		public static const KICK_GUILD:String = "KICK_GUILD";

@@ -91,11 +91,12 @@ package com.rpgGame.app.ui.scene.dungeon
 				killButList.push(_skin["killbut_"+i]);
 				TaskUtil.addLabelEvet(_skin["killbut_"+i].skin.labelDisplay);			
 			}
-			alertOk=new AlertSetInfo(LangAlertInfo.ZONE_EXIT_SURE);
+			alertOk=new AlertSetInfo(LangAlertInfo.BEAUTYZONE_EXIT_SURE);
 		}
 		
 		override protected function onShow() : void
 		{
+			
 			addEvent();
 			enterZone();
 			finishWalk(null);
