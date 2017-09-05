@@ -38,8 +38,6 @@ package com.rpgGame.coreData.cfg
 					<key funcID="9" code="112" name="F1" dataID="" type="3" />
 <!-- 移动快捷键 
 					<key funcID="1" code="87" name="W" dataID="0" type="4"/>
-					
-					<key funcID="3" code="83" name="S" dataID="0" type="4"/>
 					<key funcID="4" code="68" name="D" dataID="0" type="4"/>
 -->
 					<key funcID="5" code="38" name="UP" dataID="0" type="4" />
@@ -75,6 +73,7 @@ package com.rpgGame.coreData.cfg
 					<key funcID="52" code="27" name="ESC" dataID="0" type="2" />
 					<key funcID="51" code="9" name="TAB" dataID="" type="2" />
 					<key funcID="65" code="65" name="A" dataID="0" type="2"/>
+                    <key funcID="67" code="83" name="S" dataID="0" type="2"/>
 					<key funcID="66" code="192" name="~" dataID="0" type="2"/>
 					<!--数字 快捷键 -->
 					<!-- 加号 -->

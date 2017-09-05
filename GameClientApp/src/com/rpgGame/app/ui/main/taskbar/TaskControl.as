@@ -183,7 +183,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==TaskType.MAINTYPE_WORSHIP)//膜拜任务任务
 			{
 				TaskAutoManager.getInstance().taskType=TaskType.MAINTYPE_WORSHIP;
-				RankTopSender.reqRankListTopInfo(RankListType.COMBATPOWER_TYPE);
+				RankTopSender.reqRankListTopInfo(RankListType.All_COMBATPOWER_TYPE);
 				return;
 			}
 			

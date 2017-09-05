@@ -49,13 +49,7 @@ package com.rpgGame.app.controller.keyboard
 			
 			switch (funcID)
 			{
-				case "1": //G GM命令面板
-					
-					break;
-				case "2": //Z 自动挂机   挂机改到A去了
-					
-					break;
-				case "65": //A 自动挂机   挂机改到A去了
+				case "65": //A 自动挂机
 					if (TrusteeshipManager.getInstance().isAutoFightRunning)
 					{
 						TrusteeshipManager.getInstance().stopAutoFight();
@@ -64,12 +58,7 @@ package com.rpgGame.app.controller.keyboard
 					{
 						TrusteeshipManager.getInstance().startAutoFight();
 						AppManager.hideApp(AppConstant.SYSTEMSET_PANEL);
-					}
-					
-					break;
-				case "3": //m 地图
-					//AppManager.showApp(AppConstant.WORLD_MAP_PANEL);
-					AppManager.showApp(AppConstant.BIGMAP_PANEL);
+					}					
 					break;
 				case "4": //B 背包
 					AppManager.showApp(AppConstant.ROLE_PANEL);
@@ -77,73 +66,82 @@ package com.rpgGame.app.controller.keyboard
 				case "5": //C 人物
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,null,true,false);
 					break;
-				case "6": //V pk
-						//AppManager.showApp(AppConstant.MOUNT_PANEL);
-//					PKMamager.ChangeNextPkModel();
-					break;
-				case "23": //N 坐骑
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,true,false);
-					break;
-				case "7": //L 任务
-						AppManager.showApp(AppConstant.TASK_PANEL);
-					break;
-				case "8": //F 好友
-					/*if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
-					{
-						AppManager.hideApp(AppConstant.MULTY_PANL);
-					}
-					else if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType==EnumMapType.MAP_TYPE_NORMAL)
-					{
-						AppManager.showApp(AppConstant.MULTY_PANL);
-					}*/
-						
-					
-//					if (!ClientConfig.isBanShu)
-//						AppManager.showApp(AppConstant.FRIEND_PANEL);
-					break;
-				case "9": //P 队伍
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUDUI,null,true,false);
-					break;
-				case "10": //O 商城
-					/*if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);*/
-					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
-					break;
-				case "11": //J 社会
-						AppManager.showApp(AppConstant.COUNTRY_PANEL);
-					break;
-				case "12": //Q 装备
-						AppManager.showApp(AppConstant.EQUIP_CHANGE);
-					break;
 				case "13": //D 强化
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_QIANGHUA,null,true,false);
 					break;
 				case "14": //E
-//					CountryWarChengMenManager.testAddChengMen();
+					//					CountryWarChengMenManager.testAddChengMen();
 					break;
-				case "17": //H
+				case "8": //F 好友
+					/*if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
+					{
+					AppManager.hideApp(AppConstant.MULTY_PANL);
+					}
+					else if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType==EnumMapType.MAP_TYPE_NORMAL)
+					{
+					AppManager.showApp(AppConstant.MULTY_PANL);
+					}*/
+					
+					
+					//					if (!ClientConfig.isBanShu)
+					//						AppManager.showApp(AppConstant.FRIEND_PANEL);
+					break;
+				case "1": //G 战魂
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,true,false);
+					break;
+				case "17": //H 帮派
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI,null,true,false);
 					break;
-				case "18": //I
+				case "18": //I 显示掉落
 					DropGoodsManager.getInstance().showScaneName(isdown);
-//					CountryWarChengMenManager.testRemoveChengMen();
-					//FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MERIDIAN,null,true,false);
+					break;
+				case "11": //J 排行榜
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_LEVELRANK,null,true,false);
+					break;
+				case "20": //K 武学
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,true,false);
+					break;
+				case "7": //L 任务
+					AppManager.showApp(AppConstant.TASK_PANEL);
+					break;
+				case "3": //M 地图
+					AppManager.showApp(AppConstant.BIGMAP_PANEL);
+					break;
+				case "23": //N 坐骑
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,true,false);
+					break;
+				case "10": //O 设置
+					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					break;
+				case "9": //P 队伍
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUDUI,null,true,false);
+					break;
+				case "12": //Q 无
+//					AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();
 					break;
+				case "67": //S 商城
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_SHOP,null,true,false);
+					break;
 				case "29": //T 坐骑上下马
-//						MountManager.setMountRide();
 					HorseManager.instance().setMountRide();
 					break;
 				case "30": //U
 					break;
+				case "6": //V pk
+					//AppManager.showApp(AppConstant.MOUNT_PANEL);
+					//					PKMamager.ChangeNextPkModel();
+					break;
 				case "33": //X 心法
-					//SitManager.sit();
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_XINFA,null,true,false);
 					break;
 				case "34": //Y
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,null,true,false);
+					break;
+				case "2": //Z 
+					
 					break;
 				case "50": //显示掉落物图标
 					//DropGoodsManager.getInstance().showScaneName(isdown);
@@ -164,14 +162,11 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "60": //- 
 					break;
-				case "66":
+				case "66": //~ 
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();
 					PickAutoManager.getInstance().autoPickCtrl.DoShortcutPick();
 					break;
-				case "20":
-					//MainRoleManager.autoPickCtrl.DoShortcutPick();
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,true,false);
-					break;
+			
 			}
 		}
 
