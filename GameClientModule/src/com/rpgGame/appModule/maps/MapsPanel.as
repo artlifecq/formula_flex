@@ -92,6 +92,8 @@ package com.rpgGame.appModule.maps
 		{
 			_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
+			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
+			
 			if (gTime == null)
 			{
 				gTime = new GameTimer("MapsPanel", 100, 0, onDrawPath);
@@ -108,6 +110,7 @@ package com.rpgGame.appModule.maps
 		{
 			_bigMap.skinSpr.removeEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
+			EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
 			if (gTime != null)
 			{
 				gTime.stop();
@@ -131,6 +134,10 @@ package com.rpgGame.appModule.maps
 				_bigMap.showTips(touchOldPoint.x,touchOldPoint.y);
 				
 			}
+		}
+		private function onDrawPathRoad() : void 
+		{
+			_bigMap.onDrawPathRoad();
 		}
 		
 		private var touch : Touch;

@@ -320,11 +320,14 @@ package com.rpgGame.app.manager.role
 							MouseCursorController.showFinger();
 							break;
 						case SceneCharType.MONSTER:
-							var monsterData : MonsterData = _mouseOverRole.data as MonsterData;
-							if (monsterData != null&&monsterData.monsterData.q_monster_type==4)//npc显示对话鼠标样式
-							{
-								MouseCursorController.showTalk();
-							}
+//							var monsterData : MonsterData = _mouseOverRole.data as MonsterData;
+//							if (monsterData != null&&monsterData.monsterData.q_monster_type==4)//npc显示对话鼠标样式
+//							{
+//								MouseCursorController.showTalk();
+//							}
+							break;
+						case SceneCharType.NPC:
+							MouseCursorController.showTalk();
 							break;
 						case SceneCharType.COLLECT:
 							MouseCursorController.showCollect();

@@ -12,6 +12,7 @@ package   away3d.ribbon
 	import away3d.core.base.Object3D;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.TextureMaterial;
+	import away3d.premium.heap.MemoryItem;
 	import away3d.primitives.PlaneGeometry;
 	
 	
@@ -240,11 +241,12 @@ package   away3d.ribbon
 				var up:Vector3D = _look.crossProduct(_right);
 				up.normalize();
 				
-				var data:ByteArray = this.geometry.subGeometries[0].vertexData;
+				var data:MemoryItem = this.geometry.subGeometries[0].vertexData;
 				var stride:uint = this.geometry.subGeometries[0].vertexStride;
 				
 				var i:int;
 				
+				var dataPos:int;
 				var pos:Vector3D;
 				for(i = 0; i < _segmentCount + 1; i ++)
 				{
@@ -282,14 +284,18 @@ package   away3d.ribbon
 					var index1:int = i * stride + (_segmentCount+1)*stride;
 					pos1 = _positions1[i];
 					pos2 = _positions2[i];
-					data.position = index0<<2;
-					data.writeFloat(pos1.x);
-					data.writeFloat(pos1.y);
-					data.writeFloat(pos1.z);
-					data.position = index1<<2;
-					data.writeFloat(pos2.x);
-					data.writeFloat(pos2.y);
-					data.writeFloat(pos2.z);
+					dataPos = (index0 << 2);
+					data.writeFloat(pos1.x, dataPos);
+					dataPos = (dataPos + 4);
+					data.writeFloat(pos1.y, dataPos);
+					dataPos = (dataPos + 4);
+					data.writeFloat(pos1.z, dataPos);
+					dataPos = (index1 << 2);
+					data.writeFloat(pos2.x, dataPos);
+					dataPos = (dataPos + 4);
+					data.writeFloat(pos2.y, dataPos);
+					dataPos = (dataPos + 4);
+					data.writeFloat(pos2.z, dataPos);
 				}
 				
 				CompactSubGeometry(geometry.subGeometries[0]).updateData(data);
