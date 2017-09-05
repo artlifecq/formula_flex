@@ -95,7 +95,7 @@ package com.rpgGame.appModule.maps
 				}
 				if(releData)
 				{
-					if(nameSplit[2]==1)
+					if(nameSplit[3]==1)
 					{
 						_bigMap.roleWalk(releData.x,releData.y,100);
 					}

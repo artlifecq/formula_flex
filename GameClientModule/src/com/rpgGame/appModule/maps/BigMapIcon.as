@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.maps
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import feathers.controls.Label;
@@ -56,9 +58,12 @@ package com.rpgGame.appModule.maps
 				case SceneCharType.MONSTER:
 					setMonsterIco();
 					break;
+				case SceneCharType.COLLECT:
+					setNpcIco();
+					break;
 				case SceneCharType.NPC:
-					//setNpcIco();
-					setMonsterIco();
+					setNpcIco();
+					//setMonsterIco();
 					break;
 			}
 		}
@@ -75,13 +80,17 @@ package com.rpgGame.appModule.maps
 			this.addChild(this._ico);
 			this.touchable = false;
 			*/
-			var temp:SkinnableContainer = new SkinnableContainer();
+			
+			/*var temp:SkinnableContainer = new SkinnableContainer();
 			temp.x=-14;
 			temp.y=-30;
 			var skin:Locations = new Locations();
 			temp.skin=skin;
-			addChild(temp);
+			addChild(temp);*/
 			
+			var eftC:Inter3DContainer=new Inter3DContainer();
+			eftC.playInter3DAt(ClientConfig.getEffect("ui_ditubiaoji"),0,0,0);
+			addChild(eftC);
 		}
 		/**设置为传送点图标*/
 		private function settTranportsIco():void
@@ -104,7 +113,7 @@ package com.rpgGame.appModule.maps
 			temp.x=-62;
 			temp.y=-30;
 			var skin:ThansName = new ThansName();
-			skin.lbl_name.htmlText=_icnName;
+			skin.lbl_name.htmlText="通往"+_icnName;
 			temp.skin=skin;
 			icoName=skin.lbl_name;
 			addChild(temp);
