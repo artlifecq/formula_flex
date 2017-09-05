@@ -1,23 +1,18 @@
 ﻿package com.rpgGame.app.manager
 {
-    import com.gameClient.utils.JSONUtil;
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.pop.UIPopManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.ui.OpenPanel;
     import com.rpgGame.core.app.AppConstant;
-    import com.rpgGame.core.app.AppInfo;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.FunctionOpenEvent;
-    import com.rpgGame.coreData.cfg.FuncionBarCfgData;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
-    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+    import com.rpgGame.coreData.cfg.PanelCfgData;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
+    import com.rpgGame.coreData.clientConfig.Q_panel;
     import com.rpgGame.coreData.enum.EmFunctionID;
-    
-    import flash.net.URLRequest;
-    import flash.net.navigateToURL;
     
     import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
@@ -135,7 +130,7 @@
 			return level<=MainRoleManager.actorInfo.totalStat.level;
 		}
 		
-		public static function checkOpenBuyFunId(id:int):Boolean
+		public static function checkOpenByFunId(id:int):Boolean
 		{
 			var func:Q_newfunc = NewFuncCfgData.getFuncCfg(id);
 			if(func == null)
@@ -145,104 +140,74 @@
 		
 		
 		/**
-		 * 打开功能面板 
-		 * @param info
-		 * @return 
+		 *通过功能id打开面板 
+		 * @param id
 		 * 
 		 */
-		public static function openFunctionId(info:Q_newfunc,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
+		public static function openPanelByFuncID(id:int,data:Object=null):void
 		{
-			if(info==null)
+			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(id);
+			if(!funcCfg){
+				return;
+			}
+			var panelCfg:Q_panel=PanelCfgData.getPanelCfg(funcCfg.q_open_panel);
+			if(!panelCfg){
+				return;
+			}
+			
+			var minlevel:int =funcCfg.q_level;
+			if(!checkOpenByLevel(minlevel))//未达到开启等级
+			{
+				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
 				return ;
-//			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
-//			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
-//			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
+			}
+			
+			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 		}
 		
-		public static function openAppPaneById(id:int,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
-		{
-			/*var info:Q_newfunc = NewFuncCfgData.getdataById(id);
-			if(info==null)
-			{
-				NoticeManager.mouseFollowNotify("未找到配置:"+id);
-				return ;
-			}
-			if(!checkOpenByLevel(info.q_level))
-			{
-				if(isError)
-					NoticeManager.showNotifyById(90203,null,info.q_string_name,info.q_level);
-				return ;
-			}
-			openFunctionId(info,data,isAutoHide,isError);*/
-		}
 		
-		public static function getAppInfoByFunctionId(id:String):AppInfo
+		/**
+		 *通过功能信息打开面板 
+		 * @param info
+		 * 
+		 */
+		public static function openPanelByFuncInfo(funcCfg:Q_newfunc,data:Object=null):void
 		{
-			/*var info:Q_newfunc = NewFuncCfgData.getdataById(id);
-			if(info==null)
+			var minlevel:int =funcCfg.q_level;
+			if(!checkOpenByLevel(minlevel))//未达到开启等级
 			{
-				return null;
+				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
+				return ;
 			}
-			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
-			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
-			if(modeInfo == null)*/
-			return null;
-//			return AppConstant.getAppinfoByAppName( modeInfo.clickarg);
+			
+			var panelCfg:Q_panel=PanelCfgData.getPanelCfg(funcCfg.q_open_panel);
+			if(!panelCfg){
+				return;
+			}
+			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 		}
 		
 		/**
-		 * 打开面板
-		 * @param info
-		 * @param id 功能id
-		 * @param data
-		 * @param isAutoHide
+		 * 通过面板信息打开
+		 * @param panelCfg
 		 * 
 		 */
-		public static function openModeByInfo(info:Q_newfunc,id:int= 0,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
+		public static function openModeByPanelInfo(panelCfg:Q_panel,data:Object=null):void
 		{
-			if(info.q_btn_panel==0)
+			if(!panelCfg){
+				return;
+			}
+			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
+			if(!funcCfg){
+				return;
+			}
+			var minlevel:int =funcCfg.q_level;
+			if(!checkOpenByLevel(minlevel))//未达到开启等级
 			{
-				NoticeManager.showNotifyById(20);
+				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
 				return ;
 			}
-			var minlevel:int =info.q_level;
-			if(!checkOpenByLevel(minlevel))
-			{
-				if(isError)
-					NoticeManager.showNotifyById(90203,null,info.q_id,minlevel);
-				return ;
-			}
-			var openId:int=id?id:0;
-		/*	if(info.clickType==1)
-			{
-				if(info.clickarg=="")
-					return ;
-				if(isAutoHide)
-					AppManager.showApp(info.clickarg,data,openId);
-				else
-					AppManager.showAppNoHide(info.clickarg,data,openId);
-			}else if(info.clickType ==3){
-				if(info.id == 105){
-					if(RedRewardManager.instance().canGetReward)
-					{
-						AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
-					}else{
-						AppManager.showAppNoHide(AppConstant.REDREWARD_PANLE);
-					}
-				}else if(info.id == 20){
-					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5||Mgr.hunyinMgr.marriageInfos.state==10)
-					{
-						AppManager.showApp(AppConstant.HUNYIN_QIUHUN);
-					}
-					else{
-						AppManager.showApp(AppConstant.HUNYIN_JIEHUN);
-					}
-				}		
-			}
-			else if(info.clickType ==4) //超链接
-			{
-				navigateToURL(new URLRequest(info.clickarg),"_blank");
-			}*/
+			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 		}
     }
 }

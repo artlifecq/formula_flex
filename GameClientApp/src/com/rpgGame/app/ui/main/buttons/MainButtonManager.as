@@ -7,10 +7,11 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
 	
 	import away3d.log.Log;
 	
@@ -35,19 +36,19 @@ package com.rpgGame.app.ui.main.buttons
 			_classMap = new  HashMap();
 			
 			//主界面
-			regClass(1,ButtonSkin_renwu);
-			regClass(2,ButtonSkin_jinjie);
-			regClass(3,ButtonSkin_zhuangbei);
-			regClass(4,ButtonSkin_wuxue);
-			regClass(5,ButtonSkin_zhanhun);
-			regClass(6,ButtonSkin_bangpai);
-			regClass(7,ButtonSkin_shangcheng);
-			regClass(8,ButtonSkin_zudui);
-			regClass(9,ButtonSkin_meiren);
+			regClass(EmMainBtnID.RENWU,ButtonSkin_renwu);
+			regClass(EmMainBtnID.JINJIE,ButtonSkin_jinjie);
+			regClass(EmMainBtnID.DUANZAO,ButtonSkin_zhuangbei);
+			regClass(EmMainBtnID.WUXUE,ButtonSkin_wuxue);
+			regClass(EmMainBtnID.ZHANHUN,ButtonSkin_zhanhun);
+			regClass(EmMainBtnID.BANGPAI,ButtonSkin_bangpai);
+			regClass(EmMainBtnID.SHANGCHENG,ButtonSkin_shangcheng);
+			regClass(EmMainBtnID.ZUDUI,ButtonSkin_zudui);
+			regClass(EmMainBtnID.MEIREN,ButtonSkin_meiren);
 			
-			var btnLists:Array=NewFuncCfgData.getAllFuncList();
+			var btnLists:Array=MainBtnCfgData.getAllBtnList();
 			for(var i:int=0;i<btnLists.length;i++){
-				var info:Q_newfunc=btnLists[i];
+				var info:Q_mainbtn=btnLists[i];
 				if(info.q_btn_res){
 					regClass(info.q_id,info.q_btn_res);
 				}
@@ -60,19 +61,26 @@ package com.rpgGame.app.ui.main.buttons
 		
 		public static function getButtonByInfo(info:Q_newfunc):IOpen
 		{
+			if(!info){
+				return null;
+			}
 			var level:int = info.q_level;
 			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
 			var button:IOpen = _initializeMap.getValue(info.q_id);
 			if(button == null)
 			{
-				var styleName:*= _classMap.getValue(info.q_id);
+				if(info.q_open_btn==0){
+					return null;
+				}
+				var btnInfo:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(info.q_open_btn);
+				var styleName:*= _classMap.getValue(btnInfo.q_id);
 				if(styleName==null)
 				{
 					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.q_id);
 					return null;
 				}
-				button = getBtnById(info.q_id);
+				button = getBtnById(btnInfo.q_id);
 				button.info = info;
 				if(styleName is String){
 					if((button as ActivityButtonBase)){
@@ -91,44 +99,45 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			
 			switch(id){
-				case 1:
+				case EmMainBtnID.RENWU:
 					return new MainButton_Role();
-				case 2:
+				case EmMainBtnID.JINJIE:
 					return new MainButton_Mount();
-				case 3:
+				case EmMainBtnID.DUANZAO:
 					return new MainButton_Equip();
-				case 4:
+				case EmMainBtnID.WUXUE:
 					return new MainButton_WuXue();
-				case 5:
+				case EmMainBtnID.ZHANHUN:
 					return new MainButton_ZhanHun();
-				case 6:
+				case EmMainBtnID.ZUDUI:
 					return new MainButton_Gang();
-				case 7:
+				case EmMainBtnID.SHANGCHENG:
 					return new MainButton_ShangCheng();
-				case 8:
+				case EmMainBtnID.ZUDUI:
 					return new MainButton_Team();
-				case 9:
+				case EmMainBtnID.MEIREN:
 					return new MainButton_MeiRen();
-				case 101:
-				case 102:
-				case 103:
-				case 104:
-				case 120:
+				case EmMainBtnID.HUODONG:
+				case EmMainBtnID.LUNJIAN:
+				case EmMainBtnID.FUBEN:
+				case EmMainBtnID.ZHANCHANG:
+				case EmMainBtnID.FANGCHENMI:
 					return new ActivityButton();
-				case 105:
+				case EmMainBtnID.HONGBAO:
 					return new ActivityRedRewardButton();
-				case 300:
+				case EmMainBtnID.PIPEIDUILIE:
 					return new MultyActivityButton();
-				case 301:
-				case 302:
-				case 303:
-				case 304:
-				case 305:
-				case 306:
-				case 307:
-				case 308:
-				case 309:
-				case 310:
+				case EmMainBtnID.SHIJIEBOSS:
+				case  EmMainBtnID.DIANFENG:
+				case  EmMainBtnID.DIANFENG:
+				case EmMainBtnID.HUBAO:
+				case EmMainBtnID.JIUCENG:
+				case EmMainBtnID.HUANGCHENG:
+				case EmMainBtnID.WANGCHENG:
+				case EmMainBtnID.WEICHENG:
+				case EmMainBtnID.QINLINGMIBAO:
+				case EmMainBtnID.TIANJIANGLIJING:
+				case EmMainBtnID.JIXIANTIAOZHAN:
 					return new LimitTimeActivityButton();
 			}
 			

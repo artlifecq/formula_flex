@@ -46,6 +46,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MibaoCfgData;
@@ -284,6 +285,7 @@ package com.rpgGame.app.data
 			
 			
 			//窗口信息配置
+			MainBtnCfgData.setup(dic[ConfigClassRegister.Q_mainbtn]);
 			PanelCfgData.setup(dic[ConfigClassRegister.Q_panel]);
 			NewFuncCfgData.setup(dic[ConfigClassRegister.Q_newfunc]);
 			//心法

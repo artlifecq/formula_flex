@@ -79,9 +79,9 @@ package com.rpgGame.app.ui.main.navigation
 					break;
 				case _skin.btn_n1:
 					if(GuildManager.instance().haveGuild)
-						FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_INFO);
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO);
 					else
-						FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_LIEBIAO);
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_LIEBIAO);
 					break;
 			}
 			close();

@@ -51,13 +51,13 @@ package com.rpgGame.appModule.role
 		{
 			switch(type){
 				case 1:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_QIANGHUA,null,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_QIANGHUA);
 					break;
 				case 2:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,3,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ROLE,3);
 					break;
 				case 3:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,4,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ROLE,4);
 					break;
 			}
 		}

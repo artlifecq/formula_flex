@@ -172,7 +172,7 @@ package com.rpgGame.app.cmdlistener
 			if(info.actCfg.q_show_notice==1){
 				if(info.actCfg.q_notice_trans){
 					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
-					if(FunctionOpenManager.checkOpenBuyFunId(list[1]))
+					if(FunctionOpenManager.checkOpenByFunId(list[1]))
 					{
 						AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 					}

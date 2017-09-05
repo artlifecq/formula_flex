@@ -75,14 +75,14 @@ package com.rpgGame.app.controller.keyboard
 					AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
 				case "5": //C 人物
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ROLE);
 					break;
 				case "6": //V pk
 						//AppManager.showApp(AppConstant.MOUNT_PANEL);
 //					PKMamager.ChangeNextPkModel();
 					break;
 				case "23": //N 坐骑
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUOQI);
 					break;
 				case "7": //L 任务
 						AppManager.showApp(AppConstant.TASK_PANEL);
@@ -102,7 +102,7 @@ package com.rpgGame.app.controller.keyboard
 //						AppManager.showApp(AppConstant.FRIEND_PANEL);
 					break;
 				case "9": //P 队伍
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUDUI,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUDUI);
 					break;
 				case "10": //O 商城
 					/*if (!ClientConfig.isBanShu)
@@ -116,18 +116,18 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
 				case "13": //D 强化
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_QIANGHUA,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_QIANGHUA);
 					break;
 				case "14": //E
 //					CountryWarChengMenManager.testAddChengMen();
 					break;
 				case "17": //H
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI);
 					break;
 				case "18": //I
 					DropGoodsManager.getInstance().showScaneName(isdown);
 //					CountryWarChengMenManager.testRemoveChengMen();
-					//FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MERIDIAN,null,true,false);
+					//FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_MERIDIAN);
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();
@@ -140,10 +140,10 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "33": //X 心法
 					//SitManager.sit();
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_XINFA,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_XINFA);
 					break;
 				case "34": //Y
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JUEXUE);
 					break;
 				case "50": //显示掉落物图标
 					//DropGoodsManager.getInstance().showScaneName(isdown);
@@ -170,7 +170,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "20":
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,true,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JINENG);
 					break;
 			}
 		}

@@ -313,27 +313,27 @@ package com.rpgGame.app.manager.goods
 					{
 						case 1: //坐骑
 						{
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUOQI);
 							return;
 						}
 						case 2: //战旗
 						{
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANQI,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANQI);
 							return;
 						}
 						case 3: //婚姻
 						{
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HUNYIN,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HUNYIN);
 							return;
 						}
 						case 4://美人
 						{
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MEIREN,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_MEIREN);
 							return;
 						}
 						default: //默认坐骑
 						{
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUOQI);
 							return;
 						}
 					}
@@ -345,14 +345,14 @@ package com.rpgGame.app.manager.goods
 				{
 					var info:ComboItemInfo=new ComboItemInfo();
 					info.sourceId=item.cfgId;
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HECHENG,info,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HECHENG,info);
 					return;
 				}
 				case GoodsType.STRENGTH:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_QIANGHUA,null,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_QIANGHUA);
 					return;
 				case GoodsType.MERIDIANSTONE:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MERIDIAN,null,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_MERIDIAN);
 					return;
 			/*	case GoodsType.CHAT:
 					return;

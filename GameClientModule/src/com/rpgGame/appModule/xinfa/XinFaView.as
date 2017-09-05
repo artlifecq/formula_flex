@@ -478,7 +478,7 @@ package com.rpgGame.appModule.xinfa
 		{
 			// TODO Auto Generated method stub
 			//AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:EmFunctionID.EM_HECHENG});
-			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HECHENG);
+			FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HECHENG);
 		}
 		
 	

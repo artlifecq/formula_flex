@@ -11,6 +11,8 @@
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.cfg.MainBtnCfgData;
+    import com.rpgGame.coreData.clientConfig.Q_mainbtn;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     
     import feathers.controls.ButtonState;
@@ -46,7 +48,8 @@
         private var _effect3D:InterObject3D;
 		protected var _openState:Boolean=true;
 		protected var _btnRes:String;
-		private var _info:Q_newfunc;
+		protected var _btnInfo:Q_mainbtn;
+		private var _funcInfo:Q_newfunc;
 		
 		protected static var stateToName:HashMap;
 		protected static var stateToIndex:HashMap;
@@ -68,12 +71,13 @@
 		
 		public function get info():Q_newfunc
 		{
-			return _info;
+			return _funcInfo;
 		}
 		
 		public function set info(value:Q_newfunc):void
 		{
-			_info = value;
+			_funcInfo = value;
+			_btnInfo=MainBtnCfgData.getMainBtnCfg(_funcInfo.q_open_btn);
 		}
 		
 		public function canOpen():Boolean
@@ -81,7 +85,7 @@
 			if(!_openState){
 				return false;
 			}
-			if(_info.q_level>MainRoleManager.actorInfo.totalStat.level)
+			if(_funcInfo.q_level>MainRoleManager.actorInfo.totalStat.level)
 				return false;
 			return true;
 		}
@@ -150,16 +154,16 @@
 		}
         public function playEffect():void
         {
-			if(!_info){
+			if(!_btnInfo){
 				return;
 			}
-			if(!_info.q_btn_eft)
+			if(!_btnInfo.q_btn_eft)
 				return ;
 			if(this.parent == null)
 				return ;
             if (!_effect3D)
             {
-                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.q_btn_eft), 42, 45, 0);
+                _effect3D = playInter3DAt(ClientConfig.getEffect(_btnInfo.q_btn_eft), 42, 45, 0);
             }
             else
             {
@@ -236,14 +240,14 @@
         {
 			_openState=true;
 			onActivityData(data);
-			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_info);
+			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_funcInfo);
         }
 
         public function onActivityClose():void
         {
 			_openState=false;
 			clearTime();
-			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_info);
+			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_funcInfo);
 			this.onTextColse();
         }
 		

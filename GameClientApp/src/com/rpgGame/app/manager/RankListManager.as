@@ -104,7 +104,7 @@ package com.rpgGame.app.manager
 		public function refeashWorshipInfo(topInfo:TopInfo):void
 		{
 			_worshTopInfo = topInfo;
-			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_WORSHIP,topInfo);
+			FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_WORSHIP,topInfo);
 		}
 		
 		private var _addExp:int;

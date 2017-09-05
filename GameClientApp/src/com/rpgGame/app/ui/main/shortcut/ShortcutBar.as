@@ -279,7 +279,7 @@ package com.rpgGame.app.ui.main.shortcut {
 					autoBar.guajiClick();
 					break;		
 				case _skin.btnJieHun:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HUNYIN);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HUNYIN);
 					break;
 				//				case _skin.btnBackpack://背包
 				//					AppManager.showApp(AppConstant.BACK_PACK_PANEL);

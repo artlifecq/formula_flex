@@ -8,7 +8,9 @@
 	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.enum.EnumFunctionBtnType;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -67,10 +69,11 @@
 			var button:IOpen;
 			var len:int;
 			var starX:int;
-			var funinfo:Q_newfunc;
+			var btnInfo:Q_mainbtn;
+			var funcInfo:Q_newfunc;
 			var width:int;
 			for(var i:int=0;i<length;i++){
-				var list:Vector.<Q_newfunc>=NewFuncCfgData.getFuncBtnList(ACT_TYPES[i]);
+				var list:Vector.<Q_mainbtn>=MainBtnCfgData.getBtnListByType(ACT_TYPES[i]);
 				len=list.length;
 				if(len<=0){
 					continue;
@@ -78,10 +81,11 @@
 				starX = SIZE_WIDTH;
 				width = GRID_WIDTH[i];
 				for(var j:int=0;j<len;j++){
-					funinfo = list[j] as Q_newfunc;
-					if(q_map_zones==1&&funinfo.q_btn_zone==q_map_zones)
+					btnInfo = list[j] as Q_mainbtn;
+					if(q_map_zones==1&&btnInfo.q_show_zone==q_map_zones)
 						continue;
-					button = MainButtonManager.getButtonByInfo(funinfo);
+					funcInfo=NewFuncCfgData.getFuncCfgByBtnId(btnInfo.q_id);
+					button = MainButtonManager.getButtonByInfo(funcInfo);
 					if(button!=null&&button.canOpen())
 					{
 						button.y = i*GRID_HEIGHT;

@@ -94,17 +94,17 @@
             {
                 case ui.btnBar:
                     onButtonClick();
-					FunctionOpenManager.openModeByInfo(info,info.q_btn_panel);
+					FunctionOpenManager.openPanelByFuncInfo(info);
                     return;
             }
         }
 
         protected function onButtonClick():void
         {
-			if(!info){
+			if(!_btnInfo){
 				return;
 			}
-			if(info.q_btn_eft)
+			if(_btnInfo.q_btn_eft)
 			{
 				stopEffect();
 				TweenLite.delayedCall(600,playEffect);

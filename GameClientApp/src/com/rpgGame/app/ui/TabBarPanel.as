@@ -63,7 +63,7 @@ package com.rpgGame.app.ui
 			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle);
 			item.tabKey=funcKey;
 			var fundata:Q_newfunc = NewFuncCfgData.getFuncCfg(item.tabKey);
-			var panelData:Q_panel=PanelCfgData.getPanelCfg(fundata.q_btn_panel);
+			var panelData:Q_panel=PanelCfgData.getPanelCfg(fundata.q_open_panel);
 			if(panelData!=null&&panelData.show_tab_name==1)
 			{
 				item.text = panelData.tab_name;

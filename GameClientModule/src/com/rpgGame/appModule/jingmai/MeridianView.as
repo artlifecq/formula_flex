@@ -10,17 +10,13 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.appModule.jingmai.sub.JinMaiBtnEffect;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMap;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MeridianEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.IRewardCheck;
 	import com.rpgGame.core.ui.tip.RTNodeID;
-	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -224,7 +220,7 @@ package com.rpgGame.appModule.jingmai
 		{
 			// TODO Auto Generated method stub
 			//AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:EmFunctionID.EM_HECHENG});
-			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HECHENG);
+			FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HECHENG);
 		}
 		
 		private function tweenCompleteCallBack(map:*):void

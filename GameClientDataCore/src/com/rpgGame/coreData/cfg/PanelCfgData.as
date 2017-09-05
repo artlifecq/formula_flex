@@ -7,7 +7,7 @@ package com.rpgGame.coreData.cfg
 	import org.client.mainCore.ds.HashMap;
 
 	/**
-	 * 
+	 * 游戏面板表.xlsx
 	 * 游戏面板配置数据
 	 * @author dik
 	 * 

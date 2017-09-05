@@ -4,7 +4,9 @@ package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.enum.EnumFunctionBtnType;
 	
@@ -44,13 +46,14 @@ package com.rpgGame.app.ui.main.navigation {
 		
 		private function refeashButton(data:*=null):void
 		{
-			var buttoninfos:Vector.<Q_newfunc> = NewFuncCfgData.getFuncBtnList(EnumFunctionBtnType.MAIN_MENU);
+			var buttoninfos:Vector.<Q_mainbtn> = MainBtnCfgData.getBtnListByType(EnumFunctionBtnType.MAIN_MENU);
 			var length:int = buttoninfos.length;
 			var index:int = 0;
 			_content.reset();
 			for(var i:int =0;i<length;i++)
 			{
-				var button:IOpen = MainButtonManager.getButtonByInfo(buttoninfos[i]);
+				var funcInfo:Q_newfunc=NewFuncCfgData.getFuncCfgByBtnId(buttoninfos[i].q_id);
+				var button:IOpen = MainButtonManager.getButtonByInfo(funcInfo);
 				if(button!=null&&button.canOpen())
 				{
 					_content.addButton(button);

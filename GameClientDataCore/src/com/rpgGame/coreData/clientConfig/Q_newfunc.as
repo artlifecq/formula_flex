@@ -26,22 +26,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_need_notice:int;
 		 /**  功能开启资源目录 */
 		public var q_res_dir:String;
-		 /**  开启的按钮 */
+		 /**  开启的面板id */
+		public var q_open_panel:int;
+		 /**  开启的按钮id */
 		public var q_open_btn:int;
-		 /**  开启的按钮类型 */
-		public var q_btn_type:int;
-		 /**  点按钮打开的面板id */
-		public var q_btn_panel:int;
-		 /**  按钮的资源 */
-		public var q_btn_res:String;
-		 /**  按钮排序id */
-		public var q_btn_order:int;
-		 /**  按钮特效 */
-		public var q_btn_eft:String;
-		 /**  按钮提示 */
-		public var q_btn_tips:String;
-		 /**  按钮在副本展示 */
-		public var q_btn_zone:int;
 
 	}
 }

@@ -334,7 +334,7 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.SHOW_PANEL_TYPE:
 					var panelID:int=int(unitData.linkData);
 					//					var id:String=ChatUtil.getPanel(t);
-					FunctionOpenManager.openAppPaneById(panelID,null,false);
+					FunctionOpenManager.openPanelByFuncID(panelID);
 					//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
@@ -450,7 +450,7 @@ package com.rpgGame.app.richText
 					{
 //						var guildId:Number=parseInt(unitData.linkData);
 						id = new long(unitData.linkData);
-						FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI,id,false);
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI,id);
 					}else{
 						NoticeManager.showNotifyById(60218);
 					}			

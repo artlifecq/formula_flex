@@ -4,6 +4,8 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import away3d.events.Event;
@@ -15,6 +17,7 @@ package com.rpgGame.app.ui.main.buttons
 	public class MainButtonBases extends IconButton implements IOpen
 	{
 		private var _info:Q_newfunc;
+		protected var _btnInfo:Q_mainbtn;
 		
 		protected var _openState:Boolean=true;
 	
@@ -27,6 +30,7 @@ package com.rpgGame.app.ui.main.buttons
 		public function set info(value:Q_newfunc):void
 		{
 			_info = value;
+			_btnInfo=MainBtnCfgData.getMainBtnCfg(_info.q_open_btn);
 		}
 		
 		public function canOpen():Boolean
@@ -93,9 +97,9 @@ package com.rpgGame.app.ui.main.buttons
 		
 		override protected function initialize():void
 		{
-			if (_info.q_btn_tips)
+			if (_btnInfo.q_btn_tips)
 			{
-				TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips(_info.q_btn_tips));
+				TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips(_btnInfo.q_btn_tips));
 			}
 		}
 		override protected function changeState(state:String):void
@@ -115,7 +119,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		protected function triggeredHanadler():void
 		{
-			FunctionOpenManager.openModeByInfo(_info,_info.q_btn_panel);
+			FunctionOpenManager.openPanelByFuncInfo(_info);
 		}
 		
 		private var _tweenmax:TweenMax;

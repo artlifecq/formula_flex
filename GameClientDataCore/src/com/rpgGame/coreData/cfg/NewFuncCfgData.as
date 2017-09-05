@@ -14,48 +14,55 @@ package com.rpgGame.coreData.cfg
 	public class NewFuncCfgData
 	{
 		private static var _map:HashMap;
+		private static var _btnMap:HashMap;
+		private static var _panelMap:HashMap;
 		
 		private static var _noticeList:Vector.<Q_newfunc>;
-		private static var _btnListMap:HashMap;
 		
 		public static function setup( byte:ByteArray ):void
 		{
 			var _list:Array = byte.readObject();
 			_map = new HashMap();
+			_btnMap=new HashMap();
+			_panelMap=new HashMap();
 			_noticeList=new Vector.<Q_newfunc>();
-			_btnListMap=new HashMap();
 			for each ( var info:Q_newfunc in _list )
 			{
 				_map.add( info.q_id.toString(), info);
 				if(info.q_need_notice!=0){
 					_noticeList.push(info);
 				}
-				if(info.q_open_btn){
-					var list:Vector.<Q_newfunc>=_btnListMap.getValue(info.q_btn_type);
-					if(!list){
-						list=new Vector.<Q_newfunc>();
-						_btnListMap.add(info.q_btn_type,list);
-					}
+				if(info.q_open_btn!=0){
+					_btnMap.add(info.q_open_btn,info);
+				}
+				if(info.q_open_panel!=0){
+					_panelMap.add(info.q_open_panel,info);
 				}
 			}
 			
 			_noticeList.sort(sortByLv);
-			
-			var typelist:Array=_btnListMap.getValues();
-			for(var i:int=0;i<typelist.length;i++){
-				list=typelist[i];
-				list.sort(sortByOrder);
-			}
 		}
 		
-		private static function sortByOrder(a:Q_newfunc,b:Q_newfunc):int
+		/**
+		 *根据按钮id获取新功能配置 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function getFuncCfgByBtnId(id:int):Q_newfunc
 		{
-			if(a.q_btn_order<b.q_btn_order){
-				return -1;
-			}else if(a.q_btn_order>b.q_btn_order){
-				return 1;
-			}
-			return 0;
+			return _btnMap.getValue(id);
+		}
+		
+		/**
+		 *根据面板id获取功能配置 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function getFuncCfgByPanelId(id:int):Q_newfunc
+		{
+			return _panelMap.getValue(id);
 		}
 		
 		private static function sortByLv(a:Q_newfunc,b:Q_newfunc):int
@@ -97,17 +104,6 @@ package com.rpgGame.coreData.cfg
 		public static function getFuncCfg(id:int):Q_newfunc
 		{
 			return _map.getValue(id);
-		}
-		
-		/**
-		 *获取功能按钮配置 
-		 * @param type
-		 * @return 
-		 * 
-		 */
-		public static function getFuncBtnList(type:int):Vector.<Q_newfunc>
-		{
-			return _btnListMap.getValue(type);
 		}
 	}
 }

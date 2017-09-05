@@ -53,7 +53,7 @@ package com.rpgGame.appModule.fightsoul
 				switch(path.q_type)
 				{
 					case 1:
-						FunctionOpenManager.openFunctionId(newFunc);
+						FunctionOpenManager.openPanelByFuncInfo(newFunc);
 						break;
 					case 2:
 						if(path.q_id==1)
@@ -75,7 +75,7 @@ package com.rpgGame.appModule.fightsoul
 				switch(path.q_type)
 				{
 					case 1:
-						FunctionOpenManager.openFunctionId(newFunc);
+						FunctionOpenManager.openPanelByFuncInfo(newFunc);
 						break;
 					case 2:
 						if(path.q_id==1)

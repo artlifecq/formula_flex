@@ -93,7 +93,7 @@ package com.rpgGame.app.ui.main.shortcut
 			else{
 				NoticeManager.showNotifyById(7012);
 //				AppManager.showApp(AppConstant.SKILL_PANL,null,"lostskill");
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,qopenData);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JUEXUE,qopenData);
 			}
 			playEnd();
 		}

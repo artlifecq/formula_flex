@@ -130,7 +130,7 @@ package com.rpgGame.app.manager
 			if (FunctionOpenManager.functionIsOpen(EmFunctionID.EM_TOWERS)) 
 			{
 				reqEnterTower();
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_TOWERS);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_TOWERS);
 			}
 			else
 			{
