@@ -5,6 +5,7 @@ package com.rpgGame.core.view.ui.tip.vo
 		private var _zhanli:int;
 		private var _isTong:Boolean;
 		private var _arr:Array;
+		private var _guanqiaName:String;
 		
 		public function set zhanli(num:int):void
 		{
@@ -21,6 +22,11 @@ package com.rpgGame.core.view.ui.tip.vo
 			_arr=str;
 		}
 		
+		public function set guanqiaName(name:String):void
+		{
+			_guanqiaName=name;
+		}
+		
 		public function get zhanli():int
 		{
 			return _zhanli;
@@ -34,6 +40,11 @@ package com.rpgGame.core.view.ui.tip.vo
 		public function get prize():Array
 		{
 			return _arr;
+		}
+		
+		public function get guanqiaName():String
+		{
+			return _guanqiaName;
 		}
 	}
 }

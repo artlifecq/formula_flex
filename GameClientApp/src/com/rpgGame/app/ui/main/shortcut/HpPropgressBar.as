@@ -194,7 +194,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(_diection==1)
 			{
 				sr3D.x= 700;
-				sr3D.y=_display.y+_display.height-10;
+				sr3D.y=_display.y+_display.height;
 			}else{
 				sr3D.x= 127;
 				sr3D.y=_display.y+_display.height;

@@ -432,7 +432,7 @@ package com.rpgGame.appModule.pet
 				{
 					_skin.btnTiaozhan.label="挑战";
 					_skin.gBuy.visible=true;
-					_skin.lbContent.text="一次性通关副本可获得";
+					_skin.lbContent.text="一次性通关副本可激活本美人";
 					tipStr="点击进入挑战，一次性通关所有关卡可获得美人";
 				}
 			}
@@ -568,12 +568,14 @@ package com.rpgGame.appModule.pet
 				price=arr[nowNum];
 				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,price.toString())+
 					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"元宝临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
-					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%")+
-					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%");
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%");
+				_skin.btnYuanbao.filter=null;
 			}
 			else
 			{
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
+				var golbAtt:int=3*Mgr.petMgr.glodNum;
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"伤害加深:"+golbAtt+"%")+"/n"+HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
+				GrayFilter.gray(_skin.btnYuanbao);
 			}
 			TipTargetManager.show( _skin.btnYuanbao, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
 			
@@ -585,12 +587,14 @@ package com.rpgGame.appModule.pet
 				price=arr[nowNum];
 				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,price.toString())+
 					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"礼金临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
-					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%")+
-					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%");
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可获得防御提升")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+3%");
+				_skin.btnLijin.filter=null;
 			}
 			else
 			{
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
+				var bindGolbAtt:int=3*Mgr.petMgr.bindGlodNum;
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"防御提升:"+bindGolbAtt+"%")+"/n"+HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
+				GrayFilter.gray(_skin.btnLijin);
 			}
 			TipTargetManager.show( _skin.btnLijin, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
 		}
