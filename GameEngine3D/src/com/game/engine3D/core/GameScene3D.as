@@ -198,8 +198,6 @@ package com.game.engine3D.core
 			_heatFilter = new HeatFilter3D();
 			_glowFilter = new GlowFilter3D();
 			resetViewFilters();
-			
-			SoundUtil.soundReference = getCameraTarget();
 		}
 		
 		public function get isLoading() : Boolean
