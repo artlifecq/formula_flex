@@ -551,7 +551,7 @@ package com.game.engine3D.scene.layers
 					_mousePickerList.push(o);
 					o.addEventListener(MouseEvent3D.MOUSE_UP, handleMouseUpEvent3D);
 					o.addEventListener(MouseEvent3D.MOUSE_DOWN, handleMouseDownEvent3D);
-					o.addEventListener(MouseEvent3D.MOUSE_DOWN, handleMouseDownEvent3D);
+//					o.addEventListener(MouseEvent3D.MOUSE_DOWN, handleMouseDownEvent3D);
 					o.addEventListener(MouseEvent3D.RIGHT_MOUSE_UP, handleRightMouseUpEvent3D);
 					o.addEventListener(MouseEvent3D.RIGHT_MOUSE_DOWN, handleRightMouseDownEvent3D);
 					if (_mousePickerMovable)
