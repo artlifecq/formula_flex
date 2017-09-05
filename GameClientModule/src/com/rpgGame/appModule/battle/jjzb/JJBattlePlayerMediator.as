@@ -106,15 +106,12 @@ package    com.rpgGame.appModule.battle.jjzb
 
 		private function OnRollOut():void
 		{
-			SceneRoleSelectManager.mouseOverRole=null;
+			
 			showLoopEffect(false);
 		}
 		private function OnRollOver():void
 		{
-			if (_roleModel) 
-			{
-				SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
-			}
+			
 			showLoopEffect(true);
 		}
 
@@ -150,6 +147,7 @@ package    com.rpgGame.appModule.battle.jjzb
 			_fightPower.label=data.fightPower+"";
 			_roleModel=new RoleModelShow();
 			_roleModel.setData(data.playerAppearanceInfo,scale);
+			_roleModel.setTouch(touchImg);
 			_imgCon.addChild(_roleModel);
 			_roleModel.x=_imgCon.width/2;
 			_roleModel.y=_imgCon.height;

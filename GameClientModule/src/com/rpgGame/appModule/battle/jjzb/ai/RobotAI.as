@@ -9,7 +9,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.BlinkStateReference;
-	import com.rpgGame.appModule.common.RoleModelShow;
+	import com.rpgGame.appModule.common.RoleModelShowOld;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
@@ -29,8 +29,8 @@ package com.rpgGame.appModule.battle.jjzb.ai
 	public class RobotAI
 	{
 		private var _skin:ZhangCheng_Scene;
-		private var _winer:RoleModelShow;
-		private var _loser:RoleModelShow;
+		private var _winer:RoleModelShowOld;
+		private var _loser:RoleModelShowOld;
 		private var _winerRole:SceneRole;
 		private var _callBack:Function;
 		private var _skillDic:Dictionary=new Dictionary();
@@ -63,7 +63,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 		{
 			_forceOver=true;
 		}
-		private function getSide(role:RoleModelShow):int
+		private function getSide(role:RoleModelShowOld):int
 		{
 			if (role==_winer) 
 			{
@@ -88,7 +88,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 				}
 			}
 		}
-		public function setLeftPlayer(winer:RoleModelShow,loser:RoleModelShow,winHp:int,loseHp:int,round:int,isLeft:Boolean):void
+		public function setLeftPlayer(winer:RoleModelShowOld,loser:RoleModelShowOld,winHp:int,loseHp:int,round:int,isLeft:Boolean):void
 		{
 			_forceOver=false;
 			_winerIsLeft=isLeft;
@@ -132,7 +132,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 //			_loser.avatar.curRole.stateMachine.transition(RoleStateType.ACTION_RUN,runRef);
 //			TweenMax.to(_loser,1,{x:_skin.uiEnd2.x,y:_skin.uiEnd2.y,onComplete :onMoveComplete,onCompleteParams:[_loser]})
 		}
-		private function startMove(roleShow:RoleModelShow,otherJob:int):void
+		private function startMove(roleShow:RoleModelShowOld,otherJob:int):void
 		{
 			//兵家要滚动
 			if (roleShow.data.job==JobEnum.ROLE_1_TYPE) 
@@ -177,7 +177,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 				onMoveComplete(roleShow);
 			}
 		}
-		private function onMoveComplete(role:RoleModelShow):void
+		private function onMoveComplete(role:RoleModelShowOld):void
 		{
 			role.avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			if (role.avatar.curRole) 
@@ -248,8 +248,8 @@ package com.rpgGame.appModule.battle.jjzb.ai
 		private function showSkillHurt(...arg):void
 		{
 			
-			var hurter:RoleModelShow=getOtherShow(arg[0]);
-		//	var caster:RoleModelShow=getOtherShow(hurter.avatar.curRole);
+			var hurter:RoleModelShowOld=getOtherShow(arg[0]);
+		//	var caster:RoleModelShowOld=getOtherShow(hurter.avatar.curRole);
 			//攻击方打的血量
 			var hurt:int=arg[1];
 			
@@ -282,7 +282,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 			}
 			trace((hurter.avatar.curRole==_winerRole?"赢家":"输家")+"受到攻击  伤害："+hurt);
 		}
-		private function getOtherShow(role:SceneRole):RoleModelShow
+		private function getOtherShow(role:SceneRole):RoleModelShowOld
 		{
 			if (role==_winer.avatar.curRole) 
 			{

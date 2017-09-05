@@ -2,6 +2,7 @@ package com.rpgGame.appModule.social.team
 {
 	import com.rpgGame.core.utils.MCUtil;
 	
+	import feathers.controls.List;
 	import feathers.controls.renderers.BaseDefaultListItemRenderer;
 	
 	public class TeamListItemRender extends BaseDefaultListItemRenderer
@@ -20,7 +21,7 @@ package com.rpgGame.appModule.social.team
 		{
 			if(this._data && this._owner)
 			{
-				cell.setData(this._data);
+				cell.setData(this._data,List(_owner).dataProvider.data.indexOf(_data));
 			}
 		}
 		override public function dispose():void

@@ -83,6 +83,7 @@ package com.client
 			LoadPriorityType.LEVEL_CUSTOM_2 = 4500;
 			LoadPriorityType.LEVEL_CUSTOM_3 = 5000;
 			LoadPriorityType.LEVEL_CUSTOM_4 = 10000;
+			SoundUtil.is2DMode = true;
 			SoundUtil.initConfig({
 				"at":{
 					"index":1,

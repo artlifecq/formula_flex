@@ -32,6 +32,7 @@ package com.rpgGame.app.manager.role
 	import flash.geom.Vector3D;
 	
 	import away3d.enum.LoadPriorityType;
+	import away3d.utils.SoundUtil;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -148,6 +149,7 @@ package com.rpgGame.app.manager.role
 				
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
+				SoundUtil.soundReference = _actor.graphicDis;
 				
 				GameCameraManager.startPlayerMode(SceneManager.getScene().getCameraTarget());
 				

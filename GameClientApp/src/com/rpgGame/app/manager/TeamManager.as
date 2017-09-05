@@ -3,10 +3,12 @@ package com.rpgGame.app.manager
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
@@ -30,6 +32,7 @@ package com.rpgGame.app.manager
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
+	import com.rpgGame.coreData.info.SearchMapData;
 	
 	
 	
@@ -532,15 +535,20 @@ package com.rpgGame.app.manager
 			var mem:TeamMemberInfo=getTeamMember(heroId);
 			if (mem) 
 			{
+				if (mem.isonline==0) 
+				{
+					FloatingText.showUp(mem.memberName+"已下线");
+					return;
+				}
 				var qMap:Q_map= MapDataManager.getMapInfo(mem.memberMapModelID).getData() as Q_map;
 				if (qMap) 
 				{
 					//普通，中立，普通加中立
-					if (qMap.q_map_public!=1&&qMap.q_map_public!=2&&qMap.q_map_public!=3) 
-					{
-						//NoticeManager.mouseFollowNotify(qMap.q_map_name+"无法寻路到达");
-						NoticeManager.showNotifyById(13040,null,qMap.q_map_name);
-					}
+//					if (qMap.q_map_public!=1&&qMap.q_map_public!=2&&qMap.q_map_public!=3) 
+//					{
+//						//NoticeManager.mouseFollowNotify(qMap.q_map_name+"无法寻路到达");
+//						NoticeManager.showNotifyById(13040,null,qMap.q_map_name);
+//					}
 					if (qMap.q_map_min_level>MainRoleManager.actorInfo.totalStat.level) 
 					{
 						//NoticeManager.mouseFollowNotify("等级不足,无法进入地图{0}"+qMap.q_map_name);
@@ -553,7 +561,15 @@ package com.rpgGame.app.manager
 					}
 					else
 					{
-						MainRoleSearchPathManager.walkToScene(qMap.q_map_id, mem.x, -mem.y);
+						var findWayPaths:Vector.<SearchMapData> = MainRoleSearchPathManager.findWayPaths(SceneSwitchManager.currentMapId,qMap.q_map_id);
+						if (findWayPaths&&findWayPaths.length==0) 
+						{
+							FloatingText.showUp("对方所在区域无法到达");
+						}
+						else 
+						{
+							MainRoleSearchPathManager.walkToScene(qMap.q_map_id, mem.x, -mem.y);
+						}
 					}
 				}
 				else

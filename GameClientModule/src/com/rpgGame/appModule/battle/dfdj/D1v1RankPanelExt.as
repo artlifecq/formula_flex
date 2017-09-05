@@ -42,7 +42,8 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			_skin=new KuaFuPaiHang_Skin();
 			super(_skin);
-			
+			_skin.uiRole.touchable=true;
+			_skin.uiRole.touchGroup=false;
 			var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
 			_numCtrl=new D1v1RankPageSelectCtrl(skinF.btnAdd,skinF.btnDec,skinF.btnMax,skinF.btnMin,skinF.textDisplay,1,1,onPageChange);
 			_numCtrl.needSpeed=false;
@@ -95,11 +96,11 @@ package com.rpgGame.appModule.battle.dfdj
 			_rightData=data;
 			if (!_roleShow) 
 			{
-				_roleShow=new RoleModelShow();
+				_roleShow=new RoleModelShow(_skin.uiRole);
 				
-				_roleShow.x=_skin.uiRight.x+_skin.uiRight.width/2;
-				_roleShow.y=_skin.uiRight.y+_skin.uiRight.height/2+160;
-				_skin.container.addChild(_roleShow);
+//				_roleShow.x=_skin.uiRight.x+_skin.uiRight.width/2;
+//				_roleShow.y=_skin.uiRight.y+_skin.uiRight.height/2+160;
+//				_skin.container.addChild(_roleShow);
 			}
 			_roleShow.setData(data.playerAppearanceInfo,1.6);
 			_skin.NumZhanli.label=data.fightPower+"";
