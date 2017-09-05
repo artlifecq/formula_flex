@@ -265,6 +265,7 @@ package com.rpgGame.app.manager.scene
 		{
 			curtMapInfo.mapConfig.smallMapTexture = bmpData;
 			Scene.scene.mapConfig=curtMapInfo.mapConfig;
+			Scene.scene.mapConfig.zoneMapUrl=ClientConfig.getMapZoneDir(curtMapInfo.mapNameResource);
 			onSmallMapCmp(bmpData);
 			Scene.scene.drawSmallMap();
 			onEnterScene();
@@ -426,7 +427,7 @@ package com.rpgGame.app.manager.scene
 				MainRoleManager.actorInfo.mapID = 1001;
 			}
 			
-			if(currentMapId==mapID||!isChangeSceneComplete){//当前的地图就是要去的地图或者前面一张地图都没加载完
+			if(/*currentMapId==mapID||*/!isChangeSceneComplete){//当前的地图就是要去的地图或者前面一张地图都没加载完
 				return;
 			}
 			

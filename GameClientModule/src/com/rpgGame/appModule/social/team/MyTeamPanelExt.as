@@ -247,7 +247,7 @@ package com.rpgGame.appModule.social.team
 		
 		private function UpdateSetInfo():void
 		{
-			var isAutoAccept:Boolean=!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM)
+			var isAutoAccept:Boolean=false;//!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM)
 			if(_skin.chk_accept_invite.isEnabled ==isAutoAccept )
 				return ;
 			if(!isAutoAccept)

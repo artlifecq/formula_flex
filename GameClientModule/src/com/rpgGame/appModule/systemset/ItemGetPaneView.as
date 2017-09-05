@@ -142,35 +142,35 @@ class GetItemPaneView extends BasePaneView
 	{
 		super.refeashView();
 		_skin = this._content.skin as WupinSelect_Skin;
-		bindDate(_skin.chk_all,SystemSetManager.SYSTEMSET_AUOT_GET_ALL);
-		bindDate(_skin.chk_jinbi,SystemSetManager.SYSTEMSET_AUOT_GET_MONEY);
-		bindDate(_skin.chk_yaopin,SystemSetManager.SYSTEMSET_AUOT_GET_DRUGS);
-		bindDate(_skin.chk_zhuangbei,SystemSetManager.SYSTEMSET_AUOT_GET_EQUIPMENT);
-		bindDate(_skin.chk_cailiao,SystemSetManager.SYSTEMSET_AUOT_GET_MATERIAL);
-		bindDate(_skin.chk_renwu,SystemSetManager.SYSTEMSET_AUOT_GET_TASKITEM);
-		bindDate(_skin.chk_qita,SystemSetManager.SYSTEMSET_AUOT_GET_OTHERITEM);
+//		bindDate(_skin.chk_all,SystemSetManager.SYSTEMSET_AUOT_GET_ALL);
+//		bindDate(_skin.chk_jinbi,SystemSetManager.SYSTEMSET_AUOT_GET_MONEY);
+//		bindDate(_skin.chk_yaopin,SystemSetManager.SYSTEMSET_AUOT_GET_DRUGS);
+//		bindDate(_skin.chk_zhuangbei,SystemSetManager.SYSTEMSET_AUOT_GET_EQUIPMENT);
+//		bindDate(_skin.chk_cailiao,SystemSetManager.SYSTEMSET_AUOT_GET_MATERIAL);
+//		bindDate(_skin.chk_renwu,SystemSetManager.SYSTEMSET_AUOT_GET_TASKITEM);
+//		bindDate(_skin.chk_qita,SystemSetManager.SYSTEMSET_AUOT_GET_OTHERITEM);
 	}
 	private var _isChageing:Boolean = false;
-	override protected function checkChangeHandler(e:Event):void
-	{
-		super.checkChangeHandler(e);
-		if(_isChageing)
-			return ;
-		_isChageing = true;
-		var check:Check = e.target as Check;
-		if(check== _skin.chk_all)
-		{
-			setAll(check.isSelected);
-		}else{
-			if(!check.isSelected)
-			{
-				_skin.chk_all.isSelected = false;
-			}else{
-				_skin.chk_all.isSelected = checkAllCheck();
-			}
-		}
-		_isChageing = false;
-	}
+//	override protected function checkChangeHandler(e:Event):void
+//	{
+//		super.checkChangeHandler(e);
+//		if(_isChageing)
+//			return ;
+//		_isChageing = true;
+//		var check:Check = e.target as Check;
+//		if(check== _skin.chk_all)
+//		{
+//			setAll(check.isSelected);
+//		}else{
+//			if(!check.isSelected)
+//			{
+//				_skin.chk_all.isSelected = false;
+//			}else{
+//				_skin.chk_all.isSelected = checkAllCheck();
+//			}
+//		}
+//		_isChageing = false;
+//	}
 	
 	private function checkAllCheck():Boolean
 	{

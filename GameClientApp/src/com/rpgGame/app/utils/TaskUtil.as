@@ -880,7 +880,7 @@ package com.rpgGame.app.utils
 		
 		public static function tryAddTaskMark(role : SceneRole) : void
 		{
-			if (role.type == SceneCharType.MONSTER)
+			if (role.type == SceneCharType.NPC)
 			{
 				var npcDistributeIdId : int = (role.data as MonsterData).distributeId;
 				if (!TaskMissionManager.checkHasReplyNpcInStoryTask(npcDistributeIdId))
@@ -897,7 +897,7 @@ package com.rpgGame.app.utils
 		}
 		public static function tryRemoveTaskMark(role : SceneRole) : void
 		{
-			if (role.type == SceneCharType.MONSTER)
+			if (role.type == SceneCharType.NPC)
 			{
 				role.avatar.removeRenderUnitsByType(RenderUnitType.TASKMARK);
 			}

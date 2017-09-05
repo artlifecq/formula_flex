@@ -2,6 +2,7 @@ package com.rpgGame.appModule.maps
 {
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
@@ -24,6 +25,7 @@ package com.rpgGame.appModule.maps
 		private var _icnName:String;//显示名称
 		private var _level:int;
 		private var _icontype:String;
+		public var icoName:Label;
 		public function BigMapIcon(icontype:String,icoName:String="",level:int=0,pointx:int=0,pointy:int=0)
 		{
 			_icontype=icontype;
@@ -55,7 +57,8 @@ package com.rpgGame.appModule.maps
 					setMonsterIco();
 					break;
 				case SceneCharType.NPC:
-					setNpcIco();
+					//setNpcIco();
+					setMonsterIco();
 					break;
 			}
 		}
@@ -103,6 +106,7 @@ package com.rpgGame.appModule.maps
 			var skin:ThansName = new ThansName();
 			skin.lbl_name.htmlText=_icnName;
 			temp.skin=skin;
+			icoName=skin.lbl_name;
 			addChild(temp);
 			
 		}
@@ -134,10 +138,11 @@ package com.rpgGame.appModule.maps
 			
 			var temp:SkinnableContainer = new SkinnableContainer();
 			temp.x=-62;
-			temp.y=-48;
+			temp.y=-24;
 			var skin:NpcName2 = new NpcName2();
 			skin.lbl_name.htmlText=_icnName;//"Lv."+_level+" "+
 			temp.skin=skin;
+			icoName=skin.lbl_name;
 			addChild(temp);
 			
 		}
@@ -168,10 +173,11 @@ package com.rpgGame.appModule.maps
 			this.touchable = false;*/
 			var temp:SkinnableContainer = new SkinnableContainer();
 			temp.x=-62;
-			temp.y=-48;
+			temp.y=-24;
 			var skin:NpcName = new NpcName();
 			skin.lbl_name.htmlText=_icnName;
 			temp.skin=skin;
+			icoName=skin.lbl_name;
 			addChild(temp);
 		}
 		

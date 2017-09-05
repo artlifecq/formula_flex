@@ -29,6 +29,8 @@ package org.mokylin.skin.mainui.map
 			super();
 			
 			this.currentState = "normal";
+			this.height = 23;
+			this.width = 218;
 			this.elementsContent = [btn_shield_i(),labelDisplay_i()];
 			
 			states = {
