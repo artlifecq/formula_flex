@@ -10,7 +10,6 @@ package com.rpgGame.appModule.activety
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.activety.Activety_Skin;
-	import org.mokylin.skin.app.activety.jixiantiaozhan.JiXianTiaoZhanPaiHang;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 	
 	import starling.display.DisplayObjectContainer;
