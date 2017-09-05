@@ -56,7 +56,7 @@ package com.rpgGame.app.display3D
 		private static const HELPER_POINT : Point = new Point();
 		private var avatar3d:InterObject3D;
 		private var _role:SceneRole;
-		private var touchZone:UIAsset;
+		private var touchZone:DisplayObject;
 		private var _touchID:int=-1;
 		private var startX:Number;
 		private var defaultRotationY:int;
@@ -125,7 +125,7 @@ package com.rpgGame.app.display3D
 			if(touchable&&parent){
 				if(!touchZone){
 					this.touchZone=new UIAsset();
-					touchZone.styleName="ui/common/hover/xuanqukuang2_alpha.png";//一张透明九宫作为交互背景图
+					(touchZone as UIAsset).styleName="ui/common/hover/xuanqukuang2_alpha.png";//一张透明九宫作为交互背景图
 					touchZone.addEventListener(TouchEvent.TOUCH,onTouch);
 				}
 				touchZone.width=parent.width;
@@ -133,7 +133,15 @@ package com.rpgGame.app.display3D
 				parent.addChild(touchZone);
 			}
 		}
-		
+		public function setTouch(dis:DisplayObject):void
+		{
+			if (touchZone) 
+			{
+				return;
+			}
+			touchZone=dis;
+			touchZone.addEventListener(TouchEvent.TOUCH,onTouch);
+		}
 		/**
 		 *半生遮罩 
 		 * @param type
@@ -289,6 +297,7 @@ package com.rpgGame.app.display3D
 				RoleFaceMaskEffectUtil.removeFaceMaskEffect(_role);
 			}
 			if(avatar3d){
+				TweenLite.killTweensOf(avatar3d);
 				avatar3d.dispose();
 				avatar3d=null;
 			}

@@ -7,6 +7,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
+	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -21,6 +22,7 @@ package  com.rpgGame.appModule.social.team
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_fujin;
 
 	
@@ -51,6 +53,25 @@ package  com.rpgGame.appModule.social.team
 			list.padding=2;
 			registerListeners();
 			timer=new GameTimer("TeamListPanelExt_timer",1000,0,onTimer);
+			EventManager.addEvent(TeamEvent.TEAM_SLEECT_TEAM,onSelectTeam);
+		}
+		
+		private function onSelectTeam(team:MapTeamInfo):void
+		{
+			// TODO Auto Generated method stub
+			var isMine:Boolean=false;
+			if (team) 
+			{
+				isMine=Mgr.teamMgr.hasTeam&&team.teamid.EqualTo(Mgr.teamMgr.teamInfo.teamId);
+			}
+			if (isMine) 
+			{
+				TouchableUtil.gray(_skin.btn_shenqing);
+			}
+			else
+			{
+				TouchableUtil.ungray(_skin.btn_shenqing);
+			}
 		}
 		
 		private function onTimer():void
@@ -86,6 +107,7 @@ package  com.rpgGame.appModule.social.team
 			 update();
 			 timer.start();
 			 //onTimer();
+			 onSelectTeam(null);
 			 TeamSender.ReqSearchNearTeam("",true);
 			 TeamSender.ReqOpenOrCloseTeamPanel(1,0);
 		 }
@@ -125,7 +147,7 @@ package  com.rpgGame.appModule.social.team
 			else
 			{
 				//NoticeManager.mouseFollowNotify("请先选中一位队长");
-				NoticeManager.showNotifyById(13007);
+				NoticeManager.showNotifyById(13002);
 			}
 		}
 		private function OnSearchTeam(event:Event):void
@@ -169,11 +191,11 @@ package  com.rpgGame.appModule.social.team
 		{
 			
 			teamList = event.data as Vector.<MapTeamInfo>;
-			if (teamList.length==0) 
-			{
-				//NoticeManager.mouseFollowNotify("很抱歉，当前地图没有查到队伍信息");
-				NoticeManager.showNotifyById(13030);
-			}
+//			if (teamList.length==0) 
+//			{
+//				//NoticeManager.mouseFollowNotify("很抱歉，当前地图没有查到队伍信息");
+//				NoticeManager.showNotifyById(13030);
+//			}
 			RefreshTeamList();
 			
 		}
@@ -183,6 +205,7 @@ package  com.rpgGame.appModule.social.team
 		
 			teamList.sort(SortList);
 			_skin.Duiwu_list.dataProvider=new ListCollection(teamList);
+			_skin.ui_fujin.visible=teamList.length==0;
 			TeamListItemExt.curItem=null;
 		}
 		/**

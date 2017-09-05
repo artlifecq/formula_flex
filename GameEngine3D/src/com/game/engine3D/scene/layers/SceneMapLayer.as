@@ -358,6 +358,7 @@ package com.game.engine3D.scene.layers
 						if (!(obj as SoundBox).parent)
 						{
 							addMapObject(obj as ObjectContainer3D);	
+							objTransformPlanared(obj as ObjectContainer3D);
 							(obj as SoundBox).animator.start();
 						}
 						break;

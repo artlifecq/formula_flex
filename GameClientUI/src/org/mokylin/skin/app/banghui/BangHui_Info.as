@@ -41,6 +41,8 @@ package org.mokylin.skin.app.banghui
 
 		public var lbDengji:feathers.controls.Label;
 
+		public var uiRole:feathers.controls.UIAsset;
+
 		public var ui_zhandou:feathers.controls.UIAsset;
 
 
@@ -54,7 +56,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__BangHui_Info_UIAsset2_i(),__BangHui_Info_UIAsset3_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),ui_zhandou_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
+			this.elementsContent = [__BangHui_Info_UIAsset2_i(),__BangHui_Info_UIAsset3_i(),uiRole_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),ui_zhandou_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
 			
 			states = {
 			};
@@ -200,6 +202,19 @@ package org.mokylin.skin.app.banghui
 			temp.width = 61;
 			temp.x = 349;
 			temp.y = 271;
+			return temp;
+		}
+
+		private function uiRole_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiRole = temp;
+			temp.name = "uiRole";
+			temp.height = 380;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
+			temp.width = 250;
+			temp.x = 466;
+			temp.y = 112;
 			return temp;
 		}
 

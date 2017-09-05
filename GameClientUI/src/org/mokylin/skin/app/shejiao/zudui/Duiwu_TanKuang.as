@@ -140,10 +140,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			dui1 = temp;
 			temp.name = "dui1";
-			temp.height = 1;
-			temp.width = 1;
-			temp.x = 76;
-			temp.y = 218;
+			temp.height = 380;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
+			temp.width = 250;
+			temp.x = -40;
+			temp.y = -157;
 			return temp;
 		}
 

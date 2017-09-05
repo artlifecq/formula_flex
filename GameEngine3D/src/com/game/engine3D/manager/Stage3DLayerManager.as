@@ -33,6 +33,7 @@ package com.game.engine3D.manager
 	import away3d.lights.DirectionalLight;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.tools.utils.Bounds;
+	import away3d.utils.SoundUtil;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -488,6 +489,8 @@ package com.game.engine3D.manager
 					_averageFps.shift();
 				}
 			}
+//			if(SoundUtil.soundReference != null)
+//				trace("================SoundUtil.soundReference.scenePosition================" + SoundUtil.soundReference.scenePosition);
 		}
 		
 		public static function startRender() : void
