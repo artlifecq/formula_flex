@@ -6,6 +6,7 @@ package org.mokylin.skin.app.maps
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.maps.SelectBtn;
+	import org.mokylin.skin.component.button.ButtonSkin_send;
 
 	/**
 	 * @private
@@ -17,7 +18,11 @@ package org.mokylin.skin.app.maps
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnSend:feathers.controls.Button;
+
 		public var btn_over:feathers.controls.Button;
+
+		public var lbl_level:feathers.controls.Label;
 
 		public var lbl_name:feathers.controls.Label;
 
@@ -30,9 +35,9 @@ package org.mokylin.skin.app.maps
 			super();
 			
 			this.currentState = "normal";
-			this.height = 24;
-			this.width = 242;
-			this.elementsContent = [__NpcItem_UIAsset1_i(),lbl_name_i(),btn_over_i()];
+			this.height = 33;
+			this.width = 250;
+			this.elementsContent = [__NpcItem_UIAsset1_i(),lbl_name_i(),lbl_level_i(),btn_over_i(),btnSend_i()];
 			
 			states = {
 			};
@@ -54,16 +59,43 @@ package org.mokylin.skin.app.maps
 			return temp;
 		}
 
+		private function btnSend_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnSend = temp;
+			temp.name = "btnSend";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_send;
+			temp.x = 7;
+			temp.y = 5;
+			return temp;
+		}
+
 		private function btn_over_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_over = temp;
 			temp.name = "btn_over";
-			temp.height = 25;
+			temp.height = 33;
 			temp.styleClass = org.mokylin.skin.app.maps.SelectBtn;
-			temp.width = 242;
+			temp.width = 250;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lbl_level_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbl_level = temp;
+			temp.name = "lbl_level";
+			temp.fontSize = 14;
+			temp.text = "80级";
+			temp.textAlign = "right";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 63;
+			temp.x = 177;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -72,12 +104,13 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_name = temp;
 			temp.name = "lbl_name";
-			temp.text = "标签";
+			temp.fontSize = 14;
+			temp.text = "墨子";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 236;
-			temp.x = 3;
-			temp.y = 3;
+			temp.width = 162;
+			temp.x = 29;
+			temp.y = 8;
 			return temp;
 		}
 
