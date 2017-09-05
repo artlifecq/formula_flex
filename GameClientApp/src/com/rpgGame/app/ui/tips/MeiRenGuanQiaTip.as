@@ -51,6 +51,7 @@ package com.rpgGame.app.ui.tips
 		{
 			_info=data as MeiRenGuanQiaData;
 			_skin.lbZhanli.text=_info.zhanli.toString();
+			_skin.lb_name.text="【"+_info.guanqiaName+"】";;
 			if(_info.tongguanBool){
 				_skin.lbZhuangtai.text="已通关";
 				_skin.lbZhuangtai.color=StaticValue.GREEN_TEXT;
