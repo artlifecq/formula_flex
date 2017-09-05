@@ -91,7 +91,7 @@ package com.rpgGame.statistics
 			
 		}	
         public function pushNode(nodeId : int,tip:String="") : void {
-  //          if(!ClientConfig.isRelease)return;
+          if(!ClientConfig.isRelease)return;
 //            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
 //            if (null == nodeInfo) {
 //                return;
@@ -108,14 +108,15 @@ package com.rpgGame.statistics
             params["serverId"] = ClientConfig.isRelease?ClientConfig.loginAreaId:"30001";
             params["ip"] = ClientConfig.clientIp;
             params["time"] = (new Date()).getTime();
-			if (ClientConfig.isRelease) 
-			{
-				HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
-			}
-			else
-			{
-				HttpUtil.doGet("http://192.168.5.178:8080/front-node/node", params);
-			}
+			HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
+//			if (ClientConfig.isRelease) 
+//			{
+//				
+//			}
+//			else
+//			{
+//				HttpUtil.doGet("http://192.168.5.178:8080/front-node/node", params);
+//			}
         }
     }
 }

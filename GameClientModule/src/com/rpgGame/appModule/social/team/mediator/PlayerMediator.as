@@ -4,7 +4,6 @@ package   com.rpgGame.appModule.social.team.mediator
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.appModule.social.team.MyTeamPanelExt;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -93,21 +92,6 @@ package   com.rpgGame.appModule.social.team.mediator
 			}
 			var target : DisplayObject = e.currentTarget as DisplayObject;
 			var touch : Touch;
-			touch = e.getTouch(target);
-			if (touch == null)
-			{
-				isMouseOut = true;
-				OnRollOut();
-				return;
-			}
-			
-			touch = e.getTouch(target, TouchPhase.HOVER);
-			if (touch != null && isMouseOut)
-			{
-				isMouseOut = false;
-				OnRollOver();
-				return;
-			}
 			touch = e.getTouch(target, TouchPhase.ENDED);
 			if (touch != null)
 			{
@@ -116,39 +100,14 @@ package   com.rpgGame.appModule.social.team.mediator
 				return;
 			}
 		}
-		//private var overEffect:UIEffect2D;
-		private function OnRollOut():void
-		{
-//			if(overEffect != null)
-//			{
-//				overEffect.Dispose();
-//				overEffect = null;
-//			}
-			SceneRoleSelectManager.mouseOverRole=null;
-		}
-		private function OnRollOver():void
-		{
-			if (_roleModel) 
-			{
-				SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
-			}
-//			if(selectEffect != null)
-//				return ;
-//			if(overEffect == null)
-//			{
-//				overEffect = UIEffect2D.Create( 1076 , 0 ,true);
-//				overEffect.x = _player.uiWidth * 0.5;
-//				overEffect.y = _player.uiHeight * 0.5 + 70;
-//				_player.addChildAt( overEffect , 0 );
-//			}
-		}
+
+
 	//	private var selectEffect:UIEffect2D;
 		private function OnPlayerPanel():void
 		{
 			
 			//Clipboard.generalClipboard.clear();
 			//Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,"sssss");
-			SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
 			if(!_member.memberId.EqualTo( MainRoleManager.actorInfo.serverID))
 			{
 				var showArr:Array=[LangMenu.LOOK_HERO];
@@ -169,7 +128,6 @@ package   com.rpgGame.appModule.social.team.mediator
 			if(select != null)
 				select.RemoveSelectEffect();
 			select = this;
-			OnRollOut();
 			CreateSelectEffect();
 		}
 		public function RemoveSelectEffect():void
@@ -269,7 +227,7 @@ package   com.rpgGame.appModule.social.team.mediator
 					_roleModel=new RoleModelShow();
 					this._imgCon.addChild(_roleModel);
 					_roleModel.setData(_member.appearanceInfo,scale);
-					
+					_roleModel.setTouch(touchImg);
 				}
 				this.visible = true;
 				

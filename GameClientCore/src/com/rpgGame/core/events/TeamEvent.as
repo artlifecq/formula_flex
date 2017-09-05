@@ -23,6 +23,9 @@ package com.rpgGame.core.events
 		/***组队玩家状态改变**/
 		public static const TEAM_MEM_ATTR_CHANGE:String="team_mem_attr_change";
 		
+		/***组队玩家状态改变**/
+		public static const TEAM_SLEECT_TEAM:String="team_select_team";
+		
 		public var data:*;
 		
 		public var isCreateTeam:Boolean = false;
