@@ -78,9 +78,11 @@ package  com.rpgGame.appModule.social.team
 			
 			if(roleModel == null)
 			{
-				roleModel = new RoleModelShow();
+				_skin.dui1.touchable=true;
+				_skin.dui1.touchGroup=false;
+				roleModel = new RoleModelShow(_skin.dui1);
 				roleModel.setData(member.appearanceInfo,1.7);
-				_skin.dui1.addChild(roleModel);
+				//_skin.dui1.addChild(roleModel);
 			}
 			timeLeft=getTimer()+10*1000;
 			if (!timer) 

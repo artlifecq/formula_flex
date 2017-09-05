@@ -1,6 +1,7 @@
 package  com.rpgGame.appModule.social.team
 {
 	import com.rpgGame.app.manager.TeamManager;
+	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -11,6 +12,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.team.bean.MapTeamInfo;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.shejiao.zudui.DuiWu_Item;
 	
 	import starling.display.DisplayObject;
@@ -29,9 +31,11 @@ package  com.rpgGame.appModule.social.team
 			super(_skin);
 			TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.TEAM_NEAR_TEAM_TIP,_tipData));
 		}	
-		public function setData(team:*):void
+		public function setData(team:*,index:int):void
 		{
 			this._data=team as MapTeamInfo;
+			this._skin.bg1.visible=index%2==0;
+			this._skin.bg2.visible=!_skin.bg1.visible;
 			this._tipData.data=data;
 			_skin.lbName.text=team.captainname;
 			_skin.lbLevel.text=team.captainlv+NotifyCfgData.getNotifyTextByID(61019);
@@ -73,6 +77,7 @@ package  com.rpgGame.appModule.social.team
 			}
 			curItem=this;
 			curItem.setSelectbg(true);
+			EventManager.dispatchEvent(TeamEvent.TEAM_SLEECT_TEAM,this._data);
 		}
 	}
 }
