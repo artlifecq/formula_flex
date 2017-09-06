@@ -10,6 +10,8 @@ package com.rpgGame.core.events
 	public class MapEvent
 	{
 		/** 地图切换开始**/
+		public static const MAP_CLICK : int = UNIQUEID.NEXT;
+		/** 地图切换开始**/
 		public static const MAP_SWITCH_START : int = UNIQUEID.NEXT;
 		/** 地图切换完成 **/
 		public static const MAP_SWITCH_COMPLETE : int = UNIQUEID.NEXT;

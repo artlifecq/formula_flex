@@ -344,11 +344,15 @@ package com.rpgGame.app.cmdlistener.scene
 				var destPoint:Vector3D=new Vector3D(msg.jumpPos.x,0,msg.jumpPos.y);
 				var isEnd:Boolean=false;
 				var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(msg.jumpId);
-				if(jumpData&&jumpData.stopPoint.x==msg.jumpPos.x&&jumpData.stopPoint.y==msg.jumpPos.y)
+				if(jumpData)
 				{
-					isEnd=true;
+					var dist:int = Point.distance(new Point(jumpData.stopPoint.x,jumpData.stopPoint.y),new Point(msg.jumpPos.x,msg.jumpPos.y));
+					if(dist<50)
+					{
+						isEnd=true;
+					}
 				}
-				Lyt.a("跳跃点消息："+msg.jumpPos.x+":"+msg.jumpPos.y+":end:"+isEnd);
+				Lyt.a("跳跃点消息："+msg.jumpId+".."+msg.jumpPos.x+":"+msg.jumpPos.y+":end:"+isEnd);
 				ref.setParams(1,msg.costTime,destPoint,isEnd);
 				role.stateMachine.removeState(RoleStateType.ACTION_JUMP);//先移除状态 避免相同状态冲突
 				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref,true);
