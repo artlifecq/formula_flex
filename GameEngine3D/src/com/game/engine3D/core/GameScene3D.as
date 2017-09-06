@@ -893,6 +893,7 @@ package com.game.engine3D.core
 			if (_cameraTarget == null)
 			{
 				_cameraTarget = new ObjectContainer3D();
+				_cameraTarget.name = "cameraTarget";
 				_view.scene.addChild(_cameraTarget);
 			}
 			return _cameraTarget;

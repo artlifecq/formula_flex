@@ -1,7 +1,10 @@
 package com.game.engine3D.pathFinding
 {
+	import com.game.engine3D.config.GlobalConfig;
+	
 	import flash.geom.Vector3D;
 	
+	import away3d.containers.View3D;
 	import away3d.pathFinding.HeightMapHelper;
 
 	/**
@@ -29,6 +32,18 @@ package com.game.engine3D.pathFinding
 					vec.z = heightMapHelper.queryHeightAt(vec.x,vec.y);
 				}
 			}
+		}
+		
+		public static function generateHeightMap(heightMapHelper:HeightMapHelper,view:View3D, min:Vector3D, max:Vector3D):void
+		{
+			heightMapHelper.generateHeightMap(view,min,max);
+		}
+		
+		public static function queryHeightAt(heightMapHelper:HeightMapHelper,x:Number,z:Number):Number
+		{
+			if(GlobalConfig.use2DMap)
+				return z;
+			return heightMapHelper.queryHeightAt(x, z);
 		}
 	}
 }
