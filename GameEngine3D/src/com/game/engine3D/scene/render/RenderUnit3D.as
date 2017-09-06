@@ -3100,12 +3100,21 @@ package com.game.engine3D.scene.render
 
 		public function restoreColor() : void
 		{
+			//可能是hurtstate的演示调用
 			_useIndependentColor = false;
 			_independentColorTransform.redMultiplier = 1;
 			_independentColorTransform.greenMultiplier = 1;
 			_independentColorTransform.blueMultiplier = 1;
 			_independentColorTransform.alphaMultiplier = _alpha;
-			if (_renderUnitData)
+//			if (_renderUnitData)
+//			{
+//				_renderUnitData.restoreColor();
+//			}
+			if(alpha < 1)
+			{
+				_renderUnitData.setIndependentColorTransform(_independentColorTransform);
+			}
+			else
 			{
 				_renderUnitData.restoreColor();
 			}
