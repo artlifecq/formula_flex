@@ -23,7 +23,6 @@ package org.mokylin.skin.app.maps
 			super();
 			
 			this.currentState = "normal";
-			this.height = 33;
 			this.elementsContent = [__NpcName_UIAsset1_i(),lbl_name_i()];
 			
 			states = {
@@ -39,8 +38,8 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/maps/lv.png";
-			temp.x = 40;
-			temp.y = 16;
+			temp.x = 41;
+			temp.y = 23;
 			return temp;
 		}
 
@@ -55,7 +54,7 @@ package org.mokylin.skin.app.maps
 			temp.textAlign = "center";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 97;
+			temp.width = 90;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

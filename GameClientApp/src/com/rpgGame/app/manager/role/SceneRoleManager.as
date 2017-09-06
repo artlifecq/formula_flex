@@ -214,7 +214,7 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.enableMask = true;
-			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
+			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知NPC");
 			if (data.ownerName)
 			{
 				roleNameStr = roleNameStr + "(" + data.ownerName + ")";
@@ -227,7 +227,8 @@ package com.rpgGame.app.manager.role
 			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			//
-			(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
+			//(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
+			role.dialogFace=BubbleDialogFace.create(role);
 			if (bornData.q_animation>0)
 			{
 				role.updateBodyEft(AnimationDataManager.getData(bornData.q_animation).role_res);
@@ -258,6 +259,7 @@ package com.rpgGame.app.manager.role
 			SceneManager.addSceneObjToScene(role, true, false, true);
 			MainRoleSearchPathManager.trySetSearchRoleData(data);
 			TaskUtil.tryAddTaskMark(role);
+			role.dialogFace.probabilitySpeakBar();
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
 		}
@@ -285,7 +287,9 @@ package com.rpgGame.app.manager.role
 			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			//
-			(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
+			//(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
+			role.dialogFace=BubbleDialogFace.create(role);
+			
 			if (bornData.q_animation>0)
 			{
 				role.updateBodyEft(AnimationDataManager.getData(bornData.q_animation).role_res);
@@ -328,6 +332,7 @@ package com.rpgGame.app.manager.role
 			{
 				role.mouseEnable=false;
 			}
+			role.dialogFace.probabilitySpeakBar();
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
 		}

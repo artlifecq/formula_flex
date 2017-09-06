@@ -1,10 +1,15 @@
 package com.rpgGame.appModule.maps
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -52,6 +57,7 @@ package com.rpgGame.appModule.maps
 					loadBigMapView(sceneId);
 					scollBoxView();
 				}
+				_bigMap.onClearPath();
 				siteView();
 				setMapName(sceneData.name);
 				changeTab();
@@ -62,6 +68,7 @@ package com.rpgGame.appModule.maps
 		override public function hide():void 
 		{
 			super.hide();
+			_bigMap.onClearPath();
 			removeEvent();
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 
@@ -97,7 +104,8 @@ package com.rpgGame.appModule.maps
 			_bigMap.thumbnaiSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
 			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
-			
+			//EventManager.addEvent(UserMoveEvent.MOVE_END, onMoveEnd)
+			EventManager.addEvent(MapEvent.MAP_CLICK,onMoveEnd);
 			if (gTime == null)
 			{
 				gTime = new GameTimer("MapsPanel", 100, 0, onDrawPath);
@@ -115,6 +123,8 @@ package com.rpgGame.appModule.maps
 			_bigMap.skinSpr.removeEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
 			EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
+			//EventManager.removeEvent(UserMoveEvent.MOVE_END, onMoveEnd)
+			EventManager.removeEvent(MapEvent.MAP_CLICK,onMoveEnd);
 			if (gTime != null)
 			{
 				gTime.stop();
@@ -143,6 +153,12 @@ package com.rpgGame.appModule.maps
 		{
 			_bigMap.onDrawPathRoad();
 		}
+		private function onMoveEnd() : void 
+		{
+			_bigMap.onClearPath();
+			
+		}
+		
 		
 		private var touch : Touch;
 		private var touchPoint:Point;
@@ -247,6 +263,11 @@ package com.rpgGame.appModule.maps
 						roleMode.type=SceneCharType.COLLECT;
 						BigMapsData.mapsNpcData.push(roleMode);
 					}
+					else if(monsterData.type==6)
+					{
+						roleMode.type=SceneCharType.NPC;
+						BigMapsData.mapsNpcData.push(roleMode);
+					}
 					else
 					{
 						roleMode.type=SceneCharType.MONSTER;
@@ -264,6 +285,23 @@ package com.rpgGame.appModule.maps
 					roleMode=new BigMapIocnDataMode();
 					roleMode.type=SceneCharType.TRANS;
 					roleMode.name=transData.q_name;
+					if(transData.q_tran_dest_area_by_job!="")
+					{
+						var jobArea:Array=JSONUtil.decode(transData.q_tran_dest_area_by_job);
+						if(jobArea&&jobArea.length>0)
+						{
+							for(var j:int=0;j<jobArea.length;j++)
+							{
+								if(jobArea[j][0]==MainRoleManager.actorInfo.job)
+								{
+									var mapID:int= AreaCfgData.getAreaMapidByID(jobArea[j][1]);
+									var map:Q_map=MapDataManager.getMapInfo(mapID).getData();
+									roleMode.name=map.q_map_name;
+									break;
+								}
+							}
+						}
+					}
 					roleMode.show=true;
 					roleMode.x=transData.q_tran_res_x;
 					roleMode.y=transData.q_tran_res_y;

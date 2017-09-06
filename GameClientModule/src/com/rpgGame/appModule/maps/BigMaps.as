@@ -97,6 +97,7 @@ package com.rpgGame.appModule.maps
 			skinSpr.x=0;
 			skinSpr.y=0;
 			this._skin.grp_cont.addChild(skinSpr);
+			walkPoint=new Vector3D();
 			EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
 		}
 		public function init():void
@@ -120,8 +121,7 @@ package com.rpgGame.appModule.maps
 			baseSpr.addChild(flyPoin);
 			myselfSpr=new Inter3DContainer();
 			myselfSpr.touchable=false;
-			myselfObj=myselfSpr.addInter3D(ClientConfig.getEffect("ui_ditubiaoji"));
-			myselfSpr.visible = false;
+			
 			baseSpr.addChild(myselfSpr);
 			mySelfPos=new Point();
 			var mask : Shape = new Shape();
@@ -258,6 +258,10 @@ package com.rpgGame.appModule.maps
 		 */
 		public function updateMyselfPos() : void
 		{
+			if(myselfObj==null)
+			{
+				myselfObj=myselfSpr.addInter3D(ClientConfig.getEffect("ui_ditubiaoji"));
+			}
 			var player : SceneRole = MainRoleManager.actor;
 			if (player&&_isMapLoadComplete)
 			{
@@ -278,7 +282,6 @@ package com.rpgGame.appModule.maps
 					{
 						isPlay=true;
 						myselfObj.playEffect();
-						flyPoin.visible=false;
 					}
 				}
 				/*if(mySelfPos.x!=pot.x||mySelfPos.y!=pot.y)
@@ -297,6 +300,14 @@ package com.rpgGame.appModule.maps
 				myselfSpr.y=mySelfPos.y;
 				myselfSpr.visible = true;
 				roadSpr.onThrough(pot.x,pot.y);
+				if(flyPoin.visible)
+				{
+					var dist:int = Point.distance(new Point(pos3d.x,pos3d.z),new Point(walkPoint.x,walkPoint.z));
+					if(dist<150)
+					{
+						flyPoin.visible=false;
+					}
+				}
 				
 			}
 			
@@ -338,8 +349,18 @@ package com.rpgGame.appModule.maps
 			pos3d.z = roleData.y;
 			point=getChangeSceneToMap(pos3d);
 			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
-			roleIcon.icoName.x=point.x<60?point.x:0;
-			roleIcon.icoName.x=point.x>(thumbnaiSpr.width-60)?(thumbnaiSpr.width-point.x-60):0;
+			
+			//roleIcon.icoName.x=point.x<10?point.x:0;
+			if(point.x<(roleIcon.icoName.textWidth*0.5))
+			{
+				roleIcon.icoName.x=roleIcon.icoName.textWidth*0.5-point.x;
+			}
+			if(point.x>(thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5))
+			{
+				roleIcon.icoName.x=(-point.x+thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5);
+			}
+			
+			//roleIcon.icoName.x=point.x>(thumbnaiSpr.width-120)?(-point.x+thumbnaiSpr.width-120):0;
 			roleSpr.addChild(roleIcon);
 			roleSpr.visible = true;
 		}
@@ -407,24 +428,24 @@ package com.rpgGame.appModule.maps
 		}
 		public function roleWalk(x:Number,y:Number,spacing:int=0):void
 		{
-			roadSpr.onClearPath();
+			onClearPath();
 			var position : Vector3D = new Vector3D(x, -Math.abs(y), -Math.abs(y));
 			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))
 			{
 				walkPoint=position;
-				addEndFly(walkPoint);
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, spacing,null);
+				onDrawPathRoad();
 			}
 			else
 			{
-				flyPoin.visible=false;
-				roadSpr.onClearPath();
 				MainRoleSearchPathManager.stopAutoFind();
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"该目标点不可到达");
 			}
 		}
 		private function addEndFly(position : Vector3D) : void
 		{
+			if (!MainRoleManager.actor.stateMachine.isWalkMoving)
+				return;
 			var point:Point=getChangeSceneToMap(position);
 			flyPoin.x=point.x-6;
 			flyPoin.y=point.y-10;
@@ -437,7 +458,7 @@ package com.rpgGame.appModule.maps
 			if(BackPackManager.instance.haveItemById(601))
 			{
 				flyPoin.visible=false;
-				roadSpr.onClearPath();
+				onClearPath();
 				MainRoleSearchPathManager.stopAutoFind();
 				SceneSender.sceneMapTransport(SceneSwitchManager.currentMapId, walkPoint.x,walkPoint.z);
 			}
@@ -454,7 +475,7 @@ package com.rpgGame.appModule.maps
 			thumbnaiSpr.visible=false;
 			tips.visible=false;
 			clearAllRole();
-			roadSpr.onClearPath();
+			onClearPath();
 		}
 		public function clearAllRole():void
 		{
@@ -464,8 +485,16 @@ package com.rpgGame.appModule.maps
 		}
 		public function onDrawPathRoad() : void
 		{
-			roadSpr.onDrawPathRoad();
+			addEndFly(walkPoint);
+			roadSpr.onDrawPathRoad(walkPoint);
 		}
+		public function onClearPath() : void
+		{
+			flyPoin.visible=false;
+			roadSpr.onClearPath();
+		}
+		
+		
 		/**
 		 * 场景上坐标换算成地图坐标
 		 */
