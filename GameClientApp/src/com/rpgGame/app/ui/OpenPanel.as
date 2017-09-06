@@ -10,7 +10,6 @@ package com.rpgGame.app.ui
 	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import flash.geom.Point;
@@ -74,10 +73,7 @@ package com.rpgGame.app.ui
 			for(var i:int=0;i<length;i++)
 			{
 				qfun = NewFuncCfgData.getFuncCfg(_list[i]);
-				if(qfun.q_show_open == 1)
-				{
-					_idlist.push(qfun);
-				}
+				_idlist.push(qfun);
 			}
 			if(_idlist.length == 0)
 			{
@@ -214,8 +210,8 @@ package com.rpgGame.app.ui
 			_button= MainButtonManager.getButtonByInfo(_qdata);
 			if(_button==null)
 				GameLog.add("配置错误提示:图标id="+_qdata.q_id+",功能:"+_qdata.q_name+"按钮未找到");
-			m_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_res_dir+"/145.png";
-			m_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_res_dir+"/name.png";
+			m_skin.Icons.styleName = "ui/icon/xingongneng/"+_qdata.q_res_dir+"/145.png";
+			m_skin.uiName.styleName = "ui/icon/xingongneng/"+_qdata.q_res_dir+"/name.png";
 			m_skin.uiName.x = (this.width - m_skin.uiName.width)/2;
 			if(this._touchPointID<0)
 				this.changeState(ButtonState.UP);

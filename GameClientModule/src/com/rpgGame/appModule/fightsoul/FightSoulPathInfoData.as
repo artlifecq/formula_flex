@@ -44,7 +44,11 @@ package com.rpgGame.appModule.fightsoul
 				else
 					return false;
 			}else{
-				return FunctionOpenManager.functionIsOpen(_newFunc.q_id);
+				if(_newFunc){
+					return FunctionOpenManager.functionIsOpen(_newFunc.q_id);
+				}else{
+					return false;
+				}
 			}
 		}
 		

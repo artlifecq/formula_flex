@@ -10,9 +10,14 @@
     import com.rpgGame.core.events.FunctionOpenEvent;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.cfg.PanelCfgData;
+    import com.rpgGame.coreData.clientConfig.Q_mainbtn;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     import com.rpgGame.coreData.clientConfig.Q_panel;
     import com.rpgGame.coreData.enum.EmFunctionID;
+    import com.rpgGame.coreData.enum.EmOpenType;
+    
+    import flash.net.URLRequest;
+    import flash.net.navigateToURL;
     
     import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
@@ -40,6 +45,9 @@
 					continue;
 				if(info.q_level > level)
 					continue;
+				if(info.q_show_open==0){
+					continue;
+				}
 				openedMap.add(info.q_id,info);
 				itemlist.push(info.q_id);
 			}
@@ -111,7 +119,7 @@
 			for(var i:int = 0;i<length;i++)
 			{
 				var data:Q_newfunc = infos[i];
-				if(data.q_level <= level)
+				if(data.q_level <= level||data.q_need_notice==0)
 					continue;
 				noticeInfo = data;
 				break;
@@ -208,6 +216,36 @@
 				return ;
 			}
 			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+		}
+		
+		/**
+		 *通过按钮信息打开 
+		 * @param btnCfg
+		 * @param data
+		 * 
+		 */
+		public static function openByBtnInfo(btnCfg:Q_mainbtn,data:Object=null):void
+		{
+			if(btnCfg.q_click_type==EmOpenType.OPEN_URL){
+				navigateToURL(new URLRequest(btnCfg.q_click_arg),"_blank");
+			}else if(btnCfg.q_click_type==EmOpenType.OPEN_PANEL){
+				var panelId:int=int(btnCfg.q_click_arg);
+				var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelId);
+				if(!funcCfg){
+					return;
+				}
+				var panelCfg:Q_panel=PanelCfgData.getPanelCfg(panelId);
+				if(!panelCfg){
+					return;
+				}
+				var minlevel:int =funcCfg.q_level;
+				if(!checkOpenByLevel(minlevel))//未达到开启等级
+				{
+					NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
+					return ;
+				}
+				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}
 		}
     }
 }

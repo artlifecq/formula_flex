@@ -33,7 +33,14 @@ package com.rpgGame.coreData.cfg
 					_noticeList.push(info);
 				}
 				if(info.q_open_btn!=0){
-					_btnMap.add(info.q_open_btn,info);
+					var btnInfo:Q_newfunc=_btnMap.getValue(info.q_open_btn);
+					if(!btnInfo){
+						_btnMap.add(info.q_open_btn,info);
+					}else{
+						if(btnInfo.q_level>info.q_level){
+							_btnMap.add(info.q_open_btn,info);//以开启等级最低的为标准
+						}
+					}
 				}
 				if(info.q_open_panel!=0){
 					_panelMap.add(info.q_open_panel,info);

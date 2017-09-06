@@ -20,14 +20,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_level:int;
 		 /**  需要完成任务编号 */
 		public var q_need_taskid:int;
-		 /**  展示开启提示 */
+		 /**  是否弹出开启图标 */
 		public var q_show_open:int;
 		 /**  是否需要预告 */
 		public var q_need_notice:int;
-		 /**  功能开启资源目录 */
+		 /**  功能开启资源目录(res\ui\icon\xingongneng) */
 		public var q_res_dir:String;
 		 /**  开启的面板id */
 		public var q_open_panel:int;
+		 /**  是否展示面板 */
+		public var q_show_panel:int;
 		 /**  开启的按钮id */
 		public var q_open_btn:int;
 

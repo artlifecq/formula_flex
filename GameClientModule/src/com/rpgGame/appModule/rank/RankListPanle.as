@@ -40,7 +40,7 @@ package com.rpgGame.appModule.rank
 			var length:int = arr.length;
 			for(var i:int = 0;i<length;i++)
 			{
-				if(FunctionOpenManager.functionIsOpen(arr[i].q_id.toString()))
+				if(FunctionOpenManager.functionIsOpen(arr[i].q_id))
 				{
 					_skin.list.selectedIndex = i;
 					break;
@@ -52,12 +52,12 @@ package com.rpgGame.appModule.rank
 		private function getRankNameList():Array
 		{
 			var names:Array=[];
-			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_LEVELRANK).q_name);
-			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_COMBATPOAERRANK).q_name);
-			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_FIGHTFLAGRANK).q_name);
-			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_MOUNTRANK).q_name);
-			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_WEDDINGRINGRANK).q_name);
-			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_BEAUTYRANK).q_name);
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_LEVELRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_COMBATPOAERRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_FIGHTFLAGRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_MOUNTRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_WEDDINGRINGRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_BEAUTYRANK));
 			return names;
 		}
 		
@@ -97,7 +97,7 @@ package com.rpgGame.appModule.rank
 			{
 				_skin.content.removeChild(_currentView);
 			}
-			if(!_tabViewMap.hasOwnProperty(_selectIInfoData.q_id))
+			if(!_tabViewMap.getValue(_selectIInfoData.q_id))
 			{
 				createView(_selectIInfoData.q_id);
 			}
@@ -108,9 +108,8 @@ package com.rpgGame.appModule.rank
 		
 		private function createView(type:int):void
 		{
-			var typeToString:String = type.toString();
 			var view:RankListViewBase;
-			switch(typeToString)
+			switch(type)
 			{
 				case EmFunctionID.EM_LEVELRANK:
 					view = new LevelRankListView();

@@ -119,7 +119,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		protected function triggeredHanadler():void
 		{
-			FunctionOpenManager.openPanelByFuncInfo(_info);
+			FunctionOpenManager.openByBtnInfo(_btnInfo);
 		}
 		
 		private var _tweenmax:TweenMax;
