@@ -893,6 +893,7 @@ package com.game.engine3D.core
 			if (_cameraTarget == null)
 			{
 				_cameraTarget = new ObjectContainer3D();
+				_cameraTarget.name = "cameraTarget";
 				_view.scene.addChild(_cameraTarget);
 			}
 			return _cameraTarget;
@@ -1065,7 +1066,7 @@ package com.game.engine3D.core
 				{
 					_mainChar.addSyncInfo(new BaseObjSyncInfo(getCameraTarget(), true));//这个是用来把镜头的虚拟对象与主角关联起来，实现同步
 					
-					_mainCharSyncPosLight = _sceneMapLayer.getObj(MAIN_CHAR_SYNC_POS_LIGHT_NAME) as LightBase;
+					_mainCharSyncPosLight = _sceneMapLayer.getObj(MAIN_CHAR_SYNC_POS_LIGHT_NAME) as LightBase;//永远跟着主角的一盏灯
 					if (_mainCharSyncPosLight)
 					{
 						var syncInfo : BaseObjSyncInfo = new BaseObjSyncInfo(_mainCharSyncPosLight, true);
