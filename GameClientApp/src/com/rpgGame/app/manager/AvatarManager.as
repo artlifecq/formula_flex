@@ -39,6 +39,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.coreData.type.SexType;
 	
 	import flash.geom.Vector3D;
 	
@@ -190,7 +191,7 @@ package com.rpgGame.app.manager
 						animatResID = heroModel.animatRes_bingjia;	
 						break;
 					case 2:
-						if(roleData.sex)
+						if(roleData.sex==SexType.MALE)
 						{
 							animatResID = heroModel.animatRes_mojia_man;
 						}
@@ -200,7 +201,7 @@ package com.rpgGame.app.manager
 						}
 						break;
 					case 3:
-						if(roleData.sex)
+						if(roleData.sex==SexType.MALE)
 						{
 							animatResID = heroModel.animatRes_mojia_man;
 						}
