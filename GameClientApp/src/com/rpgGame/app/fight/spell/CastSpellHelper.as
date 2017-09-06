@@ -1130,7 +1130,7 @@ package com.rpgGame.app.fight.spell
 			tempVector3D.setTo(releasePos.x, releasePos.y, 0);
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
-			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
+			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position.clone(), tempVector3D);
 			dist = Point.distance(selfPos, releasePos);
 			var inRange : Boolean;
 			

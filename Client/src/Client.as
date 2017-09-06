@@ -1,6 +1,7 @@
 package
 {
 	import com.client.EngineSetting;
+	import com.client.process.ClientInitProcess;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
 	import com.client.process.LoadDll;
@@ -313,6 +314,7 @@ package
 			{
 				ProcessStateMachine.getInstance().pushProcess(new LoginInput());
 			}
+			ProcessStateMachine.getInstance().pushProcess(new ClientInitProcess());
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
@@ -361,12 +363,14 @@ package
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_CLINET_INIT, 0.0, 0.8,true);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0.8, 0.85);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.85, 0.9);
 			
 			var pg:ProcessGroup = new ProcessGroup();
-			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.9);
-			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.9, 0.91, true);
+			
+			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.9,0.905);
+			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.905, 0.91, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.91, 0.95, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.95, 0.96, true);
 			//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
