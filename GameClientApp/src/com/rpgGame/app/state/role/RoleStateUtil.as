@@ -432,6 +432,7 @@ package com.rpgGame.app.state.role
 			}
 			if (onThrough != null)
 				onThrough(ref);
+//			trace("=================" + SceneManager.getScene().getCameraTarget().position);
 		}
 
 		public static function beatToPos(role : SceneRole, pos : Point, atkorPos : Point, speed : int) : void

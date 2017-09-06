@@ -159,6 +159,16 @@ package com.rpgGame.app.state.role.action
 		override public function afterLeave():void
 		{
 			super.afterLeave();
+			_showType=null;
+			if (_totalFrameTween)
+			{
+				_totalFrameTween.kill();
+				_totalFrameTween = null;
+			}
+			if(nextShowTween){
+				nextShowTween.kill();
+				nextShowTween=null;
+			}
 		}
 		
 		override public function dispose() : void

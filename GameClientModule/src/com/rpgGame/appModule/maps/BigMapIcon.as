@@ -95,23 +95,9 @@ package com.rpgGame.appModule.maps
 		/**设置为传送点图标*/
 		private function settTranportsIco():void
 		{
-			/*this._ico = new UIAsset();
-			this._ico.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
-			this._ico.styleName = "ui/app/maps/lan.png";
-			this._ico.x = -7.5;
-			this._ico.y = -7.5;
-			this.addChild(this._ico);
-			var chuan:UIAsset=new UIAsset();
-			chuan.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
-			chuan.styleName = "ui/app/maps/chuan.png";
-			chuan.x = -15.5;
-			chuan.y = -38;
-			this.addChild(chuan);
-			this.touchable = false;*/
-			
 			var temp:SkinnableContainer = new SkinnableContainer();
 			temp.x=-62;
-			temp.y=-30;
+			temp.y=-35;
 			var skin:ThansName = new ThansName();
 			skin.lbl_name.htmlText="通往"+_icnName;
 			temp.skin=skin;
@@ -122,32 +108,9 @@ package com.rpgGame.appModule.maps
 		/**设置为怪物点图标*/
 		private function setMonsterIco():void
 		{
-			/*this._ico = new UIAsset();
-			this._ico.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
-			this._ico.styleName = "ui/app/maps/hong.png";
-			this._ico.x = -7.5;
-			this._ico.y = -7.5;
-			this.addChild(this._ico);
-			var icnNameLabel:Label = new Label();
-			icnNameLabel.name = "ioc_name";
-			icnNameLabel.maxWidth=icnNameLabel.width = 100;
-			icnNameLabel.letterSpacing = 0;
-			icnNameLabel.color = 0xD8D0C5;
-			icnNameLabel.textAlign = "center";
-			icnNameLabel.fontSize=15;
-			icnNameLabel.nativeFilters = Fontter.filterObj["textFilterBlackGreen3"];
-			icnNameLabel.isHtmlText=true;
-			//icnNameLabel.
-			icnNameLabel.htmlText =_icnName;
-			icnNameLabel.x = -icnNameLabel.width/2;
-			icnNameLabel.y = -27;
-			
-			this.addChild(icnNameLabel);
-			this.touchable = false;*/
-			
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.x=-62;
-			temp.y=-24;
+			temp.x=-45;
+			temp.y=-35;
 			var skin:NpcName2 = new NpcName2();
 			skin.lbl_name.htmlText=_icnName;//"Lv."+_level+" "+
 			temp.skin=skin;
@@ -158,31 +121,9 @@ package com.rpgGame.appModule.maps
 		/**设置为NPC图标*/
 		private function setNpcIco():void
 		{
-			/*this._ico = new UIAsset();
-			this._ico.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
-			this._ico.styleName = "ui/app/maps/lv.png";
-			this._ico.x = -7.5;
-			this._ico.y = -7.5;
-			this.addChild(this._ico);
-			var icnNameLabel:Label = new Label();
-			icnNameLabel.name = "ioc_name";
-			icnNameLabel.maxWidth=icnNameLabel.width = 100;
-			icnNameLabel.letterSpacing = 0;
-			icnNameLabel.color = 0x00B600;
-			icnNameLabel.textAlign = "center";
-			icnNameLabel.fontSize=15;
-			icnNameLabel.nativeFilters = Fontter.filterObj["textFilterBlackGreen3"];
-			icnNameLabel.isHtmlText=true;
-			//icnNameLabel.
-			icnNameLabel.htmlText =_icnName;
-			icnNameLabel.x = -icnNameLabel.width/2;
-			icnNameLabel.y = -27;
-			
-			this.addChild(icnNameLabel);
-			this.touchable = false;*/
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.x=-62;
-			temp.y=-24;
+			temp.x=-45;
+			temp.y=-45;
 			var skin:NpcName = new NpcName();
 			skin.lbl_name.htmlText=_icnName;
 			temp.skin=skin;
