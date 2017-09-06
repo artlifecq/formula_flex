@@ -4,13 +4,18 @@ package com.rpgGame.app.ui
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.display2D.PopSkinUI;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.ItemActionManager;
+	import com.rpgGame.app.manager.RedRewardManager;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import flash.geom.Point;
 	
@@ -73,6 +78,10 @@ package com.rpgGame.app.ui
 			for(var i:int=0;i<length;i++)
 			{
 				qfun = NewFuncCfgData.getFuncCfg(_list[i]);
+				if(qfun.q_id==EmFunctionID.EM_REDREWARD){
+					RedRewardManager.instance().funcOpening=true;
+				}
+					
 				_idlist.push(qfun);
 			}
 			if(_idlist.length == 0)
@@ -246,6 +255,12 @@ package com.rpgGame.app.ui
 		{
 			if(_button!=null)
 				_button.runAnimation();
+			if(_qdata&&_qdata.q_show_panel){//开启完成后打开面板
+				FunctionOpenManager.openPanelByFuncInfo(_qdata);
+				if(_qdata.q_id==EmFunctionID.EM_REDREWARD){
+					RedRewardManager.instance().funcOpening=false;
+				}
+			}
 			refeashView();
 		}
 		override protected function popComplete():void

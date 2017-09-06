@@ -45,11 +45,10 @@
 					continue;
 				if(info.q_level > level)
 					continue;
-				if(info.q_show_open==0){
-					continue;
-				}
 				openedMap.add(info.q_id,info);
-				itemlist.push(info.q_id);
+				if(info.q_show_open!=0){
+					itemlist.push(info.q_id);
+				}
 			}
 			
 			if(isdispatch)
