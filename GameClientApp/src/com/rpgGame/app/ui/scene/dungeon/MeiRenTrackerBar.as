@@ -41,6 +41,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
 	import org.mokylin.skin.app.meiren.MeiRen_ZhuiZong;
+	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
 	import starling.display.DisplayObject;
 	
@@ -114,10 +115,10 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			super.onTouchTarget(target);
 			switch(target){
-				case MeiRenBoss_Item(_skin.killbut_0.skin).labelDisplay:
+				case ((_skin.killbut_0.skin)as Renwu_Item2).labelDisplay:
 					touchBut(0);
 					break;
-				case MeiRenBoss_Item(_skin.killbut_1.skin).labelDisplay:				
+				case ((_skin.killbut_1.skin)as Renwu_Item2).labelDisplay:				
 					touchBut(1);
 					break;
 				case _skin.sec_subbut2:				

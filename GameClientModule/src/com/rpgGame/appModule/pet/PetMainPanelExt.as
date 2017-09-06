@@ -2,6 +2,7 @@ package com.rpgGame.appModule.pet
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -44,7 +45,6 @@ package com.rpgGame.appModule.pet
 	import org.mokylin.skin.app.meiren.MeiRen_Skin;
 	
 	import starling.display.Sprite;
-	import com.rpgGame.app.ctrl.TouchCtrl;
 	
 	public class PetMainPanelExt extends SkinUIPanel
 	{
@@ -71,6 +71,7 @@ package com.rpgGame.appModule.pet
 			_skin=new MeiRen_Skin();
 			super(_skin);
 			initConfig();
+			_skin.ico_up.visible=_skin.num_lv.visible=false;
 		}
 		private function initConfig():void
 		{
@@ -132,12 +133,21 @@ package com.rpgGame.appModule.pet
 		{
 			// TODO Auto Generated method stub
 			_attrCon.showAttrAdd(false);
+			onshowAttPower(false);
 		}
 		
 		private function onShowAttrAdd():void
 		{
 			// TODO Auto Generated method stub
 			_attrCon.showAttrAdd(true);
+			onshowAttPower(true);
+		}
+		
+		private function onshowAttPower(bool:Boolean):void
+		{
+			if(bool&&_attrCon.getAllAttPower()<=0) bool=false;
+			_skin.num_lv.number=_attrCon.getAllAttPower();
+			_skin.ico_up.visible=_skin.num_lv.visible=bool;
 		}
 		
 		private function onShowLevelUpPanel():void
@@ -574,7 +584,7 @@ package com.rpgGame.appModule.pet
 			else
 			{
 				var golbAtt:int=3*Mgr.petMgr.glodNum;
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"伤害加深:"+golbAtt+"%")+"/n"+HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"伤害加深:"+golbAtt+"%")+"\n"+HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
 				GrayFilter.gray(_skin.btnYuanbao);
 			}
 			TipTargetManager.show( _skin.btnYuanbao, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
@@ -593,7 +603,7 @@ package com.rpgGame.appModule.pet
 			else
 			{
 				var bindGolbAtt:int=3*Mgr.petMgr.bindGlodNum;
-				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"防御提升:"+bindGolbAtt+"%")+"/n"+HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"防御提升:"+bindGolbAtt+"%")+"\n"+HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"已达上限");					
 				GrayFilter.gray(_skin.btnLijin);
 			}
 			TipTargetManager.show( _skin.btnLijin, TargetTipsMaker.makeSimpleTextTips(goldBuyText));

@@ -71,8 +71,8 @@ package com.rpgGame.app.ui.main.smallmap
 			EventManager.addEvent(SystemTimeEvent.SEVER_TIMR,updateTime);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, this.onMapSwitchCompleteHandler);
 			
-//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
-//			sound_mute_one();
+			//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
+			//			sound_mute_one();
 		}
 		
 		public function resize(w : int, h : int) : void {
@@ -117,8 +117,11 @@ package com.rpgGame.app.ui.main.smallmap
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSound://打开声音
-					setAllMute(!(SimpleMp3Player.openSound));
-//					ClientSettingGameSetMananger.saveMainToServer();
+					isPlay=!isPlay;
+					if(isPlay)
+						SimpleMp3Player.player.resume();
+					else SimpleMp3Player.player.stop();
+					//					ClientSettingGameSetMananger.saveMainToServer();
 					break;
 				case this._skin.btnPaiHang://打开排行榜
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_FIGHTFLAGRANK);
@@ -146,17 +149,17 @@ package com.rpgGame.app.ui.main.smallmap
 			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ALL);
 		}
 		
-//		private function sound_mute_one():void
-//		{
-//			if (BGMManager.isMuteAll)
-//			{
-//				miniSkin.btnShengYin.styleClass = ButtonShengyinMute;
-//			}
-//			else
-//			{
-//				miniSkin.btnShengYin.styleClass = ButtonShengyin;
-//			}
-//		}
+		//		private function sound_mute_one():void
+		//		{
+		//			if (BGMManager.isMuteAll)
+		//			{
+		//				miniSkin.btnShengYin.styleClass = ButtonShengyinMute;
+		//			}
+		//			else
+		//			{
+		//				miniSkin.btnShengYin.styleClass = ButtonShengyin;
+		//			}
+		//		}
 		
 		// event
 		private function onMapSwitchCompleteHandler() : void {

@@ -49,7 +49,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		private function __ZuiDuiSkin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -1;
+			temp.gap = 1;
 			return temp;
 		}
 

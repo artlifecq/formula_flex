@@ -228,7 +228,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.labelOffsetX = 0;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.color = 0x8B8D7B;
-			temp.visible = false;
 			temp.width = 27;
 			temp.x = 119;
 			temp.y = 69;
@@ -243,7 +242,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.text = "自动";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.visible = false;
 			temp.x = 145;
 			temp.y = 71;
 			return temp;

@@ -5,7 +5,6 @@ package org.mokylin.skin.app.shejiao.zudui
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_Head;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.list.ListSkin1;
@@ -30,8 +29,6 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var sk_head:feathers.controls.SkinnableContainer;
 
-		public var ui_fujin:feathers.controls.UIAsset;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -43,7 +40,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 911;
-			this.elementsContent = [btn_shuaixin_i(),btn_chakan_i(),btn_shenqing_i(),Duiwu_list_i(),sk_head_i(),ui_fujin_i()];
+			this.elementsContent = [btn_shuaixin_i(),btn_chakan_i(),btn_shenqing_i(),Duiwu_list_i(),sk_head_i()];
 			
 			states = {
 			};
@@ -123,17 +120,6 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.width = 910;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function ui_fujin_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ui_fujin = temp;
-			temp.name = "ui_fujin";
-			temp.styleName = "ui/app/shejiao/zudui/fujinmeiyouduiwu.png";
-			temp.x = 310;
-			temp.y = 168;
 			return temp;
 		}
 

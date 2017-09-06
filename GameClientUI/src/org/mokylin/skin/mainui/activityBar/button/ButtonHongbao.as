@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/hongbao/down.png", "hover":"ui/mainui/activityBar/button/hongbao/over.png", "up":"ui/mainui/activityBar/button/hongbao/up.png"};
+			skinNames={"down":"ui/button/hongbao/down.png", "hover":"ui/button/hongbao/over.png", "up":"ui/button/hongbao/up.png"};
 		}
 
 

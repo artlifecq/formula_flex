@@ -44,7 +44,6 @@ package org.mokylin.skin.app.countryWar
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon = temp;
 			temp.name = "icon";
-			temp.styleName = "ui/common/icon/activity/can_bai.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

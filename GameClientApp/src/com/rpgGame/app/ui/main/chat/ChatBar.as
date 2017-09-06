@@ -13,6 +13,8 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
+	import com.rpgGame.app.richText.component.RichTextConfig;
+	import com.rpgGame.app.richText.component.RichTextUnitData;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
 	import com.rpgGame.core.events.ChatEvent;
@@ -20,6 +22,7 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -154,11 +157,12 @@ package com.rpgGame.app.ui.main.chat {
 			defaultFormat.leading = 0
 			
 			this._inputText = new RichTextArea3D(this._skin.inputbg.width-50, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
-//			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
+			//			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
 			this._inputText.isEditable = true;
 			this._inputText.x = this._skin.inputbg.x;
 			this._inputText.y = this._skin.inputbg.y+3;
 			this._inputText.text = "";
+			this._inputText.maxChars=ChatCfgData.MAX_CHAR_LENGTH;
 			this._inputText.defaultTextFormat = defaultFormat;
 			this._skin.grp_buttom.addChild(this._inputText);
 			this._skin.grp_buttom.addChild(this._skin.btn_face);
@@ -238,12 +242,50 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				_inputText.text = "";
 			}
-			var key:String = ChatGoodsManager.addItemInfo(item);
-			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
-			_inputText.appendRichText(goodsCode);
-			_inputText.setFocus();
-			_inputText.textfield.setSelection(_inputText.width,_inputText.width);
-			setGroubState(true);
+			if(isCanAdd(item)){
+				var key:String = ChatGoodsManager.addItemInfo(item);
+				var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
+				_inputText.appendRichText(goodsCode);
+				_inputText.setFocus();
+				_inputText.textfield.setSelection(_inputText.width,_inputText.width);
+				setGroubState(true);
+			}
+		}
+		
+		/**添加一个检测物品的方法*/
+		private function isCanAdd(info:ClientItemInfo):Boolean
+		{
+			var separator : String = RichTextConfig.SEPARATOR;
+			var str : String;
+			var data : Array = _inputText.text.split(separator);
+			var len : int = data.length;
+			var hasinfo:ClientItemInfo;
+			var hasCont:int=0;
+			if (len <= 0)
+				return true;		
+			var unitData:RichTextUnitData;
+			for (var i : int = 1; i < len; i += 2)
+			{
+				str = data[i];
+				
+				unitData = RichTextConfig.getUnitData(RichTextConfig.SEPARATOR + str + RichTextConfig.SEPARATOR);
+				
+				if (unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
+				{
+					hasinfo=ChatManager.getShowItemInfo(unitData);
+					if(hasinfo.itemInfo.itemId.EqualTo(info.itemInfo.itemId))
+					{
+						NoticeManager.showNotifyById(100502);
+						return false;
+					}
+					hasCont++;
+				}
+			}
+			if(hasCont>=3){
+				NoticeManager.showNotifyById(100501);
+				return false;
+			}
+			return true;
 		}
 		
 		private function showTest(role:SceneRole):void
@@ -299,7 +341,7 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			scrollToBottom();
 		}
-				
+		
 		/**
 		 * 刷新显示 频道改变后的内容显示
 		 * */
@@ -337,7 +379,7 @@ package com.rpgGame.app.ui.main.chat {
 				delayScroll=TweenLite.delayedCall(0.3,function ():void{
 					_skin.listBar.scrollToBottom(0);
 				});
-//				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
+				//				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
 			}
 		}
 		
@@ -365,7 +407,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.btn_lock.visible=false;
 			_skin.lb_tishi.visible=false;
 			_skin.grp_laba.visible=false;
-//			_skin.btn_scale.visible=false;
+			//			_skin.btn_scale.visible=false;
 			_skin.btns.visible=false;
 		}
 		
@@ -376,7 +418,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.btn_lock.visible=true;
 			_skin.lb_tishi.visible=true;
 			_skin.grp_laba.visible=true;
-//			_skin.btn_scale.visible=true;
+			//			_skin.btn_scale.visible=true;
 			_skin.btns.visible=true;
 		}
 		
@@ -526,11 +568,11 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			
 			// 调整大小
-//			touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
-//			if (touch) {
-//				this.setAdjustSizeState(true);
-//				return;
-//			}
+			//			touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
+			//			if (touch) {
+			//				this.setAdjustSizeState(true);
+			//				return;
+			//			}
 			
 			
 			touch=e.getTouch(_skin.btn_face,TouchPhase.ENDED);
@@ -545,10 +587,10 @@ package com.rpgGame.app.ui.main.chat {
 				onAddLocation();
 			}
 			
-//			touch = e.getTouch(this._skin.btn_scale, TouchPhase.ENDED);
-//			if (touch) {
-//				this.setAdjustSizeState(false);
-//			}
+			//			touch = e.getTouch(this._skin.btn_scale, TouchPhase.ENDED);
+			//			if (touch) {
+			//				this.setAdjustSizeState(false);
+			//			}
 			if (this._isAdjustSize) {
 				this.adjustSize();
 			}
@@ -567,10 +609,10 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			if(bool){
 				_skin.bg.alpha=1;
-//				_skin.btn_scale.alpha=1;
+				//				_skin.btn_scale.alpha=1;
 			}else {
 				_skin.bg.alpha=0;
-//				_skin.btn_scale.alpha=0;
+				//				_skin.btn_scale.alpha=0;
 			}
 			_inputText.visible=bool;
 			_skin.btn_lock.visible=bool;
@@ -757,10 +799,10 @@ package com.rpgGame.app.ui.main.chat {
 		private var delayScroll:TweenLite;
 		private function setListIstoOrKeep():void
 		{
-//			_skin.btn_lock.isSelected=!_skin.btn_lock.isSelected;
+			//			_skin.btn_lock.isSelected=!_skin.btn_lock.isSelected;
 			iskeepOrto=!_skin.btn_lock.isSelected;
 		}
-			
+		
 		private function sendMsg() : void 
 		{
 			if("" == this._inputText.text )

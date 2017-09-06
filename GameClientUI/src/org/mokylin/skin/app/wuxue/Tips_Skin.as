@@ -157,7 +157,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skillName = temp;
 			temp.name = "skillName";
-			temp.styleName = "ui/common/tips/name/shengshengbuxi.png";
+			temp.styleName = "ui/art_txt/common/tips/name/shengshengbuxi.png";
 			temp.x = 72;
 			temp.y = 15;
 			return temp;

@@ -342,7 +342,7 @@ package com.rpgGame.app.ui.tips
 			curY+=17;
 			name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"");
 			if(_itemInfo.smeltAtt1!=0){
-				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt1);
+				value=CharAttributeType.getWashName(_itemInfo.smeltAtt1);
 			}else{
 				value=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"未激活");
 			}
@@ -351,7 +351,7 @@ package com.rpgGame.app.ui.tips
 			label.y=curY;
 			curY+=20;
 			if(_itemInfo.smeltAtt2!=0){
-				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt2);
+				value=CharAttributeType.getWashName(_itemInfo.smeltAtt2);
 			}else{
 				value=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"未激活");
 			}
