@@ -28,6 +28,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -95,6 +96,7 @@ package com.rpgGame.app.manager.task
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.addEvent(MapEvent.MAP_FLY_COMPLETE,flyComplete);
+			EventManager.addEvent(UserMoveEvent.MOVE_ENTER, resetTechTime);
 			resetTechTime();
 		}
 		private function onApphide( ev:AppEvent ):void
@@ -511,7 +513,7 @@ package com.rpgGame.app.manager.task
 					break;
 				case TaskType.SUB_SPEAK:
 					var speak:String=TaskMissionCfgData.substitute(TaskMissionManager.getOtherTaskData(taskType).q_describe,MainRoleManager.actorInfo.guildName);
-					ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
+					//ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 			}

@@ -39,7 +39,7 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/maps/lan.png";
 			temp.x = 34;
-			temp.y = 8;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -48,12 +48,12 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_name = temp;
 			temp.name = "lbl_name";
-			temp.height = 16;
-			temp.fontSize = 12;
-			temp.text = "通往马贼营寨";
+			temp.height = 18;
+			temp.fontSize = 14;
+			temp.text = "通往邯郸郊外";
 			temp.textAlign = "center";
-			temp.color = 0x14A3F3;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.color = 0x14C5FF;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.width = 124;
 			temp.x = 0;
 			temp.y = 0;

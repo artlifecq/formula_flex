@@ -200,10 +200,20 @@ package com.game.engine3D.vo
 		{
 			syncPosition(value.x, value.y, value.z, true, this);
 		}
-
+		private var _tmpPos:Vector3D=new Vector3D();
+		/**
+		 *不直接返回position 
+		 * @return 
+		 * 
+		 */		
 		public function get position() : Vector3D
 		{
-			return _position;
+			_tmpPos.x=_position.x;
+			_tmpPos.y=_position.y;
+			_tmpPos.z=_position.z;
+			_tmpPos.w=_position.w;
+			return _tmpPos;
+			//return _position;
 		}
 
 		public function get transform() : Matrix3D

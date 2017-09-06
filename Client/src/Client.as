@@ -1,6 +1,7 @@
 package
 {
 	import com.client.EngineSetting;
+	import com.client.process.ClientInitProcess;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
 	import com.client.process.LoadDll;
@@ -195,7 +196,7 @@ package
 				{
 					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
 				}
-				Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_ERROR,"硬件加速开启失败");
+				Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_LOW,"硬件加速开启失败,显卡驱动后者显卡过低");
 			}
 			else
 			{
@@ -249,6 +250,7 @@ package
 			{
 				TipsInfoView2D.showAlert2D.showAlert("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
 			}
+			Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_ERROR,"硬件加速开启失败");
 		}
 		
 		private function onDownWeiDuan():void
@@ -258,6 +260,7 @@ package
 		private function stage3DLayerUserDisabledError():void
 		{
 			GameLog.addShow("stage3DLayerUserDisabledError");
+			Statistics.intance.pushNode(Statistics.STEP_HARD_DISABLED_ERROR,"硬件加速没有开启");
 		}
 		
 		private function onMemoryTooHighed():void
@@ -278,7 +281,8 @@ package
 		{
 			if (ClientConfig.isRelease && Capabilities.isDebugger)
 			{
-				TipsInfoView2D.showAlert2D("您当前的Flash插件是debug版本，游戏性能较低，为了您能有更好的游戏体验，请安装release版本的插件。", onShowPlayerOkFunc);
+				Statistics.intance.pushNode(Statistics.STEP_PLAYER_IS_DEBUG,"flash是debug版本的用户");
+//				TipsInfoView2D.showAlert2D("您当前的Flash插件是debug版本，游戏性能较低，为了您能有更好的游戏体验，请安装release版本的插件。", onShowPlayerOkFunc);
 				return true;
 			}
 			return false;
@@ -313,6 +317,7 @@ package
 			{
 				ProcessStateMachine.getInstance().pushProcess(new LoginInput());
 			}
+			ProcessStateMachine.getInstance().pushProcess(new ClientInitProcess());
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
@@ -361,12 +366,14 @@ package
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_CLINET_INIT, 0.0, 0.8,true);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0.8, 0.85);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.85, 0.9);
 			
 			var pg:ProcessGroup = new ProcessGroup();
-			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.9);
-			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.9, 0.91, true);
+			
+			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.9,0.905);
+			pg.addPreProcess(ProcessState.STATE_RANDOM_NAME, 0.905, 0.91, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.91, 0.95, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.95, 0.96, true);
 			//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);

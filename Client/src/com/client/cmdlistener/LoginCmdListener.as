@@ -12,7 +12,6 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.login.message.ResLoginSuccessMessage;
 	import com.rpgGame.netData.login.message.ResSubstituteMessage;
 	import com.rpgGame.netData.map.message.ResRoundPlayerChangeNameMessage;
-	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	import com.rpgGame.statistics.Statistics;
 	

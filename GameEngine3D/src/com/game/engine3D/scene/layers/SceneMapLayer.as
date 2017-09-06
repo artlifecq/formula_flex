@@ -759,7 +759,7 @@ package com.game.engine3D.scene.layers
 		{
 			if (_heightMapHelper && _district)
 			{
-				_heightMapHelper.generateHeightMap(_scene3D.view, _district.min, _district.max);
+				HeightMapHelperProxy.generateHeightMap(_heightMapHelper,_scene3D.view, _district.min, _district.max);
 				updateDistrictWithHeightMap();
 			}
 		}
@@ -891,7 +891,7 @@ package com.game.engine3D.scene.layers
 		public function queryHeightAt(x : Number, z : Number) : Number
 		{
 			if (_heightMapHelper)
-				return _heightMapHelper.queryHeightAt(x, z);
+				return HeightMapHelperProxy.queryHeightAt(_heightMapHelper,x, z);
 			return 0;
 		}
 

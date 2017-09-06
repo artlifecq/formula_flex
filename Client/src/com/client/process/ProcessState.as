@@ -53,6 +53,10 @@ package com.client.process
 		 */
 		public static const STATE_RANDOM_NAME:String = "STATE_RANDOM_NAME";
 
+		/**
+		 *随机名字 
+		 */
+		public static const STATE_CLINET_INIT:String = "CLIENT_INIT";
 		public function ProcessState()
 		{
 		}

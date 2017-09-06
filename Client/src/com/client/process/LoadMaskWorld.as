@@ -109,6 +109,7 @@ package com.client.process
 		{
 			ResLoadingView.instance.title = "屏蔽字库加载错误：" + ClientConfig.getLangUrl();
 			GameLog.addShow("屏蔽字库加载错误：" + ClientConfig.getLangUrl());
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_MASK_WORD_ERROR,"flash是debug版本的用户");
 		}
 
 		override public function dispose() : void

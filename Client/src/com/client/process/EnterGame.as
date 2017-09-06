@@ -8,6 +8,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.statistics.Statistics;
 	
 	import flash.system.Capabilities;
 	import flash.utils.getDefinitionByName;
@@ -64,6 +65,7 @@ package com.client.process
 
 		private function initEntry() : void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_ENTER_GAME,"成功获得登录数据并准备进入游戏！！！");
 			GameLog.addShow("进入游戏");
 			var userInfo : Object = {loginName: ClientConfig.loginName, loginKey: ClientConfig.loginKey};
 			//由于登录和资源是异步的，所以需要登录成功并且资源全部加载好之后才可以进游戏，

@@ -21,6 +21,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.controller.MouseCursorController;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -163,7 +164,7 @@ package com.rpgGame.app.cmdlistener.engine
 				
 				MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
 //				TweenLite.delayedCall(0.1, delayWalkToPos, [position]);
-				
+				EventManager.dispatchEvent(MapEvent.MAP_CLICK);	
 				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);	
 			}
 		}

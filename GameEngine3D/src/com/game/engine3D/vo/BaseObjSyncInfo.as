@@ -50,6 +50,7 @@ package com.game.engine3D.vo
 			if (_obj is ObjectContainer3D)
 			{
 				ObjectContainer3D(_obj).x = position.x + _offsetX;
+//				ObjectContainer3D(_obj).y = position.y + _offsetY;
 				ObjectContainer3D(_obj).z = position.z + _offsetZ;
 				if (_syncHeight)
 				{

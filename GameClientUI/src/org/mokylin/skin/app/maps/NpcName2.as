@@ -23,8 +23,6 @@ package org.mokylin.skin.app.maps
 			super();
 			
 			this.currentState = "normal";
-			this.height = 33;
-			this.width = 124;
 			this.elementsContent = [__NpcName2_UIAsset1_i(),lbl_name_i()];
 			
 			states = {
@@ -40,8 +38,8 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/maps/hong.png";
-			temp.x = 53.5;
-			temp.y = 16;
+			temp.x = 35;
+			temp.y = 26;
 			return temp;
 		}
 
@@ -51,12 +49,12 @@ package org.mokylin.skin.app.maps
 			lbl_name = temp;
 			temp.name = "lbl_name";
 			temp.height = 16;
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "npc名字";
 			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 124;
+			temp.width = 90;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

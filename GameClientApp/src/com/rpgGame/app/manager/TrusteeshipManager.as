@@ -674,11 +674,6 @@ package com.rpgGame.app.manager
 		public function set isNormalSpell(value:Boolean):void
 		{
 			_isNormalSpell = value;
-			
-			if(value)
-			{
-				trace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&怎么被设置为true了呢");
-			}
 		}
 
 		public function get myFighterCtrl():ControlMainPlayerFight
