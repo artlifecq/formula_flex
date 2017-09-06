@@ -151,7 +151,7 @@
 		 * @param id
 		 * 
 		 */
-		public static function openPanelByFuncID(id:int,data:Object=null):void
+		public static function openPanelByFuncID(id:int,data:Object=null,isAutoHide:Boolean=true):void
 		{
 			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(id);
 			if(!funcCfg){
@@ -169,7 +169,11 @@
 				return ;
 			}
 			
-			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			if(isAutoHide){
+				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}else{
+				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}
 		}
 		
 		
@@ -178,7 +182,7 @@
 		 * @param info
 		 * 
 		 */
-		public static function openPanelByFuncInfo(funcCfg:Q_newfunc,data:Object=null):void
+		public static function openPanelByFuncInfo(funcCfg:Q_newfunc,data:Object=null,isAutoHide:Boolean=true):void
 		{
 			var minlevel:int =funcCfg.q_level;
 			if(!checkOpenByLevel(minlevel))//未达到开启等级
@@ -191,7 +195,11 @@
 			if(!panelCfg){
 				return;
 			}
-			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			if(isAutoHide){
+				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}else{
+				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}
 		}
 		
 		/**
@@ -199,7 +207,7 @@
 		 * @param panelCfg
 		 * 
 		 */
-		public static function openModeByPanelInfo(panelCfg:Q_panel,data:Object=null):void
+		public static function openModeByPanelInfo(panelCfg:Q_panel,data:Object=null,isAutoHide:Boolean=true):void
 		{
 			if(!panelCfg){
 				return;
@@ -214,7 +222,11 @@
 				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
 				return ;
 			}
-			AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			if(isAutoHide){
+				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}else{
+				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+			}
 		}
 		
 		/**
@@ -223,7 +235,7 @@
 		 * @param data
 		 * 
 		 */
-		public static function openByBtnInfo(btnCfg:Q_mainbtn,data:Object=null):void
+		public static function openByBtnInfo(btnCfg:Q_mainbtn,data:Object=null,isAutoHide:Boolean=true):void
 		{
 			if(btnCfg.q_click_type==EmOpenType.OPEN_URL){
 				navigateToURL(new URLRequest(btnCfg.q_click_arg),"_blank");
@@ -243,7 +255,11 @@
 					NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
 					return ;
 				}
-				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				if(isAutoHide){
+					AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				}else{
+					AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				}
 			}
 		}
     }

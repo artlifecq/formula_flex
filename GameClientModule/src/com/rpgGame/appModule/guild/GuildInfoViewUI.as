@@ -172,10 +172,10 @@ package com.rpgGame.appModule.guild
 					GuildManager.instance().gotoTask();
 					break;
 				case _skin.btnJineng:
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_SPELL);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_SPELL,null,false);
 					break;
 				case _skin.btnZhengba:
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_COMBAT);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HCZB_INFO_GUILD,null,false);
 					break;
 				case _skin.btnZhaoji:
 					GuildSender.guildConvene();

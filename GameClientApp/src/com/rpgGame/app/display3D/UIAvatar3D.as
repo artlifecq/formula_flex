@@ -99,7 +99,7 @@ package com.rpgGame.app.display3D
 		
 		protected function onShow() : void
 		{
-			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
+//			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
 			transition(RoleStateType.ACTION_SHOW); //切换到“站立状态”
 			startRender3D();
 		}

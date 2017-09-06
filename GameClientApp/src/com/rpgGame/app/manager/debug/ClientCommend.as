@@ -248,8 +248,7 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".actopen", function (...arg):void
 			{
 				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
-				var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
-				if(info.actCfg.q_show_notice==1&&FunctionOpenManager.checkOpenByFunId(list[1])){
+				if(info.actCfg.q_show_notice==1&&FunctionOpenManager.checkOpenByFunId(info.actCfg.q_notice_trans)){
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
 			});

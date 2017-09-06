@@ -8,13 +8,18 @@ package com.rpgGame.appModule.activety.zonghe
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -140,8 +145,9 @@ package com.rpgGame.appModule.activety.zonghe
 			if(selectedInfo.info.joinState==ActivityJoinStateEnum.JOINING){
 				if(selectedInfo.actCfg.q_trans){
 					//跳到对应标签的对应活动
-					var list:Array=JSONUtil.decode(selectedInfo.actCfg.q_trans);
-					AppManager.showAppNoHide(list[0],selectedInfo,list[1]);
+					var panelCfg:Q_panel=PanelCfgData.getPanelCfg(selectedInfo.actCfg.q_trans);
+					var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
+					AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),selectedInfo,funcCfg.q_id);
 				}else{
 					SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
 				}

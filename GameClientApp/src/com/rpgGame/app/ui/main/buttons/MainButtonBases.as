@@ -4,9 +4,10 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.coreData.cfg.MainBtnCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.enum.EmOpenType;
 	
 	import away3d.events.Event;
 	
@@ -16,26 +17,30 @@ package com.rpgGame.app.ui.main.buttons
 	
 	public class MainButtonBases extends IconButton implements IOpen
 	{
-		private var _info:Q_newfunc;
+		private var _funcInfo:Q_newfunc;
 		protected var _btnInfo:Q_mainbtn;
 		
 		protected var _openState:Boolean=true;
 	
 		
-		public function get info():Q_newfunc
+		public function get info():Q_mainbtn
 		{
-			return _info;
+			return _btnInfo;
 		}
 		
-		public function set info(value:Q_newfunc):void
+		public function set info(value:Q_mainbtn):void
 		{
-			_info = value;
-			_btnInfo=MainBtnCfgData.getMainBtnCfg(_info.q_open_btn);
+			_btnInfo = value;
+			if(_btnInfo.q_click_type==EmOpenType.OPEN_PANEL){
+				_funcInfo=NewFuncCfgData.getFuncCfgByPanelId(int(_btnInfo.q_click_arg));
+			}else{
+				_funcInfo=NewFuncCfgData.getFuncCfgByBtnId(_btnInfo.q_id);
+			}
 		}
 		
 		public function canOpen():Boolean
 		{
-			return _info.q_level<=MainRoleManager.actorInfo.totalStat.level;
+			return _funcInfo.q_level<=MainRoleManager.actorInfo.totalStat.level;
 		}
 		
 		private var _needPlayFirstAm:Boolean = false;

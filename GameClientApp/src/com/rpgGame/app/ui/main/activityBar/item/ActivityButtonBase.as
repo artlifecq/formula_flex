@@ -12,8 +12,10 @@
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.MainBtnCfgData;
+    import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.Q_mainbtn;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
+    import com.rpgGame.coreData.enum.EmOpenType;
     
     import feathers.controls.ButtonState;
     import feathers.themes.GuiTheme;
@@ -69,15 +71,19 @@
 			}
         }
 		
-		public function get info():Q_newfunc
+		public function get info():Q_mainbtn
 		{
-			return _funcInfo;
+			return _btnInfo;
 		}
 		
-		public function set info(value:Q_newfunc):void
+		public function set info(value:Q_mainbtn):void
 		{
-			_funcInfo = value;
-			_btnInfo=MainBtnCfgData.getMainBtnCfg(_funcInfo.q_open_btn);
+			_btnInfo = value;
+			if(_btnInfo.q_click_type==EmOpenType.OPEN_PANEL){
+				_funcInfo=NewFuncCfgData.getFuncCfgByPanelId(int(_btnInfo.q_click_arg));
+			}else{
+				_funcInfo=NewFuncCfgData.getFuncCfgByBtnId(_btnInfo.q_id);
+			}
 		}
 		
 		public function canOpen():Boolean

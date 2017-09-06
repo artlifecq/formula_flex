@@ -73,7 +73,7 @@ package com.rpgGame.app.ui.tab
 			}
 		}
 		
-		public function checkOpen():void
+		private function checkOpen():void
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
@@ -88,7 +88,7 @@ package com.rpgGame.app.ui.tab
 			if(!_needRefash)
 				return ;
 			this.updata();
-			this.switchTabKey(this._currentKey);
+//			this.switchTabKey(this._currentKey);
 		}
 	}
 }

@@ -11,6 +11,7 @@ package com.rpgGame.app.ui
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
@@ -216,7 +217,7 @@ package com.rpgGame.app.ui
 				initView();
 			}
 			_needCreate = false;
-			_button= MainButtonManager.getButtonByInfo(_qdata);
+			_button= MainButtonManager.getButtonByInfo(MainBtnCfgData.getMainBtnCfg(_qdata.q_open_btn));
 			if(_button==null)
 				GameLog.add("配置错误提示:图标id="+_qdata.q_id+",功能:"+_qdata.q_name+"按钮未找到");
 			m_skin.Icons.styleName = "ui/icon/xingongneng/"+_qdata.q_res_dir+"/145.png";

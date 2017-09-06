@@ -52,8 +52,7 @@ package com.rpgGame.app.ui.main.navigation {
 			_content.reset();
 			for(var i:int =0;i<length;i++)
 			{
-				var funcInfo:Q_newfunc=NewFuncCfgData.getFuncCfgByBtnId(buttoninfos[i].q_id);
-				var button:IOpen = MainButtonManager.getButtonByInfo(funcInfo);
+				var button:IOpen = MainButtonManager.getButtonByInfo(buttoninfos[i]);
 				if(button!=null&&button.canOpen())
 				{
 					_content.addButton(button);

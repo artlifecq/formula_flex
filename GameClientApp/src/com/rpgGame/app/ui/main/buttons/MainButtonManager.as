@@ -12,6 +12,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.enum.EmMainBtnID;
+	import com.rpgGame.coreData.enum.EmOpenType;
 	
 	import away3d.log.Log;
 	
@@ -59,29 +60,36 @@ package com.rpgGame.app.ui.main.buttons
 			_classMap.add(id,skinui);
 		}
 		
-		public static function getButtonByInfo(info:Q_newfunc):IOpen
+		public static function getButtonByInfo(btnInfo:Q_mainbtn):IOpen
 		{
-			if(!info){
+			if(!btnInfo){
 				return null;
 			}
-			var level:int = info.q_level;
+			
+			var funcInfo:Q_newfunc;
+			if(btnInfo.q_click_type==EmOpenType.OPEN_PANEL){
+				funcInfo=NewFuncCfgData.getFuncCfgByPanelId(int(btnInfo.q_click_arg));
+			}else{
+				funcInfo=NewFuncCfgData.getFuncCfgByBtnId(btnInfo.q_id);
+			}
+			if(!funcInfo){
+				return null;
+			}
+			
+			var level:int = funcInfo.q_level;
 			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
-			var button:IOpen = _initializeMap.getValue(info.q_id);
+			var button:IOpen = _initializeMap.getValue(btnInfo.q_id);
 			if(button == null)
 			{
-				if(info.q_open_btn==0){
-					return null;
-				}
-				var btnInfo:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(info.q_open_btn);
 				var styleName:*= _classMap.getValue(btnInfo.q_id);
 				if(styleName==null)
 				{
-					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.q_id);
+					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + funcInfo.q_id);
 					return null;
 				}
 				button = getBtnById(btnInfo.q_id);
-				button.info = info;
+				button.info = btnInfo;
 				if(styleName is String){
 					if((button as ActivityButtonBase)){
 						(button as ActivityButtonBase).styleName=styleName;
@@ -89,8 +97,8 @@ package com.rpgGame.app.ui.main.buttons
 				}else{
 					button.styleClass=styleName;
 				}
-				button.name = info.q_id.toString();
-				_initializeMap.add(info.q_id,button);
+				button.name = btnInfo.q_id.toString();
+				_initializeMap.add(btnInfo.q_id,button);
 			}
 			return button as IOpen;
 		}
@@ -157,7 +165,7 @@ package com.rpgGame.app.ui.main.buttons
 		 */
 		public static function openActByData(id:int,data:Object):void
 		{
-			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
 			if(info)
 			{
 				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
@@ -171,7 +179,7 @@ package com.rpgGame.app.ui.main.buttons
 		/**开启活动按钮by id----yt*/
 		public static function openActivityButton(id:int):void
 		{
-			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
 			if(info)
 			{
 				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
@@ -184,7 +192,7 @@ package com.rpgGame.app.ui.main.buttons
 		/**关闭活动按钮 byid----yt*/
 		public static function closeActivityButton(id:int):void
 		{
-			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
 			if(info)
 			{
 				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
@@ -200,7 +208,7 @@ package com.rpgGame.app.ui.main.buttons
 		 * */
 		public static function setUptimeActivityButton(id:int,startTime:int=0):void
 		{
-			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
 			if(info)
 			{
 				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
@@ -215,7 +223,7 @@ package com.rpgGame.app.ui.main.buttons
 		 * */
 		public static function clearUptimeActivityButton(id:int):void
 		{
-			var info:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
 			if(info)
 			{
 				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;

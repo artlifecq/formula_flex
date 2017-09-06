@@ -6,7 +6,11 @@ package com.rpgGame.appModule.activety
 	import com.rpgGame.appModule.activety.jixiantiaozhan.JiXianTiaoZhanPenelExt;
 	import com.rpgGame.appModule.activety.jixiantiaozhan.JiXianTiaozhanPaiHnagPenelExt;
 	import com.rpgGame.appModule.activety.zonghe.ZongHeView;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.activety.Activety_Skin;
@@ -43,8 +47,9 @@ package com.rpgGame.appModule.activety
 			if(data&&funcKey!=0){
 				var info:ActivetyInfo=data as ActivetyInfo;
 				if(info){
-					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
-					funcKey=list[1];
+					var panelCfg:Q_panel=PanelCfgData.getPanelCfg(info.actCfg.q_trans);
+					var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
+					funcKey=funcCfg.q_id;
 				}
 			}
 			super.show(data,funcKey,parentContiner);

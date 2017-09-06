@@ -108,9 +108,9 @@ package com.rpgGame.app.manager
 				var typeList:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(type);
 				if(typeList){
 					for each(var info:ActivetyInfo in typeList){
-						if(info.actCfg.q_icon_id!=0&&info.info){//有独立的功能icon
+						if(info.actCfg.q_btn_id!=0&&info.info){//有独立的功能icon
 							if(info.info.notifyTime!=-1){//在预告时间内
-								MainButtonManager.openActByData(info.actCfg.q_icon_id,info);
+								MainButtonManager.openActByData(info.actCfg.q_btn_id,info);
 							}
 						}
 					}
@@ -160,9 +160,9 @@ package com.rpgGame.app.manager
 			ActivetyCfgData.sortTypeList(info.info.activityType);
 			if(state>0)
 			{
-				MainButtonManager.openActByData(info.actCfg.q_icon_id,info);
+				MainButtonManager.openActByData(info.actCfg.q_btn_id,info);
 			}else{
-				MainButtonManager.closeActivityButton(info.actCfg.q_icon_id);
+				MainButtonManager.closeActivityButton(info.actCfg.q_btn_id);
 			}
 			
 		}

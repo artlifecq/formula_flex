@@ -46,12 +46,12 @@ package com.rpgGame.coreData.enum
 		public static const EM_BANGHUI_SPELL:int=21;
 		/** 帮会列表 **/
 		public static const EM_BANGHUI_LIEBIAO:int=22;
-		/** 皇城争霸 **/
-		public static const EM_BANGHUI_COMBAT:int=23;
-		/** 王城争霸 **/
-		public static const EM_BANGHUI_WCZB1:int=24;
-		/** 王城争霸 **/
-		public static const EM_BANGHUI_WCZB2:int=25;
+		/** 帮派战 **/
+		public static const EM_BANGHUI_WAR:int=23;
+		/** 皇城争霸帮派 **/
+		public static const EM_HCZB_INFO_GUILD:int=24;
+		/** 皇城争霸战场 **/
+		public static const EM_HCZB_INFO_ZHANC:int=25;
 		/** 商城 **/
 		public static const EM_SHOP:int=26;
 		/** 红包 **/

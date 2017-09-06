@@ -10,8 +10,11 @@
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
+	import com.rpgGame.coreData.enum.EmOpenType;
 	import com.rpgGame.coreData.enum.EnumFunctionBtnType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	
@@ -70,7 +73,6 @@
 			var len:int;
 			var starX:int;
 			var btnInfo:Q_mainbtn;
-			var funcInfo:Q_newfunc;
 			var width:int;
 			for(var i:int=0;i<length;i++){
 				var list:Vector.<Q_mainbtn>=MainBtnCfgData.getBtnListByType(ACT_TYPES[i]);
@@ -84,8 +86,7 @@
 					btnInfo = list[j] as Q_mainbtn;
 					if(q_map_zones==1&&btnInfo.q_show_zone==q_map_zones)
 						continue;
-					funcInfo=NewFuncCfgData.getFuncCfgByBtnId(btnInfo.q_id);
-					button = MainButtonManager.getButtonByInfo(funcInfo);
+					button = MainButtonManager.getButtonByInfo(btnInfo);
 					if(button!=null&&button.canOpen())
 					{
 						button.y = i*GRID_HEIGHT;

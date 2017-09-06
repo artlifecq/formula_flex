@@ -1,7 +1,6 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.guild.war.HczbPlayerViewUI;
@@ -37,8 +36,8 @@ package com.rpgGame.appModule.guild
 			addTabDatas(TabBarSkin_pack,GuildUPViewUI,EmFunctionID.EM_BANGHUI_UPLEVEL);
 			addTabDatas(TabBarSkin_pack,GuildSkillViewUI,EmFunctionID.EM_BANGHUI_SPELL);
 			addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
-			addTabDatas(TabBarSkin_pack,WczbWarViewUI,EmFunctionID.EM_BANGHUI_WCZB2);
-			addTabDatas(TabBarSkin_pack,HczbPlayerViewUI,EmFunctionID.EM_BANGHUI_COMBAT);
+			addTabDatas(TabBarSkin_pack,WczbWarViewUI,EmFunctionID.EM_BANGHUI_WAR);
+			addTabDatas(TabBarSkin_pack,HczbPlayerViewUI,EmFunctionID.EM_HCZB_INFO_GUILD);
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
@@ -53,7 +52,7 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashView():void
 		{
-			_tabBar.checkOpen();
+//			_tabBar.checkOpen();
 		}
 		
 		override public function hide():void
