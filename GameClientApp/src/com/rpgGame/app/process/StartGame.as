@@ -148,6 +148,7 @@ package com.rpgGame.app.process
 
 		private function getConfig() : void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_FIRST_HERAT,"第一次请求心跳协议");
 			SystemTimeManager.reqServerTimeAndHeart();
 			//因为这里暂时没有服务器给客户端传入配置数据了，所以暂时不要了
 //			EventManager.addEvent(MiscEvent.CONGFIG_ALL_CMP, startGame);
@@ -278,6 +279,7 @@ package com.rpgGame.app.process
 
 		private function onSwitchCmp() : void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_SUCCESS_IN_MAP,"进入场景完成，[StarGame] 开始游戏...");
 			GameLog.addShow("进入场景完成，[StarGame] 开始游戏...");
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			completeProcess();

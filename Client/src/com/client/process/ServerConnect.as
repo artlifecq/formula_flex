@@ -218,6 +218,7 @@ package com.client.process
 			{
 				ResLoadingView.instance.title = "服务器连接" + msg + "，原因：" + _errMsg + "，请刷新后重新登录。";
 				GameAlert.show("服务器连接" + msg + "，原因：" + _errMsg + "，请刷新后重新登录。", "提示", onOkFunc);
+				Statistics.intance.pushNode(Statistics.STEP_FAIL_CONNECT_SERVER,"直接socket链接失败");
 			}
 		}
 		
@@ -392,6 +393,7 @@ package com.client.process
 		
 		private function socketDropsHandle(event:NetEvent):void
 		{
+			Statistics.intance.pushNode(Statistics.STEP_LOST_SERVER,"掉线了！");
             GameLog.addShow("[ServerConnect] [socketDropsHandle]");
 			ReconnectionPanelExt.Show();
 		}
