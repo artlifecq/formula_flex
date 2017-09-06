@@ -28,6 +28,7 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.coreData.type.SexType;
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 	import com.rpgGame.netData.player.bean.PlayerBriefInfo;
 	
@@ -426,7 +427,7 @@ package com.rpgGame.app.display3D
 					animatResID = heroModel.animatRes_bingjia;	
 					break;
 				case 2:
-					if(info.sex)
+					if(info.sex==SexType.MALE)
 					{
 						animatResID = heroModel.animatRes_mojia_man;
 					}
@@ -436,7 +437,7 @@ package com.rpgGame.app.display3D
 					}
 					break;
 				case 3:
-					if(info.sex)
+					if(info.sex==SexType.MALE)
 					{
 						animatResID = heroModel.animatRes_mojia_man;
 					}
@@ -534,7 +535,7 @@ package com.rpgGame.app.display3D
 					animatResID = heroModel.animatRes_bingjia;	
 					break;
 				case 2:
-					if(info.sex)
+					if(info.sex==SexType.MALE)
 					{
 						animatResID = heroModel.animatRes_mojia_man;
 					}
@@ -544,7 +545,7 @@ package com.rpgGame.app.display3D
 					}
 					break;
 				case 3:
-					if(info.sex)
+					if(info.sex==SexType.MALE)
 					{
 						animatResID = heroModel.animatRes_mojia_man;
 					}
