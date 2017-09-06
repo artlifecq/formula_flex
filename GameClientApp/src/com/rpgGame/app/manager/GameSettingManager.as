@@ -229,7 +229,7 @@
 			{
 				case LangShieldingMenu.SYSTEMSET_AKEY_BLOCK:
 					return aKeyBlock;
-				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_ENEMYS:
+				case LangShieldingMenu.SYSTEMSET_MONSTER:
 					return checkFiltrateGuaiWu;
 				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_PLAYERS:
 					return checkFiltrateBangHui;
@@ -244,31 +244,19 @@
 				case LangShieldingMenu.SYSTEMSET_AKEY_BLOCK:
 					aKeyBlock=state;
 					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_PLAYERS:
-					
-					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_ENEMYS:
+				case LangShieldingMenu.SYSTEMSET_MONSTER:
 					checkFiltrateGuaiWu=state;
 					break;
+				case LangShieldingMenu.SYSTEMSET_HIDE_PLAYERS:
+					
+					break;				
 				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_PLAYERS:
 					checkFiltrateBangHui=state;
 					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_DAMAGE_NUMBER:
+				case LangShieldingMenu.SYSTEMSET_HIDE_DOTHER_EFFECTS:
 					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_OTHER_SPELL_EFFECTS:
+				case LangShieldingMenu.SYSTEMSET_HIDE_OTHER_GIRL:
 					break;			
-				case LangShieldingMenu.SYSTEMSET_HIDE_SPELL_EFFECTS:
-					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_EFFECTS:
-					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_SHADOW_EFFECTS:
-					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_WEATHER_EFFECTS:
-					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_SCREEN_SHOCK:
-					break;
-				case LangShieldingMenu.SYSTEMSET_HIDE_SWTSITL:
-					break;
 			}
 		}
 	}

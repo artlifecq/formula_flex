@@ -42,7 +42,7 @@ package com.rpgGame.app.state.ai.pet
 							pet.dialogFace=BubbleDialogFace.create(pet);
 							pet.dialogFace.show();
 						}
-						pet.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,words[int(words.length*Math.random())],1500);
+						pet.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,words[int(words.length*Math.random())],6500);
 					}
 				}
 			}

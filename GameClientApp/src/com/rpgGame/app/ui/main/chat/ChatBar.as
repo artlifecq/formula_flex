@@ -299,8 +299,7 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			scrollToBottom();
 		}
-		
-		
+				
 		/**
 		 * 刷新显示 频道改变后的内容显示
 		 * */

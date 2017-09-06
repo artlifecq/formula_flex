@@ -24,9 +24,11 @@ package  com.rpgGame.appModule.social.team
 			_skin=new Duiwu_WanjiaItem();
 			super(_skin);
 		}	
-		public function setData(team:*):void
+		public function setData(team:*,index:int):void
 		{
 			this._data=team as MapPlayerInfo;
+			this._skin.bg1.visible=index%2==0;
+			this._skin.bg2.visible=!_skin.bg1.visible;
 			_skin.lbName.text=_data.playername;
 			_skin.lbLevel.text=_data.playerlv+NotifyCfgData.getNotifyTextByID(61019);
 			_skin.lbZhanli.text=_data.fightPower+"";

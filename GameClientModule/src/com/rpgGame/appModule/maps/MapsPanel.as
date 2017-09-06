@@ -80,6 +80,10 @@ package com.rpgGame.appModule.maps
 				}
 				
 			}
+			if(target.name=="btnSend_endFly") 
+			{
+				_bigMap.flayToEnd();
+			}
 			else
 			{
 				_scoll.onTouchTarget(target);
@@ -90,7 +94,7 @@ package com.rpgGame.appModule.maps
 		
 		private function addEvent() : void
 		{
-			_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
+			_bigMap.thumbnaiSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
 			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
 			
@@ -236,6 +240,11 @@ package com.rpgGame.appModule.maps
 					if(monsterData.type==4)
 					{
 						roleMode.type=SceneCharType.NPC;
+						BigMapsData.mapsNpcData.push(roleMode);
+					}
+					else if(monsterData.type==5)
+					{
+						roleMode.type=SceneCharType.COLLECT;
 						BigMapsData.mapsNpcData.push(roleMode);
 					}
 					else

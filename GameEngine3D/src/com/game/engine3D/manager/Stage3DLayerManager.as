@@ -31,10 +31,9 @@ package com.game.engine3D.manager
 	import away3d.entities.EntityLayerType;
 	import away3d.events.Stage3DEvent;
 	import away3d.lights.DirectionalLight;
-	import away3d.log.Log;
-	import away3d.log.LogItem;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.tools.utils.Bounds;
+	import away3d.utils.SoundUtil;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -223,7 +222,7 @@ package com.game.engine3D.manager
 				view.antiAlias = _viewAntiAlias;
 				_viewContainer.addChildAt(view, 0);
 //				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT;
-				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT | EntityLayerType.MOUSE_TRIGGER;
+				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT | EntityLayerType.MOUSE_TRIGGER;//支持当layer type设置为mouse_trigger的时候，也有鼠标事件
 				view.visible = true;
 				
 				if (_viewCount != 0)
@@ -490,6 +489,8 @@ package com.game.engine3D.manager
 					_averageFps.shift();
 				}
 			}
+//			if(SoundUtil.soundReference != null)
+//				trace("================SoundUtil.soundReference.scenePosition================" + SoundUtil.soundReference.scenePosition);
 		}
 		
 		public static function startRender() : void

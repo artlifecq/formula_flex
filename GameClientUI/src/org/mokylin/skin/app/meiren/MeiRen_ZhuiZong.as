@@ -7,11 +7,11 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
 	import org.mokylin.skin.app.meiren.button.ButtonLijintisheng;
 	import org.mokylin.skin.app.meiren.button.ButtonYuanbaotisheng;
 	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 
 	/**
 	 * @private
@@ -56,8 +56,6 @@ package org.mokylin.skin.app.meiren
 		public var sec_tishi:feathers.controls.Label;
 
 		public var task_box:feathers.controls.Group;
-
-		public var uiXiangxi:feathers.controls.UIAsset;
 
 		public var ui_bg:feathers.controls.UIAsset;
 
@@ -170,11 +168,11 @@ package org.mokylin.skin.app.meiren
 			killbut_0 = temp;
 			temp.name = "killbut_0";
 			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.meiren.MeiRenBoss_Item()
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
 			temp.skin = skin
 			temp.width = 169;
-			temp.x = 27;
-			temp.y = 63;
+			temp.x = 25;
+			temp.y = 83;
 			return temp;
 		}
 
@@ -184,11 +182,11 @@ package org.mokylin.skin.app.meiren
 			killbut_1 = temp;
 			temp.name = "killbut_1";
 			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.meiren.MeiRenBoss_Item()
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
 			temp.skin = skin
 			temp.width = 169;
-			temp.x = 27;
-			temp.y = 85;
+			temp.x = 25;
+			temp.y = 83;
 			return temp;
 		}
 
@@ -327,18 +325,7 @@ package org.mokylin.skin.app.meiren
 			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__MeiRen_ZhuiZong_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),killbut_0_i(),killbut_1_i(),sec_subbut2_i(),sec_info_i(),sec_tishi_i(),sec_shanghai_i(),sec_fangyu_i(),sec_navi1_i(),sec_navi2_i()];
-			return temp;
-		}
-
-		private function uiXiangxi_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiXiangxi = temp;
-			temp.name = "uiXiangxi";
-			temp.styleName = "ui/mainui/fubenzhuizong/fuben/wenhao.png";
-			temp.x = 9;
-			temp.y = 9;
+			temp.elementsContent = [ui_bg_i(),__MeiRen_ZhuiZong_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),killbut_0_i(),killbut_1_i(),sec_subbut2_i(),sec_info_i(),sec_tishi_i(),sec_shanghai_i(),sec_fangyu_i(),sec_navi1_i(),sec_navi2_i()];
 			return temp;
 		}
 

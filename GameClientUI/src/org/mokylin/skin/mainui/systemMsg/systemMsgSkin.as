@@ -37,7 +37,7 @@ package org.mokylin.skin.mainui.systemMsg
 			
 			this.currentState = "normal";
 			this.height = 106;
-			this.width = 193;
+			this.width = 263;
 			this.elementsContent = [bg_i(),msg_list_i(),btn_jian_i(),btn_jia_i()];
 			
 			states = {
@@ -56,7 +56,7 @@ package org.mokylin.skin.mainui.systemMsg
 			temp.name = "bg";
 			temp.height = 106;
 			temp.styleName = "ui/mainui/systemMsg/di.png";
-			temp.width = 193;
+			temp.width = 263;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -68,7 +68,7 @@ package org.mokylin.skin.mainui.systemMsg
 			btn_jia = temp;
 			temp.name = "btn_jia";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
-			temp.x = 171;
+			temp.x = 241;
 			temp.y = 82;
 			return temp;
 		}
@@ -79,7 +79,7 @@ package org.mokylin.skin.mainui.systemMsg
 			btn_jian = temp;
 			temp.name = "btn_jian";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jian;
-			temp.x = 171;
+			temp.x = 241;
 			temp.y = 82;
 			return temp;
 		}
@@ -91,7 +91,7 @@ package org.mokylin.skin.mainui.systemMsg
 			temp.name = "msg_list";
 			temp.height = 104;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 192;
+			temp.width = 262;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

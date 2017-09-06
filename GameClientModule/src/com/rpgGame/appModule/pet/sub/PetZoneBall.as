@@ -8,6 +8,7 @@ package com.rpgGame.appModule.pet.sub
 	import com.rpgGame.core.view.ui.tip.vo.MeiRenGuanQiaData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.PetCfg;
+	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
@@ -45,10 +46,12 @@ package com.rpgGame.appModule.pet.sub
 				var power:int=zhanli[_rank-1];
 				var prize:Array=prizes[_rank-1];
 				var isTongguan:Boolean=info.passlevel>=_rank;
+				var name:String=ZoneCfgData.getZoneCfg(q_girl_pet.q_zones_id).q_name;
 				var data:MeiRenGuanQiaData=new MeiRenGuanQiaData();
 				data.zhanli=power;
 				data.tongguanBool=isTongguan;
 				data.prize=prize;
+				data.guanqiaName=name+"-"+num;
 				TipTargetManager.show( this._ball, TargetTipsMaker.makeTips( TipType.MEIREN_GUANQIA_TIP, data ,true) );
 			}
 		}
