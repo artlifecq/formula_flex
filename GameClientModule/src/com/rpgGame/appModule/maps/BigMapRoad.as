@@ -14,6 +14,7 @@ package com.rpgGame.appModule.maps
 	import flash.geom.Vector3D;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.maps.EndFly;
 	
 	import starling.display.Sprite;
 
@@ -31,6 +32,7 @@ package com.rpgGame.appModule.maps
 		private var _lastDist : int;
 		private var _xunluPointEffect : InterObject3D;
 		private static const POINT_DIS : int = 10;
+		
 		
 		/**寻路的点**/
 		private var pathSpr : Sprite;
@@ -90,22 +92,23 @@ package com.rpgGame.appModule.maps
 		{
 			if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
 			{
-				var i:int,length:Number,min:Number;
+				var i:int,length:Number,mid:int=-1;
 				var ioc:MapPathIcon;
-				min=int.MAX_VALUE;
-				
-				while(pathIcoVect.length>0)
+				for(i=0;i<pathIcoVect.length;i++)
 				{
-					ioc=pathIcoVect[0];
+					ioc=pathIcoVect[i];
 					length=Math.sqrt((ioc.x-px)*(ioc.x-px)+(ioc.y-py)*(ioc.y-py));
 					if(length<10)
 					{
+						mid=i;
+					}
+				}
+				if(mid>=0)
+				{
+					for(i=0;i<=mid;i++)
+					{
 						pathIcoVect[0].removeMyself();
 						pathIcoVect.shift();
-					}
-					else
-					{
-						return;
 					}
 				}
 				
@@ -143,6 +146,8 @@ package com.rpgGame.appModule.maps
 				addPointOnPaths(_lastDrawPoint, pixNextPos);
 			}
 		}
+		
+		
 		
 		/**
 		 * 在两点之间填充连接点数据
@@ -188,6 +193,8 @@ package com.rpgGame.appModule.maps
 			pathIcoVect.push(pathIco);
 			pathSpr.addChild(pathIco);
 		}
+		
+		
 		/**
 		 * 清除路线
 		 */
@@ -196,6 +203,7 @@ package com.rpgGame.appModule.maps
 			while(pathSpr.numChildren>0){
 				pathSpr.removeChildAt(0);
 			}
+			
 			pathIcoVect=new Vector.<MapPathIcon>();
 			
 		}
