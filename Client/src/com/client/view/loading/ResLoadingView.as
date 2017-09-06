@@ -345,8 +345,8 @@ package com.client.view.loading
 		
 		public function set percent(value : Number) : void
 		{
-			if (!_stage)
-				return;
+//			if (!_stage)
+//				return;
 			TweenLite.killTweensOf(this);
 			if (value > 0 && value < 1 && value > _barPercent)
 				TweenLite.to(this, 0.5, {barPercent: value, ease: Linear.easeNone});

@@ -770,6 +770,11 @@ package com.game.engine3D.scene.render.vo
 					var orgMaterial : SinglePassMaterialBase = materialData.material as SinglePassMaterialBase;
 					addIndependentMaterial(name, orgMaterial);
 				}
+				else
+				{
+					//重新设置一下blendmodel
+					(_independentMaterialMap[name] as MaterialData).material.blendMode=_blendMode;
+				}
 			}
 		}
 		
@@ -1631,6 +1636,7 @@ package com.game.engine3D.scene.render.vo
 				_camera3DAnimators.length = 0;
 				_camera3DAnimators = null;
 			}
+			_blendMode= BlendMode.NORMAL;
 		}
 	}
 }

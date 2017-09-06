@@ -124,7 +124,7 @@ package com.rpgGame.statistics
 			
 		}	
         public function pushNode(nodeId : int,tip:String="") : void {
-       //   if(!ClientConfig.isRelease)return;
+          if(!ClientConfig.isRelease)return;
 //            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
 //            if (null == nodeInfo) {
 //                return;
@@ -138,7 +138,7 @@ package com.rpgGame.statistics
             params["browser"] = ClientConfig.browser;
             params["account"] = ClientConfig.loginName;
             params["resolution"] = Capabilities.screenResolutionX + "X" + Capabilities.screenResolutionY;
-            params["serverId"] = ClientConfig.isRelease?ClientConfig.loginAreaId:"30001";
+            params["serverId"] = ClientConfig.isRelease?ClientConfig.loginAreaId:"18";
             params["ip"] = ClientConfig.clientIp;
             params["time"] = (new Date()).getTime();
 			HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
