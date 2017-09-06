@@ -11,6 +11,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
+	import com.rpgGame.coreData.type.SexType;
 	
 	import flash.geom.Vector3D;
 	
@@ -113,7 +114,7 @@ package com.rpgGame.app.graphics
 					{
 						if (_role.data is HeroData)
 						{
-							if (HeroData(_role.data).sex)
+							if (HeroData(_role.data).sex==SexType.MALE)
 							{
 								bindOffset = manMountBindOffset;
 							}
