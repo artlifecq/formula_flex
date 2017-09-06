@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/jiucengyaota/down.png", "hover":"ui/mainui/activityBar/button/jiucengyaota/over.png", "up":"ui/mainui/activityBar/button/jiucengyaota/up.png"};
+			skinNames={"down":"ui/button/jiucengyaota/down.png", "hover":"ui/button/jiucengyaota/over.png", "up":"ui/button/jiucengyaota/up.png"};
 		}
 
 

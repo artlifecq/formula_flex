@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/wanfatuijian/down.png", "hover":"ui/mainui/activityBar/button/wanfatuijian/over.png", "up":"ui/mainui/activityBar/button/wanfatuijian/up.png"};
+			skinNames={"down":"ui/button/wanfatuijian/down.png", "hover":"ui/button/wanfatuijian/over.png", "up":"ui/button/wanfatuijian/up.png"};
 		}
 
 

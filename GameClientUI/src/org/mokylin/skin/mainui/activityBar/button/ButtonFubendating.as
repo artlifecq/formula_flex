@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/fubendating/down.png", "hover":"ui/mainui/activityBar/button/fubendating/over.png", "up":"ui/mainui/activityBar/button/fubendating/up.png"};
+			skinNames={"down":"ui/button/fubendating/down.png", "hover":"ui/button/fubendating/over.png", "up":"ui/button/fubendating/up.png"};
 		}
 
 

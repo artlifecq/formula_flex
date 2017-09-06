@@ -89,7 +89,7 @@ package org.mokylin.skin.app.meiren
 			temp.bold = true;
 			temp.letterSpacing = 0;
 			temp.fontSize = 14;
-			temp.text = "关卡奖励：";
+			temp.text = "首通奖励：";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 94;

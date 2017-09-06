@@ -200,6 +200,8 @@ package com.rpgGame.coreData.lang
 		public static const MIBAO_EXIT_SURE:String = "MIBAO_EXIT_SURE";
 		 /**  此时退出副本将重置挑战进度/n确认要离开吗？ */
 		public static const BEAUTYZONE_EXIT_SURE:String = "BEAUTYZONE_EXIT_SURE";
+		 /**  当前已经洗炼出高级属性/n是否继续？ */
+		public static const XILIAN_SURE:String = "XILIAN_SURE";
 
 	}
 }

@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/fubenduilie/down.png", "hover":"ui/mainui/activityBar/button/fubenduilie/over.png", "up":"ui/mainui/activityBar/button/fubenduilie/up.png"};
+			skinNames={"down":"ui/button/fubenduilie/down.png", "hover":"ui/button/fubenduilie/over.png", "up":"ui/button/fubenduilie/up.png"};
 		}
 
 
@@ -59,7 +59,6 @@ package org.mokylin.skin.mainui.activityBar.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
-			temp.styleName = "ui/mainui/activityBar/button/fubenduilie/up.png";
 			return temp;
 		}
 
@@ -76,7 +75,6 @@ package org.mokylin.skin.mainui.activityBar.button
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.visible = false;
 			return temp;
 		}
 

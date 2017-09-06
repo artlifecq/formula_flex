@@ -557,7 +557,7 @@ package com.rpgGame.app.ui.main.chat
 							arr[infos[i].i]=replaceHuBaoShow(str,0xBC5AF4,content);
 							break;
 						case 7: //洗炼
-							arr[infos[i].i]=getAttById(infos[i].parameterInfos[0].mod);
+							arr[infos[i].i]=CharAttributeType.getWashName(infos[i].parameterInfos[0].mod);
 							break;
 						case 8: //求婚
 							var jobType:int=arr[2];
@@ -572,13 +572,6 @@ package com.rpgGame.app.ui.main.chat
 				txt = replaceStr2(txt,true);
 			}
 			return txt;
-		}
-		
-		private static function getAttById(id:int):String
-		{
-			var str:String="";
-			str=CharAttributeType.getWashAttDes(id);
-			return str;
 		}
 	}
 }

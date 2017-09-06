@@ -19,16 +19,14 @@ package com.rpgGame.appModule.jingmai.render
 	public class StoneSelectCellExt extends SkinUI
 	{
 		private var _skin:StoneItem_Skin;
-		private var _icon:BgIcon;
-	
 		private var _item:ClientItemInfo;
 		public function StoneSelectCellExt()
 		{
 			_skin=new StoneItem_Skin();
 			
 			super(_skin);
-			_icon=new BgIcon(IcoSizeEnum.ICON_36);
-			_skin.Icon.addChild(_icon);
+//			_icon=new BgIcon(IcoSizeEnum.ICON_36);
+//			_skin.Icon.addChild(_icon);
 			
 		}
 		public function setData(data:*):void
@@ -38,7 +36,7 @@ package com.rpgGame.appModule.jingmai.render
 			if (_item) 
 			{
 				var qItem:Q_item=_item.qItem;
-				_icon.setIconResName(ClientConfig.getItemIcon(_item.qItem.q_icon.toString(),IcoSizeEnum.ICON_36));
+				_skin.Icon.styleName= "ui/icon/item/36/"+_item.qItem.q_icon+".png";
 				_skin.lbName.text=qItem.q_name;
 				_skin.lbName.color=ItemConfig.getItemQualityColor(qItem.q_id);
 				if (qItem.q_att_type!=0) 
@@ -54,7 +52,7 @@ package com.rpgGame.appModule.jingmai.render
 		}
 		public function clearData():void
 		{
-			_icon.clear();
+//			_icon.clear();
 			_item=null;
 		}
 		override protected function onTouchTarget(target:DisplayObject):void

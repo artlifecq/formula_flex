@@ -23,14 +23,14 @@ package com.rpgGame.appModule.pet.sub
 			{
 				_skin.uiUp.styleName="ui/common/tubiao/jobup.png";
 				_skin.lbAdd.color=GameColorUtil.COLOR_GREEN;
-				_skin.lbAdd.text="+"+_diff;
+				_skin.lbAdd.text=_diff.toString();
 				
 			}
 			else if (_diff<0) 
 			{
 				_skin.uiUp.styleName="ui/common/tubiao/jobdown.png";
 				_skin.lbAdd.color=GameColorUtil.COLOR_RED;
-				_skin.lbAdd.text=""+_diff;
+				_skin.lbAdd.text=_diff.toString();
 			}
 			_skin.uiName.styleName=CharAttributeType.getAttrNameUrl(attrType);
 			_skin.uiUp.visible=false;
