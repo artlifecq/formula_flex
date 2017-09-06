@@ -6,8 +6,7 @@ package com.client.sender
 	import com.rpgGame.netData.login.message.ReqLoginForPlatformMessage;
 	import com.rpgGame.netData.login.message.ReqLoginMessage;
 	import com.rpgGame.netData.player.message.ReqPlayerChangeNameMessage;
-	
-	import flash.utils.getTimer;
+	import com.rpgGame.statistics.Statistics;
 	
 	import org.game.netCore.connection.SocketConnection;
 	
@@ -69,6 +68,7 @@ package com.client.sender
 			msg.win_high = ClientConfig.stage.height;
 			msg.relogin=relogin;
 			SocketConnection.send(msg);
+			Statistics.intance.pushNode(Statistics.STEP_SEND_LOGIN_MSG,"发送登录协议");
 		}
 		
 		public static function SendPlatformLoginMessage():void

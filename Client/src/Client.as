@@ -196,7 +196,7 @@ package
 				{
 					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
 				}
-				Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_ERROR,"硬件加速开启失败");
+				Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_LOW,"硬件加速开启失败,显卡驱动后者显卡过低");
 			}
 			else
 			{
@@ -250,6 +250,7 @@ package
 			{
 				TipsInfoView2D.showAlert2D.showAlert("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
 			}
+			Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_ERROR,"硬件加速开启失败");
 		}
 		
 		private function onDownWeiDuan():void
@@ -259,6 +260,7 @@ package
 		private function stage3DLayerUserDisabledError():void
 		{
 			GameLog.addShow("stage3DLayerUserDisabledError");
+			Statistics.intance.pushNode(Statistics.STEP_HARD_DISABLED_ERROR,"硬件加速没有开启");
 		}
 		
 		private function onMemoryTooHighed():void
@@ -279,7 +281,8 @@ package
 		{
 			if (ClientConfig.isRelease && Capabilities.isDebugger)
 			{
-				TipsInfoView2D.showAlert2D("您当前的Flash插件是debug版本，游戏性能较低，为了您能有更好的游戏体验，请安装release版本的插件。", onShowPlayerOkFunc);
+				Statistics.intance.pushNode(Statistics.STEP_PLAYER_IS_DEBUG,"flash是debug版本的用户");
+//				TipsInfoView2D.showAlert2D("您当前的Flash插件是debug版本，游戏性能较低，为了您能有更好的游戏体验，请安装release版本的插件。", onShowPlayerOkFunc);
 				return true;
 			}
 			return false;
