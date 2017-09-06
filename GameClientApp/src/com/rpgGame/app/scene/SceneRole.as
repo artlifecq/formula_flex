@@ -524,5 +524,6 @@ package com.rpgGame.app.scene
 		{
 			return SceneCharType.PLAYER==type;
 		}
+	
 	}
 }

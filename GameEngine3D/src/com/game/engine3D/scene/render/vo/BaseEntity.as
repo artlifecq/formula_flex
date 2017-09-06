@@ -510,6 +510,7 @@ package com.game.engine3D.scene.render.vo
 			_renderSet.setMouseRightUpCallBack(handleMouseRightUp);
 			_renderSet.setMouseRightDownCallBack(handleMouseRightDown);
 			_renderSet.isAlpha = false;
+			_isAlpha=false;
 		}
 		
 		override protected function addToGraphic() : void
