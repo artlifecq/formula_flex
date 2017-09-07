@@ -177,7 +177,7 @@ package  com.rpgGame.appModule.skill
 			_timer.stop();
 			_skin.lbTime.text="5秒后自动关闭";
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.hintUILayer);
 			start(data)

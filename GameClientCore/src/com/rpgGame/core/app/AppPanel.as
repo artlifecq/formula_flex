@@ -47,7 +47,7 @@ package com.rpgGame.core.app
 
 		private var _appInfo : AppInfo;
 		private var _data : Object;
-		private var _openTable : String;
+		private var _openTable : int;
 
 		private var _loader : Loader;
 
@@ -102,7 +102,7 @@ package com.rpgGame.core.app
 			_isLoading = false;
 		}
 
-		public function init(data : Object, $openTable : String, parentContiner : DisplayObjectContainer) : void
+		public function init(data : Object, $openTable : int, parentContiner : DisplayObjectContainer) : void
 		{
 			_data = data;
 			_openTable = $openTable;

@@ -3,7 +3,9 @@ package com.rpgGame.app.ui
 	import com.rpgGame.app.ui.tab.FuncTabBar;
 	import com.rpgGame.app.ui.tab.UITabBarData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
 	
 	import feathers.controls.StateSkin;
 	
@@ -37,7 +39,7 @@ package com.rpgGame.app.ui
 			
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 			_tabBar.show(data,openTable);
@@ -56,14 +58,15 @@ package com.rpgGame.app.ui
 		 * @param funcKey 标签对应功能键
 		 * 
 		 */
-		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:String):void
+		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int):void
 		{
 			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle);
 			item.tabKey=funcKey;
-			var fundata:Q_newfunc = NewFuncCfgData.getdataById(item.tabKey);
-			if(fundata!=null&&fundata.q_show_buttonName==1)
+			var fundata:Q_newfunc = NewFuncCfgData.getFuncCfg(item.tabKey);
+			var panelData:Q_panel=PanelCfgData.getPanelCfg(fundata.q_open_panel);
+			if(panelData!=null&&panelData.show_tab_name==1)
 			{
-				item.text = fundata.q_string_name;
+				item.text = panelData.tab_name;
 			}
 			_tabDatas.push(item);
 		}

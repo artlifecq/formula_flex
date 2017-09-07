@@ -7,8 +7,12 @@ package com.rpgGame.appModule.activety
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -34,7 +38,7 @@ package com.rpgGame.appModule.activety
 			super(_skin);
 		}
 		
-		override public function show(data : * = null, openTable : String = "", parentContiner : DisplayObjectContainer = null) : void
+		override public function show(data : * = null, openTable:int=0, parentContiner : DisplayObjectContainer = null) : void
 		{
 			actInfo=data as ActivetyInfo;
 			_skin.icons.styleName="ui/icon/activity/open/"+actInfo.actCfg.q_activity_id+".png";
@@ -70,8 +74,9 @@ package com.rpgGame.appModule.activety
 					default:
 					{
 						if(actInfo.actCfg.q_notice_trans){
-							var list:Array=JSONUtil.decode(actInfo.actCfg.q_notice_trans);
-							AppManager.showAppNoHide(list[0],actInfo,list[1]);//跳到对应标签的对应活动
+							var panelCfg:Q_panel=PanelCfgData.getPanelCfg(actInfo.actCfg.q_notice_trans);
+							var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
+							AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),actInfo,funcCfg.q_id);
 						}else{
 							SpecialActivitySender.reqJoinAct(actInfo.actCfg.q_activity_id);
 						}						

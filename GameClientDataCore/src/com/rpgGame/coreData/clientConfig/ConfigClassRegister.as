@@ -140,7 +140,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库							前端显示对应关卡战斗力						 */
+		/**  美人基本信息数据库									前端显示对应关卡战斗力						 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -174,6 +174,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
 		/**  论剑配置表											 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
+		/**  界面按钮表									 */
+		public static const Q_mainbtn:String = "data.Q_mainbtn";
 		/**  副本触发表																				 */
 		public static const Q_map_trigger:String = "data.Q_map_trigger";
 		/**  婚姻技能数据库		 */
@@ -204,7 +206,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
-		/**  排行榜称号							 */
+		/**  面板表					 */
+		public static const Q_panel:String = "data.Q_panel";
+		/**  排行榜称号								 */
 		public static const Q_rank_designation:String = "data.Q_rank_designation";
 		/**  红包配置		 */
 		public static const Q_redreward:String = "data.Q_redreward";
@@ -222,7 +226,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
-		/**  填色配置表					 */
+		/**  填色配置表						 */
 		public static const Q_vertex_color:String = "data.Q_vertex_color";
 		/**  											 */
 		public static const Q_vip:String = "data.Q_vip";
@@ -252,7 +256,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Attach:String = "data.spell.Attach";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
-		/**  BUFF效果配置数据表																																									 */
+		/**  BUFF效果配置数据表																																											 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
@@ -282,7 +286,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
-			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);
 			regClass("data.GlobalSetting", com.rpgGame.coreData.clientConfig.GlobalSetting);
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
@@ -353,6 +356,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
 			regClass("data.Q_lunjian", com.rpgGame.coreData.clientConfig.Q_lunjian);
+			regClass("data.Q_mainbtn", com.rpgGame.coreData.clientConfig.Q_mainbtn);
 			regClass("data.Q_map_trigger", com.rpgGame.coreData.clientConfig.Q_map_trigger);
 			regClass("data.Q_marriage_skills", com.rpgGame.coreData.clientConfig.Q_marriage_skills);
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
@@ -368,6 +372,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
 			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
+			regClass("data.Q_panel", com.rpgGame.coreData.clientConfig.Q_panel);
 			regClass("data.Q_rank_designation", com.rpgGame.coreData.clientConfig.Q_rank_designation);
 			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);

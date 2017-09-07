@@ -59,17 +59,6 @@ package com.rpgGame.app.ui.main.navigation
 				return ;
 			
 		}
-		public function checkHaveButton(info:FunctionBarInfo):Boolean
-		{
-			var itemCount:int =this.numChildren
-			for(var i:int = 0; i < itemCount; i++)
-			{
-				var item:MainButtonBases = getChildAt(i) as MainButtonBases;
-				if(item.info.id == info.id)
-					return true;
-			}
-			return false;
-		}
 		
 		private function refreshPostion():void
 		{

@@ -722,7 +722,7 @@ package com.rpgGame.app.manager.scene
 			
 			if(needOpenNewFuncId>0)
 			{
-				FunctionOpenManager.openAppPaneById(needOpenNewFuncId.toString());
+				FunctionOpenManager.openPanelByFuncID(needOpenNewFuncId);
 				needOpenNewFuncId = 0;
 			}
 		}

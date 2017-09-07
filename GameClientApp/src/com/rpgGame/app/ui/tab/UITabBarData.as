@@ -24,7 +24,7 @@ package com.rpgGame.app.ui.tab
 		/**
 		 *标签键
 		 */
-		public var tabKey:String;
+		public var tabKey:int;
 		
 		
 		public var button:ToggleButton;

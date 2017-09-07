@@ -2,8 +2,11 @@
 package com.rpgGame.core.app
 {
 	import com.rpgGame.core.app.enum.PanelPosType;
+	import com.rpgGame.coreData.enum.EmPanelID;
 	
 	import flash.utils.Dictionary;
+	
+	import org.client.mainCore.ds.HashMap;
 	
 	/**
 	 * app模块常量定义，
@@ -19,6 +22,7 @@ package com.rpgGame.core.app
 		private static const APP_ROOT:String="com.rpgGame.appModule";
 		
 		private static var appNameDic:Dictionary = new Dictionary();
+		private static var appIdMap:HashMap=new HashMap();
 		
 		/**
 		 * @param moduleName 横块名:包名.+类名形式,如gm.GmPanel
@@ -28,7 +32,7 @@ package com.rpgGame.core.app
 		 * @param pY
 		 * @return 
 		 */		
-		private static function createAppInfo( moduleName:String, resName:String=null,posType:uint=4, pX:int = 0, pY:int = 0 ):String
+		private static function createAppInfo( moduleName:String, resName:String=null,panelId:int=0,posType:uint=4, pX:int = 0, pY:int = 0 ):String
 		{
 			var a:AppInfo = appNameDic[ moduleName ];
 			if(a == null)
@@ -44,10 +48,24 @@ package com.rpgGame.core.app
 				a.pX = pX;
 				a.pY = pY;
 				appNameDic[moduleName] = a;
+				if(panelId!=0){
+					appIdMap.add(panelId,moduleName);
+				}
 			}else{
 				trace("警告:",moduleName+"重复定义,请检查是否有同名APP(可能包路径不同)");
 			}
 			return moduleName;
+		}
+		
+		/**
+		 *根据面板id获取面板名 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function getAppNameByPanelId(id:int):String
+		{
+			return 	appIdMap.getValue(id);
 		}
 		
 		/**
@@ -67,27 +85,20 @@ package com.rpgGame.core.app
 		 */		
 		/** GM命令面板 **/
 		public static var GM_PANEL:String = createAppInfo( "gm.GmPanel" );
-		/** 测试面板 **/
-		public static var UIDEMO_PANEL:String = createAppInfo("demo.UIDemoPanel");
 		/** 人物面板 **/
-		public static var ROLE_PANEL:String = createAppInfo("role.RolePanel","beibao");
+		public static var ROLE_PANEL:String = createAppInfo("role.RolePanel","beibao",EmPanelID.ROLE_PANEL);
 		/** 玩家信息面板 **/
-		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao");
-		/** 查看面板*/
-		public static var LOOK_PANEL:String = createAppInfo("look.LookPanel","look");
-		/** 背包面板 **/
-		public static var BACK_PACK_PANEL:String = createAppInfo("bag.BagPanel","beibao");
+		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao",EmPanelID.PLAYER_INFO);
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
-		public static var RELIVE_PANEL:String = createAppInfo( "relive.RelivePanel","relive");
 		public static var KADUN_PANEL:String = createAppInfo( "kadun.KaDunPanel","kadun");
 		
 		/** 大地图面板 **/
-		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps");
+		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps",EmPanelID.BIGMAP_PANEL);
 		
 		/**
 		 *死亡复活 
 		 */
-		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo");
+		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo",EmPanelID.DIE_PANEL);
 		
 		/**
 		 *副本死亡 
@@ -96,11 +107,11 @@ package com.rpgGame.core.app
 		/**
 		 *武学面板 
 		 */
-		public static var SKILL_PANL:String = createAppInfo( "skill.SkillPanel","wuxue");
+		public static var SKILL_PANL:String = createAppInfo( "skill.SkillPanel","wuxue",EmPanelID.WU_XUE);
 		/**
 		 *论剑面板
 		 */
-		public static var SWORD_PANL:String = createAppInfo( "dungeon.JiangHuPanel","jianghu");
+		public static var SWORD_PANL:String = createAppInfo( "dungeon.JiangHuPanel","jianghu",EmPanelID.LUN_JIAN);
 		/**
 		 *论剑结果成功
 		 */
@@ -112,7 +123,7 @@ package com.rpgGame.core.app
 		/**
 		 *多人副本面板
 		 */
-		public static var MULTY_PANL:String = createAppInfo( "dungeon.multy.MultyPanel","fuben");
+		public static var MULTY_PANL:String = createAppInfo( "dungeon.multy.MultyPanel","fuben",EmPanelID.MULTY_PANL);
 		
 		/**
 		 *每日副本成功结算
@@ -139,7 +150,7 @@ package com.rpgGame.core.app
 		/**
 		 *活动面板
 		 */
-		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
+		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety",EmPanelID.ACTIVETY_PANL);
 		/** 活动BOSS **/
 		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
 		/** 极限挑战BOSS **/
@@ -184,11 +195,11 @@ package com.rpgGame.core.app
 		/**
 		 *装备面板
 		 */
-		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
+		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei",EmPanelID.DUAN_ZAO);
 		/** 
 		 *战魂
 		 */
-		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
+		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun",EmPanelID.ZHAN_HUN);
 		
 		/**
 		 * 战魂升级展示
@@ -232,7 +243,7 @@ package com.rpgGame.core.app
 		public static var TASK_FLY_PANEL:String = createAppInfo( "task.TaskFlySend" ); 
 		
 		/**国家讨逆任务条面板**/
-		public static var COUNTRY_TAO_NI_TASK_BAR_PANEL:String = createAppInfo( "taoni.CountryTaoNiTaskBarPanel" , null,PanelPosType.MIDDLE_RIGHT); 
+		public static var COUNTRY_TAO_NI_TASK_BAR_PANEL:String = createAppInfo( "taoni.CountryTaoNiTaskBarPanel" , null,EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_RIGHT); 
 		
 		/**采集条**/
 		public static var COLLECT_PANEL:String = createAppInfo( "collect.CollectBar" ); 
@@ -251,9 +262,9 @@ package com.rpgGame.core.app
 		/** 偷经 查询各国经书数量面板 **/
 		public static var TOU_JING_COUNTRY_BOOK_STATE_PANEL:String = createAppInfo("toujing.TouJingCountryBookStatePanel");
 		/** 运镖 各种提示小窗口 **/
-		public static var YUN_BIAO_TIPS:String = createAppInfo("yunbiao.YunBiaoTips",null,PanelPosType.BOTTOM_RIGHT, -20, -20 );
+		public static var YUN_BIAO_TIPS:String = createAppInfo("yunbiao.YunBiaoTips",null,EmPanelID.DEFAULT_ID,PanelPosType.BOTTOM_RIGHT, -20, -20 );
 		/** 运镖 中间底部各种提示小窗口 **/
-		public static var YUN_BIAO_BOTTOM_TIP:String = createAppInfo("yunbiao.YunBiaoBottomTips",null,PanelPosType.MIDDLE_CENTRAL, 0, 290 );
+		public static var YUN_BIAO_BOTTOM_TIP:String = createAppInfo("yunbiao.YunBiaoBottomTips",null,EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_CENTRAL, 0, 290 );
 		
 		
 		/**日常**/
@@ -266,7 +277,7 @@ package com.rpgGame.core.app
 		/**家族招募**/
 		public static var FAMILY_MSG_INFO_PANEL:String = createAppInfo( "family.FamilyMsgInfoPanel" ); 
 		/**掉落物品列表**/
-		public static var DROP_GOODS_LIST_PANEL:String = createAppInfo( "dropGoods.DropGoodsListPanel" , null, PanelPosType.MIDDLE_LEFT , 200); 
+		public static var DROP_GOODS_LIST_PANEL:String = createAppInfo( "dropGoods.DropGoodsListPanel" , null,EmPanelID.DEFAULT_ID, PanelPosType.MIDDLE_LEFT , 200); 
 		
 		/**随身商店/NPC商店面板**/
 		public static var SHOP_PANEL:String = createAppInfo( "shop.ShopPanel", "shop" ); 
@@ -291,7 +302,7 @@ package com.rpgGame.core.app
 		public static var GAME_NOTICE:String = createAppInfo( "gameNotice.GameNoticePanel", "game_notice" ); 
 		
 		/**社交面板**/
-		public static var SOCIAL_PANEL:String = createAppInfo( "social.SocialMainPanelExt", "shejiao" ); 
+		public static var SOCIAL_PANEL:String = createAppInfo( "social.SocialMainPanelExt", "shejiao" ,EmPanelID.ZU_DUI); 
 		/**组队提示**/
 		public static var SOCIAL_TEAM_ALERT:String = createAppInfo( "social.team.TeamAskPanelExt"); 
 		/**国家面板**/
@@ -311,25 +322,25 @@ package com.rpgGame.core.app
 		/**帮派建筑升级面板**/
 		public static var SOCIETY_BUILD_UPGRADE_PANEL:String = createAppInfo( "country.society.SocietyBuildUpgradePanel","society_build_upgrade"); 
 		/**挑战帮派神兽信息面板**/
-		public static var SOCIETY_BEAST_FIGHT_INFO_PANEL:String = createAppInfo( "country.society.SocietyBeastFightInfoPanel",null,PanelPosType.BOTTOM_RIGHT); 
+		public static var SOCIETY_BEAST_FIGHT_INFO_PANEL:String = createAppInfo( "country.society.SocietyBeastFightInfoPanel",null,EmPanelID.DEFAULT_ID,PanelPosType.BOTTOM_RIGHT); 
 		/**Boss伤害排行榜面板**/
-		public static var BOSS_HURT_RANK_PANEL:String = createAppInfo( "rank.BossHurtRankPanel",null,PanelPosType.MIDDLE_LEFT); 
+		public static var BOSS_HURT_RANK_PANEL:String = createAppInfo( "rank.BossHurtRankPanel",null,EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_LEFT); 
 		/**国家讨逆信息面板**/
-		public static var COUNTRY_TAO_NI_INFO_PANEL:String = createAppInfo( "taoni.CountryTaoNiInfoPanel",null,PanelPosType.BOTTOM_RIGHT,-10,-130); 
+		public static var COUNTRY_TAO_NI_INFO_PANEL:String = createAppInfo( "taoni.CountryTaoNiInfoPanel",null,EmPanelID.DEFAULT_ID,PanelPosType.BOTTOM_RIGHT,-10,-130); 
 		/**国家讨逆结算信息面板**/
 		public static var COUNTRY_TAO_NI_ACCOUNT_PANEL:String = createAppInfo( "taoni.CountryTaoNiAccountPanel","account"); 
 		/**NPC剧情对话面板**/
-		public static var NPC_PLOT_DIALOG_PANEL:String = createAppInfo( "dialog.NpcPlotDialogPanel","dialog",PanelPosType.BOTTOM_CENTRAL,0,-150); 
+		public static var NPC_PLOT_DIALOG_PANEL:String = createAppInfo( "dialog.NpcPlotDialogPanel","dialog",EmPanelID.DEFAULT_ID,PanelPosType.BOTTOM_CENTRAL,0,-150); 
 		/**国战顶部面板*/
-		public static var COUNTRY_WAR_TOP_BAR_PANEL:String = createAppInfo( "countryWar.CountryWarTopBarPanel","countryWar",PanelPosType.TOP_RIGHT);
+		public static var COUNTRY_WAR_TOP_BAR_PANEL:String = createAppInfo( "countryWar.CountryWarTopBarPanel","countryWar",EmPanelID.DEFAULT_ID,PanelPosType.TOP_RIGHT);
 		/**国战右部面板*/
-		public static var COUNTRY_WAR_RIGHT_BAR_PANEL:String = createAppInfo( "countryWar.CountryWarRightBarPanel","countryWar",PanelPosType.TOP_RIGHT);
+		public static var COUNTRY_WAR_RIGHT_BAR_PANEL:String = createAppInfo( "countryWar.CountryWarRightBarPanel","countryWar",EmPanelID.DEFAULT_ID,PanelPosType.TOP_RIGHT);
 		/**国战底部面板*/
-		public static var COUNTRY_WAR_BOTTOM_BAR_PANEL:String = createAppInfo( "countryWar.CountryWarBottomBarPanel","countryWar",PanelPosType.BOTTOM_CENTRAL);
+		public static var COUNTRY_WAR_BOTTOM_BAR_PANEL:String = createAppInfo( "countryWar.CountryWarBottomBarPanel","countryWar",EmPanelID.DEFAULT_ID,PanelPosType.BOTTOM_CENTRAL);
 		/**国战结算面板*/
 		public static var COUNTRY_WAR_RESULT_PANEL:String = createAppInfo( "countryWar.CountryWarResultPanel","countryWar");
 		/**国战进度文本面板*/
-		public static var COUNTRY_WAR_PROGRESS_TEXT_PANEL:String = createAppInfo( "countryWar.CountryWarProgressTextPanel","countryWar",PanelPosType.BOTTOM_CENTRAL,0,-390);
+		public static var COUNTRY_WAR_PROGRESS_TEXT_PANEL:String = createAppInfo( "countryWar.CountryWarProgressTextPanel","countryWar",EmPanelID.DEFAULT_ID,PanelPosType.BOTTOM_CENTRAL,0,-390);
 		
 		
 		
@@ -357,7 +368,7 @@ package com.rpgGame.core.app
 		public static var CROWN_BEEN_INVITE_UNION_PANEL : String = createAppInfo("crown.CrownBeenInviteUnionPanel");
 		
 		/** 坐骑主面板 **/
-		public static var MOUNT_PANEL:String = createAppInfo( "mount.MountPanel","zuoqi" );
+		public static var MOUNT_PANEL:String = createAppInfo( "mount.MountPanel","zuoqi" ,EmPanelID.JIN_JIE);
 		/** 坐骑转化面板 **/
 		public static var MOUNT_CHANGE_PANEL:String = createAppInfo( "mount.panel.MountChangePanel","mount" );
 		/** 坐骑繁育面板 **/
@@ -400,13 +411,13 @@ package com.rpgGame.core.app
 		/** 收到的交易列表 **/
 		public static var TRADE_BEEN_INVITE_PANEL : String = createAppInfo("trade.TradeBeenInvitePanel","trade");
 		/**八阵图详情面板**/
-		public static var BA_ZHEN_TU_DETAIL_PANEL : String = createAppInfo("baZhenTu.BaZhenTuDetailPanel","baZhenTu",PanelPosType.MIDDLE_RIGHT);
+		public static var BA_ZHEN_TU_DETAIL_PANEL : String = createAppInfo("baZhenTu.BaZhenTuDetailPanel","baZhenTu",EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_RIGHT);
 		/**聊天设置**/
-		public static var CHAT_SET_PANEL : String = createAppInfo("chatSet.ChatSetPanel",null,PanelPosType.MIDDLE_CENTRAL);
+		public static var CHAT_SET_PANEL : String = createAppInfo("chatSet.ChatSetPanel",null,EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_CENTRAL);
 		/**喇叭*/
-		public static var LABA_PANEL : String = createAppInfo("laba.LabaPanel",null,PanelPosType.MIDDLE_CENTRAL);
+		public static var LABA_PANEL : String = createAppInfo("laba.LabaPanel",null,EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_CENTRAL);
 		/**囚禁倒计时**/
-		public static var CROWN_QIU_JIN_END_TIME : String = createAppInfo("crown.CrownQiuJinEndPanel",null,PanelPosType.MIDDLE_LEFT);
+		public static var CROWN_QIU_JIN_END_TIME : String = createAppInfo("crown.CrownQiuJinEndPanel",null,EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_LEFT);
 		//------------------镖局
 		/** 镖局**/
 		public static var BIAO_JU_PANEL : String = createAppInfo("biaoju.BiaoJuPanel","biaoju");
@@ -418,7 +429,7 @@ package com.rpgGame.core.app
 		public static var BIAO_JU_ADD_MONEY_PANEL : String =  createAppInfo("biaoju.BiaoJuAddMoneyPanel","biaoju");
 		//-------------------帮派
 		/**帮会 **/
-		public static var GUILD_PANEL : String = createAppInfo("guild.GuildPanel","banghui");
+		public static var GUILD_PANEL : String = createAppInfo("guild.GuildPanel","banghui",EmPanelID.BANG_PAI);
 		/**帮会请求列表 **/
 		public static var GUILD_APPLAYLIST_PANEL : String = createAppInfo("guild.GuildApplyListPanle","banghui");
 		/**帮会邀请列表 **/
@@ -445,11 +456,11 @@ package com.rpgGame.core.app
 		public static var GUILD_LEADER_SKILL_NOTICE : String = createAppInfo("guild.war.GuildLeaderSkillNoticePanel","banghui");
 		
 		/**迷宫排行**/
-		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);
+		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",EmPanelID.DEFAULT_ID,PanelPosType.MIDDLE_RIGHT);
 		/**上次迷宫排行**/
 		public static var MAZE_LAST_RANL_PANEL : String = createAppInfo("maze.MazeLastInfoPanel","maze");
 		/**迷宫提示**/
-		public static var MAZE_ALERT_PANEL : String = createAppInfo("maze.MazeAlert","maze",PanelPosType.TOP_CENTRAL);
+		public static var MAZE_ALERT_PANEL : String = createAppInfo("maze.MazeAlert","maze",EmPanelID.DEFAULT_ID,PanelPosType.TOP_CENTRAL);
 		/**查找玩家**/
 		public static var FIND_FRIEND_PANEL : String = createAppInfo("friend.view.FindFriendPanel","friend");
 		/**其他人加我为好友的列表**/
@@ -475,12 +486,12 @@ package com.rpgGame.core.app
 		/**经脉**/
 		public static var JINGMAI_STONE:String = createAppInfo("jingmai.sub.NoStoneNoticePanelExt","beibao");
 		/**商城**/
-		public static var MALL_PANEL:String = createAppInfo("shop.MallMainPanelExt","shangcheng");
+		public static var MALL_PANEL:String = createAppInfo("shop.MallMainPanelExt","shangcheng",EmPanelID.SHANG_CHENG);
 		/**售卖道具**/
 		public static var ITEM_SELL_PANEL:String = createAppInfo("shop.ItemSellAlertExtPanelExt");
 		
 		/**战场**/
-		public static var BATTLE_MAIN_PANEL:String = createAppInfo("battle.BattleMainPanelExt","zhanchang");
+		public static var BATTLE_MAIN_PANEL:String = createAppInfo("battle.BattleMainPanelExt","zhanchang",EmPanelID.BATTLE_MAIN_PANEL);
 		
 		/**战场**/
 		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
@@ -488,7 +499,7 @@ package com.rpgGame.core.app
 		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
 		
 		/**护宝主面板**/
-		public static var HUBAO_MAINPANEL:String = createAppInfo("hubao.HuBaoMainPanelExt","hubao");
+		public static var HUBAO_MAINPANEL:String = createAppInfo("hubao.HuBaoMainPanelExt","hubao",EmPanelID.HU_BAO);
 		/**护宝成功**/
 		public static var HUBAO_CHENGGONG:String = createAppInfo("hubao.HuBaoChengGongPanelExt","hubao");
 		/**护宝追踪**/
@@ -519,13 +530,13 @@ package com.rpgGame.core.app
 		/**npc闲话**/
 		public static var NPC_SPEAK:String = createAppInfo("npc.NpcSpeak","npc");
 		
-		/**npc闲话**/
-		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip");
+		/**vip**/
+		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip",EmPanelID.VIP);
 		
 		/**求婚界面**/
 		public static var HUNYIN_QIUHUN:String = createAppInfo("hunyin.QiuHunPanelExt","hunyin");
 		/**婚姻界面**/
-		public static var HUNYIN_JIEHUN:String = createAppInfo("hunyin.HunYinPanelExt","hunyin");
+		public static var HUNYIN_JIEHUN:String = createAppInfo("hunyin.HunYinPanelExt","hunyin",EmPanelID.JIE_HUN);
 		/**夫妻日志**/
 		public static var HUNYIN_RIZHI:String = createAppInfo("hunyin.FuQiRiZhiPanelExt","hunyin");
 		/**夫妻副本**/
@@ -534,22 +545,22 @@ package com.rpgGame.core.app
 		public static var HUNYIN_FUBENYAOQING:String = createAppInfo("hunyin.FuQiYaoQingPanel","hunyin");
 		
 		/**红包拆开**/
-		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao");
+		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao",EmPanelID.HONG_BAO);
 		/**发送红包**/
-		public static var REDREWARD_SEND:String = createAppInfo("redreward.RedRewardSendPanle","hongbao");
+		public static var REDREWARD_SEND:String = createAppInfo("redreward.RedRewardSendPanle","hongbao",EmPanelID.HONG_BAO_SEND);
 		/**红包信息**/
-		public static var REDREWARD_PANLE:String = createAppInfo("redreward.RedRewardInfoPanle","hongbao");
+		public static var REDREWARD_PANLE:String = createAppInfo("redreward.RedRewardInfoPanle","hongbao",EmPanelID.HONG_BAO_RECORD);
 		
 		/**美人**/
-		public static var PET_PANLE:String = createAppInfo("pet.PetMainPanelExt","meiren");
+		public static var PET_PANLE:String = createAppInfo("pet.PetMainPanelExt","meiren",EmPanelID.MEI_REN);
 		/**美人挑战成功面板**/
 		public static var PET_TIAOZHAN_PANLE:String = createAppInfo("pet.MeiRenTiaoZhanChengGongPanel","meiren");
 		/**排行榜**/
-		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang");
+		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang",EmPanelID.RANKLISTPANLE);
 		/**全平台排行榜**/
 		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
 		/**膜拜**/
-		public static var WORSHIP_PANLE:String = createAppInfo("rank.WorshipPanle","paihangbang");
+		public static var WORSHIP_PANLE:String = createAppInfo("rank.WorshipPanle","paihangbang",EmPanelID.MO_BAI);
 		
 		/**副本结算通用**/
 		public static var COMMON_ZONE_RESULT_PANLE:String = createAppInfo("zone.CommonZoneResultPanelExt");

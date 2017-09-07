@@ -25,7 +25,7 @@ package com.rpgGame.core.app
 //		function initAttr():void;
 //		function initView():void;
 		
-		function show( data:* = null, openTable:String = "", parentContiner:DisplayObjectContainer = null ):void;
+		function show( data:* = null, openTable:int = 0, parentContiner:DisplayObjectContainer = null ):void;
 		function refresh():void;
 		function hide():void;
 //		function addEvent():void;

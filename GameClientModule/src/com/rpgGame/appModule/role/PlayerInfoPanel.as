@@ -25,7 +25,7 @@ package com.rpgGame.appModule.role
 			addTabDatas(ButtonJuese,SubRolePanel,EmFunctionID.EM_ROLE);
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data,EmFunctionID.EM_ROLE,parentContiner);
 		}

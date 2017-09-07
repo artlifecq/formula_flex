@@ -29,7 +29,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			super(_skin);
 			init();
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 			var dataInfo:SCRankInfoMessage=data as SCRankInfoMessage;

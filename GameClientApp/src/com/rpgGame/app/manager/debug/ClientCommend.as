@@ -55,6 +55,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -190,11 +191,11 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".bat", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"325");
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,EmFunctionID.EM_TOWERS);
 			});
 			commandList.put( ".bat2", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"320");
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,EmFunctionID.EM_DIANFENGDUIJUE);
 			});
 			commandList.put( ".log", function (...arg):void
 			{
@@ -247,8 +248,7 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".actopen", function (...arg):void
 			{
 				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
-				var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
-				if(info.actCfg.q_show_notice==1&&FunctionOpenManager.checkOpenBuyFunId(list[1])){
+				if(info.actCfg.q_show_notice==1&&FunctionOpenManager.checkOpenByFunId(info.actCfg.q_notice_trans)){
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
 			});

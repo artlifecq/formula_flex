@@ -56,7 +56,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hui.png";
+			temp.height = 27;
+			temp.styleName = "ui/common/table/list1.png";
 			temp.width = 298;
 			temp.x = 0;
 			temp.y = 0;
@@ -68,7 +69,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg2 = temp;
 			temp.name = "bg2";
-			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hei.png";
+			temp.height = 27;
+			temp.styleName = "ui/common/table/list.png";
 			temp.width = 298;
 			temp.x = 0;
 			temp.y = 0;

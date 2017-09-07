@@ -82,11 +82,6 @@ package com.rpgGame.app.utils
 			
 			role.setScale(scale);
 			role.rotationY =rotationY;
-			POINT.x=avatar.x;
-			POINT.y=avatar.y;
-			var point : Point = avatar.parent.localToGlobal(POINT);
-//			role.x=fadeX;
-//			role.z=fadeY;
 			
 			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
 			{
@@ -106,7 +101,7 @@ package com.rpgGame.app.utils
 			
 			POINT.x=avatar.x;
 			POINT.y=avatar.y;
-			point=avatar.parent.localToGlobal(POINT);
+			var point : Point =avatar.parent.localToGlobal(POINT);
 			updateFadeAlphaRectPos(role,point.x,point.y );
 			
 			roleMap.add(role,avatar);
@@ -183,11 +178,11 @@ package com.rpgGame.app.utils
 				var fadeList:Array=fadeMap.getValue(role);
 				POINT.x=avatar.x;
 				POINT.y=avatar.y;
-				point=avatar.parent.localToGlobal(POINT);
 				if(fadeList){
-					point.x=point.x-fadeList[0];
-					point.y=point.y+fadeList[1];
+					POINT.x=POINT.x-fadeList[0];
+					POINT.y=POINT.y+fadeList[1];
 				}
+				point=avatar.parent.localToGlobal(POINT);
 				updateFadeAlphaRectPos(role,point.x,point.y );
 			}
 		}

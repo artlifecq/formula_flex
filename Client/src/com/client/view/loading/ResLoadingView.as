@@ -228,7 +228,7 @@ package com.client.view.loading
 		{
 			if (ExternalInterface.available) 
 			{
-				ExternalInterface.call("reloadswf");
+				ExternalInterface.call("refresh");
 			}
 		}
 		private function getDefaultStrokeFilter() : Array
