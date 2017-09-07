@@ -1,7 +1,7 @@
-package com.rpgGame.netData.activities.bean{
-	
-	
+package  com.rpgGame.netData.activities.bean
+{
 	import org.game.netCore.net.Bean;
+
 	
 	/** 
 	 * @author Commuication Auto Maker
@@ -13,11 +13,11 @@ package com.rpgGame.netData.activities.bean{
 	 * 活动信息
 	 */
 	public class ActivityInfo extends Bean {
-	
+		
 		//活动id
 		private var _activityId: int;
 		
-		//活动类型
+		//活动类型(与充值有关)
 		private var _activityType: int;
 		
 		//活动名称
@@ -59,8 +59,11 @@ package com.rpgGame.netData.activities.bean{
 		//完成进度分母
 		private var _denominator: int;
 		
-		//面板类型
-		private var _panelType: int;
+		//主面板类型
+		private var _mainPanelType: int;
+		
+		//主面板类型
+		private var _subPanelType: int;
 		
 		//开始时间
 		private var _startTime: int;
@@ -71,13 +74,16 @@ package com.rpgGame.netData.activities.bean{
 		//奖励领取条件
 		private var _exchange: String;
 		
+		//其他信息显示(目前用于排行活动中显示首位达成条件的玩家名字)
+		private var _other: String;
+		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
 			//活动id
 			writeInt(_activityId);
-			//活动类型
+			//活动类型(与充值有关)
 			writeInt(_activityType);
 			//活动名称
 			writeString(_activityName);
@@ -105,14 +111,18 @@ package com.rpgGame.netData.activities.bean{
 			writeInt(_numerator);
 			//完成进度分母
 			writeInt(_denominator);
-			//面板类型
-			writeInt(_panelType);
+			//主面板类型
+			writeInt(_mainPanelType);
+			//主面板类型
+			writeInt(_subPanelType);
 			//开始时间
 			writeInt(_startTime);
 			//结束时间
 			writeInt(_endTime);
 			//奖励领取条件
 			writeString(_exchange);
+			//其他信息显示(目前用于排行活动中显示首位达成条件的玩家名字)
+			writeString(_other);
 			return true;
 		}
 		
@@ -122,7 +132,7 @@ package com.rpgGame.netData.activities.bean{
 		override protected function reading(): Boolean{
 			//活动id
 			_activityId = readInt();
-			//活动类型
+			//活动类型(与充值有关)
 			_activityType = readInt();
 			//活动名称
 			_activityName = readString();
@@ -150,14 +160,18 @@ package com.rpgGame.netData.activities.bean{
 			_numerator = readInt();
 			//完成进度分母
 			_denominator = readInt();
-			//面板类型
-			_panelType = readInt();
+			//主面板类型
+			_mainPanelType = readInt();
+			//主面板类型
+			_subPanelType = readInt();
 			//开始时间
 			_startTime = readInt();
 			//结束时间
 			_endTime = readInt();
 			//奖励领取条件
 			_exchange = readString();
+			//其他信息显示(目前用于排行活动中显示首位达成条件的玩家名字)
+			_other = readString();
 			return true;
 		}
 		
@@ -177,7 +191,7 @@ package com.rpgGame.netData.activities.bean{
 		}
 		
 		/**
-		 * get 活动类型
+		 * get 活动类型(与充值有关)
 		 * @return 
 		 */
 		public function get activityType(): int{
@@ -185,7 +199,7 @@ package com.rpgGame.netData.activities.bean{
 		}
 		
 		/**
-		 * set 活动类型
+		 * set 活动类型(与充值有关)
 		 */
 		public function set activityType(value: int): void{
 			this._activityType = value;
@@ -387,18 +401,33 @@ package com.rpgGame.netData.activities.bean{
 		}
 		
 		/**
-		 * get 面板类型
+		 * get 主面板类型
 		 * @return 
 		 */
-		public function get panelType(): int{
-			return _panelType;
+		public function get mainPanelType(): int{
+			return _mainPanelType;
 		}
 		
 		/**
-		 * set 面板类型
+		 * set 主面板类型
 		 */
-		public function set panelType(value: int): void{
-			this._panelType = value;
+		public function set mainPanelType(value: int): void{
+			this._mainPanelType = value;
+		}
+		
+		/**
+		 * get 主面板类型
+		 * @return 
+		 */
+		public function get subPanelType(): int{
+			return _subPanelType;
+		}
+		
+		/**
+		 * set 主面板类型
+		 */
+		public function set subPanelType(value: int): void{
+			this._subPanelType = value;
 		}
 		
 		/**
@@ -444,6 +473,21 @@ package com.rpgGame.netData.activities.bean{
 		 */
 		public function set exchange(value: String): void{
 			this._exchange = value;
+		}
+		
+		/**
+		 * get 其他信息显示(目前用于排行活动中显示首位达成条件的玩家名字)
+		 * @return 
+		 */
+		public function get other(): String{
+			return _other;
+		}
+		
+		/**
+		 * set 其他信息显示(目前用于排行活动中显示首位达成条件的玩家名字)
+		 */
+		public function set other(value: String): void{
+			this._other = value;
 		}
 		
 	}

@@ -144,7 +144,7 @@ package
 		private function onAddToStg(e : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
-			pushNode(1,"加载ClientLoader");
+			
 			_urlParmar = loaderInfo.parameters;
 			if (ExternalInterface.available)
 			{
@@ -216,7 +216,7 @@ package
 			{
 				_clientPathUrl = "loader_#/" + _clientPathUrl;
 			}
-
+			pushNode(1,"加载ClientLoader");
 			initStage();
 			//initMenu();
 
@@ -430,7 +430,7 @@ package
             client["browser"] = _browser;
             client["gameName"] = _gameName;
             client["clientIp"] = _clientIp;
-            client
+            //client
 			this.stage.addChild(client);
 			//
 			loaderInfo.loader.unload();
