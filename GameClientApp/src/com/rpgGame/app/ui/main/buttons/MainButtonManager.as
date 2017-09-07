@@ -118,11 +118,11 @@ package com.rpgGame.app.ui.main.buttons
 				case EmMainBtnID.ZHANHUN:
 					return new MainButton_ZhanHun();
 				case EmMainBtnID.ZUDUI:
-					return new MainButton_Gang();
+					return new MainButton_Team();
 				case EmMainBtnID.SHANGCHENG:
 					return new MainButton_ShangCheng();
 				case EmMainBtnID.BANGPAI:
-					return new MainButton_Team();
+					return new MainButton_Gang();
 				case EmMainBtnID.MEIREN:
 					return new MainButton_MeiRen();
 				case EmMainBtnID.HUODONG:
