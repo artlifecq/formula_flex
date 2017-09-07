@@ -1,6 +1,6 @@
 package  com.rpgGame.app.ui.main.openActivity.comps
 {
-	import com.game.activities.business.ActivityVo;
+	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 
 	public interface IActivityInter
 	{

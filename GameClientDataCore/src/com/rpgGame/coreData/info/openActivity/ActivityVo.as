@@ -428,10 +428,7 @@ package  com.rpgGame.coreData.info.openActivity
 			return _repeatTimes;
 		}
 		
-		public function get isend():Boolean
-		{
-			return _isend;
-		}
+		
 		
 		/**活动标签小图标资源名*/
 		public function get activityImgName():String

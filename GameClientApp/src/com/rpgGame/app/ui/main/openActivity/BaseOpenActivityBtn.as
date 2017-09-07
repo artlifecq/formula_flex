@@ -26,7 +26,15 @@ package com.rpgGame.app.ui.main.openActivity
 			ui = new OpenActivityBtnSkin();
 			super(ui);
 		}
-		
+		public function setNum(num:int):void
+		{
+			if (num>0) 
+			{
+				ui.lbnum.text=num+"";
+			}
+			ui.lbnum.visible=num>0;
+			ui.bg.visible=num>0;
+		}
 		override public function set styleName(res:String):void
 		{
 			super.styleName=res;
