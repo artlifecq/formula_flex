@@ -9,6 +9,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
@@ -194,7 +195,9 @@ package com.rpgGame.app.ui.main.taskbar
 				var role:SceneRole = SceneManager.getSceneObjByID(serverID.ToGID()) as SceneRole;
 				if (role != null&& role.data !=null&&role.headFace!=null) 
 				{
-					(role.headFace as HeadFace).updateMonserSpeakBar();
+					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+					role.dialogFace.speakBar(speak);
+					//(role.headFace as HeadFace).updateMonserSpeakBar();
 					/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
 					if(speak!=null&&speak!="")
 					{

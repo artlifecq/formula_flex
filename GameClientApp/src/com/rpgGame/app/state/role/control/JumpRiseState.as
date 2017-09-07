@@ -1,12 +1,18 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.IState;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.action.TrailStateReference;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.state.role.control.ControlState;
+	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.RenderUnitID;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Vector3D;
@@ -126,6 +132,10 @@ package com.rpgGame.app.state.role.control
 					transition(RoleStateType.ACTION_IDLE);
 					
 				}
+				//落地特效
+				SpellAnimationHelper.addTargetEffect(_machine.owner as SceneRole, RenderUnitID.JUMP_DOWN, RenderUnitType.TARGET_EFFECT, EffectUrl.EFFECT_JUMPDOWN, BoneNameEnum.st_zero);
+				
+				
 			}
 		}
 
@@ -151,6 +161,7 @@ package com.rpgGame.app.state.role.control
 					_machine.owner.z=_destPoint.z;
 				}*/
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
+				TaskAutoManager.getInstance().jumpOver=true;
 				if(_stateReference&&_stateReference.isEnd)
 				{Lyt.a("跳跃点最后一个点");
 					EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
