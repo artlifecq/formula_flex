@@ -33,17 +33,17 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				case _skin.lbFuben:
 				{
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_DUORENFUBEN);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_DUORENFUBEN,null,false);
 					break;
 				}
 				case _skin.lbJixian:
 				{
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHUANGBEIFUBEN);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHUANGBEIFUBEN,null,false);
 					break;
 				}
 				case _skin.lbBoss:
 				{
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BOSS_ACT);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BOSS_ACT,null,false);
 					break;
 				}
 				default:
