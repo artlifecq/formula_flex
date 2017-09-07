@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.alert
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
@@ -102,19 +103,19 @@ package com.rpgGame.app.ui.alert
 					switch(_data.sys)
 					{
 						case SYS_HORSE:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUOQI);
 							break;
 						case SYS_SKILLL_LEVEL_UP:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JINENG);
 							break;
 						case SYS_SKILLL_GRADE_UP:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JINENG);
 							break;
 						case SYS_ZHANHUN:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN);
 							break;
 						case SYS_ZHANQI:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANQI,null,false);
+							FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANQI);
 							break;
 					}
 				}
@@ -208,7 +209,7 @@ package com.rpgGame.app.ui.alert
 		public static function checkPanleIsOpen(sys:String):Boolean
 		{
 			var id:String  =sys.split("_")[0];
-			var appinfo:AppInfo = FunctionOpenManager.getAppInfoByFunctionId(id);
+			var appinfo:AppInfo = AppConstant.getAppinfoByAppName(AppConstant.getAppNameByPanelId(int(id)));
 			if(appinfo == null)
 				return true;
 			return AppManager.isAppInScene(appinfo.appName);

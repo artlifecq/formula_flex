@@ -330,7 +330,7 @@
 
         private function showRelivePanel():void
         {
-            AppManager.showAppNoHide(AppConstant.BACK_PACK_PANEL);
+//            AppManager.showAppNoHide(AppConstant.BACK_PACK_PANEL);
         }
 
         private function useRingDepth():void

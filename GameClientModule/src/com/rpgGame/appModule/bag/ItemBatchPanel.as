@@ -42,7 +42,7 @@ package com.rpgGame.appModule.bag
 			numCtrl=new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,1,dataChange);
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			CONFIG::netDebug {
 				NetDebug.LOG("[AppModule] [ItemBatchPanel] show");

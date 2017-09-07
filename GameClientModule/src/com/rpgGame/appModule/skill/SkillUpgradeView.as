@@ -253,7 +253,7 @@ package com.rpgGame.appModule.skill
 								SpellSender.reqSkillLevelUp(cfg.q_skillID,0,0);
 							}
 						}else{
-							alertPanel.show({cfg:cfg,info:_selectedInfo},"",_panel);
+							alertPanel.show({cfg:cfg,info:_selectedInfo},0,_panel);
 							alertPanel.x=290;
 							alertPanel.y=160;
 						}

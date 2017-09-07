@@ -273,7 +273,7 @@ package com.rpgGame.appModule.equip
 					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 					break;
 				case _skin.lb_cailiao:
-					_getPanel.show(useItemInfo.cfgId,"",this._skin.container)
+					_getPanel.show(useItemInfo.cfgId,0,this._skin.container)
 					break;
 			}
 			if(targetEquipInfo){

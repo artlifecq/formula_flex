@@ -21,6 +21,7 @@ package com.rpgGame.app.manager
 	{
 		private var _firstAutoOpen:Boolean = true;
 		private var _vipInfo:Q_redreward;
+		public var funcOpening:Boolean=false;
 
 		public function get vipInfo():Q_redreward
 		{
@@ -70,12 +71,13 @@ package com.rpgGame.app.manager
 			_redCount = msg.redCount;
 			_recharged = msg.recharged == 1;
 			if(msg.panelState==1&& _sendCount>0)
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_SENDREDREWARD);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_SENDREDREWARD);
 			refeashVipData();
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);
-			if(_firstAutoOpen&&canGetReward)
+			if(_firstAutoOpen&&canGetReward&&!funcOpening)
 			{
-				AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+//				AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_REDREWARD);
 				_firstAutoOpen = false;
 			}
 			

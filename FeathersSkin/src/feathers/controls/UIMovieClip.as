@@ -23,7 +23,7 @@ package feathers.controls
 	public class UIMovieClip extends UIAsset implements IMovieClip
 	{
 		public static var RES_ROOT:String = "../res/app/";
-		private static var BmdId:int;
+		private static var BmdId:int=0;
 		private var _frameLabels:Vector.<String>;
 		private var _frameStyles:Vector.<String>;
 		private var _frameInfos:Vector.<Object>;
@@ -54,7 +54,8 @@ package feathers.controls
 		public function UIMovieClip()
 		{
 			_frameTime = 1000/_fps;
-			_timer=new GameTimer(this.name+"movie",_frameTime,0,renderFrame);
+			BmdId++;
+			_timer=new GameTimer("movie"+BmdId,_frameTime,0,renderFrame);
 			this.addEventListener(away3d.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			this.addEventListener(away3d.events.Event.REMOVED_FROM_STAGE, onRemoveFromStage);
 		}

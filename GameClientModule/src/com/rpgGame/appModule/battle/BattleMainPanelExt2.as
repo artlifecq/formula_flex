@@ -66,17 +66,17 @@ package com.rpgGame.appModule.battle
 			this.addChild(_curView);
 			
 		}
-		override public function show(data:*=null, openTable:String="0", parentContiner:DisplayObjectContainer=null):void 
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
-			var sub:String=openTable;
-			if (sub==""&&_curView==null) 
+			var sub:int=openTable;
+			if (sub==0&&_curView==null) 
 			{
 				showSubPanel(SUB_DIANFENG);
 			}
 			else
 			{
-				showSubPanel(sub);
+				showSubPanel(sub.toString());
 			}
 		}
 		

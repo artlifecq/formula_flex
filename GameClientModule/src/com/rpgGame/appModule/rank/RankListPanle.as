@@ -34,19 +34,31 @@ package com.rpgGame.appModule.rank
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.itemRendererType = RankListButtonCell;
 			_skin.list.addEventListener(Event.SELECT,selectHandler);
-			var arr:Array = NewFuncCfgData.getListById(311);
+			var arr:Array = getRankNameList();
 			_skin.list.dataProvider = new ListCollection(arr);
 			
 			var length:int = arr.length;
 			for(var i:int = 0;i<length;i++)
 			{
-				if(FunctionOpenManager.functionIsOpen(arr[i].q_id.toString()))
+				if(FunctionOpenManager.functionIsOpen(arr[i].q_id))
 				{
 					_skin.list.selectedIndex = i;
 					break;
 				}
 			}
 			selectHandler();
+		}
+		
+		private function getRankNameList():Array
+		{
+			var names:Array=[];
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_LEVELRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_COMBATPOAERRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_FIGHTFLAGRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_MOUNTRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_WEDDINGRINGRANK));
+			names.push(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_BEAUTYRANK));
+			return names;
 		}
 		
 		private var _selectIndex:int=-1;
@@ -60,9 +72,9 @@ package com.rpgGame.appModule.rank
 			var q_data:Q_newfunc = _skin.list.dataProvider.getItemAt(index) as Q_newfunc;
 			if(q_data==null)
 				return ;
-			if(!FunctionOpenManager.functionIsOpen(q_data.q_id.toString()))
+			if(!FunctionOpenManager.functionIsOpen(q_data.q_id))
 			{
-				NoticeManager.showNotifyById(90203,null,q_data.q_string_name,q_data.q_level);
+				NoticeManager.showNotifyById(90203,null,q_data.q_name,q_data.q_level);
 				_skin.list.selectedIndex = _selectIndex;
 			}else{
 				_selectIndex = index;
@@ -85,7 +97,7 @@ package com.rpgGame.appModule.rank
 			{
 				_skin.content.removeChild(_currentView);
 			}
-			if(!_tabViewMap.hasOwnProperty(_selectIInfoData.q_id))
+			if(!_tabViewMap.getValue(_selectIInfoData.q_id))
 			{
 				createView(_selectIInfoData.q_id);
 			}
@@ -96,9 +108,8 @@ package com.rpgGame.appModule.rank
 		
 		private function createView(type:int):void
 		{
-			var typeToString:String = type.toString();
 			var view:RankListViewBase;
-			switch(typeToString)
+			switch(type)
 			{
 				case EmFunctionID.EM_LEVELRANK:
 					view = new LevelRankListView();

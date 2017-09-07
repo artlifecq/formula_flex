@@ -83,7 +83,7 @@ package com.rpgGame.appModule.guild.war
 				_skin.uiLingQu.visible=true;
 				GuildWarSender.reqGuildWarGiveDailyGift(1);
 			}else if(target==_skin.lbJiangli){
-				AppManager.showApp(AppConstant.GUILD_HCZB_REWARD,null,"",this._skin.container);
+				AppManager.showApp(AppConstant.GUILD_HCZB_REWARD,null,0,this._skin.container);
 			}else if(target==_skin.toZhanChang){
 				GuildWarSender.reqGuildWarEnter(1);
 			}

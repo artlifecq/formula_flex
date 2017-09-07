@@ -19,7 +19,7 @@ package com.rpgGame.core.app
 		 * @return 
 		 * 
 		 */		
-		public static function isCanOpenApp( appInfo:String, data:Object, openTable:String ):Boolean
+		public static function isCanOpenApp( appInfo:String, data:Object, openTable:int ):Boolean
 		{
 			var isOpen:Boolean = true;
 			switch( appInfo )

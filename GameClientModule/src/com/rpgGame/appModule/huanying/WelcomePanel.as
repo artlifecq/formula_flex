@@ -38,7 +38,7 @@ package com.rpgGame.appModule.huanying
 			}
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			eft=this.playInter3DAt(ClientConfig.getEffect("ui_kaishiyouxi"),455,287,1,playCom);
 			super.show(data,openTable,parentContiner);

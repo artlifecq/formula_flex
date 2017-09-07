@@ -258,7 +258,7 @@ package com.rpgGame.app.manager
 		
 		private static function showRelivePanel():void
 		{
-			AppManager.showAppNoHide( AppConstant.RELIVE_PANEL );
+//			AppManager.showAppNoHide( AppConstant.RELIVE_PANEL );
 			if(_curDieInfo.trusteeshipReliveTime)
 				TimerServer.add(autoOriginRelive,trusteeshipReliveTime);
 //			UIModel.instence.showModel(RELIVE_TYPE);
@@ -270,7 +270,7 @@ package com.rpgGame.app.manager
 		 */		
 		public static function hideRelivePanel():void
 		{
-			AppManager.hideApp( AppConstant.RELIVE_PANEL);
+//			AppManager.hideApp( AppConstant.RELIVE_PANEL);
 //			UIModel.instence.hideModel(RELIVE_TYPE);
 		}
 		

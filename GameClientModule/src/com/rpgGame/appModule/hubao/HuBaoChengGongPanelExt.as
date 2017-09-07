@@ -79,7 +79,7 @@ package com.rpgGame.appModule.hubao
 			}			
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show();
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,setDate);

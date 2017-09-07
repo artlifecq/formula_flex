@@ -34,7 +34,7 @@ package com.rpgGame.appModule.rank
 		
 		override protected function commitData():void
 		{
-			_skin.labelDisplay.text= infodata.q_string_name;
+			_skin.labelDisplay.text= infodata.q_name;
 		}
 		
 		private function get infodata():Q_newfunc

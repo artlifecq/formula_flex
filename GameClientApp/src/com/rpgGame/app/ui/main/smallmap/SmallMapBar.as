@@ -128,7 +128,7 @@ package com.rpgGame.app.ui.main.smallmap
 					//					ClientSettingGameSetMananger.saveMainToServer();
 					break;
 				case this._skin.btnPaiHang://打开排行榜
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_FIGHTFLAGRANK);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_FIGHTFLAGRANK);
 					break;
 				case this._skin.btnGm://GM
 					//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);

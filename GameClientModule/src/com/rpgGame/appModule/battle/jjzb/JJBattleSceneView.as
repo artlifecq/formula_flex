@@ -59,7 +59,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				return;
 			}
-			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),_data.rank,_data.awardItemInfos,this],""
+			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),_data.rank,_data.awardItemInfos,this],0
 			,StarlingLayerManager.topUILayer);
 		}
 		private function onOver(eve:Event):void

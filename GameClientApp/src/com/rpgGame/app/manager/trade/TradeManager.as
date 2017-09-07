@@ -57,7 +57,7 @@ package com.rpgGame.app.manager.trade
 			_tradeMine.playerName = MainRoleManager.actorInfo.name;
 			//预留打开交易面板的操作
 			AppManager.showAppNoHide(AppConstant.TRADE_PANEL);
-			AppManager.showAppNoHide(AppConstant.BACK_PACK_PANEL);
+//			AppManager.showAppNoHide(AppConstant.BACK_PACK_PANEL);
 			AppManager.hideApp(AppConstant.TRADE_BEEN_INVITE_PANEL)
 			replayAllInvite();
 			TimerServer.remove(showInviteTimeOut);

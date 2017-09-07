@@ -620,13 +620,13 @@ package com.rpgGame.appModule.guild.war
 			{
 				case _skin.btnBaoming:
 				case _skin.btnJinPai:
-					AppManager.showApp(AppConstant.GUILD_WCZB_APPLY,null,"",this._skin.container);
+					AppManager.showApp(AppConstant.GUILD_WCZB_APPLY,null,0,this._skin.container);
 					break;
 				case _skin.btnJiangli:
 					if(_currentMap==wczbMap){
-						AppManager.showApp(AppConstant.GUILD_WCZB_REWARD,null,"",this._skin.container);
+						AppManager.showApp(AppConstant.GUILD_WCZB_REWARD,null,0,this._skin.container);
 					}else{
-						AppManager.showApp(AppConstant.GUILD_HCZB_REWARD,null,"",this._skin.container);
+						AppManager.showApp(AppConstant.GUILD_HCZB_REWARD,null,0,this._skin.container);
 					}
 					break;
 				case _skin.btnJinru:

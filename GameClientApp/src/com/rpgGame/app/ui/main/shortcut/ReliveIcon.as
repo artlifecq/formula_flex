@@ -33,7 +33,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			super.onTouchIcon();
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,EnumFunctionMessageBarIcoType.RELIVE_TYPE);
-			AppManager.showAppNoHide(AppConstant.RELIVE_PANEL);
+//			AppManager.showAppNoHide(AppConstant.RELIVE_PANEL);
 		}
 		
 		/**

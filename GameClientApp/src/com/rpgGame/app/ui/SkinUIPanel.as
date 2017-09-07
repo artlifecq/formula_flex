@@ -33,7 +33,7 @@ package com.rpgGame.app.ui
 		protected var _model : Boolean = false;
 		protected var _appInfo : AppInfo;
 		protected var _data : Object;
-		protected var _openTab : String;
+		protected var _openTab : int;
 		
 		public function SkinUIPanel(skin : StateSkin)
 		{
@@ -332,7 +332,7 @@ package com.rpgGame.app.ui
 		 * @param parentContiner 被添加到的父容器
 		 *
 		 */
-		public function show(data : * = null, openTable : String = "", parentContiner : DisplayObjectContainer = null) : void
+		public function show(data : * = null, openTable : int = 0, parentContiner : DisplayObjectContainer = null) : void
 		{
 			_data = data;
 			_openTab = openTable;

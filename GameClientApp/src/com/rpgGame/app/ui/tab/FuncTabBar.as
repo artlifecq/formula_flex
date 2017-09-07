@@ -19,20 +19,20 @@ package com.rpgGame.app.ui.tab
 			super(tab, datas);
 		}
 		
-		override public function show(data:*=null, openTable:String="0"):void
+		override public function show(data:*=null, openTable:int=0):void
 		{
 			updateTabData();
 			super.show(data,openTable);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,onOpenFunc);
 		}
 		
-		private function onOpenFunc(ids:Vector.<String>):void
+		private function onOpenFunc(ids:Vector.<int>):void
 		{
 			var num2:int=ids.length;
-			var tabKey:String;
+			var tabKey:int;
 			var bool:Boolean = false;
 			for(var i:int=0;i<num2;i++){
-				tabKey=ids[i].toString();
+				tabKey=ids[i];
 				if(isHoldFunc(tabKey)){
 					if(FunctionOpenManager.functionIsOpen(ids[i])){//已经开启了
 						addTabDataWithTabKey(tabKey);
@@ -47,7 +47,7 @@ package com.rpgGame.app.ui.tab
 				this.updata();
 		}
 		
-		private function isHoldFunc(tabKey:String):Boolean
+		private function isHoldFunc(tabKey:int):Boolean
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
@@ -73,7 +73,7 @@ package com.rpgGame.app.ui.tab
 			}
 		}
 		
-		public function checkOpen():void
+		private function checkOpen():void
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
@@ -88,7 +88,7 @@ package com.rpgGame.app.ui.tab
 			if(!_needRefash)
 				return ;
 			this.updata();
-			this.switchTabKey(this._currentKey);
+//			this.switchTabKey(this._currentKey);
 		}
 	}
 }
