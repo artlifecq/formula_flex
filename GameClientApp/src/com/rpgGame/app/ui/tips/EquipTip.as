@@ -391,11 +391,10 @@ package com.rpgGame.app.ui.tips
 				yinIcon.x=52;
 				yinIcon.y=curY-4;
 				
-				_itemTip.lbl_bangding.x=190;
 				_itemTip.lbl_bangding.y=label.y;
 				_itemTip.lbl_bangding.visible=true;
 				if(_itemInfo.binded){
-					_itemTip.lbl_bangding.text="【已绑定】"
+					_itemTip.lbl_bangding.text="【已绑定】";
 				}else{
 					if(_itemInfo.qItem.q_bind==0){
 						_itemTip.lbl_bangding.visible=false;

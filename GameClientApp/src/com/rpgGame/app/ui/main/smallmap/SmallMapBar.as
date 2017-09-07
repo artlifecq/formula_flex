@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.smallmap
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.MenuUtil;
@@ -11,6 +12,7 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.core.ui.SkinUI;
@@ -84,12 +86,14 @@ package com.rpgGame.app.ui.main.smallmap
 			super.onShow();
 			this.showSmallMap();
 			this._smallMap.openRoad();
+			EventManager.addEvent(GameSettingEvent.FILTRATE_UPDATE,updatePingbiBtnState);
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
 			this._smallMap.closeRoad();
+			EventManager.removeEvent(GameSettingEvent.FILTRATE_UPDATE,updatePingbiBtnState);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void {
@@ -140,6 +144,19 @@ package com.rpgGame.app.ui.main.smallmap
 					menus = MenuUtil.getsystemChangeLine();
 					MenuManager.showMenu(menus,null, -1, -1, 80);
 					break;
+			}
+		}
+		
+		private function updatePingbiBtnState():void
+		{
+			if(GameSettingManager.isHavePingBi())
+			{
+				_skin.uiSelect.visible=true;
+				_skin.uiUp.visible=false;
+			}
+			else{
+				_skin.uiSelect.visible=false;
+				_skin.uiUp.visible=true;
 			}
 		}
 		

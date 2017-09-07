@@ -103,7 +103,7 @@ package com.rpgGame.appModule.role
 					NoticeManager.showNotifyById(2008);
 					return;
 				}
-				ItemSender.reqOpenCellMessage(_type,_index);
+				ItemSender.reqOpenCellMessage(_type,_index+1);
 			}
 		}
 		

@@ -53,6 +53,8 @@ package org.mokylin.skin.app.maps
 
 		public var tab:feathers.controls.TabBar;
 
+		public var uiOver:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -64,7 +66,7 @@ package org.mokylin.skin.app.maps
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__maps_Skin_UIAsset1_i(),tab_i(),grp_cont_i(),__maps_Skin_UIAsset2_i(),__maps_Skin_UIAsset3_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
+			this.elementsContent = [bg_i(),__maps_Skin_UIAsset1_i(),tab_i(),grp_cont_i(),uiOver_i(),__maps_Skin_UIAsset2_i(),__maps_Skin_UIAsset3_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
 			
 			states = {
 			};
@@ -331,6 +333,19 @@ package org.mokylin.skin.app.maps
 			temp.y = 54;
 			temp.layout = __maps_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __maps_Skin_ArrayCollection1_i();
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.height = 449;
+			temp.styleName = "ui/app/maps/bggg.png";
+			temp.width = 638;
+			temp.x = 23;
+			temp.y = 88;
 			return temp;
 		}
 

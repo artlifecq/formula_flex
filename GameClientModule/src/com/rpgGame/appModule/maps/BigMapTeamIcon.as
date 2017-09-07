@@ -33,11 +33,11 @@ package com.rpgGame.appModule.maps
 			var isCaptain:Boolean=Mgr.teamMgr.getPlayerIsCaptain(data.serverID);
 			if (isCaptain) 
 			{	
-				url="ui/mainui/map/hong.png";
+				url="ui/mainui/map/hongdian.png";
 			}
 			else
 			{
-				url="ui/mainui/map/lv.png";
+				url="ui/mainui/map/lvdian.png";
 			}
 			if (icon.styleName!=url) 
 			{

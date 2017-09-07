@@ -420,6 +420,7 @@ package com.rpgGame.app.ui.main.chat
 					return RichTextCustomUtil.getImageLinkCode("ui/mainui/chat/siliao.png");
 					break;
 				}
+				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:
 				{
 					return RichTextCustomUtil.getImageLinkCode("ui/mainui/chat/xitong.png");
