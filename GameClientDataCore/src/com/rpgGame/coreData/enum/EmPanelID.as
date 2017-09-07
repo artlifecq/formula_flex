@@ -93,21 +93,18 @@ package com.rpgGame.coreData.enum
 		 */
 		public static const HU_BAO:int=21;
 		/**
+		 * 防沉迷
+		 */
+		public static const FANG_CHENMI:int=22;
+		/**
 		 * vip
 		 */
 		public static const VIP:int=23;
 		/**
-		 * 玩家信息
+		 * 声望商店
 		 */
-		public static const PLAYER_INFO:int=24;
-		/**
-		 * 大地图
-		 */
-		public static const BIGMAP_PANEL:int=25;
-		/**
-		 * 死亡复活
-		 */
-		public static const DIE_PANEL:int=26;
+		public static const BATTLE_SHOP_PANEL:int=24;
+
 		
 		public function EmPanelID()
 		{

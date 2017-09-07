@@ -153,7 +153,7 @@
 		 */
 		public static function openPanelByFuncID(id:int,data:Object=null,isAutoHide:Boolean=true):void
 		{
-			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(id);
+			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
 			if(!funcCfg){
 				return;
 			}

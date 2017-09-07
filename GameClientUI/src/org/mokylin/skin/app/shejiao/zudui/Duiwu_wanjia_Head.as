@@ -39,7 +39,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 26;
 			this.width = 910;
-			this.elementsContent = [__Duiwu_wanjia_Head_UIAsset1_i(),__Duiwu_wanjia_Head_Group1_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbBanghui_i(),lbMap_i()];
+			this.elementsContent = [__Duiwu_wanjia_Head_Group1_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbBanghui_i(),lbMap_i()];
 			
 			states = {
 			};
@@ -55,20 +55,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__Duiwu_wanjia_Head_UIAsset2_i(),__Duiwu_wanjia_Head_UIAsset3_i(),__Duiwu_wanjia_Head_UIAsset4_i(),__Duiwu_wanjia_Head_UIAsset5_i(),__Duiwu_wanjia_Head_UIAsset6_i(),__Duiwu_wanjia_Head_UIAsset7_i()];
+			temp.elementsContent = [__Duiwu_wanjia_Head_UIAsset1_i(),__Duiwu_wanjia_Head_UIAsset2_i(),__Duiwu_wanjia_Head_UIAsset3_i(),__Duiwu_wanjia_Head_UIAsset4_i(),__Duiwu_wanjia_Head_UIAsset5_i(),__Duiwu_wanjia_Head_UIAsset6_i()];
 			return temp;
 		}
 
 		private function __Duiwu_wanjia_Head_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shejiao/zudui/yeqian1.jpg";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Duiwu_wanjia_Head_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -78,7 +69,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function __Duiwu_wanjia_Head_UIAsset3_i():feathers.controls.UIAsset
+		private function __Duiwu_wanjia_Head_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -88,7 +79,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function __Duiwu_wanjia_Head_UIAsset4_i():feathers.controls.UIAsset
+		private function __Duiwu_wanjia_Head_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -98,7 +89,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function __Duiwu_wanjia_Head_UIAsset5_i():feathers.controls.UIAsset
+		private function __Duiwu_wanjia_Head_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -108,7 +99,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function __Duiwu_wanjia_Head_UIAsset6_i():feathers.controls.UIAsset
+		private function __Duiwu_wanjia_Head_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -118,7 +109,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function __Duiwu_wanjia_Head_UIAsset7_i():feathers.controls.UIAsset
+		private function __Duiwu_wanjia_Head_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
