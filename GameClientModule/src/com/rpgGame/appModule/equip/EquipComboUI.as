@@ -468,19 +468,19 @@ package com.rpgGame.appModule.equip
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
 			//			_skin.tree.dataProvider.updateAll();
-//			var not:TreeNode=getDataById(info.qItem.q_id);
-//			if(not){
-//				var index:int=_skin.tree.dataProvider.getItemIndex(not);
-//				_skin.tree.dataProvider.updateItemAt(index);
-//				_skin.tree.validate();
-//				var nextCfg:Q_hecheng=HeChengData.getHeChengTargetByCaiLiao(info.qItem.q_id);
-//				if(nextCfg){
-//					not=getDataById(nextCfg.q_item_id);
-//					index=_skin.tree.dataProvider.getItemIndex(not);
-//					_skin.tree.dataProvider.updateItemAt(index);
-//					_skin.tree.validate();
-//				}
-//			}
+			//			var not:TreeNode=getDataById(info.qItem.q_id);
+			//			if(not){
+			//				var index:int=_skin.tree.dataProvider.getItemIndex(not);
+			//				_skin.tree.dataProvider.updateItemAt(index);
+			//				_skin.tree.validate();
+			//				var nextCfg:Q_hecheng=HeChengData.getHeChengTargetByCaiLiao(info.qItem.q_id);
+			//				if(nextCfg){
+			//					not=getDataById(nextCfg.q_item_id);
+			//					index=_skin.tree.dataProvider.getItemIndex(not);
+			//					_skin.tree.dataProvider.updateItemAt(index);
+			//					_skin.tree.validate();
+			//				}
+			//			}
 			updateAllList();
 			if(info.containerID==ItemContainerID.BackPack&&info.cfgId==cailiaoId){//背包里的合成对应合成材料
 				setShowData();
@@ -500,12 +500,12 @@ package com.rpgGame.appModule.equip
 			for each(var item:ClientItemInfo in list){
 				if(item.containerID==ItemContainerID.BackPack&&item.cfgId==cailiaoId){//有一个是就去更新展示了
 					setShowData();
-//					var not:TreeNode=getDataById(item.qItem.q_id);
-//					if(not){
-//						var index:int=_skin.tree.dataProvider.getItemIndex(not);
-//						_skin.tree.dataProvider.updateItemAt(index);
-//						_skin.tree.validate();
-//					}
+					//					var not:TreeNode=getDataById(item.qItem.q_id);
+					//					if(not){
+					//						var index:int=_skin.tree.dataProvider.getItemIndex(not);
+					//						_skin.tree.dataProvider.updateItemAt(index);
+					//						_skin.tree.validate();
+					//					}
 					break;
 				}
 			}
@@ -529,8 +529,8 @@ package com.rpgGame.appModule.equip
 				}
 				return;
 			}
-			
-			setSelectItem(data.data);
+			else
+				setSelectItem(data.data);
 		}
 		
 		private function clearEvent():void
@@ -657,13 +657,13 @@ package com.rpgGame.appModule.equip
 			{
 				setCaiLiaoData();
 				updateAllList();
-//				if(_nowSelect){
-//					var oldindex:int=_skin.tree.selectedIndex;
-//					_skin.tree.selectedItem=getDataById(_nowSelect.q_item_id);
-//					_skin.tree.dataProvider.updateItemAt(oldindex);
-//					_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
-//					_skin.tree.validate();
-//				}
+				//				if(_nowSelect){
+				//					var oldindex:int=_skin.tree.selectedIndex;
+				//					_skin.tree.selectedItem=getDataById(_nowSelect.q_item_id);
+				//					_skin.tree.dataProvider.updateItemAt(oldindex);
+				//					_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
+				//					_skin.tree.validate();
+				//				}
 				//				_skin.tree.dataProvider.updateAll();
 				
 				this.playInter3DAt(ClientConfig.getEffect("ui_ronglu"),613,313,1);

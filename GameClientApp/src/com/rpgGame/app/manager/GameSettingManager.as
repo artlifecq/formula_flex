@@ -13,7 +13,6 @@
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	
 	public class GameSettingManager 
@@ -54,12 +53,13 @@
 			gameSetObj  = JSONUtil.decode(dataStr)[0];
 			if(gameSetObj!=null)
 			{
+				aKeyBlock=gameSetObj.gameSet.aKeyBlock;
 				checkFiltrateGuaiWu=gameSetObj.gameSet.checkFiltrateGuaiWu;
 				checkFiltrateDuiWu=gameSetObj.gameSet.checkFiltrateDuiWu;
 				checkFiltrateJiaZu=gameSetObj.gameSet.checkFiltrateJiaZu;
 				checkFiltrateBangHui=gameSetObj.gameSet.checkFiltrateBangHui;
 				checkFiltrateBiaoChe=gameSetObj.gameSet.checkFiltrateBiaoChe;
-				checkFiltrateBenGuo=gameSetObj.gameSet.checkFiltrateBenGuo;
+				checkFiltrateBenGuo=gameSetObj.gameSet.checkFiltrateBenGuo;		
 			}
 		}
 		
@@ -77,6 +77,10 @@
 		public static function set checkFiltrateGuaiWu(value:Boolean):void
 		{
 			_checkFiltrateGuaiWu=value;
+			if(!_checkFiltrateGuaiWu&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
@@ -88,6 +92,10 @@
 		public static function set checkFiltrateDuiWu(value:Boolean):void
 		{
 			_checkFiltrateDuiWu=value;
+			if(!_checkFiltrateDuiWu&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
@@ -99,6 +107,10 @@
 		public static function set checkFiltrateJiaZu(value:Boolean):void
 		{
 			_checkFiltrateJiaZu=value;
+			if(!_checkFiltrateJiaZu&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
@@ -110,6 +122,10 @@
 		public static function set checkFiltrateBangHui(value:Boolean):void
 		{
 			_checkFiltrateBangHui=value;
+			if(!_checkFiltrateBangHui&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
@@ -121,6 +137,10 @@
 		public static function set checkFiltrateBiaoChe(value:Boolean):void
 		{
 			_checkFiltrateBiaoChe=value;
+			if(!_checkFiltrateBiaoChe&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
@@ -132,6 +152,10 @@
 		public static function set checkFiltrateBenGuo(value:Boolean):void
 		{
 			_checkFiltrateBenGuo=value;
+			if(!_checkFiltrateBenGuo&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
@@ -154,7 +178,7 @@
 		{
 			var value:String;		
 			var data:Array=[];
-			data.push({gameSet:{checkFiltrateGuaiWu:checkFiltrateGuaiWu,checkFiltrateDuiWu:checkFiltrateDuiWu,checkFiltrateJiaZu:checkFiltrateJiaZu,
+			data.push({gameSet:{aKeyBlock:aKeyBlock,checkFiltrateGuaiWu:checkFiltrateGuaiWu,checkFiltrateDuiWu:checkFiltrateDuiWu,checkFiltrateJiaZu:checkFiltrateJiaZu,
 				checkFiltrateBangHui:checkFiltrateBangHui,checkFiltrateBiaoChe:checkFiltrateBiaoChe,checkFiltrateBenGuo:checkFiltrateBenGuo}});
 			value=JSONUtil.encode(data);
 			return value;
@@ -180,6 +204,14 @@
 		//			checkFiltrateBiaoChe = false;
 		//			checkFiltrateBenGuo = false;
 		//		}
+		
+		/**是否有屏蔽选择*/
+		public static function isHavePingBi():Boolean
+		{
+			if(checkFiltrateGuaiWu||checkFiltrateDuiWu||checkFiltrateJiaZu||checkFiltrateBangHui||checkFiltrateBiaoChe||checkFiltrateBenGuo)
+				return true;
+			else return false;
+		}
 		
 		/**屏蔽设置*/
 		public static function viewFilter(baseObj:BaseObj3D):Boolean
