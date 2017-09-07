@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
@@ -61,9 +62,9 @@ package com.rpgGame.appModule.guild
 				_skin.btnOk.visible = true;
 				_skin.lbZhanli0.visible = true;
 			}
-			_skin.lbTeamName.text = _inviteInfo.info.guildName;
+			_skin.lbTeamName.text = MainRoleManager.getPlayerName(_inviteInfo.info.guildName);
 			_skin.lbLevel.text = _inviteInfo.info.guildLevel.toString();
-			_skin.lbRoleName.text = _inviteInfo.info.chiefName;
+			_skin.lbRoleName.text = MainRoleManager.getPlayerName(_inviteInfo.info.chiefName);
 			_skin.lbZhanli.text = _inviteInfo.info.allBattle.toString();
 			var levelInfo:Q_guild = GuildCfgData.getLevelInfo(_inviteInfo.info.guildLevel);
 			_skin.lbNum.text = _inviteInfo.info.guildMemberNum.toString()+"/"+levelInfo.q_max_num.toString();

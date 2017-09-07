@@ -235,7 +235,7 @@ package   com.rpgGame.app.ui.main.team
 				mapName=qMap.q_map_name;
 			}
 			tipData[0]=mapName;
-			tipData[1]=_data.memberName;
+			tipData[1]=_data.memberLevel;
 			tipData[2]=hp;
 			tipData[3]=_data.maxhp;
 			if (buff&&buff.length>0) 

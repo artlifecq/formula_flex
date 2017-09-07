@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -136,9 +137,9 @@ package com.rpgGame.appModule.guild
 				_skin.numList2.text = _guildListinfo.rank.toString();
 			}
 			
-			_skin.lbTeamName.text = _guildListinfo.guildName;
+			_skin.lbTeamName.text = MainRoleManager.getPlayerName(_guildListinfo.guildName);
 			_skin.lbLevel.text = _guildListinfo.guildLevel.toString();
-			_skin.lbRolenName.text = _guildListinfo.chiefName;
+			_skin.lbRolenName.text = MainRoleManager.getPlayerName(_guildListinfo.chiefName);
 			_skin.lbNum.text = _guildListinfo.guildMemberNum.toString()+"/"+_levelInfo.q_max_num.toString();
 			_skin.lbZhanli.text = _guildListinfo.allBattle.toString();
 			

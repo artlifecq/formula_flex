@@ -205,6 +205,10 @@ package com.rpgGame.appModule.hubao
 		{
 			super.hide();
 			if(timer) timer.stop();
+			if(_tishiPanel&&_tishiPanel.stage!=null){
+				MCUtil.removeSelf(_tishiPanel);
+				_tishiPanel=null;
+			}
 			_skin.btnTiSheng.removeEventListener(Event.TRIGGERED,btnTiShengHandler);
 			_skin.btnHuSong.removeEventListener(Event.TRIGGERED,btnHuSongHandler);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_UPDATEPINZHI,updateNowSelectBaoWu);
