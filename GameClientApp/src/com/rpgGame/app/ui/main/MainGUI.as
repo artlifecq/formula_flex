@@ -196,8 +196,6 @@ package com.rpgGame.app.ui.main
 			//			this.addChild(this._topBar);
 			_expBar=new ExpBar();
 			this.addChild(this._expBar);		
-			this._headBar = new MainRoleHeadBar();
-			this.addChild(this._headBar);
 			this._smallMapBar = new SmallMapBar();
 			this.addChild(this._smallMapBar);
 			this._shortcutBar = new ShortcutBar();
@@ -246,6 +244,8 @@ package com.rpgGame.app.ui.main
 			//			
 			_activityBar = new ActivityBar();
 			addChild(_activityBar);
+			this._headBar = new MainRoleHeadBar();
+			this.addChild(this._headBar);
 			//			
 			//			_hintBattleBar = new HintBattleBar();
 			//			addChild(_hintBattleBar);
