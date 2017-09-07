@@ -189,9 +189,9 @@ package com.rpgGame.app.cmdlistener
 		
 		private function OnSCSkillLevelUpResultMessage(msg:SCSkillLevelUpResultMessage):void
 		{
-			if(msg.skilltype==1&&msg.result==1){
-				EventManager.dispatchEvent(SkillEvent.SKILL_ORDER_UP); 
-			}
+//			if(msg.skilltype==1&&msg.result==1){
+//				EventManager.dispatchEvent(SkillEvent.SKILL_ORDER_UP); 
+//			}
 		}
 		
 		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void

@@ -240,7 +240,7 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
-			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
+//			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
 		}
 		override protected function onHide():void
 		{
@@ -253,7 +253,7 @@ package com.rpgGame.appModule.skill
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);
-			EventManager.removeEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
+//			EventManager.removeEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
 			skillUpgrade.onHide();
 			skillRise.onHide();
 		}

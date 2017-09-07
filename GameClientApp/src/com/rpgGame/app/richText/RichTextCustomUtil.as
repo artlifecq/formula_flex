@@ -113,6 +113,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -334,7 +335,7 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.SHOW_PANEL_TYPE:
 					var panelID:int=int(unitData.linkData);
 					//					var id:String=ChatUtil.getPanel(t);
-					FunctionOpenManager.openPanelByFuncID(panelID);
+					FunctionOpenManager.openModeByPanelInfo(PanelCfgData.getPanelCfg(panelID));
 					//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
