@@ -201,7 +201,17 @@
 				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 			}
 		}
-		
+		/**
+		 *通过面板id打开面板 
+		 */
+		public static function openPanelBypanelId(id:int,data:Object=null,isAutoHide:Boolean=true):void
+		{
+			var panelInfo:Q_panel=PanelCfgData.getPanelCfg(id);
+			if(panelInfo!=null)
+			{
+				openModeByPanelInfo(panelInfo,data,isAutoHide);
+			}
+		}
 		/**
 		 * 通过面板信息打开
 		 * @param panelCfg

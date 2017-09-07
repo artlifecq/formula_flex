@@ -130,7 +130,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.noMainTaskId!=0)//卡级
 			{
 				var add:int=1;
-				if(FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN))
+				if(FunctionOpenManager.checkOpenByFunId(EmFunctionID.EM_ZHANHUN))
 				{
 					add--;
 				}
@@ -175,7 +175,7 @@ package com.rpgGame.app.ui.main.taskbar
 					var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
 					if(emidArr.length>num)
 					{
-						FunctionOpenManager.openPanelByFuncID(emidArr[num]);
+						FunctionOpenManager.openPanelBypanelId(int(emidArr[num]));
 					}
 				}
 				return;
