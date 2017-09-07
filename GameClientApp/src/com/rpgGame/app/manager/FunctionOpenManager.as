@@ -165,7 +165,7 @@
 			var minlevel:int =funcCfg.q_level;
 			if(!checkOpenByLevel(minlevel))//未达到开启等级
 			{
-				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
+				NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
 				return ;
 			}
 			
@@ -187,7 +187,7 @@
 			var minlevel:int =funcCfg.q_level;
 			if(!checkOpenByLevel(minlevel))//未达到开启等级
 			{
-				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
+				NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
 				return ;
 			}
 			
@@ -219,7 +219,7 @@
 			var minlevel:int =funcCfg.q_level;
 			if(!checkOpenByLevel(minlevel))//未达到开启等级
 			{
-				NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
+				NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
 				return ;
 			}
 			if(isAutoHide){
@@ -252,7 +252,7 @@
 				var minlevel:int =funcCfg.q_level;
 				if(!checkOpenByLevel(minlevel))//未达到开启等级
 				{
-					NoticeManager.showNotifyById(90203,null,funcCfg.q_id,minlevel);
+					NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
 					return ;
 				}
 				if(isAutoHide){

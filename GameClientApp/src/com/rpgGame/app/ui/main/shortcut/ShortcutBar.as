@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.core.app.AppConstant;
@@ -18,8 +19,10 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.lang.LangUI_2;
@@ -279,7 +282,16 @@ package com.rpgGame.app.ui.main.shortcut {
 					autoBar.guajiClick();
 					break;		
 				case _skin.btnJieHun:
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HUNYIN);
+					if(Mgr.hunyinMgr.hasMarriage()){
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_HUNYIN);
+					}else{
+						if(FunctionOpenManager.checkOpenByFunId(EmFunctionID.EM_HUNYIN)){
+							AppManager.showApp(AppConstant.HUNYIN_QIUHUN);
+						}else{
+							var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfg(EmFunctionID.EM_HUNYIN);
+							NoticeManager.showNotifyById(90203,null,funcCfg.q_name,funcCfg.q_level);
+						}
+					}
 					break;
 				//				case _skin.btnBackpack://背包
 				//					AppManager.showApp(AppConstant.BACK_PACK_PANEL);

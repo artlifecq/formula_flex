@@ -36,7 +36,7 @@ package com.rpgGame.app.ui.main.navigation
 		override protected function onShow():void
 		{
 			var height:Number = 40;
-			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_BANGHUI))
+			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_BANGHUI_INFO))
 			{
 				if(_skin.btn_n1.parent==null)
 				{

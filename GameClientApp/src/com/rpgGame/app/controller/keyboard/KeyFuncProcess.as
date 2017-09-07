@@ -122,7 +122,7 @@ package com.rpgGame.app.controller.keyboard
 //					CountryWarChengMenManager.testAddChengMen();
 					break;
 				case "17": //H
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO);
 					break;
 				case "18": //I
 					DropGoodsManager.getInstance().showScaneName(isdown);
