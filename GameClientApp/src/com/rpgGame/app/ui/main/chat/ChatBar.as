@@ -373,12 +373,13 @@ package com.rpgGame.app.ui.main.chat {
 		{
 			if(!iskeepOrto)
 			{
-				if(delayScroll){
-					delayScroll.kill();
-				}
-				delayScroll=TweenLite.delayedCall(0.3,function ():void{
-					_skin.listBar.scrollToBottom(0);
-				});
+				_skin.listBar.scrollToBottom(0);
+//				if(delayScroll){
+//					delayScroll.kill();
+//				}
+//				delayScroll=TweenLite.delayedCall(0.3,function ():void{
+//					
+//				});
 				//				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
 			}
 		}
