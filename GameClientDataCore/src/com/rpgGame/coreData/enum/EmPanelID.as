@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.enum
 {
 	/**
-	 * 面板id枚举
+	 * 面板id枚举对应面板表的main_id
 	 * @author dik
 	 * 
 	 */
