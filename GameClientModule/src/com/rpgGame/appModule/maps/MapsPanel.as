@@ -58,6 +58,7 @@ package com.rpgGame.appModule.maps
 					scollBoxView();
 				}
 				_bigMap.onClearPath();
+				onDrawPath();
 				siteView();
 				setMapName(sceneData.name);
 				changeTab();

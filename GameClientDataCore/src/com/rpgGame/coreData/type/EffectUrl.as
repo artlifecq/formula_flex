@@ -239,6 +239,9 @@ package com.rpgGame.coreData.type
 		public static const UI_MEIREN_JIESUAN:String="ui_meiren_1";
 		/**开锁提示*/
 		public static const GRID_OPEN:String="ui_gezi_3";
+		/**跳跃落地特效*/
+		public static const EFFECT_JUMPDOWN:String="tx_tiaoyueyan";
+		
 		public function EffectUrl()
 		{
 		}

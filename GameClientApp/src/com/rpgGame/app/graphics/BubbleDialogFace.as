@@ -238,12 +238,20 @@ package com.rpgGame.app.graphics
 					var speak:String=MonsterDataManager.getNpcSpeak(monsterData.distributeId);
 					if(speak!=null&&speak!="")
 					{
-						TweenLite.delayedCall(2, addWordFrame, [RenderUnitType.BODY, RenderUnitID.BODY,speak, 5000,"c_0_name_01"]);
+						TweenLite.delayedCall(2, speakBar, [speak]);
 					}
 				}
 			}
 			
 		}
+		public function speakBar(speak:String):void
+		{
+			if(speak&&speak!="")
+			{
+				addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,speak, 5000,"c_0_name_01");
+			}
+		}
+		
 		public function addWordFrame(renderUnitType:String, renderUnitId:int, message:String, delay:Number=5000, boneName:String=BoneNameEnum.c_0_name_01, autoRecycle:Boolean=false):void
 		{
 			var camouflage : SceneRole = null;
