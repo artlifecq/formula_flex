@@ -161,14 +161,15 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
-			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//支线护宝任务
-			{
-				TaskUtil.npcTaskFly(TaskMissionManager.getTaskNpcAreaId(type),type,TaskType.SUB_HUBAO);
-				return;
-			}
+			
 			if(type==TaskType.MAINTYPE_DAILYTASK)//支线打开面板任务
 			{
-				if(TaskMissionManager.dailyTaskData.q_emid!="")
+				if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//护宝任务
+				{
+					var postfPath:Array=TaskMissionManager.getTaskPathingByType(type,0);
+					TaskUtil.postTaskFly(postfPath,type,TaskType.SUB_HUBAO,0);
+				}
+				else if(TaskMissionManager.dailyTaskData.q_emid!="")
 				{
 					TaskAutoManager.getInstance().taskType=TaskType.MAINTYPE_DAILYTASK;
 					var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");

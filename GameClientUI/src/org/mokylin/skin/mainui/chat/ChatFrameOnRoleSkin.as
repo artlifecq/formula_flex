@@ -46,7 +46,7 @@ package org.mokylin.skin.mainui.chat
 			temp.styleName = "ui/mainui/chat/san_jiao.png";
 			temp.width = 12;
 			temp.x = 106;
-			temp.y = 94;
+			temp.y = 96;
 			return temp;
 		}
 

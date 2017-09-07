@@ -80,6 +80,7 @@ package com.rpgGame.coreData.cfg
 				}
 				center.x=addX/points.length;
 				center.y=addY/points.length;
+				center.y=-Math.abs(center.y);
 				return center;
 			}
 			

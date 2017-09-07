@@ -16,14 +16,14 @@ package com.rpgGame.app.ui.main.chat
 	{
 		private var _customSkin : ChatFrameOnRoleSkin;
 		private var _richText : RichTextArea3D;
-		private const PAD : int = 8;
+		private const PAD : int = 18;
 		
 		public function ChatFramOnRole()
 		{
 			_customSkin = new ChatFrameOnRoleSkin();
 			super(_customSkin);
 			var defaultFormat : TextFormat = new TextFormat(Fontter.FONT_Hei);
-			defaultFormat.color = 0xded8c7;
+			defaultFormat.color = 0xeaeabc;//0xded8c7;
 			defaultFormat.size = 14;
 			defaultFormat.leading = 8;
 			_richText = new RichTextArea3D(200, 100, ColorUtils.getDefaultStrokeFilter());
