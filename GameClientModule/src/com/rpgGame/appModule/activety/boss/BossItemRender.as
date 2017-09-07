@@ -113,9 +113,9 @@ package com.rpgGame.appModule.activety.boss
 					var next:int=timeList[0];
 					var num:int=timeList.length;
 					for(var i:int=0;i<num;i++){
-						if(timeList[i]>hm){
-							if((i+1)!=num){
-								next=timeList[i+1];
+						if(i%2==0&&timeList[i]>hm){
+							if((i+2)!=num){
+								next=timeList[i+2];
 							}else{
 								next=timeList[0];
 							}
