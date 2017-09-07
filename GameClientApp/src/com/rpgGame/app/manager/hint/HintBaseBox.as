@@ -19,6 +19,8 @@ package com.rpgGame.app.manager.hint
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
+	import utils.TimerServer;
+	
 	/**
 	 * 提示
 	 * @author Mandragora
@@ -433,7 +435,7 @@ package com.rpgGame.app.manager.hint
 		
 		private function stop() : void
 		{
-			//			TimerServer.remove(update);
+//			TimerServer.remove(update);
 			timer.stop();
 			this.visible = false;
 		}

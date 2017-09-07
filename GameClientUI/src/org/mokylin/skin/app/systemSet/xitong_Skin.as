@@ -389,7 +389,7 @@ package org.mokylin.skin.app.systemSet
 			temp.value = 3;
 			temp.width = 240;
 			temp.x = 98;
-			temp.y = 145;
+			temp.y = 158;
 			return temp;
 		}
 
@@ -404,7 +404,7 @@ package org.mokylin.skin.app.systemSet
 			temp.value = 3;
 			temp.width = 240;
 			temp.x = 98;
-			temp.y = 110;
+			temp.y = 123;
 			return temp;
 		}
 
@@ -419,7 +419,7 @@ package org.mokylin.skin.app.systemSet
 			temp.value = 3;
 			temp.width = 240;
 			temp.x = 98;
-			temp.y = 76;
+			temp.y = 90;
 			return temp;
 		}
 
