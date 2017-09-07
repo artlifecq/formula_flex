@@ -88,17 +88,17 @@ package com.rpgGame.core.app
 		/** 人物面板 **/
 		public static var ROLE_PANEL:String = createAppInfo("role.RolePanel","beibao",EmPanelID.ROLE_PANEL);
 		/** 玩家信息面板 **/
-		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao",EmPanelID.PLAYER_INFO);
+		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao");
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
 		public static var KADUN_PANEL:String = createAppInfo( "kadun.KaDunPanel","kadun");
 		
 		/** 大地图面板 **/
-		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps",EmPanelID.BIGMAP_PANEL);
+		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps");
 		
 		/**
 		 *死亡复活 
 		 */
-		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo",EmPanelID.DIE_PANEL);
+		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo");
 		
 		/**
 		 *副本死亡 
@@ -495,8 +495,8 @@ package com.rpgGame.core.app
 		
 		/**战场**/
 		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
-		/**战场**/
-		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
+		/**声望商店**/
+		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang",EmPanelID.BATTLE_SHOP_PANEL);
 		
 		/**护宝主面板**/
 		public static var HUBAO_MAINPANEL:String = createAppInfo("hubao.HuBaoMainPanelExt","hubao",EmPanelID.HU_BAO);
