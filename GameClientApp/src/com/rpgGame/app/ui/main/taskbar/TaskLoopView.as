@@ -730,7 +730,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(!_skin.lbInfo.visible)return;
 			var text:String="";
 			var add:int=0;
-			if(FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN))
+			if(FunctionOpenManager.checkOpenByFunId(EmFunctionID.EM_ZHANHUN))
 			{
 				text="<u>战魂</u>"
 				TaskUtil.setGotargetLabelText(false,killBut1List[add],text);

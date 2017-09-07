@@ -383,6 +383,7 @@ package com.rpgGame.app.manager.scene
 		 */
 		private static function clearScene(clearScene:Boolean=true):void
 		{
+			
 			GamePerformsManager.pause();
 			MapUnitDataManager.clear();
 			SceneRoleSelectManager.clearSelect();
@@ -391,6 +392,7 @@ package com.rpgGame.app.manager.scene
 			TaskManager.storyTaskInfo=null;
 			GameSoundManager.stopBgSound();
 			if(MainRoleManager.actor){
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			}
@@ -405,6 +407,7 @@ package com.rpgGame.app.manager.scene
 				SceneManager.getScene().clearAreaMap(1);
 				
 			}
+
 			TaskAutoManager.getInstance().stopSwitchAll();
 			TrusteeshipManager.getInstance().stopAll();
 			UIModel.instence.clear();
