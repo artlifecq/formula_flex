@@ -6,6 +6,7 @@ package com.rpgGame.app.utils
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -20,6 +21,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;
@@ -83,7 +85,6 @@ package com.rpgGame.app.utils
 	 */
 	public class TaskUtil
 	{
-		
 		/**
 		 * 根据任务类型，获取描述字段			这个方法没做完，还要完善
 		 * @param _targetInfo
@@ -523,72 +524,29 @@ package com.rpgGame.app.utils
 		}
 		
 		/**
-		 * 飞鞋Npc
-		 * @param id 刷新的id
-		 *
-		 */
-		public static function npcTaskFly(id : int,mainType : int,missionType:int=0) : void
-		{
-			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
-			if (monsterData)
-			{
-				TaskMissionManager.flyTaskType=mainType;
-				TaskMissionManager.flyMissionType=missionType;
-				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
-			}
-		}
-		
-		
-		/**
-		 * 飞鞋任务怪
-		 * @param modeId
-		 *
-		 */
-		public static function monsterTaskFly(modeId : int,mainType : int,onArrive:Function=null,noWalk:Function=null) : void
-		{
-			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
-			if (monsterData)
-			{
-				TaskMissionManager.flyTaskType=mainType;
-				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
-			}
-		}
-		/**
 		 * 飞鞋任务点
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskFly(post :Array,mainType : int,missionType:int=0,onArrive:Function=null,noWalk:Function=null) : void
+		public static function postTaskFly(post :Array,mainType : int,missionType:int=0,deduct:int=1) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
-				TaskMissionManager.flyTaskType=mainType;
-				TaskMissionManager.flyMissionType=missionType;
-				post[2]=-Math.abs(post[2]);
-				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
+				if(BackPackManager.instance.haveItemById(601))
+				{
+					TaskMissionManager.flyTaskType=mainType;
+					TaskMissionManager.flyMissionType=missionType;
+					post[2]=-Math.abs(post[2]);
+					SceneSender.sceneMapTransport(post[0], post[1], post[2],25,false,null,0,deduct);
+				}
+				else
+				{
+					//buyItemByModelId(601);
+				}
+				
 			}
 		}
-		/**
-		 * 飞鞋处理
-		 * @param npcId
-		 *
-		 */
-		public static function TaskFly(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
-		{
-			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(npcId);
-			if (monsterData)
-			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
-				//var targerPos:Vector3D=new Vector3D();
-				SceneSender.sceneMapTransport(monsterData.q_mapid,pos.x,pos.y);
-				//MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
-			}
-		}
-		
 		//------------------------------------------
 		/**
 		 * 回复任务

@@ -4,6 +4,7 @@ package com.rpgGame.appModule.maps
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.SceneMapDataManager;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.MapTextureLoader;
@@ -88,6 +89,7 @@ package com.rpgGame.appModule.maps
 		private var tips:BigMapTips;
 		private var teamatesIconList:Vector.<BigMapTeamIcon>=new Vector.<BigMapTeamIcon>();
 		private var walkPoint:Vector3D;
+		private var isWalkClick:Boolean=false;
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
@@ -98,7 +100,7 @@ package com.rpgGame.appModule.maps
 			skinSpr.y=0;
 			this._skin.grp_cont.addChild(skinSpr);
 			walkPoint=new Vector3D();
-			EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
+			//EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
 		}
 		public function init():void
 		{
@@ -261,6 +263,9 @@ package com.rpgGame.appModule.maps
 			if(myselfObj==null)
 			{
 				myselfObj=myselfSpr.addInter3D(ClientConfig.getEffect("ui_ditubiaoji"));
+				//myselfObj.gotoPercent(0.5);
+				myselfObj.stopEffect();
+				//myselfObj.play()
 			}
 			var player : SceneRole = MainRoleManager.actor;
 			if (player&&_isMapLoadComplete)
@@ -270,7 +275,7 @@ package com.rpgGame.appModule.maps
 				//myselfSpr.updatePos(pot.x,pot.y);
 				if(player.stateMachine.isWalking||player.stateMachine.isWalkMoving)
 				{
-					if(isPlay)
+					if(isPlay&&(myselfObj.baseObj3D as RenderUnit3D).resReady)
 					{
 						isPlay=false;
 						myselfObj.gotoPercent(0.5);
@@ -278,12 +283,13 @@ package com.rpgGame.appModule.maps
 				}
 				else 
 				{
-					if(!isPlay)
+					if(!isPlay&&(myselfObj.baseObj3D as RenderUnit3D).resReady)
 					{
 						isPlay=true;
 						myselfObj.playEffect();
 					}
 				}
+				
 				/*if(mySelfPos.x!=pot.x||mySelfPos.y!=pot.y)
 				{
 					isPlay=false;
@@ -294,8 +300,15 @@ package com.rpgGame.appModule.maps
 					isPlay=true;
 					myselfObj.playEffect();
 				}*/
-				mySelfPos.x=pot.x;
-				mySelfPos.y=pot.y;
+				if(mySelfPos.x==pot.x&&mySelfPos.y==pot.y)
+				{
+					mySelfPos.y++;
+				}
+				else
+				{
+					mySelfPos.x=pot.x;
+					mySelfPos.y=pot.y;
+				}
 				myselfSpr.x=mySelfPos.x;
 				myselfSpr.y=mySelfPos.y;
 				myselfSpr.visible = true;
@@ -337,7 +350,7 @@ package com.rpgGame.appModule.maps
 			{
 				updateRolePosShow(BigMapsData.mapsThansData[i]);
 			}
-			updateTeamatesPoint();
+			//updateTeamatesPoint();
 		}
 		private function updateRolePosShow(roleData:BigMapIocnDataMode) : void
 		{
@@ -434,6 +447,7 @@ package com.rpgGame.appModule.maps
 			{
 				walkPoint=position;
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, spacing,null);
+				isWalkClick=true;
 				onDrawPathRoad();
 			}
 			else
@@ -485,7 +499,11 @@ package com.rpgGame.appModule.maps
 		}
 		public function onDrawPathRoad() : void
 		{
-			addEndFly(walkPoint);
+			if(isWalkClick)
+			{
+				isWalkClick=false;
+				addEndFly(walkPoint);
+			}
 			roadSpr.onDrawPathRoad(walkPoint);
 		}
 		public function onClearPath() : void
