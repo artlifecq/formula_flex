@@ -182,7 +182,6 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "rdoSelect";
 			temp.height = 32;
 			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
-			temp.visible = false;
 			temp.width = 894;
 			temp.x = 0;
 			temp.y = -4;

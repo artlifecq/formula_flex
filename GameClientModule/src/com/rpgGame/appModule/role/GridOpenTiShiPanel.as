@@ -48,11 +48,11 @@ package com.rpgGame.appModule.role
 			switch(_itemContainerID)
 			{
 				case ItemContainerID.BackPack:
-					_buyNum=_index-BackPackManager.instance.hasOpenCount;
+					_buyNum=_index-BackPackManager.instance.hasOpenCount+1;
 					_type=1;
 					break;
 				case ItemContainerID.Storage:
-					_buyNum=_index-StorageManager.instance.hasOpenCount;
+					_buyNum=_index-StorageManager.instance.hasOpenCount+1;
 					_type=2;
 					break;
 			}
@@ -103,7 +103,7 @@ package com.rpgGame.appModule.role
 					NoticeManager.showNotifyById(2008);
 					return;
 				}
-				ItemSender.reqOpenCellMessage(_type,_index);
+				ItemSender.reqOpenCellMessage(_type,_index+1);
 			}
 		}
 		

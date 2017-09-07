@@ -7,7 +7,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.appModule.battle.jjzb.ai.RobotAI;
-	import com.rpgGame.appModule.common.RoleModelShow;
+	import com.rpgGame.appModule.common.RoleModelShowOld;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
@@ -36,8 +36,8 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _skin:ZhangCheng_Scene;
 		private var _data:SCChallengeResultMessage;
 		
-		private var _leftRoleShow:RoleModelShow;
-		private var _rightRoleShow:RoleModelShow;
+		private var _leftRoleShow:RoleModelShowOld;
+		private var _rightRoleShow:RoleModelShowOld;
 		private var _skill:ControlAutoFightSelectSkill;
 		private var _leftHeadIcon:UIAsset;
 		private var _rightHeadIcon:UIAsset;
@@ -146,14 +146,14 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			if (_data) 
 			{
-				_leftRoleShow=new RoleModelShow();
+				_leftRoleShow=new RoleModelShowOld();
 				_leftRoleShow.setData(leftData.playerAppearanceInfo,1);
 				_leftRoleShow.x=_skin.uiBuron1.x;
 				_leftRoleShow.y=_skin.uiBuron1.y;
 				_leftRoleShow.avatar.rotationY=-90;
 				this._scene.addChild(_leftRoleShow);
 				
-				_rightRoleShow=new RoleModelShow();
+				_rightRoleShow=new RoleModelShowOld();
 				_rightRoleShow.setData(rightData.playerAppearanceInfo,1);
 				_rightRoleShow.x=_skin.uiBuron2.x;
 				_rightRoleShow.y=_skin.uiBuron2.y;

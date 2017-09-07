@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/meiribizuo/down.png", "hover":"ui/mainui/activityBar/button/meiribizuo/over.png", "up":"ui/mainui/activityBar/button/meiribizuo/up.png"};
+			skinNames={"down":"ui/button/meiribizuo/down.png", "hover":"ui/button/meiribizuo/over.png", "up":"ui/button/meiribizuo/up.png"};
 		}
 
 

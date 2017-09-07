@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/dianfengduijue/down.png", "hover":"ui/mainui/activityBar/button/dianfengduijue/over.png", "up":"ui/mainui/activityBar/button/dianfengduijue/up.png"};
+			skinNames={"down":"ui/button/dianfengduijue/down.png", "hover":"ui/button/dianfengduijue/over.png", "up":"ui/button/dianfengduijue/up.png"};
 		}
 
 

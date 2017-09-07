@@ -342,7 +342,7 @@ package com.rpgGame.app.ui.tips
 			curY+=17;
 			name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"");
 			if(_itemInfo.smeltAtt1!=0){
-				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt1);
+				value=CharAttributeType.getWashName(_itemInfo.smeltAtt1);
 			}else{
 				value=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"未激活");
 			}
@@ -351,7 +351,7 @@ package com.rpgGame.app.ui.tips
 			label.y=curY;
 			curY+=20;
 			if(_itemInfo.smeltAtt2!=0){
-				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt2);
+				value=CharAttributeType.getWashName(_itemInfo.smeltAtt2);
 			}else{
 				value=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"未激活");
 			}
@@ -391,11 +391,10 @@ package com.rpgGame.app.ui.tips
 				yinIcon.x=52;
 				yinIcon.y=curY-4;
 				
-				_itemTip.lbl_bangding.x=190;
 				_itemTip.lbl_bangding.y=label.y;
 				_itemTip.lbl_bangding.visible=true;
 				if(_itemInfo.binded){
-					_itemTip.lbl_bangding.text="【已绑定】"
+					_itemTip.lbl_bangding.text="【已绑定】";
 				}else{
 					if(_itemInfo.qItem.q_bind==0){
 						_itemTip.lbl_bangding.visible=false;

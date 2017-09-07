@@ -60,10 +60,12 @@ package com.rpgGame.appModule.guild
 		
 		private function initAvatar():void
 		{
-			_roleModel = new RoleModelShow();
-			_roleModel.x = 594;
-			_roleModel.y = 478;
-			this.addChild(_roleModel);
+			_skin.uiRole.touchable=true;
+			_skin.uiRole.touchGroup=false;
+			
+//			_roleModel.x = 594;
+//			_roleModel.y = 478;
+//			this.addChild(_roleModel);
 		}
 		
 		override public function show(data:Object=null):void
@@ -96,6 +98,11 @@ package com.rpgGame.appModule.guild
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
 			if(_guildInfo.parent != null)
 				this.removeChild(_guildInfo);
+			if (_roleModel) 
+			{
+				_roleModel.dispose();
+				_roleModel=null;
+			}
 		}
 		
 		private function refeashView():void
@@ -158,6 +165,10 @@ package com.rpgGame.appModule.guild
 			var chiefAvatar:PlayerAppearanceInfo = guildData.chiefAvatar;
 			if(chiefAvatar!=null)
 			{
+				if (!_roleModel) 
+				{
+					_roleModel = new RoleModelShow(_skin.uiRole);
+				}
 				_roleModel.setData(chiefAvatar,1.7);
 			}
 		}

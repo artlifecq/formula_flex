@@ -90,7 +90,7 @@ package com.rpgGame.core.app
 		/** 玩家信息面板 **/
 		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao",EmPanelID.PLAYER_INFO);
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
-		public static var KADUN_PANEL:String = createAppInfo( "kadun.KaDunPanel");
+		public static var KADUN_PANEL:String = createAppInfo( "kadun.KaDunPanel","kadun");
 		
 		/** 大地图面板 **/
 		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps",EmPanelID.BIGMAP_PANEL);

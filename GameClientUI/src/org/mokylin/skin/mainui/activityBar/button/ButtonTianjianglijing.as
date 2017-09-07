@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/tianjianglijing/down.png", "hover":"ui/mainui/activityBar/button/tianjianglijing/over.png", "up":"ui/mainui/activityBar/button/tianjianglijing/up.png"};
+			skinNames={"down":"ui/button/tianjianglijing/down.png", "hover":"ui/button/tianjianglijing/over.png", "up":"ui/button/tianjianglijing/up.png"};
 		}
 
 

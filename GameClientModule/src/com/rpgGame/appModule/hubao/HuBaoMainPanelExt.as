@@ -423,6 +423,10 @@ package com.rpgGame.appModule.hubao
 		private function close():void
 		{
 			MCUtil.removeSelf(this);
+			if(_tishiPanel&&_tishiPanel.stage!=null){
+				MCUtil.removeSelf(_tishiPanel);
+				_tishiPanel=null;
+			}
 			if(timer) timer.stop();
 		}
 	}

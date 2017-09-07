@@ -28,6 +28,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -53,6 +54,7 @@ package com.rpgGame.app.manager.task
 	{
 		
 		public static var AUTOLVE:int=100;
+		public static var AUTODUNGEON:int=200000;//拉主线任务时间
 		public static var AUTOMAIN:int=60000;//拉主线任务时间
 		public static var AUTOTREASEUER:int=120000;//拉环式任务时间
 		public static var PANLVE:int=30;//任务面板切换等级
@@ -89,12 +91,15 @@ package com.rpgGame.app.manager.task
 			AUTOTREASEUER=GlobalSheetData.getSettingInfo(521)!=null?GlobalSheetData.getSettingInfo(521).q_int_value*1000:20*1000;
 			PANLVE=GlobalSheetData.getSettingInfo(533)!=null?GlobalSheetData.getSettingInfo(533).q_int_value:30;
 			FLYTIME=GlobalSheetData.getSettingInfo(534)!=null?GlobalSheetData.getSettingInfo(534).q_int_value:5;
+			AUTODUNGEON=GlobalSheetData.getSettingInfo(535)!=null?GlobalSheetData.getSettingInfo(535).q_int_value*1000:20000;
+			
 			
 			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.addEvent(MapEvent.MAP_FLY_COMPLETE,flyComplete);
+			EventManager.addEvent(UserMoveEvent.MOVE_ENTER, resetTechTime);
 			resetTechTime();
 		}
 		private function onApphide( ev:AppEvent ):void
@@ -207,6 +212,11 @@ package com.rpgGame.app.manager.task
 			{
 				return false;
 			}
+			if(TaskMissionManager.noMainTaskId>0)
+			{
+				return false;
+			}
+			
 			if(HuBaoManager.instance().ishuing)//押镖状态不拉
 			{
 				return false;
@@ -511,7 +521,7 @@ package com.rpgGame.app.manager.task
 					break;
 				case TaskType.SUB_SPEAK:
 					var speak:String=TaskMissionCfgData.substitute(TaskMissionManager.getOtherTaskData(taskType).q_describe,MainRoleManager.actorInfo.guildName);
-					ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
+					//ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 			}

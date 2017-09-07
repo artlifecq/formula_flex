@@ -508,6 +508,10 @@ package com.rpgGame.app.manager.task
 		public static function getTaskNpcAreaId(type:int):int
 		{
 			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			if(taskData==null)
+			{
+				return 0;
+			}
 			return taskData.q_finish_npc;
 			
 		}

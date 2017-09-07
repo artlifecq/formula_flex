@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/jixianboss/down.png", "hover":"ui/mainui/activityBar/button/jixianboss/over.png", "up":"ui/mainui/activityBar/button/jixianboss/up.png"};
+			skinNames={"down":"ui/button/jixianboss/down.png", "hover":"ui/button/jixianboss/over.png", "up":"ui/button/jixianboss/up.png"};
 		}
 
 

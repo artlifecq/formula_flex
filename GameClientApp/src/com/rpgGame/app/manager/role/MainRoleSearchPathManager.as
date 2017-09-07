@@ -622,6 +622,7 @@ package com.rpgGame.app.manager.role
 		
 		
 		/*-----------------------跨跳跃点寻路--------------------------------------------*/
+		public static var jumpPointList:Vector.<Vector3D>;
 		private static var _jumpPash:Vector.<Vector3D>;
 		private static var _isAutoJumping : Boolean = false;
 		private static var _jumpPass:Array;
@@ -647,7 +648,7 @@ package com.rpgGame.app.manager.role
 		public static function jumpWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 												onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
-			
+			clearJumpPath();
 			var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(role.sceneName);
 			if(!PathFinderUtil.isPointInSide(_districtWithPath, pos))//阻挡点正常寻路
 			{
@@ -660,12 +661,17 @@ package com.rpgGame.app.manager.role
 					return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 				}
 				//没有路径开有没有跳跃点
-				clearJumpPath();
 				var jumpPash : Vector.<Vector3D>=new Vector.<Vector3D>();
 				searchJumpToPonit(_districtWithPath,role.position, pos,jumpPash);
 				if (jumpPash && jumpPash.length > 0)//如果可以跳跃
 				{
 					_jumpPash = jumpPash;
+					jumpPointList=new Vector.<Vector3D>();
+					for(var i:int=0;i<jumpPash.length;i++)
+					{
+						jumpPointList.push(jumpPash[i]);
+					}
+					
 					_isAutoJumping = true;
 					_onJumpArrive=onArrive;
 					onNextJump();
@@ -676,7 +682,7 @@ package com.rpgGame.app.manager.role
 			}
 			
 		}
-		private static function searchJumpToPonit(district : DistrictWithPath, position : Vector3D, target : Vector3D, crossJumpArr : Vector.<Vector3D>) : Boolean
+		public static function searchJumpToPonit(district : DistrictWithPath, position : Vector3D, target : Vector3D, crossJumpArr : Vector.<Vector3D>) : Boolean
 		{
 			if (PolyUtil.isFindPath(district, position,target))///寻到了终点
 			{
@@ -696,7 +702,7 @@ package com.rpgGame.app.manager.role
 					stop=new Vector3D(jumpData.stopPoint.x,jumpData.stopPoint.y,jumpData.stopPoint.y);
 					if(searchJumpToPonit(district,stop,target,crossJumpArr))
 					{
-						start=new Vector3D(jumpData.startPoint.x,jumpData.startPoint.y,jumpData.startPoint.y); 
+						start=new Vector3D(jumpData.startPoint.x,jumpData.startPoint.y,jumpData.startPoint.y,jumpData.id); 
 						crossJumpArr.push(start);
 						return true;
 					}
@@ -776,7 +782,7 @@ package com.rpgGame.app.manager.role
 		}
 		private static function onWalktojump() : void
 		{
-			TaskAutoManager.getInstance().jumpOver=true;
+			
 			TweenLite.killDelayedCallsTo(onNextJump);
 			if (_isAutoJumping)
 			{
@@ -795,6 +801,7 @@ package com.rpgGame.app.manager.role
 			//TweenLite.killDelayedCallsTo(onNextJump);
 			_isAutoJumping = false;
 			_jumpPash = null;
+			jumpPointList=null;
 			_jumpPass=new Array();
 		}
 		

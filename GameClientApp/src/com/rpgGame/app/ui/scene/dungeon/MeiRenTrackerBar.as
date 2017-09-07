@@ -41,6 +41,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
 	import org.mokylin.skin.app.meiren.MeiRen_ZhuiZong;
+	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
 	import starling.display.DisplayObject;
 	
@@ -91,11 +92,12 @@ package com.rpgGame.app.ui.scene.dungeon
 				killButList.push(_skin["killbut_"+i]);
 				TaskUtil.addLabelEvet(_skin["killbut_"+i].skin.labelDisplay);			
 			}
-			alertOk=new AlertSetInfo(LangAlertInfo.ZONE_EXIT_SURE);
+			alertOk=new AlertSetInfo(LangAlertInfo.BEAUTYZONE_EXIT_SURE);
 		}
 		
 		override protected function onShow() : void
 		{
+			
 			addEvent();
 			enterZone();
 			finishWalk(null);
@@ -113,10 +115,10 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			super.onTouchTarget(target);
 			switch(target){
-				case MeiRenBoss_Item(_skin.killbut_0.skin).labelDisplay:
+				case ((_skin.killbut_0.skin)as Renwu_Item2).labelDisplay:
 					touchBut(0);
 					break;
-				case MeiRenBoss_Item(_skin.killbut_1.skin).labelDisplay:				
+				case ((_skin.killbut_1.skin)as Renwu_Item2).labelDisplay:				
 					touchBut(1);
 					break;
 				case _skin.sec_subbut2:				
@@ -354,7 +356,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[i].monsterModelId);
 					if(qzm&&i<killButList.length)
 					{
-						(killButList[i].skin as MeiRenBoss_Item).labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
+						(killButList[i].skin as Renwu_Item2).labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
 						killButList[i].visible=true;
 					}				
 				}

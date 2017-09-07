@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.smallmap
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.MenuUtil;
@@ -11,6 +12,7 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.core.ui.SkinUI;
@@ -71,8 +73,8 @@ package com.rpgGame.app.ui.main.smallmap
 			EventManager.addEvent(SystemTimeEvent.SEVER_TIMR,updateTime);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, this.onMapSwitchCompleteHandler);
 			
-//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
-//			sound_mute_one();
+			//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
+			//			sound_mute_one();
 		}
 		
 		public function resize(w : int, h : int) : void {
@@ -84,12 +86,14 @@ package com.rpgGame.app.ui.main.smallmap
 			super.onShow();
 			this.showSmallMap();
 			this._smallMap.openRoad();
+			EventManager.addEvent(GameSettingEvent.FILTRATE_UPDATE,updatePingbiBtnState);
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
 			this._smallMap.closeRoad();
+			EventManager.removeEvent(GameSettingEvent.FILTRATE_UPDATE,updatePingbiBtnState);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void {
@@ -117,8 +121,11 @@ package com.rpgGame.app.ui.main.smallmap
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSound://打开声音
-					setAllMute(!(SimpleMp3Player.openSound));
-//					ClientSettingGameSetMananger.saveMainToServer();
+					isPlay=!isPlay;
+					if(isPlay)
+						SimpleMp3Player.player.resume();
+					else SimpleMp3Player.player.stop();
+					//					ClientSettingGameSetMananger.saveMainToServer();
 					break;
 				case this._skin.btnPaiHang://打开排行榜
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_FIGHTFLAGRANK);
@@ -140,23 +147,36 @@ package com.rpgGame.app.ui.main.smallmap
 			}
 		}
 		
+		private function updatePingbiBtnState():void
+		{
+			if(GameSettingManager.isHavePingBi())
+			{
+				_skin.uiSelect.visible=true;
+				_skin.uiUp.visible=false;
+			}
+			else{
+				_skin.uiSelect.visible=false;
+				_skin.uiUp.visible=true;
+			}
+		}
+		
 		public function setAllMute(isMute:Boolean):void
 		{
 			SimpleMp3Player.openSound=isMute;
 			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ALL);
 		}
 		
-//		private function sound_mute_one():void
-//		{
-//			if (BGMManager.isMuteAll)
-//			{
-//				miniSkin.btnShengYin.styleClass = ButtonShengyinMute;
-//			}
-//			else
-//			{
-//				miniSkin.btnShengYin.styleClass = ButtonShengyin;
-//			}
-//		}
+		//		private function sound_mute_one():void
+		//		{
+		//			if (BGMManager.isMuteAll)
+		//			{
+		//				miniSkin.btnShengYin.styleClass = ButtonShengyinMute;
+		//			}
+		//			else
+		//			{
+		//				miniSkin.btnShengYin.styleClass = ButtonShengyin;
+		//			}
+		//		}
 		
 		// event
 		private function onMapSwitchCompleteHandler() : void {

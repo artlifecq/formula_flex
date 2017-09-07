@@ -259,11 +259,11 @@ package org.mokylin.skin.app.tips
 			lbBangding = temp;
 			temp.name = "lbBangding";
 			temp.height = 18;
+			temp.right = 4;
 			temp.text = "【已绑定】";
+			temp.textAlign = "right";
 			temp.color = 0x00FF0C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 76;
-			temp.x = 201;
 			temp.y = 235;
 			return temp;
 		}

@@ -66,6 +66,10 @@ package org.mokylin.skin.mainui.map
 
 		public var lbTime:feathers.controls.Label;
 
+		public var uiSelect:feathers.controls.UIAsset;
+
+		public var uiUp:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -276,7 +280,7 @@ package org.mokylin.skin.mainui.map
 			temp.name = "grp_cont";
 			temp.x = 0;
 			temp.y = 27;
-			temp.elementsContent = [UIMap_i(),__map_Skin_UIAsset1_i(),lbTime_i(),lbLocation_i(),btnMail_i(),btnGm_i(),btnSet_i(),btnHide_i(),btnWeb_i(),btnSound_i(),btnSMax_i(),btnSMin_i(),btnMap_i(),btnSelect_i(),btnPaiHang_i(),__map_Skin_UIAsset2_i(),lbName_i()];
+			temp.elementsContent = [UIMap_i(),__map_Skin_UIAsset1_i(),lbTime_i(),lbLocation_i(),btnMail_i(),btnGm_i(),btnSet_i(),btnHide_i(),btnWeb_i(),btnSound_i(),btnSMax_i(),btnSMin_i(),btnMap_i(),btnSelect_i(),btnPaiHang_i(),__map_Skin_UIAsset2_i(),lbName_i(),uiUp_i(),uiSelect_i()];
 			return temp;
 		}
 
@@ -327,6 +331,32 @@ package org.mokylin.skin.mainui.map
 			temp.width = 61;
 			temp.x = 78;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function uiSelect_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiSelect = temp;
+			temp.name = "uiSelect";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/mainui/map/button/yincang/select1.png";
+			temp.x = 35;
+			temp.y = 156;
+			return temp;
+		}
+
+		private function uiUp_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiUp = temp;
+			temp.name = "uiUp";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/mainui/map/button/yincang/up1.png";
+			temp.x = 35;
+			temp.y = 156;
 			return temp;
 		}
 

@@ -2,18 +2,29 @@ package com.rpgGame.appModule.maps
 {
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.main.smallmap.MapPathIcon;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapUtil;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.coreData.cfg.MapJumpCfgData;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import away3d.pathFinding.DistrictWithPath;
+	
+	import gameEngine2D.PolyUtil;
+	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.maps.EndFly;
 	
 	import starling.display.Sprite;
 
@@ -31,6 +42,7 @@ package com.rpgGame.appModule.maps
 		private var _lastDist : int;
 		private var _xunluPointEffect : InterObject3D;
 		private static const POINT_DIS : int = 10;
+		
 		
 		/**寻路的点**/
 		private var pathSpr : Sprite;
@@ -62,10 +74,14 @@ package com.rpgGame.appModule.maps
 			//EventManager.removeEvent(UserMoveEvent.MOVE_END, onClearPath);
 			onClearPath();
 		}
-		public function onDrawPathRoad() : void
+		public function onDrawPathRoad(walkPoint:Vector3D) : void
 		{
+			if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
+				return;
 			onClearPath();
 			if (MainRoleManager.actor == null)
+				return;
+			if (!MainRoleManager.actor.stateMachine.isWalkMoving)
 				return;
 			if (KeyMoveManager.getInstance().keyMoving)
 			{
@@ -73,13 +89,42 @@ package com.rpgGame.appModule.maps
 			}
 			else
 			{
-				var ref : WalkMoveStateReference;
-				var camouflageEntity : SceneRole = MainRoleManager.actor.getCamouflageEntity() as SceneRole;
-				if (camouflageEntity)
-					ref = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				var actPo:Vector3D=MainRoleManager.actor.position
+				var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
+				if (PolyUtil.isFindPath(districtWithPath, actPo, walkPoint))///有寻路路径直接走
+				{
+					var ref : WalkMoveStateReference;
+					var camouflageEntity : SceneRole = MainRoleManager.actor.getCamouflageEntity() as SceneRole;
+					if (camouflageEntity)
+						ref = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					else
+						ref = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					_lastPath = (ref && ref.path) ? ref.path : null;
+				}
 				else
-					ref = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-				_lastPath = (ref && ref.path) ? ref.path : null;
+				{
+					var jumpPash:Vector.<Vector3D>=MainRoleSearchPathManager.jumpPointList;
+					if(jumpPash!=null&&jumpPash.length>0)
+					{
+						_lastPath=new Vector.<Vector3D>();
+						var start:Vector3D=new Vector3D(actPo.x,actPo.y,actPo.z);
+						var stop:Vector3D;
+						var pash:Vector.<Vector3D>;
+						var jumpData:SceneJumpPointData;
+						for(var i:int=jumpPash.length-1;i>=0;i--)
+						{
+							stop=new Vector3D(jumpPash[i].x,jumpPash[i].y,jumpPash[i].z);
+							pash=PolyUtil.findPath(districtWithPath, start, stop);
+							_lastPath=_lastPath.concat(pash);
+							if(i>0)
+							{
+								jumpData=MapJumpCfgData.getJumpportData(jumpPash[i].w);
+								start=new Vector3D(jumpData.stopPoint.x,jumpData.stopPoint.y,jumpData.stopPoint.y);
+							}
+						}
+						
+					}
+				}
 			}
 			
 			
@@ -90,22 +135,23 @@ package com.rpgGame.appModule.maps
 		{
 			if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
 			{
-				var i:int,length:Number,min:Number;
+				var i:int,length:Number,mid:int=-1;
 				var ioc:MapPathIcon;
-				min=int.MAX_VALUE;
-				
-				while(pathIcoVect.length>0)
+				for(i=0;i<pathIcoVect.length;i++)
 				{
-					ioc=pathIcoVect[0];
+					ioc=pathIcoVect[i];
 					length=Math.sqrt((ioc.x-px)*(ioc.x-px)+(ioc.y-py)*(ioc.y-py));
 					if(length<10)
 					{
+						mid=i;
+					}
+				}
+				if(mid>=0)
+				{
+					for(i=0;i<=mid;i++)
+					{
 						pathIcoVect[0].removeMyself();
 						pathIcoVect.shift();
-					}
-					else
-					{
-						return;
 					}
 				}
 				
@@ -121,10 +167,10 @@ package com.rpgGame.appModule.maps
 			{
 				return;
 			}
-			onClearPath();
+			//onClearPath();
 			if (_lastPath == null)
 				return;
-			
+			Lyt.a("_lastPath:"+_lastPath.length);
 			var beforePoint : Vector3D = MainRoleManager.actor.position;
 			
 			_lastDrawPoint = BigMaps.getChangeSceneToMap(beforePoint);
@@ -143,6 +189,8 @@ package com.rpgGame.appModule.maps
 				addPointOnPaths(_lastDrawPoint, pixNextPos);
 			}
 		}
+		
+		
 		
 		/**
 		 * 在两点之间填充连接点数据
@@ -188,6 +236,8 @@ package com.rpgGame.appModule.maps
 			pathIcoVect.push(pathIco);
 			pathSpr.addChild(pathIco);
 		}
+		
+		
 		/**
 		 * 清除路线
 		 */

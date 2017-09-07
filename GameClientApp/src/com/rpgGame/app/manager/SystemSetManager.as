@@ -9,17 +9,17 @@ package com.rpgGame.app.manager
 		private static var gameSetObj:Object;
 		
 		/**生命值按钮选中*/
-		private static var _hpSelect:Boolean=false;
+		private static var _hpSelect:Boolean=true;
 		/**生命值百分比*/
 		private static var _hpValue:int=85;
 		/**自动购买按钮选中*/
-		private static var _lifeSelect:Boolean=false;
+		private static var _lifeSelect:Boolean=true;
 		/**攻击距离*/
 		private static var _hookValue:int=10;
-		/**自动拾取所有按钮选中（与拾取互斥）*/
-		private static var _autoSelect:Boolean=false;
-		/**拾取按钮选中（与自动拾取互斥）*/
-		private static var _pickUpSelect:Boolean=false;
+		/**自动拾取所有按钮选中*/
+		private static var _autoSelect:Boolean=true;
+		/**拾取按钮选中*/
+		private static var _pickUpSelect:Boolean=true;
 		/**拾取职业*/
 		private static var _job:int=0;
 		/**拾取品质*/

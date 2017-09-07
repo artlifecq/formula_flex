@@ -428,6 +428,15 @@ package com.rpgGame.coreData.type
 			return HtmlTextUtil.getTextColor(color,des);
 		}
 		
+		/**获取洗炼属性的名字*/
+		public static function getWashName(att:int):String
+		{
+			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(att);
+			if(!cfg) return "";
+			var color:int=ItemQualityType.getColorValue(cfg.q_quality);
+			return HtmlTextUtil.getTextColor(color,cfg.q_name);
+		}
+		
 		public static function getDesBySkill(q_skill_id:int):String
 		{
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(q_skill_id);

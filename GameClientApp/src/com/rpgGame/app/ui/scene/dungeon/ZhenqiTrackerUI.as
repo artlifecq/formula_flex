@@ -71,6 +71,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onShow() : void
 		{
+			super.onShow();
 			addEvent();
 		}
 		override protected function onHide():void
@@ -79,6 +80,10 @@ package com.rpgGame.app.ui.scene.dungeon
 			removeEvent();
 			clear();
 			
+		}
+		override protected function autoWalk():void
+		{
+			walkNextWave();
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -120,6 +125,8 @@ package com.rpgGame.app.ui.scene.dungeon
 				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,qzm.q_move_x,qzm.q_move_y]);
 			}
 		}
+		
+		
 		/**寻下一波未完成的怪*/
 		private function walkNextWave():void
 		{

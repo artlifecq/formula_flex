@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.activityBar.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/activityBar/button/huodongtating/down.png", "hover":"ui/mainui/activityBar/button/huodongtating/over.png", "up":"ui/mainui/activityBar/button/huodongtating/up.png"};
+			skinNames={"down":"ui/button/huodongtating/down.png", "hover":"ui/button/huodongtating/over.png", "up":"ui/button/huodongtating/up.png"};
 		}
 
 

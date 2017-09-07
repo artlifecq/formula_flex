@@ -260,7 +260,7 @@ package org.mokylin.skin.app.beibao.junjie
 			lbTiaojian = temp;
 			temp.name = "lbTiaojian";
 			temp.text = "（4/5）";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 797;
 			temp.y = 345;

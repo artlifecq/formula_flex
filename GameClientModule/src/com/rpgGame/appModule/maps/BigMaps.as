@@ -1,18 +1,25 @@
 package com.rpgGame.appModule.maps
 {
+	import com.game.engine3D.display.EffectObject3D;
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.SceneMapDataManager;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.MapTextureLoader;
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SceneSender;
+	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;
@@ -26,6 +33,7 @@ package com.rpgGame.appModule.maps
 	import away3d.pathFinding.DistrictWithPath;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.maps.EndFly;
 	import org.mokylin.skin.app.maps.maps_Skin;
 	import org.mokylin.skin.component.text.textInput3_Skin;
 	
@@ -52,13 +60,15 @@ package com.rpgGame.appModule.maps
 		public var thumbnaiSpr : Sprite;
 		private var thumbnaiImage : Image;
 		/**主角自己**/
-		private var myselfSpr : BigMapIcon;
-		
+		//private var myselfSpr : BigMapIcon;
+		private var myselfSpr : Inter3DContainer;
+		private var myselfObj : EffectObject3D;
+		private var mySelfPos:Point;
 		/**NPC 怪物 传送点**/
 		private var roleSpr : Sprite;
 		
 		private var roadSpr : BigMapRoad;
-		
+		private var flyPoin:Sprite;
 		/**当前显示的地图编号*/
 		private var _currentMapId : int;
 		private var _mapWidth : int;
@@ -78,6 +88,8 @@ package com.rpgGame.appModule.maps
 		
 		private var tips:BigMapTips;
 		private var teamatesIconList:Vector.<BigMapTeamIcon>=new Vector.<BigMapTeamIcon>();
+		private var walkPoint:Vector3D;
+		private var isWalkClick:Boolean=false;
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
@@ -87,7 +99,8 @@ package com.rpgGame.appModule.maps
 			skinSpr.x=0;
 			skinSpr.y=0;
 			this._skin.grp_cont.addChild(skinSpr);
-			EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
+			walkPoint=new Vector3D();
+			//EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
 		}
 		public function init():void
 		{
@@ -96,14 +109,23 @@ package com.rpgGame.appModule.maps
 			
 			thumbnaiSpr = new Sprite();
 			baseSpr.addChild(thumbnaiSpr);
+			
 			roadSpr=new BigMapRoad();
+			roadSpr.touchable=false;
 			baseSpr.addChild(roadSpr);
 			roleSpr=new Sprite();
+			roleSpr.touchable=false;
 			roleSpr.visible=false;
 			baseSpr.addChild(roleSpr);
-			myselfSpr =new BigMapIcon(SceneCharType.PLAYER);
-			myselfSpr.visible = false;
+			var endFly:EndFly=new EndFly();
+			flyPoin=endFly.toSprite();
+			flyPoin.visible=false;
+			baseSpr.addChild(flyPoin);
+			myselfSpr=new Inter3DContainer();
+			myselfSpr.touchable=false;
+			
 			baseSpr.addChild(myselfSpr);
+			mySelfPos=new Point();
 			var mask : Shape = new Shape();
 			mask.graphics.beginFill(0x00FF00);
 			mask.graphics.drawRoundRect(0, 0, _mapWidth, this._mapHeight, 5);
@@ -232,20 +254,74 @@ package com.rpgGame.appModule.maps
 			
 		}
 		
-		
+		private var isPlay:Boolean=false;
 		/**
 		 * 更新自己的位置
 		 */
 		public function updateMyselfPos() : void
 		{
+			if(myselfObj==null)
+			{
+				myselfObj=myselfSpr.addInter3D(ClientConfig.getEffect("ui_ditubiaoji"));
+				//myselfObj.gotoPercent(0.5);
+				myselfObj.stopEffect();
+				//myselfObj.play()
+			}
 			var player : SceneRole = MainRoleManager.actor;
 			if (player&&_isMapLoadComplete)
 			{
 				var pos3d : Vector3D =player.position;
 				var pot:Point=getChangeSceneToMap(pos3d);
-				myselfSpr.updatePos(pot.x,pot.y);
+				//myselfSpr.updatePos(pot.x,pot.y);
+				if(player.stateMachine.isWalking||player.stateMachine.isWalkMoving)
+				{
+					if(isPlay&&(myselfObj.baseObj3D as RenderUnit3D).resReady)
+					{
+						isPlay=false;
+						myselfObj.gotoPercent(0.5);
+					}
+				}
+				else 
+				{
+					if(!isPlay&&(myselfObj.baseObj3D as RenderUnit3D).resReady)
+					{
+						isPlay=true;
+						myselfObj.playEffect();
+					}
+				}
+				
+				/*if(mySelfPos.x!=pot.x||mySelfPos.y!=pot.y)
+				{
+					isPlay=false;
+					myselfObj.gotoPercent(0.67);
+				}
+				else if(!isPlay)
+				{
+					isPlay=true;
+					myselfObj.playEffect();
+				}*/
+				if(mySelfPos.x==pot.x&&mySelfPos.y==pot.y)
+				{
+					mySelfPos.y++;
+				}
+				else
+				{
+					mySelfPos.x=pot.x;
+					mySelfPos.y=pot.y;
+				}
+				myselfSpr.x=mySelfPos.x;
+				myselfSpr.y=mySelfPos.y;
 				myselfSpr.visible = true;
 				roadSpr.onThrough(pot.x,pot.y);
+				if(flyPoin.visible)
+				{
+					var dist:int = Point.distance(new Point(pos3d.x,pos3d.z),new Point(walkPoint.x,walkPoint.z));
+					if(dist<150)
+					{
+						flyPoin.visible=false;
+					}
+				}
+				
 			}
 			
 			
@@ -274,7 +350,7 @@ package com.rpgGame.appModule.maps
 			{
 				updateRolePosShow(BigMapsData.mapsThansData[i]);
 			}
-			updateTeamatesPoint();
+			//updateTeamatesPoint();
 		}
 		private function updateRolePosShow(roleData:BigMapIocnDataMode) : void
 		{
@@ -286,8 +362,18 @@ package com.rpgGame.appModule.maps
 			pos3d.z = roleData.y;
 			point=getChangeSceneToMap(pos3d);
 			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
-			roleIcon.icoName.x=point.x<60?point.x:0;
-			roleIcon.icoName.x=point.x>(thumbnaiSpr.width-60)?(thumbnaiSpr.width-point.x-60):0;
+			
+			//roleIcon.icoName.x=point.x<10?point.x:0;
+			if(point.x<(roleIcon.icoName.textWidth*0.5))
+			{
+				roleIcon.icoName.x=roleIcon.icoName.textWidth*0.5-point.x;
+			}
+			if(point.x>(thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5))
+			{
+				roleIcon.icoName.x=(-point.x+thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5);
+			}
+			
+			//roleIcon.icoName.x=point.x>(thumbnaiSpr.width-120)?(-point.x+thumbnaiSpr.width-120):0;
 			roleSpr.addChild(roleIcon);
 			roleSpr.visible = true;
 		}
@@ -355,11 +441,14 @@ package com.rpgGame.appModule.maps
 		}
 		public function roleWalk(x:Number,y:Number,spacing:int=0):void
 		{
-			roadSpr.onClearPath();
-			var position : Vector3D = new Vector3D(x, -Math.abs(y), 0);
+			onClearPath();
+			var position : Vector3D = new Vector3D(x, -Math.abs(y), -Math.abs(y));
 			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))
 			{
+				walkPoint=position;
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, spacing,null);
+				isWalkClick=true;
+				onDrawPathRoad();
 			}
 			else
 			{
@@ -367,13 +456,40 @@ package com.rpgGame.appModule.maps
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"该目标点不可到达");
 			}
 		}
+		private function addEndFly(position : Vector3D) : void
+		{
+			if (!MainRoleManager.actor.stateMachine.isWalkMoving)
+				return;
+			var point:Point=getChangeSceneToMap(position);
+			flyPoin.x=point.x-6;
+			flyPoin.y=point.y-10;
+			flyPoin.visible=true;
+			//pathSpr.addChild(flyPoin);
+		}
+		
+		public function flayToEnd():void
+		{
+			if(BackPackManager.instance.haveItemById(601))
+			{
+				flyPoin.visible=false;
+				onClearPath();
+				MainRoleSearchPathManager.stopAutoFind();
+				SceneSender.sceneMapTransport(SceneSwitchManager.currentMapId, walkPoint.x,walkPoint.z);
+			}
+			else
+			{
+				ItemBuyPanelExt.buyItemByModelId(601);
+			}
+		}
 		
 		public function clearView():void
 		{
 			myselfSpr.visible=false;
+			flyPoin.visible=false;
 			thumbnaiSpr.visible=false;
 			tips.visible=false;
 			clearAllRole();
+			onClearPath();
 		}
 		public function clearAllRole():void
 		{
@@ -383,8 +499,20 @@ package com.rpgGame.appModule.maps
 		}
 		public function onDrawPathRoad() : void
 		{
-			roadSpr.onDrawPathRoad();
+			if(isWalkClick)
+			{
+				isWalkClick=false;
+				addEndFly(walkPoint);
+			}
+			roadSpr.onDrawPathRoad(walkPoint);
 		}
+		public function onClearPath() : void
+		{
+			flyPoin.visible=false;
+			roadSpr.onClearPath();
+		}
+		
+		
 		/**
 		 * 场景上坐标换算成地图坐标
 		 */

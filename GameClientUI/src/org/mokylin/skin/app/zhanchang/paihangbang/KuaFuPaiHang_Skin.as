@@ -54,6 +54,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 
 		public var uiRight:feathers.controls.UIAsset;
 
+		public var uiRole:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -65,7 +67,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__KuaFuPaiHang_Skin_UIAsset1_i(),__KuaFuPaiHang_Skin_UIAsset2_i(),__KuaFuPaiHang_Skin_UIAsset3_i(),__KuaFuPaiHang_Skin_UIAsset4_i(),uiRight_i(),__KuaFuPaiHang_Skin_UIAsset5_i(),__KuaFuPaiHang_Skin_Group1_i(),grpMy_i(),__KuaFuPaiHang_Skin_UIAsset16_i(),NumZhanli_i(),btnMsg_i(),__KuaFuPaiHang_Skin_UIAsset17_i(),lbRoleName_i(),btnGlass_i(),__KuaFuPaiHang_Skin_UIAsset18_i(),__KuaFuPaiHang_Skin_UIAsset19_i(),uiLevel_i(),uiLevelName_i(),__KuaFuPaiHang_Skin_Label1_i(),lbMsg_i(),btnJiangli_i(),skinFlip_i(),icon2_i(),skinRank_i()];
+			this.elementsContent = [bg_i(),__KuaFuPaiHang_Skin_UIAsset1_i(),__KuaFuPaiHang_Skin_UIAsset2_i(),__KuaFuPaiHang_Skin_UIAsset3_i(),__KuaFuPaiHang_Skin_UIAsset4_i(),uiRight_i(),__KuaFuPaiHang_Skin_UIAsset5_i(),__KuaFuPaiHang_Skin_Group1_i(),grpMy_i(),__KuaFuPaiHang_Skin_UIAsset16_i(),NumZhanli_i(),btnMsg_i(),__KuaFuPaiHang_Skin_UIAsset17_i(),lbRoleName_i(),btnGlass_i(),__KuaFuPaiHang_Skin_UIAsset18_i(),__KuaFuPaiHang_Skin_UIAsset19_i(),uiLevel_i(),uiLevelName_i(),__KuaFuPaiHang_Skin_Label1_i(),lbMsg_i(),btnJiangli_i(),skinFlip_i(),icon2_i(),skinRank_i(),uiRole_i()];
 			
 			states = {
 			};
@@ -249,7 +251,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/titilebg/list.png";
-			temp.visible = false;
 			temp.width = 545;
 			temp.x = 22;
 			temp.y = 416;
@@ -457,6 +458,19 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.width = 359;
 			temp.x = 574;
 			temp.y = 89;
+			return temp;
+		}
+
+		private function uiRole_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiRole = temp;
+			temp.name = "uiRole";
+			temp.height = 380;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
+			temp.width = 250;
+			temp.x = 630;
+			temp.y = 139;
 			return temp;
 		}
 

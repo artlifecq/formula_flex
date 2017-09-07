@@ -300,9 +300,9 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.ROLE_NAME_TYPE:
 					//获取人物名;
 					//trace( "点击打开这个人的属性面板，id：",data.id," 英雄名字：",data.data1 );
-//					var userID : String = unitData.linkData;
+					//					var userID : String = unitData.linkData;
 					var id:long = new long(unitData.linkData);
-//					var uise:Number=(new long(userID)).ToGID();
+					//					var uise:Number=(new long(userID)).ToGID();
 					if (MainRoleManager.actorID==id.ToGID())
 					{
 						return;
@@ -393,7 +393,7 @@ package com.rpgGame.app.richText
 					var scenePosArr : Array = unitData.linkData.split(",");
 					var sceneId : int = scenePosArr[0];
 					var x : int = scenePosArr[1];
-					var y : int = scenePosArr[2];
+					var y : int = -Math.abs(scenePosArr[2]);
 					SceneSender.sceneMapTransport(sceneId, x, y);
 					break;
 				case RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE:
@@ -418,7 +418,7 @@ package com.rpgGame.app.richText
 					break;
 				
 				case RichTextCustomLinkType.TEAM_APPLY:
-//					var teamId:Number=(new long(unitData.linkData)).ToGID();
+					//					var teamId:Number=(new long(unitData.linkData)).ToGID();
 					id = new long(unitData.linkData);
 					TeamManager.ins.reqJoinToTeam(id);
 					break;
@@ -426,19 +426,15 @@ package com.rpgGame.app.richText
 					scenePosArr = unitData.linkData.split(",");
 					sceneId = scenePosArr[0];
 					x = scenePosArr[1];
-					y = scenePosArr[2];
-					var shenxingfuNum:int=BackPackManager.instance.getItemCount(601);
-					if(shenxingfuNum>0||Mgr.vipMgr.vipLv>0)
-						SceneSender.sceneMapTransport(sceneId, x, y);
-					else
-						MainRoleSearchPathManager.walkToScene(sceneId,x, y, null, 200);
+					y = Math.abs(scenePosArr[2]);
+					MainRoleSearchPathManager.walkToScene(sceneId,x, y, null, 200);
 					break;
 				case RichTextCustomLinkType.HUBAO:
 					scenePosArr = unitData.linkData.split(",");
 					sceneId = scenePosArr[0];
 					x = scenePosArr[1];
 					y = scenePosArr[2];
-					shenxingfuNum=BackPackManager.instance.getItemCount(601);
+					var shenxingfuNum:int=BackPackManager.instance.getItemCount(601);
 					if(shenxingfuNum>0||Mgr.vipMgr.vipLv>0)
 						//						SceneSender.sceneMapTransport(sceneId, x, y);
 						HuBaoSender.upCSGoConvoyMessage();
@@ -448,7 +444,7 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.GUILD_APPLY:
 					if(!GuildManager.instance().haveGuild)
 					{
-//						var guildId:Number=parseInt(unitData.linkData);
+						//						var guildId:Number=parseInt(unitData.linkData);
 						id = new long(unitData.linkData);
 						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO,id);
 					}else{

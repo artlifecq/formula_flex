@@ -67,7 +67,7 @@ package com.client.process
 			if (ClientConfig.hasHero)
 			{
 				GameLog.addShow("已有角色，继续进入游戏");
-				toPercent = 0.2;
+				//toPercent = 0.2;
 				completeProcess();
 				Statistics.intance.pushNode(Statistics.STEP_CREATE_CHAR,"创角成功");
 			}

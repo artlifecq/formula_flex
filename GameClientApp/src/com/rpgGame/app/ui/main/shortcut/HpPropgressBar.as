@@ -194,7 +194,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(_diection==1)
 			{
 				sr3D.x= 700;
-				sr3D.y=_display.y+_display.height-10;
+				sr3D.y=_display.y+_display.height-5;
 			}else{
 				sr3D.x= 127;
 				sr3D.y=_display.y+_display.height;
@@ -214,7 +214,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_mask.rotation = _diectionoff*Math.PI*0.9*value;
 			if(_diection==1)
 			{
-				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.85*value);
+				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.86*value);
 			}else{
 				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.83*value);
 			}

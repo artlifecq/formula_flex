@@ -14,6 +14,8 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  洗炼ID */
 		public var q_id:int;
+		 /**  属性名称 */
+		public var q_name:String;
 		 /**  属性总表属性 */
 		public var q_attr_id:int;
 		 /**  BUFFID */

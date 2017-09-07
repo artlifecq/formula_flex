@@ -28,10 +28,12 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.SharedObjectEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -39,6 +41,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -111,6 +114,8 @@ package com.rpgGame.appModule.equip
 		private var oldAtt2:int;
 		private var isLockRefresh:Boolean;
 		private static var noAlertWash:Boolean;
+		private var _alertJiPin:AlertSetInfo;
+		private static var noAlertjipin:Boolean;
 		
 		public function EquipSmeltUI(skin:StateSkin=null)
 		{
@@ -170,6 +175,9 @@ package com.rpgGame.appModule.equip
 			_getPanel=new ItemGetPathPanel();
 			(_skin.left.skin as Zhuangbei_left).monyIcon.removeFromParent(true);
 			(_skin.left.skin as Zhuangbei_left).monyTips.removeFromParent(true);
+			
+			_alertJiPin=new AlertSetInfo(LangAlertInfo.XILIAN_SURE);
+			_alertJiPin.isShowCBox=true;
 		}
 		
 		private function createItemRender():GridItemRender
@@ -301,19 +309,42 @@ package com.rpgGame.appModule.equip
 				alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT30)+needMon;
 				alertOk.isShowCBox=true;
 				alertOk.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
-//				alertOk.alertInfo.align="left";
+				//				alertOk.alertInfo.align="left";
 				GameAlert.showAlert(alertOk,onAlert,[type]);
 				return;
 			}
-			
-			ItemSender.washEquip(targetEquipInfo.itemInfo.itemId,type,lock);
+			if(chackIsHaveMaxAtt()&&!noAlertjipin)
+			{
+				GameAlert.showAlert(_alertJiPin,onAlertJiPin,[type]);
+				return;
+			}else
+				ItemSender.washEquip(targetEquipInfo.itemInfo.itemId,type,lock);
 		}
 		
+		private function chackIsHaveMaxAtt():Boolean
+		{
+			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(targetEquipInfo.smeltAtt1);
+			if(cfg&&cfg.q_quality>=4&&!getItemSkin(_skin.Item1).chk_suoding.isSelected) return true;
+			cfg=EquipWashAttCfg.getEquipWashAttr(targetEquipInfo.smeltAtt2);
+			if(cfg&&cfg.q_quality>=4&&!getItemSkin(_skin.Item2).chk_suoding.isSelected) return true;
+			return false;
+		}
 		
 		private  function onAlert(gameAlert:GameAlert,datas:Array):void
 		{
 			noAlertWash=gameAlert.isCheckSelected;
-			
+			noAlertjipin=gameAlert.isCheckSelected;
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					ItemSender.washEquip(targetEquipInfo.itemInfo.itemId,datas[0],lock);
+					break;
+			}
+		}
+		
+		private  function onAlertJiPin(gameAlert:GameAlert,datas:Array):void
+		{
+			noAlertjipin=gameAlert.isCheckSelected;
 			switch(gameAlert.clickType)
 			{
 				case AlertClickTypeEnum.TYPE_SURE:
@@ -370,21 +401,21 @@ package com.rpgGame.appModule.equip
 				needMon=0;
 				if(targetEquipInfo.smeltAtt1!=0){
 					if(targetEquipInfo.smeltAtt1!=oldAtt1&&oldAtt1!=0){//刷新
-						getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);//新的
-						getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashAttDes(oldAtt1);//老的
+						getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashName(targetEquipInfo.smeltAtt1);//新的
+						getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashName(oldAtt1);//老的
 						target=getItemSkin(_skin.Item1).lb_name;
 						TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 						target=getItemSkin(_skin.Item1).lb_name0;
 						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					}else{
 						if(targetEquipInfo.smeltAtt1==oldAtt1){//洗出的是老属性
-							getItemSkin(_skin.Item1).lb_name.htmlText=getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);
+							getItemSkin(_skin.Item1).lb_name.htmlText=getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashName(targetEquipInfo.smeltAtt1);
 							target=getItemSkin(_skin.Item1).lb_name;
 							TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 							target=getItemSkin(_skin.Item1).lb_name0;
 							TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 						}else{
-							getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);
+							getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashName(targetEquipInfo.smeltAtt1);
 							getItemSkin(_skin.Item1).lb_name0.htmlText="";
 						}
 					}
@@ -397,17 +428,17 @@ package com.rpgGame.appModule.equip
 				}
 				if(targetEquipInfo.smeltAtt2!=0){
 					if(targetEquipInfo.smeltAtt2!=oldAtt2&&oldAtt2!=0){//刷新
-						getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);//新的
-						getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashAttDes(oldAtt2);//老的
+						getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashName(targetEquipInfo.smeltAtt2);//新的
+						getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashName(oldAtt2);//老的
 						target=getItemSkin(_skin.Item2).lb_name;
 						TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 						target=getItemSkin(_skin.Item2).lb_name0;
 						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					}else{
 						if(targetEquipInfo.smeltAtt2==oldAtt2){//洗出的是老属性)
-							getItemSkin(_skin.Item2).lb_name.htmlText=getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);
+							getItemSkin(_skin.Item2).lb_name.htmlText=getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashName(targetEquipInfo.smeltAtt2);
 						}else{
-							getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);
+							getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashName(targetEquipInfo.smeltAtt2);
 							getItemSkin(_skin.Item2).lb_name0.htmlText="";
 						}
 					}
@@ -809,8 +840,8 @@ package com.rpgGame.appModule.equip
 				var info:ClientItemInfo=datas[i];
 				if(isSmelt(info as EquipInfo)){
 					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
-//						trace("当前的1ID："+targetEquipInfo.smeltAtt1+"  琢磨后的值ID：——"+(info as EquipInfo).smeltAtt1+"\n");
-//						trace("当前的2ID："+targetEquipInfo.smeltAtt2+"  琢磨后的值ID：——"+(info as EquipInfo).smeltAtt2+"\n");
+						//						trace("当前的1ID："+targetEquipInfo.smeltAtt1+"  琢磨后的值ID：——"+(info as EquipInfo).smeltAtt1+"\n");
+						//						trace("当前的2ID："+targetEquipInfo.smeltAtt2+"  琢磨后的值ID：——"+(info as EquipInfo).smeltAtt2+"\n");
 						if(targetEquipInfo.smeltAtt1!=(info as EquipInfo).smeltAtt1||targetEquipInfo.smeltAtt2!=(info as EquipInfo).smeltAtt2)
 						{
 							getupdateAtt(targetEquipInfo,info as EquipInfo);

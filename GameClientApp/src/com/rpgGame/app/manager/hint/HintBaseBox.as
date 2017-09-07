@@ -1,19 +1,16 @@
 package com.rpgGame.app.manager.hint
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.HintTypeSetInfo;
 	import com.rpgGame.coreData.enum.HintMoveDirectionEnum;
 	
-	import flash.utils.getTimer;
-	
 	import feathers.controls.Button;
-	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenMax;
-	import gs.easing.Expo;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
@@ -21,8 +18,6 @@ package com.rpgGame.app.manager.hint
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	
-	import utils.TimerServer;
 	
 	/**
 	 * 提示
@@ -48,7 +43,7 @@ package com.rpgGame.app.manager.hint
 		private var _topOffset : int;
 		private var _lastHintValue : String;
 		
-		
+		private var timer:GameTimer;
 		public function HintBaseBox(noticeType : int)
 		{
 			super();
@@ -57,6 +52,8 @@ package com.rpgGame.app.manager.hint
 			//_hintTypeSet.bg="ui/common/tips/shubiaotiao_bg.png";
 			_lastHintValue = null;
 			this.addEventListener(TouchEvent.TOUCH, onTouch);
+			timer=new GameTimer("HintBaseBox",50,0,update);
+			timer.stop();
 			initSprite();
 		}
 		
@@ -186,7 +183,10 @@ package com.rpgGame.app.manager.hint
 				for (var i : int = len - 1; i >= 0; i--)
 				{
 					label = _hintLines[i];
-					result += label.lineHeight;
+					if(_hintTypeSet.type==1)
+						result += label.lineHeight+10;
+					else
+						result += label.lineHeight;
 				}
 			}
 			return result;
@@ -433,7 +433,8 @@ package com.rpgGame.app.manager.hint
 		
 		private function stop() : void
 		{
-			TimerServer.remove(update);
+			//			TimerServer.remove(update);
+			timer.stop();
 			this.visible = false;
 		}
 		
@@ -441,10 +442,12 @@ package com.rpgGame.app.manager.hint
 		{
 			if (_hintTypeSet.refreshInterval > 0)
 			{
-				if (!TimerServer.has(update))
-				{
-					TimerServer.addLoop(update, _hintTypeSet.refreshInterval);
-				}
+				timer.delay=_hintTypeSet.refreshInterval;
+				timer.start();
+//				if (!TimerServer.has(update))
+//				{
+//					TimerServer.addLoop(update, _hintTypeSet.refreshInterval);
+//				}
 			}
 			this.visible = true;
 		}

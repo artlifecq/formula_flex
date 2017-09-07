@@ -71,6 +71,39 @@ package com.rpgGame.statistics
 		public static const STEP_HARD_DRIVE_ERROR:int=202;
 		/**显卡配置太低**/
 		public static const STEP_XCARD_ERROR:int=203;
+		/**gpu没有开启*/
+		public static const STEP_HARD_DISABLED_ERROR:int = 204;
+		/**显卡驱动或者显卡太低*/
+		public static const STEP_HARD_DRIVE_LOW:int = 205;
+		/**玩家的falsh是debug版本的*/
+		public static const STEP_PLAYER_IS_DEBUG:int = 206;
+		/**加载脏词库失败了*/
+		public static const STEP_LOAD_MASK_WORD_ERROR:int = 207;
+		/**成功获得登录数据并准备进入游戏*/
+		public static const STEP_ENTER_GAME:int = 208;
+		/**真正进入场景*/
+		public static const STEP_SUCCESS_IN_MAP:int = 209;
+		/**第一次发送心跳协议*/
+		public static const STEP_FIRST_HERAT:int = 300;
+		/**直接socket链接失败*/
+		public static const STEP_FAIL_CONNECT_SERVER:int = 301;
+		/**发送登录协议*/
+		public static const STEP_SEND_LOGIN_MSG:int = 302;
+		/**FLASH PLAYER 12*/
+		public static const STEP_PLAYER_IS_12:int = 303;
+		/**FLASH PLAYER 13*/
+		public static const STEP_PLAYER_IS_13:int = 304;
+		/**FLASH PLAYER 14*/
+		public static const STEP_PLAYER_IS_14:int = 305;
+		/**FLASH PLAYER 15*/
+		public static const STEP_PLAYER_IS_15:int = 306;
+		/**FLASH PLAYER 16*/
+		public static const STEP_PLAYER_IS_16:int = 307;
+		/**FLASH PLAYER 16以上*/
+		public static const STEP_PLAYER_IS_HIGE:int = 308;
+		/**掉线了*/
+		public static const STEP_LOST_SERVER:int = 309;
+		
         public static const intance : Statistics = new Statistics();
         
         // nodeId
@@ -91,7 +124,7 @@ package com.rpgGame.statistics
 			
 		}	
         public function pushNode(nodeId : int,tip:String="") : void {
-  //          if(!ClientConfig.isRelease)return;
+          if(!ClientConfig.isRelease)return;
 //            var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
 //            if (null == nodeInfo) {
 //                return;
@@ -105,17 +138,18 @@ package com.rpgGame.statistics
             params["browser"] = ClientConfig.browser;
             params["account"] = ClientConfig.loginName;
             params["resolution"] = Capabilities.screenResolutionX + "X" + Capabilities.screenResolutionY;
-            params["serverId"] = ClientConfig.isRelease?ClientConfig.loginAreaId:"30001";
+            params["serverId"] = ClientConfig.isRelease?ClientConfig.loginAreaId:"18";
             params["ip"] = ClientConfig.clientIp;
             params["time"] = (new Date()).getTime();
-			if (ClientConfig.isRelease) 
-			{
-				HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
-			}
-			else
-			{
-				HttpUtil.doGet("http://192.168.5.178:8080/front-node/node", params);
-			}
+			HttpUtil.doGet("http://front.moloong.com/front-node/node", params);
+//			if (ClientConfig.isRelease) 
+//			{
+//				
+//			}
+//			else
+//			{
+//				HttpUtil.doGet("http://192.168.5.178:8080/front-node/node", params);
+//			}
         }
     }
 }

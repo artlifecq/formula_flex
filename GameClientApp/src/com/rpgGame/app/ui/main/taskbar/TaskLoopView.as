@@ -578,7 +578,7 @@ package com.rpgGame.app.ui.main.taskbar
 						
 						(glabe.skin as Renwu_Item).labelDisplay.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
 						(glabe.skin as Renwu_Item).btn_send.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
-						glabe.x=_skin.sec_navi1.x;
+						glabe.x=_skin.sec_navi1.x-4;
 						glabe.visible=true;
 						taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
 						var flyKey:Boolean=taskData.q_mission_type==TaskType.SUB_HUBAO;
@@ -790,8 +790,8 @@ package com.rpgGame.app.ui.main.taskbar
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 170;
-			temp.x = 12;
-			temp.y = 57;
+		//	temp.x = 12;
+			//temp.y = 57;
 			return temp;
 		}
 		

@@ -10,7 +10,12 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.main.chat.ChatFramOnRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.type.RenderUnitID;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	
 	import flash.geom.Vector3D;
 	
@@ -190,6 +195,7 @@ package com.rpgGame.app.graphics
 		private function removeBodyRender():void
 		{
 			TweenLite.killDelayedCallsTo(hideWordFrame);
+			TweenLite.killDelayedCallsTo(addWordFrame);
 			if (_wordFrame)
 			{
 				_wordFrame.dispose();
@@ -205,6 +211,45 @@ package com.rpgGame.app.graphics
 		public function recycleSelf():void
 		{
 			recycle(this);
+		}
+		/**
+		 *概率怪物闲话框
+		 * 
+		 */
+		public function probabilitySpeakBar():void
+		{
+			var role:SceneRole=_owner as SceneRole;
+			var monsterData : MonsterData;
+			if(role!=null)
+			{
+				monsterData = role.data as MonsterData;
+			}
+			var areaData : Q_scene_monster_area;
+			if(monsterData!=null)
+			{
+				areaData =MonsterDataManager.getAreaByAreaID(monsterData.distributeId);
+			}
+			TweenLite.killDelayedCallsTo(addWordFrame);
+			if(areaData!=null)
+			{
+				var prob:int = Math.random()*100;
+				if(prob<areaData.q_speak_probability)//概率闲话
+				{
+					var speak:String=MonsterDataManager.getNpcSpeak(monsterData.distributeId);
+					if(speak!=null&&speak!="")
+					{
+						TweenLite.delayedCall(2, speakBar, [speak]);
+					}
+				}
+			}
+			
+		}
+		public function speakBar(speak:String):void
+		{
+			if(speak&&speak!="")
+			{
+				addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,speak, 5000,"c_0_name_01");
+			}
 		}
 		
 		public function addWordFrame(renderUnitType:String, renderUnitId:int, message:String, delay:Number=5000, boneName:String=BoneNameEnum.c_0_name_01, autoRecycle:Boolean=false):void

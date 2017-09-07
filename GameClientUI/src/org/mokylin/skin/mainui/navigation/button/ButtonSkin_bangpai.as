@@ -27,6 +27,8 @@ package org.mokylin.skin.mainui.navigation.button
 			super();
 			
 			this.currentState = "down";
+			this.height = 60;
+			this.width = 60;
 			this.elementsContent = [];
 			
 			states = {

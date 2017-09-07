@@ -33,7 +33,7 @@ package org.mokylin.skin.mainui.chat
 			this.currentState = "normal";
 			this.height = 263;
 			this.width = 241;
-			this.elementsContent = [__FaceGroupSkin_UIAsset1_i(),__FaceGroupSkin_UIAsset2_i(),__FaceGroupSkin_UIAsset3_i(),lbl_Title_i(),tab_Face_i()];
+			this.elementsContent = [__FaceGroupSkin_UIAsset1_i(),__FaceGroupSkin_UIAsset2_i(),lbl_Title_i(),tab_Face_i()];
 			
 			states = {
 			};
@@ -76,16 +76,6 @@ package org.mokylin.skin.mainui.chat
 			temp.width = 234;
 			temp.x = 4;
 			temp.y = 230;
-			return temp;
-		}
-
-		private function __FaceGroupSkin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 33;
-			temp.styleName = "ui/common/tips/mc/title_bg/title_bg1.png";
-			temp.x = 34;
-			temp.y = 2;
 			return temp;
 		}
 

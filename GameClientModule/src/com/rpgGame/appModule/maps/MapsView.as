@@ -1,11 +1,14 @@
 package com.rpgGame.appModule.maps
 {
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	
 	import org.mokylin.skin.app.maps.maps_Skin;
 	import org.mokylin.skin.component.text.textInput2_Skin;
@@ -95,13 +98,21 @@ package com.rpgGame.appModule.maps
 				}
 				if(releData)
 				{
-					if(nameSplit[2]==1)
+					if(nameSplit[3]==1)
 					{
 						_bigMap.roleWalk(releData.x,releData.y,100);
 					}
 					else
 					{
-						SceneSender.sceneMapTransport(SceneSwitchManager.currentMapId, releData.x, releData.y);
+						if(BackPackManager.instance.haveItemById(601))
+						{
+							SceneSender.sceneMapTransport(SceneSwitchManager.currentMapId, releData.x, releData.y);
+						}
+						else
+						{
+							ItemBuyPanelExt.buyItemByModelId(601);
+						}
+						
 					}
 				}
 			}

@@ -16,6 +16,7 @@ package org.mokylin.skin.app.meiren
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 
 	/**
 	 * @private
@@ -49,6 +50,8 @@ package org.mokylin.skin.app.meiren
 
 		public var grpIcon:feathers.controls.Group;
 
+		public var ico_up:feathers.controls.UIAsset;
+
 		public var icon:feathers.controls.UIAsset;
 
 		public var icon1:feathers.controls.UIAsset;
@@ -75,6 +78,8 @@ package org.mokylin.skin.app.meiren
 
 		public var lbYuanbao:feathers.controls.Label;
 
+		public var num_lv:feathers.controls.UINumber;
+
 		public var uiLevel:feathers.controls.UIAsset;
 
 		public var uiLijin:feathers.controls.UIAsset;
@@ -98,7 +103,7 @@ package org.mokylin.skin.app.meiren
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__MeiRen_Skin_UIAsset1_i(),__MeiRen_Skin_UIAsset2_i(),__MeiRen_Skin_UIAsset3_i(),btnPrev_i(),btnNext_i(),grpIcon_i(),gBuy_i(),btnTiaozhan_i(),uiName_i(),uiLevel_i(),ui_zhandou_i(),NumZhanli_i(),__MeiRen_Skin_Group1_i(),__MeiRen_Skin_Group2_i(),__MeiRen_Skin_Group3_i(),icon_i(),btnJinjie_i(),btnInfo_i(),uiOK_i(),lbContent_i(),__MeiRen_Skin_SkinnableContainer5_i()];
+			this.elementsContent = [bg_i(),__MeiRen_Skin_UIAsset1_i(),__MeiRen_Skin_UIAsset2_i(),__MeiRen_Skin_UIAsset3_i(),btnPrev_i(),btnNext_i(),grpIcon_i(),gBuy_i(),btnTiaozhan_i(),uiName_i(),uiLevel_i(),ui_zhandou_i(),NumZhanli_i(),ico_up_i(),num_lv_i(),__MeiRen_Skin_Group1_i(),__MeiRen_Skin_Group2_i(),__MeiRen_Skin_Group3_i(),icon_i(),btnJinjie_i(),btnInfo_i(),uiOK_i(),lbContent_i(),__MeiRen_Skin_SkinnableContainer5_i()];
 			
 			states = {
 			};
@@ -119,7 +124,7 @@ package org.mokylin.skin.app.meiren
 			temp.label = "629845";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 			temp.width = 141;
-			temp.x = 789;
+			temp.x = 748;
 			temp.y = 182;
 			return temp;
 		}
@@ -397,6 +402,17 @@ package org.mokylin.skin.app.meiren
 			return temp;
 		}
 
+		private function ico_up_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico_up = temp;
+			temp.name = "ico_up";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 870;
+			temp.y = 195;
+			return temp;
+		}
+
 		private function icon1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -517,8 +533,8 @@ package org.mokylin.skin.app.meiren
 			temp.textAlign = "center";
 			temp.color = 0x41FF65;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 221;
-			temp.x = 288;
+			temp.width = 300;
+			temp.x = 267;
 			temp.y = 480;
 			return temp;
 		}
@@ -546,6 +562,21 @@ package org.mokylin.skin.app.meiren
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 24;
 			temp.y = 4;
+			return temp;
+		}
+
+		private function num_lv_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv = temp;
+			temp.name = "num_lv";
+			temp.gap = -4;
+			temp.height = 25;
+			temp.label = "1000";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
+			temp.width = 60;
+			temp.x = 884;
+			temp.y = 191;
 			return temp;
 		}
 
@@ -610,7 +641,7 @@ package org.mokylin.skin.app.meiren
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
 			temp.styleName = "ui/art_txt/common/zhandouli1.png";
-			temp.x = 715;
+			temp.x = 671;
 			temp.y = 179;
 			return temp;
 		}

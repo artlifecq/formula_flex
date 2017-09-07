@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.chat
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -9,8 +8,6 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LinkCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
-	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.clientConfig.Q_hyperlinksMenu;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -357,6 +354,7 @@ package com.rpgGame.app.ui.main.chat
 		{
 			var str:String=name;
 			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.RALLY,content);
+			str+=RichTextCustomUtil.getButtonLinkCode("org.mokylin.skin.component.button.ButtonSkin_send",RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE,content);
 			return str;
 		}
 		
@@ -422,6 +420,7 @@ package com.rpgGame.app.ui.main.chat
 					return RichTextCustomUtil.getImageLinkCode("ui/mainui/chat/siliao.png");
 					break;
 				}
+				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:
 				{
 					return RichTextCustomUtil.getImageLinkCode("ui/mainui/chat/xitong.png");
@@ -487,7 +486,7 @@ package com.rpgGame.app.ui.main.chat
 				}
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NOTICE://公告	
-					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_HEARSAY://传闻	
 					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,str);
@@ -537,14 +536,14 @@ package com.rpgGame.app.ui.main.chat
 					switch(infos[i].t)
 					{
 						case 1: //人物
-							arr[infos[i].i]=replacePlayerShow(str,0xFFFFFF,infos[i].parameterInfos[0].id.hexValue);
+							arr[infos[i].i]=replacePlayerShow(str,StaticValue.GREEN_TEXT,infos[i].parameterInfos[0].id.hexValue);
 							break;
 						case 2: //物品
 							arr[infos[i].i]=replaceItemShowByMod(infos[i].parameterInfos[0].mod);
 							break;
-						case 3: //组队
+						case 3: //组队 
 							var id:String=infos[i].parameterInfos[0].id.hexValue;
-							arr[infos[i].i]=replaceTeamShow(str,0xFFFFFF,id);
+							arr[infos[i].i]=replaceTeamShow(str,StaticValue.GREEN_TEXT,id);
 							break;
 						case 4: //入帮
 							id=infos[i].parameterInfos[0].id.hexValue;
@@ -559,7 +558,7 @@ package com.rpgGame.app.ui.main.chat
 							arr[infos[i].i]=replaceHuBaoShow(str,0xBC5AF4,content);
 							break;
 						case 7: //洗炼
-							arr[infos[i].i]=getAttById(infos[i].parameterInfos[0].mod);
+							arr[infos[i].i]=CharAttributeType.getWashName(infos[i].parameterInfos[0].mod);
 							break;
 						case 8: //求婚
 							var jobType:int=arr[2];
@@ -574,13 +573,6 @@ package com.rpgGame.app.ui.main.chat
 				txt = replaceStr2(txt,true);
 			}
 			return txt;
-		}
-		
-		private static function getAttById(id:int):String
-		{
-			var str:String="";
-			str=CharAttributeType.getWashAttDes(id);
-			return str;
 		}
 	}
 }

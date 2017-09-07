@@ -489,6 +489,10 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_YJ));
 			}
+			if(readyEffect!=null)
+			{
+				readyEffect.stopEffect();
+			}
 			
 			readyEffectJod=playerJod;
 			
