@@ -209,7 +209,6 @@ package com.rpgGame.app.ui.main.chat {
 			this._inputText.addEventListener(FeathersEventType.FOCUS_OUT,onFocueOut);			
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
 			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
-			
 			EventManager.addEvent(ChatEvent.SHOW_GOODS,onShowGoods);
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showTest);
@@ -366,6 +365,7 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				_skin.listBar.dataProvider.addItem(msgs[i]);
 			}
+			
 			scrollToBottom();
 		}
 		
@@ -373,13 +373,7 @@ package com.rpgGame.app.ui.main.chat {
 		{
 			if(!iskeepOrto)
 			{
-				if(delayScroll){
-					delayScroll.kill();
-				}
-				delayScroll=TweenLite.delayedCall(0.3,function ():void{
-					_skin.listBar.scrollToBottom(0);
-				});
-				//				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
+				_skin.listBar.scrollToBottom(0);
 			}
 		}
 		
@@ -796,7 +790,6 @@ package com.rpgGame.app.ui.main.chat {
 		}
 		
 		private var iskeepOrto:Boolean=false;
-		private var delayScroll:TweenLite;
 		private function setListIstoOrKeep():void
 		{
 			//			_skin.btn_lock.isSelected=!_skin.btn_lock.isSelected;

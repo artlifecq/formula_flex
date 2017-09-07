@@ -69,7 +69,7 @@ package com.rpgGame.appModule.pet
 			_bgEff.stop();
 		}
 		
-		public override function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		public override function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show();		
 			if(_bgEff)

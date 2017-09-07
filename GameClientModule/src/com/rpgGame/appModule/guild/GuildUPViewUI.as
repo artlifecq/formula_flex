@@ -130,7 +130,7 @@ package com.rpgGame.appModule.guild
 					break;
 				case _skin.btnZhengba:
 					//FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_WCZB2,null,false);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_WAR,null,false);
 					break;
 				case _skin.btnUp:
 					GuildManager.instance().guildLevelup();

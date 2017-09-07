@@ -52,7 +52,7 @@ package com.rpgGame.appModule.fightsoul
 			avatar=new UIAvatar3D(_skin.roleGrp);
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 			currentShowMode = FightSoulManager.instance().currentMode.q_mode;

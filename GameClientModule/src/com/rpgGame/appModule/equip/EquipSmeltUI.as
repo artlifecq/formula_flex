@@ -114,6 +114,8 @@ package com.rpgGame.appModule.equip
 		private var oldAtt2:int;
 		private var isLockRefresh:Boolean;
 		private static var noAlertWash:Boolean;
+		private var _alertJiPin:AlertSetInfo;
+		private static var noAlertjipin:Boolean;
 		
 		public function EquipSmeltUI(skin:StateSkin=null)
 		{
@@ -173,6 +175,9 @@ package com.rpgGame.appModule.equip
 			_getPanel=new ItemGetPathPanel();
 			(_skin.left.skin as Zhuangbei_left).monyIcon.removeFromParent(true);
 			(_skin.left.skin as Zhuangbei_left).monyTips.removeFromParent(true);
+			
+			_alertJiPin=new AlertSetInfo(LangAlertInfo.XILIAN_SURE);
+			_alertJiPin.isShowCBox=true;
 		}
 		
 		private function createItemRender():GridItemRender
@@ -268,7 +273,7 @@ package com.rpgGame.appModule.equip
 					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 					break;
 				case _skin.lb_cailiao:
-					_getPanel.show(useItemInfo.cfgId,"",this._skin.container)
+					_getPanel.show(useItemInfo.cfgId,0,this._skin.container)
 					break;
 			}
 			if(targetEquipInfo){
@@ -308,12 +313,9 @@ package com.rpgGame.appModule.equip
 				GameAlert.showAlert(alertOk,onAlert,[type]);
 				return;
 			}
-			if(chackIsHaveMaxAtt())
+			if(chackIsHaveMaxAtt()&&!noAlertjipin)
 			{
-				alertOk=new AlertSetInfo(LangAlertInfo.XILIAN_SURE);
-				alertOk.isShowCBox=true;
-				alertOk.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
-				GameAlert.showAlert(alertOk,onAlert,[type]);
+				GameAlert.showAlert(_alertJiPin,onAlertJiPin,[type]);
 				return;
 			}else
 				ItemSender.washEquip(targetEquipInfo.itemInfo.itemId,type,lock);
@@ -331,7 +333,18 @@ package com.rpgGame.appModule.equip
 		private  function onAlert(gameAlert:GameAlert,datas:Array):void
 		{
 			noAlertWash=gameAlert.isCheckSelected;
-			
+			noAlertjipin=gameAlert.isCheckSelected;
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					ItemSender.washEquip(targetEquipInfo.itemInfo.itemId,datas[0],lock);
+					break;
+			}
+		}
+		
+		private  function onAlertJiPin(gameAlert:GameAlert,datas:Array):void
+		{
+			noAlertjipin=gameAlert.isCheckSelected;
 			switch(gameAlert.clickType)
 			{
 				case AlertClickTypeEnum.TYPE_SURE:

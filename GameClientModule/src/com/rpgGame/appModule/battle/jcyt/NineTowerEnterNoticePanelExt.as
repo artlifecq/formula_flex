@@ -19,7 +19,7 @@ package com.rpgGame.appModule.battle.jcyt
 			_skin=new LevelTips_Skin();
 			super(_skin);
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			_skin.numLevel.label=int(data)+"";

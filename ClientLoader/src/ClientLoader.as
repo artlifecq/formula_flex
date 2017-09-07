@@ -217,6 +217,7 @@ package
 				_clientPathUrl = "loader_#/" + _clientPathUrl;
 			}
 			pushNode(1,"加载ClientLoader");
+
 			initStage();
 			//initMenu();
 
@@ -430,7 +431,7 @@ package
             client["browser"] = _browser;
             client["gameName"] = _gameName;
             client["clientIp"] = _clientIp;
-            //client
+            client
 			this.stage.addChild(client);
 			//
 			loaderInfo.loader.unload();

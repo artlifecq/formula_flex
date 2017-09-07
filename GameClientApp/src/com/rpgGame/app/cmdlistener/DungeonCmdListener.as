@@ -11,6 +11,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.netData.cross.message.SCCancelTeamMatchMessage;
 	import com.rpgGame.netData.cross.message.SCStartTeamMatchMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneIdInfoMessage;
@@ -242,19 +243,18 @@ package com.rpgGame.app.cmdlistener
 			DungeonManager.setPanelInfos(msg.zoneId,msg.count,msg.rewardCount);
 			
 		}
-		private const ACTIBUTID:int=300;
 		private function onSCCancelTeamMatchMessage(msg:SCCancelTeamMatchMessage):void
 		{
 			DungeonManager.teamZid=0;
-			MainButtonManager.closeActivityButton(ACTIBUTID);
-			MainButtonManager.clearUptimeActivityButton(ACTIBUTID);
+			MainButtonManager.closeActivityButton(EmMainBtnID.PIPEIDUILIE);
+			MainButtonManager.clearUptimeActivityButton(EmMainBtnID.PIPEIDUILIE);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_EXIT_TEAM);
 		}
 		private function onSCStartTeamMatchMessage(msg:SCStartTeamMatchMessage):void
 		{
 			DungeonManager.teamZid=msg.zoneModelId;
-			MainButtonManager.openActivityButton(ACTIBUTID);
-			MainButtonManager.setUptimeActivityButton(ACTIBUTID);
+			MainButtonManager.openActivityButton(EmMainBtnID.PIPEIDUILIE);
+			MainButtonManager.setUptimeActivityButton(EmMainBtnID.PIPEIDUILIE);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_ENTER_TEAM);
 		}
 		

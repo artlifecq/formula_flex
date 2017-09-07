@@ -185,7 +185,7 @@ package com.rpgGame.appModule.hubao
 			}			
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show();
 			_skin.btnTiSheng.addEventListener(Event.TRIGGERED,btnTiShengHandler);
@@ -205,6 +205,10 @@ package com.rpgGame.appModule.hubao
 		{
 			super.hide();
 			if(timer) timer.stop();
+			if(_tishiPanel&&_tishiPanel.stage!=null){
+				MCUtil.removeSelf(_tishiPanel);
+				_tishiPanel=null;
+			}
 			_skin.btnTiSheng.removeEventListener(Event.TRIGGERED,btnTiShengHandler);
 			_skin.btnHuSong.removeEventListener(Event.TRIGGERED,btnHuSongHandler);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_UPDATEPINZHI,updateNowSelectBaoWu);
@@ -423,6 +427,10 @@ package com.rpgGame.appModule.hubao
 		private function close():void
 		{
 			MCUtil.removeSelf(this);
+			if(_tishiPanel&&_tishiPanel.stage!=null){
+				MCUtil.removeSelf(_tishiPanel);
+				_tishiPanel=null;
+			}
 			if(timer) timer.stop();
 		}
 	}

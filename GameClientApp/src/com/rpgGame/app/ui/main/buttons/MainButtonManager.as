@@ -7,8 +7,12 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
+	import com.rpgGame.coreData.enum.EmOpenType;
 	
 	import away3d.log.Log;
 	
@@ -33,21 +37,21 @@ package com.rpgGame.app.ui.main.buttons
 			_classMap = new  HashMap();
 			
 			//主界面
-			regClass(1,ButtonSkin_renwu);
-			regClass(2,ButtonSkin_jinjie);
-			regClass(3,ButtonSkin_zhuangbei);
-			regClass(4,ButtonSkin_wuxue);
-			regClass(5,ButtonSkin_zhanhun);
-			regClass(6,ButtonSkin_bangpai);
-			regClass(7,ButtonSkin_shangcheng);
-			regClass(8,ButtonSkin_zudui);
-			regClass(9,ButtonSkin_meiren);
+			regClass(EmMainBtnID.RENWU,ButtonSkin_renwu);
+			regClass(EmMainBtnID.JINJIE,ButtonSkin_jinjie);
+			regClass(EmMainBtnID.DUANZAO,ButtonSkin_zhuangbei);
+			regClass(EmMainBtnID.WUXUE,ButtonSkin_wuxue);
+			regClass(EmMainBtnID.ZHANHUN,ButtonSkin_zhanhun);
+			regClass(EmMainBtnID.BANGPAI,ButtonSkin_bangpai);
+			regClass(EmMainBtnID.SHANGCHENG,ButtonSkin_shangcheng);
+			regClass(EmMainBtnID.ZUDUI,ButtonSkin_zudui);
+			regClass(EmMainBtnID.MEIREN,ButtonSkin_meiren);
 			
-			var btnLists:Array=FuncionBarCfgData.getAllBarInfos();
+			var btnLists:Array=MainBtnCfgData.getAllBtnList();
 			for(var i:int=0;i<btnLists.length;i++){
-				var info:FunctionBarInfo=btnLists[i];
-				if(info.btn_res){
-					regClass(info.id,info.btn_res);
+				var info:Q_mainbtn=btnLists[i];
+				if(info.q_btn_res){
+					regClass(info.q_id,info.q_btn_res);
 				}
 			}
 		}
@@ -56,22 +60,36 @@ package com.rpgGame.app.ui.main.buttons
 			_classMap.add(id,skinui);
 		}
 		
-		public static function getButtonBuyInfo(info:FunctionBarInfo):IOpen
+		public static function getButtonByInfo(btnInfo:Q_mainbtn):IOpen
 		{
-			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
+			if(!btnInfo){
+				return null;
+			}
+			
+			var funcInfo:Q_newfunc;
+			if(btnInfo.q_click_type==EmOpenType.OPEN_PANEL){
+				funcInfo=NewFuncCfgData.getFuncCfgByPanelId(int(btnInfo.q_click_arg));
+			}else{
+				funcInfo=NewFuncCfgData.getFuncCfgByBtnId(btnInfo.q_id);
+			}
+			if(!funcInfo){
+				return null;
+			}
+			
+			var level:int = funcInfo.q_level;
 			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
-			var button:IOpen = _initializeMap.getValue(info.id);
+			var button:IOpen = _initializeMap.getValue(btnInfo.q_id);
 			if(button == null)
 			{
-				var styleName:*= _classMap.getValue(info.id);
+				var styleName:*= _classMap.getValue(btnInfo.q_id);
 				if(styleName==null)
 				{
-					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.id);
+					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + funcInfo.q_id);
 					return null;
 				}
-				button = getBtnById(info.id);
-				button.info = info;
+				button = getBtnById(btnInfo.q_id);
+				button.info = btnInfo;
 				if(styleName is String){
 					if((button as ActivityButtonBase)){
 						(button as ActivityButtonBase).styleName=styleName;
@@ -79,8 +97,8 @@ package com.rpgGame.app.ui.main.buttons
 				}else{
 					button.styleClass=styleName;
 				}
-				button.name = info.id.toString();
-				_initializeMap.add(info.id,button);
+				button.name = btnInfo.q_id.toString();
+				_initializeMap.add(btnInfo.q_id,button);
 			}
 			return button as IOpen;
 		}
@@ -89,44 +107,45 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			
 			switch(id){
-				case 1:
+				case EmMainBtnID.RENWU:
 					return new MainButton_Role();
-				case 2:
+				case EmMainBtnID.JINJIE:
 					return new MainButton_Mount();
-				case 3:
+				case EmMainBtnID.DUANZAO:
 					return new MainButton_Equip();
-				case 4:
+				case EmMainBtnID.WUXUE:
 					return new MainButton_WuXue();
-				case 5:
+				case EmMainBtnID.ZHANHUN:
 					return new MainButton_ZhanHun();
-				case 6:
+				case EmMainBtnID.ZUDUI:
 					return new MainButton_Gang();
-				case 7:
+				case EmMainBtnID.SHANGCHENG:
 					return new MainButton_ShangCheng();
-				case 8:
+				case EmMainBtnID.BANGPAI:
 					return new MainButton_Team();
-				case 9:
+				case EmMainBtnID.MEIREN:
 					return new MainButton_MeiRen();
-				case 101:
-				case 102:
-				case 103:
-				case 104:
-				case 120:
+				case EmMainBtnID.HUODONG:
+				case EmMainBtnID.LUNJIAN:
+				case EmMainBtnID.FUBEN:
+				case EmMainBtnID.ZHANCHANG:
+				case EmMainBtnID.FANGCHENMI:
 					return new ActivityButton();
-				case 105:
+				case EmMainBtnID.HONGBAO:
 					return new ActivityRedRewardButton();
-				case 300:
+				case EmMainBtnID.PIPEIDUILIE:
 					return new MultyActivityButton();
-				case 301:
-				case 302:
-				case 303:
-				case 304:
-				case 305:
-				case 306:
-				case 307:
-				case 308:
-				case 309:
-				case 310:
+				case EmMainBtnID.SHIJIEBOSS:
+				case  EmMainBtnID.DIANFENG:
+				case  EmMainBtnID.DIANFENG:
+				case EmMainBtnID.HUBAO:
+				case EmMainBtnID.JIUCENG:
+				case EmMainBtnID.HUANGCHENG:
+				case EmMainBtnID.WANGCHENG:
+				case EmMainBtnID.WEICHENG:
+				case EmMainBtnID.QINLINGMIBAO:
+				case EmMainBtnID.TIANJIANGLIJING:
+				case EmMainBtnID.JIXIANTIAOZHAN:
 					return new LimitTimeActivityButton();
 			}
 			
@@ -146,10 +165,10 @@ package com.rpgGame.app.ui.main.buttons
 		 */
 		public static function openActByData(id:int,data:Object):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.onActivityOpen(data);
@@ -160,10 +179,10 @@ package com.rpgGame.app.ui.main.buttons
 		/**开启活动按钮by id----yt*/
 		public static function openActivityButton(id:int):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.onActivityOpen();
@@ -173,10 +192,10 @@ package com.rpgGame.app.ui.main.buttons
 		/**关闭活动按钮 byid----yt*/
 		public static function closeActivityButton(id:int):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.onActivityClose();
@@ -189,10 +208,10 @@ package com.rpgGame.app.ui.main.buttons
 		 * */
 		public static function setUptimeActivityButton(id:int,startTime:int=0):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.setupActTime(0,false);
@@ -204,10 +223,10 @@ package com.rpgGame.app.ui.main.buttons
 		 * */
 		public static function clearUptimeActivityButton(id:int):void
 		{
-			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
-			if(bar)
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
 			{
-				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				var button:ActivityButton= MainButtonManager.getButtonByInfo(info) as ActivityButton;
 				if(button)
 				{
 					button.clearTime();

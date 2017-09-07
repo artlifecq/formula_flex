@@ -216,7 +216,7 @@ package com.rpgGame.app.manager.guild
 			EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 			if(_needSwitchChange&&this.haveGuild)
 			{
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_CHENGYUAN,null,false);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_CHENGYUAN,null,false);
 			}
 			_needSwitchChange = false;
 		}

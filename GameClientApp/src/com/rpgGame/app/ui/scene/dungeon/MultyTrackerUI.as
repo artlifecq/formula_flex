@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -8,6 +9,8 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -64,6 +67,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	public class MultyTrackerUI extends DungeonTrackerUI
 	{
 		private var _skin:FuBen_Skin;
+		
 		private var skinList:Array;
 		/*private var icoBg1List:Vector.<UIAsset>;
 		private var ico1List:Vector.<IconCDFace>;
@@ -76,6 +80,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		private var zoneId:int=0;
 		private var remainTime:int;
 		private var alertOk:AlertSetInfo;
+		private var isKillAll:Boolean=false;
 		public function MultyTrackerUI()
 		{
 			_skin=new FuBen_Skin();
@@ -85,6 +90,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		}
 		override protected function onShow() : void
 		{
+			super.onShow();
 			addEvent();
 			enterZone();
 //			GameAlert.showAlert(alertOk,onAlert);
@@ -96,7 +102,13 @@ package com.rpgGame.app.ui.scene.dungeon
 			clear();
 			
 		}
-		
+		override protected function autoWalk():void
+		{
+			if(!isKillAll)
+			{
+				walkTo();
+			}
+		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -155,6 +167,9 @@ package com.rpgGame.app.ui.scene.dungeon
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀单个
 			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
+			
+			
+			
 		}
 		private function removeEvent():void
 		{
@@ -165,6 +180,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
 			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀单个
 			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
+			
 			TimerServer.remove(updateTime);
 			TweenLite.killDelayedCallsTo(walkTo);
 			for(var i:int=0;i<killButList.length;i++)
@@ -194,6 +210,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			}
 			
 		}
+		
 		private function outZone():void
 		{
 			_skin.task_box.visible=false;
@@ -203,9 +220,9 @@ package com.rpgGame.app.ui.scene.dungeon
 			enterZone();
 			setTageText();
 			setUisite();
-			autoWalk();
+			walkNextWave();
 		}
-		private function autoWalk():void
+		private function walkNextWave():void
 		{
 			TweenLite.killDelayedCallsTo(walkTo);
 			TweenLite.delayedCall(1, walkTo);
@@ -241,8 +258,6 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function setTageText():void
 		{
-			
-			
 			if(DungeonManager.zoneStage==0)
 			{
 				_skin.sec_navi1.visible=false;
@@ -263,7 +278,7 @@ package com.rpgGame.app.ui.scene.dungeon
 				killButList[i].visible=false;
 			}
 			//getMonsterModeidByAreaid
-			var isKillAll:Boolean=true;
+			isKillAll=true;
 			var killList:Vector.<KillMonsterInfo>=DungeonManager.killInfos;
 			var rItme:Renwu_Item2;
 			var qzm:Q_dailyzone_monster;
@@ -290,6 +305,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			
 			if(DungeonManager.isLostWave()&&isKillAll)
 			{
+				TrusteeshipManager.getInstance().stopAll();
 				PickAutoManager.getInstance().startPickAuto();
 			}
 		}

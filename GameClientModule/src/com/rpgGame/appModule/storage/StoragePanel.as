@@ -219,7 +219,7 @@ package com.rpgGame.appModule.storage
 			}
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			CONFIG::netDebug {
 				NetDebug.LOG("[AppModule] [StoragePanel] show");

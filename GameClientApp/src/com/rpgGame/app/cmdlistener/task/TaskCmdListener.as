@@ -99,7 +99,7 @@ package com.rpgGame.app.cmdlistener.task
 						else
 						{
 							var postPath:Array=TaskMissionManager.getTaskPathingByType(taskData.q_mission_mainType,0);
-							TaskUtil.postTaskFly(postPath,taskData.q_mission_mainType);
+							TaskUtil.postTaskFly(postPath,taskData.q_mission_mainType,0);
 						}
 						
 					}

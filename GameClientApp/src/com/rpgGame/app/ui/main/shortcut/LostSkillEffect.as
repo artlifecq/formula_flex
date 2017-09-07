@@ -93,7 +93,7 @@ package com.rpgGame.app.ui.main.shortcut
 			else{
 				NoticeManager.showNotifyById(7012);
 //				AppManager.showApp(AppConstant.SKILL_PANL,null,"lostskill");
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,qopenData);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JUEXUE,qopenData);
 			}
 			playEnd();
 		}
@@ -127,10 +127,10 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				_effect.stopEffect();
 			}
-			var func:Q_newfunc = NewFuncCfgData.getdataById(EmFunctionID.EM_JUEXUE);
+			var func:Q_newfunc = NewFuncCfgData.getFuncCfg(EmFunctionID.EM_JUEXUE);
 			if(!FunctionOpenManager.checkOpenByLevel(func.q_level))
 			{
-				NoticeManager.showNotifyById(90203,null,func.q_string_name,func.q_level);
+				NoticeManager.showNotifyById(90203,null,func.q_name,func.q_level);
 				return ;
 			}
 			if(this.parent==null)

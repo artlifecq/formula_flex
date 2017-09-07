@@ -123,7 +123,7 @@ package com.rpgGame.app.ui.main
 		//buff
 		private var _buffBar:BuffBar;
 		
-		private var _lowBloodBg:UIAsset;
+//		private var _lowBloodBg:UIAsset;
 		
 		//		/** 主工具栏 **/
 		//		private var _mainBar : ShortcutBar;
@@ -196,8 +196,6 @@ package com.rpgGame.app.ui.main
 			//			this.addChild(this._topBar);
 			_expBar=new ExpBar();
 			this.addChild(this._expBar);		
-			this._headBar = new MainRoleHeadBar();
-			this.addChild(this._headBar);
 			this._smallMapBar = new SmallMapBar();
 			this.addChild(this._smallMapBar);
 			this._shortcutBar = new ShortcutBar();
@@ -225,9 +223,9 @@ package com.rpgGame.app.ui.main
 			_normalHead=new MonsterNormalBar();
 			_meirenHead = new PetHeadBar();
 			
-			_lowBloodBg=new UIAsset();
-			_lowBloodBg.touchable=false;
-			_lowBloodBg.styleName="ui/common/dyingeffect.png";
+//			_lowBloodBg=new UIAsset();
+//			_lowBloodBg.touchable=false;
+//			_lowBloodBg.styleName="ui/common/dyingeffect.png";
 			
 			onSwitchCmp();
 			this._teamFixedBar=new TeamLeftFixedBar();
@@ -246,6 +244,8 @@ package com.rpgGame.app.ui.main
 			//			
 			_activityBar = new ActivityBar();
 			addChild(_activityBar);
+			this._headBar = new MainRoleHeadBar();
+			this.addChild(this._headBar);
 			//			
 			//			_hintBattleBar = new HintBattleBar();
 			//			addChild(_hintBattleBar);
@@ -327,10 +327,10 @@ package com.rpgGame.app.ui.main
 			var max:int=MainRoleManager.actorInfo.totalStat.life;
 			var per:Number=value/max;
 			if(per<=SHOW_BLOOD_TIPS&&per!=0){
-				this.addChild(_lowBloodBg);
-				lowBloodTween=TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
+//				this.addChild(_lowBloodBg);
+//				lowBloodTween=TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
 			}else{
-				this.removeChild(_lowBloodBg);
+//				this.removeChild(_lowBloodBg);
 				if(lowBloodTween){
 					lowBloodTween.kill();
 					lowBloodTween=null;
@@ -341,11 +341,11 @@ package com.rpgGame.app.ui.main
 		
 		private function tweenLowBood():void
 		{
-			if(_lowBloodBg.alpha==0.5){
-				TweenLite.to(_lowBloodBg,0.5,{alpha:1,onComplete:tweenLowBood});
-			}else{
-				TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
-			}
+//			if(_lowBloodBg.alpha==0.5){
+//				TweenLite.to(_lowBloodBg,0.5,{alpha:1,onComplete:tweenLowBood});
+//			}else{
+//				TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
+//			}
 		}
 		
 		private  function showHead(role : SceneRole) : void
@@ -571,8 +571,8 @@ package com.rpgGame.app.ui.main
 			this._normalHead.resize(sWidth, sHeight);
 			this._buffBar.resize(sWidth, sHeight);
 			this._teamFixedBar.resize(sWidth,sHeight);
-			_lowBloodBg.width=sWidth;
-			_lowBloodBg.height=sHeight;
+//			_lowBloodBg.width=sWidth;
+//			_lowBloodBg.height=sHeight;
 			
 			//			_mainBar.resize(sWidth, sHeight);
 			//			_headBar.resize(sWidth, sHeight);

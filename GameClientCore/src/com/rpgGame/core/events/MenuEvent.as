@@ -11,5 +11,7 @@ package com.rpgGame.core.events
 		public static const SHIELDMENU_CLICK : int = UNIQUEID.NEXT;
 		/**一键屏蔽（带参数）*/
 		public static const SAKEYBLOCK : int = UNIQUEID.NEXT;
+		/**取消一键屏蔽（单向取消 不做其他项的更改）*/
+		public static const CANCEL_LOCK : int = UNIQUEID.NEXT;
 	}
 }

@@ -52,7 +52,7 @@ package com.rpgGame.appModule.guild.war
 			
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			this.x=0;
 			this.y=0;

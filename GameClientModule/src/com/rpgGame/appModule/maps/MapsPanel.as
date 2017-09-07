@@ -41,7 +41,7 @@ package com.rpgGame.appModule.maps
 			super();
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			var sceneData : SceneData = MapDataManager.currentScene;
 			if (sceneData) 
@@ -58,6 +58,7 @@ package com.rpgGame.appModule.maps
 					scollBoxView();
 				}
 				_bigMap.onClearPath();
+				onDrawPath();
 				siteView();
 				setMapName(sceneData.name);
 				changeTab();

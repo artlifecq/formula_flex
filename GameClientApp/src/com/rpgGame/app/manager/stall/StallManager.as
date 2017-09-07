@@ -188,7 +188,7 @@ package com.rpgGame.app.manager.stall
 			stallInfo.length = 0;
 			addStallInfo(LanguageConfig.getText(LangStall.infoStartStall,TimeUtil.getCurrentTimeFromt()));
 			AppManager.hideApp(AppConstant.STALL_PANEL);
-			AppManager.hideApp(AppConstant.BACK_PACK_PANEL);
+//			AppManager.hideApp(AppConstant.BACK_PACK_PANEL);
 		}
 		
 		private static function updateStallTime():void

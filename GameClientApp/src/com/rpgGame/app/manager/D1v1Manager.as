@@ -193,7 +193,7 @@ package com.rpgGame.app.manager
 			if (FunctionOpenManager.functionIsOpen(EmFunctionID.EM_DIANFENGDUIJUE)) 
 			{
 				reqDFMatch();
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_DIANFENGDUIJUE);
+				FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_DIANFENGDUIJUE);
 			}
 			else
 			{

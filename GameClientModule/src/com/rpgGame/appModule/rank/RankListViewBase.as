@@ -132,7 +132,7 @@ package com.rpgGame.appModule.rank
 		}
 		private function allTriggeredHandler(e:Event):void
 		{
-			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_AllCOMBATPOWERRANK);
+			FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_AllCOMBATPOWERRANK);
 		}
 		
 		protected var _totalPage:int;

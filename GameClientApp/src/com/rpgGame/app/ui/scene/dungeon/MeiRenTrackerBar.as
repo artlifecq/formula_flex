@@ -356,7 +356,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[i].monsterModelId);
 					if(qzm&&i<killButList.length)
 					{
-						(killButList[i].skin as MeiRenBoss_Item).labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
+						(killButList[i].skin as Renwu_Item2).labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
 						killButList[i].visible=true;
 					}				
 				}

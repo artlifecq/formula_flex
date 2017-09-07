@@ -782,7 +782,7 @@ package com.rpgGame.app.manager.role
 		}
 		private static function onWalktojump() : void
 		{
-			TaskAutoManager.getInstance().jumpOver=true;
+			
 			TweenLite.killDelayedCallsTo(onNextJump);
 			if (_isAutoJumping)
 			{

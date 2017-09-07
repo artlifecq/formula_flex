@@ -48,7 +48,7 @@ package com.rpgGame.coreData.role
 					point.y=dest[i][1];
 					this.destPointList.push(point);
 				}
-				this.stopPoint = new Point(this.destPointList[this.destPointList.length-1].x,this.destPointList[this.destPointList.length-1].y);
+				this.stopPoint = new Point(this.destPointList[this.destPointList.length-1].x,-Math.abs(this.destPointList[this.destPointList.length-1].y));
 			}
 			
 			

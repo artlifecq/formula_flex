@@ -1,14 +1,18 @@
 package com.rpgGame.app.view.uiComponent.menu
 {
+	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.TweenUtil;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
+	
+	import org.client.mainCore.manager.EventManager;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -185,7 +189,6 @@ package com.rpgGame.app.view.uiComponent.menu
 			isShowing = false;
 			
 			removeListener();
-			
 			TweenUtil.MenuShowAndHide( this, 0, 1, 0, removeSelf );
 		}
 		

@@ -31,7 +31,7 @@ package com.rpgGame.appModule.open
 			this.addChild(_content);
 			_isOpen = true;
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			if(this.parent == null)
 				super.show(data,openTable,parentContiner);

@@ -581,7 +581,7 @@ package com.rpgGame.appModule.role
 			{
 				return;
 			}
-			itemBatchPanel.show(info,"",this._skin.container);
+			itemBatchPanel.show(info,0,this._skin.container);
 			itemBatchPanel.x=235;
 			itemBatchPanel.y=160;
 		}
@@ -597,7 +597,7 @@ package com.rpgGame.appModule.role
 			{
 				return;
 			}
-			itemSplitPanel.show(info,"",this._skin.container);
+			itemSplitPanel.show(info,0,this._skin.container);
 			itemSplitPanel.x=235;
 			itemSplitPanel.y=160;
 		}
@@ -807,7 +807,7 @@ package com.rpgGame.appModule.role
 					shopPanel.x=213;
 					shopPanel.y=87;
 					//this._skin.container.addChild(shopPanel);
-					shopPanel.show(null,"",this._skin.container);
+					shopPanel.show(null,0,this._skin.container);
 					return true;
 				case _skin.btn_getYuanbao:
 					enterOrLeaveSellMode(false);
@@ -834,7 +834,7 @@ package com.rpgGame.appModule.role
 						}
 						return true;
 					}
-					storagePanel.show(null,"",this._skin.container);
+					storagePanel.show(null,0,this._skin.container);
 					storagePanel.x=213;
 					storagePanel.y=87;
 					if(isAtoGrid){

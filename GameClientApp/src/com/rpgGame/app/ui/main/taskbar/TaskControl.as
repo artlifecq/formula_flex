@@ -108,7 +108,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				if(taskData.q_emid!="")
 				{
-					FunctionOpenManager.openAppPaneById(taskData.q_emid);
+					FunctionOpenManager.openPanelByFuncID(int(taskData.q_emid));
 				}
 				else if(taskData.q_mission_type==TaskType.SUB_HUBAO)//护宝
 				{
@@ -130,14 +130,14 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.noMainTaskId!=0)//卡级
 			{
 				var add:int=1;
-				if(FunctionOpenManager.checkOpenBuyFunId(EmFunctionID.EM_ZHANHUN))
+				if(FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN))
 				{
 					add--;
 				}
 				add+=num;
 				if(add==0)//打开战魂面板
 				{
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN);
 				}
 				else if(add==1)
 				{
@@ -161,20 +161,21 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
-			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//支线护宝任务
-			{
-				TaskUtil.npcTaskFly(TaskMissionManager.getTaskNpcAreaId(type),type,TaskType.SUB_HUBAO);
-				return;
-			}
+			
 			if(type==TaskType.MAINTYPE_DAILYTASK)//支线打开面板任务
 			{
-				if(TaskMissionManager.dailyTaskData.q_emid!="")
+				if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//护宝任务
+				{
+					var postfPath:Array=TaskMissionManager.getTaskPathingByType(type,0);
+					TaskUtil.postTaskFly(postfPath,type,TaskType.SUB_HUBAO,0);
+				}
+				else if(TaskMissionManager.dailyTaskData.q_emid!="")
 				{
 					TaskAutoManager.getInstance().taskType=TaskType.MAINTYPE_DAILYTASK;
 					var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
 					if(emidArr.length>num)
 					{
-						FunctionOpenManager.openAppPaneById(emidArr[num]);
+						FunctionOpenManager.openPanelByFuncID(emidArr[num]);
 					}
 				}
 				return;

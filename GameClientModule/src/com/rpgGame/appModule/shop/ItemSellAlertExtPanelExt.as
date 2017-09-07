@@ -38,7 +38,7 @@ package com.rpgGame.appModule.shop
 			this._skin.btn_ok.addEventListener(Event.TRIGGERED,onSale);
 			this._skin.btn_cancel.addEventListener(Event.TRIGGERED,onCancel);
 		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 		}

@@ -32,6 +32,7 @@ package com.rpgGame.app.state.role.action
 		
 		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
 		{
+			super.playAnimation(role, render, isFreeze, time, speedRatio);
 			var statusType : String = RoleActionType.getActionType(_showType, false);
 			switch (render.type)
 			{
@@ -209,10 +210,6 @@ package com.rpgGame.app.state.role.action
 		
 		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
 		{
-			if(!prevState){
-				return false;
-			}
-			
 			return true;
 		}
 	}

@@ -1,6 +1,10 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.rpgGame.app.manager.FunctionOpenManager;
+    import com.rpgGame.coreData.enum.EmOpenType;
+    
+    import flash.net.URLRequest;
+    import flash.net.navigateToURL;
     
     import away3d.events.Event;
     
@@ -94,17 +98,17 @@
             {
                 case ui.btnBar:
                     onButtonClick();
-					FunctionOpenManager.openModeByInfo(info,info.open_id);
+					FunctionOpenManager.openByBtnInfo(_btnInfo);
                     return;
             }
         }
 
         protected function onButtonClick():void
         {
-			if(!info){
+			if(!_btnInfo){
 				return;
 			}
-			if(info.showEft!=0)
+			if(_btnInfo.q_btn_eft)
 			{
 				stopEffect();
 				TweenLite.delayedCall(600,playEffect);

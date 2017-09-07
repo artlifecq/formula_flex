@@ -202,10 +202,10 @@ package com.rpgGame.app.ui.main.smallmap
 					break;
 				
 				case MapIconType.BORN_OFFICER:
-					var officerinfo : MapOfficerInfo = _data as MapOfficerInfo;
-					iconUrl = getMapOfficerIcon(officerinfo.office);
-					updateIco(iconUrl);
-					_tipsData.info = officerinfo.name + "<br/>" + officerinfo.x + "," + officerinfo.y;
+//					var officerinfo : MapOfficerInfo = _data as MapOfficerInfo;
+//					iconUrl = getMapOfficerIcon(officerinfo.office);
+//					updateIco(iconUrl);
+//					_tipsData.info = officerinfo.name + "<br/>" + officerinfo.x + "," + officerinfo.y;
 					break;
 				case MapIconType.BORN_FAMILY:
 					var familyinfo : MapFamilyMemberInfo = _data as MapFamilyMemberInfo;

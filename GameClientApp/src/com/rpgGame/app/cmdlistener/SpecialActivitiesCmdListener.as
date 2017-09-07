@@ -1,6 +1,5 @@
 package com.rpgGame.app.cmdlistener
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MibaoManager;
@@ -159,8 +158,8 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY_NOTICE,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
-			if(info.actCfg.q_icon_id!=0){//有独立的功能icon
-				MainButtonManager.closeActivityButton(info.actCfg.q_icon_id);
+			if(info.actCfg.q_btn_id!=0){//有独立的功能icon
+				MainButtonManager.closeActivityButton(info.actCfg.q_btn_id);
 			}
 		}
 		
@@ -171,8 +170,7 @@ package com.rpgGame.app.cmdlistener
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId); 
 			if(info.actCfg.q_show_notice==1){
 				if(info.actCfg.q_notice_trans){
-					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
-					if(FunctionOpenManager.checkOpenBuyFunId(list[1]))
+					if(FunctionOpenManager.checkOpenByFunId(info.actCfg.q_notice_trans))
 					{
 						AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 					}

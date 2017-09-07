@@ -1,7 +1,6 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.game.engine3D.display.InterObject3D;
-    import com.rpgGame.app.manager.FunctionOpenManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.ui.main.buttons.IOpen;
@@ -12,7 +11,11 @@
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
-    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+    import com.rpgGame.coreData.cfg.MainBtnCfgData;
+    import com.rpgGame.coreData.cfg.NewFuncCfgData;
+    import com.rpgGame.coreData.clientConfig.Q_mainbtn;
+    import com.rpgGame.coreData.clientConfig.Q_newfunc;
+    import com.rpgGame.coreData.enum.EmOpenType;
     
     import feathers.controls.ButtonState;
     import feathers.themes.GuiTheme;
@@ -47,6 +50,8 @@
         private var _effect3D:InterObject3D;
 		protected var _openState:Boolean=true;
 		protected var _btnRes:String;
+		protected var _btnInfo:Q_mainbtn;
+		private var _funcInfo:Q_newfunc;
 		
 		protected static var stateToName:HashMap;
 		protected static var stateToIndex:HashMap;
@@ -66,15 +71,19 @@
 			}
         }
 		
-		private var _info:FunctionBarInfo;
-		public function get info():FunctionBarInfo
+		public function get info():Q_mainbtn
 		{
-			return _info;
+			return _btnInfo;
 		}
 		
-		public function set info(value:FunctionBarInfo):void
+		public function set info(value:Q_mainbtn):void
 		{
-			_info = value;
+			_btnInfo = value;
+			if(_btnInfo.q_click_type==EmOpenType.OPEN_PANEL){
+				_funcInfo=NewFuncCfgData.getFuncCfgByPanelId(int(_btnInfo.q_click_arg));
+			}else{
+				_funcInfo=NewFuncCfgData.getFuncCfgByBtnId(_btnInfo.q_id);
+			}
 		}
 		
 		public function canOpen():Boolean
@@ -82,7 +91,7 @@
 			if(!_openState){
 				return false;
 			}
-			if(FunctionOpenManager.getOpenLevelByFunBarInfo(_info)>MainRoleManager.actorInfo.totalStat.level)
+			if(_funcInfo.q_level>MainRoleManager.actorInfo.totalStat.level)
 				return false;
 			return true;
 		}
@@ -151,16 +160,16 @@
 		}
         public function playEffect():void
         {
-			if(!_info){
+			if(!_btnInfo){
 				return;
 			}
-			if(_info.showEft==0)
+			if(!_btnInfo.q_btn_eft)
 				return ;
 			if(this.parent == null)
 				return ;
             if (!_effect3D)
             {
-                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.effect_name), 42, 45, 0);
+                _effect3D = playInter3DAt(ClientConfig.getEffect(_btnInfo.q_btn_eft), 42, 45, 0);
             }
             else
             {
@@ -237,14 +246,14 @@
         {
 			_openState=true;
 			onActivityData(data);
-			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_info);
+			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_funcInfo);
         }
 
         public function onActivityClose():void
         {
 			_openState=false;
 			clearTime();
-			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_info);
+			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_funcInfo);
 			this.onTextColse();
         }
 		
