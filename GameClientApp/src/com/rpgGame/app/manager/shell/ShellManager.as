@@ -54,6 +54,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.enum.BoneNameEnum;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
+    import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.buff.BuffData;
     import com.rpgGame.coreData.role.HeroData;
@@ -126,7 +127,7 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&setRenderFunc".toLocaleLowerCase()] = this.setRenderFunc;
             this._funcs["&addTrap".toLowerCase()] = this.addTrap;
             this._funcs["&changeTrap".toLowerCase()] = this.changeTrap;
-			this._funcs["&test".toLowerCase()] = this.test;
+			this._funcs["&test".toLowerCase()] = this.testAlpha;
 			this._funcs["&addhide".toLowerCase()] = this.addHideTest;
 			this._funcs["&removeTest".toLowerCase()] = this.removeTest;
 			
@@ -365,7 +366,7 @@ package com.rpgGame.app.manager.shell
 			}
 		}
 		
-		private function test(alpha:Number):void
+		private function testAlpha(alpha:Number):void
 		{
 			if(alpha == 9)
 			{
@@ -1020,6 +1021,24 @@ package com.rpgGame.app.manager.shell
 			ChatManager.sendGMMsg("&level 100");
 			ChatManager.sendGMMsg("&gold 9999999");
 			ChatManager.sendGMMsg("&money 9999999");
+			switch(MainRoleManager.actorInfo.job){
+				case JobEnum.ROLE_1_TYPE:
+					ChatManager.sendGMMsg("&additem 2010 1");
+					ChatManager.sendGMMsg("&additem 2050 1");
+					break;
+				case JobEnum.ROLE_2_TYPE:
+					ChatManager.sendGMMsg("&additem 2020 1");
+					ChatManager.sendGMMsg("&additem 2051 1");
+					break;
+				case JobEnum.ROLE_3_TYPE:
+					ChatManager.sendGMMsg("&additem 2020 1");
+					ChatManager.sendGMMsg("&additem 2051 1");
+					break;
+				case JobEnum.ROLE_4_TYPE:
+					ChatManager.sendGMMsg("&additem 2030 1");
+					ChatManager.sendGMMsg("&additem 2052 1");
+					break;
+			}
 		}
 		private function testStopFight(level:int=-1) : void {
 			TrusteeshipManager.getInstance().testStop();
