@@ -16,7 +16,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  功能名 */
 		public var q_name:String;
-		 /**  按钮类型(1,导航按钮,2.常规活动,3,特殊活动,4,限时活动 */
+		 /**  按钮类型(1,主控上方按钮，2.右上角第一排按钮，3右上角第二排按钮，4.右上角第三排活动按钮 */
 		public var q_btn_type:int;
 		 /**  按钮排序id */
 		public var q_btn_order:int;
@@ -32,6 +32,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_btn_tips:String;
 		 /**  在副本展示(0,不展示,1展示) */
 		public var q_show_zone:int;
+		 /**  是否是运营活动按钮 */
+		public var q_is_activity:int;
 
 	}
 }

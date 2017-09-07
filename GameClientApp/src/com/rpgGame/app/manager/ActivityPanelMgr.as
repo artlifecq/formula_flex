@@ -2,7 +2,7 @@ package  com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.ui.main.openActivity.ActivityIconExt;
-	import com.rpgGame.app.ui.main.openActivity.comps.IActivityPanel;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.netData.activities.bean.ActivityInfo;
 	import com.rpgGame.netData.activities.message.ResActivitiesGetRewardInfoMessage;
@@ -10,10 +10,9 @@ package  com.rpgGame.app.manager
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.utils.Dictionary;
 	import flash.utils.setTimeout;
 	
-	import feathers.controls.Panel;
+	import org.client.mainCore.manager.EventManager;
 
 	public class ActivityPanelMgr extends EventDispatcher
 	{
@@ -36,7 +35,7 @@ package  com.rpgGame.app.manager
 		//活动  hashmap
 		private var _activtiyMap:HashMap = new HashMap();
 		//活动panel
-		private var _activityPan:Dictionary = new Dictionary();
+		private var _activityBtnMap:HashMap = new HashMap();
 		
 		
 		
@@ -204,10 +203,61 @@ package  com.rpgGame.app.manager
 					value.push(tmp);
 					_activtiyMap.put(tmp.mainPanelType, value);
 				}
-				
 			}
+	
 		}
+		private function checkNewBtn():void
+		{
+			
+			var btnTypes:Array=_activityBtnMap.keys();
+			
+			var newType:Array=_activtiyMap.keys();
+			
+			var needCheck:Boolean=false;
+			
+			if (btnTypes.length!=newType.length) 
+			{
+				needCheck=true;
+			}
+			if (!needCheck) 
+			{
+				//检查类型
+				btnTypes.sort(Array.NUMERIC);
+				newType.sort(Array.NUMERIC);
+				var len:int=btnTypes.length;
+				for (var i:int = 0; i < len; i++) 
+				{
+					if (btnTypes[i]!=newType[i]) 
+					{
+						needCheck=true;
+						break;
+					}
+				}
+			}
+			if (!needCheck) 
+			{
+				return;
+			}
+			var newBtnHash:HashMap=new HashMap();
+			var btn:ActivityIconExt;
 		
+			for each (var key:int in newType) 
+			{
+				btn=_activityBtnMap.getValue(key);
+				if (!btn) 
+				{
+					btn=new ActivityIconExt();
+				}
+				btn.setActivityList(_activtiyMap.getValue(key));
+				newBtnHash.put(key,btn);
+			}
+			_activityBtnMap=newBtnHash;
+			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY);
+		}
+		public function getBtn(mainType:int):ActivityIconExt
+		{
+			return _activityBtnMap.getValue(mainType);
+		}
 		/**
 		 * 收到活动信息
 		 * */
@@ -319,44 +369,6 @@ package  com.rpgGame.app.manager
 			}
 			return type;
 		}
-		
-		public function removeCommonActivityPanel(topType:int):Boolean
-		{
-			// TODO Auto Generated method stub
-			if ( _activityPan[topType] == null )
-				return false;
-			
-			var pan:Panel = _activityPan[topType];
-			pan.dispose();
-			_activityPan[topType] = null;
-			delete _activityPan[topType];
-			return true;
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-		
-	
-		
-//		public function res_ResSuperVipMessage(msg:ResSuperVipMessage):void{
-//			_superVIP_girlImageURL = msg.img;
-//			_superVIP_girlQQ = msg.qq;
-//			if (Mgr.uiMgr.isPanelShowByType(Platform37SuperVIPExt)) 
-//			{
-//				(Mgr.uiMgr.getPanelShowByType(Platform37SuperVIPExt) as Platform37SuperVIPExt).RefreshQQInfo();
-//			}
-//		}
+
 	}
 }

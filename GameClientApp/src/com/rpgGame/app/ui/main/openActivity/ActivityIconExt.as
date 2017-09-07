@@ -57,7 +57,10 @@ package  com.rpgGame.app.ui.main.openActivity
 		{
 			super();
 		}
-		
+		override public function canOpen():Boolean
+		{
+			return true;
+		}
 		public function setActivityList( infos:Vector.<ActivityVo> ):void
 		{
 			_activityInfos = infos;
