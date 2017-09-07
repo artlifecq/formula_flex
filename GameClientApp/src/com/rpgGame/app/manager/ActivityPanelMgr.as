@@ -8,6 +8,7 @@ package  com.rpgGame.app.manager
 	import com.rpgGame.netData.activities.message.ResActivitiesGetRewardInfoMessage;
 	import com.rpgGame.netData.activities.message.ResActivitiesRefreshMessage;
 	
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 	import flash.utils.setTimeout;
@@ -16,6 +17,7 @@ package  com.rpgGame.app.manager
 
 	public class ActivityPanelMgr extends EventDispatcher
 	{
+		public static const EVENT_GET:String="get_act_event";
 		private static var _ins:ActivityPanelMgr;
 		public static function get ins ():ActivityPanelMgr
 		{
@@ -226,13 +228,7 @@ package  com.rpgGame.app.manager
 			ToLocationData();
 			//			topBtnPanel.updateActivityBtns( _activtiyMap.values() );
 			
-			for each( var activitypan:Panel in _activityPan )
-			{
-//				if ( activitypan != null && Mgr.uiMgr.isPanelShow( activitypan ) )
-//				{
-//					(activitypan as IActivityPanel).updateActivtiyInfo();
-//				}
-			}
+			this.dispatchEvent(new Event(EVENT_GET));
 		}
 		
 		
@@ -241,8 +237,6 @@ package  com.rpgGame.app.manager
 		 * */
 		public function resActivitiesGetRewardInfoMsg(msg:ResActivitiesGetRewardInfoMessage):void
 		{
-			
-			
 			reqActivitiesInfoMsg();
 		}
 		
@@ -299,10 +293,10 @@ package  com.rpgGame.app.manager
 		
 		
 		
-		public function getActivityPanel(activityBtn:ActivityIconExt):IActivityPanel
+		public function getActivityPanelKey(activityBtn:ActivityIconExt):String
 		{
 			// TODO Auto Generated method stub
-			var type:Class;
+			var type:String;
 			switch ( activityBtn.topType )
 			{
 //				case EnumCampPanelType.M_FIRST_BUY:
@@ -323,16 +317,7 @@ package  com.rpgGame.app.manager
 //				default:
 //					type=GeneralActivityPanel;
 			}
-			
-			if ( _activityPan[activityBtn.topType] == null )
-			{
-				var pan:IActivityPanel = new type();
-				pan.mainPanelType = activityBtn.topType;
-				_activityPan[activityBtn.topType] = pan;
-				_activityPan[activityBtn.topType].name = _activityPan[activityBtn.topType].name + activityBtn.topType;
-				pan.titleimg(activityBtn.titleUrl);
-			}
-			return _activityPan[activityBtn.topType];
+			return type;
 		}
 		
 		public function removeCommonActivityPanel(topType:int):Boolean

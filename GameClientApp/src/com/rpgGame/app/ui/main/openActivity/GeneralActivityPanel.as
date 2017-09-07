@@ -8,12 +8,9 @@ package  com.rpgGame.app.ui.main.openActivity
 	import com.rpgGame.app.ui.main.openActivity.comps.ICampSub;
 	import com.rpgGame.app.ui.main.openActivity.sub.GeneralActTypeBtnRender;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.netData.activities.bean.ActivityInfo;
 	
-	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
-	import flash.utils.getTimer;
 	
 	import away3d.events.Event;
 	
@@ -24,24 +21,25 @@ package  com.rpgGame.app.ui.main.openActivity
 	import org.mokylin.skin.app.openActivity.OpenActivityPanleSkin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 
 
-	
-	public class GeneralActivityPanel extends SkinUIPanel implements IActivityPanel
+	/**
+	 *活动通用面板左侧list，右侧内容需继承这个面板 
+	 * @author yfl
+	 * 
+	 */	
+	public class GeneralActivityPanel extends BaseActivityMainPanel
 	{
-		protected var _mainPanelType:int;
-		
 		protected var _panelShowType:int;
-	
-	
 		//子面板
 		protected var subdic:Dictionary = new Dictionary();
 
 		private var _skin:OpenActivityPanleSkin;
-		public function GeneralActivityPanel()
+		public function GeneralActivityPanel(type:int)
 		{
 			_skin=new OpenActivityPanleSkin();
-			super(_skin);
+			super(type,_skin);
 			
 			this.dragAble = true;
 		
@@ -68,7 +66,11 @@ package  com.rpgGame.app.ui.main.openActivity
 			// TODO Auto Generated method stub
 			return new GeneralActTypeBtnRender();
 		}
-		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			super.show(data,openTable,parentContiner);
+			updataPanel(data);
+		}
 		/**
 		 * 刷新面板显示
 		 */
@@ -113,7 +115,7 @@ package  com.rpgGame.app.ui.main.openActivity
 			return true;
 		}
 		/**活动刷新  更新内容*/
-		public function updateActivtiyInfo():void
+		override protected function updateActivtiyInfo():void
 		{
 			
 			if(updateActivities())
@@ -196,17 +198,6 @@ package  com.rpgGame.app.ui.main.openActivity
 				pan.setData( activityMap.getValue(_panelShowType));
 				MCUtil.addChildOnly( _skin.uiRight, (pan as DisplayObject) );
 			}
-		}
-		
-		
-		public function set mainPanelType(value:int):void
-		{
-			_mainPanelType = value;
-		}
-		
-		public function get mainPanelType():int
-		{
-			return _mainPanelType;
 		}
 		override protected function onHide():void
 		{

@@ -2,10 +2,11 @@ package  com.rpgGame.app.ui.main.openActivity
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.GlobalFunction;
-	import com.rpgGame.app.ui.main.openActivity.comps.IActivityPanel;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.main.openActivity.comps.ISpecialActivityInter;
 	import com.rpgGame.app.ui.main.openActivity.comps.ITopBtn;
 	import com.rpgGame.app.ui.main.openActivity.comps.ITopSortBtn;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.coreData.info.openActivity.EnumCampPanelType;
 	import com.rpgGame.coreData.info.openActivity.EnumCampsFlag;
@@ -40,7 +41,7 @@ package  com.rpgGame.app.ui.main.openActivity
 		private var _activityInfos:Vector.<ActivityVo>;
 		private var _icon:String;
 		
-		private var thisActivityPan:IActivityPanel;
+		
 		private var _tag:int = 0;
 		
 		private var _rewardCount:int = 0;
@@ -107,16 +108,9 @@ package  com.rpgGame.app.ui.main.openActivity
 			if ( goUrl() )
 				return;
 			
-//			thisActivityPan = Mgr.activityPanelMgr.getActivityPanel(this);
-//			if ( Mgr.uiMgr.isPanelShow( (thisActivityPan as Panel) ) )
-//				Mgr.uiMgr.hidePanel( (thisActivityPan as Panel) );
-//			else
-//			{
-//				Mgr.uiMgr.showPanel( (thisActivityPan as Panel) );
-//				thisActivityPan.updataPanel( _tag, true );
-//				if ( _tag != 0 )
-//					_tag = 0;
-			//}			
+			var thisActivityPan:String = Mgr.activityPanelMgr.getActivityPanelKey(this);
+			AppManager.showApp(thisActivityPan,_tag);
+			_tag=0;
 		}
 		public function updateNums( num:int ):void
 		{
