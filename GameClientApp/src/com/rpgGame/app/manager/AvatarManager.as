@@ -54,7 +54,7 @@ package com.rpgGame.app.manager
 	 */
 	public class AvatarManager
 	{
-		private static const simpleShadowBaseScale : Number = 0.01;
+		private static const simpleShadowBaseScale : Number = 0.02;
 		
 		public function AvatarManager()
 		{
@@ -923,8 +923,9 @@ package com.rpgGame.app.manager
 						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, bodyRu.radius * simpleShadowBaseScale);
 					}
 				}
+			}else{
+				role.removeSimpleShadow();
 			}
-			role.removeSimpleShadow();
 			
 			role.stateMachine.transition(RoleStateType.CONTROL_AVATAR);
 		}

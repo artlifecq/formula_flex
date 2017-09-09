@@ -53,7 +53,9 @@ package com.rpgGame.coreData.cfg
 			var mapCfg:SceneData;
 			for(i=0;i<num;i++){
 				mapCfg=MapDataManager.getMapInfo(mapIds[i]);
-				mapDatas.push(mapCfg);
+				if(mapCfg){
+					mapDatas.push(mapCfg);
+				}
 			}
 		}
 		

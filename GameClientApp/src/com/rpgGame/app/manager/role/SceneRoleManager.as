@@ -176,6 +176,9 @@ package com.rpgGame.app.manager.role
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
+			
+			AvatarManager.updateRoleSimpleShadow(role);
+			
 			if (!isMainChar)
 				EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
@@ -284,6 +287,7 @@ package com.rpgGame.app.manager.role
 			role.headFace = HeadFace.create(role);
 			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
+//			(role.headFace as HeadFace).showBloodBar();
 			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			//
