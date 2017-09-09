@@ -14,21 +14,21 @@ package  com.rpgGame.coreData.info.openActivity
 		 ******************************/ 
 		
 		// 封测活动
-		public static const M_CLOSEBETA:int = 1;
+		public static const M_BUG:int = 10001;
 		// 首冲
-		public static const M_FIRST_BUY:int = 2
+		public static const M_FIRST_BUY:int = 10002
 		//37平台活动
-		public static const M_PLATFORM_37:int=3;
+		public static const M_PLATFORM_37:int=10003;
 		//37超级会员
-		public static const M_SUPER_VIP_37:int=4;
+		public static const M_SUPER_VIP_37:int=10004;
 		//开服活动
-		public static const M_KAIFU:int=5;
+		public static const M_KAIFU:int=10005;
 		//七天登录
-		public static const M_SEVEN_DAY:int=7;
+		public static const M_SEVEN_DAY:int=10007;
 		//每日首冲
-		public static const M_FIRST_BUY_EVERYDAY:int=8;
+		public static const M_FIRST_BUY_EVERYDAY:int=10008;
 		//公测送元宝
-		public static const M_GONGCE_YUANBAO:int=9;
+		public static const M_GONGCE_YUANBAO:int=10009;
 		
 		
 		

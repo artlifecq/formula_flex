@@ -33,7 +33,7 @@ package  com.rpgGame.app.manager.platform
 		}
 		override public function downExe():void
 		{
-			GlobalFunction.OpenUrl(ClientConfig.urlParmar["loginexeurl"]);
+			GlobalFunction.OpenUrl("lp.37.com");
 		}
 		override public function isMClinetLogin():Boolean
 		{

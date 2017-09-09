@@ -52,14 +52,18 @@ package  com.rpgGame.app.ui.main.openActivity
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=4;
-			list.addEventListener(Event.TRIGGERED,onClickItem);
+		//	list.addEventListener(Event.TRIGGERED,onClickItem);
+			list.addEventListener( Event.CHANGE, list_changeHandler );
 		}
 		
-		private function onClickItem(eve:Event):void
+		private function list_changeHandler(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			
+			var item:GeneralActTypeBtnRender=_skin.listCont.selectedItemRender as GeneralActTypeBtnRender;
+			showActivityPanelByType(item.subType);
 		}
+		
+		
 		
 		private function createMainActivityBtn():GeneralActTypeBtnRender
 		{
@@ -69,38 +73,19 @@ package  com.rpgGame.app.ui.main.openActivity
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			updataPanel(data);
-		}
-		/**
-		 * 刷新面板显示
-		 */
-		public function updataPanel(tag:int = 0, isreq:Boolean = false):void
-		{
-			if ( tag != 0 )
-				_panelShowType = tag;
-			
-			if(updateActivities())
+			if (int(data!=0)) 
 			{
-				if (_panelShowType==0) 
-				{
-					_panelShowType=(_skin.listCont.dataProvider.getItemAt(0) as Vector.<ActivityInfo>)[0].childPanelType;
-					showActivityPanelByType( _panelShowType );
-				}
+				_panelShowType=int(data);
 			}
-			
-			//			showActivityPanelByKey( _panelShowTag );
-			
-			
-			
-//			allStateButtonHandler(_arrTextButton[tag]);
 		}
-		private function updateActivities():Boolean
+	
+		override protected function setData(hash:HashMap):void
 		{
-			var activityMap:HashMap = Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType);
+			var activityMap:HashMap = hash;
 			if ( activityMap.values().length == 0 )
 			{
 				hide();
-				return false;
+				return;
 			}
 			var arrs:Array=activityMap.keys();
 			_skin.uiTitle.styleName=activityMap.getValue(arrs[0])[0].titleUrl;
@@ -111,29 +96,13 @@ package  com.rpgGame.app.ui.main.openActivity
 			{
 				_skin.listCont.dataProvider.addItem(activityMap.getValue(arrs[i]));
 			}
-			
-			return true;
-		}
-		/**活动刷新  更新内容*/
-		override protected function updateActivtiyInfo():void
-		{
-			
-			if(updateActivities())
+			if (_panelShowType==0||arrs.indexOf(_panelShowType)==-1) 
 			{
-				showActivityPanelByType( _panelShowType );
+				_panelShowType=arrs[0];
 			}
-		}
-		public function updateBySubkey( panelKey:int ):Boolean
-		{
-			if ( subdic[panelKey] == null )
-				return false;
-			
-			if ( _panelShowType != panelKey )
-				return false;
-			
-			( subdic[panelKey] as ICampSub ).update();
-			return true;
-		}
+			//showActivityPanelByType( _panelShowType );
+			_skin.listCont.selectedIndex=arrs.indexOf(_panelShowType);
+		}	
 		
 		public function getSubPanelByType(type:Class):Panel
 		{

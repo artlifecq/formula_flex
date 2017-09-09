@@ -489,7 +489,7 @@ package
 			params["browser"] = _browser;
 			params["account"] =_loginName;
 			params["resolution"] = Capabilities.screenResolutionX + "X" + Capabilities.screenResolutionY;
-			params["serverId"] = _server;
+			params["serverId"] = _areaId;
 			params["ip"] = _clientIp;
 			params["time"] = (new Date()).getTime();
 			doGet("http://front.moloong.com/front-node/node", params);

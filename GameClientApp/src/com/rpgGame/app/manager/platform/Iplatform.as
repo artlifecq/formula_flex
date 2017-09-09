@@ -9,6 +9,8 @@ package  com.rpgGame.app.manager.platform
 		//下载微端
 		function downExe():void;
 		//是否微端登录
-		function isMClinetLogin():Boolean
+		function isMClinetLogin():Boolean;
+		
+		function goBBS():void;
 	}
 }

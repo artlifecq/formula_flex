@@ -24,6 +24,16 @@ package com.rpgGame.app.ui.main.openActivity.sub
 		{
 			return _skin.height;
 		}
+		public function get subType():int
+		{
+			var infos:Vector.<ActivityVo>=_data as Vector.<ActivityVo>;
+			if (infos&&infos.length>0) 
+			{
+				var vo:ActivityVo=infos[0];
+				return vo.childPanelType;
+			}
+			return 0;
+		}
 		override protected function commitData():void
 		{
 			if(this._data && this._owner)

@@ -25,5 +25,9 @@ package  com.rpgGame.app.manager.platform
 		{
 			return false;
 		}
+		public function goBBS():void
+		{
+			
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.openActivity
+package org.mokylin.skin.app.tequan.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.openActivity
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonBasebtn extends feathers.controls.StateSkin
+	public class ButtonLibao extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,13 +22,11 @@ package org.mokylin.skin.app.openActivity
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonBasebtn()
+		public function ButtonLibao()
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
-			this.height = 53;
-			this.width = 201;
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -49,12 +47,7 @@ package org.mokylin.skin.app.openActivity
 						}
 					]
 			};
-			skinNames={"down":"ui/common/btn/basebtn/down.png",
-			"downAndSelected":"ui/common/btn/basebtn/select.png",
-			"hover":"ui/common/btn/basebtn/over.png",
-			"hoverAndSelected":"ui/common/btn/basebtn/select.png",
-			"up":"ui/common/btn/basebtn/up.png",
-			"upAndSelected":"ui/common/btn/basebtn/select.png"};
+			skinNames={"down":"ui/app/tequan/button/libao/down.png", "hover":"ui/app/tequan/button/libao/over.png", "up":"ui/app/tequan/button/libao/up.png"};
 		}
 
 
@@ -74,14 +67,14 @@ package org.mokylin.skin.app.openActivity
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 53;
+			temp.bottom = 0;
 			temp.left = 0;
+			temp.right = 0;
 			temp.text = "";
 			temp.textAlign = "center";
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.width = 201;
 			return temp;
 		}
 

@@ -391,6 +391,7 @@ package com.rpgGame.app.manager.scene
 			TaskManager.storyTaskInfo=null;
 			GameSoundManager.stopBgSound();
 			if(MainRoleManager.actor){
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			}

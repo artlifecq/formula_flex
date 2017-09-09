@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.openActivity
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.ActivityPanelMgr;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -26,20 +27,21 @@ package com.rpgGame.app.ui.main.openActivity
 		{
 			return _mainPanelType;
 		}
-		protected function  updateActivtiyInfo():void
-		{
-			
-		}
+		
 		override protected function onShow():void
 		{
 			super.onShow();
 			Mgr.activityPanelMgr.addEventListener(ActivityPanelMgr.EVENT_GET,onGetActivites);
+			setData(Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType));
 		}
-		
+		protected function setData(hash:HashMap):void
+		{
+			
+		}
 		protected function onGetActivites(event:Event):void
 		{
 			// TODO Auto-generated method stub
-			updateActivtiyInfo();
+			setData(Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType))
 		}
 		override protected function onHide():void
 		{

@@ -6,6 +6,11 @@ package com.rpgGame.app.ui.main.openActivity
 	
 	import feathers.controls.StateSkin;
 	
+	/**
+	 *活动右侧子面板基类 
+	 * @author yfl
+	 * 
+	 */	
 	public class BaseCampSubPanel extends SkinUI implements ICampSub
 	{
 		public function BaseCampSubPanel(skin:StateSkin=null)
