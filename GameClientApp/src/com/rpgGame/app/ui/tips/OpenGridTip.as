@@ -89,6 +89,7 @@ package com.rpgGame.app.ui.tips
 			if(cdTime <= 0)
 			{
 				TimerServer.remove(updateCdTime);
+				_skin.lb_time.htmlText = TimeUtil.format3TimeType(0);
 				return;
 			}
 			_skin.lb_time.htmlText = TimeUtil.format3TimeType(cdTime--);

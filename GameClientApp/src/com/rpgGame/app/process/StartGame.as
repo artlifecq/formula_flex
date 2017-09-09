@@ -28,6 +28,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.AmountTip;
     import com.rpgGame.app.ui.tips.BlessTip;
     import com.rpgGame.app.ui.tips.BuffTip;
+    import com.rpgGame.app.ui.tips.CanOpenGridTip;
     import com.rpgGame.app.ui.tips.D1v1RankRewardExt;
     import com.rpgGame.app.ui.tips.D1v1RankTipExt;
     import com.rpgGame.app.ui.tips.D1v1TipExt;
@@ -232,6 +233,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.ITEM_TIP, ItemTip);
 			TipManager.registerTipsParserClass(TipType.SPELL_TIP, SpellTip);
 			TipManager.registerTipsParserClass(TipType.OPEN_GRID_TIP, OpenGridTip);
+			TipManager.registerTipsParserClass(TipType.CANOPEN_GRID_TIP, CanOpenGridTip);
 			TipManager.registerTipsParserClass(TipType.FRIEND_HERO_TIP, FriendHeroTips);
 			TipManager.registerTipsParserClass(TipType.EQUIP_TIP, EquipTip);
 			TipManager.registerTipsParserClass(TipType.AMOUNT_TIP, AmountTip);

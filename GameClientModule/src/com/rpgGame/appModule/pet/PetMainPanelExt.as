@@ -378,7 +378,8 @@ package com.rpgGame.appModule.pet
 				return;
 			}
 			addid=Mgr.petMgr.getAttId(qPetAdv.q_attid_master);
-			_skin.NumZhanli.label=FightValueUtil.calFightPowerByAttValue(AttValueConfig.getAttInfoById(addid),MainRoleManager.actorInfo.job)+"";
+			_skin.NumZhanli.number=FightValueUtil.calFightPowerByAttValue(AttValueConfig.getAttInfoById(addid),MainRoleManager.actorInfo.job);
+			_skin.NumZhanli.bounds.width=_skin.NumZhanli.width;
 			var nextAttrId:int=0;
 			if(!data.actived||data.rank==qPet.q_max_grade) 
 			{

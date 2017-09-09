@@ -23,6 +23,7 @@ package com.rpgGame.appModule.zhangong
 	import feathers.controls.UINumber;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
+	import feathers.layout.TiledRowsLayout;
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
@@ -58,8 +59,9 @@ package com.rpgGame.appModule.zhangong
 			list.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			list.padding=4;
-			
+			list.padding=0;
+			(_skin.ListMap.layout as TiledRowsLayout).horizontalGap=0;
+			(_skin.ListMap.layout as TiledRowsLayout).verticalGap=4;
 			//			var list1:List=_skin.ListBoss;
 			//			list1.itemRendererFactory = creatBossItemCell;
 			//			list1.clipContent = true;

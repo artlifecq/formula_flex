@@ -28,6 +28,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
+	import flash.geom.Point;
+	
 	import app.message.EquipType;
 	
 	import feathers.controls.Label;
@@ -95,7 +97,6 @@ package com.rpgGame.app.ui.tips
 			pors=new Vector.<ZhuangbeiTipPro>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
-			_itemTip.lbl_bangding.width=120;
 		}
 		
 		
@@ -105,7 +106,7 @@ package com.rpgGame.app.ui.tips
 				createJianTou();
 				uijiantou.y=258;
 				this._itemTip.container.addChild(uijiantou);			
-				_equipTip.x=-(this.x+this.width+uijiantou.width);
+				_equipTip.x=-(this.x+_itemTip.width+uijiantou.width);
 				this._itemTip.container.addChild(_equipTip);
 				uijiantou.x=-uijiantou.width;
 				TipManager.updatePositon();
@@ -155,6 +156,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.tip_down.visible=false;
 			_itemTip.tip_up.visible=false;
 			_itemTip.lb_power.visible=false;
+			_itemTip.lbl_bangding.visible=false;
 			if(equipItemInfo){
 				currentFight=equipItemInfo.itemInfo.fightPower;
 			}

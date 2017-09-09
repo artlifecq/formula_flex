@@ -689,6 +689,7 @@ package com.rpgGame.appModule.role
 					}
 				}
 			}
+			goodsContainer.updateList();
 		}
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{

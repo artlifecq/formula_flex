@@ -1,6 +1,8 @@
 package org.mokylin.skin.app.beibao.zhangong
 {
 	import feathers.controls.text.Fontter;
+	import feathers.layout.IVirtualLayout;
+	import feathers.layout.TiledRowsLayout;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.List;
@@ -70,6 +72,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.width = 238;
 			temp.x = 27;
 			temp.y = 133;
+			temp.layout = __ZhanGong_Skin_TileLayout1_i();
 			return temp;
 		}
 
@@ -85,6 +88,13 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.width = 142;
 			temp.x = 56;
 			temp.y = 3;
+			return temp;
+		}
+
+		private function __ZhanGong_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
+		{
+			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
+			temp.horizontalGap = 1;
 			return temp;
 		}
 

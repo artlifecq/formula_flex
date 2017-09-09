@@ -3,6 +3,7 @@ package com.rpgGame.app.view.icon
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.EftMcManager;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -11,6 +12,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import flash.geom.Point;
 	
@@ -161,10 +163,12 @@ package com.rpgGame.app.view.icon
 				_luckEff.removeChildren();
 			}
 			_luckEff.touchable=false;
-			if(type==1)
+			if(type==1){
 				EftMcManager.setMcStyle(_luckEff,"UIMovieClipGridLock_2");//Quality.getQualityStyleName(3));
-			else if(type==2)
+			}
+			else if(type==2){
 				EftMcManager.setMcStyle(_luckEff,"UIMovieClipGridLock_1");//Quality.getQualityStyleName(4));
+			}
 			_luckEff.width=this.width;
 			_luckEff.height=this.width;
 			this.addChild(_luckEff);

@@ -88,7 +88,10 @@ package com.rpgGame.app.view.icon
 			{
 				var type:int=GoodsContainerMamager.getMrg(gridInfo.containerID).isMianFei?2:1;
 				showLuckEff(type);
-				TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
+				if(type==2)
+					TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.CANOPEN_GRID_TIP, gridInfo.unlockInfo ) );
+				else
+					TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
 			}
 			else{
 				heidEff();

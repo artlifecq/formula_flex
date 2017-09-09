@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.richText.component
 {
 	import com.rpgGame.app.richText.RichTextCustomUnitType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
 	
 	import flash.display.BitmapData;
 	import flash.display.StageQuality;
@@ -323,9 +324,19 @@
 				selectRange(_cursorInfo.selectionEndIndex,_cursorInfo.selectionEndIndex);
 			}
 			//判断是否还能输入字符
-			if(remainChars < getCharsByStr($str))
-			{
-				return;
+			/*在这里加一个文本判断 如果是富文本则提取实际的文字来*/
+			var lab:RichTextUnitData=RichTextConfig.getUnitData($str);
+			if(lab){
+				if(remainChars < getCharsByStr(lab.label))
+				{
+					return;
+				}
+			}
+			else{
+				if(remainChars < getCharsByStr($str))
+				{
+					return;
+				}
 			}
 			addDynamicConfigIconData( $str, RichTextConfig.SEPARATOR );
 			//如果是输入文本不需要自动添加段落标签
@@ -1027,7 +1038,7 @@
 					if ($_rect)
 					{
 						$_txtLineMetrics = _textField.getLineMetrics(_textField.getLineIndexOfChar(unit.unitData.indexInMessageStringToShow));
-//						unit.displayObj.visible = true;
+						//						unit.displayObj.visible = true;
 						var offsetY:Number = 0;
 						//这里是临时处理
 						if(unit.displayObj.height < 100)
@@ -1046,14 +1057,14 @@
 								unit.displayObj.x = Math.round( $_rect.x + ($_rect.width - unit.displayObj.width) * 0.5 );
 						}
 						
-//						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
+						//						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
 						var rowH:int=Math.ceil($_rect.height);
-						unit.displayObj.y=$_rect.y+(rowH-unit.displayObj.height)/2+$_txtLineMetrics.descent;
+						unit.displayObj.y=$_rect.y+(rowH-unit.displayObj.height)/2+$_txtLineMetrics.descent+unit.unitData.offsetY;
 					}
-//					else
-//					{
-//						unit.displayObj.visible = false;
-//					}
+					//					else
+					//					{
+					//						unit.displayObj.visible = false;
+					//					}
 				}
 			}
 			setContainerPos();
@@ -1090,7 +1101,7 @@
 			_tempTextFormat.size = $size;
 			_tempTextFormat.font = _defaultFormat.font;
 			_tempTextField.text = PLACEHOLDER;
-//			_tempTextField.defaultTextFormat = _tempTextFormat;
+			//			_tempTextField.defaultTextFormat = _tempTextFormat;
 			_tempTextField.setTextFormat(_tempTextFormat);
 			return _tempTextField.textWidth-2;
 		}
@@ -1372,15 +1383,15 @@
 				{
 					_unitTextFormat = new TextFormat();
 				}
-			/*	if(unit.displayObj is Label)
+				/*	if(unit.displayObj is Label)
 				{
-					$_fontSize = int(_defaultFormat.size);
+				$_fontSize = int(_defaultFormat.size);
 				}
 				else
 				{*/
-//					$_fontSize = unit.displayObj.height;
+				//					$_fontSize = unit.displayObj.height;
 				$_fontSize = int(_defaultFormat.size);
-//				}
+				//				}
 				_unitTextFormat.size = $_fontSize;
 				_unitTextFormat.url = unit.unitData.code + SEPARATOR;
 				_unitTextFormat.letterSpacing = unit.unitData.width - getPlaceholderWidth($_fontSize);
