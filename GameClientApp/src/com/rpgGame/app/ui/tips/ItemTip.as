@@ -286,20 +286,6 @@ package com.rpgGame.app.ui.tips
 				label=createLabel(name,value);
 				yinIcon.x=52;
 				yinIcon.y=curY-4;
-				
-				_itemTip.lbBangding.y=curY;
-				_itemTip.lbBangding.visible=true;
-				if(_itemInfo.binded){
-					_itemTip.lbBangding.text="【已绑定】";
-				}else{
-					if(_itemInfo.qItem.q_bind==0){
-						_itemTip.lbBangding.visible=false;
-					}else if(_itemInfo.qItem.q_bind==1){
-						_itemTip.lbBangding.text="【获得时绑定】";
-					}else{
-						_itemTip.lbBangding.text="【使用后绑定】";
-					}
-				}
 			}
 			else
 			{
@@ -309,6 +295,18 @@ package com.rpgGame.app.ui.tips
 			
 			for(var i:int=0;i<_itemTip.bg.numChildren;i++){
 				_itemTip.bg.getChildAt(i).visible=false;
+			}			
+			_itemTip.lbBangding.visible=true;
+			if(_itemInfo.binded){
+				_itemTip.lbBangding.text="【已绑定】";
+			}else{
+				if(_itemInfo.qItem.q_bind==0){
+					_itemTip.lbBangding.visible=false;
+				}else if(_itemInfo.qItem.q_bind==1){
+					_itemTip.lbBangding.text="【获得时绑定】";
+				}else{
+					_itemTip.lbBangding.text="【使用后绑定】";
+				}
 			}
 			var obj:DisplayObject=_itemTip.bg.getChildAt(_itemInfo.qItem.q_default);
 			if(!obj) obj=_itemTip.bg.getChildAt(0);
@@ -316,6 +314,7 @@ package com.rpgGame.app.ui.tips
 			ui_bg.visible=true;
 			ui_bg.height=curY;
 			_itemTip.bg_di.y=ui_bg.height;
+			_itemTip.lbBangding.y=_itemTip.bg_di.y-3;
 			_itemTip.bg_di.visible=true;
 			_itemTip.bg.height=_itemTip.bg_di.y+_itemTip.bg_di.height;
 		}

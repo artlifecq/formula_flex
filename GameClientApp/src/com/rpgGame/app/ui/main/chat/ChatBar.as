@@ -625,19 +625,45 @@ package com.rpgGame.app.ui.main.chat {
 		 */
 		private function onAddLocation():void
 		{
-			//国家名称暂时不要
-			//			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(MainRoleManager.actorInfo.countryId) + "]";
-			var sceneID:String = MapDataManager.currentScene.sceneId.toString();
-			var xy:String = int(MainRoleManager.actor.x) + "," + int(MainRoleManager.actor.z);
-			var posName:String =  MapDataManager.currentScene.name + "(" + xy + ")";
-			var locationCode:String =RichTextCustomUtil.getTextLinkCode(posName,0x55bb17,RichTextCustomLinkType.POSITION_TYPE,sceneID + "," + xy);	
-			if(_inputText.text == DEFAULT_CHAT_TEXT)
-			{
-				_inputText.text = "";
+			if(isCanAddLocation()){
+				//国家名称暂时不要
+				//			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(MainRoleManager.actorInfo.countryId) + "]";
+				var sceneID:String = MapDataManager.currentScene.sceneId.toString();
+				var xy:String = int(MainRoleManager.actor.x) + "," + int(MainRoleManager.actor.z);
+				var posName:String =  MapDataManager.currentScene.name + "(" + xy + ")";
+				var locationCode:String =RichTextCustomUtil.getTextLinkCode(posName,0x55bb17,RichTextCustomLinkType.POSITION_TYPE,sceneID + "," + xy);	
+				if(_inputText.text == DEFAULT_CHAT_TEXT)
+				{
+					_inputText.text = "";
+				}
+				_inputText.appendRichText(locationCode);
+				_inputText.setFocus();
+				setGroubState(true);
 			}
-			_inputText.appendRichText(locationCode);
-			_inputText.setFocus();
-			setGroubState(true);
+		}
+		
+		/**添加一个检测物品的方法*/
+		private function isCanAddLocation():Boolean
+		{
+			var separator : String = RichTextConfig.SEPARATOR;
+			var str : String;
+			var data : Array = _inputText.text.split(separator);
+			var len : int = data.length;
+			var hasinfo:ClientItemInfo;
+			var hasCont:int=0;
+			if (len <= 0)
+				return true;		
+			var unitData:RichTextUnitData;
+			for (var i : int = 1; i < len; i += 2)
+			{
+				str = data[i];				
+				unitData = RichTextConfig.getUnitData(RichTextConfig.SEPARATOR + str + RichTextConfig.SEPARATOR);			
+				if (unitData.linkType == RichTextCustomLinkType.POSITION_TYPE)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 		
 		private function onShowFaceListView():void

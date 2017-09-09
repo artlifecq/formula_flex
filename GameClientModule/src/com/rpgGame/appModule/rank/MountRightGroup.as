@@ -39,8 +39,8 @@ package com.rpgGame.appModule.rank
 		
 		override protected function initView():void
 		{
-			super.initView();
 			this._scale = 1.3;
+			super.initView();	
 			_spellIconList = new Vector.<IconCDFace>();
 			
 			var partner:DisplayObjectContainer = _skin.icon1.parent;
