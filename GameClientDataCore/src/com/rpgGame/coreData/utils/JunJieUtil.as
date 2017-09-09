@@ -5,6 +5,7 @@ package com.rpgGame.coreData.utils
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_junjie;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	public class JunJieUtil
 	{
@@ -46,17 +47,17 @@ package com.rpgGame.coreData.utils
 		{
 			switch(type)
 			{
-				case 1: return 313;
-				case 2: return 20;
-				case 3: return 30;
-				case 4: return 20;
-				case 5: return 10;
-				case 6: return 2;
-				case 7: return 21;
-				case 8: return 22;
-				case 9: return 3;
-				case 10: return 31;
-				case 11: return 31;
+				case 1: return EmFunctionID.EM_JINGYANFUBEN;
+				case 2: return EmFunctionID.EM_QIANGHUA;
+				case 3: return EmFunctionID.EM_JINENG;
+				case 4: return EmFunctionID.EM_QIANGHUA;
+				case 5: return EmFunctionID.EM_ZUOQI;
+				case 6: return EmFunctionID.EM_MERIDIAN;
+				case 7: return EmFunctionID.EM_ZUOMO;
+				case 8: return EmFunctionID.EM_XILIAN;
+				case 9: return EmFunctionID.EM_XINFA;
+				case 10: return EmFunctionID.EM_JUEXUE;
+				case 11: return EmFunctionID.EM_JUEXUE;
 			}
 			return 1;
 		}
