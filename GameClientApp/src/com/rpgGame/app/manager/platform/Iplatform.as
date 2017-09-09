@@ -12,5 +12,7 @@ package  com.rpgGame.app.manager.platform
 		function isMClinetLogin():Boolean;
 		
 		function goBBS():void;
+		
+		function downLinPai():void;
 	}
 }

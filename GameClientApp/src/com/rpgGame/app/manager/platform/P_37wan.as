@@ -13,7 +13,7 @@ package  com.rpgGame.app.manager.platform
 		override public function phoneVerify():void
 		{
 			var url:String="";
-			var param:Object=ClientConfig.urlParmar;
+			var param:Object=ClientConfig.clientParams;
 			if (param) 
 			{
 				url=param["phoneVerifyUrl"];
@@ -33,11 +33,15 @@ package  com.rpgGame.app.manager.platform
 		}
 		override public function downExe():void
 		{
+			
+		}
+		override public function downLinPai():void
+		{
 			GlobalFunction.OpenUrl("lp.37.com");
 		}
 		override public function isMClinetLogin():Boolean
 		{
-			var type:int=ClientConfig.urlParmar["showlogin"];
+			var type:int=ClientConfig.clientParams["showlogin"];
 			return type==EnumLoginType.LOGIN__PLAT_CLIENT||type==EnumLoginType.LOGIN_BOX;
 		}
 	}

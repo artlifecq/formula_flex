@@ -1,5 +1,7 @@
 package  com.rpgGame.app.manager.platform
 {
+	import com.rpgGame.app.manager.GlobalFunction;
+
 	public class P__default implements Iplatform
 	{
 		protected var _name:String;
@@ -26,6 +28,10 @@ package  com.rpgGame.app.manager.platform
 			return false;
 		}
 		public function goBBS():void
+		{
+			
+		}
+		public function downLinPai():void
 		{
 			
 		}

@@ -36,14 +36,7 @@ package com.rpgGame.appModule.openActivity.plat37
 			{
 				var vo:ActivityVo=_datas[0];
 				this._rewardG.setRewardByJsonStr(_datas[0].activityReward);
-				if (vo.IsCanGetReward()) 
-				{
-					TouchableUtil.ungray(_skin.btnOk);
-				}
-				else
-				{
-					TouchableUtil.gray(_skin.btnOk);
-				}
+				setBtnState(_skin.btnOk,vo.status);
 			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -53,7 +46,7 @@ package com.rpgGame.appModule.openActivity.plat37
 			{
 				case _skin.labDown:
 				{
-					PlatformUtil.platform.downExe();
+					PlatformUtil.platform.downLinPai();
 					break;
 				}
 				case _skin.btnOk:
@@ -70,9 +63,8 @@ package com.rpgGame.appModule.openActivity.plat37
 				}
 			}
 		}
-		override protected function onHide():void
+		override public function clearData():void
 		{
-			super.onHide();
 			_rewardG.clear();
 			_datas=null;
 		}

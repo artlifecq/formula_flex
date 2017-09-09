@@ -187,18 +187,12 @@ package  com.rpgGame.coreData.info.openActivity
 			if( _fenye )
 			{
 				arr = ActivityUtil.splitStr(_fenye, 2);
-				
-				_activityImgName = arr[0];
-				_activityTabName = arr[1];
-				
+				_activityTabName = arr[0];
+				if (arr.length>1) 
+				{
+					_activityImgName = arr[1];
+				}
 			}
-			
-			//			_gridIcon = "/image/other/chengzhangzhilu/image/" + _resflag;
-			
-			
-			
-			
-			
 			_exchange = info.exchange;
 		}
 		

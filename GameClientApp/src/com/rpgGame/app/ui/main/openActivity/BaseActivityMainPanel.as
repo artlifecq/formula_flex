@@ -22,6 +22,7 @@ package com.rpgGame.app.ui.main.openActivity
 		{
 			super(skin);
 			_mainPanelType=type;
+			this.dragAble=true;
 		}
 		public function get mainPanelType():int
 		{

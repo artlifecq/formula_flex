@@ -42,9 +42,9 @@ package com.rpgGame.app.ui.main.openActivity.sub
 				if (infos&&infos.length>0) 
 				{
 					var vo:ActivityVo=infos[0];
-					if (vo.activityName!=null&&vo.activityName!="") 
+					if (vo.activityTabName!=null&&vo.activityTabName!="") 
 					{
-						_skin.uiText.styleName=vo.activityName;
+						_skin.uiText.styleName=vo.activityTabName;
 					}
 					//小图标
 					if (vo.activityImgName != null && vo.activityImgName != "" )

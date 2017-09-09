@@ -37,8 +37,10 @@ package com.rpgGame.app.ui.main.openActivity
 			super.setData(infos);
 			if (_list) 
 			{
+				var oldPos:Number=_list.verticalScrollPosition;
 				_list.dataProvider.removeAll();
 				_list.dataProvider=new ListCollection(infos);
+				_list.scrollToPosition(_list.horizontalScrollPosition,oldPos);
 			}
 		}
 		override protected function onHide():void
@@ -53,6 +55,10 @@ package com.rpgGame.app.ui.main.openActivity
 			super.dispose();
 			this._list=null;
 			this._class=null;
+		}
+		override public function clearData():void
+		{
+			
 		}
 	}
 }

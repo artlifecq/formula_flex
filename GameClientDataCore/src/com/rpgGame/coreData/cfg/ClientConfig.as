@@ -29,6 +29,7 @@ package com.rpgGame.coreData.cfg
 		
 		private static var _stage : Stage;
 		public static var urlParmar : Object;
+		public static var clientParams:Object;
 		public static var loginAreaId : uint = 1;
 		public static var loginTime : uint = 0;
 		public static var policyPort : uint = 8002; //9374;

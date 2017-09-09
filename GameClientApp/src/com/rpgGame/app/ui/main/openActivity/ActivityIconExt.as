@@ -170,7 +170,7 @@ package  com.rpgGame.app.ui.main.openActivity
 			if ( _activityInfos == null || _activityInfos.length == 0 )
 				return false;
 			
-			var str:String = _activityInfos[0].getFlagValue(EnumCampsFlag.F_HTTP_STR);
+			var str:String = _activityInfos[0].getFlagValue(EnumCampsFlag.F_URL_STR);
 			if ( str == null || str == "" )
 				return false;
 			

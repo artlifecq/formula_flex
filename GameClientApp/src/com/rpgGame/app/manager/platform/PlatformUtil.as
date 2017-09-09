@@ -38,7 +38,7 @@ package  com.rpgGame.app.manager.platform
 		 */
 		public static function init():void
 		{
-			var nam:String = ClientConfig.urlParmar["agent"];
+			var nam:String = ClientConfig.clientParams["agent"];
 			if( nam == null )
 				nam = EnumPlatformName.WAN37;
 			switch (nam)
@@ -131,14 +131,14 @@ package  com.rpgGame.app.manager.platform
 		{
 			if (ExternalInterface.available) 
 			{
-				ExternalInterface.call("reloadswf",1,platform.name,ClientConfig.urlParmar["showlogin"]);
+				ExternalInterface.call("reloadswf",1,platform.name,ClientConfig.clientParams["showlogin"]);
 			}
 		}
 		public static function OpenErrorBackUrl():void
 		{
 			if (ExternalInterface.available) 
 			{
-				ExternalInterface.call("reloadswf",0,platform.name,ClientConfig.urlParmar["showlogin"]);
+				ExternalInterface.call("reloadswf",0,platform.name,ClientConfig.clientParams["showlogin"]);
 			}
 		}
 	}

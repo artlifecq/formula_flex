@@ -102,6 +102,7 @@ package
 			
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
 			ClientConfig.urlParmar = urlParmar || loaderInfo.parameters;
+			ClientConfig.clientParams=loaderInfo.parameters;
 			ClientConfig.baseDir = baseDir;
 			ClientConfig.loginIP = server;
 			ClientConfig.loginPort = port;

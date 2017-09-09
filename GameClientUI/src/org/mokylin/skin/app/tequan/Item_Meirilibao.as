@@ -26,13 +26,17 @@ package org.mokylin.skin.app.tequan
 
 		public var btnOk:feathers.controls.Button;
 
-		public var grpIcon:feathers.controls.Group;
+		public var gLevel:feathers.controls.Group;
+
+		public var gTilte:feathers.controls.Group;
 
 		public var icon1:feathers.controls.UIAsset;
 
 		public var lbVip:feathers.controls.Label;
 
 		public var uiHead:feathers.controls.UIAsset;
+
+		public var uiHead0:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -45,7 +49,7 @@ package org.mokylin.skin.app.tequan
 			this.currentState = "normal";
 			this.height = 72;
 			this.width = 684;
-			this.elementsContent = [bg1_i(),bg2_i(),uiHead_i(),btnOk_i(),lbVip_i(),grpIcon_i(),Icon_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),gTilte_i(),gLevel_i(),btnOk_i()];
 			
 			states = {
 			};
@@ -62,8 +66,8 @@ package org.mokylin.skin.app.tequan
 			Icon = temp;
 			temp.name = "Icon";
 			temp.styleName = "ui/app/tequan/37_1.png";
-			temp.x = 29;
-			temp.y = 5;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -105,14 +109,25 @@ package org.mokylin.skin.app.tequan
 			return temp;
 		}
 
-		private function grpIcon_i():feathers.controls.Group
+		private function gLevel_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grpIcon = temp;
-			temp.name = "grpIcon";
-			temp.x = 168;
-			temp.y = 8;
-			temp.elementsContent = [icon1_i()];
+			gLevel = temp;
+			temp.name = "gLevel";
+			temp.x = 29;
+			temp.y = 5;
+			temp.elementsContent = [lbVip_i(),Icon_i(),icon1_i()];
+			return temp;
+		}
+
+		private function gTilte_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gTilte = temp;
+			temp.name = "gTilte";
+			temp.x = 5;
+			temp.y = 28;
+			temp.elementsContent = [uiHead_i(),uiHead0_i()];
 			return temp;
 		}
 
@@ -122,8 +137,8 @@ package org.mokylin.skin.app.tequan
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 139;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -135,8 +150,19 @@ package org.mokylin.skin.app.tequan
 			temp.text = "37平台vip等级达到V1即可领取";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 487;
-			temp.y = 52;
+			temp.x = 458;
+			temp.y = 47;
+			return temp;
+		}
+
+		private function uiHead0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiHead0 = temp;
+			temp.name = "uiHead0";
+			temp.styleName = "ui/app/tequan/37pingtaiVIP6.png";
+			temp.x = 242;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -146,8 +172,8 @@ package org.mokylin.skin.app.tequan
 			uiHead = temp;
 			temp.name = "uiHead";
 			temp.styleName = "ui/app/tequan/37pingtaiVIP6.png";
-			temp.x = 5;
-			temp.y = 28;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
