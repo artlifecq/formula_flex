@@ -112,12 +112,12 @@ package com.rpgGame.appModule.guild
 			switch(target)
 			{
 				case _skin.btnUp:
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_UPLEVEL);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_UPLEVEL,null,false);
 					break;
 				case _skin.btnWeicheng:
 				case _skin.btnWangcheng:
 				case _skin.btnHuangcheng:
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_WAR);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_WAR,null,false);
 					break;
 				case _skin.btnJuanxian:
 					AppManager.showApp(AppConstant.GUILD_DONATE_PANEL);

@@ -7,6 +7,7 @@ package org.mokylin.skin.app.hunyin
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.list.ListSkin1;
 
@@ -22,7 +23,7 @@ package org.mokylin.skin.app.hunyin
 		//==========================================================================
 		public var ListRizi:feathers.controls.List;
 
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -39,7 +40,7 @@ package org.mokylin.skin.app.hunyin
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 625;
-			this.elementsContent = [bg_i(),__AlertFuQiRiZi_UIAsset1_i(),__AlertFuQiRiZi_UIAsset2_i(),btnClose_i(),__AlertFuQiRiZi_UIAsset3_i(),lbInfo_i(),ListRizi_i()];
+			this.elementsContent = [bg_i(),__AlertFuQiRiZi_UIAsset1_i(),__AlertFuQiRiZi_UIAsset2_i(),btnClose_i(),__AlertFuQiRiZi_UIAsset3_i(),lbInfo_i(),ListRizi_i(),__AlertFuQiRiZi_Label1_i()];
 			
 			states = {
 			};
@@ -60,6 +61,17 @@ package org.mokylin.skin.app.hunyin
 			temp.width = 597;
 			temp.x = 14;
 			temp.y = 43;
+			return temp;
+		}
+
+		private function __AlertFuQiRiZi_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.htmlText = "<font color='#00dfff'>2017-6-19 09:36:31 </font>熬血红颜也TA的伴侣<font color='#00ff33'>洞房</font> 双方增加了<font color='#ffea00'>5000000</font>点亲密度";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 20;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -96,13 +108,14 @@ package org.mokylin.skin.app.hunyin
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 429;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
 			temp.width = 625;
 			temp.x = 0;
 			temp.y = 0;
