@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.game.engine3D.display.InterObject3D;
+    import com.game.mainCore.core.timer.GameTimer;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.ui.main.buttons.IOpen;
@@ -11,7 +12,6 @@
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
-    import com.rpgGame.coreData.cfg.MainBtnCfgData;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.Q_mainbtn;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
@@ -27,8 +27,6 @@
     
     import starling.display.DisplayObject;
     import starling.textures.IStarlingTexture;
-    
-    import utils.TimerServer;
 
     public class ActivityButtonBase extends SkinUI implements IOpen
     {
@@ -55,6 +53,8 @@
 		
 		protected static var stateToName:HashMap;
 		protected static var stateToIndex:HashMap;
+		
+		private var timer:GameTimer;
 
         public function ActivityButtonBase(skin)
         {
@@ -295,19 +295,6 @@
         public function setupActTime(time:int,isdown:Boolean = true):void
         {
             _openTime = time;
-		/*	if (isNaN(openTime))
-			{
-				_openTimeStr = openTime + "";
-				_openTimeData = new TimeData(openTime + "");
-				_openTime = _openTimeData.getCheackNextTime(duration);
-				clearTime();
-			}else{
-				_openTime = openTime;
-			}
-            _duration = duration;
-            _endTime = _openTime + _duration;
-			
-            _openTimeAdvance = openTimeAdvance;*/
 			_isDown = isdown;
 			if(_isDown)
 			{
@@ -316,16 +303,18 @@
 			else{
 				_TimeFun = updtaupTime;
 			}
-			if(!TimerServer.has(updateTime))
-				TimerServer.addLoop(updateTime,1000);
+			
+			if(!timer){
+				timer=new GameTimer("act"+_btnInfo.q_id,1000,0,updateTime);
+			}
+			timer.start();
         }
 
         public function clearTime():void
         {
             _openTime = 0;
             _runing = false;
-			if(TimerServer.has(updateTime))
-				TimerServer.remove(updateTime);
+			timer.stop();
         }
 
         public function debugInfo():void
