@@ -113,7 +113,7 @@ package com.game.engine3D.vo
 		
 		public function addSimpleShadow(textureUrl : String, texturePriority : int, scale : Number) : void
 		{
-			if (_useSimpleShadow)
+			if (_useSimpleShadow&&_simpleShadowScale==scale)
 				return;
 			_useSimpleShadow = true;
 			_simpleShadowTextureUrl = textureUrl;
@@ -153,7 +153,7 @@ package com.game.engine3D.vo
 			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
 			if (!shadowGeometry)
 			{
-				shadowGeometry = new PlaneGeometry(100, 100, 1, 1, true, false, false, false, false);
+				shadowGeometry = new PlaneGeometry(100, 100, 1, 1, false,false, false, false, false);
 				shadowMaterial = new TextureMaterial(globalTexture.texture);
 				shadowMaterial.blendMode = BlendMode.LAYER;
 			}
@@ -166,11 +166,11 @@ package com.game.engine3D.vo
 			}
 			if (!_simpleShadowShowing)
 			{
-				if (_graphicDis.parent)
-					_graphicDis.parent.addChild(_simpleShadowMesh);
-				addSyncInfo(new BaseObjSyncInfo(_simpleShadowMesh, true, false, true));
+				if (this.parent)
+					this.parent.addChild(_simpleShadowMesh);
+				addSyncInfo(new BaseObjSyncInfo(_simpleShadowMesh, true, false, false));
 			}
-			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = _simpleShadowScale;
+			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleY=_simpleShadowMesh.scaleZ = _simpleShadowScale;
 			_simpleShadowShowing = true;
 		}
 		
