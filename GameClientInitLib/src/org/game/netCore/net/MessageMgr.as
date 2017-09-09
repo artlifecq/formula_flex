@@ -371,7 +371,7 @@ package org.game.netCore.net
 		{
 			if (ExternalInterface.available) 
 			{
-				ExternalInterface.call( "setcloseunloadmsg" );
+				ExternalInterface.call("refresh");
 			}
 			
 			//navigateToURL( new URLRequest(  WebSiteConfig.WEBSITE_URL ), "_self" );

@@ -122,6 +122,8 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb1 = temp;
 			temp.name = "lb1";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.fontSize = 12;
 			temp.text = "12";
 			temp.textAlign = "right";
@@ -136,6 +138,8 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb2 = temp;
 			temp.name = "lb2";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.fontSize = 12;
 			temp.text = "12";
 			temp.textAlign = "right";
