@@ -132,7 +132,7 @@ package com.rpgGame.appModule.maps
 			this._skin.lbl_mapName.text="";
 			_skin.locat_x.text="";
 			_skin.locat_y.text="";
-			_bigMap.clearView();
+			
 			_scoll.clearItem();
 		}
 		/**大地图加载*/
