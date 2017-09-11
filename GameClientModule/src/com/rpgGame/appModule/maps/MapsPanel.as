@@ -51,12 +51,13 @@ package com.rpgGame.appModule.maps
 				if(sceneId!=BigMapsData.currentMapId)//如果大地图上显示场景ID不是当前场景，则重新加载地图
 				{
 					BigMapsData.isMapLoadComplete=false;
-					clearMapsData();
-					clearMapsView();
-					updataMapsData();
 					loadBigMapView(sceneId);
-					scollBoxView();
+					_bigMap.clearView();
 				}
+				clearMapsData();
+				clearMapsView();
+				updataMapsData();
+				scollBoxView();
 				_bigMap.onClearPath();
 				onDrawPath();
 				siteView();

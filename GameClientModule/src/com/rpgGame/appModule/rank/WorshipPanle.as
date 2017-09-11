@@ -8,6 +8,8 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.netData.top.bean.TopInfo;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.paihangbang.PaiHang_BaZhu;
 	
@@ -40,9 +42,31 @@ package com.rpgGame.appModule.rank
 			_topInfo = data as TopInfo;
 			if(_topInfo == null)
 				return ;
-			_skin.lbName.text = _topInfo.playername;
+			if(_topInfo.playerid.ToGID()!=0)
+			{
+				_skin.skinXuwei.visible=false;
+				_skin.lbName.text = _topInfo.playername;
+				_avater.visible=true;
+				_avater.updateWithPlayerBriefInfo(_topInfo.playerBriefInfo);
+				GrayFilter.unGray(_skin.btnPutong);
+				GrayFilter.unGray(_skin.btnYuanbao);
+				_skin.btnPutong.isEnabled=true;
+				_skin.btnYuanbao.isEnabled=true;
+			}
+			else
+			{
+				_skin.skinXuwei.visible=true;
+				_skin.lbName.text = "虚位以待";
+				_avater.visible=false;
+				GrayFilter.gray(_skin.btnPutong);
+				GrayFilter.gray(_skin.btnYuanbao);
+				_skin.btnPutong.isEnabled=false;
+				_skin.btnYuanbao.isEnabled=false;
+				
+				
+			}
 			
-			_avater.updateWithPlayerBriefInfo(_topInfo.playerBriefInfo);
+			
 			EventManager.addEvent(RankListEvent.UPDATAWORSHIPCOUNT,updataWorshipHandler);
 			updataWorshipHandler();
 		}

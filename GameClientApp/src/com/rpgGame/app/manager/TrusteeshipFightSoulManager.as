@@ -71,7 +71,7 @@ package com.rpgGame.app.manager
 		public function startFightSoulAuto(targetId:long,type:int) : void
 		{
 			fightSoulTarget(targetId,type);
-			if(!_isFightSoulRunning)
+			if(!_isFightSoulRunning&&_stateMachine!=null)
 			{
 				_isFightSoulRunning = true;
 				_isBroken = false;
