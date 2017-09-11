@@ -56,11 +56,12 @@ package com.rpgGame.app.ui
 		 * @param tabStyle 标签按钮样式
 		 * @param viewStyle 标签对应视图
 		 * @param funcKey 标签对应功能键
+		 * @param openShow 功能开启了才展示
 		 * 
 		 */
-		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int):void
+		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int,openShow:Boolean=true):void
 		{
-			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle);
+			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle,openShow);
 			item.tabKey=funcKey;
 			var fundata:Q_newfunc = NewFuncCfgData.getFuncCfg(item.tabKey);
 			var panelData:Q_panel=PanelCfgData.getPanelCfg(fundata.q_open_panel);

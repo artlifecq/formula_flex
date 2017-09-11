@@ -558,7 +558,7 @@ package com.rpgGame.core.app
 		/**排行榜**/
 		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang",EmPanelID.RANKLISTPANLE);
 		/**全平台排行榜**/
-		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
+		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang",EmPanelID.ALL_PLATFORM_RANK);
 		/**膜拜**/
 		public static var WORSHIP_PANLE:String = createAppInfo("rank.WorshipPanle","paihangbang",EmPanelID.MO_BAI);
 		

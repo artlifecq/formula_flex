@@ -80,7 +80,7 @@ package com.rpgGame.appModule.rank
 					_skin.lbNum.text = info.rank.toString();
 				}
 			}
-			
+			_skin.lbLevel.text=info.playerBriefInfo.level.toString();
 			
 			_skin.vip.visible = info.vipId>0;
 			if(_skin.vip.visible){
