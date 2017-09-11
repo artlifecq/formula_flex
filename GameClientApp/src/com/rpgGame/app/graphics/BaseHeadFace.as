@@ -23,6 +23,7 @@ package com.rpgGame.app.graphics
 
 	public class BaseHeadFace extends BindableSprite  implements IInstancePoolClass
 	{
+		private static var defaultBindOffset : Vector3D = new Vector3D(0, 100);
 		private static var bodyBindOffset : Vector3D = new Vector3D(0, 10);
 		private static var manMountBindOffset : Vector3D = new Vector3D(0, 40);
 		private static var womanMountBindOffset : Vector3D = new Vector3D(0, 30);
@@ -137,7 +138,7 @@ package com.rpgGame.app.graphics
 				}
 				else
 				{
-					bindOffset = null;
+					bindOffset = defaultBindOffset;
 					bind(_role.graphicDis, null);
 					isTemporary = false;
 				}
@@ -150,7 +151,8 @@ package com.rpgGame.app.graphics
 					_role.parent.addChild(_bindDis);
 					_role.addSyncInfo(new BaseObjSyncInfo(_bindDis, true));
 				}
-				bindOffset = null;
+//				bindOffset = null;
+				bindOffset = defaultBindOffset;
 				bind(_bindDis, null);
 				isTemporary = true;
 			}

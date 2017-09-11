@@ -1,7 +1,10 @@
 package com.rpgGame.app.ui.tab
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.core.events.FunctionOpenEvent;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import feathers.controls.TabBar;
 	
@@ -24,6 +27,25 @@ package com.rpgGame.app.ui.tab
 			updateTabData();
 			super.show(data,openTable);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,onOpenFunc);
+		}
+		
+		override protected function isCanToTab(key:int):Boolean
+		{
+			var index:int=getTabDataIndexByTabKey(key);
+			if(index>=0)
+			{
+				var item:UITabBarData = _allDatas[index];
+				if(item){
+					if(FunctionOpenManager.functionIsOpen(item.tabKey)){//已经开启了
+						return true;
+					}else{
+						var q_data:Q_newfunc=NewFuncCfgData.getFuncCfg(item.tabKey);
+						NoticeManager.showNotifyById(90203,null,q_data.q_name,q_data.q_level);
+						return false;
+					}
+				}
+			}
+			return false;
 		}
 		
 		private function onOpenFunc(ids:Vector.<int>):void
@@ -79,7 +101,7 @@ package com.rpgGame.app.ui.tab
 			var item:UITabBarData;
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
-				if(FunctionOpenManager.functionIsOpen(item.tabKey)){//已经开启了
+				if((item.openShow&&FunctionOpenManager.functionIsOpen(item.tabKey))||!item.openShow){//已经开启了或者不需要开启
 					addTabDataWithTabKey(item.tabKey);
 				}else{
 					removeTabDataWithTabKey(item.tabKey);
