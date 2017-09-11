@@ -5,6 +5,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.ItemNoticePanel;
 	import com.rpgGame.core.app.AppConstant;
@@ -85,6 +86,11 @@ package com.rpgGame.app.manager.goods
 			if (index > Max_Grid_Count)
 			{
 				NoticeManager.showNotify("您已经解锁了全部的格子");
+				return;
+			}
+			else if(index==curUnlockIndex){
+				var type:int=GoodsContainerMamager.getGridType(containerId);
+				ItemSender.reqOpenTimeCellMessage(type);
 				return;
 			}
 			AppManager.showApp(AppConstant.GRID_OPEN_TISHI,[ItemContainerID.BackPack,index]);

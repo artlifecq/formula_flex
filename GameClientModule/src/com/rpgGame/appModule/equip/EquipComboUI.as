@@ -29,9 +29,11 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ComboItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -372,7 +374,9 @@ package com.rpgGame.appModule.equip
 		private function setShowData():void
 		{
 			if(!_nowSelect) return;
-			var itemInfo:ClientItemInfo=new ClientItemInfo(_nowSelect.q_item_id);
+			var q_item:Q_item=ItemConfig.getQItemByID(_nowSelect.q_item_id);
+			var isbind:int=q_item.q_bind>0?1:0;
+			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(_nowSelect.q_item_id,1,isbind);
 			FaceUtil.SetItemGrid(icon,itemInfo);
 			icon.selectImgVisible=false;
 			icon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getItemIcon(_nowSelect.q_item_id),IcoSizeEnum.ICON_64));		
@@ -409,7 +413,9 @@ package com.rpgGame.appModule.equip
 			}
 			for(i=0;i<_cailiao.length;i++)
 			{
-				var itemInfo:ClientItemInfo=new ClientItemInfo(cailiaoId);
+				var q_item:Q_item=ItemConfig.getQItemByID(cailiaoId);
+				var isbind:int=q_item.q_bind>0?1:0;
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(cailiaoId,1,isbind);
 				FaceUtil.SetItemGrid(_cailiao[i],itemInfo);
 				_cailiao[i].selectImgVisible=false;
 				if(itemByBagNum>i)

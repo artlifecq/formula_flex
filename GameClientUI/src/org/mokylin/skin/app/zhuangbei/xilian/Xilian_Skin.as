@@ -273,6 +273,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_num = temp;
 			temp.name = "lb_num";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.text = "100/1";
 			temp.textAlign = "right";
 			temp.color = 0xD02525;
