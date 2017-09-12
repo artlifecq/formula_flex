@@ -169,7 +169,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 46;
+			temp.x = 2;
 			temp.y = 167;
 			return temp;
 		}

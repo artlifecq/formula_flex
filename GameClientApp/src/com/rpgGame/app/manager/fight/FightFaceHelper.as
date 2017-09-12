@@ -93,7 +93,8 @@ package com.rpgGame.app.manager.fight
 
 		/** 战斗-自身飘字 回蓝（深蓝色） **/
 		public static const NUMBER_PC_MPREC : int = NUMBER_BULE;
-	
+		/** 积分**/
+		public static const NUMBER_SCORE : int = 66;
 
 		/** 加号 **/
 		public static const NUMBER_JIA : String = "jia";
@@ -647,6 +648,10 @@ package com.rpgGame.app.manager.fight
 				case EnumHurtType.BIND_GOLD: //礼金
 					numberColor = NUMBER_BIND_GOLD;
 					//var golddata:AttackFace=LostSkillManager.instance().hasGoldAddAtf(MainRoleManager.actorInfo.serverID,count);
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao2);
+					return;
+				case EnumHurtType.JI_FEN: //积分
+					numberColor = NUMBER_SCORE;
 					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao2);
 					return;
 				default:
