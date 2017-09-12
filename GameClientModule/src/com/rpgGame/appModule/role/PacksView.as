@@ -4,6 +4,7 @@ package com.rpgGame.appModule.role
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
+	import com.game.mainCore.core.controller.KeyController;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -77,8 +78,6 @@ package com.rpgGame.appModule.role
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	
-	import utils.KeyboardMananger;
 	
 	/**
 	 *背包部分 
@@ -407,7 +406,7 @@ package com.rpgGame.appModule.role
 			}
 			
 			var realIndex:int =  goodsContainer.getRealIndex(grid.index);
-			if(grid.gridInfo.isUnlock&&(realIndex+1)>BackPackManager.instance.hasOpenCount)
+			if(grid.gridInfo.isUnlock&&realIndex>BackPackManager.instance.hasOpenCount-1)
 			{
 				BackPackManager.instance.unLockGrid(realIndex);
 				return;
@@ -431,7 +430,8 @@ package com.rpgGame.appModule.role
 				return;
 			}
 			
-			if(KeyboardMananger.isKeyDown(Keyboard.CONTROL))
+			//			if(KeyboardMananger.isKeyDown(Keyboard.CONTROL))
+			if (KeyController.instance.isKeyDown(Keyboard.CONTROL))
 			{
 				EventManager.dispatchEvent(ChatEvent.SHOW_GOODS, grid.gridInfo.data);
 				return;
@@ -618,7 +618,7 @@ package com.rpgGame.appModule.role
 		private function jiesuochenggong(msg:ResOpenCellResultMessage):void
 		{
 			if(GoodsContainerMamager.getGoodsType(msg.type)==ItemContainerID.BackPack){
-				var grid:DragDropItem=goodsContainer.getGridIndex(msg.cellId);
+				var grid:DragDropItem=goodsContainer.getGridIndex(msg.cellId-1);
 				if(grid){
 					var p:Point=new Point(grid.x+grid.width/2,grid.y+grid.height/2);
 					p=grid.parent.localToGlobal(p);
@@ -661,7 +661,7 @@ package com.rpgGame.appModule.role
 							goodsContainer.setGridInfo(index,info);
 						}
 					}
-					//改
+						//改
 					else if (optType==1) 
 					{
 						var change:GridInfo=goodsContainer.geGridInfoByLong(info.itemInfo.itemId);
@@ -674,7 +674,7 @@ package com.rpgGame.appModule.role
 							}
 						}
 					}
-					//删除
+						//删除
 					else if (optType==2) 
 					{
 						var del:GridInfo=goodsContainer.geGridInfoByLong(info.itemInfo.itemId);
@@ -744,6 +744,12 @@ package com.rpgGame.appModule.role
 		{
 			if (bool) 
 			{
+				GrayFilter.gray(_skin.btn_zhengli);
+				GrayFilter.gray(_skin.btn_cangku);
+				GrayFilter.gray(_skin.btn_shangdian);
+				if(storagePanel&&storagePanel.stage!=null) storagePanel.hide();
+				if(_shopPanel&&_shopPanel.stage!=null) _shopPanel.hide();
+				
 				MouseCursorController.showSell();
 				//				BreatheTweenUtil.add(_skin.imgBg,StaticValue.OEANGE_TEXT,30);
 				_skin.skinKuang.visible=true;
@@ -756,6 +762,9 @@ package com.rpgGame.appModule.role
 			}
 			else
 			{
+				_skin.btn_zhengli.filter=null;
+				_skin.btn_cangku.filter=null;
+				_skin.btn_shangdian.filter=null;
 				MouseCursorController.exitSellMode();
 				//				BreatheTweenUtil.remove(_skin.imgBg);
 				_skin.skinKuang.visible=false;
@@ -784,31 +793,37 @@ package com.rpgGame.appModule.role
 					enterOrLeaveSellMode(Mouse.cursor != MouseCursorEnum.SELL);
 					return true;
 				case _skin.btn_zhengli:
-					enterOrLeaveSellMode(false);
-					if(leftCD!=0){
-						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_SORT_CD);
-						alertSet.alertInfo.value=alertSet.alertInfo.value.replace(/#/,leftCD);
-						NoticeManager.mouseFollowNotify(alertSet.alertInfo.value);
-						return true;
+					if(_skin.btn_zhengli.filter==null){
+						enterOrLeaveSellMode(false);
+						if(leftCD!=0){
+							var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_SORT_CD);
+							alertSet.alertInfo.value=alertSet.alertInfo.value.replace(/#/,leftCD);
+							NoticeManager.mouseFollowNotify(alertSet.alertInfo.value);
+							return true;
+						}
+						GrayFilter.gray(_skin.btn_zhengli);
+						cdTime=setInterval(cdComplete,1000);
+						leftCD=10;
+						ItemSender.clearUpItem(ItemContainerID.BackPack);
 					}
-					GrayFilter.gray(_skin.btn_zhengli);
-					cdTime=setInterval(cdComplete,1000);
-					leftCD=10;
-					ItemSender.clearUpItem(ItemContainerID.BackPack);
 					return true;
 				case _skin.btn_cangku:
-					return openThis(2);
+					if(_skin.btn_cangku.filter==null)
+						return openThis(2);
+					else return false;
 				case _skin.btn_shangdian:
-					enterOrLeaveSellMode(false);
-					if (shopPanel.parent) 
-					{
-						shopPanel.hide();
-						return true;
+					if(_skin.btn_shangdian.filter==null){
+						enterOrLeaveSellMode(false);
+						if (shopPanel.parent) 
+						{
+							shopPanel.hide();
+							return true;
+						}
+						shopPanel.x=213;
+						shopPanel.y=87;
+						//this._skin.container.addChild(shopPanel);
+						shopPanel.show(null,0,this._skin.container);
 					}
-					shopPanel.x=213;
-					shopPanel.y=87;
-					//this._skin.container.addChild(shopPanel);
-					shopPanel.show(null,0,this._skin.container);
 					return true;
 				case _skin.btn_getYuanbao:
 					enterOrLeaveSellMode(false);

@@ -1,15 +1,12 @@
 package com.rpgGame.app.view.uiComponent.menu
 {
 	import com.rpgGame.app.manager.GameSettingManager;
-	import com.rpgGame.core.events.MenuEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.TweenUtil;
 	
 	import away3d.events.Event;
 	
 	import feathers.controls.UIAsset;
-	
-	import org.client.mainCore.manager.EventManager;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;

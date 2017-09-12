@@ -151,7 +151,7 @@ package com.rpgGame.core.manager.tips
 				_currentSowTips.hideTips();
 			}
 			_currentSowTips = null;
-			
+			_currentData=null;
 			while(_tipContiner.numChildren > 0)
 			{
 				_tipContiner.removeChildAt(0);

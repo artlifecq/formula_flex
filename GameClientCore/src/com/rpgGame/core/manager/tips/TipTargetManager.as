@@ -87,7 +87,7 @@ package com.rpgGame.core.manager.tips
 		{
 			if (null == target)
 				return;
-
+			isMouseOut = true;
 			if (_currentMouseTarget == target)
 			{
 				_currentMouseTarget = null;
