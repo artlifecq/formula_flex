@@ -1230,6 +1230,12 @@ package com.rpgGame.app.graphics
 				HeadSpeakBar.recycle(_speakBar);
 				_speakBar = null;
 			}
+			if (_titleCtrl) 
+			{
+				deCtrl.removeTop(_titleCtrl);
+				_titleCtrl.dispose();
+				_titleCtrl=null;
+			}
 			removeIco();
 			removeBodyIco();
 			TweenLite.killDelayedCallsTo(hideMoodMC);
@@ -1496,6 +1502,17 @@ package com.rpgGame.app.graphics
 				}
 				updateAllBarPosition();
 			}
+		}
+		private var _titleCtrl:RoleTitleCtrl;
+		
+		public function addTilteById(id:int):void
+		{
+			if (!_titleCtrl) 
+			{
+				_titleCtrl=new RoleTitleCtrl(this.deCtrl,_role.type);
+				this.deCtrl.addTop(_titleCtrl,DecorCtrl.TOP_TEST);
+			}
+			_titleCtrl.addTitleById(id);
 		}
 		
 		private function onSort(a:int,b:int):int

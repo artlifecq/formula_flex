@@ -123,6 +123,7 @@ package  com.rpgGame.appModule.openActivity.plat37
 		private function loadGirl():void
 		{
 			var gurl:String = Mgr.activityPanelMgr.superVIP_girlImageURL;
+			//gurl="http://image.xqj.cdmodu.com/37/1505199180722.jpg";
 			if (gurl!=girlImageUrl&&gurl!=null&&gurl!=""&&!_isLoading) 
 			{
 				if (girlBit) 

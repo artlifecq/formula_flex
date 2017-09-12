@@ -15,7 +15,9 @@ package  com.rpgGame.app.ui.main.openActivity
 	import feathers.controls.List;
 	import feathers.controls.Panel;
 	import feathers.controls.Scroller;
+	import feathers.core.ToggleGroup;
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	
 	import org.mokylin.skin.app.openActivity.OpenActivityPanleSkin;
 	
@@ -36,6 +38,7 @@ package  com.rpgGame.app.ui.main.openActivity
 
 		private var _skin:OpenActivityPanleSkin;
 		private var _subClass:Dictionary=new Dictionary();
+		private var _touchGroup:ToggleGroup = new ToggleGroup();
 		public function GeneralActivityPanel(type:int)
 		{
 			_skin=new OpenActivityPanleSkin();
@@ -48,16 +51,29 @@ package  com.rpgGame.app.ui.main.openActivity
 			list.itemRendererFactory = createMainActivityBtn;
 			//list.touchAcross=true;
 			list.clipContent = true;
-			list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
+			list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE;
 			list.verticalScrollBarPosition = "right";
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=0;
+			
 		//	list.addEventListener(Event.TRIGGERED,onClickItem);
-			//list.addEventListener( Event.CHANGE, list_changeHandler );
+			list.addEventListener( FeathersEventType.RENDERER_ADD, onAddItem );
 			list.dataProvider=new ListCollection();
 			initSubClass();
 		}
+		
+		private function onAddItem():void
+		{
+			// TODO Auto Generated method stub
+			//第一个选中
+			if (_touchGroup.numItems==1) 
+			{
+				_touchGroup.selectedItem.isSelected=true;
+			}
+		
+		}		
+	
 		protected function initSubClass():void
 		{
 			throw new Error("initSubClass muse be override");
@@ -69,12 +85,12 @@ package  com.rpgGame.app.ui.main.openActivity
 		private function list_changeHandler(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			var item:Vector.<ActivityVo>=_skin.listCont.selectedItem as Vector.<ActivityVo>;
-			if (item&&item.length) 
-			{
-				showActivityPanelByType(item[0].childPanelType);
-			}
-			
+//			var item:Vector.<ActivityVo>=_skin.listCont.selectedItem as Vector.<ActivityVo>;
+//			if (item&&item.length) 
+//			{
+//				showActivityPanelByType(item[0].childPanelType);
+//			}
+			trace("c");
 		}
 		private function subClick(type:int):void
 		{
@@ -89,7 +105,7 @@ package  com.rpgGame.app.ui.main.openActivity
 		private function createMainActivityBtn():GeneralActTypeBtnRender
 		{
 			// TODO Auto Generated method stub
-			return new GeneralActTypeBtnRender(subClick); 
+			return new GeneralActTypeBtnRender(subClick,_touchGroup); 
 		}
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
@@ -120,6 +136,7 @@ package  com.rpgGame.app.ui.main.openActivity
 			if (_panelShowType==0||arrs.indexOf(_panelShowType)==-1) 
 			{
 				_panelShowType=arrs[0];
+				_touchGroup.selectedIndex=0;
 			}
 			showActivityPanelByType( _panelShowType );
 			//_skin.listCont.selectedIndex=arrs.indexOf(_panelShowType);

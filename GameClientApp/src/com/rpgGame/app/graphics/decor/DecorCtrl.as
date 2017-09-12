@@ -43,6 +43,7 @@ package  com.rpgGame.app.graphics.decor
 		public static const TOP_NPCCHENGHAO :int = SORT_VALUE--;
 		public static const TOP_RANKDESIGNATION:int = SORT_VALUE--;//其他序列
 		public static const TOP_RANKDESIGNATION1:int = SORT_VALUE--;//国士无双
+		public static const TOP_TEST:int= SORT_VALUE--;
 		public static const TOP_TOWER :int = 0;
 		private var topLayer :SortLayer = null;
 		

@@ -28,7 +28,7 @@ package com.rpgGame.app.ui.main.openActivity
 			list.verticalScrollBarPosition = "right";
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			list.padding=4;
+			list.padding=1;
 			list.dataProvider=new ListCollection();
 		}
 		private function renderClassItem():BaseActivityItemRender

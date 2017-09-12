@@ -1,5 +1,7 @@
 package  com.rpgGame.app.manager
 {
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	
 	import flash.external.ExternalInterface;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
@@ -13,7 +15,7 @@ package  com.rpgGame.app.manager
 		
 		public static function iWantRecharge():void
 		{
-			
+			OpenUrl(ClientConfig.clientParams["rechargeurl"]);
 		}
 		public static function OpenUrl(url:String, window:String = "_blank"):void
 		{

@@ -187,7 +187,7 @@ package org.mokylin.skin.app.youjiang
 			temp.name = "rdoBUG";
 			temp.isSelected = true;
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
-			temp.width = 57;
+			temp.width = 21;
 			temp.x = 120;
 			temp.y = 102;
 			return temp;
@@ -199,7 +199,7 @@ package org.mokylin.skin.app.youjiang
 			rdoJianyi = temp;
 			temp.name = "rdoJianyi";
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
-			temp.width = 57;
+			temp.width = 21;
 			temp.x = 223;
 			temp.y = 102;
 			return temp;
@@ -211,6 +211,7 @@ package org.mokylin.skin.app.youjiang
 			txtInput = temp;
 			temp.name = "txtInput";
 			temp.height = 103;
+			temp.multiline = true;
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 391;

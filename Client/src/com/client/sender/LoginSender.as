@@ -68,14 +68,14 @@ package com.client.sender
 			msg.win_width = ClientConfig.stage.width;
 			msg.win_high = ClientConfig.stage.height;
 			msg.relogin=relogin;
-			SocketConnection.send(msg);
-			if (msg.agent=="37") 
+			if (msg.agent=="37"&& ClientConfig.clientParams) 
 			{
 				var obj:Object={};
 				obj["lingpai"]= ClientConfig.clientParams[ "lingpai" ];
 				obj["pt_vip"]=ClientConfig.clientParams[ "pt_vip" ];
 				msg.ptData=JSONUtil.encode(obj);
 			}
+			SocketConnection.send(msg);
 			Statistics.intance.pushNode(Statistics.STEP_SEND_LOGIN_MSG,"发送登录协议");
 		}
 		

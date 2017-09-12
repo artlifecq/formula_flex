@@ -1,7 +1,11 @@
 package com.rpgGame.appModule.openActivity.plat37
 {
+	import com.rpgGame.app.manager.platform.P_37wan;
+	import com.rpgGame.app.manager.platform.PlatformUtil;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.ui.main.openActivity.BaseActivityListItemCell;
+	import com.rpgGame.app.ui.tab.FuncTabBar;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.coreData.info.openActivity.EnumCampsFlag;
@@ -28,6 +32,17 @@ package com.rpgGame.appModule.openActivity.plat37
 		{
 			super.clearData();
 			_rewardG.clear();
+		}
+		override protected function cannotGetReward():void
+		{
+			if (PlatformUtil.is37()) 
+			{
+				var p37:P_37wan=PlatformUtil.platform as P_37wan;
+				if (p37) 
+				{
+					GameAlertExt.show("你的37会员等级不足，请先提升会员等级",p37.viewVip);
+				}
+			}
 		}
 	}
 }

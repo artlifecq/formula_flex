@@ -585,5 +585,6 @@ package com.rpgGame.core.app
 		public static const ACT_BUG:String=createAppInfo("openActivity.bug.BugSubmitPanelExt","youjiang");
 		public static const ACT_37_PLATFORM:String=createAppInfo("openActivity.plat37.P37PlatformTokenPanelExt","tequan");
 		public static const ACT_37_SUPER_VIP:String=createAppInfo("openActivity.plat37.P37SuperVIPExt","showgirl");
+		public static const ACT_37_PHONE:String=createAppInfo("openActivity.plat37.P37PhonePanelExt","shoujilibao");
 	}
 }

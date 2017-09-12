@@ -19,7 +19,8 @@ package  com.rpgGame.coreData.info.openActivity
 		public static const M_PLATFORM_37:int=10002;
 		//37超级会员
 		public static const M_SUPER_VIP_37:int=10003;
-
+		//37手机验证
+		public static const M_PHONE_37:int=10004;
 		
 		
 		

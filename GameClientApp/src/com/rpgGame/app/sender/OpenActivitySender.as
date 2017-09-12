@@ -1,9 +1,10 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.netData.activities.message.ReqActivitiesGetRewardMessage;
 	import com.rpgGame.netData.activities.message.ReqActivitiesInfoMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import com.rpgGame.netData.activities.message.ReqActivitiesGetRewardMessage;
+	import com.rpgGame.netData.activities.message.ReqGameAdviceMessage;
 
 	public class OpenActivitySender extends BaseSender
 	{
@@ -18,7 +19,14 @@ package com.rpgGame.app.sender
 			msg.mainPanelType=type;
 			SocketConnection.send(msg);
 		}
-		
+		/**题bug*/
+		public static function reqSubmitBug(type:int, data:String):void
+		{
+			var msg:ReqGameAdviceMessage = new ReqGameAdviceMessage();
+			msg.type=type;
+			msg.content=data;
+			SocketConnection.send(msg);
+		}
 		/**请求领取奖励*/
 		public static function reqActivitiesGetRewardMsg(id:int, times:int = 1):void
 		{

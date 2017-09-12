@@ -1,8 +1,8 @@
 package org.mokylin.skin.app.openActivity
 {
 	import feathers.controls.Group;
-	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
+	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.openActivity.ButtonBasebtn;
 
@@ -16,7 +16,7 @@ package org.mokylin.skin.app.openActivity
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn:feathers.controls.Radio;
+		public var btn:feathers.controls.ToggleButton;
 
 		public var flag:feathers.controls.UIAsset;
 
@@ -38,7 +38,7 @@ package org.mokylin.skin.app.openActivity
 			
 			this.currentState = "normal";
 			this.height = 53;
-			this.width = 201;
+			this.width = 183;
 			this.elementsContent = [btn_i(),uiText_i(),icon_i(),gReward_i()];
 			
 			states = {
@@ -50,14 +50,14 @@ package org.mokylin.skin.app.openActivity
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function btn_i():feathers.controls.Radio
+		private function btn_i():feathers.controls.ToggleButton
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
 			btn = temp;
 			temp.name = "btn";
 			temp.height = 53;
 			temp.styleClass = org.mokylin.skin.app.openActivity.ButtonBasebtn;
-			temp.width = 201;
+			temp.width = 183;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -90,7 +90,7 @@ package org.mokylin.skin.app.openActivity
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gReward = temp;
 			temp.name = "gReward";
-			temp.x = 139;
+			temp.x = 120;
 			temp.y = 3;
 			temp.elementsContent = [flagbg_i(),flag_i()];
 			return temp;
@@ -116,8 +116,8 @@ package org.mokylin.skin.app.openActivity
 			temp.height = 31;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.width = 134;
-			temp.x = 35;
+			temp.width = 132;
+			temp.x = 25;
 			temp.y = 11;
 			return temp;
 		}

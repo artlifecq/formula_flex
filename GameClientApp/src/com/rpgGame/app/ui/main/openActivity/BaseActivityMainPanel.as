@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main.openActivity
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.OpenActivityEvent;
+	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	
 	import feathers.controls.StateSkin;
 	
@@ -51,6 +52,25 @@ package com.rpgGame.app.ui.main.openActivity
 		{
 			super.onHide();
 			EventManager.removeEvent(OpenActivityEvent.GET_DATA,onGetActivites);
+		}
+		/**
+		 *获取一个活动，单独一条活动一个面板的可以使用这个接口，减少冗余 
+		 * @param hash
+		 * @return 
+		 * 
+		 */		
+		public static function getSingleVo(hash:HashMap):ActivityVo
+		{
+			var vo:ActivityVo;
+			var values:Array=hash.values();
+			if (values.length) 
+			{
+				if (values[0].length) 
+				{
+					vo=values[0][0];
+				}	
+			}
+			return vo;
 		}
 	}
 }

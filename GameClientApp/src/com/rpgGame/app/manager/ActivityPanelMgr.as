@@ -12,11 +12,11 @@ package  com.rpgGame.app.manager
 	import com.rpgGame.netData.activities.message.ResActivitiesGetRewardInfoMessage;
 	import com.rpgGame.netData.activities.message.ResActivitiesInfoMessage;
 	import com.rpgGame.netData.activities.message.ResActivitiesRefreshMessage;
+	import com.rpgGame.netData.player.message.SCSuperVipMessage;
 	
 	import flash.utils.setTimeout;
 	
 	import org.client.mainCore.manager.EventManager;
-	import com.rpgGame.netData.player.message.SCSuperVipMessage;
 
 	public class ActivityPanelMgr 
 	{
@@ -371,6 +371,9 @@ package  com.rpgGame.app.manager
 						break;
 					case EnumCampPanelType.M_PLATFORM_37:
 						type=AppConstant.ACT_37_PLATFORM;
+						break;
+					case EnumCampPanelType.M_PHONE_37:
+						type=AppConstant.ACT_37_PHONE;
 						break;
 			}
 			return type;

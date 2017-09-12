@@ -1,6 +1,7 @@
 package  com.rpgGame.app.manager.platform
 {
 	import com.rpgGame.app.manager.GlobalFunction;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 
 	public class P__default implements Iplatform
 	{
@@ -29,7 +30,7 @@ package  com.rpgGame.app.manager.platform
 		}
 		public function goBBS():void
 		{
-			
+			GlobalFunction.OpenUrl(ClientConfig.clientParams["bbsurl"]);
 		}
 		public function downLinPai():void
 		{

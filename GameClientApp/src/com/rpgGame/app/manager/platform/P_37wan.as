@@ -44,5 +44,13 @@ package  com.rpgGame.app.manager.platform
 			var type:int=ClientConfig.clientParams["showlogin"];
 			return type==EnumLoginType.LOGIN__PLAT_CLIENT||type==EnumLoginType.LOGIN_BOX;
 		}
+		public function goMoreVip():void
+		{
+			GlobalFunction.OpenUrl("my.37.com/user/vip.php");
+		}
+		public function viewVip():void
+		{
+			GlobalFunction.OpenUrl("my.37.com/user/index.php");
+		}
 	}
 }

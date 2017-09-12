@@ -58,7 +58,7 @@ package
 		public var versionInfo : String = "V1.5.39";
 		public var version : String = null;
 		public var urlParmar : Object = null;
-		public var clientParmar:Object=null;
+		public var clientParmar:Object={};
 		public var baseDir : String = "../";
 		public var isRelease : Boolean = false;
 		public var useVersion : Boolean = false;

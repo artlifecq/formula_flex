@@ -92,7 +92,7 @@ package org.mokylin.skin.app.openActivity
 			temp.name = "uiRight";
 			temp.height = 504;
 			temp.width = 706;
-			temp.x = 229;
+			temp.x = 224;
 			temp.y = 86;
 			return temp;
 		}

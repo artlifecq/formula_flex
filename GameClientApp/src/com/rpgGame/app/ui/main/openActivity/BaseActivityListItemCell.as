@@ -58,6 +58,10 @@ package com.rpgGame.app.ui.main.openActivity
 				{
 					canGetReward();
 				}
+				if (_data.status==0) 
+				{
+					hasGetReward();
+				}
 				else
 				{
 					cannotGetReward();
@@ -69,6 +73,10 @@ package com.rpgGame.app.ui.main.openActivity
 			Mgr.activityPanelMgr.reqActivitiesGetRewardMsg(_data.activityId);
 		}
 		protected function cannotGetReward():void
+		{
+			
+		}
+		protected function hasGetReward():void
 		{
 			
 		}
