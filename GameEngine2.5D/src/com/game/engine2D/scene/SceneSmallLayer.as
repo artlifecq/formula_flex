@@ -5,7 +5,6 @@ package com.game.engine2D.scene
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
 	import com.game.engine2D.vo.PoolMesh;
-	import com.game.engine3D.loader.GlobalTexture;
 	
 	import flash.display.BlendMode;
 	import flash.geom.Matrix;
