@@ -33,6 +33,9 @@ package com.rpgGame.netData.login.message{
 		//重连
 		private var _relogin: int;
 		
+		//37wan手机令牌，vip等级 json 格式
+		private var _ptData: String;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -52,6 +55,8 @@ package com.rpgGame.netData.login.message{
 			writeInt(_win_width);
 			//重连
 			writeByte(_relogin);
+			//37wan手机令牌，vip等级 json 格式
+			writeString(_ptData);
 			return true;
 		}
 		
@@ -73,6 +78,8 @@ package com.rpgGame.netData.login.message{
 			_win_width = readInt();
 			//重连
 			_relogin = readByte();
+			//37wan手机令牌，vip等级 json 格式
+			_ptData = readString();
 			return true;
 		}
 		
@@ -187,6 +194,21 @@ package com.rpgGame.netData.login.message{
 		 */
 		public function set relogin(value: int): void{
 			this._relogin = value;
+		}
+		
+		/**
+		 * get 37wan手机令牌，vip等级 json 格式
+		 * @return 
+		 */
+		public function get ptData(): String{
+			return _ptData;
+		}
+		
+		/**
+		 * set 37wan手机令牌，vip等级 json 格式
+		 */
+		public function set ptData(value: String): void{
+			this._ptData = value;
 		}
 		
 	}

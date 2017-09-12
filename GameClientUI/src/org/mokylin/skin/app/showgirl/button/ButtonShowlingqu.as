@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.openActivity
+package org.mokylin.skin.app.showgirl.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.openActivity
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonBasebtn extends feathers.controls.StateSkin
+	public class ButtonShowlingqu extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,13 +22,11 @@ package org.mokylin.skin.app.openActivity
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonBasebtn()
+		public function ButtonShowlingqu()
 		{
 			super();
 			
 			this.currentState = "down";
-			this.height = 53;
-			this.width = 201;
 			this.elementsContent = [];
 			
 			states = {
@@ -49,7 +47,7 @@ package org.mokylin.skin.app.openActivity
 						}
 					]
 			};
-			skinNames={"down":"ui/common/btn/basebtn/down.png", "hover":"ui/common/btn/basebtn/over.png", "up":"ui/common/btn/basebtn/up.png"};
+			skinNames={"down":"ui/app/showgirl/button/showlingqu/down.png", "hover":"ui/app/showgirl/button/showlingqu/over.png", "up":"ui/app/showgirl/button/showlingqu/up.png"};
 		}
 
 

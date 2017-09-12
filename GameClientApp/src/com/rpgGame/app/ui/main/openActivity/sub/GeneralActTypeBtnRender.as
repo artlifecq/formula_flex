@@ -1,7 +1,9 @@
 package com.rpgGame.app.ui.main.openActivity.sub
 {
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	
+	import feathers.controls.UIAsset;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.mokylin.skin.app.openActivity.OpenActivityCommonBtnSkin;
@@ -9,12 +11,23 @@ package com.rpgGame.app.ui.main.openActivity.sub
 	public class GeneralActTypeBtnRender extends DefaultListItemRenderer
 	{
 		private var _skin:OpenActivityCommonBtnSkin;
-		public function GeneralActTypeBtnRender()
+		private var _call:Function;
+		public function GeneralActTypeBtnRender(c:Function)
 		{
 			super();
 			_skin=new OpenActivityCommonBtnSkin();
 			_skin.toSprite(this);
-			
+			var touch:TouchCtrl=new TouchCtrl(this,onClick);
+			_call=c;
+		}
+		
+		private function onClick():void
+		{
+			// TODO Auto Generated method stub
+			if (_call) 
+			{
+				_call(subType);
+			}
 		}
 		override public function get width():Number
 		{

@@ -25,6 +25,8 @@ package org.mokylin.skin.app.tequan
 
 		public var labDown:feathers.controls.Label;
 
+		public var uibg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -36,7 +38,7 @@ package org.mokylin.skin.app.tequan
 			this.currentState = "normal";
 			this.height = 498;
 			this.width = 706;
-			this.elementsContent = [bg_i(),btnOk_i(),labDown_i(),icon3_i(),__TQ_Youxilipai_Label1_i()];
+			this.elementsContent = [uibg_i(),bg_i(),btnOk_i(),labDown_i(),icon3_i(),__TQ_Youxilipai_Label1_i()];
 			
 			states = {
 			};
@@ -53,8 +55,8 @@ package org.mokylin.skin.app.tequan
 			temp.text = "温馨提示：每个角色只能被领取1次，领取时请勿解绑令牌";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 230;
-			temp.y = 472;
+			temp.x = 233;
+			temp.y = 475;
 			return temp;
 		}
 
@@ -64,8 +66,8 @@ package org.mokylin.skin.app.tequan
 			bg = temp;
 			temp.name = "bg";
 			temp.styleName = "ui/big_bg/tequan/linpai_bg.jpg";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -75,8 +77,8 @@ package org.mokylin.skin.app.tequan
 			btnOk = temp;
 			temp.name = "btnOk";
 			temp.styleClass = org.mokylin.skin.app.tequan.button.ButtonLingqu;
-			temp.x = 328;
-			temp.y = 410;
+			temp.x = 331;
+			temp.y = 413;
 			return temp;
 		}
 
@@ -86,8 +88,8 @@ package org.mokylin.skin.app.tequan
 			icon3 = temp;
 			temp.name = "icon3";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 386;
-			temp.y = 341;
+			temp.x = 389;
+			temp.y = 344;
 			return temp;
 		}
 
@@ -100,8 +102,21 @@ package org.mokylin.skin.app.tequan
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 327;
-			temp.y = 308;
+			temp.x = 330;
+			temp.y = 311;
+			return temp;
+		}
+
+		private function uibg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uibg = temp;
+			temp.name = "uibg";
+			temp.height = 504;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 712;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

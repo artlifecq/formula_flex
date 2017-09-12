@@ -22,8 +22,6 @@ package org.mokylin.skin.app.tequan
 
 		public var bg1:feathers.controls.UIAsset;
 
-		public var bg2:feathers.controls.UIAsset;
-
 		public var btnOk:feathers.controls.Button;
 
 		public var gLevel:feathers.controls.Group;
@@ -49,7 +47,7 @@ package org.mokylin.skin.app.tequan
 			this.currentState = "normal";
 			this.height = 72;
 			this.width = 684;
-			this.elementsContent = [bg1_i(),bg2_i(),gTilte_i(),gLevel_i(),btnOk_i()];
+			this.elementsContent = [bg1_i(),gTilte_i(),gLevel_i(),btnOk_i()];
 			
 			states = {
 			};
@@ -76,17 +74,6 @@ package org.mokylin.skin.app.tequan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.styleName = "ui/app/tequan/kuang.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function bg2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg2 = temp;
-			temp.name = "bg2";
 			temp.styleName = "ui/app/tequan/kuang_wupomo.png";
 			temp.x = 0;
 			temp.y = 0;
@@ -160,9 +147,9 @@ package org.mokylin.skin.app.tequan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiHead0 = temp;
 			temp.name = "uiHead0";
-			temp.styleName = "ui/app/tequan/37pingtaiVIP6.png";
-			temp.x = 242;
-			temp.y = 0;
+			temp.styleName = "ui/app/tequan/chenghao/37_v0.png";
+			temp.x = 226;
+			temp.y = -23;
 			return temp;
 		}
 

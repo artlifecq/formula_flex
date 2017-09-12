@@ -47,11 +47,7 @@ package  com.rpgGame.coreData.info.openActivity
 		// 活动标志
 		protected var _flags:HashMap = null;
 		
-		//活动顺序（1表示默认在第一排显示，相同的则按照活动ID顺序表示）
-		private var _top: int;
-		
-		//是否独立入口（0或者不填，在充值面板内。1,icon名字，1表示有独立入口，以及ICON的名字，调用面板ID) 奖励领取完后，面板消失。
-		private var _icon: String;
+	
 		
 		//活动所在的分页标签
 		private var _fenye: String;
@@ -65,8 +61,7 @@ package  com.rpgGame.coreData.info.openActivity
 		//系统需求
 		private var _xitong: String;
 		
-		/**入口icon资源*/
-		private var _entranceIcon:String;
+	
 		private var _titleUrl:String;
 		/**grid  icon 资源池*/
 		private var _gridIcon:String;
@@ -141,11 +136,7 @@ package  com.rpgGame.coreData.info.openActivity
 			
 			//活动ICON
 			_resflag = info.resflag;
-			
-			//活动顺序（1表示默认在第一排显示，相同的则按照活动ID顺序表示）
-			_top = info.top;
-			
-			_icon = info.icon;
+
 			
 			//活动所在的分页标签
 			_fenye = info.fenye;
@@ -169,21 +160,8 @@ package  com.rpgGame.coreData.info.openActivity
 			
 			_other=info.other;
 			//			_xitong = info.xitong;
-			
+			_titleUrl = info.icon;
 			var arr:Array;
-			arr = ActivityUtil.splitStr(_icon, 2);
-			if ( arr[0] == "" || arr[0] == null )
-				_titleUrl = "";
-			else
-				_titleUrl = "other/openfun/tittle/" + arr[0];
-			if ( arr[1] == "" || arr[1] == null )
-				_entranceIcon = "";
-			else
-				_entranceIcon = "other/openfun/topbtn/" + arr[1];
-			
-			if ( arr.length > 2 )
-				_activityGroupType = arr[2];
-			
 			if( _fenye )
 			{
 				arr = ActivityUtil.splitStr(_fenye, 2);
@@ -296,11 +274,7 @@ package  com.rpgGame.coreData.info.openActivity
 			return time < 0 ? 0 : time; 
 		}
 		
-		/**入口icon资源*/
-		public function get entranceIcon():String
-		{
-			return _entranceIcon;
-		}
+	
 		
 		public function get titleUrl():String
 		{
@@ -317,11 +291,7 @@ package  com.rpgGame.coreData.info.openActivity
 		{
 			return _fenye;
 		}
-		
-		public function get icon():String
-		{
-			return _icon;
-		}
+
 		
 		public function get activityId():int
 		{
@@ -348,17 +318,7 @@ package  com.rpgGame.coreData.info.openActivity
 			return _denominator;
 		}
 		
-		public function get top():int
-		{
-			return _top;
-		}
-		
-		public function set top(value:int):void
-		{
-			_top = value;
-		}
-		
-		
+	
 		
 		public function get activityTitle():String
 		{

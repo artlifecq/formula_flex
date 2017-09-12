@@ -36,7 +36,7 @@ package com.rpgGame.appModule.openActivity.plat37
 			{
 				var vo:ActivityVo=_datas[0];
 				this._rewardG.setRewardByJsonStr(_datas[0].activityReward);
-				setBtnState(_skin.btnOk,vo.status);
+				setBtnState(_skin.btnOk,vo.status,false);
 			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void

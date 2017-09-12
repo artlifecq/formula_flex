@@ -34,6 +34,8 @@ package org.mokylin.skin.app.openActivity
 			super();
 			
 			this.currentState = "normal";
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__OpenActivityPanleSkin_UIAsset1_i(),uiRight_i(),uiTitle_i(),listCont_i()];
 			
 			states = {
@@ -77,8 +79,8 @@ package org.mokylin.skin.app.openActivity
 			temp.name = "listCont";
 			temp.height = 500;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 207;
-			temp.x = 23;
+			temp.width = 199;
+			temp.x = 24;
 			temp.y = 89;
 			return temp;
 		}
@@ -89,7 +91,6 @@ package org.mokylin.skin.app.openActivity
 			uiRight = temp;
 			temp.name = "uiRight";
 			temp.height = 504;
-			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 706;
 			temp.x = 229;
 			temp.y = 86;

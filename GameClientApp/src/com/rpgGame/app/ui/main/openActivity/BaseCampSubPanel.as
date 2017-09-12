@@ -41,7 +41,7 @@ package com.rpgGame.app.ui.main.openActivity
 		 * @param state 0已经领取，1可领取， 2不可领取
 		 * 
 		 */		
-		public static function setBtnState(btn:Button,state:int):void
+		public static function setBtnState(btn:Button,state:int,useText:Boolean=true):void
 		{
 			if (!btn) 
 			{
@@ -50,17 +50,26 @@ package com.rpgGame.app.ui.main.openActivity
 			//
 			if (state==0) 
 			{
-				btn.label="已领取";
+				if (useText) 
+				{
+					btn.label="已领取";
+				}
 				TouchableUtil.gray(btn);
 			}
 			else if (state==1) 
 			{
-				btn.label="可领取";
+				if (useText) 
+				{
+					btn.label="可领取";
+				}
 				TouchableUtil.ungray(btn);
 			}
 			else if (state==2) 
 			{
-				btn.label="未达成";
+				if (useText) 
+				{
+					btn.label="未达成";
+				}
 				TouchableUtil.gray(btn);
 			}
 		}

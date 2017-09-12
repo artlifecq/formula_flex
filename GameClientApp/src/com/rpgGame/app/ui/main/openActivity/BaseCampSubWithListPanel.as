@@ -3,9 +3,11 @@ package com.rpgGame.app.ui.main.openActivity
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	
 	import feathers.controls.List;
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.controls.StateSkin;
 	import feathers.data.ListCollection;
+
 	/**
 	 *活动子面板 右侧有list的 
 	 * @author yfl
@@ -22,11 +24,12 @@ package com.rpgGame.app.ui.main.openActivity
 			this._class=renderClass;
 			_list.itemRendererFactory =renderClassItem;
 			list.clipContent = true;
-			list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
+			list.scrollBarDisplayMode =  ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			list.verticalScrollBarPosition = "right";
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=4;
+			list.dataProvider=new ListCollection();
 		}
 		private function renderClassItem():BaseActivityItemRender
 		{
@@ -40,7 +43,7 @@ package com.rpgGame.app.ui.main.openActivity
 				var oldPos:Number=_list.verticalScrollPosition;
 				_list.dataProvider.removeAll();
 				_list.dataProvider=new ListCollection(infos);
-				_list.scrollToPosition(_list.horizontalScrollPosition,oldPos);
+				_list.scrollToPosition(_list.horizontalScrollPosition,oldPos,0.01);
 			}
 		}
 		override protected function onHide():void

@@ -37,9 +37,12 @@ package com.rpgGame.app.ui.main.openActivity
 		}
 		override public function set styleName(res:String):void
 		{
-			super.styleName=res;
-			var img:Image=new Image(GuiTheme.ins.getTexture("ui/common/waitbtn.png"));
-			ui.btnBar.setSkinForState(ButtonState.UP,img);
+			if (_btnRes!=res) 
+			{
+				super.styleName=res;
+				var img:Image=new Image(GuiTheme.ins.getTexture("ui/common/waitbtn.png"));
+				ui.btnBar.setSkinForState(ButtonState.UP,img);
+			}
 		}
 		
 		override protected function setBtnState(texture:IStarlingTexture):void

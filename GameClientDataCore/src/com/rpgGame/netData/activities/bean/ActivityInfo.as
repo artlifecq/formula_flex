@@ -1,7 +1,7 @@
-package  com.rpgGame.netData.activities.bean
-{
+package com.rpgGame.netData.activities.bean{
+	
+	
 	import org.game.netCore.net.Bean;
-
 	
 	/** 
 	 * @author Commuication Auto Maker
@@ -13,7 +13,7 @@ package  com.rpgGame.netData.activities.bean
 	 * 活动信息
 	 */
 	public class ActivityInfo extends Bean {
-		
+	
 		//活动id
 		private var _activityId: int;
 		

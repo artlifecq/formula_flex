@@ -21,17 +21,19 @@ package com.rpgGame.app.ui.main.openActivity
 		protected var _data:ActivityVo;
 		protected var _btnReward:Button;
 		protected var _needGray:Boolean;
-		public function BaseActivityListItemCell(skin:StateSkin=null,btn:Button=null,gray:Boolean=true)
+		private var _useText:Boolean;
+		public function BaseActivityListItemCell(skin:StateSkin=null,btn:Button=null,gray:Boolean=true,useText:Boolean=true)
 		{
 			super(skin);
 			this._btnReward=btn;
 			_needGray=gray;
+			_useText=useText;
 		}
 		
 		public function setData(info:ActivityVo):void
 		{
 			this._data=info;
-			setBtnState(_btnReward,_data.status,_needGray);
+			setBtnState(_btnReward,_data.status,_needGray,_useText);
 		}
 		
 		public function get dis():DisplayObject
@@ -76,7 +78,7 @@ package com.rpgGame.app.ui.main.openActivity
 		 * @param state 0已经领取，1可领取， 2不可领取
 		 * 
 		 */		
-		public static function setBtnState(btn:Button,state:int,gray:Boolean):void
+		public static function setBtnState(btn:Button,state:int,gray:Boolean,useText:Boolean=true):void
 		{
 			if (!btn) 
 			{
@@ -85,7 +87,11 @@ package com.rpgGame.app.ui.main.openActivity
 			//
 			if (state==0) 
 			{
-				btn.label="已领取";
+				if (useText) 
+				{
+					btn.label="已领取";
+				}
+				
 				if (gray) 
 				{
 					TouchableUtil.gray(btn);
@@ -93,7 +99,10 @@ package com.rpgGame.app.ui.main.openActivity
 			}
 			else if (state==1) 
 			{
-				btn.label="领取";
+				if (useText) 
+				{
+					btn.label="领取";
+				}
 				if (gray) 
 				{
 					TouchableUtil.ungray(btn);
@@ -101,7 +110,10 @@ package com.rpgGame.app.ui.main.openActivity
 			}
 			else if (state==2) 
 			{
-				btn.label="未达成";
+				if (useText) 
+				{
+					btn.label="未达成";
+				}
 				if (gray) 
 				{
 					TouchableUtil.gray(btn);

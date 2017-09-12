@@ -20,6 +20,8 @@ package org.mokylin.skin.app.tequan
 
 		public var listCont:feathers.controls.List;
 
+		public var uibg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -30,7 +32,7 @@ package org.mokylin.skin.app.tequan
 			
 			this.currentState = "normal";
 			this.width = 706;
-			this.elementsContent = [banner_i(),listCont_i()];
+			this.elementsContent = [uibg_i(),banner_i(),listCont_i()];
 			
 			states = {
 			};
@@ -47,8 +49,8 @@ package org.mokylin.skin.app.tequan
 			banner = temp;
 			temp.name = "banner";
 			temp.styleName = "ui/big_bg/tequan/banner_meirilibao.jpg";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -60,8 +62,21 @@ package org.mokylin.skin.app.tequan
 			temp.height = 368;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 704;
+			temp.x = 3;
+			temp.y = 134;
+			return temp;
+		}
+
+		private function uibg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uibg = temp;
+			temp.name = "uibg";
+			temp.height = 504;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 712;
 			temp.x = 0;
-			temp.y = 131;
+			temp.y = 0;
 			return temp;
 		}
 

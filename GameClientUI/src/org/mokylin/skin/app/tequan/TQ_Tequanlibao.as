@@ -30,6 +30,8 @@ package org.mokylin.skin.app.tequan
 
 		public var listCont:feathers.controls.List;
 
+		public var uibg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -40,7 +42,7 @@ package org.mokylin.skin.app.tequan
 			
 			this.currentState = "normal";
 			this.width = 706;
-			this.elementsContent = [banner_i(),listCont_i(),__TQ_Tequanlibao_Label1_i(),lbLv_i(),btnChongzhi_i(),lbPingtai_i()];
+			this.elementsContent = [uibg_i(),banner_i(),listCont_i(),__TQ_Tequanlibao_Label1_i(),lbLv_i(),btnChongzhi_i(),lbPingtai_i()];
 			
 			states = {
 			};
@@ -57,8 +59,8 @@ package org.mokylin.skin.app.tequan
 			temp.text = "你当前的37平台会员等级：";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 236;
-			temp.y = 101;
+			temp.x = 239;
+			temp.y = 104;
 			return temp;
 		}
 
@@ -68,8 +70,8 @@ package org.mokylin.skin.app.tequan
 			banner = temp;
 			temp.name = "banner";
 			temp.styleName = "ui/big_bg/tequan/banner_tequanlibao.jpg";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -79,8 +81,8 @@ package org.mokylin.skin.app.tequan
 			btnChongzhi = temp;
 			temp.name = "btnChongzhi";
 			temp.styleClass = org.mokylin.skin.app.tequan.button.ButtonChongzhi;
-			temp.x = 560;
-			temp.y = 91;
+			temp.x = 563;
+			temp.y = 94;
 			return temp;
 		}
 
@@ -93,8 +95,8 @@ package org.mokylin.skin.app.tequan
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 35;
-			temp.x = 404;
-			temp.y = 101;
+			temp.x = 407;
+			temp.y = 104;
 			return temp;
 		}
 
@@ -107,8 +109,8 @@ package org.mokylin.skin.app.tequan
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 533;
-			temp.y = 6;
+			temp.x = 536;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -120,8 +122,21 @@ package org.mokylin.skin.app.tequan
 			temp.height = 368;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 704;
+			temp.x = 3;
+			temp.y = 134;
+			return temp;
+		}
+
+		private function uibg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uibg = temp;
+			temp.name = "uibg";
+			temp.height = 504;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 712;
 			temp.x = 0;
-			temp.y = 131;
+			temp.y = 0;
 			return temp;
 		}
 

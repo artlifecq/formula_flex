@@ -74,7 +74,7 @@ package org.mokylin.skin.app.tequan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.styleName = "ui/app/tequan/kuang.png";
+			temp.styleName = "ui/app/tequan/kuang_wupomo.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

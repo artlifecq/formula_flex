@@ -3,12 +3,10 @@ package  com.rpgGame.app.ui.main.openActivity
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.main.openActivity.comps.IActivityPanel;
 	import com.rpgGame.app.ui.main.openActivity.comps.ICampSub;
 	import com.rpgGame.app.ui.main.openActivity.sub.GeneralActTypeBtnRender;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.netData.activities.bean.ActivityInfo;
+	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	
 	import flash.utils.Dictionary;
 	
@@ -17,6 +15,7 @@ package  com.rpgGame.app.ui.main.openActivity
 	import feathers.controls.List;
 	import feathers.controls.Panel;
 	import feathers.controls.Scroller;
+	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.openActivity.OpenActivityPanleSkin;
 	
@@ -36,11 +35,13 @@ package  com.rpgGame.app.ui.main.openActivity
 		protected var subdic:Dictionary = new Dictionary();
 
 		private var _skin:OpenActivityPanleSkin;
+		private var _subClass:Dictionary=new Dictionary();
 		public function GeneralActivityPanel(type:int)
 		{
 			_skin=new OpenActivityPanleSkin();
 			super(type,_skin);
-			
+			_skin.uiRight.touchable=true;
+			_skin.uiRight.touchGroup=false;
 			this.dragAble = true;
 		
 			var list:List=_skin.listCont;
@@ -51,24 +52,44 @@ package  com.rpgGame.app.ui.main.openActivity
 			list.verticalScrollBarPosition = "right";
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			list.padding=4;
+			list.padding=0;
 		//	list.addEventListener(Event.TRIGGERED,onClickItem);
-			list.addEventListener( Event.CHANGE, list_changeHandler );
+			//list.addEventListener( Event.CHANGE, list_changeHandler );
+			list.dataProvider=new ListCollection();
+			initSubClass();
 		}
-		
+		protected function initSubClass():void
+		{
+			throw new Error("initSubClass muse be override");
+		}
+		protected function addSubClass(subType:int,subC:Class):void
+		{
+			_subClass[subType]=subC;
+		}
 		private function list_changeHandler(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			var item:GeneralActTypeBtnRender=_skin.listCont.selectedItemRender as GeneralActTypeBtnRender;
-			showActivityPanelByType(item.subType);
+			var item:Vector.<ActivityVo>=_skin.listCont.selectedItem as Vector.<ActivityVo>;
+			if (item&&item.length) 
+			{
+				showActivityPanelByType(item[0].childPanelType);
+			}
+			
 		}
-		
+		private function subClick(type:int):void
+		{
+			if (type==_panelShowType) 
+			{
+				return;
+			}
+			showActivityPanelByType(type);
+		}
 		
 		
 		private function createMainActivityBtn():GeneralActTypeBtnRender
 		{
 			// TODO Auto Generated method stub
-			return new GeneralActTypeBtnRender();
+			return new GeneralActTypeBtnRender(subClick); 
 		}
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
@@ -100,8 +121,8 @@ package  com.rpgGame.app.ui.main.openActivity
 			{
 				_panelShowType=arrs[0];
 			}
-			//showActivityPanelByType( _panelShowType );
-			_skin.listCont.selectedIndex=arrs.indexOf(_panelShowType);
+			showActivityPanelByType( _panelShowType );
+			//_skin.listCont.selectedIndex=arrs.indexOf(_panelShowType);
 		}	
 		
 		public function getSubPanelByType(type:Class):Panel
@@ -120,19 +141,19 @@ package  com.rpgGame.app.ui.main.openActivity
 		 * 创建子面板
 		 * 新加的活动类型在这里搞
 		 * */
-		protected function createChildPanel(panelChildType:int):ICampSub
+		private function createChildPanel(panelChildType:int):ICampSub
 		{
 			if ( subdic[panelChildType] != null )
 				return subdic[panelChildType];
 			
 			var subpan:ICampSub;
-			switch ( panelChildType )
+			var subC:Class=_subClass[panelChildType];
+			if (!subC) 
 			{
-				default:
-					GameLog.add("未知活动子面板" + panelChildType.toString() );
-					return null;
+				GameLog.add("未知活动子面板" + panelChildType.toString() );
+				return null;
 			}
-			
+			subpan=new subC();
 			subpan.x = subpan.y = 0;
 			subdic[panelChildType] = subpan;
 			return subpan;
@@ -165,7 +186,10 @@ package  com.rpgGame.app.ui.main.openActivity
 			{
 				var activityMap:HashMap = Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType);
 				pan.setData( activityMap.getValue(_panelShowType));
-				MCUtil.addChildOnly( _skin.uiRight, (pan as DisplayObject) );
+				if ((pan as DisplayObject).parent!=_skin.uiRight) 
+				{
+					MCUtil.addChildOnly( _skin.uiRight, (pan as DisplayObject) );
+				}
 			}
 		}
 		override protected function onHide():void

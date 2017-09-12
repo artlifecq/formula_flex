@@ -33,8 +33,8 @@ package com.rpgGame.appModule.openActivity.plat37
 				_skin.gTilte.visible=true;
 				MCUtil.removeAllChild(_skin.uiHead);
 				_skin.uiHead.addChild(new Image(GuiTheme.ins.getTexture(info.getFlagValue(EnumCampsFlag.F_CELLNAME_STR))));
-				MCUtil.removeAllChild(_skin.uiHead0);
-				_skin.uiHead0.addChild(new Image(GuiTheme.ins.getTexture(info.getFlagValue(EnumCampsFlag.F_37_TITLE))));
+			
+				_skin.uiHead0.styleName=info.getFlagValue(EnumCampsFlag.F_37_TITLE);
 			}
 			else
 			{

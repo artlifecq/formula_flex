@@ -37,6 +37,8 @@ package org.mokylin.skin.app.openActivity
 			super();
 			
 			this.currentState = "normal";
+			this.height = 53;
+			this.width = 201;
 			this.elementsContent = [btn_i(),uiText_i(),icon_i(),gReward_i()];
 			
 			states = {
@@ -53,7 +55,9 @@ package org.mokylin.skin.app.openActivity
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn = temp;
 			temp.name = "btn";
+			temp.height = 53;
 			temp.styleClass = org.mokylin.skin.app.openActivity.ButtonBasebtn;
+			temp.width = 201;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

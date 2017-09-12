@@ -14,5 +14,11 @@ package com.rpgGame.appModule.openActivity.plat37
 		{
 			super(EnumCampPanelType.M_PLATFORM_37);
 		}
+		override protected function initSubClass():void
+		{
+			addSubClass(EnumCampPanelType.SP_37_TOKEN,P37TokenPanelExt);
+			addSubClass(EnumCampPanelType.SP_37_TQ,P37PlatformVipPriveligePanelExt);
+			addSubClass(EnumCampPanelType.SP_37_VIP,P37PlatformVipLevelPanelExt);
+		}
 	}
 }

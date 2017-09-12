@@ -1,20 +1,24 @@
 package  com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.sender.OpenActivitySender;
 	import com.rpgGame.app.ui.main.openActivity.ActivityIconExt;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.events.ActivityEvent;
+	import com.rpgGame.core.events.OpenActivityEvent;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
+	import com.rpgGame.coreData.info.openActivity.EnumCampPanelType;
 	import com.rpgGame.netData.activities.bean.ActivityInfo;
 	import com.rpgGame.netData.activities.message.ResActivitiesGetRewardInfoMessage;
+	import com.rpgGame.netData.activities.message.ResActivitiesInfoMessage;
 	import com.rpgGame.netData.activities.message.ResActivitiesRefreshMessage;
 	
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
 	import flash.utils.setTimeout;
 	
 	import org.client.mainCore.manager.EventManager;
+	import com.rpgGame.netData.player.message.SCSuperVipMessage;
 
-	public class ActivityPanelMgr extends EventDispatcher
+	public class ActivityPanelMgr 
 	{
 		public static const EVENT_GET:String="get_act_event";
 		private static var _ins:ActivityPanelMgr;
@@ -30,8 +34,7 @@ package  com.rpgGame.app.manager
 		
 		public var coupletCur:int = 0;
 		
-		//所有活动列表
-		private var _activities: Vector.<ActivityVo> = new Vector.<ActivityVo>();
+	
 		//活动  hashmap
 		private var _activtiyMap:HashMap = new HashMap();
 		//活动panel
@@ -86,31 +89,7 @@ package  com.rpgGame.app.manager
 		 * 
 		 ***********************************************************************************************/
 	
-		
-		/**获得活动icon*/
-		public function getActivityIcons():HashMap
-		{
-			var tmp:ActivityVo;
-			var tmpMap:HashMap = new HashMap();
-			var value:Vector.<ActivityVo>;
-			for each (tmp in _activities)
-			{
-				value = tmpMap.getValue(tmp.entranceIcon);
-				if (value)
-				{
-					value.push(tmp);
-				}
-				else
-				{
-					value = new Vector.<ActivityVo>();
-					value.push(tmp);
-					tmpMap.put(tmp.entranceIcon, value);
-				}
-			}
-			
-			return tmpMap;
-		}
-		
+
 		/**获得主面板下的标签活动*/
 		public function getTagActivityByMianPanel(main:int):HashMap
 		{
@@ -162,20 +141,7 @@ package  com.rpgGame.app.manager
 			return needList;
 		}
 		
-		/**根据活动id  获得活动*/
-		public function getActivityByID(id:int):ActivityVo
-		{
-			var tmp:ActivityVo;
-			for each (tmp in _activities)
-			{
-				if (tmp.activityId == id)
-				{
-					return tmp;
-				}
-			}
-			
-			return null;
-		}
+	
 		public function getActivitysByType(type:int):Vector.<ActivityVo>
 		{
 			return _activtiyMap.getValue(type) as Vector.<ActivityVo>;
@@ -184,12 +150,12 @@ package  com.rpgGame.app.manager
 		{
 			return _activtiyMap.containsKey(type);
 		}
-		public function ToLocationData():void
+		public function ToLocationData(activities:Vector.<ActivityVo>):void
 		{
 			var tmp:ActivityVo;
 			var value:Vector.<ActivityVo>;
 			_activtiyMap.clear();
-			for each (tmp in _activities)
+			for each (tmp in activities)
 			{
 				
 				value = _activtiyMap.getValue(tmp.mainPanelType);
@@ -258,36 +224,88 @@ package  com.rpgGame.app.manager
 		{
 			return _activityBtnMap.getValue(mainType);
 		}
-		/**
-		 * 收到活动信息
-		 * */
-		
-		private var _isFirstLogin:Boolean=true;
-		public function recActivitiesInfoMsg(activities:Vector.<ActivityInfo>):void
+		public function onResActivitiesInfoMessage(msg:ResActivitiesInfoMessage):void
+		{
+			//全部刷新
+			if (msg.mainPanelType==0) 
+			{
+				recActivitiesInfoMsg(msg.activities);
+			}
+			//
+			else
+			{
+				recActivitiesByType(msg.mainPanelType,msg.activities);
+			}
+		}
+
+		private function recActivitiesInfoMsg(activities:Vector.<ActivityInfo>):void
 		{
 			// TODO Auto Generated method stub
-			traceCamps(activities);
-			
-			_activities.splice(0, _activities.length);
+			//traceCamps(activities);
+			var activitiesVos:Vector.<ActivityVo>=new Vector.<ActivityVo>();
 			for each (var newInfo:ActivityInfo in activities)
 			{
 				var nowInfo:ActivityVo = new ActivityVo(); 
 				nowInfo.setInfo( newInfo );
-				_activities.push(nowInfo);	
+				activitiesVos.push(nowInfo);	
 			}
-			ToLocationData();
+			ToLocationData(activitiesVos);
 			//			topBtnPanel.updateActivityBtns( _activtiyMap.values() );
-			
-			this.dispatchEvent(new Event(EVENT_GET));
+			checkNewBtn();
+			EventManager.dispatchEvent(OpenActivityEvent.GET_DATA,0);
 		}
-		
-		
+		private function recActivitiesByType(type:int,infos:Vector.<ActivityInfo>):void
+		{
+			var list:Vector.<ActivityVo>=new Vector.<ActivityVo>();
+			var len:int=infos.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				var vo:ActivityVo=new ActivityVo();
+				vo.setInfo(infos[i]);
+				list.push(vo);
+			}
+			_activtiyMap.put(type,list);
+			EventManager.dispatchEvent(OpenActivityEvent.GET_DATA,type);
+		}
+		public function onSCSuperVipHandler(msg:SCSuperVipMessage):void
+		{
+			// TODO Auto Generated method stub
+			_superVIP_girlQQ=msg.qq;
+			_superVIP_girlImageURL=msg.img;
+		}
+		public function recActivityInfoChange(info:ActivityInfo):void
+		{
+			var vo:ActivityVo=new ActivityVo();
+			vo.setInfo(info);
+			var oldList:Vector.<ActivityVo>=_activtiyMap.getValue(vo.mainPanelType);
+			if (!oldList) 
+			{
+				oldList=new Vector.<ActivityVo>;
+				_activtiyMap.put(vo.mainPanelType,oldList);
+				oldList.push(vo);
+			}
+			else
+			{
+				var len:int=oldList.length;
+				var tmp:ActivityVo;
+				for (var i:int = 0; i < len; i++) 
+				{
+					tmp=oldList[i];
+					if (tmp.activityId==vo.activityId) 
+					{
+						oldList[i]=vo;
+						break;
+					}
+				}
+			}
+			EventManager.dispatchEvent(OpenActivityEvent.GET_DATA,vo.mainPanelType);
+		}
 		/**
 		 * 领奖返回
 		 * */
 		public function resActivitiesGetRewardInfoMsg(msg:ResActivitiesGetRewardInfoMessage):void
 		{
-			reqActivitiesInfoMsg();
+			recActivityInfoChange(msg.info);
 		}
 		
 		/**活动刷新广播*/
@@ -305,19 +323,15 @@ package  com.rpgGame.app.manager
 		}
 		
 		/**请求活动信息*/
-		public function reqActivitiesInfoMsg():void
+		public function reqActivitiesInfoMsg(type:int=0):void
 		{
-//			var msg:ReqActivitiesInfoMessage = new ReqActivitiesInfoMessage();
-//			Mgr.messageMgr.send(msg);
+			OpenActivitySender.reqActivitiesInfoMsg(type);
 		}
 		
 		/**请求领取奖励*/
 		public function reqActivitiesGetRewardMsg(id:int, times:int = 1):void
 		{
-//			var msg:ReqActivitiesGetRewardMessage = new ReqActivitiesGetRewardMessage();
-//			msg.activityId = id;
-//			msg.times = times;
-//			Mgr.messageMgr.send(msg);
+			OpenActivitySender.reqActivitiesGetRewardMsg(id,times);
 		}
 		
 		
@@ -349,23 +363,15 @@ package  com.rpgGame.app.manager
 			var type:String;
 			switch ( activityBtn.topType )
 			{
-//				case EnumCampPanelType.M_FIRST_BUY:
-//					type=FirstPayPanelExt;
-//					break;
-//				case EnumCampPanelType.M_SUPER_VIP_37:
-//					type=Platform37SuperVIPExt;
-//					break;
-//				case EnumCampPanelType.M_SEVEN_DAY:
-//					type=SevenDayLoginPanelExt;
-//					break;
-//				case EnumCampPanelType.M_FIRST_BUY_EVERYDAY:
-//					type=FirstPayEveryDayPanelExt;
-//					break;
-//				case EnumCampPanelType.M_GONGCE_YUANBAO:
-//					type=LinQuGongCeGoldPanelExt;
-//					break;
-//				default:
-//					type=GeneralActivityPanel;
+					case EnumCampPanelType.M_BUG:
+						type=AppConstant.ACT_BUG;
+						break;
+					case EnumCampPanelType.M_SUPER_VIP_37:
+						type=AppConstant.ACT_37_SUPER_VIP;
+						break;
+					case EnumCampPanelType.M_PLATFORM_37:
+						type=AppConstant.ACT_37_PLATFORM;
+						break;
 			}
 			return type;
 		}

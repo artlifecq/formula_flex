@@ -7,39 +7,22 @@ package  com.rpgGame.app.ui.main.openActivity
 	import com.rpgGame.app.ui.main.openActivity.comps.ITopBtn;
 	import com.rpgGame.app.ui.main.openActivity.comps.ITopSortBtn;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.OpenActivityEvent;
+	import com.rpgGame.coreData.cfg.MainBtnCfgData;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.coreData.info.openActivity.EnumCampPanelType;
 	import com.rpgGame.coreData.info.openActivity.EnumCampsFlag;
 	import com.rpgGame.coreData.utils.ActivityUtil;
 	
+	import org.client.mainCore.manager.EventManager;
 	
-	public class ActivityIconExt extends BaseOpenActivityBtn implements ISpecialActivityInter,ITopBtn,ITopSortBtn
+	
+	public class ActivityIconExt extends BaseOpenActivityBtn implements ISpecialActivityInter,ITopBtn
 	{
 		private static var defaultSortId:int=-100;
 		
-		/**首充、平台游戏礼包、超级会员 这三个必须排在最后所以在这里修改权重**/
-		public static function changeSortId(sort:int):int
-		{
-			if (sort==EnumCampPanelType.M_FIRST_BUY) 
-			{
-				return 100000;
-			}
-			else if (sort==EnumCampPanelType.M_PLATFORM_37) 
-			{
-				return 100001
-			}
-			else if (sort==EnumCampPanelType.M_SUPER_VIP_37) 
-			{
-				return 100002;
-			}
-			else if (sort==EnumCampPanelType.M_SEVEN_DAY) 
-			{
-				return 100003;
-			}
-			return -sort;
-		}
 		private var _activityInfos:Vector.<ActivityVo>;
-		private var _icon:String;
+		
 		
 		
 		private var _tag:int = 0;
@@ -47,26 +30,40 @@ package  com.rpgGame.app.ui.main.openActivity
 		private var _rewardCount:int = 0;
 		private var _activityGroupType:int;
 		
-		public function get SortId():int
-		{
-			if ( _activityInfos == null || _activityInfos.length == 0 )
-				return defaultSortId--;
-			return changeSortId(_activityInfos[0].mainPanelType);
-		}
+
 		public function ActivityIconExt()
 		{
-			super();
+			super();	
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			EventManager.addEvent(OpenActivityEvent.GET_DATA,onGetData);
+		}
+		
+		private function onGetData(atype:int):void
+		{
+			// TODO Auto Generated method stub
+			if (atype==0||atype==topType&&topType!=-1) 
+			{
+				setActivityList(Mgr.activityPanelMgr.getActivitysByType(topType));
+			}
+		}
+		override protected function onHide():void
+		{
+			super.onHide();
+			EventManager.removeEvent(OpenActivityEvent.GET_DATA,onGetData);
 		}
 		override public function canOpen():Boolean
 		{
-			return true;
+			return !ActivityUtil.isFilterActivity(_activityInfos);
 		}
 		public function setActivityList( infos:Vector.<ActivityVo> ):void
 		{
 			_activityInfos = infos;
 			_activityInfos.sort(sortIcons);
 			
-			_icon = _activityInfos[0].entranceIcon;
+			this.styleName=MainBtnCfgData.getMainBtnCfg(topType).q_btn_res;
 			
 			var hasReward:Array = [];
 			var getGroup:int = 0;
@@ -92,9 +89,6 @@ package  com.rpgGame.app.ui.main.openActivity
 				_activityGroupType = getGroup;
 //			else
 //				_activityGroupType = EnumTopGroupBtnType.G_TYPE_ACTIVITY;
-			
-			if( infos[0].entranceIcon )
-				this.styleName=infos[0].entranceIcon;
 		}
 
 		
@@ -132,23 +126,13 @@ package  com.rpgGame.app.ui.main.openActivity
 			return _rewardCount;
 		}
 		
-		override public function dispose():void
-		{
-			super.dispose();
-			
-//			if ( thisActivityPan != null )
-//				Mgr.uiMgr.hidePanel( (thisActivityPan as Panel) );
-		}
 		
 		public function set tag(value:int):void
 		{
 			_tag = value;
 		}
 		
-		public function get icon():String
-		{
-			return _icon;
-		}
+		
 		
 		public function get topType():int
 		{

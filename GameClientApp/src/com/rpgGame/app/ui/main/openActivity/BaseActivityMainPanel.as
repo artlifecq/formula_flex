@@ -1,14 +1,13 @@
 package com.rpgGame.app.ui.main.openActivity
 {
 	import com.gameClient.utils.HashMap;
-	import com.rpgGame.app.manager.ActivityPanelMgr;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.main.openActivity.comps.IActivityPanel;
-	
-	import flash.events.Event;
+	import com.rpgGame.core.events.OpenActivityEvent;
 	
 	import feathers.controls.StateSkin;
+	
+	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *活动面板基类 
@@ -32,22 +31,26 @@ package com.rpgGame.app.ui.main.openActivity
 		override protected function onShow():void
 		{
 			super.onShow();
-			Mgr.activityPanelMgr.addEventListener(ActivityPanelMgr.EVENT_GET,onGetActivites);
-			setData(Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType));
+			EventManager.addEvent(OpenActivityEvent.GET_DATA,onGetActivites);
+			//setData(Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType));
+			Mgr.activityPanelMgr.reqActivitiesInfoMsg(_mainPanelType);
 		}
 		protected function setData(hash:HashMap):void
 		{
 			
 		}
-		protected function onGetActivites(event:Event):void
+		protected function onGetActivites(type:int):void
 		{
 			// TODO Auto-generated method stub
-			setData(Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType))
+			if (type==0||type==_mainPanelType) 
+			{
+				setData(Mgr.activityPanelMgr.getTagActivityByMianPanel(_mainPanelType))
+			}
 		}
 		override protected function onHide():void
 		{
 			super.onHide();
-			Mgr.activityPanelMgr.removeEventListener(ActivityPanelMgr.EVENT_GET,onGetActivites);
+			EventManager.removeEvent(OpenActivityEvent.GET_DATA,onGetActivites);
 		}
 	}
 }

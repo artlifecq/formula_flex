@@ -141,10 +141,7 @@ package  com.rpgGame.coreData.utils
 		
 		public static function subListSort( a:ActivityVo, b:ActivityVo ):int
 		{
-			if ( a.top > b.top )
-				return 1;
-			if ( a.top < b.top )
-				return -1;
+		
 			
 			if ( a.activityId > b.activityId )
 				return 1;
@@ -225,21 +222,19 @@ package  com.rpgGame.coreData.utils
 			if ( vos == null || vos.length == 0 )
 				return true;
 			
-			var vo:ActivityVo = vos[0];
-			if (vo.mainPanelType==EnumCampPanelType.M_FIRST_BUY&&vo.status==0) 
-			{
-				return true;
-			}
-			if (vo.mainPanelType==EnumCampPanelType.M_FIRST_BUY_EVERYDAY&&vo.status==0) 
-			{
-				return true;
-			}
+//			var vo:ActivityVo = vos[0];
+//			if (vo.mainPanelType==EnumCampPanelType.M_FIRST_BUY&&vo.status==0) 
+//			{
+//				return true;
+//			}
+//			if (vo.mainPanelType==EnumCampPanelType.M_FIRST_BUY_EVERYDAY&&vo.status==0) 
+//			{
+//				return true;
+//			}
 			//			else if (vo.mainPanelType==EnumCampPanelType.M_PHONE&&vo.status==1) 
 			//			{
 			//				return true;
 			//			}
-			if ( vo == null )
-				return true;
 			//太长了上面
 			return false;
 		}

@@ -1,6 +1,7 @@
 package com.client.sender
 {
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.login.message.ReqCreateCharacterMessage;
 	import com.rpgGame.netData.login.message.ReqLoginForPlatformMessage;
@@ -68,6 +69,13 @@ package com.client.sender
 			msg.win_high = ClientConfig.stage.height;
 			msg.relogin=relogin;
 			SocketConnection.send(msg);
+			if (msg.agent=="37") 
+			{
+				var obj:Object={};
+				obj["lingpai"]= ClientConfig.clientParams[ "lingpai" ];
+				obj["pt_vip"]=ClientConfig.clientParams[ "pt_vip" ];
+				msg.ptData=JSONUtil.encode(obj);
+			}
 			Statistics.intance.pushNode(Statistics.STEP_SEND_LOGIN_MSG,"发送登录协议");
 		}
 		
@@ -90,6 +98,13 @@ package com.client.sender
 			msg.adregtime = "";
 			msg.win_width = ClientConfig.stage.width;
 			msg.win_high = ClientConfig.stage.height;
+			if (msg.agent=="37") 
+			{
+				var obj:Object={};
+				obj["lingpai"]= ClientConfig.clientParams[ "lingpai" ];
+				obj["pt_vip"]=ClientConfig.clientParams[ "pt_vip" ];
+				msg.ptData=JSONUtil.encode(obj);
+			}
 			SocketConnection.send(msg);
 		}
 		

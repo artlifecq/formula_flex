@@ -21,7 +21,7 @@ package com.rpgGame.appModule.openActivity.plat37
 		override public function setData(info:ActivityVo):void
 		{
 			super.setData(info);
-			_skin.num.label=info.getFlagValue(EnumCampsFlag.F_CELLNUMS_STR);
+			_skin.num.label=info.getFlagValue(EnumCampsFlag.F_CELLNUMS_STR)+"";
 			_rewardG.setRewardByJsonStr(info.activityReward);
 		}
 		override public function clearData():void

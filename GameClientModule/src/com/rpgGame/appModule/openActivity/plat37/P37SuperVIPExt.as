@@ -1,13 +1,14 @@
 package  com.rpgGame.appModule.openActivity.plat37
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.GlobalFunction;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.main.openActivity.BaseActivityMainPanel;
+	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.coreData.info.openActivity.EnumCampPanelType;
 	
-	import flash.desktop.Clipboard;
-	import flash.desktop.ClipboardFormats;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -16,7 +17,6 @@ package  com.rpgGame.appModule.openActivity.plat37
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
-	import flash.system.System;
 	
 	import org.mokylin.skin.app.showgirl.ShowGirl_Skin;
 	
@@ -36,6 +36,40 @@ package  com.rpgGame.appModule.openActivity.plat37
 		{
 			_skin=new ShowGirl_Skin();
 			super(EnumCampPanelType.M_SUPER_VIP_37,_skin);
+			registerListeners();
+			loadGirl();
+			RefreshQQInfo(false);
+		}
+		override protected function setData(hash:HashMap):void
+		{
+			var arrs:Array=hash.values();
+			if (arrs&&arrs.length>0) 
+			{
+				var vos:Vector.<ActivityVo>=arrs[0];
+				_skin.btnChongzhi.visible=false;
+				_skin.btnLingqu.visible=false;
+				if (vos&&vos.length>0) 
+				{
+					var vo:ActivityVo=vos[0];
+					if (vo.status==0) 
+					{
+						_skin.btnLingqu.visible=true;
+						TouchableUtil.gray(_skin.btnLingqu);
+						RefreshQQInfo(true);
+					}
+					else if (vo.status==1) 
+					{
+						_skin.btnLingqu.visible=true;
+						TouchableUtil.ungray(_skin.btnLingqu);
+						RefreshQQInfo(true);
+					}
+					else 
+					{
+						_skin.btnChongzhi.visible=true;
+						RefreshQQInfo(false);
+					}
+				}
+			}
 		}
 		private  function registerListeners():void
 		{
@@ -84,27 +118,10 @@ package  com.rpgGame.appModule.openActivity.plat37
 		{
 			super.onShow();
 			
-			RefreshQQInfo();
+			
 		}
-		private var _isLoading:Boolean;
-		/**
-		 * http://image.njws.moloong.com/37wan/1482308885241.png 
-		 * 
-		 */		
-		public function RefreshQQInfo():void
+		private function loadGirl():void
 		{
-			//todo 等后端传
-			girlQQ = Mgr.activityPanelMgr.superVIP_girlQQ;
-			
-				
-				
-//			imgMeizhi.setImageUrl();
-//			imglab_QQ.visible=(girlQQ!=null&&girlQQ!="");
-//			imglab_QQ.text=girlQQ;
-//			
-//		
-//			btnCopy.visible = imglab_QQ.visible ;
-			
 			var gurl:String = Mgr.activityPanelMgr.superVIP_girlImageURL;
 			if (gurl!=girlImageUrl&&gurl!=null&&gurl!=""&&!_isLoading) 
 			{
@@ -120,12 +137,29 @@ package  com.rpgGame.appModule.openActivity.plat37
 				_isLoading=true;
 			}
 		}
+		private var _isLoading:Boolean;
+		/**
+		 * http://image.njws.moloong.com/37wan/1482308885241.png 
+		 * 
+		 */		
+		private function RefreshQQInfo(show:Boolean):void
+		{
+			_skin.grpQQ.visible=show;
+			_skin.grpImg.visible=!show;
+			//todo 等后端传
+			girlQQ = Mgr.activityPanelMgr.superVIP_girlQQ;
+			_skin.numQQ.label=girlQQ;
+				
+				
+//			imgMeizhi.setImageUrl();
+//			imglab_QQ.visible=(girlQQ!=null&&girlQQ!="");
+//			imglab_QQ.text=girlQQ;
+//			
+//		
+//			btnCopy.visible = imglab_QQ.visible ;
+			
 		
-		private function onbtnCopyClick(e:MouseEvent):void{
-//			Clipboard.generalClipboard.clear();
-//			Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, girlQQ);
-			System.setClipboard(girlQQ);
-			FloatingText.showUp("复制成功");
 		}
+	
 	}
 }

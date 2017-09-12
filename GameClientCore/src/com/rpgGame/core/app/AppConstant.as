@@ -579,5 +579,11 @@ package com.rpgGame.core.app
 		
 		/**背包快满了提示*/
 		public static var BACK_FULL_TISHI:String = createAppInfo("role.BaoGuoTiShiPanel","baoguo");
+		
+		
+		//开服bug
+		public static const ACT_BUG:String=createAppInfo("openActivity.bug.BugSubmitPanelExt","youjiang");
+		public static const ACT_37_PLATFORM:String=createAppInfo("openActivity.plat37.P37PlatformTokenPanelExt","tequan");
+		public static const ACT_37_SUPER_VIP:String=createAppInfo("openActivity.plat37.P37SuperVIPExt","showgirl");
 	}
 }
