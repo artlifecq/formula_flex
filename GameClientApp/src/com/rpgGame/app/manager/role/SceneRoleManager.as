@@ -284,15 +284,10 @@ package com.rpgGame.app.manager.role
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-			role.headFace = HeadFace.create(role);
-			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
-			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
 //			(role.headFace as HeadFace).showBloodBar();
-			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			//
 			//(role.headFace as HeadFace).probabilityMonserSpeakBar();//概率闲话
-			role.dialogFace=BubbleDialogFace.create(role);
 			
 			if (bornData.q_animation>0)
 			{
@@ -330,6 +325,13 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;;
 			SceneManager.addSceneObjToScene(role, true, false, true);
+			
+			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
+			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
+			role.updateBody(bornData ? bornData.q_body_res : "", null);
+			role.dialogFace=BubbleDialogFace.create(role);
+			
 			MainRoleSearchPathManager.trySetSearchRoleData(data);
 			//弓弩不要鼠标事件
 			if ((data.modelID==EnumMonsterId.BOW1||data.modelID==EnumMonsterId.BOW2)) 

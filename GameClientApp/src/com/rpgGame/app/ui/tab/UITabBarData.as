@@ -29,13 +29,18 @@ package com.rpgGame.app.ui.tab
 		
 		public var button:ToggleButton;
 		/**
+		 *开启才展示按钮 
+		 */
+		public var openShow:Boolean;
+		/**
 		 *是否显示 
 		 */
 		internal var isShow:Boolean;
-		public function UITabBarData(tabStyle:Class,viewStyle:Class)
+		public function UITabBarData(tabStyle:Class,viewStyle:Class,openShow:Boolean)
 		{
 			this.tabStyle=tabStyle;
 			this.viewStyle=viewStyle;
+			this.openShow=openShow;
 		}
 	}
 }

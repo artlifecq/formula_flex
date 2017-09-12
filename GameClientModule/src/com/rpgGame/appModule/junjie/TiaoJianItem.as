@@ -1,10 +1,12 @@
 package com.rpgGame.appModule.junjie
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.clientConfig.Q_junjie;
+	import com.rpgGame.coreData.clientConfig.Q_junjie_condition;
 	import com.rpgGame.coreData.utils.JunJieUtil;
 	import com.rpgGame.netData.junjie.bean.JunJieConditionInfo;
 	
@@ -62,23 +64,39 @@ package com.rpgGame.appModule.junjie
 			_info=info;	
 			showTiaojian();
 			_q_junjie=JunJieData.getModByLv(_id);
-			_gongnengId=JunJieUtil.getIDByTiaoJianType(_info.type);
+			var condInfo:Q_junjie_condition=JunJieData.getConditionByType(_info.type);
+			if(condInfo!=null)
+			{
+				_gongnengId=condInfo.q_emid;
+			}
+			else
+			{
+				GameLog.addShow("策划没有配置对应的条件：："+_info.type);
+			}
 		}
 		
 		private function showTiaojian():void
 		{
 			_skin.lbNum.text=_info.currentValue+"/"+_info.maxValue;
-			if(_info.currentValue>=_info.maxValue){
-				_skin.lbName.text=JunJieUtil.getStrByTiaoJianType(_info.type);
-				_skin.lbWancheng.color=0x5CB006;
-				_skin.lbWancheng.text="已完成";
-				_iswancheng=true;
+			var condInfo:Q_junjie_condition=JunJieData.getConditionByType(_info.type);
+			if(condInfo!=null)
+			{
+				if(_info.currentValue>=_info.maxValue){
+					_skin.lbName.text=condInfo.q_name;
+					_skin.lbWancheng.color=0x5CB006;
+					_skin.lbWancheng.text="已完成";
+					_iswancheng=true;
+				}
+				else{
+					_skin.lbName.text=condInfo.q_name+" >>";
+					_skin.lbWancheng.color=0xd02525;
+					_skin.lbWancheng.text="未完成";
+					_iswancheng=false;
+				}
 			}
-			else{
-				_skin.lbName.text=JunJieUtil.getStrByTiaoJianType(_info.type)+" >>";
-				_skin.lbWancheng.color=0xd02525;
-				_skin.lbWancheng.text="未完成";
-				_iswancheng=false;
+			else
+			{
+				GameLog.addShow("策划没有配置对应的条件：："+_info.type);
 			}
 		}
 		

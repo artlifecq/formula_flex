@@ -7,6 +7,7 @@ package org.mokylin.skin.app.paihangbang
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.paihangbang.PaiHang_Xuwei;
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -42,6 +43,8 @@ package org.mokylin.skin.app.paihangbang
 
 		public var lbYuanbao:feathers.controls.Label;
 
+		public var skinXuwei:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -53,7 +56,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__PaiHang_BaZhu_UIAsset1_i(),__PaiHang_BaZhu_UIAsset2_i(),__PaiHang_BaZhu_UIAsset3_i(),__PaiHang_BaZhu_UIAsset4_i(),grpHead_i(),content_i(),btnPutong_i(),btnYuanbao_i(),lbAdd_i(),__PaiHang_BaZhu_UIAsset5_i(),__PaiHang_BaZhu_UIAsset6_i(),__PaiHang_BaZhu_Group1_i(),__PaiHang_BaZhu_Group2_i(),__PaiHang_BaZhu_Label1_i(),__PaiHang_BaZhu_Label2_i(),__PaiHang_BaZhu_Label3_i(),__PaiHang_BaZhu_Label4_i(),lbPutong_i(),__PaiHang_BaZhu_Label5_i(),lbYuanbao_i(),lbJiacheng_i()];
+			this.elementsContent = [bg_i(),__PaiHang_BaZhu_UIAsset1_i(),__PaiHang_BaZhu_UIAsset2_i(),__PaiHang_BaZhu_UIAsset3_i(),__PaiHang_BaZhu_UIAsset4_i(),grpHead_i(),content_i(),btnPutong_i(),btnYuanbao_i(),lbAdd_i(),__PaiHang_BaZhu_UIAsset5_i(),__PaiHang_BaZhu_UIAsset6_i(),__PaiHang_BaZhu_Group1_i(),__PaiHang_BaZhu_Group2_i(),__PaiHang_BaZhu_Label1_i(),__PaiHang_BaZhu_Label2_i(),__PaiHang_BaZhu_Label3_i(),__PaiHang_BaZhu_Label4_i(),lbPutong_i(),__PaiHang_BaZhu_Label5_i(),lbYuanbao_i(),lbJiacheng_i(),skinXuwei_i()];
 			
 			states = {
 			};
@@ -407,6 +410,20 @@ package org.mokylin.skin.app.paihangbang
 			temp.width = 123;
 			temp.x = 802;
 			temp.y = 342;
+			return temp;
+		}
+
+		private function skinXuwei_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinXuwei = temp;
+			temp.name = "skinXuwei";
+			temp.height = 340;
+			var skin:StateSkin = new org.mokylin.skin.app.paihangbang.PaiHang_Xuwei()
+			temp.skin = skin
+			temp.width = 216;
+			temp.x = 253;
+			temp.y = 158;
 			return temp;
 		}
 

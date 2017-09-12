@@ -370,6 +370,18 @@ package com.rpgGame.core.manager.sound
 			}
 		}
 		
+		public static function stopPlaying():void
+		{
+			var mp3:SimpleMp3Player;
+			for each(mp3 in pool)
+			{
+				if(mp3.free == false)
+				{
+					mp3.stop();
+				}
+			}
+		}
+		
 		/**是否开放声音,设为false,则全部声音不能播放**/
 		private static var _openSound:Boolean=true;
 		

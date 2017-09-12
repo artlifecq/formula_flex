@@ -383,6 +383,7 @@ package com.rpgGame.app.manager
 						else
 							role.headFace.setBodyRender(mountRu);
 					}
+					updateRoleSimpleShadow(role);
 				}
 				else if (bodyRu)
 				{
@@ -393,6 +394,7 @@ package com.rpgGame.app.manager
 						else
 							role.headFace.setBodyRender(bodyRu);
 					}
+					updateRoleSimpleShadow(role);
 				}
 			}
 			else if (avatarInfo.rpd_effect)
@@ -407,6 +409,7 @@ package com.rpgGame.app.manager
 						else
 							role.headFace.setBodyRender(effectRu);
 					}
+					updateRoleSimpleShadow(role);
 				}
 			}
 			
@@ -903,7 +906,7 @@ package com.rpgGame.app.manager
 		 */		
 		public static function updateRoleSimpleShadow(role : SceneRole) : void
 		{
-			if (DisplaySetUpManager.shadowLevel == 0)
+			if (DisplaySetUpManager.shadowLevel == 0&&role.type != SceneCharType.DUMMY)
 			{
 				var data : RoleData = RoleData(role.data);
 				var avatarResConfig : AvatarResConfig;
@@ -921,6 +924,8 @@ package com.rpgGame.app.manager
 					if (bodyRu)
 					{
 						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, bodyRu.radius * simpleShadowBaseScale);
+					}else{
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, 1);
 					}
 				}
 			}else{

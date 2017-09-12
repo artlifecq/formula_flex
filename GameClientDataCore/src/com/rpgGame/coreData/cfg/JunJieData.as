@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.cfg
 {
 	import com.rpgGame.coreData.clientConfig.Q_junjie;
+	import com.rpgGame.coreData.clientConfig.Q_junjie_condition;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
@@ -8,9 +9,10 @@ package com.rpgGame.coreData.cfg
 	public class JunJieData
 	{
 		private static var _dataDic : Dictionary;
+		private static var _conditionDataDic : Dictionary;
 		private static var _maxLv:int=0;
 		
-		public static function setup(data : ByteArray) : void
+		public static function setup(data : ByteArray,conditiondata : ByteArray) : void
 		{
 			_dataDic = new Dictionary();
 			var arr : Array = data.readObject();
@@ -19,6 +21,14 @@ package com.rpgGame.coreData.cfg
 				_dataDic[info.q_id] = info;
 				if(_maxLv<info.q_id) _maxLv=info.q_id;
 			}
+			_conditionDataDic = new Dictionary();
+			var arr2 : Array = conditiondata.readObject();
+			for each (var info2 :Q_junjie_condition in arr2)
+			{
+				_conditionDataDic[info2.q_id] = info2;
+			}
+			
+			
 		}
 		
 		/**
@@ -61,5 +71,14 @@ package com.rpgGame.coreData.cfg
 		{
 			return (_dataDic[id] as Q_junjie).q_effect;
 		}
+		
+		/**
+		 * 依据类型返回军阶条件信息
+		 * */
+		public static function getConditionByType(type:int):Q_junjie_condition
+		{
+			return _conditionDataDic[type];
+		}
+		
 	}
 }

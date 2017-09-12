@@ -28,6 +28,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 
 		public var num:feathers.controls.UINumber;
 
+		public var uiFlag:feathers.controls.UIAsset;
+
 		public var uiTitle1:feathers.controls.UIAsset;
 
 		public var uiTitle2:feathers.controls.UIAsset;
@@ -45,7 +47,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			this.currentState = "normal";
 			this.height = 102;
 			this.width = 290;
-			this.elementsContent = [__TiaoZhanPaiHang_Item_UIAsset1_i(),uiTitle1_i(),gRank_i(),num_i(),ico0_i(),ico1_i(),ico2_i(),ico3_i()];
+			this.elementsContent = [__TiaoZhanPaiHang_Item_UIAsset1_i(),uiTitle1_i(),gRank_i(),num_i(),ico0_i(),ico1_i(),ico2_i(),ico3_i(),uiFlag_i()];
 			
 			states = {
 			};
@@ -140,6 +142,17 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.width = 20;
 			temp.x = 104;
 			temp.y = 8;
+			return temp;
+		}
+
+		private function uiFlag_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiFlag = temp;
+			temp.name = "uiFlag";
+			temp.styleName = "ui/app/activety/jixiantiaozhan/canyujiangli.png";
+			temp.x = 102;
+			temp.y = 6;
 			return temp;
 		}
 
