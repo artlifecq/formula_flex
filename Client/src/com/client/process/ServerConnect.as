@@ -48,18 +48,17 @@ package com.client.process
 			_allowReconnect = false;
 		}
 		
-		//private var _retryTimer : Timer;
-		//private var _retryConnectCnt : uint = 0;
 		/** 腾讯oid*/
 		private var _tencentOid : int = 199;
 		private var _connectDelay : int = 0;
 		
+		private var _reTryCount:int = 0;
 		public function ServerConnect()
 		{
 			super();
 			_reTryCount = 0;
 			_connectDelay = 0;
-			EventManager.addEvent("SERVER_RECONNECT", closeSocket);
+			EventManager.addEvent("SERVER_RECONNECT", closeSocket);//这个事件主要用在gm面板上，用来测试断线重连的
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_DROPS_TO_SERVER, socketDropsHandle);
 		}
 		
@@ -89,6 +88,7 @@ package com.client.process
 				completeProcess();
 				return;
 			}
+			
 			loadPolicys();
 			connect();
 		}
@@ -102,6 +102,7 @@ package com.client.process
 			}
 			var policyFileUrl : String = "xmlsocket://" + ClientConfig.loginIP + ":" + ClientConfig.policyPort;
 			Security.loadPolicyFile(policyFileUrl);
+			Statistics.intance.pushNode(Statistics.STEP_LOAD_POLICY_FILE,"加载跨域文件");
 			GameLog.addShow("加载跨域文件 : ", policyFileUrl);
 		}
 		
@@ -109,9 +110,6 @@ package com.client.process
 		{
 			_allowReconnect = true;
 			_errMsg = "";
-			
-			var messagePool:MessagePool = new MessagePool();
-			SocketConnection.messageMgr.msgObjPool = messagePool;
 			
 			TweenLite.killDelayedCallsTo(onConnect);
 			if (_connectDelay > 0)
@@ -129,33 +127,22 @@ package com.client.process
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
             
-			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 5000);
-//			_reTryCount = 0;
-//			_retryConnectCnt = 0;
-//			if (!_retryTimer)
-//			{
-//				_retryTimer = new Timer(1000, 0);
-//			}
-//			_retryTimer.addEventListener(TimerEvent.TIMER, onRetryConnect);
-//			_retryTimer.reset();
-//			_retryTimer.start();
+			Statistics.intance.pushNode(Statistics.STEP_SEND_CONNECT_SOCKET,"发送socket连接请求");
+			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 30000);
 		}
 		
 		protected function socketConnectHandle(event:NetEvent):void
 		{
-            GameLog.addShow("[ServerConnect] [socketConnectHandle]");
 			_allowReconnect = true;
 			_errMsg = "";
 			GameAlert.hide();
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
 			Statistics.intance.pushNode(Statistics.STEP_CONNECT,"服务器链接成功");
-//			if (_retryTimer)
-//			{
-//				_retryTimer.stop();
-//				_retryTimer.removeEventListener(TimerEvent.TIMER, onRetryConnect);
-//				_retryTimer = null;
-//			}
+			
+			var messagePool:MessagePool = new MessagePool();
+			SocketConnection.messageMgr.msgObjPool = messagePool;
+			
 			//
 			if (isProcessed)
 			{
@@ -171,6 +158,16 @@ package com.client.process
 		
 		protected function socketConnectFailHandle(event:NetEvent):void
 		{
+			var str:String = String(event.data);
+			switch(str)
+			{
+				case "SecurityErrorEvent":
+					Statistics.intance.pushNode(Statistics.STEP_SOCKET_FAIL_FOR_SECURITY_ERROR,"因为超时，或者其他原因导致服务器连接失败");
+					break;
+				case "IOErrorEvent":
+					Statistics.intance.pushNode(Statistics.STEP_SOCKET_FAIL_FOR_IOERROR,"因为网络原因导致服务器连接失败");
+					break;
+			}
 			closeSocket(500, "错误");
 		}
 		
@@ -186,19 +183,11 @@ package com.client.process
 			completeProcess();
 		}
 		
-		private var _reTryCount:int = 0;
 		private function closeSocket(deley : int, msg : String) : void
 		{
 			_connectDelay = deley;
-			GameLog.addShow("服务器连接关闭:" + msg);
-			//			SenderReferenceSet.stop();
-			//
-//			if (_retryTimer)
-//			{
-//				_retryTimer.stop();
-//				_retryTimer.removeEventListener(TimerEvent.TIMER, onRetryConnect);
-//				_retryTimer = null;
-//			}
+			GameLog.addShow("服务器连接失败:" + msg);
+
 			//
 			if (_allowReconnect && (isProcessing || (!isProcessing && !ProcessStateMachine.getInstance().isProcessing)))
 			{
@@ -222,29 +211,9 @@ package com.client.process
 			}
 		}
 		
-		/**
-		 * 服务器关闭连接
-		 * @param e
-		 *
-		 */
-		private function onSocketClose(e : Event) : void
-		{
-			closeSocket(500, "断开");
-		}
-		
-		/**
-		 * 服务器连接错误
-		 * @param e
-		 *
-		 */
-		private function onConnectError(e : Event) : void
-		{
-			closeSocket(500, "错误");
-		}
-		
 		private function reconnect() : void
 		{
-            GameLog.addShow("[ServerConnect] [reconnect]");
+            GameLog.addShow("重连中一次");
 			if (isProcessing)
 			{
 				connect();
@@ -284,9 +253,12 @@ package com.client.process
 			{
 				sendTGW(ClientConfig.loginIP, ClientConfig.loginPort);
 			}
-			if (null == ClientConfig.loginKey || 0 == ClientConfig.loginKey.length) {
+			if (null == ClientConfig.loginKey || 0 == ClientConfig.loginKey.length) 
+			{
 				LoginSender.SendLoginMessage();
-			} else {
+			} 
+			else 
+			{
 				LoginSender.SendPlatformLoginMessage();
 			}
 			
