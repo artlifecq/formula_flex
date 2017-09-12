@@ -4,6 +4,7 @@
 	import com.game.engine3D.vo.BaseRole;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.HeroMiscSender;
 	import com.rpgGame.core.events.GameSettingEvent;
@@ -83,6 +84,14 @@
 				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
 			}
 			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
+			var list : Vector.<SceneRole> = SceneManager.getSceneRoleList();
+			for each (var role : SceneRole in list)
+			{
+				if(role.type== SceneCharType.MONSTER)
+				{
+					AvatarManager.updateBody(role);
+				}
+			}
 		}
 		
 		public static function get checkFiltrateGuaiWu():Boolean
@@ -249,10 +258,6 @@
 					}
 					else if (baseObj.type == SceneCharType.MONSTER)
 					{
-						var role:SceneRole = baseObj as SceneRole;
-						if(role){
-							AvatarManager.updateBody(role);
-						}
 						return !checkFiltrateGuaiWu;
 					}
 				}

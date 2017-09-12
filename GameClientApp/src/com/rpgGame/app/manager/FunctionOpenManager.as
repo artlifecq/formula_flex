@@ -201,15 +201,15 @@
 				return;
 			}
 			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
-			if(!funcCfg){
-				return;
+			if(funcCfg){//有功能配置
+				var minlevel:int =funcCfg.q_level;
+				if(!checkOpenByLevel(minlevel))//未达到开启等级
+				{
+					NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
+					return ;
+				}
 			}
-			var minlevel:int =funcCfg.q_level;
-			if(!checkOpenByLevel(minlevel))//未达到开启等级
-			{
-				NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
-				return ;
-			}
+			
 			if(isAutoHide){
 				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 			}else{
