@@ -1,9 +1,8 @@
 package com.rpgGame.appModule.pet
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.ctrl.TouchCtrl;
-	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -30,7 +29,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TipType;
@@ -63,9 +61,7 @@ package com.rpgGame.appModule.pet
 		private var goldBuyMod:Q_global;
 		private var bindGoldBuyMod:Q_global;
 		
-		private var _modContaner:Inter3DContainer;
-		private var _avatar : InterAvatar3D;
-		private var _avatarData : RoleData;
+		private var _avatar : UIAvatar3D;
 		public function PetMainPanelExt()
 		{
 			_skin=new MeiRen_Skin();
@@ -75,8 +71,7 @@ package com.rpgGame.appModule.pet
 		}
 		private function initConfig():void
 		{
-			_modContaner=new Inter3DContainer();
-			this._skin.container.addChildAt(_modContaner,4);
+			_avatar=new UIAvatar3D(_skin.avatarGrp,2.3);
 			goldBuyMod=GlobalSheetData.getSettingInfo(845);
 			bindGoldBuyMod=GlobalSheetData.getSettingInfo(846);
 			var pets:Array=PetCfg.dataArr;
@@ -99,6 +94,7 @@ package com.rpgGame.appModule.pet
 				_headCon.addChild(tmp);
 				_headItems.push(tmp);
 			}
+			_skin.btnPrev.y=_skin.btnPrev.y+25;
 			_tweenS=new TweenScaleScrollUitlExt(_headCon,_headItems,_skin.btnPrev,_skin.btnNext,1,130,101*4,101,0.5/4,false);
 			_tweenS.setStep(4);
 			
@@ -315,18 +311,8 @@ package com.rpgGame.appModule.pet
 		private function showPetModEff(data:PetInfo):void
 		{
 			var qPet:Q_girl_pet=PetCfg.getPet(data.modelId);
-			if(this._avatar==null)
-			{
-				_avatar=new InterAvatar3D();
-				_modContaner.addChild3D(_avatar);
-				_avatar.x = 420;
-				_avatar.y =490;
-			}
-			_avatarData=new RoleData(0);		
-			this._avatarData.avatarInfo.setBodyResID(qPet.q_panel_show_id, null);
-			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(2.3);	
-			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			_avatar.updateBodyWithRes(qPet.q_panel_show_id,qPet.q_panel_show_id);
+			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
 		private function showSubPetData(data:PetInfo):void

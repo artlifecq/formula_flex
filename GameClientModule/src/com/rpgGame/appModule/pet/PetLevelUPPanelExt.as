@@ -3,6 +3,7 @@ package com.rpgGame.appModule.pet
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
@@ -48,9 +49,7 @@ package com.rpgGame.appModule.pet
 		private var _petAdvConfig:Q_girl_advance;
 		private var _isAutoState:Boolean;
 		
-		private var _modContaner:Inter3DContainer;
-		private var _avatar : InterAvatar3D;
-		private var _avatarData : RoleData;
+		private var _avatar : UIAvatar3D;
 		
 		private var autoReq:TweenLite;
 		private var _petShowData:PetShowData;
@@ -64,13 +63,7 @@ package com.rpgGame.appModule.pet
 		
 		private function initPanel():void
 		{
-			_modContaner=new Inter3DContainer();
-			this._skin.container.addChildAt(_modContaner,3);
-			_avatar=new InterAvatar3D();
-			_avatar.x = 158;
-			_avatar.y =430;
-			_modContaner.addChild3D(_avatar);
-			_avatarData=new RoleData(0);
+			_avatar=new UIAvatar3D(_skin.avatarGrp,2.3);
 			_petShowData=new PetShowData();
 		}
 		
@@ -88,10 +81,8 @@ package com.rpgGame.appModule.pet
 		private function initModEff():void
 		{
 			_qPet=PetCfg.getPet(_data.modelId);
-			this._avatarData.avatarInfo.setBodyResID(_qPet.q_panel_show_id, null);
-			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(2.3);	
-			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			_avatar.updateBodyWithRes(_qPet.q_panel_show_id,_qPet.q_panel_show_id);
+			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
 		private function updateNeedItems():void

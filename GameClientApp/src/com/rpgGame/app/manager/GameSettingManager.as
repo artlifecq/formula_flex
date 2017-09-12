@@ -4,6 +4,7 @@
 	import com.game.engine3D.vo.BaseRole;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.HeroMiscSender;
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MenuEvent;
@@ -248,6 +249,10 @@
 					}
 					else if (baseObj.type == SceneCharType.MONSTER)
 					{
+						var role:SceneRole = baseObj as SceneRole;
+						if(role){
+							AvatarManager.updateBody(role);
+						}
 						return !checkFiltrateGuaiWu;
 					}
 				}

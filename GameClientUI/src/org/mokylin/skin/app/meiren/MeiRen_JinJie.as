@@ -25,6 +25,8 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var avatarGrp:feathers.controls.Group;
+
 		public var barJindu:feathers.controls.ProgressBar;
 
 		public var bg:feathers.controls.SkinnableContainer;
@@ -58,7 +60,7 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__MeiRen_JinJie_UIAsset1_i(),__MeiRen_JinJie_UIAsset2_i(),btnClose_i(),__MeiRen_JinJie_UIAsset3_i(),uiLevel_i(),__MeiRen_JinJie_Label1_i(),lbCailiao_i(),cboxTip_i(),lbInfo_i(),grpBar_i(),btnJinjie_i(),btnZidong_i(),btnStop_i()];
+			this.elementsContent = [bg_i(),__MeiRen_JinJie_UIAsset1_i(),__MeiRen_JinJie_UIAsset2_i(),btnClose_i(),__MeiRen_JinJie_UIAsset3_i(),uiLevel_i(),__MeiRen_JinJie_Label1_i(),lbCailiao_i(),cboxTip_i(),lbInfo_i(),avatarGrp_i(),grpBar_i(),btnJinjie_i(),btnZidong_i(),btnStop_i()];
 			
 			states = {
 			};
@@ -118,6 +120,18 @@ package org.mokylin.skin.app.meiren
 			temp.width = 265;
 			temp.x = -1;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function avatarGrp_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			avatarGrp = temp;
+			temp.name = "avatarGrp";
+			temp.height = 360;
+			temp.width = 237;
+			temp.x = 41;
+			temp.y = 85;
 			return temp;
 		}
 

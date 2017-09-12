@@ -1,5 +1,7 @@
 package com.rpgGame.app.ui.tab
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
+	
 	import flash.events.Event;
 	
 	import feathers.controls.TabBar;
@@ -135,8 +137,16 @@ package com.rpgGame.app.ui.tab
 			return 0;
 		}
 		
+		protected function isCanToTab(key:int):Boolean
+		{
+			return true;
+		}
+		
 		public function switchTabKey(key:int):void
 		{
+			if(!isCanToTab(key)){
+				return;	
+			}
 			var index:int = getTabDataIndexByTabKey(key);
 			if(index>=0)
 			{
@@ -233,6 +243,9 @@ package com.rpgGame.app.ui.tab
 			}
 			if(!item){
 				return;
+			}
+			if(!isCanToTab( item.tabKey)){
+				return;	
 			}
 			_currentKey = item.tabKey;
 			var view:ViewUI=_tabViewMap.getValue(item.viewStyle);

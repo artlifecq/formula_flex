@@ -68,7 +68,7 @@ package com.rpgGame.app.manager.goods
 				NoticeManager.showNotify("您已经解锁了全部的格子");
 				return;
 			}
-			else if(index==curUnlockIndex){
+			else if(index<curUnlockIndex){
 				var type:int=GoodsContainerMamager.getGridType(containerId);
 				ItemSender.reqOpenTimeCellMessage(type);
 				return;

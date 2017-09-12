@@ -263,7 +263,7 @@ package com.rpgGame.app.data
 			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
 			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
 			ZhanGongMonsterData.setup(dic[ConfigClassRegister.Q_meritorious_monster]);
-			JunJieData.setup(dic[ConfigClassRegister.Q_junjie]);
+			JunJieData.setup(dic[ConfigClassRegister.Q_junjie],dic[ConfigClassRegister.Q_junjie_condition]);
 			//护宝
 			HuBaoData.setup(dic[ConfigClassRegister.Q_convoy]);
 			//格子配置

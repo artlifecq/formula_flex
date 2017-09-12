@@ -326,11 +326,19 @@ package com.rpgGame.app.richText
 					MainRoleSearchPathManager.walkToScene(flypos[0], flypos[1], flypos[2], null, 200);
 					break;
 				case RichTextCustomLinkType.ITEM_SHOW_TYPE:
+					TipTargetManager.remove(unit.displayObj);
 					var info:ClientItemInfo=ChatManager.getShowItemInfo(unitData);
-					if(info is EquipInfo)//.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2
-						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
-					else
-						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+					if(info is EquipInfo){//.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2
+						if(!TipTargetManager.hasTipsEventListener(unit.displayObj))
+						{
+							TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
+						}
+					}
+					else{
+						if(!TipTargetManager.hasTipsEventListener(unit.displayObj)){
+							TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+						}
+					}
 					break;
 				case RichTextCustomLinkType.SHOW_PANEL_TYPE:
 					var panelID:int=int(unitData.linkData);

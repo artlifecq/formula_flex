@@ -36,6 +36,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
+    import com.rpgGame.app.manager.sound.GameSoundManager;
     import com.rpgGame.app.manager.task.TaskAutoManager;
     import com.rpgGame.app.manager.task.TouJingManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -56,6 +57,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
+    import com.rpgGame.coreData.info.MapDataManager;
     import com.rpgGame.coreData.info.buff.BuffData;
     import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.role.MonsterData;
@@ -148,6 +150,8 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
 			this._funcs["&Whosyourdaddy".toLowerCase()] = this.whosyourdaddy;
 			this._funcs["&testRoll".toLowerCase()] = this.testRoll;
+			this._funcs["&sound".toLowerCase()] = this.sound;
+			
             
             // cross
             this._funcs["&enterCross".toLowerCase()] = this.enterCross;
@@ -168,6 +172,19 @@ package com.rpgGame.app.manager.shell
 			info.tempItemInfo=temp;
 			
 			DropGoodsManager.getInstance().addRollGoods(info);
+		}
+		
+		private function sound(type:String,value:String):void
+		{
+			if(type=="bg"){
+				if(value=="0"){
+					GameSoundManager.stopBgSound();
+				}else{
+					GameSoundManager.playBgSound(MapDataManager.currentScene.sound);
+				}
+			}else{
+					GameSoundManager.openSound=value!="0";
+			}
 		}
 		
 		private function testRibbon():void

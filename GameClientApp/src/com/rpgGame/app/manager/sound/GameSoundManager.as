@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.sound
 	import com.rpgGame.coreData.clientConfig.GameSoundInfo;
 	import com.rpgGame.coreData.enum.sound.CountryWarSoundEnum;
 	import com.rpgGame.coreData.enum.sound.GameSoundType;
+	import com.rpgGame.coreData.info.MapDataManager;
 	
 	import flash.utils.getTimer;
 	
@@ -54,11 +55,6 @@ package com.rpgGame.app.manager.sound
 					_groundTypeSoundHM.add(EnumSceneGroundType.CARPET,"carpet");
 					TSoundManager.setup();
 					PosSoundManager.setup();*/
-		}
-
-		public static function stopBgSound() : void
-		{
-			SimpleMp3Player.player.stop();
 		}
 
 		/**
@@ -153,6 +149,34 @@ package com.rpgGame.app.manager.sound
 				SimpleMp3Player.player.play(ClientConfig.getSound($name))
 			}
 		}
+		
+		/**
+		 *关闭背景音乐 
+		 * 
+		 */
+		public static function stopBgSound() : void
+		{
+			SimpleMp3Player.player.stop();
+		}
+		
+		/**
+		 *是否开启音效 
+		 * 
+		 */
+		public static function set openSound(value:Boolean):void
+		{
+			if(value==SimpleMp3Player.openSound){
+				return;
+			}
+			SimpleMp3Player.openSound=value;
+			if(!value){
+				SimpleMp3Player.player.pause();
+				SimpleMp3Player.stopPlaying();
+			}else{
+				SimpleMp3Player.player.resume();
+			}
+		}
+		
 
 		/**
 		 * 按资源名称播放
