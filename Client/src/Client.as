@@ -187,7 +187,7 @@ package
 		{
 			if (!ClientConfig.isBanShu)
 			{
-//				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "success", true, stage);
+				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "success", true, stage);
 			}
 			var driverInfo:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
 			if (driverInfo.indexOf("software") != -1)
@@ -245,7 +245,7 @@ package
 			Log.error("stage3DLayerSetupError：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
 			if (!ClientConfig.isBanShu && Stage3DLayerManager.stage3DProxy)
 			{
-//				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "error", true, stage);
+				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "error", true, stage);
 			}
 			if (Stage3DLayerManager.stage3DProxy)
 			{
