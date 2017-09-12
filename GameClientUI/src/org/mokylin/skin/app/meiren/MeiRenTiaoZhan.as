@@ -51,6 +51,8 @@ package org.mokylin.skin.app.meiren
 
 		public var skinJihuo:feathers.controls.SkinnableContainer;
 
+		public var uihead:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -114,7 +116,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "grpIcon1";
 			temp.x = 128;
 			temp.y = 305;
-			temp.elementsContent = [__MeiRenTiaoZhan_UIAsset1_i(),ic1_i()];
+			temp.elementsContent = [__MeiRenTiaoZhan_UIAsset1_i(),ic1_i(),uihead_i()];
 			return temp;
 		}
 
@@ -265,6 +267,17 @@ package org.mokylin.skin.app.meiren
 			temp.width = 176;
 			temp.x = 202;
 			temp.y = 558;
+			return temp;
+		}
+
+		private function uihead_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uihead = temp;
+			temp.name = "uihead";
+			temp.styleName = "ui/app/meiren/tiaozhan/putongjiangli.png";
+			temp.x = 99;
+			temp.y = -28;
 			return temp;
 		}
 

@@ -41,9 +41,9 @@ package com.rpgGame.appModule.role
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.ui_bg:
-					if(GoodsContainerMamager.getMrg(ItemContainerID.BackPack).isMianFei)
+					if(GoodsContainerMamager.getMrg(ItemContainerID.BackPack).hasOpenCount-1<GoodsContainerMamager.getMrg(ItemContainerID.BackPack).curUnlockIndex)
 						AppManager.showAppNoHide(AppConstant.ROLE_PANEL,1);
-					else if(GoodsContainerMamager.getMrg(ItemContainerID.Storage).isMianFei)
+					else if(GoodsContainerMamager.getMrg(ItemContainerID.Storage).hasOpenCount-1<GoodsContainerMamager.getMrg(ItemContainerID.Storage).curUnlockIndex)
 						AppManager.showAppNoHide(AppConstant.ROLE_PANEL,2);
 					else AppManager.showAppNoHide(AppConstant.ROLE_PANEL,1);
 					this.hide();

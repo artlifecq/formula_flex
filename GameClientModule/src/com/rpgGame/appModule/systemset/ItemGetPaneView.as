@@ -1,11 +1,10 @@
 package com.rpgGame.appModule.systemset
 {
-	import com.rpgGame.app.richText.RichTextCustomUnitType;
-	import com.rpgGame.app.richText.component.RichTextUnit;
-	import com.rpgGame.app.richText.component.RichTextUnitData;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.TweenUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
@@ -13,8 +12,6 @@ package com.rpgGame.appModule.systemset
 	import org.mokylin.skin.app.systemSet.WupinSelect_Skin;
 	
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -121,15 +118,12 @@ package com.rpgGame.appModule.systemset
 		}
 	}
 }
-import com.rpgGame.app.manager.SystemSetManager;
 import com.rpgGame.appModule.systemset.BasePaneView;
 
 import feathers.controls.Check;
 import feathers.controls.SkinnableContainer;
 
 import org.mokylin.skin.app.systemSet.WupinSelect_Skin;
-
-import away3d.events.Event;
 
 class GetItemPaneView extends BasePaneView
 {

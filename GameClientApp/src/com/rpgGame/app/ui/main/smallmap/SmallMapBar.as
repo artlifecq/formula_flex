@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.sound.GameSoundManager;
 	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.SystemSetUtil;
 	import com.rpgGame.app.view.uiComponent.menu.ShieldingMenu;
@@ -25,13 +26,21 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.coreData.role.MonsterBornData;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	
+	import away3d.utils.SoundUtil;
+	
+	import feathers.controls.Check;
+	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.mainui.head.Head_Select;
 	import org.mokylin.skin.mainui.map.map_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	public class SmallMapBar extends SkinUI {
 		private static const MAXMAPSCALE : Number = 1;
@@ -54,10 +63,16 @@ package com.rpgGame.app.ui.main.smallmap
 		
 		private var _mapScale : Number = 0.3;
 		private var isPlay:Boolean;
+		private var _smallmapHideMenu:SmallmapHideMenu;
 		
 		public function SmallMapBar() {
 			this._skin = new map_Skin();
 			super(this._skin);
+			_smallmapHideMenu=new SmallmapHideMenu();
+			_skin.grp_cont.addChild(_smallmapHideMenu);
+			_smallmapHideMenu.x=_skin.btnHide.x;
+			_smallmapHideMenu.y=_skin.btnHide.y+_skin.btnHide.height;
+			_smallmapHideMenu.visible=false;
 			isPlay=true;
 			this._initBgX = this._skin.grp_cont.x;
 			
@@ -122,9 +137,11 @@ package com.rpgGame.app.ui.main.smallmap
 					break;
 				case this._skin.btnSound://打开声音
 					isPlay=!isPlay;
-					if(isPlay)
-						SimpleMp3Player.player.resume();
-					else SimpleMp3Player.player.stop();
+					if(isPlay){
+						SoundUtil.volume = 1;
+//						GameSoundManager.
+					}
+					else SoundUtil.volume = 0;
 					//					ClientSettingGameSetMananger.saveMainToServer();
 					break;
 				case this._skin.btnPaiHang://打开排行榜
