@@ -73,7 +73,6 @@ package com.client.cmdlistener
 		
 		private static function RecvResSubstituteMessage(msg:ResSubstituteMessage):void
 		{
-			// TODO Auto Generated method stub
 			SocketConnection.messageMgr.isReplace=true;
 			SocketConnection.messageMgr.replaceIP=msg.ip;
 		}
@@ -106,20 +105,8 @@ package com.client.cmdlistener
 		
 		public static function RecvLoginSuccessMessage(msg:ResLoginSuccessMessage):void
 		{
-			/*if (loginRoleCreatePanel) 
-			{
-				MCUtil.removeSelf(loginRoleCreatePanel);
-				loginRoleCreatePanel=null;
-			}
-			ToolBase.Log("收到登录成功消息 ");
-			_isLoginSuccess = true;
-			Mgr.enter.SetConnectLoginReady(msg.mapModelId);
-			prepareFilterWords();
-			// 这里启动心跳吧
-			StartHeart();*/
 			GameLog.addShow("收到登录成功消息 ");
 			Statistics.intance.pushNode(Statistics.STEP_LOGIN_SUCCESS,"玩家登陆成功");
-//			ClientConfig.loginData.mapModelId=msg.mapModelId;
 			ClientConfig.hasHero = true;
 			onCreateHeroSuccess();
 		}
