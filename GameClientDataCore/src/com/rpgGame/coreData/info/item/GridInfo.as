@@ -62,7 +62,8 @@ package com.rpgGame.coreData.info.item
 		
 		//是否为待解锁
 		public var isUnlock:Boolean;
-		
+		//是否为可解锁
+		public var isCanlock:Boolean;
 		//是否为禁用
 		public var isEnabled:Boolean = true;
 		

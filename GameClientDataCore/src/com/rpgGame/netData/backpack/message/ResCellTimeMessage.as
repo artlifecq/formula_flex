@@ -21,6 +21,9 @@ package com.rpgGame.netData.backpack.message{
 		//剩余时间(秒)
 		private var _timeRemaining: int;
 		
+		//已经免费开启最大格子数
+		private var _freeOpenMaxCell: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -32,6 +35,8 @@ package com.rpgGame.netData.backpack.message{
 			writeByte(_type);
 			//剩余时间(秒)
 			writeInt(_timeRemaining);
+			//已经免费开启最大格子数
+			writeInt(_freeOpenMaxCell);
 			return true;
 		}
 		
@@ -45,6 +50,8 @@ package com.rpgGame.netData.backpack.message{
 			_type = readByte();
 			//剩余时间(秒)
 			_timeRemaining = readInt();
+			//已经免费开启最大格子数
+			_freeOpenMaxCell = readInt();
 			return true;
 		}
 		
@@ -99,6 +106,21 @@ package com.rpgGame.netData.backpack.message{
 		 */
 		public function set timeRemaining(value: int): void{
 			this._timeRemaining = value;
+		}
+		
+		/**
+		 * get 已经免费开启最大格子数
+		 * @return 
+		 */
+		public function get freeOpenMaxCell(): int{
+			return _freeOpenMaxCell;
+		}
+		
+		/**
+		 * set 已经免费开启最大格子数
+		 */
+		public function set freeOpenMaxCell(value: int): void{
+			this._freeOpenMaxCell = value;
 		}
 		
 	}
