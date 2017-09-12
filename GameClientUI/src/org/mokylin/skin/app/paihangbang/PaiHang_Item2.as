@@ -42,8 +42,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 30;
 			this.width = 546;
-			this.elementsContent = [__PaiHang_Item2_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbLevel_i(),lbZhiye_i(),lbContent_i(),lbNum_i()];
-			uiOver_i();
+			this.elementsContent = [__PaiHang_Item2_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbLevel_i(),lbZhiye_i(),lbContent_i(),lbNum_i(),uiOver_i()];
 			
 			
 			states = {
@@ -154,12 +153,11 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiOver = temp;
 			temp.name = "uiOver";
-			temp.bottom = 0;
+			temp.height = 30;
 			temp.left = 0;
-			temp.right = 0;
 			temp.styleName = "ui/common/hover/liangkuang2.png";
 			temp.top = 0;
-			temp.visible = false;
+			temp.width = 546;
 			return temp;
 		}
 

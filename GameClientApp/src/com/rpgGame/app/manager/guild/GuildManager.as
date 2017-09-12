@@ -888,9 +888,14 @@ package com.rpgGame.app.manager.guild
 				ClientConfig.loginData.guildId = msg.guildId;
 				ClientConfig.loginData.guildMemberType = msg.guildMemberType;
 				if(!haveGuild)
+				{
 					EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
+					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_LIEBIAO,null,false);
+				}
 				else
+				{
 					GuildSender.requestGuildInfo();
+				}
 				_needSwitchChange = true;
 			}else if(this.haveGuild&&_memberList!=null){
 				var playerInfo:GuildMemberInfo = this.getGuildMemberInfoById(msg.playerId.hexValue);

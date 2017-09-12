@@ -652,7 +652,7 @@ package com.rpgGame.app.manager.fight
 					return;
 				case EnumHurtType.JI_FEN: //积分
 					numberColor = NUMBER_SCORE;
-					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao2);
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp);
 					return;
 				default:
 					break;

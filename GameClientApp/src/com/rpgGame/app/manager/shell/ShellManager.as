@@ -32,6 +32,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.TrusteeshipManager;
     import com.rpgGame.app.manager.chat.ChatManager;
+    import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.DropGoodsManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
@@ -151,6 +152,7 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&Whosyourdaddy".toLowerCase()] = this.whosyourdaddy;
 			this._funcs["&testRoll".toLowerCase()] = this.testRoll;
 			this._funcs["&sound".toLowerCase()] = this.sound;
+			this._funcs["&showAttChange".toLowerCase()] = this.showAttChange;
 			
             
             // cross
@@ -172,6 +174,11 @@ package com.rpgGame.app.manager.shell
 			info.tempItemInfo=temp;
 			
 			DropGoodsManager.getInstance().addRollGoods(info);
+		}
+		
+		private function showAttChange(type : String, count : int,show:int=0) : void
+		{
+			FightFaceHelper.showAttChange(type,count,show);
 		}
 		
 		private function sound(type:String,value:String):void

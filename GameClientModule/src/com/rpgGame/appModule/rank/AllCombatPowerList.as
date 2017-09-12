@@ -4,7 +4,6 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.coreData.enum.RankListType;
 	
 	import org.mokylin.skin.app.paihangbang.PaiHangTotal_dianfeng;
-	import org.mokylin.skin.app.paihangbang.PaiHang_Right;
 	import org.mokylin.skin.common.Flip2_Skin;
 	
 	public class AllCombatPowerList extends ViewUI
