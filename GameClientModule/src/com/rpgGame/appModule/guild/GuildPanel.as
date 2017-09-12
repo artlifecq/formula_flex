@@ -1,19 +1,15 @@
 package com.rpgGame.appModule.guild
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.guild.war.HczbPlayerViewUI;
 	import com.rpgGame.appModule.guild.war.WczbWarViewUI;
-	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.BangHui_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-	
-	import starling.display.DisplayObjectContainer;
 
 	public class GuildPanel extends TabBarPanel
 	{
@@ -22,11 +18,29 @@ package com.rpgGame.appModule.guild
 		{
 			_skin = new BangHui_Skin();
 			super(_skin);
-			
+			_tabBar.checkToTabHandler=checkToTabHandler;
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_INFO,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_INFO).button,65,GuildManager.instance().hasDailyGift,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_UP,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_UPLEVEL).button,65,GuildManager.instance().hasGuildLevelUp,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_MEM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_CHENGYUAN).button,65,GuildManager.instance().hasApplyList,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_SKILL,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_SPELL).button,65,GuildManager.instance().hasSkill2LevelUp,false,null,true);
+		}
+		
+		private function checkToTabHandler(funcID:int):Boolean
+		{
+			switch(funcID){
+				case EmFunctionID.EM_BANGHUI_CHENGYUAN:
+				case EmFunctionID.EM_BANGHUI_UPLEVEL:
+				case EmFunctionID.EM_BANGHUI_SPELL:
+				case EmFunctionID.EM_BANGHUI_WAR:
+				case EmFunctionID.EM_BANGHUI_INFO:
+				case EmFunctionID.EM_HCZB_INFO_GUILD:
+					if(GuildManager.instance().haveGuild==false){
+						NoticeManager.showNotifyById(22004);
+						return false;
+					}
+					break;
+			}
+			return true
 		}
 		
 		override protected function initTabBarDatas():void
@@ -38,28 +52,6 @@ package com.rpgGame.appModule.guild
 			addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
 			addTabDatas(TabBarSkin_pack,WczbWarViewUI,EmFunctionID.EM_BANGHUI_WAR);
 			addTabDatas(TabBarSkin_pack,HczbPlayerViewUI,EmFunctionID.EM_HCZB_INFO_GUILD);
-		}
-		
-		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
-		{
-			super.show(data,openTable,parentContiner);
-			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
-			EventManager.addEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
-			refeashView();
-			GuildSender.requestGuildInfo();
-			GuildSender.reqGuildSkillInfo();
-		}
-		
-		private function refeashView():void
-		{
-//			_tabBar.checkOpen();
-		}
-		
-		override public function hide():void
-		{
-			super.hide();
-			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
-			EventManager.removeEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
 		}
 	}
 }

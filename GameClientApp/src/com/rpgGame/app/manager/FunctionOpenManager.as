@@ -75,33 +75,11 @@
 		 */
 		public static function functionIsOpen(id:int):Boolean
 		{
-			var bool:Boolean = openedMap.getValue(id) as Q_newfunc != null;
-			if(bool)
-			{
-				switch(id)
-				{
-					case EmFunctionID.EM_BANGHUI_INFO:
-					case EmFunctionID.EM_BANGHUI_CHENGYUAN:
-					case EmFunctionID.EM_BANGHUI_UPLEVEL:
-						if(GuildManager.instance().haveGuild)
-						{
-							return true;
-						}
-						else 
-						{
-							return false;
-						}
-						break;
-					case EmFunctionID.EM_BANGHUI_SPELL:
-						if(GuildManager.instance().haveGuild||GuildManager.instance().havePersonSkill)
-						{
-							return true;
-						}
-						return false;
-						break;
-				}
+			var cfg:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(!cfg){
+				return false;
 			}
-			return bool;
+			return checkOpenByLevel(cfg.q_level);
 		}
 		
 		/**

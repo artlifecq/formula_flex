@@ -1,15 +1,15 @@
 package com.rpgGame.appModule.guild
 {
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
-	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
-	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.enum.EmFunctionID;
@@ -26,6 +26,7 @@ package com.rpgGame.appModule.guild
 	public class GuildUPViewUI extends ViewUI
 	{
 		private var _skin:BangHui_Up;
+		private var _proBorder:InterObject3D
 		
 		public function GuildUPViewUI()
 		{
@@ -40,12 +41,16 @@ package com.rpgGame.appModule.guild
 			//EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			refeashValue();
 			finishMation(TaskType.MAINTYPE_GUILDDAILYTASK);
+			_proBorder=this.playInter3DAt(ClientConfig.getEffect("ui_bangpailiuguang"),_skin.proJindu.x+210,_skin.proJindu.y+10,0);
 		}
 		
 		override protected function onHide():void
 		{
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashValue);
 			//EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
+			_proBorder.stop();
+			_proBorder.dispose();
+			_proBorder=null;
 		}
 		
 		private function finishMation(type:int):void

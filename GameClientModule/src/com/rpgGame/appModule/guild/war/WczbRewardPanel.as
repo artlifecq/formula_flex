@@ -30,6 +30,7 @@ package com.rpgGame.appModule.guild.war
 		private var weiGRe:RewardGroup;
 		private var weiBRe:RewardGroup;
 		private var canyuRe:RewardGroup;
+		private var jingongRe:RewardGroup;
 		
 		public function WczbRewardPanel()
 		{
@@ -45,6 +46,7 @@ package com.rpgGame.appModule.guild.war
 			weiGRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid2_1,RewardGroup.ALIN_LEFT,5);
 			weiBRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid2_6,RewardGroup.ALIN_LEFT,5);
 			canyuRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid3_1,RewardGroup.ALIN_LEFT,5);
+			jingongRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid4_1,RewardGroup.ALIN_LEFT,5);
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void
@@ -71,8 +73,10 @@ package com.rpgGame.appModule.guild.war
 			wangGRe.setRewardByJsonStr(str);
 			str=cfg.q_rewards1;
 			wangBRe.setRewardByJsonStr(str);
-			str=cfg.q_reward4;
+			str=cfg.q_reward3;
 			canyuRe.setRewardByJsonStr(str);
+			str=cfg.q_reward4;
+			jingongRe.setRewardByJsonStr(str);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

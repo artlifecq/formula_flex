@@ -76,7 +76,7 @@ package com.rpgGame.app.scene
 		private var _headFace : BaseHeadFace;
 		private var _dialogFace : BubbleDialogFace;
 		protected var _fightChange : Boolean = false;
-		public var mapAreaTypes : Array = [];
+		public var mapAreaType:int=-1;
 		public var isWheel : Boolean = false;
 		public var isSwimming:Boolean = false;
 		
@@ -100,7 +100,7 @@ package com.rpgGame.app.scene
 			super.reSet($parameters);
 			_stateMachine = RoleStateMachine.create(this);
 			_buffSet = BuffSet.create(this);
-			mapAreaTypes.length = 0;
+			mapAreaType=-1;
 			isWheel = false;
 			
 			
@@ -206,7 +206,7 @@ package com.rpgGame.app.scene
 				_dialogFace.recycleSelf();
 				_dialogFace = null;
 			}
-			mapAreaTypes.length = 0;
+			mapAreaType=-1;
 			isWheel = false;
 			super.dispose();
 		}
