@@ -143,6 +143,9 @@ package com.rpgGame.app.ui.scene
 				case "sec_subbut1"://自动任务
 					taskAuto(true);
 					break;
+				case "chkAotu"://自动任务复选框
+					taskAutoChk();
+					break;
 				case "sec_subbut2"://离开场景
 					//AppManager.showApp(AppConstant.ACTIVETY_LIJIN_RESULT);
 					outToGame();
@@ -660,13 +663,22 @@ package com.rpgGame.app.ui.scene
 				icoList2Group.tweeRewardInBag();
 			}
 		}
-		
+		private function taskAutoChk():void
+		{
+			var chk:Boolean=_skin.chkAotu.isSelected;
+			taskAutoKey=chk;
+			if(taskAutoKey)
+			{
+				taskAuto(taskAutoKey);
+			}
+		}
 		
 		private function taskAuto(key:Boolean=false):void
 		{
 			if(taskAutoKey||key)
 			{
 				taskAutoKey=true;
+				_skin.chkAotu.isSelected=true;
 				TaskAutoManager.getInstance().startTaskAuto(TaskType.LIJIN_TASK);
 			}
 			

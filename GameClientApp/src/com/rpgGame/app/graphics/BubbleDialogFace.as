@@ -238,7 +238,7 @@ package com.rpgGame.app.graphics
 					var speak:String=MonsterDataManager.getNpcSpeak(monsterData.distributeId);
 					if(speak!=null&&speak!="")
 					{
-						TweenLite.delayedCall(2, speakBar, [speak]);
+						TweenLite.delayedCall(1.5, speakBar, [speak]);
 					}
 				}
 			}
@@ -256,6 +256,7 @@ package com.rpgGame.app.graphics
 		{
 			var camouflage : SceneRole = null;
 			var camouflageDialogFace : BubbleDialogFace;
+			var offset:int=0;
 			var ru : RenderUnit3D = null;
 			if (_owner)
 			{
@@ -289,11 +290,13 @@ package com.rpgGame.app.graphics
 					}
 					else
 					{
+						offset=170;
 						setBodyRender(null, null);
 					}
 				}
 				else
 				{
+					offset=170;
 					setBodyRender(null, null);
 				}
 				TweenLite.killDelayedCallsTo(hideWordFrame);
@@ -303,7 +306,7 @@ package com.rpgGame.app.graphics
 				}
 				_wordFrame.show(message);
 				this.addChild(_wordFrame);
-				updatePosition();
+				updatePosition(offset);
 				if (_wordTween)
 				{
 					_wordTween.kill();
@@ -326,12 +329,12 @@ package com.rpgGame.app.graphics
 			}
 		}
 		
-		private function updatePosition():void
+		private function updatePosition(offset:int=0):void
 		{
 			if (_wordFrame && _wordFrame.parent)
 			{
 				_wordFrame.x = -_wordFrame.width / 2;
-				_wordFrame.y = -_wordFrame.height-(_owner as SceneRole).headFace.height;
+				_wordFrame.y =-_wordFrame.height-(_owner as SceneRole).headFace.height-offset;
 			}
 		}
 	}

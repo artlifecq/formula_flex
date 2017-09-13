@@ -61,7 +61,8 @@ package com.rpgGame.coreData.enum
 		public static const TIANJIANGLIJING:int=209;
 		/** 极限挑战 **/
 		public static const JIXIANTIAOZHAN:int=210;
-		
+		/** 七日豪礼 **/
+		public static const QIRIHAOLI:int=10005;
 		public function EmMainBtnID()
 		{
 		}

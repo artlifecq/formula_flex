@@ -115,7 +115,10 @@ package com.rpgGame.appModule.maps
 						{
 							stop=new Vector3D(jumpPash[i].x,jumpPash[i].y,jumpPash[i].z);
 							pash=PolyUtil.findPath(districtWithPath, start, stop);
-							_lastPath=_lastPath.concat(pash);
+							if(pash!=null)
+							{
+								_lastPath=_lastPath.concat(pash);
+							}
 							if(i>0)
 							{
 								jumpData=MapJumpCfgData.getJumpportData(jumpPash[i].w);

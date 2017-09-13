@@ -286,7 +286,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_summon:String = "data.spell.Q_summon";
 		/**  属性的名字（针对不同的地方可以有不同的配置）	 */
 		public static const SpriteStatNameInfo:String = "data.SpriteStatNameInfo";
-
+		/**七日豪礼 */
+		public static const Q_sevenday:String = "data.Q_sevenday";
+		
 		public static function setup():void
 		{
 			regClass("data.activity.Q_online", com.rpgGame.coreData.clientConfig.Q_online);
@@ -398,6 +400,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
+			regClass("data.Q_sevenday", com.rpgGame.coreData.clientConfig.Q_sevenday);
 			regClass("data.Q_suggest", com.rpgGame.coreData.clientConfig.Q_suggest);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_title_control", com.rpgGame.coreData.clientConfig.Q_title_control);

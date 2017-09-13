@@ -5,14 +5,17 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.EmFunctionID;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
 	import flash.utils.getTimer;
