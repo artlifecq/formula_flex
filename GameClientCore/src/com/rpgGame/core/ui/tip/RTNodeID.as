@@ -1,7 +1,7 @@
 package com.rpgGame.core.ui.tip
 {
 	
-
+	
 	public class RTNodeID
 	{
 		//角色：主面板角色按钮-角色面板系统按钮（新功能id）-系统内部。。。
@@ -31,7 +31,7 @@ package com.rpgGame.core.ui.tip
 		public static const HORSE_UP:String=HORSE+"-up";
 		public static const FIGHTFLAG:String=MAIN_JINJIE+"-fihtflag";
 		public static const FIGHTFLAG_UP:String=FIGHTFLAG+"-up";
-	
+		
 		//装备面板
 		public static const MAIN_EQUIP:String="mainequip";
 		public static const EQUIP_QH:String=MAIN_EQUIP+"-strength";
@@ -66,6 +66,13 @@ package com.rpgGame.core.ui.tip
 		public static const GUILD_SKILL_SELF_BTN:String=GUILD_SKILL+"-btn";
 		public static const GUILD_SKILL_LEADER:String=GUILD_SKILL+"-leader";
 		public static const GUILD_SKILL_SELF_LEADER_BTN:String=GUILD_SKILL_LEADER+"-btn";
+		
+		//福利大厅
+		public static const MAIN_FULI:String="mainfuli";
+		public static const FULI_ZAILIAN:String=MAIN_FULI+"_zaixian";
+		public static const FULI_QIANDAO:String=MAIN_FULI+"_qiandao";
+		public static const FULI_JIHUOMA:String=MAIN_FULI+"_jihuoma";
+		public static const FULI_DENGJI:String=MAIN_FULI+"_dengji";
 		public function RTNodeID()
 		{
 		}

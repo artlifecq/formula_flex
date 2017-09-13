@@ -311,7 +311,7 @@ package com.rpgGame.appModule.pet
 		private function showPetModEff(data:PetInfo):void
 		{
 			var qPet:Q_girl_pet=PetCfg.getPet(data.modelId);
-			_avatar.updateBodyWithRes(qPet.q_panel_show_id,qPet.q_panel_show_id);
+			_avatar.updateBodyWithRes(qPet.q_panel_show_id);
 			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
@@ -601,11 +601,6 @@ package com.rpgGame.appModule.pet
 			super.onHide();
 			if(_blessPanel)
 				MCUtil.removeSelf(_blessPanel);
-			if(this._avatar)
-			{
-				this._avatar.dispose();
-				this._avatar=null;
-			}
 			_curSelectItem=null;
 			EventManager.removeEvent(PetEvent.PET_UP_RESULT,onUpdateExp);
 			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);

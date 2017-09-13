@@ -547,7 +547,7 @@ package com.rpgGame.app.ui.main.chat
 							break;
 						case 4: //入帮
 							id=infos[i].parameterInfos[0].id.hexValue;
-							arr[infos[i].i]=replaceGuildShow(str,0x4de822,id);
+							arr[infos[i].i]=replaceGuildShow(str,0x00ff33,id);
 							break;
 						case 5: //集结
 							var content:String=infos[i].parameterInfos[0].mod+","+infos[i].parameterInfos[0].x+","+infos[i].parameterInfos[0].y;

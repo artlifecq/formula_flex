@@ -196,15 +196,14 @@ package com.rpgGame.app.ui.main
 			//			this.addChild(this._topBar);
 			_expBar=new ExpBar();
 			this.addChild(this._expBar);		
-			this._smallMapBar = new SmallMapBar();
-			this.addChild(this._smallMapBar);
 			this._shortcutBar = new ShortcutBar();
 			this.addChild(this._shortcutBar);
 			this._navigationBar = new NavigationBar();
 			this.addChild(this._navigationBar);
 			this._chatBar = new ChatBar();
 			this.addChild(this._chatBar);
-			
+			this._smallMapBar = new SmallMapBar();
+			this.addChild(this._smallMapBar);
 			this._systemMsgBar=new SystemMsgBar();
 			this.addChild(this._systemMsgBar);
 			this._taskBar=new TaskBar();
@@ -515,20 +514,20 @@ package com.rpgGame.app.ui.main
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var mapCfg:Q_map=sceneData.getData();
-			
+			var index:int=this.getChildIndex(_smallMapBar);
 			if(HuBaoManager.instance().ishuing)
 			{
 				this.removeChild(_taskBar);
 				this.removeChild(_trackerBar);
-				this.addChild(_hubaoTrackerBar);
+				this.addChildAt(_hubaoTrackerBar,index);
 			}
 			else if(mapCfg.q_map_zones==1||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_NORMAL){//副本或者不是普通的基本地图
 				this.removeChild(_taskBar);
 				this.removeChild(_trackerBar);
 				this.removeChild(_hubaoTrackerBar);
-				this.addChild(_trackerBar);
+				this.addChildAt(_trackerBar,index);
 			}else{
-				this.addChild(_taskBar);
+				this.addChildAt(_taskBar,index);
 				this.removeChild(_trackerBar);
 				this.removeChild(_hubaoTrackerBar);
 			}		

@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.type
 {
 	import com.rpgGame.coreData.enum.JobEnum;
-
+	
 	/**
 	 * 图片配置URL
 	 * @author 陈鹉光
@@ -177,17 +177,12 @@ package com.rpgGame.coreData.type
 			{
 				case JobEnum.ROLE_1_TYPE:
 					return AssetUrl.HEAD_ICON_1+ret;
-					break;
 				case JobEnum.ROLE_2_TYPE:
-					if (sex==1) 
-					{
-						return AssetUrl.HEAD_ICON_2+ret;
-					}
-					return AssetUrl.HEAD_ICON_3+ret;		
-					break;
+					return AssetUrl.HEAD_ICON_2+ret;	
+				case JobEnum.ROLE_3_TYPE:
+					return AssetUrl.HEAD_ICON_3+ret;	
 				case JobEnum.ROLE_4_TYPE:
 					return AssetUrl.HEAD_ICON_4+ret;
-					break;
 			}
 			return "";
 		}

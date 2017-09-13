@@ -36,11 +36,21 @@ package com.rpgGame.app.ui.tab
 		 *是否显示 
 		 */
 		internal var isShow:Boolean;
-		public function UITabBarData(tabStyle:Class,viewStyle:Class,openShow:Boolean)
+		/**
+		 * X
+		 * */
+		public var initX:int;
+		/**
+		 * Y
+		 * */
+		public var initY:int;
+		public function UITabBarData(tabStyle:Class,viewStyle:Class,openShow:Boolean,x:int=0,y:int=0)
 		{
 			this.tabStyle=tabStyle;
 			this.viewStyle=viewStyle;
 			this.openShow=openShow;
+			this.initX=x;
+			this.initY=y;
 		}
 	}
 }

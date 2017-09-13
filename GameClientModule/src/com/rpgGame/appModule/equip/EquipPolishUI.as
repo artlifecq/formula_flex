@@ -965,7 +965,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
-			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.qItem.q_type==GoodsType.STRENGTH||info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
 		}
@@ -1317,7 +1317,7 @@ package com.rpgGame.appModule.equip
 		private function isPolish(info:EquipInfo):Boolean
 		{
 			var job:int=MainRoleManager.actorInfo.job;
-			if(info.qItem.q_job==job){
+			if(info.qItem.q_job==job&&info.polishLevel<EquipPolishCfg.maxLv){
 				return true;
 			}
 			return false;

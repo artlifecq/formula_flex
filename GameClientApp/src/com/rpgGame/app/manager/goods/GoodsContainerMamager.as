@@ -1417,7 +1417,7 @@ package com.rpgGame.app.manager.goods
 				{
 					if(info.index>GoodsContainerMamager.getMrg(info.containerID).hasOpenCount-1&&info.index<=GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
 					{
-						var id:String=getGridType(ItemContainerID.BackPack).toString()+"_"+info.index;
+						var id:String=getGridType(ItemContainerID.BackPack).toString()+"_"+(info.index+1);
 						info.unlockInfo=setUnlockData(ItemContainerID.BackPack,id);
 					}
 					else
@@ -1430,7 +1430,7 @@ package com.rpgGame.app.manager.goods
 				{
 					if(info.index>GoodsContainerMamager.getMrg(info.containerID).hasOpenCount-1&&info.index<=GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
 					{
-						id=getGridType(ItemContainerID.Storage).toString()+"_"+info.index;
+						id=getGridType(ItemContainerID.Storage).toString()+"_"+(info.index+1);
 						info.unlockInfo=setUnlockData(ItemContainerID.Storage,id);
 					}
 					else
@@ -1488,7 +1488,7 @@ package com.rpgGame.app.manager.goods
 		{
 			var pice:int=0;
 			var type:int=getGridType(containerID);
-			var starindex:int=getMrg(containerID).curUnlockIndex;
+			var starindex:int=getMrg(containerID).curUnlockIndex+1;
 			for(var i:int=starindex;i<=index;i++)
 			{
 				var id:String=type+"_"+index;

@@ -1,8 +1,6 @@
 package com.rpgGame.appModule.pet
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -13,6 +11,8 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -26,7 +26,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -81,7 +80,7 @@ package com.rpgGame.appModule.pet
 		private function initModEff():void
 		{
 			_qPet=PetCfg.getPet(_data.modelId);
-			_avatar.updateBodyWithRes(_qPet.q_panel_show_id,_qPet.q_panel_show_id);
+			_avatar.updateBodyWithRes(_qPet.q_panel_show_id);
 			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
@@ -189,13 +188,13 @@ package com.rpgGame.appModule.pet
 		private function showBuyPanel():void
 		{
 			var retw:int=ItemGetAdvisePanelExt.showBuyItem(_needItem,this,0,false);
-//			if (retw!=0) 
-//			{
-//				if (this.parent) 
-//				{
-//					(this.parent as PetMainPanelExt).updatePos();
-//				}
-//			}
+			//			if (retw!=0) 
+			//			{
+			//				if (this.parent) 
+			//				{
+			//					(this.parent as PetMainPanelExt).updatePos();
+			//				}
+			//			}
 		}
 		override protected function onStageResize(sw:int, sh:int):void
 		{
@@ -211,8 +210,6 @@ package com.rpgGame.appModule.pet
 			setAutoState(false);
 			if(this.parent)
 				(this.parent as PetMainPanelExt).updatePos();
-			if(this._avatar)
-				this._avatar.dispose();
 		}
 		override protected function onShow():void
 		{
@@ -235,7 +232,8 @@ package com.rpgGame.appModule.pet
 				//成功了停止自动进阶
 				if (isSuccess==1) 
 				{
-					UIPopManager.showAlonePopUI(CenterEftPop,"ui_jinjiechenggongchenggong_01");
+					AppManager.showAppNoHide(AppConstant.PET_LEVEL_UP,petId);
+					//					UIPopManager.showAlonePopUI(CenterEftPop,"ui_jinjiechenggongchenggong_01");
 					if (_isAutoState) 
 					{
 						setAutoState(false);
