@@ -55,6 +55,7 @@ package com.rpgGame.appModule.rank
 				_skin.lbZhiye.visible = false;
 				_skin.lbContent.visible = false;
 				_skin.uiOver.touchable = false;
+				_skin.uiOver.visible=false;
 				_topInfo = null;
 				return ;
 			}else{
@@ -62,6 +63,9 @@ package com.rpgGame.appModule.rank
 				_skin.lbName.visible = true;
 				_skin.lbZhiye.visible = true;
 				_skin.lbContent.visible = true;
+				_skin.lbLevel.visible = true;
+			/*	_skin.uiOver.touchable = true;
+				_skin.lbContent.visible = true;*/
 			}
 			_topInfo = info;
 			if(info.rank<=3&&info.rank>0)
@@ -130,6 +134,11 @@ package com.rpgGame.appModule.rank
 				{
 					MenuManager.showMenu(MenuUtil.getPlayerTargetRank(), [uise, userName], -1, -1, 80);
 				}
+			}else{
+				if(_triggeredFun!=null)
+				{
+					_triggeredFun(_topInfo);
+				}
 			}
 		}
 		private var _isSelect:Boolean;
@@ -153,13 +162,13 @@ package com.rpgGame.appModule.rank
 				_skin.uiOver.visible = !(state==ButtonState.UP);
 			}
 			
-			if(state== ButtonState.DOWN)
+		/*	if(state== ButtonState.DOWN)
 			{
 				if(_triggeredFun!=null)
 				{
 					_triggeredFun(_topInfo);
 				}
-			}
+			}*/
 		}
 	}
 }

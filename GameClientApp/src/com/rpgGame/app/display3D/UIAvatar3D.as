@@ -7,6 +7,7 @@ package com.rpgGame.app.display3D
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.role.action.ShowStateReference;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
@@ -301,7 +302,11 @@ package com.rpgGame.app.display3D
 		public function transition(actionType : int) : void
 		{
 			if (_role != null)
-				_role.stateMachine.transition(actionType);
+			{
+				var actionRef : ShowStateReference = _role.stateMachine.getReference(ShowStateReference) as ShowStateReference;
+				actionRef.defaultRotationY=defaultRotationY;
+				_role.stateMachine.transition(actionType,actionRef);
+			}
 		}
 		
 		/**
@@ -360,6 +365,8 @@ package com.rpgGame.app.display3D
 		{
 			defaultRotationY=value;
 			avatar3d.rotationY=defaultRotationY;
+			var actionRef : ShowStateReference = _role.stateMachine.getReference(ShowStateReference) as ShowStateReference;
+			actionRef.defaultRotationY=defaultRotationY;
 		}
 		
 		/**

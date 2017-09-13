@@ -238,14 +238,16 @@ package com.rpgGame.app.ui.tab
 			if(index<0)
 				return ;
 			var item:UITabBarData=_allDatas[index];
+			if(!isCanToTab( item.tabKey)){
+				index=getTabDataIndexByTabKey(_currentKey);
+				_touchGroup.selectedIndex=index;
+				return;	
+			}
 			if(_currentView){
 				_currentView.removeFromParent();
 			}
 			if(!item){
 				return;
-			}
-			if(!isCanToTab( item.tabKey)){
-				return;	
 			}
 			_currentKey = item.tabKey;
 			var view:ViewUI=_tabViewMap.getValue(item.viewStyle);

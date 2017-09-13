@@ -31,6 +31,8 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		public var NumZhanli:feathers.controls.UINumber;
 
+		public var avatarGrp:feathers.controls.Group;
+
 		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnInfo:feathers.controls.Button;
@@ -104,7 +106,7 @@ package org.mokylin.skin.app.meiren
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__MeiRen_Skin_UIAsset1_i(),__MeiRen_Skin_UIAsset2_i(),__MeiRen_Skin_UIAsset3_i(),btnPrev_i(),btnNext_i(),grpIcon_i(),gBuy_i(),btnTiaozhan_i(),uiName_i(),uiLevel_i(),__MeiRen_Skin_Group1_i(),__MeiRen_Skin_Group2_i(),__MeiRen_Skin_Group3_i(),icon_i(),btnJinjie_i(),btnInfo_i(),uiOK_i(),lbContent_i(),__MeiRen_Skin_SkinnableContainer5_i(),__MeiRen_Skin_Group4_i(),ico_up_i(),num_lv_i()];
+			this.elementsContent = [bg_i(),__MeiRen_Skin_UIAsset1_i(),__MeiRen_Skin_UIAsset2_i(),__MeiRen_Skin_UIAsset3_i(),btnPrev_i(),btnNext_i(),avatarGrp_i(),grpIcon_i(),gBuy_i(),btnTiaozhan_i(),uiName_i(),uiLevel_i(),__MeiRen_Skin_Group1_i(),__MeiRen_Skin_Group2_i(),__MeiRen_Skin_Group3_i(),icon_i(),btnJinjie_i(),btnInfo_i(),uiOK_i(),lbContent_i(),__MeiRen_Skin_SkinnableContainer5_i(),__MeiRen_Skin_Group4_i(),ico_up_i(),num_lv_i()];
 			
 			states = {
 			};
@@ -299,6 +301,18 @@ package org.mokylin.skin.app.meiren
 			temp.styleName = "ui/app/meiren/jineng.png";
 			temp.x = 101;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function avatarGrp_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			avatarGrp = temp;
+			temp.name = "avatarGrp";
+			temp.height = 360;
+			temp.width = 237;
+			temp.x = 317;
+			temp.y = 141;
 			return temp;
 		}
 

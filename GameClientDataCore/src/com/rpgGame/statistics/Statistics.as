@@ -20,8 +20,25 @@ package com.rpgGame.statistics
 		public static const STPE_START_LOAD_RES:int=110;
 		/**屏蔽字库加载完成**/
 		public static const STEP_LOAD_WORD:int=111;
+		/**
+		 * 发送socket连接请求 
+		 */		
+		public static const STEP_SEND_CONNECT_SOCKET:int = 102;
+		/**
+		 * 加载跨域文件 
+		 */		
+		public static const STEP_LOAD_POLICY_FILE:int = 103;
 		/**服务器链接成功**/
 		public static const STEP_CONNECT:int=112;
+		/**
+		 * 因为网络原因导致的socket连接失败 
+		 */		
+		public static const STEP_SOCKET_FAIL_FOR_IOERROR:int = 122;
+		/**
+		 * 因为安全原因导致的socket连接失败
+		 */		
+		public static const STEP_SOCKET_FAIL_FOR_SECURITY_ERROR:int = 123;
+		
 		/**创角成功**/
 		public static const STEP_CREATE_CHAR:int=113;
 		/**加载创角资源成功**/

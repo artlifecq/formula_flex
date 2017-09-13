@@ -49,7 +49,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__WangChengJiangLi_UIAsset1_i(),__WangChengJiangLi_UIAsset2_i(),__WangChengJiangLi_UIAsset3_i(),__WangChengJiangLi_UIAsset4_i(),btnClose1_i(),__WangChengJiangLi_UIAsset5_i(),__WangChengJiangLi_UIAsset6_i(),__WangChengJiangLi_UIAsset8_i(),__WangChengJiangLi_UIAsset9_i(),grpGrid1_i(),grpGrid2_i(),grpGrid3_i(),__WangChengJiangLi_UIAsset12_i(),grpGrid4_i()];
+			this.elementsContent = [__WangChengJiangLi_UIAsset1_i(),__WangChengJiangLi_UIAsset2_i(),__WangChengJiangLi_UIAsset3_i(),__WangChengJiangLi_UIAsset4_i(),btnClose1_i(),__WangChengJiangLi_UIAsset5_i(),__WangChengJiangLi_UIAsset6_i(),__WangChengJiangLi_UIAsset7_i(),__WangChengJiangLi_UIAsset8_i(),__WangChengJiangLi_UIAsset9_i(),grpGrid1_i(),grpGrid2_i(),grpGrid3_i(),__WangChengJiangLi_UIAsset12_i(),grpGrid4_i()];
 			
 			states = {
 			};
@@ -140,6 +140,15 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.styleName = "ui/app/banghui/wangcheng/guanyuanjiangli.png";
 			temp.x = 241;
 			temp.y = 162;
+			return temp;
+		}
+
+		private function __WangChengJiangLi_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/wangcheng/canyujiangli.png";
+			temp.x = 29;
+			temp.y = 531;
 			return temp;
 		}
 
