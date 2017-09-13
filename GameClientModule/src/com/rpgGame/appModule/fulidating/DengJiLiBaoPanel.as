@@ -38,5 +38,6 @@ package com.rpgGame.appModule.fulidating
 		}
 		
 		
+		
 	}
 }

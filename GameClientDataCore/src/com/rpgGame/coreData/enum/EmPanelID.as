@@ -111,7 +111,11 @@ package com.rpgGame.coreData.enum
 		/**
 		 * 七日豪礼
 		 */
-		public static const SEVENDAY_PANEL:int=27;
+		public static const SEVENDAY_PANEL:int=26;
+		/**
+		 * 福利大厅
+		 */
+		public static const ACTIVITY_FULI:int=27;
 		
 		public function EmPanelID()
 		{
