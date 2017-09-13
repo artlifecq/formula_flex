@@ -113,7 +113,7 @@ class BeautyRightGroup extends RightGroupBase
 			_avatar.updateBodyWithRes(_girlData.q_skinResID,_girlData.q_animatResID);
 		}else{
 			_power = 0;
-			_avatar.dispose();
+			_avatar.updateBodyWithRes(null);
 		}
 	}
 	
