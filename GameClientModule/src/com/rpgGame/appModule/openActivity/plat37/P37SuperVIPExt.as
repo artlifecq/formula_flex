@@ -20,6 +20,7 @@ package  com.rpgGame.appModule.openActivity.plat37
 	
 	import org.mokylin.skin.app.showgirl.ShowGirl_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
@@ -107,19 +108,36 @@ package  com.rpgGame.appModule.openActivity.plat37
 			}
 		}		
 	
-		
-		protected function onbtnChongzhiClick(event:MouseEvent):void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			GlobalFunction.iWantRecharge;
+			super.onTouchTarget(target);
+			switch(target)
+			{
+				case _skin.btnLingqu:
+				{
+					var vos:Vector.<ActivityVo>=Mgr.activityPanelMgr.getActivitysByType(_mainPanelType);
+					if (vos&&vos.length) 
+					{
+						if (vos[0].status==1) 
+						{
+							Mgr.activityPanelMgr.reqActivitiesGetRewardMsg(vos[0].activityId);
+						}
+					}
+					
+					break;
+				}
+				case _skin.btnChongzhi:
+				{
+					GlobalFunction.iWantRecharge;
+					break;
+				}
+				default:
+				{
+					break;
+				}
+			}
 		}
-		
-		
-		protected override function onShow():void
-		{
-			super.onShow();
-			
-			
-		}
+
 		private function loadGirl():void
 		{
 			var gurl:String = Mgr.activityPanelMgr.superVIP_girlImageURL;

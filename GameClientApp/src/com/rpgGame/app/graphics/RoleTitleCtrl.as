@@ -42,6 +42,10 @@ package com.rpgGame.app.graphics
 			for (var i:int = 0; i <len; i++) 
 			{
 				qTitle=TitleControlCfg.getTitle(_tiles[i]);
+				if (!qTitle) 
+				{
+					continue;
+				}
 				var arr:Array=_tileHash.getValue(qTitle.q_type);
 				if (!arr) 
 				{
