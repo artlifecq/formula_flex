@@ -284,12 +284,12 @@ package com.rpgGame.appModule.hunyin
 			if(MainRoleManager.actorInfo.sex==1)		
 			{
 				_skin.lbLaoGong.text=MainRoleManager.actorInfo.name;
-				_skin.lbLaoPo.text=Mgr.hunyinMgr.marriageInfos.marriagePlayerName;
+				_skin.lbLaoPo.text=Mgr.hunyinMgr.marriageInfos?Mgr.hunyinMgr.marriageInfos.marriagePlayerName:"";
 			}
 			else
 			{
 				_skin.lbLaoPo.text=MainRoleManager.actorInfo.name;
-				_skin.lbLaoGong.text=Mgr.hunyinMgr.marriageInfos.marriagePlayerName;
+				_skin.lbLaoGong.text=Mgr.hunyinMgr.marriageInfos?Mgr.hunyinMgr.marriageInfos.marriagePlayerName:"";
 			}
 		}
 		

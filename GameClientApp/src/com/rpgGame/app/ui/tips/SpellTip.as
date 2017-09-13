@@ -64,7 +64,8 @@ package com.rpgGame.app.ui.tips
 			riseIco.bindBg(_spellTip.Icon2);
 			_spellTip.lbShuoming.wordWrap=true;
 			_spellTip.lbShuoming.enableTextBatch=false;
-			_spellTip.lbJinjie2.wordWrap=true;			
+			_spellTip.lbJinjie2.wordWrap=true;		
+			_spellTip.lbJinjie2.enableTextBatch=false;
 		}		
 		
 		/**

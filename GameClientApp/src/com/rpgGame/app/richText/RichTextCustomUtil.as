@@ -210,7 +210,7 @@ package com.rpgGame.app.richText
 		 */
 		public static function getTextLinkCode(label : String = null, labelColor : Number = -1, linkType : String = null, linkData : String = null, tWidth : int = 0) : String
 		{
-			return RichTextConfig.getCode(RichTextCustomUnitType.LINK, null, label, labelColor, linkType, linkData, -2, tWidth);
+			return RichTextConfig.getCode(RichTextCustomUnitType.LINK, null, label, labelColor, linkType, linkData, 0, tWidth);
 		}
 		
 		/**
