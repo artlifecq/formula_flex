@@ -108,7 +108,10 @@ package com.rpgGame.coreData.enum
 		 * 声望商店
 		 */
 		public static const BATTLE_SHOP_PANEL:int=25;
-
+		/**
+		 * 七日豪礼
+		 */
+		public static const SEVENDAY_PANEL:int=27;
 		
 		public function EmPanelID()
 		{

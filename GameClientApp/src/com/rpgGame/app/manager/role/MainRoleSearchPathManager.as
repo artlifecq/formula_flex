@@ -18,6 +18,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.WorldMapEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -62,7 +63,8 @@ package com.rpgGame.app.manager.role
 
 		/** 自动寻路大于多少距离自动上马  */
 		public static const AUTO_MOUNT_UP_DISTANCE : int = 10;
-
+		/**寻路偏移半径*/
+		public static var OFFSETR : int = 200;
 		private static var currentSceneId : int;
 		private static var _data : Object;
 		private static var _onArrive:Function;
@@ -75,7 +77,7 @@ package com.rpgGame.app.manager.role
 
 		public function MainRoleSearchPathManager()
 		{
-
+			
 		}
 
 		setup();
@@ -86,6 +88,7 @@ package com.rpgGame.app.manager.role
 			EventManager.addEvent(SceneEvent.INTERACTIVE, onSceneInteractive);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			EventManager.addEvent(MapEvent.MAP_JUMP_COMPLETE, onWalktojump);
+			OFFSETR=GlobalSheetData.getSettingInfo(536)!=null?GlobalSheetData.getSettingInfo(536).q_int_value:200;
 		}
 
 		private static function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
@@ -145,8 +148,9 @@ package com.rpgGame.app.manager.role
 		//========================跨场景寻路========================================
 		//跨场景寻路静态方法
 		//===========================================================================================================
-		/**打完怪后再寻路，统一延时0.5秒处理*/		
-		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		
+		/**寻路前先拾取物品*/	
+		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false,isOffset:Boolean=false) : void
 		{
 			Lyt.a("走之前拾取物品");
 			var obj:Object=new Object();
@@ -157,25 +161,73 @@ package com.rpgGame.app.manager.role
 			obj.spacing=spacing;
 			obj.data=data;
 			obj.needSprite=needSprite;
+			obj.isOffset=isOffset;
 			PickAutoManager.getInstance().startPickAuto(pickOverScene,obj,true);
 		}
+		
+		
+		
+		
+		/**打完怪后再寻路，统一延时0.5秒处理*/	
 		private static function pickOverScene(obj:Object):void
 		{
 			if(obj==null)
 				return;
 			TrusteeshipManager.getInstance().isAutoWalking=true;
 			TweenLite.killDelayedCallsTo(walkToSceneTween);
-			TweenLite.delayedCall(0.5, walkToSceneTween, [obj.targetSceneId, obj.posx, obj.posy, obj.onArrive, obj.spacing,obj.data,obj.needSprite]);
+			TweenLite.delayedCall(0.5, walkToSceneTween, [obj.targetSceneId, obj.posx, obj.posy, obj.onArrive, obj.spacing,obj.data,obj.needSprite,obj.isOffset]);
 			
 		}
-		private static function walkToSceneTween(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		private static function walkToSceneTween(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false,isOffset:Boolean=false) : void
 		{
-			var walking:Boolean=walkToScene(targetSceneId, posx,posy,onArrive,spacing,data,needSprite);
+			var walking:Boolean;
+			if(isOffset)
+			{
+				walking=walkToSceneOffset(targetSceneId, posx,posy,onArrive,spacing,data,needSprite);
+			}
+			else
+			{
+				walking=walkToScene(targetSceneId, posx,posy,onArrive,spacing,data,needSprite);
+			}
 			if(!walking)
 			{
 				Lyt.a("寻路失败了----");
 			}
 		}
+		/**寻路偏移量*/	
+		public static function walkToSceneOffset(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			posy=-Math.abs(posy);
+			var positionX:Number=posx;
+			var positionY:Number=posy;
+			if(targetSceneId==SceneSwitchManager.currentMapId)//本地图才偏移
+			{
+				var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(MainRoleManager.actor.sceneName);
+				var position : Vector3D = new Vector3D(posx,posy,0);
+				if(PathFinderUtil.isPointInSide(_districtWithPath, position))//不是阻挡点才偏移
+				{
+					var randomR:int;
+					var randomQ:int;
+					for(var i:int=0;i<100;i++)
+					{
+						randomR=Math.floor(Math.random()*OFFSETR);
+						randomQ=Math.floor(Math.random()*360)* Math.PI / 180;
+						position.x=posx+int(randomR * Math.cos(randomQ));
+						position.y=posy+int(randomR * Math.sin(randomQ));
+						if(PathFinderUtil.isPointInSide(_districtWithPath, position))
+						{
+							positionX=position.x;
+							positionY=position.y;
+							spacing=0;
+							break;
+						}
+					}
+				}
+				
+			}
+			walkToScene(targetSceneId, positionX,positionY,onArrive,spacing,data,needSprite);
+		}
+		
 		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : Boolean
 		{
 
