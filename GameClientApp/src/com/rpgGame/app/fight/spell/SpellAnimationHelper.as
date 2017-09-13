@@ -97,6 +97,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
+					effectRu.setErrorCallBack(avatarRuError, atkor.avatar);
 					effectRu.play(0,speed);
 					func=atkor.avatar.removeRenderUnit;
 				}
@@ -126,6 +127,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 					func=removeSceneObjUnitFromScene;
 				}
@@ -190,6 +192,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
+					effectRu.setErrorCallBack(avatarRuError, atkor.avatar);
 					effectRu.play(0,speed);
 					func=atkor.avatar.removeRenderUnit;
 				}
@@ -219,6 +222,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 					func=removeSceneObjUnitFromScene;
 				}
@@ -267,6 +271,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, role.avatar);
+					effectRu.setErrorCallBack(avatarRuError, role.avatar);
 					effectRu.play(0,speed);
 				}
 				else if (animatData.scene_res)
@@ -294,6 +299,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 				selfEffectObjID++;
@@ -339,6 +345,7 @@ package com.rpgGame.app.fight.spell
 				effectRu.rotationY = 0;
 				effectRu.castsShadows = false;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
+				effectRu.setErrorCallBack(avatarRuError, target.avatar);
 				effectRu.play(0,speed);
                 return effectRu;
 			}
@@ -395,6 +402,7 @@ package com.rpgGame.app.fight.spell
 				effectRu.castsShadows = false;
 //				effectRu.completeWhenInvisible = true;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
+				effectRu.setErrorCallBack(avatarRuError, target.avatar);
 				effectRu.play(0);
                 return effectRu;
 			}
@@ -446,6 +454,7 @@ package com.rpgGame.app.fight.spell
 						effectRu.castsShadows = false;
 						effectRu.completeWhenInvisible = true;
 						effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, targetRole.avatar);
+						effectRu.setErrorCallBack(avatarRuError, targetRole.avatar);
 						effectRu.play(0,speed);
 					}
 				}
@@ -475,6 +484,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 				hurtEffectObjID++;
@@ -512,6 +522,7 @@ package com.rpgGame.app.fight.spell
 						effectRu.setPlayCompleteCallBack(finishFunc, role,mountResID);
 					else
 						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 				else if (animatData.role_res)
@@ -536,6 +547,7 @@ package com.rpgGame.app.fight.spell
 						effectRu.castsShadows = false;
 						effectRu.completeWhenInvisible = true;
 						effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, role.avatar);
+						effectRu.setErrorCallBack(avatarRuError, role.avatar);
 						effectRu.play(0,speed);
 					}
 				}
@@ -598,6 +610,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.castsShadows = false;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
+					effectRu.setErrorCallBack(avatarRuError, atkor.avatar);
 					effectRu.play(0,speed);
 				}else if (animatData.scene_res)
 				{
@@ -617,6 +630,7 @@ package com.rpgGame.app.fight.spell
 					SceneManager.addSceneObjToScene(effectRu, true);
 					
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 				sceneWarningEffectObjID++;
@@ -707,6 +721,7 @@ package com.rpgGame.app.fight.spell
 //					else
 //					{
 						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+						effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 //					}
 					effectRu.play(0,speed);
 					
@@ -986,6 +1001,12 @@ package com.rpgGame.app.fight.spell
 			SpellEffectRecordCtrl.removeRecord(ru);
 		}
 		
+		private static function avatarRuError(avatar:RenderSet3D, ru:RenderUnit3D):void
+		{
+			avatar.removeRenderUnit(ru);
+			SpellEffectRecordCtrl.removeRecord(ru);
+		}
+		
 		/**
 		 * 同步施法特效 
 		 * @param time
@@ -1030,6 +1051,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = 0;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
+					effectRu.setErrorCallBack(avatarRuError,atkor.avatar);
 					effectRu.play(time,speed);
 				}
 				else if (animatData.scene_res)
@@ -1057,6 +1079,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
+					effectRu.setErrorCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(time,speed);
 				}
 				selfEffectObjID++;
