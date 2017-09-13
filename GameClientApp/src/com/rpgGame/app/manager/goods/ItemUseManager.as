@@ -354,20 +354,9 @@ package com.rpgGame.app.manager.goods
 				case GoodsType.MERIDIANSTONE:
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_MERIDIAN);
 					return;
-			/*	case GoodsType.CHAT:
-					return;
-				case GoodsType.TRANSFER:
-					return;
-				case GoodsType.TASK:
-					return;
-				case GoodsType.BUFF:
-					return;
-				case GoodsType.NAMES:
-					return;
-				case GoodsType.MOUNT:
-					return;
-				case GoodsType.MERIDIANSTONE:
-					return;*/
+				default:
+					FunctionOpenManager.openPanelBypanelId(item.qItem.q_ui);
+					break;
 			}
 			
 			/*switch(item.getNormalUsableType)
