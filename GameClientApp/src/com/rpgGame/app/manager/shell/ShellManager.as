@@ -51,9 +51,11 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.cfg.PanelCfgData;
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.cfg.item.ItemConfig;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
+    import com.rpgGame.coreData.clientConfig.Q_panel;
     import com.rpgGame.coreData.enum.BoneNameEnum;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.JobEnum;
@@ -98,6 +100,8 @@ package com.rpgGame.app.manager.shell
     
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
+    
+    import utils.TimerServer;
 
     /*********************************************************************************************************
      * 单机版 指令管理
@@ -153,12 +157,45 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&testRoll".toLowerCase()] = this.testRoll;
 			this._funcs["&sound".toLowerCase()] = this.sound;
 			this._funcs["&showAttChange".toLowerCase()] = this.showAttChange;
+			this._funcs["&cdShowPanel".toLowerCase()] = this.cdShowPanel;
 			
             
             // cross
             this._funcs["&enterCross".toLowerCase()] = this.enterCross;
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
+		
+		private function cdShowPanel():void
+		{
+			if(TimerServer.has(showPanel)){
+				TimerServer.remove(showPanel);
+			}else{
+				TimerServer.addLoop(showPanel,1000);
+			}
+		}
+		
+		private function showPanel():void
+		{
+			var list:Array=PanelCfgData.idList;
+			if(panelIndex>=list.length){
+				panelIndex=0;
+			}else{
+				if(panelIndex!=0){
+					var prePanel:int=(list[panelIndex-1] as Q_panel).id;
+					FunctionOpenManager.openPanelBypanelId(panel);	
+				}
+			}
+			var panel:int=(list[panelIndex] as Q_panel).id;
+			try
+			{
+				FunctionOpenManager.openPanelBypanelId(panel);	
+			} 
+			catch(error:Error) 
+			{
+				
+			}
+			panelIndex++;
+		}
 		
 		private function testRoll():void
 		{
@@ -529,6 +566,7 @@ package com.rpgGame.app.manager.shell
         
         private var role : SceneRole;
         private var index : int = 0;
+        private var panelIndex:int;
         private function addHero(id : int, x : int, y : int) : void {
             if (null == role) {
                 var data : HeroData = new HeroData();

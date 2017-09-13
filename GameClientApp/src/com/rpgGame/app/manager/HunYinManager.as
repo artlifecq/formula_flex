@@ -53,7 +53,7 @@ package com.rpgGame.app.manager
 		 * */
 		public function get Power():int
 		{
-			return _marriageInfo.fihtPower;
+			return _marriageInfo?_marriageInfo.fihtPower:0;
 		}
 		/**
 		 *是否结婚 
@@ -102,12 +102,15 @@ package com.rpgGame.app.manager
 		 * */
 		public function get marriageLoggerInfos():Vector.<MarriageLoggerInfo>
 		{
-			return _marriageInfo.marriageLoggerInfos;
+			return _marriageInfo?_marriageInfo.marriageLoggerInfos:null;
 		}
 		
 		/**获取互动次数*/
 		public function gethudongNumByType(type:int):int
 		{
+			if(!_marriageInfo){
+				return 0; 
+			}
 			for(var i:int=0;i<_marriageInfo.interactionInfos.length;i++)
 			{
 				if(_marriageInfo.interactionInfos[i].type==type)

@@ -314,6 +314,9 @@ package com.rpgGame.core.app
 		 */		
 		private static function preTurnModule( appInfo:AppInfo, data:Object, openTable:int, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
 		{
+			if(!appInfo){
+				return;
+			}
 			if( AppOpenUtil.isCanOpenApp(appInfo.appName,data,openTable) )
 				turnModule( appInfo, data, openTable, parentContiner, isCloseAll, isAutoHide );
 		}

@@ -48,9 +48,11 @@ package com.rpgGame.appModule.guild
 		{
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashValue);
 			//EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
-			_proBorder.stop();
-			_proBorder.dispose();
-			_proBorder=null;
+			if(_proBorder){
+				_proBorder.stop();
+				_proBorder.dispose();
+				_proBorder=null;
+			}
 		}
 		
 		private function finishMation(type:int):void
