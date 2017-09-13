@@ -145,7 +145,8 @@ package com.rpgGame.app.manager.role
 		//========================跨场景寻路========================================
 		//跨场景寻路静态方法
 		//===========================================================================================================
-		/**打完怪后再寻路，统一延时0.5秒处理*/		
+		
+		/**寻路前先拾取物品*/	
 		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
 			Lyt.a("走之前拾取物品");
@@ -159,6 +160,11 @@ package com.rpgGame.app.manager.role
 			obj.needSprite=needSprite;
 			PickAutoManager.getInstance().startPickAuto(pickOverScene,obj,true);
 		}
+		
+		
+		
+		
+		/**打完怪后再寻路，统一延时0.5秒处理*/	
 		private static function pickOverScene(obj:Object):void
 		{
 			if(obj==null)
@@ -170,12 +176,45 @@ package com.rpgGame.app.manager.role
 		}
 		private static function walkToSceneTween(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
-			var walking:Boolean=walkToScene(targetSceneId, posx,posy,onArrive,spacing,data,needSprite);
+			var walking:Boolean=walkToSceneOffset(targetSceneId, posx,posy,onArrive,spacing,data,needSprite);
 			if(!walking)
 			{
 				Lyt.a("寻路失败了----");
 			}
 		}
+		/**寻路偏移量*/	
+		public static function walkToSceneOffset(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			posy=-Math.abs(posy);
+			var positionX:Number=posx;
+			var positionY:Number=posy;
+			if(targetSceneId==SceneSwitchManager.currentMapId)//本地图才偏移
+			{
+				var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(MainRoleManager.actor.sceneName);
+				var position : Vector3D = new Vector3D(posx,posy,0);
+				if(PathFinderUtil.isPointInSide(_districtWithPath, position))//不是阻挡点才偏移
+				{
+					var randomR:int;
+					var randomQ:int;
+					for(var i:int=0;i<100;i++)
+					{
+						randomR=Math.floor(Math.random()*200);
+						randomQ=Math.floor(Math.random()*360)* Math.PI / 180;
+						position.x=posx+int(randomR * Math.cos(randomQ));
+						position.y=posy+int(randomR * Math.sin(randomQ));
+						if(PathFinderUtil.isPointInSide(_districtWithPath, position))
+						{
+							positionX=position.x;
+							positionY=position.y;
+							break;
+						}
+					}
+				}
+				
+			}
+			walkToScene(targetSceneId, positionX,positionY,onArrive,spacing,data,needSprite);
+		}
+		
 		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : Boolean
 		{
 

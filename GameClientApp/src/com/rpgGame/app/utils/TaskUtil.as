@@ -465,29 +465,11 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
-				walkAdd=0;
 				postWalk(monsterData.q_mapid, monsterData.q_center_x,monsterData.q_center_y,onArrive);
 				//MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
 			}
 				
 		}
-		
-		
-		/**
-		 * 寻路任务怪
-		 * @param modeId
-		 *
-		 */
-		public static function monsterTaskWalk(modeId : int,onArrive:Function=null) : void
-		{
-			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
-			if (monsterData)
-			{
-				postWalk(monsterData.q_mapid, monsterData.q_center_x,monsterData.q_center_y,onArrive);
-			}
-		}
-		
 		/**
 		 * 寻路任务点
 		 * @param modeId
@@ -498,16 +480,16 @@ package com.rpgGame.app.utils
 			
 			if (post!=null&&post.length==3)
 			{
-				walkAdd=0;
+				
+				
 				postWalk(post[0], post[1], post[2],onArrive,data,needSprite);
 				
 			}
 		}
-		private static var walkAdd:int=0;
-		public static function postWalk(post0 : int, posx:Number,posy:Number,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
+		public static function postWalk(sid : int, posx:Number,posy:Number,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
 		{
 			Lyt.a("任务开始寻路=====");
-			var walking:Boolean=MainRoleSearchPathManager.walkToScenePreAttack(post0, posx, posy,onArrive, 100,data,needSprite);
+			var walking:Boolean=MainRoleSearchPathManager.walkToScenePreAttack(sid, posx, posy,onArrive, 100,data,needSprite);
 		}
 		/**
 		 * 寻路跳跃点

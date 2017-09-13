@@ -7,12 +7,14 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.EmFunctionID;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
 	import flash.utils.getTimer;
@@ -130,6 +132,7 @@ package com.rpgGame.app.controller.keyboard
 				case "30": //U
 					break;
 				case "6": //V pk
+					MainButtonManager.openActivityButton(EmMainBtnID.QIRIHAOLI);
 					//AppManager.showApp(AppConstant.MOUNT_PANEL);
 					//					PKMamager.ChangeNextPkModel();
 					break;
@@ -141,7 +144,9 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JUEXUE);
 					break;
 				case "2": //Z 
-					
+					//AppManager.showAppNoHide(AppConstant.SEVENDAY_PANEL);
+					MainButtonManager.openActivityButton(EmMainBtnID.QIRIHAOLI);
+					MainButtonManager.setActivityPointNumButton(EmMainBtnID.QIRIHAOLI,10);
 					break;
 				case "50": //显示掉落物图标
 					//DropGoodsManager.getInstance().showScaneName(isdown);
