@@ -384,5 +384,17 @@ package  com.rpgGame.app.reward
 		{
 			return icons;
 		}
+		
+		public function set gray(value:Boolean):void
+		{
+			if(value)
+			{
+				GrayFilter.gray(this);
+			}
+			else
+			{
+				GrayFilter.unGray(this);
+			}
+		}
 	}
 }

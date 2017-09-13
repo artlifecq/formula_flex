@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
+	import com.rpgGame.app.ui.main.activityBar.item.ActivityPointNumButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
@@ -133,6 +134,8 @@ package com.rpgGame.app.ui.main.buttons
 					return new ActivityButton();
 				case EmMainBtnID.HONGBAO:
 					return new ActivityRedRewardButton();
+				case EmMainBtnID.QIRIHAOLI:
+					return new ActivityPointNumButton();
 				case EmMainBtnID.PIPEIDUILIE:
 					return new MultyActivityButton();
 				case EmMainBtnID.SHIJIEBOSS:
@@ -233,7 +236,20 @@ package com.rpgGame.app.ui.main.buttons
 				}
 			}
 		}
-		
+		/** 设置带红点按钮数字 byid----yt
+		 * */
+		public static function setActivityPointNumButton(id:int,num:int):void
+		{
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
+			{
+				var button:ActivityPointNumButton= MainButtonManager.getButtonByInfo(info) as ActivityPointNumButton;
+				if(button)
+				{
+					button.setNum(num);
+				}
+			}
+		}
 		
 		
 	}

@@ -581,6 +581,10 @@ package com.rpgGame.core.app
 		
 		/**背包快满了提示*/
 		public static var BACK_FULL_TISHI:String = createAppInfo("role.BaoGuoTiShiPanel","baoguo");
+
+		/**七天豪礼面板*/
+		public static var SEVENDAY_PANEL:String = createAppInfo("sevenday.SevendayPanel","sevenday",EmPanelID.SEVENDAY_PANEL);
+
 		/**福利大厅*/
 		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating");
 		//开服bug
