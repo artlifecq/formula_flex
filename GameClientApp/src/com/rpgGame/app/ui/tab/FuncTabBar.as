@@ -17,9 +17,9 @@ package com.rpgGame.app.ui.tab
 	 */
 	public class FuncTabBar extends UITabBar
 	{
-		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>)
+		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>,crosswise:Boolean=true)
 		{
-			super(tab, datas);
+			super(tab, datas,crosswise);
 		}
 		
 		override public function show(data:*=null, openTable:int=0):void

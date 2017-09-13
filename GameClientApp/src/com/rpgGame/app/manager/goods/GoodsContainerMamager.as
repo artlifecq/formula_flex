@@ -1488,7 +1488,7 @@ package com.rpgGame.app.manager.goods
 		{
 			var pice:int=0;
 			var type:int=getGridType(containerID);
-			var starindex:int=getMrg(containerID).curUnlockIndex;
+			var starindex:int=getMrg(containerID).curUnlockIndex+1;
 			for(var i:int=starindex;i<=index;i++)
 			{
 				var id:String=type+"_"+index;
