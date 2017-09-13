@@ -14,7 +14,13 @@ package com.rpgGame.coreData.clientConfig
 	public class ConfigClassRegister
 	{
 		private static var _classMap:HashMap = new HashMap();
-				/**  弹道效果										 */
+				/**  在线奖励数据库			 */
+		public static const Q_online:String = "data.activity.Q_online";
+		/**  签到数据库	 */
+		public static const Q_sign_accumulate:String = "data.activity.Q_sign_accumulate";
+		/**  等级成长礼包		 */
+		public static const Q_upgrade:String = "data.activity.Q_upgrade";
+		/**  弹道效果										 */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
 		/**  客户端区域数据			 */
 		public static const ClientArea:String = "data.ClientArea";
@@ -140,7 +146,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库									前端显示对应关卡战斗力						 */
+		/**  美人基本信息数据库										前端显示对应关卡战斗力						 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -164,7 +170,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表						 */
 		public static const Q_junjie:String = "data.Q_junjie";
-		/**  军阶升级条件表					 */
+		/**  军阶条件数据表		 */
 		public static const Q_junjie_condition:String = "data.Q_junjie_condition";
 		/**  王城名称对照表（仅客户端使用）		 */
 		public static const Q_kindomname:String = "data.Q_kindomname";
@@ -230,7 +236,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
-		/**  排行榜称号									 */
+		/**  排行榜称号							 */
 		public static const Q_title_control:String = "data.Q_title_control";
 		/**  填色配置表						 */
 		public static const Q_vertex_color:String = "data.Q_vertex_color";
@@ -285,6 +291,9 @@ package com.rpgGame.coreData.clientConfig
 		
 		public static function setup():void
 		{
+			regClass("data.activity.Q_online", com.rpgGame.coreData.clientConfig.Q_online);
+			regClass("data.activity.Q_sign_accumulate", com.rpgGame.coreData.clientConfig.Q_sign_accumulate);
+			regClass("data.activity.Q_upgrade", com.rpgGame.coreData.clientConfig.Q_upgrade);
 			regClass("data.animat.EffectAnimation", com.rpgGame.coreData.clientConfig.EffectAnimation);
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
@@ -294,6 +303,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
+			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);
 			regClass("data.GlobalSetting", com.rpgGame.coreData.clientConfig.GlobalSetting);
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
@@ -385,6 +395,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_rank_designation", com.rpgGame.coreData.clientConfig.Q_rank_designation);
 			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
+			regClass("data.Q_sevenday", com.rpgGame.coreData.clientConfig.Q_sevenday);
 			regClass("data.Q_shuxing", com.rpgGame.coreData.clientConfig.Q_shuxing);
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);

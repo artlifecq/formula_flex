@@ -32,7 +32,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_btn_tips:String;
 		 /**  在副本展示(0,不展示,1展示) */
 		public var q_show_zone:int;
-		 /**  是否是运营活动按钮 */
+		 /**  运营活动按钮（活动功能此处均需配为1） */
 		public var q_is_activity:int;
 
 	}
