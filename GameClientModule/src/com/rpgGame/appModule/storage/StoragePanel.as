@@ -143,7 +143,7 @@ package com.rpgGame.appModule.storage
 				return;
 			}
 			
-			if(grid.gridInfo.isUnlock&&(realIndex+1)>StorageManager.instance.hasOpenCount)
+			if(grid.gridInfo.isUnlock&&realIndex>StorageManager.instance.hasOpenCount-1)
 			{
 				StorageManager.instance.unLockGrid(realIndex);
 				return;

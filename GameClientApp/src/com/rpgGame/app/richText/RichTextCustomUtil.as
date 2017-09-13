@@ -113,6 +113,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -209,7 +210,7 @@ package com.rpgGame.app.richText
 		 */
 		public static function getTextLinkCode(label : String = null, labelColor : Number = -1, linkType : String = null, linkData : String = null, tWidth : int = 0) : String
 		{
-			return RichTextConfig.getCode(RichTextCustomUnitType.LINK, null, label, labelColor, linkType, linkData, 0, tWidth);
+			return RichTextConfig.getCode(RichTextCustomUnitType.LINK, null, label, labelColor, linkType, linkData, -2, tWidth);
 		}
 		
 		/**
@@ -325,16 +326,24 @@ package com.rpgGame.app.richText
 					MainRoleSearchPathManager.walkToScene(flypos[0], flypos[1], flypos[2], null, 200);
 					break;
 				case RichTextCustomLinkType.ITEM_SHOW_TYPE:
+					TipTargetManager.remove(unit.displayObj);
 					var info:ClientItemInfo=ChatManager.getShowItemInfo(unitData);
-					if(info is EquipInfo)//.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2
-						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
-					else
-						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+					if(info is EquipInfo){//.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2
+						if(!TipTargetManager.hasTipsEventListener(unit.displayObj))
+						{
+							TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
+						}
+					}
+					else{
+						if(!TipTargetManager.hasTipsEventListener(unit.displayObj)){
+							TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+						}
+					}
 					break;
 				case RichTextCustomLinkType.SHOW_PANEL_TYPE:
 					var panelID:int=int(unitData.linkData);
 					//					var id:String=ChatUtil.getPanel(t);
-					FunctionOpenManager.openPanelByFuncID(panelID);
+					FunctionOpenManager.openModeByPanelInfo(PanelCfgData.getPanelCfg(panelID));
 					//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
@@ -446,7 +455,7 @@ package com.rpgGame.app.richText
 					{
 						//						var guildId:Number=parseInt(unitData.linkData);
 						id = new long(unitData.linkData);
-						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO,id);
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_LIEBIAO,id);
 					}else{
 						NoticeManager.showNotifyById(60218);
 					}			

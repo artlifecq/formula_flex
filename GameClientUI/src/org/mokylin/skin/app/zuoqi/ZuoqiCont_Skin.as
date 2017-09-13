@@ -534,10 +534,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			currentAvatar = temp;
 			temp.name = "currentAvatar";
-			temp.height = 362;
-			temp.width = 408;
-			temp.x = 142;
-			temp.y = 96;
+			temp.height = 372;
+			temp.width = 542;
+			temp.x = 81;
+			temp.y = 86;
 			return temp;
 		}
 
@@ -853,10 +853,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			nextAvatar = temp;
 			temp.name = "nextAvatar";
-			temp.height = 362;
-			temp.width = 408;
-			temp.x = 142;
-			temp.y = 96;
+			temp.height = 372;
+			temp.width = 542;
+			temp.x = 81;
+			temp.y = 86;
 			return temp;
 		}
 

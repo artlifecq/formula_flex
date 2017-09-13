@@ -63,8 +63,6 @@ package com.rpgGame.app.manager.goods
 		public var curUnlockIndex:int;
 		/**当前待解锁的开格时间*/
 		public var unlockTime : int;
-		/**是否能免费解锁*/
-		public var isMianFei:Boolean;
 		
 		/**此处type为背包或者仓库table栏的分类  非物品type*/
 		protected var CUR_TYPE:uint;
@@ -234,7 +232,7 @@ package com.rpgGame.app.manager.goods
 		public function setItemsInfo(cellnum:int,items:Vector.<ItemInfo>):void
 		{
 			hasOpenCount = cellnum;
-			curUnlockIndex = hasOpenCount;
+//			curUnlockIndex = hasOpenCount;
 			
 			_goodsList=[];
 			for(var i:int=0; i<items.length; i++)
@@ -1242,16 +1240,15 @@ package com.rpgGame.app.manager.goods
 		public function isUnlock(index:int):Boolean
 		{
 			if(containerId==ItemContainerID.BackPack||containerId==ItemContainerID.Storage)
-				return index >= curUnlockIndex;
+				return index > hasOpenCount-1;
 			return false;
 		}
 		
 		public function setUnlocked(index:int):void
 		{
-			curUnlockIndex = index;
 			hasOpenCount = index;
 			//						unlockData.setUnlockedSize(hasOpenCount-initOpenCount);
-			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_UNLOCK, containerId,index);
+			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_UNLOCK, containerId,index-1);
 		}
 		
 		/**如果是需要解锁格子的容器，需要重写这个方法**/
@@ -1418,9 +1415,9 @@ package com.rpgGame.app.manager.goods
 			{
 				case ItemContainerID.BackPack:
 				{
-					if(info.index==GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
+					if(info.index>GoodsContainerMamager.getMrg(info.containerID).hasOpenCount-1&&info.index<=GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
 					{
-						var id:String=getGridType(ItemContainerID.BackPack).toString()+"_"+info.index;
+						var id:String=getGridType(ItemContainerID.BackPack).toString()+"_"+(info.index+1);
 						info.unlockInfo=setUnlockData(ItemContainerID.BackPack,id);
 					}
 					else
@@ -1431,9 +1428,9 @@ package com.rpgGame.app.manager.goods
 				}
 				case ItemContainerID.Storage:
 				{
-					if(info.index==GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
+					if(info.index>GoodsContainerMamager.getMrg(info.containerID).hasOpenCount-1&&info.index<=GoodsContainerMamager.getMrg(info.containerID).curUnlockIndex)
 					{
-						id=getGridType(ItemContainerID.Storage).toString()+"_"+info.index;
+						id=getGridType(ItemContainerID.Storage).toString()+"_"+(info.index+1);
 						info.unlockInfo=setUnlockData(ItemContainerID.Storage,id);
 					}
 					else
@@ -1457,7 +1454,7 @@ package com.rpgGame.app.manager.goods
 		public static function setUnlocked(containerID:int, index:int):void
 		{
 			getMrg(containerID).setUnlocked(index);
-			setItemInfo(containerID, index, null);
+			setItemInfo(containerID, index-1, null);
 		}
 		
 		/**获取格子类型
@@ -1491,7 +1488,7 @@ package com.rpgGame.app.manager.goods
 		{
 			var pice:int=0;
 			var type:int=getGridType(containerID);
-			var starindex:int=getMrg(containerID).curUnlockIndex;
+			var starindex:int=getMrg(containerID).curUnlockIndex+1;
 			for(var i:int=starindex;i<=index;i++)
 			{
 				var id:String=type+"_"+index;
@@ -1507,11 +1504,13 @@ package com.rpgGame.app.manager.goods
 		public function setGridUnLuck(index:int,tiem:int):void
 		{
 			curUnlockIndex=index-1;
-			hasOpenCount = curUnlockIndex;
 			unlockTime=tiem;
 			updateTime();
+			if(curUnlockIndex>hasOpenCount-1){
+				AppManager.showAppNoHide(AppConstant.GRID_OPEM);
+			}
 			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_ONLOCK,this.containerId);
-			TimerServer.addLoop(updateTime,1000);		
+			TimerServer.addLoop(updateTime,1000);
 		}
 		
 		private function updateTime():void
@@ -1520,13 +1519,7 @@ package com.rpgGame.app.manager.goods
 			if(unlockTime<=0)	{
 				TimerServer.remove(updateTime);
 				unlockTime=0;
-				isMianFei=true;
-//				EventManager.dispatchEvent(ItemEvent.ITEM_GRID_CANLOCK,this.containerId);
-				AppManager.showAppNoHide(AppConstant.GRID_OPEM);
-			}
-			else
-			{		
-				isMianFei=false;
+				//				AppManager.showAppNoHide(AppConstant.GRID_OPEM);
 			}
 		}	
 	}	

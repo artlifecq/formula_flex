@@ -2,9 +2,12 @@ package com.rpgGame.appModule.rank
 {
 	import com.rpgGame.app.manager.RankListManager;
 	import com.rpgGame.core.events.RankListEvent;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.RankListType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.top.bean.TopInfo;
 	import com.rpgGame.netData.top.message.ResToplistToClientMessage;
+	import com.rpgGame.netData.top.message.SCNoInTopMessage;
 	
 	import away3d.events.Event;
 	
@@ -75,13 +78,16 @@ package com.rpgGame.appModule.rank
 			if(_selectinfo == info)
 				return ;
 			_selectinfo = info;
+			if(info){
+				_bindImg.visible=_bindLable.visible=false;
+			}
 			_rightGroup.updateModle(info);
 			var length:int = _cellList.length;
 			for(var i:int = 0;i<length;i++)
 			{
-				_cellList[i].updatCellByInfo(info);
+				_cellList[i].chackItem(info);
 			}
-			_selfCell.updatCellByInfo(info);
+			_selfCell.chackItem(info);
 		}
 		protected var _totalPage:int;
 		protected var _currentPage:int;
@@ -102,12 +108,31 @@ package com.rpgGame.appModule.rank
 		{
 			EventManager.removeEvent(RankListEvent.UPDATATYPEINFO,updataTypeInfoHandler);
 			EventManager.removeEvent(RankListEvent.UPDATAEVERYPAGELIST,updataPageInfoHandler);
+			EventManager.removeEvent(RankListEvent.NO_IN_TOP,setNoInRank);
 		}
 		
 		private function addEvent():void
 		{
 			EventManager.addEvent(RankListEvent.UPDATATYPEINFO,updataTypeInfoHandler);
 			EventManager.addEvent(RankListEvent.UPDATAEVERYPAGELIST,updataPageInfoHandler);
+			EventManager.addEvent(RankListEvent.NO_IN_TOP,setNoInRank);
+		}
+		
+		private function setNoInRank(msg:SCNoInTopMessage):void
+		{
+			if(msg.topType==RankListType.All_COMBATPOWER_TYPE||msg.topType==RankListType.ALL_DIANFENG_TYPE){
+				var cell:AllPlayerCell;
+				for(var i:int = 0;i<_length;i++)
+				{
+					cell = _cellList[i];
+					cell.updatCellByInfo(null);
+				}
+				_rightGroup.updateModle(null);
+				_bindImg.visible=_bindLable.visible=true;
+				_bindLable.htmlText="再提升"+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,msg.parameter.toString())+"战力即可上榜，一览纵英雄风采！";
+				_totalPage=1;
+				refeashPageValue();
+			}
 		}
 		
 		private function updataTypeInfoHandler(msg:ResToplistToClientMessage):void
@@ -119,7 +144,7 @@ package com.rpgGame.appModule.rank
 		
 		private function updataPageInfoHandler():void
 		{
-			var cell:AllPlayerCell
+			var cell:AllPlayerCell;
 			for(var i:int = 0;i<_length;i++)
 			{
 				cell = _cellList[i];

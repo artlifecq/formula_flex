@@ -11,7 +11,7 @@ package com.rpgGame.netData.login.message{
 	 * 内部登陆
 	 */
 	public class ReqLoginMessage extends Message {
-	
+		
 		//平台标识
 		private var _agent: String;
 		

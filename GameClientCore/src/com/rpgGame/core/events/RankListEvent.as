@@ -23,5 +23,9 @@ package com.rpgGame.core.events
 		 * 更新膜拜信息
 		 */
 		public static const UPDATAWORSHIPCOUNT:int = UNIQUEID.NEXT;
+		/**
+		 * 未上榜
+		 */
+		public static const NO_IN_TOP:int = UNIQUEID.NEXT;
 	}
 }

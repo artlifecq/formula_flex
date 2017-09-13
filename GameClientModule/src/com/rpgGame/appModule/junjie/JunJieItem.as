@@ -11,6 +11,7 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.netData.junjie.bean.JunJieInfo;
 	
+	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -26,6 +27,7 @@ package com.rpgGame.appModule.junjie
 	import org.mokylin.skin.app.beibao.junjie.button.Button9jie;
 	
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 	
 	public class JunJieItem extends SkinUI
 	{
@@ -132,9 +134,12 @@ package com.rpgGame.appModule.junjie
 					break;
 				case 9:
 					_skin.btnCont.styleClass = org.mokylin.skin.app.beibao.junjie.button.Button9jie;
-					_skin.icons.styleName = "ui/app/beibao/junjie/icon/icon2.png";
-					_skin.icons.x=35;
-					_skin.icons.y=25;
+					var ui:UIAsset=new UIAsset();
+					ui.styleName="ui/app/beibao/junjie/icon/icon2.png";
+					_skin.icons.visible=false;
+					ui.x=16;
+					ui.y=8;
+					_skin.container.addChild(ui);
 					_huangQinGuoQiContaner=new Inter3DContainer();
 					_skin.container.addChild(_huangQinGuoQiContaner);
 					_huangQinGuoQiContaner.x=1;

@@ -59,5 +59,7 @@ package com.rpgGame.coreData.type
 		public static const ADDMP : String = "fa_shu_zhi";
 		/** 礼金 **/
 		public static const BIND_GOLD : String = "lijin";
+		/** 积分 **/
+		public static const JI_FEN : String = "jifen";
 	}
 }

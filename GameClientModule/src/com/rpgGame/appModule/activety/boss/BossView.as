@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.activety.boss
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -11,7 +10,6 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.tab.ViewUI;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.AvatarEvent;
@@ -24,8 +22,6 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -229,25 +225,34 @@ package com.rpgGame.appModule.activety.boss
 			var isFind:Boolean;
 			for(i=1;i<num;i++){
 				text=TimeUtil.changeIntHM2Str(refreshList[i]);
+				if(isFind){
+					text=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,text);
+					_skin.lbTime.htmlText+=text+"     ";
+					continue;
+				}
 				var ls:Array=text.split(":");
 				var ah:int=int(ls[0]);
 				var am:int=int(ls[1]);
 				var t:int=int(timeList[i]);
 				if(nh<ah){
-					text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,text);
 					isFind=true;
 				}else if(nh==ah){
 					if(nm<=am){
-						text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,text);
 						isFind=true;
 					}
 				}
-				_skin.lbTime.htmlText+=text+"     ";
+				
+				if(isFind){
+					text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,text);
+					_skin.lbTime.htmlText+=text+"     ";
+				}
 			}
 			
 			text=TimeUtil.changeIntHM2Str(refreshList[0]);
 			if(!isFind){
 				text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,text);
+			}else{
+				text=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,text);
 			}
 			_skin.lbTime.htmlText=text+"     "+_skin.lbTime.htmlText;
 			

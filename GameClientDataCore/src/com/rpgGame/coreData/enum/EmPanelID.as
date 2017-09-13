@@ -77,37 +77,38 @@ package com.rpgGame.coreData.enum
 		 */
 		public static const RANKLISTPANLE:int=17;
 		/**
-		 * 膜拜
+		 * 全平台排行
 		 */
-		public static const MO_BAI:int=18;
+		public static const ALL_PLATFORM_RANK:int=18;
+		/**
+		 * 全平台排行
+		 */
+		public static const MO_BAI:int=19;
 		/**
 		 * 结婚
 		 */
-		public static const JIE_HUN:int=19;
+		public static const JIE_HUN:int=20;
 		/**
 		 * 美人
 		 */
-		public static const MEI_REN:int=20;
+		public static const MEI_REN:int=21;
 		/**
 		 * 护宝
 		 */
-		public static const HU_BAO:int=21;
+		public static const HU_BAO:int=22;
+		/**
+		 * 防沉迷
+		 */
+		public static const FANG_CHENMI:int=23;
 		/**
 		 * vip
 		 */
-		public static const VIP:int=23;
+		public static const VIP:int=24;
 		/**
-		 * 玩家信息
+		 * 声望商店
 		 */
-		public static const PLAYER_INFO:int=24;
-		/**
-		 * 大地图
-		 */
-		public static const BIGMAP_PANEL:int=25;
-		/**
-		 * 死亡复活
-		 */
-		public static const DIE_PANEL:int=26;
+		public static const BATTLE_SHOP_PANEL:int=25;
+
 		
 		public function EmPanelID()
 		{

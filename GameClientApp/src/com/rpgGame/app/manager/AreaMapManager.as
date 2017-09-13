@@ -6,6 +6,8 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -14,6 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -319,27 +322,27 @@ package com.rpgGame.app.manager
 		 */
 		public static function updateActorEnterAreaInfo() : void
 		{
-//			var actor : SceneRole = MainRoleManager.actor;
-//			var areaType : int = AreaMapManager.getRoleInMapDataAreaType(actor);
-//			if (areaType != actor.mapAreaType)
-//			{
-//				actor.mapAreaType = areaType;
-//				switch (areaType)
-//				{
-//					case MapAreaTypeEnum.ATHLETICS:
-//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
-//						break;
-//					case MapAreaTypeEnum.SAFE:
-//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
-//						break;
-//					case MapAreaTypeEnum.STALL:
-//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
-//						break;
-//					case MapAreaTypeEnum.SPELL_FORBID:
-//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
-//						break;
-//				}
-//			}
+			var actor : SceneRole = MainRoleManager.actor;
+			var areaType : int = AreaMapManager.getRoleInMapDataAreaType(actor);
+			if (areaType != actor.mapAreaType)
+			{
+				actor.mapAreaType = areaType;
+				switch (areaType)
+				{
+					case MapAreaTypeEnum.ATHLETICS:
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
+						break;
+					case MapAreaTypeEnum.SAFE:
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
+						break;
+					case MapAreaTypeEnum.STALL:
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
+						break;
+					case MapAreaTypeEnum.SPELL_FORBID:
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
+						break;
+				}
+			}
 		}
 	}
 }

@@ -86,9 +86,12 @@ package com.rpgGame.app.view.icon
 			setBg( GridBGType.CHORTCUT_2_MASK );
 			if(gridInfo.unlockInfo && !TipTargetManager.hasTipsEventListener(this))
 			{
-				var type:int=GoodsContainerMamager.getMrg(gridInfo.containerID).isMianFei?2:1;
+				var type:int=GoodsContainerMamager.getMrg(gridInfo.containerID).hasOpenCount-1<this.index&&this.index<GoodsContainerMamager.getMrg(gridInfo.containerID).curUnlockIndex?2:1;
 				showLuckEff(type);
-				TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
+				if(type==2)
+					TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.CANOPEN_GRID_TIP, gridInfo.unlockInfo ) );
+				else
+					TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
 			}
 			else{
 				heidEff();

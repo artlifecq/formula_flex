@@ -1,7 +1,10 @@
 package com.rpgGame.app.ui.tab
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.core.events.FunctionOpenEvent;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import feathers.controls.TabBar;
 	
@@ -14,9 +17,10 @@ package com.rpgGame.app.ui.tab
 	 */
 	public class FuncTabBar extends UITabBar
 	{
-		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>)
+		private var _checkToTabHandler:Function;	
+		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>,crosswise:Boolean=true)
 		{
-			super(tab, datas);
+			super(tab, datas,crosswise);
 		}
 		
 		override public function show(data:*=null, openTable:int=0):void
@@ -24,6 +28,31 @@ package com.rpgGame.app.ui.tab
 			updateTabData();
 			super.show(data,openTable);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,onOpenFunc);
+		}
+		
+		override protected function isCanToTab(key:int):Boolean
+		{
+			var index:int=getTabDataIndexByTabKey(key);
+			if(index>=0)
+			{
+				var item:UITabBarData = _allDatas[index];
+				if(item){
+					var checkResult:Boolean;
+					if(_checkToTabHandler){
+						checkResult=_checkToTabHandler(item.tabKey);
+					}else{
+						checkResult=FunctionOpenManager.functionIsOpen(item.tabKey);//默认新功能
+					}
+					if(checkResult){//能切过去
+						return true;
+					}else if(!_checkToTabHandler){
+						var q_data:Q_newfunc=NewFuncCfgData.getFuncCfg(item.tabKey);
+						NoticeManager.showNotifyById(90203,null,q_data.q_name,q_data.q_level);
+						return false;
+					}
+				}
+			}
+			return false;
 		}
 		
 		private function onOpenFunc(ids:Vector.<int>):void
@@ -79,7 +108,7 @@ package com.rpgGame.app.ui.tab
 			var item:UITabBarData;
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
-				if(FunctionOpenManager.functionIsOpen(item.tabKey)){//已经开启了
+				if((item.openShow&&FunctionOpenManager.functionIsOpen(item.tabKey))||!item.openShow){//已经开启了或者不需要开启
 					addTabDataWithTabKey(item.tabKey);
 				}else{
 					removeTabDataWithTabKey(item.tabKey);
@@ -90,5 +119,11 @@ package com.rpgGame.app.ui.tab
 			this.updata();
 //			this.switchTabKey(this._currentKey);
 		}
+
+		public function set checkToTabHandler(value:Function):void
+		{
+			_checkToTabHandler = value;
+		}
+
 	}
 }

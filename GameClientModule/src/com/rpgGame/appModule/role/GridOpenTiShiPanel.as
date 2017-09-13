@@ -48,17 +48,17 @@ package com.rpgGame.appModule.role
 			switch(_itemContainerID)
 			{
 				case ItemContainerID.BackPack:
-					_buyNum=_index-BackPackManager.instance.hasOpenCount+1;
+					_buyNum=_index-(BackPackManager.instance.hasOpenCount-1);
 					_type=1;
 					break;
 				case ItemContainerID.Storage:
-					_buyNum=_index-StorageManager.instance.hasOpenCount+1;
+					_buyNum=_index-(StorageManager.instance.hasOpenCount-1);
 					_type=2;
 					break;
 			}
-			_buyPice=GoodsContainerMamager.getOpenGridMoney(_itemContainerID,_index);
+			_buyPice=GoodsContainerMamager.getOpenGridMoney(_itemContainerID,_index+1);
 			_skin.lb_num.text=_buyNum.toString()+"格";
-			if(_index==GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex&&GoodsContainerMamager.getMrg(_itemContainerID).isMianFei)
+			if(_index<GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex)
 			{
 				_skin.lb_pice.text="免费";
 				_skin.lb_pice.color=StaticValue.GREEN_TEXT;
@@ -88,7 +88,7 @@ package com.rpgGame.appModule.role
 		
 		private function onToBuy():void
 		{
-			if(_index==GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex&&GoodsContainerMamager.getMrg(_itemContainerID).isMianFei)
+			if(_index<GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex)
 			{
 				//				if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
 				//				{

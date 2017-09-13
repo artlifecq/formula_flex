@@ -44,6 +44,8 @@ package com.rpgGame.coreData.type
 
 		/** unlock Gridl tips*/
 		public static const OPEN_GRID_TIP : int = rEnum.next;
+		/** can lock Gridl tips*/
+		public static const CANOPEN_GRID_TIP : int = rEnum.next;
 		/** friend tips*/
 		public static const FRIEND_HERO_TIP : int = rEnum.next;
 		/** PK模式 tips*/

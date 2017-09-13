@@ -164,7 +164,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表						 */
 		public static const Q_junjie:String = "data.Q_junjie";
-		/**  军阶条件数据表		 */
+		/**  军阶升级条件表					 */
 		public static const Q_junjie_condition:String = "data.Q_junjie_condition";
 		/**  王城名称对照表（仅客户端使用）		 */
 		public static const Q_kindomname:String = "data.Q_kindomname";
@@ -357,6 +357,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_interaction", com.rpgGame.coreData.clientConfig.Q_interaction);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_junjie", com.rpgGame.coreData.clientConfig.Q_junjie);
+			regClass("data.Q_junjie_condition", com.rpgGame.coreData.clientConfig.Q_junjie_condition);
 			regClass("data.Q_kindomname", com.rpgGame.coreData.clientConfig.Q_kindomname);
 			regClass("data.Q_limitchallenge", com.rpgGame.coreData.clientConfig.Q_limitchallenge);
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);

@@ -1,5 +1,7 @@
 package com.rpgGame.app.ui.tab
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
+	
 	import flash.events.Event;
 	
 	import feathers.controls.TabBar;
@@ -9,7 +11,7 @@ package com.rpgGame.app.ui.tab
 	import org.client.mainCore.ds.HashMap;
 	
 	import starling.display.DisplayObjectContainer;
-
+	
 	/**
 	 *基于原始tabbar扩展的tabbar，需要切标签的统一使用这一套 
 	 * @author dik
@@ -28,17 +30,19 @@ package com.rpgGame.app.ui.tab
 		protected var _needRefash:Boolean = true;
 		protected var _touchGroup:ToggleGroup;
 		protected var _gap:int = 0;
+		protected var _crosswise:Boolean;
 		/**
 		 * 
 		 * @param tab 要绑定的tabbar
 		 * @param datas tabbar数据
-		 * 
+		 * @param crosswise 横向还是纵向分布
 		 */
-		public function UITabBar(tab:TabBar,datas:Vector.<UITabBarData>)
+		public function UITabBar(tab:TabBar,datas:Vector.<UITabBarData>,crosswise:Boolean=true)
 		{
 			_tabBar=tab;
 			_allDatas=datas;
 			_gap = tab.gap;
+			_crosswise=crosswise;
 			init();
 		}
 		private function init():void
@@ -70,12 +74,12 @@ package com.rpgGame.app.ui.tab
 		}
 		/*private function onTabInitializer(tab:ToggleButton, item:UITabBarData ):void
 		{
-			if(item.text){
-				tab.label = item.text;
-			}
-			if(item.tabStyle){
-				tab.styleClass=item.tabStyle;
-			}
+		if(item.text){
+		tab.label = item.text;
+		}
+		if(item.tabStyle){
+		tab.styleClass=item.tabStyle;
+		}
 		}*/
 		
 		public function show(data:*=null, openTable:int=0):void
@@ -119,7 +123,7 @@ package com.rpgGame.app.ui.tab
 			}
 			return null;
 		}
-			
+		
 		
 		protected function getTabkeyByIndex(index:int):int
 		{
@@ -135,8 +139,16 @@ package com.rpgGame.app.ui.tab
 			return 0;
 		}
 		
+		protected function isCanToTab(key:int):Boolean
+		{
+			return true;
+		}
+		
 		public function switchTabKey(key:int):void
 		{
+			if(!isCanToTab(key)){
+				return;	
+			}
 			var index:int = getTabDataIndexByTabKey(key);
 			if(index>=0)
 			{
@@ -211,14 +223,28 @@ package com.rpgGame.app.ui.tab
 			var item:UITabBarData;
 			_tabBar.removeChildren();
 			var startX:Number = 0;
-			for(var i:int=0;i<num;i++){
-				item=_allDatas[i];
-				if(item.isShow)
-				{
-					_tabBar.addChild(item.button);
-					item.button.validate();
-					item.button.x = startX;
-					startX += item.button.width+_gap;
+			var startY:Number = 0;
+			if(_crosswise){
+				for(var i:int=0;i<num;i++){
+					item=_allDatas[i];
+					if(item.isShow)
+					{
+						_tabBar.addChild(item.button);
+						item.button.validate();
+						item.button.x = startX;
+						startX += item.button.width+_gap;
+					}
+				}
+			}else{
+				for(i=0;i<num;i++){
+					item=_allDatas[i];
+					if(item.isShow)
+					{
+						_tabBar.addChild(item.button);
+						item.button.validate();
+						item.button.y = startY;
+						startY += item.button.height+_gap;
+					}
 				}
 			}
 		}
@@ -228,6 +254,11 @@ package com.rpgGame.app.ui.tab
 			if(index<0)
 				return ;
 			var item:UITabBarData=_allDatas[index];
+			if(!isCanToTab( item.tabKey)){
+				index=getTabDataIndexByTabKey(_currentKey);
+				_touchGroup.selectedIndex=index;
+				return;	
+			}
 			if(_currentView){
 				_currentView.removeFromParent();
 			}
@@ -242,6 +273,8 @@ package com.rpgGame.app.ui.tab
 				_tabViewMap.add(item.viewStyle,view);
 			}
 			_currentView=view;
+			_currentView.x=item.initX;
+			_currentView.y=item.initY;
 			_container.addChild(_currentView);
 			_currentView.show(_data);
 		}

@@ -63,9 +63,9 @@ package org.game.netCore.net
 		/** 每秒消息数量 **/
 		private var _msgPerSceCount:int;
 		/** php端口 **/
-		private var _phpPort:int;
+//		private var _phpPort:int;
 		/** php端口key **/
-		private var _phpPortErrKey:String;
+//		private var _phpPortErrKey:String;
 		/** 连接时间计时 **/
 		private var _connectTime:int;
 		/** 消息类型池 **/
@@ -128,14 +128,13 @@ package org.game.netCore.net
 		public function MessageMgr()
 		{
 			_replaceIP = "";
-			_phpPortErrKey = "tmp";
+//			_phpPortErrKey = "tmp";
 			
 			_msgBuff = new ByteArray();
 			_msgCrossBuff = new ByteArray();
 			_lastMessageName = "";
 			
 			_msgTypeMap = new Dictionary();
-			//			_msgObjPool = new MessagePool();
 			
 			_isConnected = false;
 			_isReconnect = false;
@@ -144,7 +143,7 @@ package org.game.netCore.net
 			
 			_msgPerSceCount = 0;
 			_connectTime = 0;
-			_phpPort = -1;
+//			_phpPort = -1;
 			
 			initCrossHash();
 		}
@@ -232,22 +231,6 @@ package org.game.netCore.net
 		}
 		
 		/**
-		 * php端口
-		 */
-		public function get phpPort():uint
-		{
-			return _phpPort;
-		}
-		
-		/**
-		 * php端口key
-		 */
-		public function get phpPortErrKey():String
-		{
-			return _phpPortErrKey;
-		}
-		
-		/**
 		 * 连接时间计时
 		 */
 		public function get connectTime():int
@@ -257,6 +240,7 @@ package org.game.netCore.net
 		
 		
 		/**
+		 * 主要用在重连上调用
 		 * 直接设置好socket 
 		 * @param skt
 		 * 
@@ -271,80 +255,16 @@ package org.game.netCore.net
 			_connectTime = getTimer();
 		}
 		
-		
 		/**
 		 * 开始连接
 		 */
 		public function Connect($host:String, $port:int, timeout : uint):void 
 		{
-			//			Security.allowDomain( "*" );
-			
 			ip = $host;
 			port = $port;
             this._connectTimeout = timeout;
-			
-			_phpPortErrKey = "phpsandboxerror";
-			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "agent" ];
-			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "account" ];
-			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "zoneid" ];
-			
-			//			if ( Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] != null && Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] != "" )
-			//			{
-			//				try
-			//				{
-			//					if (Mgr.cacheMgr.GetValue(_phpPortErrKey) == "1")
-			//					{
-			//						Mgr.cacheMgr.SetValue(_phpPortErrKey, "0");
-			//					}
-			//					else
-			//					{
-			//						_phpPort = parseInt( Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] );
-			//						if ( _phpPort >= 0 )
-			//							GameConfig.SANDBOX_PORT = _phpPort;
-			//					}
-			//	
-			//				}
-			//				catch ( err:Error )
-			//				{
-			//					trace( "svrsport error" );
-			//				}
-			//			}
-			
-			//trace( "GAME_SERVER_IP:" + this.ip + ":" + this.port + " " + SANDBOX_PORT + "     GameConfig.gameline " + GAME_LINE );
-			
-			//			var policyPath:String = "xmlsocket://" + this.ip + ":" + SANDBOX_PORT;
-			//			Security.loadPolicyFile( policyPath );
+
 			createSocketAndConnect();
-			
-			//			var portchecker:PortChecker = new PortChecker();
-			//			portchecker.startTest( this.port_ARR );
-			//			portchecker.addEventListener( NetEvent.GAME_CHANGE_IP, changeIPConnectHandler );
-			//			portchecker.addEventListener( Event.COMPLETE, portCheckerOKHandler );
-		}
-		
-		protected function portCheckerOKHandler(event:Event):void
-		{
-			var portChecker:PortChecker = event.target as PortChecker;
-			this.port = portChecker.curPort;
-			createSocketAndConnect();
-		}
-		
-		protected function changeIPConnectHandler(event:NetEvent):void
-		{
-			var obj:Object = event.data;
-			if (obj.type == "0")
-			{
-				var vect:PortChecker = event.currentTarget as PortChecker;
-				//" 与服务器["+ PlatformUtil.platformName + GameConfig.GAME_LINE +"区:" +this.port_ARR+"]deactivate 连接断开！尝试连接"+obj.newIP+"的地址?"
-				AlertPanel.showMsg( "与服务器断开连接", null, false,vect.start);
-				//				GameLog.addError("与服务器断开连接");
-				//				AlertPanel.showMsg(" 与服务器["+obj.oldIP+":"+this.port_ARR+"]deactivate 连接断开！尝试连接"+obj.newIP+"的地址?", Mgr.layerMgr.alertLayer, false,vect.start);
-			}
-			else
-			{
-				//TextUtil.changeDateToDateStr(new Date()) +" 与" + PlatformUtil.platformName + "服务器["+ GameConfig.GAME_LINE +"区:"+this.port_ARR+"]deactivate 连接断开,请重新登录！"
-				AlertPanel.showMsg( "连接断开,请重新登录！", null, false, flushPage); 			
-			}		
 		}
 		
 		/**
@@ -356,12 +276,10 @@ package org.game.netCore.net
 			if ( _socket != null && _socket.connected )
 			{
 				_socket.close();
-				//DebugFunction.traceCheckDbg("重连");
 				_socket = null;
 			}
 			
 			_isSocket5 = useProxy;
-			//Mgr.loginMgr.showlogin();
 		}
 		
 		/**
@@ -371,7 +289,7 @@ package org.game.netCore.net
 		{
 			if (ExternalInterface.available) 
 			{
-				ExternalInterface.call( "setcloseunloadmsg" );
+				ExternalInterface.call("refresh");
 			}
 			
 			//navigateToURL( new URLRequest(  WebSiteConfig.WEBSITE_URL ), "_self" );
@@ -384,14 +302,12 @@ package org.game.netCore.net
 		{
 			_socket.close();
 			_isReplace = true;
-			
-			//Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
 		}
 		
-		private function isLoginMsg( msgId:int ):Boolean
-		{
-			return msgId == 100202 || msgId == 100201 || msgId == 100205 || msgId == 100209;
-		}
+//		private function isLoginMsg( msgId:int ):Boolean
+//		{
+//			return msgId == 100202 || msgId == 100201 || msgId == 100205 || msgId == 100209;
+//		}
 		
 		private var sendCrossHash:HashMap;
 		
@@ -484,31 +400,258 @@ package org.game.netCore.net
 					isCross = sendCrossHash.get( msgId );
 				/*if( msgId == 112201 )
 				{
-				var type:int = (msg as ReqChatMessage).type;
-				if( type == EnumChatChannelType.PRIVATE )
-				isCross = 2;
-				else if( type == EnumChatChannelType.NORMAL )
-				isCross = 1;
+					var type:int = (msg as ReqChatMessage).type;
+					if( type == EnumChatChannelType.PRIVATE )
+						isCross = 2;
+					else if( type == EnumChatChannelType.NORMAL )
+						isCross = 1;
 				}
 				else if( msgId == 108203 )
 				{
-				var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
-				var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
-				if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
-				isCross = 1;
+					var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
+					var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
+					if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
+						isCross = 1;
 				}*/
 			}
 			return isCross;
 		}
 		
+		/** 代理服务器地址 **/
+		public var PROXY_SERVER_IP:String = "122.227.23.146";
+		/** 代理服务器端口 **/
+		public var PROXY_SERVER_PORT:uint = 80;
+		/** 代理服务器用户 **/
+		public var PROXY_SERVER_USER:String = "zt";
+		/** 代理服务器密码 **/
+		public var PROXY_SERVER_PWD:String = "moloong";
+		private var crossIP:String;
+		private var crossPort:int;
+		private var crossSSLPort:int;
+		/**
+		 * 创建套接字并连接 
+		 */		
+		private function createSocketAndConnect():void
+		{
+			clearOrgSocket();
+			if ( _isSocket5 )
+			{
+				_socket = new Socket5( this.ip, this.port );
+				_socket.setHandler( connectHandler, recvBytes, errorHandler, closeHandler );
+				_socket.connect( PROXY_SERVER_IP, PROXY_SERVER_PORT, PROXY_SERVER_USER, PROXY_SERVER_PWD );
+			}
+			else
+			{
+				_socket = new Socket();
+				_socket.addEventListener( Event.CONNECT, connectHandler );			//socket连接上了
+				_socket.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );	//socket网络错误
+				_socket.addEventListener( SecurityErrorEvent.SECURITY_ERROR, errorHandler );//socket安全错误
+				_socket.addEventListener( Event.CLOSE, closeHandler, false, 0, true );		//服务器主动关闭socket
+				_socket.addEventListener( ProgressEvent.SOCKET_DATA, recv );				//数据通信监听
+                (_socket as Socket).timeout = this._connectTimeout;
+				_socket.connect( this.ip, this.port );	
+			}
+			_connectTime = getTimer();
+		}
+		
+		/**
+		 * 连接成功回调 
+		 */		
+		protected function connectHandler( event:Event = null ):void
+		{
+			if ( !_isSocket5 )
+			{
+				_socket.removeEventListener( Event.CONNECT, connectHandler );
+			}
+			clearCorssSocket();
+			_isConnected = true;
+			GameLog.add( "连接成功   连接时间:" + ( getTimer() - _connectTime ));
+			_orgSendMsgNum = 0;
+			//Mgr.mainApp.resetServerTimeCheck();
+			dispatchEvent( new NetEvent( CLIENT_CONNECT_TO_SERVER ) );
+		}
+		
+		/**
+		 * 连接错误回调 
+		 */		
+		protected function errorHandler( event:* ):void
+		{
+			var str:String = "";
+			if ( event is SecurityErrorEvent )
+			{
+				_isConnected = false;
+				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, "SecurityErrorEvent"));
+				
+			}
+			else if ( event is IOErrorEvent )
+			{
+				_isConnected = false;
+				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, "IOErrorEvent"));
+			}
+		}
+		
+		/**
+		 * 连接关闭回调 
+		 */		
+		protected function closeHandler( event:Event ):void
+		{
+			clearOrgSocket();
+			
+			_isConnected = false;
+			if ( !_isReconnect )
+			{
+				if ( !isReplace )
+				{
+					dispatchEvent( new NetEvent( CLIENT_DROPS_TO_SERVER) );
+				}
+				else
+				{
+					AlertPanel.showMsg( "您的账号在IP:[" 
+						+ _replaceIP 
+						+ "]处登录上线了", 
+						null,
+						false, 
+						flushPage 
+					);
+				}
+			}
+		}
+		
+		public function connctOldServer():void
+		{
+			createSocketAndConnect();
+		}
+		
+		/**
+		 * 开始跨服连接 
+		 * 
+		 */
+		public function connectCrossServer(crossIP:String,crossPort:int,crossSSLPort:int):void
+		{
+			if (crossSocket == null)
+			{
+				var policyPath:String = "xmlsocket://" + crossIP + ":" +  crossSSLPort;
+				Security.loadPolicyFile( policyPath );
+				GameLog.addShow("连接跨服服务器:" + crossIP + ":" +  crossPort );
+				crossSocket = new Socket();
+				crossSocket.timeout = 10000;
+				crossSocket.addEventListener(Event.CONNECT, crossconnectHandler);
+				crossSocket.addEventListener(IOErrorEvent.IO_ERROR, crossioErrorHandler);
+				crossSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, crossEcurityErrorHandler);
+				crossSocket.addEventListener(Event.CLOSE, corsscloseHandler, false, 0, true );
+				crossSocket.addEventListener(ProgressEvent.SOCKET_DATA, recvCross);
+			}
+			this.crossIP=crossIP;
+			this.crossPort=crossPort;
+			this.crossSSLPort=crossSSLPort;
+			crossSocket.connect( crossIP, crossPort);
+		}
+		
+		protected function corsscloseHandler(event:Event):void
+		{
+			clearCorssSocket();
+		}
+		
+		protected function crossEcurityErrorHandler(event:SecurityErrorEvent):void
+		{
+			GameLog.addShow("安全错误 跨服断开" );
+			clearCorssSocket();
+			if( crossTimes > 0 )
+			{
+				GameLog.addShow("跨服连接失败次数倒数:" + crossTimes + '   ' + event.text);
+				crossTimes--;
+				connectCrossServer(crossIP,crossPort,crossSSLPort);
+			}
+			else
+			{
+				var str:String = "【SecurityError】";
+				str += "\n端口：" + crossPort;
+				str += "\n安全端口：" + crossSSLPort;
+				str += "\nIP：" +crossIP;
+				AlertPanel.showMsg( str );
+				dispatchEvent(new Event(CROSS_CONNECT_ERROR));
+			}
+		}
+		
+		protected function crossioErrorHandler(event:IOErrorEvent):void
+		{
+			GameLog.addShow("io错误 跨服断开"); 
+			clearCorssSocket();
+			if( crossTimes > 0 )
+			{
+				GameLog.addShow("跨服连接失败次数倒数:" + crossTimes + '   ' + event.text);
+				crossTimes--;
+				connectCrossServer(crossIP,crossPort,crossSSLPort);
+			}
+			else
+			{
+				dispatchEvent(new Event(CROSS_CONNECT_ERROR));
+			}
+		}
+		
+		protected function crossconnectHandler(event:Event):void
+		{
+			GameLog.addShow("连接跨服服务器成功" );
+			isCrossSocket = true;
+			_crossMsgNum = 0;
+			dispatchEvent(new Event(CROSS_CONNECT_OK));
+		}		
+		
+		public function clearOrgSocket():void
+		{
+			if( _socket != null )
+			{
+				if ( !_isSocket5 )
+				{
+					_socket.removeEventListener( Event.CONNECT, connectHandler );			//socket连接上了
+					_socket.removeEventListener( SecurityErrorEvent.SECURITY_ERROR, errorHandler );//socket安全错误
+					_socket.removeEventListener( Event.CLOSE, closeHandler );
+					_socket.removeEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+					_socket.removeEventListener( ProgressEvent.SOCKET_DATA, recv );	
+					_orgSendMsgNum = 0;
+				}
+				if(_socket.connected)
+				{
+					_socket.close();
+				}
+				_socket = null;
+			}
+			//Mgr.loginMgr.isLoginSuccess = false;
+		}
+		
+		public function clearCorssSocket():void
+		{
+			crossTimes=3;
+			if (crossSocket != null)
+			{
+				crossSocket.close();
+				crossSocket.removeEventListener(Event.CONNECT, crossconnectHandler);
+				crossSocket.removeEventListener(IOErrorEvent.IO_ERROR, crossioErrorHandler);
+				crossSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, crossEcurityErrorHandler);
+				crossSocket.removeEventListener(Event.CLOSE, corsscloseHandler);
+				crossSocket.removeEventListener(ProgressEvent.SOCKET_DATA, recvCross);
+				crossSocket = null;
+				_crossMsgNum = 0;
+				isCrossSocket = false;
+			}
+			//Mgr.loginMgr.isCrossSuccess = false;
+		}
+		
+		/** 发送的消息数量 **/
+		public function get sendMsgCnt():int
+		{
+			return _sendMsgCnt;
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		//    以下是专门处理数据接收的
+		//
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * 发送消息 
 		 */		
 		public function send( msg:Message ):Boolean 
 		{
-			//			if ( StoryMgr.Ins.isStoryType(StoryUtil.STORY_CREATE) )//哎呀呀，这里加return真蛋疼，除了这个不能再加了,目前仅创角动画return
-			//				return false;
-			
 			if ( !_isConnected )
 				return false;
 			
@@ -580,10 +723,6 @@ package org.game.netCore.net
 			}
 			else
 			{
-				/*if( ( !Mgr.loginMgr.isLoginSuccess || orgSendMsgNum == 0 ) && !isLoginMsg( msg.getId() ) )
-				{
-				return;
-				}*/
 				sendMsgNum = orgSendMsgNum;
 			}
 			
@@ -631,126 +770,6 @@ package org.game.netCore.net
 			}
 		}
 		
-		/**
-		 * 连接回调 
-		 */		
-		protected function connectHandler( event:Event = null ):void
-		{
-			trace( "连接时间:" + ( getTimer() - _connectTime ) );
-			if ( !_isSocket5 )
-				_socket.removeEventListener( Event.CONNECT, connectHandler );
-			clearCorssSocket();
-			_isConnected = true;
-			//GameLog.add( "连接成功" );
-			_orgSendMsgNum = 0;
-			//Mgr.mainApp.resetServerTimeCheck();
-			dispatchEvent( new NetEvent( CLIENT_CONNECT_TO_SERVER ) );
-		}
-		
-		/**
-		 * 错误回调 
-		 */		
-		protected function errorHandler( event:* ):void
-		{
-			var str:String = "";
-			if ( event is SecurityErrorEvent )
-			{
-				_isConnected = false;
-				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.text ) );
-				
-			}
-			else if ( event is IOErrorEvent )
-			{
-				_isConnected = false;
-				
-				
-				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.text ) );
-				
-			}
-		}
-		
-		/**
-		 * 关闭回调 
-		 */		
-		protected function closeHandler( event:Event ):void
-		{
-			clearOrgSocket();
-			//			if ( Mgr.pubLoginMgr.isCrossState )
-			//			{
-			//				DebugFunction.traceCheckDbg("完成跨服连接。。。");
-			//			}
-			//			else
-			{
-				//				Mgr.mainApp.cacheAsBitmap = true;
-				//				Mgr.sceneMgr.removeEvent();
-				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
-				
-				_isConnected = false;
-				//dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-				if ( !_isReconnect )
-				{
-					if ( !isReplace )
-					{
-						//						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
-						//暂时弹框 没filter了
-						//												AlertPanel.showMsg("服务器连接断开", null, false);
-						dispatchEvent( new NetEvent( CLIENT_DROPS_TO_SERVER) );
-					}
-					else
-					{
-						AlertPanel.showMsg( "您的账号在IP:[" 
-							+ _replaceIP 
-							+ "]处登录上线了", 
-							null,
-							false, 
-							flushPage 
-						);
-					}
-				}
-			}
-		}
-		
-		/** 代理服务器地址 **/
-		public var PROXY_SERVER_IP:String = "122.227.23.146";
-		/** 代理服务器端口 **/
-		public var PROXY_SERVER_PORT:uint = 80;
-		/** 代理服务器用户 **/
-		public var PROXY_SERVER_USER:String = "zt";
-		/** 代理服务器密码 **/
-		public var PROXY_SERVER_PWD:String = "moloong";
-		private var crossIP:String;
-		private var crossPort:int;
-		private var crossSSLPort:int;
-		/**
-		 * 创建套接字并连接 
-		 */		
-		private function createSocketAndConnect():void
-		{
-			clearOrgSocket();
-			if ( _isSocket5 )
-			{
-				_socket = new Socket5( this.ip, this.port );
-				_socket.setHandler( connectHandler, recvBytes, errorHandler, closeHandler );
-				_socket.connect( PROXY_SERVER_IP, PROXY_SERVER_PORT, PROXY_SERVER_USER, PROXY_SERVER_PWD );
-			}
-			else
-			{
-				_socket = new Socket();
-				_socket.addEventListener( Event.CONNECT, connectHandler );
-				_socket.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
-				_socket.addEventListener( SecurityErrorEvent.SECURITY_ERROR, errorHandler );
-				_socket.addEventListener( Event.CLOSE, closeHandler, false, 0, true );
-				_socket.addEventListener( ProgressEvent.SOCKET_DATA, recv );
-                (_socket as Socket).timeout = this._connectTimeout;
-				_socket.connect( this.ip, this.port );	
-			}
-			_connectTime = getTimer();
-		}
-		
-		public function connctOldServer():void
-		{
-			createSocketAndConnect();
-		}
 		
 		/**
 		 * 接收消息 
@@ -827,7 +846,7 @@ package org.game.netCore.net
 						else
 						{
 							_lastMessageName = DebugUtil.getObjectNameStr( message );
-							//							GameLog.add("客户端处理消息 " + id + " : " + _lastMessageName);
+							GameLog.add("客户端处理消息 " + id + " : " + _lastMessageName);
 						}
 						
 						_lastMsgID = id;
@@ -909,7 +928,7 @@ package org.game.netCore.net
 						
 						//传入数据到对应的监听函数去
 						var beginTime:int = getTimer();
-//						GameLog.add("[消息处理 ] id:"  + id + "  message:" + message);
+						//						GameLog.add("[消息处理 ] id:"  + id + "  message:" + message);
 						try
 						{
 							GameSocketDispatcher.excute(id, message);
@@ -919,7 +938,7 @@ package org.game.netCore.net
 							GameLog.addShow(error.getStackTrace());
 						}
 						
-   						var delta:int = getTimer() - beginTime;
+						var delta:int = getTimer() - beginTime;
 						if ( delta > 100 )
 						{
 							GameLog.add("[消息处理 Time] 单个函数超时    "  + id + "  " + delta.toString());
@@ -954,7 +973,7 @@ package org.game.netCore.net
 		}
 		
 		/**
-		 * 接收消息
+		 * 接收跨服消息
 		 */		
 		private function recvCrossBytes( bytes:ByteArray ):void
 		{
@@ -1104,151 +1123,6 @@ package org.game.netCore.net
 					break;
 				}
 			}
-		}
-		
-		/**
-		 * 开始跨服连接 
-		 * 
-		 */
-		public function connectCrossServer(crossIP:String,crossPort:int,crossSSLPort:int):void
-		{
-			if (crossSocket == null)
-			{
-				var policyPath:String = "xmlsocket://" + crossIP + ":" +  crossSSLPort;
-				Security.loadPolicyFile( policyPath );
-				GameLog.addShow("连接跨服服务器:" + crossIP + ":" +  crossPort );
-				crossSocket = new Socket();
-				crossSocket.timeout = 10000;
-				crossSocket.addEventListener(Event.CONNECT, crossconnectHandler);
-				crossSocket.addEventListener(IOErrorEvent.IO_ERROR, crossioErrorHandler);
-				crossSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, crossEcurityErrorHandler);
-				crossSocket.addEventListener(Event.CLOSE, corsscloseHandler, false, 0, true );
-				crossSocket.addEventListener(ProgressEvent.SOCKET_DATA, recvCross);
-			}
-			this.crossIP=crossIP;
-			this.crossPort=crossPort;
-			this.crossSSLPort=crossSSLPort;
-			crossSocket.connect( crossIP, crossPort);
-		}
-		
-		protected function corsscloseHandler(event:Event):void
-		{
-			clearCorssSocket();
-			//			dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-			//			AlertPanel.showMsg("服务器连接断开", null, false);
-			//			
-			//			if( !Mgr.pubLoginMgr.isCrossState )
-			//				Mgr.mainApp.cacheAsBitmap = true;
-			//				Mgr.sceneMgr.removeEvent();
-			//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
-			//				
-			//				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-			//				if ( !_isReconnect )
-			//				{
-			//					if ( !Mgr.messageMgr.isReplace )
-			//					{
-			////						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
-			//					}
-			//					else
-			//					{
-			//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
-			//							+ "您的账号在IP:[" 
-			//							+ _replaceIP 
-			//							+ "]处登录上线了", 
-			//							Mgr.layerMgr.alertLayer, 
-			//							false, 
-			//							flushPage 
-			//						);
-			//					}
-			//				}
-		}
-		
-		protected function crossEcurityErrorHandler(event:SecurityErrorEvent):void
-		{
-			GameLog.addShow("安全错误 跨服断开" );
-			clearCorssSocket();
-			if( crossTimes > 0 )
-			{
-				GameLog.addShow("跨服连接失败次数倒数:" + crossTimes + '   ' + event.text);
-				crossTimes--;
-				connectCrossServer(crossIP,crossPort,crossSSLPort);
-			}
-			else
-			{
-				var str:String = "【SecurityError】";
-				str += "\n端口：" + crossPort;
-				str += "\n安全端口：" + crossSSLPort;
-				str += "\nIP：" +crossIP;
-				AlertPanel.showMsg( str );
-				dispatchEvent(new Event(CROSS_CONNECT_ERROR));
-			}
-		}
-		
-		protected function crossioErrorHandler(event:IOErrorEvent):void
-		{
-			GameLog.addShow("io错误 跨服断开"); 
-			clearCorssSocket();
-			if( crossTimes > 0 )
-			{
-				GameLog.addShow("跨服连接失败次数倒数:" + crossTimes + '   ' + event.text);
-				crossTimes--;
-				connectCrossServer(crossIP,crossPort,crossSSLPort);
-			}
-			else
-			{
-				dispatchEvent(new Event(CROSS_CONNECT_ERROR));
-			}
-		}
-		
-		protected function crossconnectHandler(event:Event):void
-		{
-			GameLog.addShow("连接跨服服务器成功" );
-			isCrossSocket = true;
-			_crossMsgNum = 0;
-			dispatchEvent(new Event(CROSS_CONNECT_OK));
-		}		
-		
-		public function clearOrgSocket():void
-		{
-			if( _socket != null )
-			{
-				if ( !_isSocket5 )
-				{
-					_socket.removeEventListener( Event.CLOSE, closeHandler );
-					_socket.removeEventListener( IOErrorEvent.IO_ERROR, errorHandler );
-					_socket.removeEventListener( ProgressEvent.SOCKET_DATA, recv );	
-					_orgSendMsgNum = 0;
-				}
-				if(_socket.connected){
-					_socket.close();
-				}
-				_socket = null;
-			}
-			//Mgr.loginMgr.isLoginSuccess = false;
-		}
-		
-		public function clearCorssSocket():void
-		{
-			crossTimes=3;
-			if (crossSocket != null)
-			{
-				crossSocket.close();
-				crossSocket.removeEventListener(Event.CONNECT, crossconnectHandler);
-				crossSocket.removeEventListener(IOErrorEvent.IO_ERROR, crossioErrorHandler);
-				crossSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, crossEcurityErrorHandler);
-				crossSocket.removeEventListener(Event.CLOSE, corsscloseHandler);
-				crossSocket.removeEventListener(ProgressEvent.SOCKET_DATA, recvCross);
-				crossSocket = null;
-				_crossMsgNum = 0;
-				isCrossSocket = false;
-			}
-			//Mgr.loginMgr.isCrossSuccess = false;
-		}
-		
-		/** 发送的消息数量 **/
-		public function get sendMsgCnt():int
-		{
-			return _sendMsgCnt;
 		}
 	}
 }

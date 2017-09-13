@@ -41,20 +41,38 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		{
 			var initX:int=_skin.ico1.x;
 			var initY:int=_skin.ico1.y;
-			if(info.nowRank-info.upRank==1){
-				_skin.num.label = info.nowRank.toString();
-				_skin.gRank.x = 116;
+			
+			if(info.nowRank==10000)
+			{
+				_skin.uiFlag.visible=true;
+				_skin.num.visible=false;
+				_skin.gRank.visible=false;
+				_skin.uiTitle1.visible=false;
 			}
 			else
 			{
-				_skin.num.label = (info.upRank+1).toString()+"-"+info.nowRank.toString();
-				if(info.nowRank<10)
-					_skin.gRank.x = 145;
-				else if(info.nowRank>=10&&info.nowRank<1000)
-					_skin.gRank.x = 165;
+				_skin.uiFlag.visible=false;
+				_skin.num.visible=true;
+				_skin.gRank.visible=true;
+				_skin.uiTitle1.visible=true;
+				if(info.nowRank-info.upRank==1){
+					_skin.num.label = info.nowRank.toString();
+					_skin.gRank.x = 116;
+				}
 				else
-					_skin.gRank.x = 196;
+				{
+					
+					_skin.num.label = (info.upRank+1).toString()+"-"+info.nowRank.toString();
+					if(info.nowRank<10)
+						_skin.gRank.x = 145;
+					else if(info.nowRank>=10&&info.nowRank<1000)
+						_skin.gRank.x = 165;
+					else
+						_skin.gRank.x = 196;
+					
+				}
 			}
+			
 			var list:Vector.<ClientItemInfo>=(info.reWard as Vector.<ClientItemInfo>); 
 			for(var i:int=0;i<list.length;i++)
 			{

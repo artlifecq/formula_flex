@@ -8,6 +8,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
@@ -27,6 +28,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	
+	import flash.geom.Point;
 	
 	import app.message.EquipType;
 	
@@ -95,7 +98,6 @@ package com.rpgGame.app.ui.tips
 			pors=new Vector.<ZhuangbeiTipPro>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
-			_itemTip.lbl_bangding.width=120;
 		}
 		
 		
@@ -103,11 +105,22 @@ package com.rpgGame.app.ui.tips
 		{
 			if(_equipTip&&isShowDuiBi&&!_equipTip.parent){	
 				createJianTou();
-				uijiantou.y=258;
-				this._itemTip.container.addChild(uijiantou);			
-				_equipTip.x=-(this.x+this.width+uijiantou.width);
-				this._itemTip.container.addChild(_equipTip);
-				uijiantou.x=-uijiantou.width;
+				var pos:Point =TipTargetManager.stagePoint;
+				if(pos.x>=this._itemTip.width)
+				{
+					uijiantou.y=258;
+					this._itemTip.container.addChild(uijiantou);			
+					_equipTip.x=-(this.x+_itemTip.width+uijiantou.width);
+					this._itemTip.container.addChild(_equipTip);
+					uijiantou.x=-uijiantou.width;
+				}else{
+					uijiantou.y=258;
+					this._itemTip.container.addChild(uijiantou);			
+					_equipTip.x=this.x+_itemTip.width+uijiantou.width;
+					this._itemTip.container.addChild(_equipTip);
+					uijiantou.scaleX=-1;
+					uijiantou.x=_itemTip.width+uijiantou.width;
+				}
 				TipManager.updatePositon();
 			}
 		}
@@ -155,6 +168,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.tip_down.visible=false;
 			_itemTip.tip_up.visible=false;
 			_itemTip.lb_power.visible=false;
+			_itemTip.lbl_bangding.visible=false;
 			if(equipItemInfo){
 				currentFight=equipItemInfo.itemInfo.fightPower;
 			}
@@ -571,7 +585,14 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function hideTips():void
 		{
-			//			_iconFace.destroy();
+			if(_equipTip){
+				_equipTip.removeFromParent();
+				_equipTip.setkuangState(false);
+			}
+			if(uijiantou)
+			{
+				uijiantou.removeFromParent(true);
+			}
 		}
 		
 		/**

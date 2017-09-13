@@ -383,6 +383,7 @@ package com.rpgGame.app.manager.scene
 		 */
 		private static function clearScene(clearScene:Boolean=true):void
 		{
+			
 			GamePerformsManager.pause();
 			MapUnitDataManager.clear();
 			SceneRoleSelectManager.clearSelect();
@@ -406,6 +407,7 @@ package com.rpgGame.app.manager.scene
 				SceneManager.getScene().clearAreaMap(1);
 				
 			}
+
 			TaskAutoManager.getInstance().stopSwitchAll();
 			TrusteeshipManager.getInstance().stopAll();
 			UIModel.instence.clear();

@@ -120,7 +120,6 @@ package com.rpgGame.core.manager.tips
 			}
 			$pos.x = $pos.x + OffsetX;
 			$pos.y = $pos.y + OffsetY;
-			
 			if($pos.x + _currentSowTips.width > Starling.current.stage.stageWidth)
 			{
 				//$pos.x = $pos.x - _currentSowTips.width/2;// - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
@@ -152,7 +151,7 @@ package com.rpgGame.core.manager.tips
 				_currentSowTips.hideTips();
 			}
 			_currentSowTips = null;
-			
+			_currentData=null;
 			while(_tipContiner.numChildren > 0)
 			{
 				_tipContiner.removeChildAt(0);

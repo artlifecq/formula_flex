@@ -75,33 +75,11 @@
 		 */
 		public static function functionIsOpen(id:int):Boolean
 		{
-			var bool:Boolean = openedMap.getValue(id) as Q_newfunc != null;
-			if(bool)
-			{
-				switch(id)
-				{
-					case EmFunctionID.EM_BANGHUI_INFO:
-					case EmFunctionID.EM_BANGHUI_CHENGYUAN:
-					case EmFunctionID.EM_BANGHUI_UPLEVEL:
-						if(GuildManager.instance().haveGuild)
-						{
-							return true;
-						}
-						else 
-						{
-							return false;
-						}
-						break;
-					case EmFunctionID.EM_BANGHUI_SPELL:
-						if(GuildManager.instance().haveGuild||GuildManager.instance().havePersonSkill)
-						{
-							return true;
-						}
-						return false;
-						break;
-				}
+			var cfg:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
+			if(!cfg){
+				return false;
 			}
-			return bool;
+			return checkOpenByLevel(cfg.q_level);
 		}
 		
 		/**
@@ -153,7 +131,7 @@
 		 */
 		public static function openPanelByFuncID(id:int,data:Object=null,isAutoHide:Boolean=true):void
 		{
-			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(id);
+			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfg(id);
 			if(!funcCfg){
 				return;
 			}
@@ -201,7 +179,17 @@
 				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 			}
 		}
-		
+		/**
+		 *通过面板id打开面板 
+		 */
+		public static function openPanelBypanelId(id:int,data:Object=null,isAutoHide:Boolean=true):void
+		{
+			var panelInfo:Q_panel=PanelCfgData.getPanelCfg(id);
+			if(panelInfo!=null)
+			{
+				openModeByPanelInfo(panelInfo,data,isAutoHide);
+			}
+		}
 		/**
 		 * 通过面板信息打开
 		 * @param panelCfg
@@ -213,15 +201,15 @@
 				return;
 			}
 			var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
-			if(!funcCfg){
-				return;
+			if(funcCfg){//有功能配置
+				var minlevel:int =funcCfg.q_level;
+				if(!checkOpenByLevel(minlevel))//未达到开启等级
+				{
+					NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
+					return ;
+				}
 			}
-			var minlevel:int =funcCfg.q_level;
-			if(!checkOpenByLevel(minlevel))//未达到开启等级
-			{
-				NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
-				return ;
-			}
+			
 			if(isAutoHide){
 				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 			}else{

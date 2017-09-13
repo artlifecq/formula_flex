@@ -20,6 +20,7 @@ package
 	import com.game.engine3D.process.ProcessGroup;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
+	import com.game.engine3d.utils.LogUtils;
 	import com.gameClient.alert.AlertPanel;
 	import com.gameClient.alert.Game2dLayer;
 	import com.gameClient.log.GameLog;
@@ -186,6 +187,10 @@ package
 		
 		private function stage3DLayerSetupComplete():void
 		{
+			if (!ClientConfig.isBanShu)
+			{
+				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "success", true, stage);
+			}
 			var driverInfo:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
 			if (driverInfo.indexOf("software") != -1)
 			{
@@ -240,6 +245,10 @@ package
 		private function stage3DLayerSetupError():void
 		{
 			Log.error("stage3DLayerSetupError：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+			if (!ClientConfig.isBanShu && Stage3DLayerManager.stage3DProxy)
+			{
+				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "error", true, stage);
+			}
 			if (Stage3DLayerManager.stage3DProxy)
 			{
 			}

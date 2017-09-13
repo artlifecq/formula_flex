@@ -49,6 +49,7 @@ import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 import com.rpgGame.coreData.clientConfig.Q_skill_model;
 import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 import com.rpgGame.coreData.role.RoleData;
+import com.rpgGame.coreData.type.RoleStateType;
 import com.rpgGame.netData.skill.bean.SkillInfo;
 
 import org.mokylin.skin.app.paihangbang.PaiHang_Right;
@@ -66,7 +67,8 @@ class BeautyRightGroup extends RightGroupBase
 	}
 	override protected function initView():void
 	{
-		super.initView();
+		this._scale = 2;
+		super.initView();	
 		_spellIconList = new Vector.<IconCDFace>();
 		
 		var partner:DisplayObjectContainer = _skin.icon1.parent;
@@ -108,9 +110,23 @@ class BeautyRightGroup extends RightGroupBase
 			var attId:int=Mgr.petMgr.getAttId(_girlData.q_attid_master);
 			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(attId);
 			_power = FightValueUtil.calFightPowerByAttValue(attValues1,_topInfo.job);
-			_avatar.updateBodyWithRes(_girlData.q_skill_id);
+			_avatar.updateBodyWithRes(_girlData.q_skinResID,_girlData.q_animatResID);
 		}else{
 			_power = 0;
+			_avatar.dispose();
+		}
+	}
+	
+	override protected function refeashJunjie():void
+	{
+		
+	}
+	
+	override protected function refeashModle():void
+	{
+		//			super.refeashModle();
+		if(_avatar){
+			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 	}
 	
@@ -127,22 +143,34 @@ class BeautyRightGroup extends RightGroupBase
 		{
 			_spellIconList[i].clear();
 		}
-		
-		length = _topInfo.playerBriefInfo.beautySkillInfos.length;
-		var skillinfo:SkillInfo;
-		for(i=0;i<length;i++)
-		{
-			skillinfo = _topInfo.playerBriefInfo.beautySkillInfos[i];
-			var skill:Q_skill_model = SpellDataManager.getSpellData(skillinfo.skillModelId,skillinfo.skillChildLv);
-			FaceUtil.SetSkillGrid(_spellIconList[i],FaceUtil.chanceSpellToFaceInfo(skill),true);
+		if(_girlData){
+			var skill:Q_skill_model=SpellDataManager.getSpellById(_girlData.q_skill_id);			
+			length = 1;
+			var skillinfo:SkillInfo;
+			for(i=0;i<length;i++)
+			{
+				FaceUtil.SetSkillGrid(_spellIconList[i], FaceUtil.chanceSpellToFaceInfo(skill), true);
+			}
 		}
 	}
 	
-	
 	override protected function refeashName():void
 	{
-		_skin.grpHead.visible = true;
-		_skin.lbName.visible = false;
-		_skin.headName.styleName = "ui/app/paihangbang/word/meiren/"+_topInfo.playerBriefInfo.beautyModelid.toString()+".png"
+		if(_girlData)
+		{
+			_skin.grpHead.visible = true;
+			_skin.lbName.visible = false;
+			_skin.headName.styleName = "ui/app/paihangbang/word/meiren/"+_topInfo.playerBriefInfo.beautyModelid.toString()+".png";
+		}
+		else{
+			_skin.grpHead.visible = false;
+		}
+	}
+	
+	private function updateTime():void
+	{
+		if(_avatar){
+			_avatar.transition(RoleStateType.ACTION_SHOW);
+		}
 	}
 }

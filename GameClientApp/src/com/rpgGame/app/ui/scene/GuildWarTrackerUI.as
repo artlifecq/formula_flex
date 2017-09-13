@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.app.cmdlistener.enum.EGuildMemberType;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.WalkToRoleManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -25,6 +26,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guildWar.bean.CampOreInfo;
 	import com.rpgGame.netData.guildWar.bean.CampScoreInfo;
@@ -80,6 +82,7 @@ package com.rpgGame.app.ui.scene
 		private var maps:Array=[900,901,902];
 		private var items:Array;
 		private var toPoint:Position;
+		private var preScore:int=-1;
 		
 		public function GuildWarTrackerUI()
 		{
@@ -249,6 +252,11 @@ package com.rpgGame.app.ui.scene
 		private function getPlayerInfo(msg:ResGuildWarPersionInfoMessage):void
 		{
 			_skin.lbJifen.htmlText="本人积分:"+msg.score;
+			var changeScore:int=msg.score-preScore;
+			if(preScore!=-1&&changeScore!=0){
+				FightFaceHelper.showAttChange(EnumHurtType.JI_FEN,changeScore);
+			}
+			preScore=msg.score;
 			_skin.lbPaiming.htmlText="本人排名:"+msg.rank;
 			_skin.lbJisha.htmlText="累计击杀玩家数:"+msg.allKillCnt;
 			

@@ -46,7 +46,7 @@ package com.rpgGame.app.ui.scene
 		
 		private function initUI():void
 		{
-			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico1_0,RewardGroup.ALIN_LEFT,4);
+			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,5,0);
 			toPoint=new Position();
 		}
 		

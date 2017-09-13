@@ -4,6 +4,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
 	
@@ -12,6 +13,7 @@ package com.rpgGame.appModule.guild
 	import feathers.core.ToggleGroup;
 	import feathers.utils.filter.GrayFilter;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.BangHui_Skill;
 	import org.mokylin.skin.app.banghui.Skill_Personal;
 	import org.mokylin.skin.app.banghui.Skill_TongShuai;
@@ -69,7 +71,7 @@ package com.rpgGame.appModule.guild
 				_skin.btnSkill2.touchable = true;
 				_skin.btnSkill2.filter = null;
 			}
-			
+//			EventManager.addEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
 			_gropu.selectedIndex = 0;
 			GuildSender.reqGuildSkillInfo();
 		}

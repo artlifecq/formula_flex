@@ -161,12 +161,15 @@ package com.rpgGame.app.state.role.control
 					_machine.owner.z=_destPoint.z;
 				}*/
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
-				TaskAutoManager.getInstance().jumpOver=true;
-				if(_stateReference&&_stateReference.isEnd)
-				{Lyt.a("跳跃点最后一个点");
-					EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
-				}
 				
+				if((_machine.owner as SceneRole).isMainChar)
+				{
+					TaskAutoManager.getInstance().jumpOver=true;
+					if(_stateReference&&_stateReference.isEnd)
+					{Lyt.a("跳跃点最后一个点");
+						EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
+					}
+				}
 			}
 		}
 

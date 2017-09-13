@@ -6,7 +6,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	
-
+	
 	/**
 	 * 仓库物品管理 
 	 * @author wewell@163.com
@@ -56,7 +56,7 @@ package com.rpgGame.app.manager.goods
 		{
 			if(!isLoaded)
 			{
-//				ItemSender.reqDepotStorageGetData();
+				//				ItemSender.reqDepotStorageGetData();
 				isLoaded = true;
 			}
 		}
@@ -66,6 +66,11 @@ package com.rpgGame.app.manager.goods
 			if (index > Max_Grid_Count)
 			{
 				NoticeManager.showNotify("您已经解锁了全部的格子");
+				return;
+			}
+			else if(index<curUnlockIndex){
+				var type:int=GoodsContainerMamager.getGridType(containerId);
+				ItemSender.reqOpenTimeCellMessage(type);
 				return;
 			}
 			AppManager.showApp(AppConstant.GRID_OPEN_TISHI,[ItemContainerID.Storage,index]);

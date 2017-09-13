@@ -506,10 +506,10 @@ package com.rpgGame.appModule.equip
 				var info:ClientItemInfo=datas[i];
 				if(isCanInheritance(info as EquipInfo)){
 					if(_targetEquipInfo&&info.itemInfo.itemId.ToGID()==_targetEquipInfo.itemInfo.itemId.ToGID()){
-//						trace("当前的强化等级对比："+_targetEquipInfo.strengthLevel+"__"+(info as EquipInfo).strengthLevel);
-//						trace("当前的琢磨等级对比："+_targetEquipInfo.polishLevel+"__"+(info as EquipInfo).polishLevel);
-//						trace("当前的洗炼1对比："+_targetEquipInfo.smeltAtt1+"__"+(info as EquipInfo).smeltAtt1);
-//						trace("当前的洗炼2对比："+_targetEquipInfo.smeltAtt2+"__"+(info as EquipInfo).smeltAtt2);					
+						//						trace("当前的强化等级对比："+_targetEquipInfo.strengthLevel+"__"+(info as EquipInfo).strengthLevel);
+						//						trace("当前的琢磨等级对比："+_targetEquipInfo.polishLevel+"__"+(info as EquipInfo).polishLevel);
+						//						trace("当前的洗炼1对比："+_targetEquipInfo.smeltAtt1+"__"+(info as EquipInfo).smeltAtt1);
+						//						trace("当前的洗炼2对比："+_targetEquipInfo.smeltAtt2+"__"+(info as EquipInfo).smeltAtt2);					
 						if(_targetEquipInfo.strengthLevel!=(info as EquipInfo).strengthLevel||_targetEquipInfo.polishLevel!=(info as EquipInfo).polishLevel||
 							_targetEquipInfo.smeltAtt1!=(info as EquipInfo).smeltAtt1||_targetEquipInfo.smeltAtt2!=(info as EquipInfo).smeltAtt2)
 						{
@@ -718,7 +718,13 @@ package com.rpgGame.appModule.equip
 			{
 				var type:int=RoleEquipmentManager.equipIsWearing(_targetEquipInfo)?0:1;
 				var lock:int=getLock();
-				var alertSet:AlertSetInfo= new AlertSetInfo( LangUI.UI_TEXT15);
+				var alertSet:AlertSetInfo;
+				if(_useEuipInfo&&!_useEuipInfo.binded) //feibang
+				{
+					alertSet= new AlertSetInfo( LangUI.UI_TEXT15);
+				}else{//bangding
+					alertSet= new AlertSetInfo( LangUI.UI_TEXT38);
+				}
 				alertSet.alertInfo.value=alertSet.alertInfo.value.replace("$",HtmlTextUtil.getTextColor(ItemQualityType.getColorValue(_targetEquipInfo.quality),_useEuipInfo.name));
 				alertSet.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
 				alertSet.alertInfo.align="left";

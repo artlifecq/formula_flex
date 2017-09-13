@@ -230,16 +230,16 @@ package com.rpgGame.appModule.common
 			
 		}
 		
-//		/**
-//		 * 获得指定索引可拖拽格子 
-//		 * @param index
-//		 * @return 
-//		 * 
-//		 */		
-//		private function getGridByIndex(index:int):DragDropItem
-//		{
-//			return index<dndGrids.length?dndGrids[index]:null;
-//		}
+		//		/**
+		//		 * 获得指定索引可拖拽格子 
+		//		 * @param index
+		//		 * @return 
+		//		 * 
+		//		 */		
+		//		private function getGridByIndex(index:int):DragDropItem
+		//		{
+		//			return index<dndGrids.length?dndGrids[index]:null;
+		//		}
 		
 		/**
 		 * 依据下标获取格子
@@ -286,9 +286,9 @@ package com.rpgGame.appModule.common
 			{
 				NoticeManager.showNotify("有一个格子的数据出错了！！！");
 			}
-//			var grid:DragDropItem = getGridByIndex(index);
-//			if(!grid)return;
-//			grid.gridInfo = gridInfo;
+			//			var grid:DragDropItem = getGridByIndex(index);
+			//			if(!grid)return;
+			//			grid.gridInfo = gridInfo;
 			updateGridLen && updateGridLen();
 		}
 		
@@ -395,7 +395,7 @@ package com.rpgGame.appModule.common
 		}
 		
 		/**不要跳格子 还是循环刷新吧*/
-		private function updateList():void
+		public function updateList():void
 		{
 			for(var i:int=0;i<dataProvider.length;i++)
 			{
@@ -603,18 +603,18 @@ package com.rpgGame.appModule.common
 			movingFace.y = int(Starling.current.nativeStage.mouseY) - 23;
 		}
 		
-//		/**
-//		 * 移动失败 
-//		 * 
-//		 */		
-//		private function onFaceMoveFail():void
-//		{
-//			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
-//			var srcFace:DragDropItem = getGridByIndex(info.index);
-//			var pos:Point = srcFace.localToGlobal(new Point(0,0));
-//			if(movingFace.stage == null)Starling.current.stage.addChild(movingFace);
-//			TweenLite.to(movingFace,0.5,{x:pos.x, y:pos.y, onComplete:reShowSrcFace});
-//		}
+		//		/**
+		//		 * 移动失败 
+		//		 * 
+		//		 */		
+		//		private function onFaceMoveFail():void
+		//		{
+		//			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
+		//			var srcFace:DragDropItem = getGridByIndex(info.index);
+		//			var pos:Point = srcFace.localToGlobal(new Point(0,0));
+		//			if(movingFace.stage == null)Starling.current.stage.addChild(movingFace);
+		//			TweenLite.to(movingFace,0.5,{x:pos.x, y:pos.y, onComplete:reShowSrcFace});
+		//		}
 		
 		/**
 		 * 移动失败处理 
@@ -687,9 +687,9 @@ package com.rpgGame.appModule.common
 		
 		public function addEvents():void
 		{
-//			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
-//			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
-//			EventManager.addEvent(ItemEvent.ITEM_DELETE,removeItem);
+			//			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
+			//			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
+			//			EventManager.addEvent(ItemEvent.ITEM_DELETE,removeItem);
 			
 			EventManager.addEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
@@ -706,9 +706,9 @@ package com.rpgGame.appModule.common
 		public function hide():void
 		{
 			stopFaceMove();
-//			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
-//			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
-//			EventManager.removeEvent(ItemEvent.ITEM_DELETE,removeItem);
+			//			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
+			//			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
+			//			EventManager.removeEvent(ItemEvent.ITEM_DELETE,removeItem);
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.removeEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.removeEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);

@@ -6,7 +6,6 @@ package com.client.ui.alert
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
-	import flash.events.MouseEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
 	

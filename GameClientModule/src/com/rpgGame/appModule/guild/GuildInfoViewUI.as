@@ -74,7 +74,7 @@ package com.rpgGame.appModule.guild
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
 			//EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			finishMation(TaskType.MAINTYPE_GUILDDAILYTASK);
-			refeashView();
+			GuildSender.requestGuildInfo();
 		}
 		
 		private function finishMation(type:int):void
@@ -215,7 +215,7 @@ package com.rpgGame.appModule.guild
 			_guildGetDailyGiftOpaque = 0;
 			if(msg.result ==1)
 			{
-				var str:String = "获得奖励:\n";
+				var str:String = "获得奖励:";
 				var itemInfos:Object = JSONUtil.decode(GuildManager.instance().guildLevelInfo.q_gift_data);
 				var iteminfo:Object;
 				var selfMemberInfo:GuildMemberInfo = GuildManager.instance().selfMemberInfo;
