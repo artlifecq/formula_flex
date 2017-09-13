@@ -524,6 +524,21 @@ package com.rpgGame.app.scene
 		{
 			return SceneCharType.PLAYER==type;
 		}
-	
+		override public function set x(value:Number):void
+		{
+			super.x=value;
+//			if (isMainChar) 
+//			{
+//				trace("main move");
+//			}
+		}
+		override public function set z(value:Number):void
+		{
+			super.z=value;
+//			if (isMainChar) 
+//			{
+//				trace("main move z");
+//			}
+		}
 	}
 }

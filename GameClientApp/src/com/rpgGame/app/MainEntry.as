@@ -7,6 +7,7 @@ package com.rpgGame.app
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.cmdlistener.scene.SceneSwitchCmdListener;
 	import com.rpgGame.app.manager.ReconnectManager;
+	import com.rpgGame.app.manager.platform.PlatformUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.process.LoadConfigData;
 	import com.rpgGame.app.process.ProcessState;
@@ -65,7 +66,7 @@ package com.rpgGame.app
 			LayerManager.setup(_root);
 			ProjectManager.setup(_root, _root.stage);
 			PopUpManager.container = LayerManager.topLevel;
-
+			PlatformUtil.init();
 			var loginData : MyPlayerInfo = clientGlobal.loginData;
 			if (ClientConfig.isSingle)
 			{

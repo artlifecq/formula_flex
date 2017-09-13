@@ -79,6 +79,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "9": //P 队伍
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUDUI);
+					break;
 				case "1": //G 战魂
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN);
 					break;

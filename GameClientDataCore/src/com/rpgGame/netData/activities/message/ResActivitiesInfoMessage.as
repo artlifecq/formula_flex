@@ -13,6 +13,9 @@ package com.rpgGame.netData.activities.message{
 	 */
 	public class ResActivitiesInfoMessage extends Message {
 	
+		//活动面板类型 ,0全部
+		private var _mainPanelType: int;
+		
 		//活动信息
 		private var _activities: Vector.<ActivityInfo> = new Vector.<ActivityInfo>();
 		
@@ -21,6 +24,8 @@ package com.rpgGame.netData.activities.message{
 		 */
 		override protected function writing(): Boolean{
 			var i: int = 0;
+			//活动面板类型 ,0全部
+			writeInt(_mainPanelType);
 			//活动信息
 			writeShort(_activities.length);
 			for (i = 0; i < _activities.length; i++) {
@@ -34,6 +39,8 @@ package com.rpgGame.netData.activities.message{
 		 */
 		override protected function reading(): Boolean{
 			var i: int = 0;
+			//活动面板类型 ,0全部
+			_mainPanelType = readInt();
 			//活动信息
 			var activities_length : int = readShort();
 			for (i = 0; i < activities_length; i++) {
@@ -48,6 +55,21 @@ package com.rpgGame.netData.activities.message{
 		 */
 		override public function getId(): int {
 			return 181101;
+		}
+		
+		/**
+		 * get 活动面板类型 ,0全部
+		 * @return 
+		 */
+		public function get mainPanelType(): int{
+			return _mainPanelType;
+		}
+		
+		/**
+		 * set 活动面板类型 ,0全部
+		 */
+		public function set mainPanelType(value: int): void{
+			this._mainPanelType = value;
 		}
 		
 		/**

@@ -40,6 +40,7 @@ package
 		/**加载进度条**/
 		private var _loadingView : LoadProgressView;
 		private var _urlParmar : Object = null;
+		private var _clientParmar:Object=null;
 		private var _clientPathUrl : String = CLIENTSWF_PATH;
 		private var _versionPath : String = "version_#";
 
@@ -146,6 +147,7 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
 			
 			_urlParmar = loaderInfo.parameters;
+			_clientParmar=loaderInfo.parameters;
 			if (ExternalInterface.available)
 			{
 				ExternalInterface.addCallback("closeBrower", closeBrower );
@@ -413,7 +415,7 @@ package
             client["urlParmar"] = _urlParmar;
             client["useBpgFormat"] = _useBpgFormat;
             client["GlobalBridge"] = GlobalBridge;
-            
+            client["clientParmar"]=_clientParmar;
             // web params
 			client["baseDir"] = _baseDir;
 			client["isRelease"] = _isRelease;

@@ -514,9 +514,10 @@ package com.rpgGame.app.state.role
 		}
 		public static function updateMoveBySpeedChange(player:SceneRole):void
 		{
-			if (player.stateMachine.isWalkMoving) 
+			var ref:WalkMoveStateReference=player.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+			if (player.stateMachine.isWalkMoving&&ref.leftPath.length>0) 
 			{
-				var ref:WalkMoveStateReference=player.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				
 				var moveInfo:RoleMoveInfo=new RoleMoveInfo();
 				var posNow:Position=new Position();
 				posNow.x=player.pos.x;
