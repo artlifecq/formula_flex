@@ -7,10 +7,13 @@ package com.rpgGame.appModule.fulidating
 	public class ZaiXianJiangLiPanel extends ViewUI
 	{
 		private var _skin:FLDT_Zaixianjiangli;
+		
 		public function ZaiXianJiangLiPanel()
 		{
 			_skin=new FLDT_Zaixianjiangli();
 			super(_skin);
 		}
+		
+		
 	}
 }
