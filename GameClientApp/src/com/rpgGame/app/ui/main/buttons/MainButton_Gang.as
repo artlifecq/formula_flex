@@ -1,7 +1,11 @@
 package com.rpgGame.app.ui.main.buttons
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	public class MainButton_Gang extends MainButtonBases/*MainButtonBases*/
 	{
@@ -10,6 +14,16 @@ package com.rpgGame.app.ui.main.buttons
 			super();
 			SkinUI.addNode(null,RTNodeID.MAIN_SOCAIL,this,60,null,false);
 		}
+		
+		override protected function triggeredHanadler():void
+		{
+			if(GuildManager.instance().haveGuild){
+				FunctionOpenManager.openByBtnInfo(_btnInfo);
+			}else{
+				FunctionOpenManager.openPanelByFuncInfo(NewFuncCfgData.getFuncCfg(EmFunctionID.EM_BANGHUI_LIEBIAO));
+			}
+		}
+		
 //		private var _helpPoint:Point;
 //		override protected function initialize():void
 //		{

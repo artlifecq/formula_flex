@@ -24,7 +24,7 @@ package com.rpgGame.appModule.guild.war
 	{
 		private var guanRe:RewardGroup;
 		private var bangRe:RewardGroup;
-		private var jinRe:RewardGroup;
+		private var canyuRe:RewardGroup;
 		private var allServerRe:RewardGroup;
 		
 		private var _skin:HuangChengJiangLi;
@@ -41,7 +41,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			guanRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid1_1,RewardGroup.ALIN_LEFT,5);
 			bangRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid1_6,RewardGroup.ALIN_LEFT,5);
-			jinRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid2_1,RewardGroup.ALIN_LEFT,5);
+			canyuRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid2_1,RewardGroup.ALIN_LEFT,5);
 			allServerRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid3_1,RewardGroup.ALIN_LEFT,5);			
 		}
 		
@@ -64,9 +64,9 @@ package com.rpgGame.appModule.guild.war
 			guanRe.setRewardByJsonStr(str);
 			str=cfg.q_rewards1;
 			bangRe.setRewardByJsonStr(str);
-			str=cfg.q_reward4;
-			jinRe.setRewardByJsonStr(str);
-			str=cfg.q_rewards3;
+			str=cfg.q_reward3;
+			canyuRe.setRewardByJsonStr(str);
+			str=cfg.q_rewards4;
 			allServerRe.setRewardByJsonStr(str);
 		}
 		
@@ -91,7 +91,7 @@ package com.rpgGame.appModule.guild.war
 			super.onHide();
 			guanRe.clear();
 			bangRe.clear();
-			jinRe.clear();
+			canyuRe.clear();
 			allServerRe.clear();
 		}
 	}

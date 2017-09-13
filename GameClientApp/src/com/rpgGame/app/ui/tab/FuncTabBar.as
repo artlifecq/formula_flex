@@ -17,6 +17,7 @@ package com.rpgGame.app.ui.tab
 	 */
 	public class FuncTabBar extends UITabBar
 	{
+		private var _checkToTabHandler:Function;	
 		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>,crosswise:Boolean=true)
 		{
 			super(tab, datas,crosswise);
@@ -36,9 +37,15 @@ package com.rpgGame.app.ui.tab
 			{
 				var item:UITabBarData = _allDatas[index];
 				if(item){
-					if(FunctionOpenManager.functionIsOpen(item.tabKey)){//已经开启了
-						return true;
+					var checkResult:Boolean;
+					if(_checkToTabHandler){
+						checkResult=_checkToTabHandler(item.tabKey);
 					}else{
+						checkResult=FunctionOpenManager.functionIsOpen(item.tabKey);//默认新功能
+					}
+					if(checkResult){//能切过去
+						return true;
+					}else if(!_checkToTabHandler){
 						var q_data:Q_newfunc=NewFuncCfgData.getFuncCfg(item.tabKey);
 						NoticeManager.showNotifyById(90203,null,q_data.q_name,q_data.q_level);
 						return false;
@@ -112,5 +119,11 @@ package com.rpgGame.app.ui.tab
 			this.updata();
 //			this.switchTabKey(this._currentKey);
 		}
+
+		public function set checkToTabHandler(value:Function):void
+		{
+			_checkToTabHandler = value;
+		}
+
 	}
 }

@@ -85,9 +85,9 @@ package com.rpgGame.appModule.rank
 			var length:int = _cellList.length;
 			for(var i:int = 0;i<length;i++)
 			{
-				_cellList[i].updatCellByInfo(info);
+				_cellList[i].chackItem(info);
 			}
-			_selfCell.updatCellByInfo(info);
+			_selfCell.chackItem(info);
 		}
 		protected var _totalPage:int;
 		protected var _currentPage:int;
@@ -144,7 +144,7 @@ package com.rpgGame.appModule.rank
 		
 		private function updataPageInfoHandler():void
 		{
-			var cell:AllPlayerCell
+			var cell:AllPlayerCell;
 			for(var i:int = 0;i<_length;i++)
 			{
 				cell = _cellList[i];

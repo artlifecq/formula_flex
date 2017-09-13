@@ -25,6 +25,9 @@ package com.rpgGame.app.state.role.action
 		private var _repeatNum:int;
 		private var nextShowTween:TweenLite;
 		private var showCD:Number=10;//每次展示的时间间隔
+		private var _stateReference : ShowStateReference;
+		
+		
 		public function ShowState()
 		{
 			super(RoleStateType.ACTION_SHOW);
@@ -75,6 +78,9 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
+				if(_ref){
+					_stateReference=_ref as ShowStateReference;
+				}
 				setShowAction();
 			}
 		}
@@ -144,7 +150,7 @@ package com.rpgGame.app.state.role.action
 		{
 			var role:SceneRole=_machine.owner as SceneRole;
 			
-			if(role.parent.parent.rotationY!=0){//不在展示角度不做下次展示
+			if(Math.round(role.parent.parent.rotationY)!=_stateReference.defaultRotationY){//不在展示角度不做下次展示
 				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);
 				return;
 			}
