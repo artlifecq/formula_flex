@@ -555,6 +555,8 @@ package com.rpgGame.core.app
 		public static var PET_PANLE:String = createAppInfo("pet.PetMainPanelExt","meiren",EmPanelID.MEI_REN);
 		/**美人挑战成功面板**/
 		public static var PET_TIAOZHAN_PANLE:String = createAppInfo("pet.MeiRenTiaoZhanChengGongPanel","meiren");
+		/**美人进阶成功**/
+		public static var PET_LEVEL_UP:String = createAppInfo("pet.PetLevelUpOkPanel");
 		/**排行榜**/
 		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang",EmPanelID.RANKLISTPANLE);
 		/**全平台排行榜**/
@@ -579,10 +581,11 @@ package com.rpgGame.core.app
 		
 		/**背包快满了提示*/
 		public static var BACK_FULL_TISHI:String = createAppInfo("role.BaoGuoTiShiPanel","baoguo");
-		
+
 		/**七天豪礼面板*/
 		public static var SEVENDAY_PANEL:String = createAppInfo("sevenday.SevendayPanel","sevenday",EmPanelID.SEVENDAY_PANEL);
-		
-		
+
+		/**福利大厅*/
+		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating");
 	}
 }

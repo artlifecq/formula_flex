@@ -455,7 +455,7 @@ package com.rpgGame.app.richText
 					{
 						//						var guildId:Number=parseInt(unitData.linkData);
 						id = new long(unitData.linkData);
-						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO,id);
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_LIEBIAO,id);
 					}else{
 						NoticeManager.showNotifyById(60218);
 					}			

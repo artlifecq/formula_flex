@@ -311,7 +311,7 @@ package com.rpgGame.app.ui.main.head
 					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia2/middle.png";
 					break;
 				case JobEnum.ROLE_4_TYPE:
 					this._skin.icon.styleName = "ui/mainui/head/touxiang/yijia/middle.png";

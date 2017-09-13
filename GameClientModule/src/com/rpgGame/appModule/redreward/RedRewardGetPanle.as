@@ -98,7 +98,7 @@ package com.rpgGame.appModule.redreward
 					this._headImg.styleName="ui/mainui/head/touxiang/mojia/middle.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					this._headImg.styleName="ui/mainui/head/touxiang/mojia/middle.png";
+					this._headImg.styleName="ui/mainui/head/touxiang/mojia2/middle.png";
 					break;
 				case JobEnum.ROLE_4_TYPE:
 					this._headImg.styleName="ui/mainui/head/touxiang/yijia/middle.png";
