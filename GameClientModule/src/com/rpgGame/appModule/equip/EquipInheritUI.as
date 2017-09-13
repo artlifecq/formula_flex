@@ -723,7 +723,7 @@ package com.rpgGame.appModule.equip
 				{
 					alertSet= new AlertSetInfo( LangUI.UI_TEXT15);
 				}else{//bangding
-					alertSet= new AlertSetInfo( LangUI.UI_TEXT15);
+					alertSet= new AlertSetInfo( LangUI.UI_TEXT38);
 				}
 				alertSet.alertInfo.value=alertSet.alertInfo.value.replace("$",HtmlTextUtil.getTextColor(ItemQualityType.getColorValue(_targetEquipInfo.quality),_useEuipInfo.name));
 				alertSet.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);

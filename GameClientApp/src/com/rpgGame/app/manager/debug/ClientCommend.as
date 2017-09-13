@@ -325,6 +325,10 @@ package   com.rpgGame.app.manager.debug
 				//				data.setServerData(petInfo);
 				//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
+			commandList.put( ".fuli", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.FULIDATING_MAIN);
+			});
 			commandList.put( ".sset", function (...arg):void
 			{
 				TrusteeshipManager.getInstance().autoSkillCtrl.resetSkill();

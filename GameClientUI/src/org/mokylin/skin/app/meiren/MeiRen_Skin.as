@@ -571,8 +571,8 @@ package org.mokylin.skin.app.meiren
 			temp.textAlign = "center";
 			temp.color = 0x41FF65;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 221;
-			temp.x = 300;
+			temp.width = 458;
+			temp.x = 182;
 			temp.y = 480;
 			return temp;
 		}

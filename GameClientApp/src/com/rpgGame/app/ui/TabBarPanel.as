@@ -21,17 +21,17 @@ package com.rpgGame.app.ui
 		protected var _tabBar:FuncTabBar;
 		protected var _tabDatas:Vector.<UITabBarData>;
 		
-		public function TabBarPanel(skin:StateSkin)
+		public function TabBarPanel(skin:StateSkin,crosswise:Boolean=true)
 		{
 			super(skin);
-			initTabBar();
+			initTabBar(crosswise);
 		}
 		
-		private function initTabBar():void
+		private function initTabBar(crosswise:Boolean=true):void
 		{
 			_tabDatas=new Vector.<UITabBarData>();
 			initTabBarDatas();
-			_tabBar=new FuncTabBar(_stateSkin["tabBar"],_tabDatas);
+			_tabBar=new FuncTabBar(_stateSkin["tabBar"],_tabDatas,crosswise);
 		}
 		
 		protected function initTabBarDatas():void
@@ -57,11 +57,12 @@ package com.rpgGame.app.ui
 		 * @param viewStyle 标签对应视图
 		 * @param funcKey 标签对应功能键
 		 * @param openShow 功能开启了才展示
-		 * 
+		 * @param x 子项的坐标
+		 * @param y 子项的坐标
 		 */
-		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int,openShow:Boolean=true):void
+		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int,openShow:Boolean=true,x:int=0,y:int=0):void
 		{
-			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle,openShow);
+			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle,openShow,x,y);
 			item.tabKey=funcKey;
 			var fundata:Q_newfunc = NewFuncCfgData.getFuncCfg(item.tabKey);
 			var panelData:Q_panel=PanelCfgData.getPanelCfg(fundata.q_open_panel);

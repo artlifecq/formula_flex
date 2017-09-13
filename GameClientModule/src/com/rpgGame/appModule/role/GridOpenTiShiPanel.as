@@ -56,7 +56,7 @@ package com.rpgGame.appModule.role
 					_type=2;
 					break;
 			}
-			_buyPice=GoodsContainerMamager.getOpenGridMoney(_itemContainerID,_index);
+			_buyPice=GoodsContainerMamager.getOpenGridMoney(_itemContainerID,_index+1);
 			_skin.lb_num.text=_buyNum.toString()+"格";
 			if(_index<GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex)
 			{

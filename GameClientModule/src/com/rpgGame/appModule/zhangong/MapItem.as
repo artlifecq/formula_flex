@@ -57,55 +57,8 @@ package com.rpgGame.appModule.zhangong
 			ClearData();
 			_lv=data as int;
 			updateBtnState(CharAttributeType.LV);
-			setDxml(_lv);
+			_skin.bg.styleName = "ui/app/beibao/zhangong/name/"+_lv+".png";
 			updatePanel();
-		}
-		
-		private function setDxml(lv:int):void
-		{
-			switch(lv)
-			{
-				case 21:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/wujiabao.png";
-					break;
-				}		
-				case 31:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/handanjinjiao.png";
-					break;
-				}
-				case 41:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/daliangcheng.png";
-					break;
-				}
-				case 51:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/changpingwanrenkeng.png";
-					break;
-				}
-				case 61:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/wanlichangcheng.png";
-					break;
-				}
-				case 71:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/saiwai.png";
-					break;
-				}
-				case 81:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/epanggong.png";
-					break;
-				}
-				case 91:
-				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/qinshihuangling.png";
-					break;
-				}
-			}
 		}
 		
 		public function ClearData():void
