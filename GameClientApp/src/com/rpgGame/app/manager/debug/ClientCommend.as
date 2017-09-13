@@ -497,6 +497,16 @@ package   com.rpgGame.app.manager.debug
 					ResChangeEffect.fly(arg[1],arg[2]);
 				}	
 			});
+			commandList.put( ".title1", function (...arg):void
+			{
+				var ids:Vector.<int>=new Vector.<int>()
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+				ids.push(arg[i+1]);
+				}
+				(MainRoleManager.actor.headFace as HeadFace).addAndUpdataRankTitle(ids);
+			
+			});
 			commandList.put( ".title", function (...arg):void
 			{
 //				var ids:Vector.<int>=new Vector.<int>()
@@ -505,7 +515,15 @@ package   com.rpgGame.app.manager.debug
 //					ids.push(arg[i+1]);
 //				}
 //				(MainRoleManager.actor.headFace as HeadFace).addAndUpdataRankTitle(ids);
-				(MainRoleManager.actor.headFace as HeadFace).addTilteById(arg[0]);
+				if (arg[0]<0) 
+				{
+					(MainRoleManager.actor.headFace as HeadFace).removeTitleById(-arg[0]);
+				}
+				else
+				{
+					(MainRoleManager.actor.headFace as HeadFace).addTilteById(arg[0]);
+				}
+				
 			});
 		}
 		

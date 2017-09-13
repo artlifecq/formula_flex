@@ -21,6 +21,7 @@ package com.rpgGame.appModule.openActivity.plat37
 		private var _vo:ActivityVo;
 		public function P37PhonePanelExt()
 		{
+			_skin=new Shoujilibao_Skin();
 			super(EnumCampPanelType.M_PHONE_37,_skin);
 			_gReward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon2,1,9,4);
 		}

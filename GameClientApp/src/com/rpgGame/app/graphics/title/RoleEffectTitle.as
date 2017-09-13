@@ -37,7 +37,7 @@ package  com.rpgGame.app.graphics.title
 			}
 			this._th=_data.q_effects_high*toScale;
 			
-			var obj:InterObject3D = playInter3DAt(ClientConfig.getEffect(_data.q_effects),0,0,repeat,onPlayComplete,addComplete);
+			var obj:InterObject3D = playInter3DAt(ClientConfig.getEffect(_data.q_effects),0,_th/2,repeat,onPlayComplete,addComplete);
 			obj.baseObj3D.setScale(toScale);
 			return obj;
 		}

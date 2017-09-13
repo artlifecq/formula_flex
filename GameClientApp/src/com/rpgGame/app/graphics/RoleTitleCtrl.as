@@ -6,24 +6,24 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.graphics.title.IBaseTitle;
 	import com.rpgGame.app.graphics.title.RoleEffectTitle;
 	import com.rpgGame.app.graphics.title.RoleUITitle;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.TitleControlCfg;
 	import com.rpgGame.coreData.clientConfig.Q_title_control;
 	
-	import org.mokylin.skin.app.maps.ThansName;
+	import feathers.core.IFeathersControl;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 
 	/**
-	 *游戏头顶称号统一管理 
+	 *游戏头顶称号显示统一管理 
 	 * @author yfl
 	 * 
 	 */	
 	public class RoleTitleCtrl extends Sprite
 	{
-		private var _titleHash:HashMap=new HashMap();
+		private var _curShowHash:HashMap=new HashMap();
+		private var _tileHash:HashMap=new HashMap();
 		private var _deCtrl:DecorCtrl;
 		private var _th:int;
 		private var _owt:String;
@@ -35,27 +35,46 @@ package com.rpgGame.app.graphics
 		}
 		public function setTileData(_tiles:Vector.<int>):void
 		{
-			var tmp:HashMap=new HashMap();
+			clearData();
+			
 			var len:int=_tiles.length;
 			var qTitle:Q_title_control;
 			for (var i:int = 0; i <len; i++) 
 			{
 				qTitle=TitleControlCfg.getTitle(_tiles[i]);
-				var old:Q_title_control=tmp.getValue(qTitle.q_type);
-				if (!old||old.q_id<qTitle.q_id) 
+				var arr:Array=_tileHash.getValue(qTitle.q_type);
+				if (!arr) 
 				{
-					tmp.put(qTitle.q_type,qTitle);
+					arr=[];
+					_tileHash.put(qTitle.q_type,arr);
+				}
+				arr.push(qTitle);
+			}
+			_tileHash.eachValue(sortSameType);
+			
+			
+			//所有称号
+			var allArr:Array=_tileHash.values();
+			//把每组最牛逼的取出来
+			len=allArr.length;
+			var tmp:Array=[];
+			for (var k:int = 0; k <len; k++) 
+			{
+				if (allArr[k].lenght) 
+				{
+					tmp.push(allArr[k][0]);
 				}
 			}
-			var arr:Array=tmp.values();
-			//升序id越低，称号约在底
-			arr.sortOn("q_q_weight",Array.NUMERIC);
-			len=arr.length;
+			len=tmp.length;
 			for (var j:int = 0; j < len; j++) 
 			{
-				addTitle(arr[j]);
+				addTitle(tmp[j]);
 			}
 			
+		}
+		private function sortSameType(arr:Array):void
+		{
+			arr.sortOn("q_id",Array.NUMERIC|Array.DESCENDING);
 		}
 		private function addTitle(qTitle:Q_title_control,bSort:Boolean=false):void
 		{
@@ -63,7 +82,18 @@ package com.rpgGame.app.graphics
 			{
 				return;
 			}
-			var old:IBaseTitle=_titleHash.getValue(qTitle.q_type);
+			var arr:Array=_tileHash.getValue(qTitle.q_type);
+			if (!arr) 
+			{
+				arr=[];
+				_tileHash.put(qTitle.q_type,arr);
+			}
+			if (arr.indexOf(qTitle)==-1) 
+			{
+				arr.push(qTitle);
+				sortSameType(arr);
+			}
+			var old:IBaseTitle=_curShowHash.getValue(qTitle.q_type);
 			if (old) 
 			{
 				var oldData:Q_title_control=old.data;
@@ -76,24 +106,27 @@ package com.rpgGame.app.graphics
 			//需要新加或者改表
 			if (old) 
 			{
-				_titleHash.remove(qTitle.q_title);
+				_curShowHash.remove(qTitle.q_title);
 				MCUtil.removeSelf(old as DisplayObject);
+				old.dispose();
 				old=null;
 			}
 			if (qTitle.q_effects) 
 			{
 				old=new RoleEffectTitle();
 			}
-			else if (qTitle.q_title) 
-			{
-				old=new RoleUITitle();
-			}
+//			else if (qTitle.q_title) 
+//			{
+//				old=new RoleUITitle();
+//			}
 			if (!old) 
 			{
 				GameLog.addError("qtile error"+qTitle.q_id);
+				return;
 			}
 			old.playEffect(_owt,qTitle);
 			this.addChild(old as DisplayObject);
+			_curShowHash.put(qTitle.q_type,old);
 			if (bSort) 
 			{
 				sortTitle();
@@ -105,20 +138,47 @@ package com.rpgGame.app.graphics
 		}
 		public function removeTitle(titleId:int):void
 		{
-			var iTitle:IBaseTitle=_titleHash.remove(titleId);
-			if (iTitle) 
+			var qTile:Q_title_control=TitleControlCfg.getTitle(titleId);
+			if (!qTile) 
 			{
+				return;
+			}
+			//移除数据
+			var arr:Array=_tileHash.getValue(qTile.q_type);
+			if (!arr) 
+			{
+				arr=[];
+				_tileHash.put(qTile.q_type,arr);
+			}
+			var find:int=arr.indexOf(qTile);
+			if (find!=-1) 
+			{
+				arr.removeAt(find);
+			}
+			var iTitle:IBaseTitle=_curShowHash.getValue(qTile.q_type);
+			if (iTitle&&iTitle.data.q_id==titleId) 
+			{
+				_curShowHash.remove(qTile.q_type);
+				iTitle.dispose();
 				MCUtil.removeSelf(iTitle as DisplayObject);
-				sortTitle();
+				//还有低级的
+				if (arr.length>0) 
+				{
+					addTitle(arr[0],true);
+				}
+				else
+				{
+					sortTitle();
+				}
 			}
 		}
 		private function onSort(aTile:IBaseTitle,bTile:IBaseTitle):int
 		{
-			if (aTile.data.q_weight<bTile.data.q_weight) 
+			if (aTile.data.q_weight>bTile.data.q_weight) 
 			{
 				return -1;
 			}
-			else if (aTile.data.q_weight>bTile.data.q_weight) 
+			else if (aTile.data.q_weight<bTile.data.q_weight) 
 			{
 				return 1;
 			}
@@ -126,7 +186,7 @@ package com.rpgGame.app.graphics
 		}
 		private function sortTitle():void
 		{
-			var tiles:Array=_titleHash.values();
+			var tiles:Array=_curShowHash.values();
 			tiles.sort(onSort);
 			var len:int=tiles.length;
 			_th=0;
@@ -134,8 +194,9 @@ package com.rpgGame.app.graphics
 			for (var i:int = 0; i < len; i++) 
 			{
 				tmp=tiles[i];
-				_th=tmp.height+2;
-				tmp.y=-_th;
+				tmp.y=_th;
+				_th+=tmp.height+2;
+				
 			}
 			if (_deCtrl) 
 			{
@@ -146,13 +207,25 @@ package com.rpgGame.app.graphics
 		{
 			return _th;
 		}
+		override public function get width():Number
+		{
+			return 0;
+		}
+		private function clearData():void
+		{
+			MCUtil.removeAllChild(this);
+			_curShowHash.eachValue(function (title:IBaseTitle):void{
+				title.dispose();			
+			});
+			_curShowHash.clear();
+			_th=0;
+			_tileHash.clear();
+		}
 		override public function dispose():void
 		{
-			super.dispose();
-			MCUtil.removeAllChild(this);
-			_titleHash.clear();
-			_th=0;
+			clearData();
 			MCUtil.removeSelf(this);
+			super.dispose();
 		}
 	}
 }

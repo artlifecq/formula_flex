@@ -90,7 +90,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_npc:String = "data.monster.Q_npc";
 		/**  定点刷怪数据库 -- 编辑器录入									 */
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
-		/**  区域刷怪数据库 -- 编辑器录入																 */
+		/**  区域刷怪数据库 -- 编辑器录入																	 */
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
 		/**  婚戒升阶表							 */
 		public static const Q_advance_wedding:String = "data.Q_advance_wedding";
@@ -130,7 +130,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
 		/**  					 */
 		public static const Q_equip_wash:String = "data.Q_equip_wash";
-		/**  					 */
+		/**  						 */
 		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
@@ -164,6 +164,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表						 */
 		public static const Q_junjie:String = "data.Q_junjie";
+		/**  军阶条件数据表		 */
+		public static const Q_junjie_condition:String = "data.Q_junjie_condition";
 		/**  王城名称对照表（仅客户端使用）		 */
 		public static const Q_kindomname:String = "data.Q_kindomname";
 		/**  极限挑战活动配置													 */
@@ -174,7 +176,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
 		/**  论剑配置表											 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
-		/**  界面按钮表									 */
+		/**  界面按钮表										 */
 		public static const Q_mainbtn:String = "data.Q_mainbtn";
 		/**  副本触发表																				 */
 		public static const Q_map_trigger:String = "data.Q_map_trigger";
@@ -198,9 +200,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
 		/**  ??				 */
 		public static const Q_mission_section:String = "data.Q_mission_section";
-		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
+		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id，40000—49999帮派任务)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
-		/**  功能开放表														 */
+		/**  功能开放表									 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
@@ -214,6 +216,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
+		/**  七日豪礼奖励表				 */
+		public static const Q_sevenday:String = "data.Q_sevenday";
 		/**  属性对应属性ID_前端			 */
 		public static const Q_shuxing:String = "data.Q_shuxing";
 		/**  城池基础表																			 */
@@ -226,6 +230,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
+		/**  排行榜称号									 */
+		public static const Q_title_control:String = "data.Q_title_control";
 		/**  填色配置表						 */
 		public static const Q_vertex_color:String = "data.Q_vertex_color";
 		/**  											 */
@@ -382,6 +388,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
 			regClass("data.Q_suggest", com.rpgGame.coreData.clientConfig.Q_suggest);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
+			regClass("data.Q_title_control", com.rpgGame.coreData.clientConfig.Q_title_control);
 			regClass("data.Q_vertex_color", com.rpgGame.coreData.clientConfig.Q_vertex_color);
 			regClass("data.Q_vip", com.rpgGame.coreData.clientConfig.Q_vip);
 			regClass("data.Q_warflag", com.rpgGame.coreData.clientConfig.Q_warflag);

@@ -16,16 +16,16 @@ package  com.rpgGame.app.manager.platform
 			var param:Object=ClientConfig.clientParams;
 			if (param) 
 			{
-				url=param["phoneVerifyUrl"];
+				url=param["phoneUrl"];
 				//
-				url+="&a="+param["a"];
-				url+="&game_id="+param["game_id"];
-				url+="&sid="+param["sid"];
-				url+="&username="+param["username"];
-				url+="&actor="+param["actor"];
-				url+="&time="+param["time"];
-				url+="&sign="+param["sign37"];
-				if (url!="") 
+//				url+="&a="+param["a"];
+//				url+="&game_id="+param["game_id"];
+//				url+="&sid="+param["sid"];
+//				url+="&username="+param["username"];
+//				url+="&actor="+param["actor"];
+//				url+="&time="+param["time"];
+//				url+="&sign="+param["sign37"];
+				if (url!=""&&url!=null) 
 				{
 					GlobalFunction.OpenUrl(url);
 				}

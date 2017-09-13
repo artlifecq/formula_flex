@@ -14,5 +14,7 @@ package com.rpgGame.app.graphics.title
 		function get data():Q_title_control;
 		
 		function set y(value:Number):void;
+		
+		function dispose():void;
 	}
 }

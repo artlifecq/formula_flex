@@ -249,8 +249,6 @@ package com.rpgGame.app.graphics
 			addElement(_biaoFlagIcon);
 			addElement(_familyWarIcon);
 			addElement(_moodMC);
-			addElement(_rankTitle1);
-			addElement(_rankTitle2);
 			addElement(_meirenTitle);
 		}
 		
@@ -365,8 +363,8 @@ package com.rpgGame.app.graphics
 				}
 				
 				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
-				showAndHideElement(_rankTitle1, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_RANKDESIGNATION);
-				showAndHideElement(_rankTitle2, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_RANKDESIGNATION1);
+				showAndHideElement(_titleCtrl, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_TEST);
+				//showAndHideElement(_rankTitle2, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_RANKDESIGNATION1);
 				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
 				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
 				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
@@ -1192,18 +1190,6 @@ package com.rpgGame.app.graphics
 				_title.dispose();
 				_title = null;
 			}
-			
-			if (_rankTitle1 != null)
-			{
-				_rankTitle1.dispose();
-				_rankTitle1 = null;
-			}
-			
-			if (_rankTitle2 != null)
-			{
-				_rankTitle2.dispose();
-				_rankTitle2 = null;
-			}
 			if(_huabotitle != null)
 			{
 				_huabotitle.dispose();
@@ -1507,151 +1493,31 @@ package com.rpgGame.app.graphics
 		
 		public function addTilteById(id:int):void
 		{
+			getTitleCtrl().addTitleById(id);
+		}
+		public function removeTitleById(id:int):void
+		{
+			if (_titleCtrl) 
+			{
+				_titleCtrl.removeTitle(id);
+			}
+		}
+	
+		/** 排行榜称号 */
+		public function addAndUpdataRankTitle(list:Vector.<int>):void
+		{
+			getTitleCtrl().setTileData(list);
+			updateAllBarPosition();
+		}
+		private function getTitleCtrl():RoleTitleCtrl
+		{
 			if (!_titleCtrl) 
 			{
 				_titleCtrl=new RoleTitleCtrl(this.deCtrl,_role.type);
 				this.deCtrl.addTop(_titleCtrl,DecorCtrl.TOP_TEST);
 			}
-			_titleCtrl.addTitleById(id);
+			return _titleCtrl;
 		}
-		
-		private function onSort(a:int,b:int):int
-		{
-			if (a>b) 
-			{
-				return -1;
-			}
-			else if (a<b) 
-			{
-				return 1;
-			}
-			return 0;
-		}
-	
-		private var _rankTitle1:HeadFaceEffect;
-		private var _rankTitle2:HeadFaceEffect;
-		
-		private function updateSubRankTile(list:Vector.<int>):void
-		{
-			if(list==null||list.length==0)
-			{
-				if (_rankTitle1!=null) 
-				{
-					deCtrl.removeTop(_rankTitle1);
-					_rankTitle1.dispose();
-					_rankTitle1=null;
-				}
-			}
-			else
-			{
-				list=list.sort(onSort);
-				var tileId:int=list[0];
-				
-				var qTile:Q_rank_designation=RankDesignationData.getinfoById(tileId);
-				if (!qTile||qTile.q_effects=="") 
-				{
-					return;
-				}
-				if (_rankTitle1) 
-				{
-					if (_rankTitle1.url==ClientConfig.getEffect(qTile.q_effects)) 
-					{
-						return;
-					}
-					deCtrl.removeTop(_rankTitle1);
-					_rankTitle1.dispose();
-					_rankTitle1=null;
-				}
-				
-				if (!_rankTitle1) 
-				{
-					_rankTitle1=new HeadFaceEffect();
-				}
-				var toScale:Number=1;
-				if (SceneCharType.SCULPTURE==this._role.type) 
-				{
-					toScale=qTile.q_modle_scale/100;
-				}
-				else
-				{
-					toScale=(qTile.q_hero_scale/100);
-				}
-				var obj:InterObject3D=_rankTitle1.playEffect(0,qTile.q_effects_high*toScale,ClientConfig.getEffect(qTile.q_effects),0,qTile.q_effects_high/2*toScale,0);
-				obj.baseObj3D.setScale(toScale);
-				deCtrl.addTop(_rankTitle1,DecorCtrl.TOP_RANKDESIGNATION);
-			}
-		}
-		/**
-		 *皇城争霸 
-		 * @param list
-		 * 
-		 */		
-		private function updateHCZBTile(list:Vector.<int>):void
-		{
-			if(list==null||list.length==0)
-			{
-				if (_rankTitle2!=null) 
-				{
-					deCtrl.removeTop(_rankTitle2);
-					_rankTitle2.dispose();
-					_rankTitle2=null;
-				}
-			}
-			else
-			{
-				list=list.sort(onSort);
-				var tileId:int=list[0];
-				
-				var qTile:Q_rank_designation=RankDesignationData.getinfoById(tileId);
-				if (!qTile||qTile.q_effects=="") 
-				{
-					return;
-				}
-				if (_rankTitle2) 
-				{
-					if (_rankTitle2.url==ClientConfig.getEffect(qTile.q_effects)) 
-					{
-						return;
-					}
-					deCtrl.removeTop(_rankTitle2);
-					_rankTitle2.dispose();
-					_rankTitle2=null;
-				}
-				
-				if (!_rankTitle2) 
-				{
-					_rankTitle2=new HeadFaceEffect();
-				}
-				var toScale:Number=1;
-				if (SceneCharType.SCULPTURE==this._role.type) 
-				{
-					toScale=qTile.q_modle_scale/100;
-				}
-				else
-				{
-					toScale=(qTile.q_hero_scale/100);
-				}
-				var obj:InterObject3D=_rankTitle2.playEffect(0,qTile.q_effects_high*toScale,ClientConfig.getEffect(qTile.q_effects),0,qTile.q_effects_high/2*toScale,0);
-				obj.baseObj3D.setScale(toScale);
-				deCtrl.addTop(_rankTitle2,DecorCtrl.TOP_RANKDESIGNATION1);
-			}
-		}
-		/** 排行榜称号 */
-		public function addAndUpdataRankTitle(list:Vector.<int>):void
-		{
-			var index:int=list.indexOf(108);
-			var tmp:Vector.<int>=new Vector.<int>();
-			//皇城争霸108
-			if (index!=-1) 
-			{
-				tmp.push(108);
-				list.removeAt(index);
-			}
-			updateHCZBTile(tmp);
-			updateSubRankTile(list);
-			updateAllBarPosition();
-		}
-		
 		//---------------------------------------------
 		//---------------------------------------------心情动画
 		

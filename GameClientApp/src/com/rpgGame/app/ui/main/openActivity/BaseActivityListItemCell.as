@@ -8,6 +8,7 @@ package com.rpgGame.app.ui.main.openActivity
 	
 	import feathers.controls.Button;
 	import feathers.controls.StateSkin;
+	import feathers.utils.filter.GrayFilter;
 	
 	import starling.display.DisplayObject;
 
@@ -22,18 +23,20 @@ package com.rpgGame.app.ui.main.openActivity
 		protected var _btnReward:Button;
 		protected var _needGray:Boolean;
 		private var _useText:Boolean;
-		public function BaseActivityListItemCell(skin:StateSkin=null,btn:Button=null,gray:Boolean=true,useText:Boolean=true)
+		private var _setTouch:Boolean;
+		public function BaseActivityListItemCell(skin:StateSkin=null,btn:Button=null,gray:Boolean=true,useText:Boolean=true,setT:Boolean=true)
 		{
 			super(skin);
 			this._btnReward=btn;
 			_needGray=gray;
 			_useText=useText;
+			_setTouch=setT
 		}
 		
 		public function setData(info:ActivityVo):void
 		{
 			this._data=info;
-			setBtnState(_btnReward,_data.status,_needGray,_useText);
+			setBtnState(_btnReward,_data.status,_needGray,_useText,_setTouch);
 		}
 		
 		public function get dis():DisplayObject
@@ -86,12 +89,13 @@ package com.rpgGame.app.ui.main.openActivity
 		 * @param state 0已经领取，1可领取， 2不可领取
 		 * 
 		 */		
-		public static function setBtnState(btn:Button,state:int,gray:Boolean,useText:Boolean=true):void
+		public static function setBtnState(btn:Button,state:int,gray:Boolean,useText:Boolean=true,setTouchable:Boolean=false):void
 		{
 			if (!btn) 
 			{
 				return;
 			}
+			btn.touchable=true;
 			//
 			if (state==0) 
 			{
@@ -102,7 +106,11 @@ package com.rpgGame.app.ui.main.openActivity
 				
 				if (gray) 
 				{
-					TouchableUtil.gray(btn);
+					GrayFilter.gray(btn);
+				}
+				if (setTouchable) 
+				{
+					btn.touchable=false;
 				}
 			}
 			else if (state==1) 
@@ -113,7 +121,7 @@ package com.rpgGame.app.ui.main.openActivity
 				}
 				if (gray) 
 				{
-					TouchableUtil.ungray(btn);
+					GrayFilter.unGray(btn);
 				}
 			}
 			else if (state==2) 
@@ -124,7 +132,11 @@ package com.rpgGame.app.ui.main.openActivity
 				}
 				if (gray) 
 				{
-					TouchableUtil.gray(btn);
+					GrayFilter.gray(btn);
+				}
+				if (setTouchable) 
+				{
+					btn.touchable=false;
 				}
 			}
 		}

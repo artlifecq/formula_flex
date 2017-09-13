@@ -19,7 +19,7 @@ package com.rpgGame.appModule.openActivity.plat37
 		public function P37PlatformVipLevelItemExt()
 		{
 			_skin=new Item_Tequanlibao();
-			super(_skin, _skin.btnOk);
+			super(_skin, _skin.btnOk,true,true,false);
 			_rewardG=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon1);
 		}
 		override public function setData(info:ActivityVo):void

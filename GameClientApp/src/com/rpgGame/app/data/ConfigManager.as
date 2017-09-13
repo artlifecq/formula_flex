@@ -71,6 +71,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.cfg.TitleControlCfg;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.cfg.VipCfg;
@@ -334,6 +335,7 @@ package com.rpgGame.app.data
 			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
 			RankDesignationData.setup(dic[ConfigClassRegister.Q_rank_designation]);//排行榜名称
 			AttributeCfg.setup(dic[ConfigClassRegister.Q_shuxing]);//属性
+			TitleControlCfg.setup(dic[ConfigClassRegister.Q_title_control]);//属性
 		}
 		
 		/**
