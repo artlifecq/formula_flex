@@ -1,6 +1,7 @@
 package com.client.sender
 {
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.login.message.ReqCreateCharacterMessage;
 	import com.rpgGame.netData.login.message.ReqLoginForPlatformMessage;
@@ -56,7 +57,14 @@ package com.client.sender
 			//
 			GameLog.addShow("发送创建角色：", nickName);
 		}
-		
+		public static function sendRelogin():void
+		{
+			if (null == ClientConfig.loginKey || 0 == ClientConfig.loginKey.length) {
+				LoginSender.SendLoginMessage(1);
+			} else {
+				LoginSender.SendPlatformLoginMessage(1);
+			}
+		}
 		public static function SendLoginMessage(relogin:int=0):void
 		{
 			var msg:ReqLoginMessage = new ReqLoginMessage();
@@ -67,11 +75,18 @@ package com.client.sender
 			msg.win_width = ClientConfig.stage.width;
 			msg.win_high = ClientConfig.stage.height;
 			msg.relogin=relogin;
+			if (msg.agent=="37"&& ClientConfig.clientParams) 
+			{
+				var obj:Object={};
+				obj["lingpai"]= ClientConfig.clientParams[ "lingpai" ];
+				obj["pt_vip"]=ClientConfig.clientParams[ "pt_vip" ];
+				msg.ptData=JSONUtil.encode(obj);
+			}
 			SocketConnection.send(msg);
 			Statistics.intance.pushNode(Statistics.STEP_SEND_LOGIN_MSG,"发送登录协议");
 		}
 		
-		public static function SendPlatformLoginMessage():void
+		public static function SendPlatformLoginMessage(relogin:int=0):void
 		{
 			var msg:ReqLoginForPlatformMessage = new ReqLoginForPlatformMessage();
 			msg.serverId = ClientConfig.loginAreaId + "";
@@ -88,8 +103,16 @@ package com.client.sender
 			msg.agentPlusdata = "";
 			msg.agentColdatas = "";
 			msg.adregtime = "";
+			msg.relogin=relogin;
 			msg.win_width = ClientConfig.stage.width;
 			msg.win_high = ClientConfig.stage.height;
+			if (msg.agent=="37") 
+			{
+				var obj:Object={};
+				obj["lingpai"]= ClientConfig.clientParams[ "lingpai" ];
+				obj["pt_vip"]=ClientConfig.clientParams[ "pt_vip" ];
+				msg.ptData=JSONUtil.encode(obj);
+			}
 			SocketConnection.send(msg);
 		}
 		

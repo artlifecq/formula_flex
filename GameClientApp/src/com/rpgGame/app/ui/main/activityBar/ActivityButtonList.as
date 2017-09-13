@@ -1,5 +1,6 @@
 ﻿package com.rpgGame.app.ui.main.activityBar
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.hud.ActivityBarManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
@@ -86,7 +87,15 @@
 					btnInfo = list[j] as Q_mainbtn;
 					if(q_map_zones==1&&btnInfo.q_show_zone==q_map_zones)
 						continue;
-					button = MainButtonManager.getButtonByInfo(btnInfo);
+					if (btnInfo.q_is_activity) 
+					{
+						button = Mgr.activityPanelMgr.getBtn(btnInfo.q_id);
+					}
+					else
+					{
+						button = MainButtonManager.getButtonByInfo(btnInfo);
+					}
+					
 					if(button!=null&&button.canOpen())
 					{
 						button.y = i*GRID_HEIGHT;

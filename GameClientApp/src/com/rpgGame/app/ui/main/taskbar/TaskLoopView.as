@@ -574,6 +574,7 @@ package com.rpgGame.app.ui.main.taskbar
 							guideLabelList.push(glabe);
 							skinList.push(glabe);
 							scrollBox.addChild(glabe);
+							TaskUtil.setTextEvet(glabe);
 						}
 						
 						(glabe.skin as Renwu_Item).labelDisplay.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;

@@ -14,6 +14,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
@@ -133,8 +134,7 @@ package com.rpgGame.app.state.role.control
 					
 				}
 				//落地特效
-				SpellAnimationHelper.addTargetEffect(_machine.owner as SceneRole, RenderUnitID.JUMP_DOWN, RenderUnitType.TARGET_EFFECT, EffectUrl.EFFECT_JUMPDOWN, BoneNameEnum.st_zero);
-				
+				SpellAnimationHelper.createSceneEffect(EffectUrl.EFFECT_JUMPDOWN,RenderUnitID.JUMP_DOWN,SceneCharType.SCENE_DEST_EFFECT,_machine.owner.x,_machine.owner.z);
 				
 			}
 		}

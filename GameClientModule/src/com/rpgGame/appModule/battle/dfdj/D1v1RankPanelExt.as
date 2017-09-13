@@ -55,14 +55,14 @@ package com.rpgGame.appModule.battle.dfdj
 			D1v1RankCellExt.clickCall=cellCkick;
 			_myCell=new D1v1RankCellExt(0);
 			_myCell.isMy(true);
-			
-			_myCell.x=21;
+			var startX:int=26;
+			var startY:int=115;
+			_myCell.x=startX;
 			_myCell.y=415;
 			_myCell.visible=false;
 			_skin.container.addChild(_myCell);
 			var tmp:D1v1RankCellExt;
-			var startX:int=26;
-			var startY:int=115;
+		
 			_rankList=new Vector.<D1v1RankCellExt>();
 			for (var i:int = 0; i < MAX_COUNT; i++) 
 			{

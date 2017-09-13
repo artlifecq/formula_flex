@@ -66,7 +66,7 @@
             _memCheckTime = lastTime;
             resetDisplayAdjust();
             resetViewAdjust();
-            readMemory();
+//            readMemory();
         }
 
         private static function resetViewAdjust():void
@@ -106,13 +106,13 @@
             if (diffTime >= 1000)
             {
                 _lastTime = currentTime;
-                readMemory();
+//                readMemory();
                 if (_autoDisplayAdjust)
                 {
                     checkDisplayAdjust(currentTime);
                 }
                 checkViewAdjust(currentTime);
-                checkMemory(currentTime);
+//                checkMemory(currentTime);
             }
         }
 

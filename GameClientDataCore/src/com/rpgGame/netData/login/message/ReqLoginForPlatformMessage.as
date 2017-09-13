@@ -60,6 +60,9 @@ package com.rpgGame.netData.login.message{
 		//窗口宽像素
 		private var _win_width: int;
 		
+		//重连
+		private var _relogin: int;
+		
 		//37wan手机令牌，vip等级 json 格式
 		private var _ptData: String;
 		
@@ -100,6 +103,8 @@ package com.rpgGame.netData.login.message{
 			writeInt(_win_high);
 			//窗口宽像素
 			writeInt(_win_width);
+			//重连
+			writeByte(_relogin);
 			//37wan手机令牌，vip等级 json 格式
 			writeString(_ptData);
 			return true;
@@ -141,6 +146,8 @@ package com.rpgGame.netData.login.message{
 			_win_high = readInt();
 			//窗口宽像素
 			_win_width = readInt();
+			//重连
+			_relogin = readByte();
 			//37wan手机令牌，vip等级 json 格式
 			_ptData = readString();
 			return true;
@@ -392,6 +399,21 @@ package com.rpgGame.netData.login.message{
 		 */
 		public function set win_width(value: int): void{
 			this._win_width = value;
+		}
+		
+		/**
+		 * get 重连
+		 * @return 
+		 */
+		public function get relogin(): int{
+			return _relogin;
+		}
+		
+		/**
+		 * set 重连
+		 */
+		public function set relogin(value: int): void{
+			this._relogin = value;
 		}
 		
 		/**

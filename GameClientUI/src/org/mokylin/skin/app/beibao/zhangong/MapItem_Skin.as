@@ -68,7 +68,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/beibao/zhangong/name/21.png";
+			temp.styleName = "ui/zhangongmapname/55.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

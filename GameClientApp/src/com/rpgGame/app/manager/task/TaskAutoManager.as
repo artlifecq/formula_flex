@@ -100,6 +100,7 @@ package com.rpgGame.app.manager.task
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.addEvent(MapEvent.MAP_FLY_COMPLETE,flyComplete);
 			EventManager.addEvent(UserMoveEvent.MOVE_ENTER, resetTechTime);
+			EventManager.addEvent(MapEvent.MAP_CLICK, resetTechTime);
 			resetTechTime();
 		}
 		private function onApphide( ev:AppEvent ):void

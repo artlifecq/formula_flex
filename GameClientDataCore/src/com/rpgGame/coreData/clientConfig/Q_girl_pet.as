@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_name:String;
 		 /**  美人面板展示用造型资源编号 */
 		public var q_panel_show_id:String;
+		 /**  美人界面展示特效 */
+		public var q_effect_panel:String;
 		 /**  面板头像资源 */
 		public var q_head_name:String;
 		 /**  面板名字资源 */

@@ -186,7 +186,7 @@ package com.rpgGame.app.manager
 					var targetPos:Array=target as Array;
 					if(targetPos&&targetPos.length==3)
 					{
-						MainRoleSearchPathManager.walkToScenePreAttack(targetPos[0], targetPos[1], targetPos[2],onArrive, 100,null,true);
+						MainRoleSearchPathManager.walkToScenePreAttack(targetPos[0], targetPos[1], targetPos[2],onArrive, 100,null,true,true);
 					}
 					break;
 				case 2:
@@ -194,7 +194,7 @@ package com.rpgGame.app.manager
 					var monsterAreaData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(areaId);
 					if (monsterAreaData)
 					{
-						MainRoleSearchPathManager.walkToScenePreAttack(monsterAreaData.q_mapid, monsterAreaData.q_center_x, monsterAreaData.q_center_y,onArrive, 100,null,true);
+						MainRoleSearchPathManager.walkToScenePreAttack(monsterAreaData.q_mapid, monsterAreaData.q_center_x, monsterAreaData.q_center_y,onArrive, 100,null,true,true);
 					}
 					break;
 				case 3:
@@ -202,7 +202,7 @@ package com.rpgGame.app.manager
 					var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(monsterId,SceneSwitchManager.currentMapId);
 					if (monsterData)
 					{
-						MainRoleSearchPathManager.walkToScenePreAttack(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,true);
+						MainRoleSearchPathManager.walkToScenePreAttack(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,true,true);
 					}
 					break;
 			}

@@ -111,6 +111,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	import com.rpgGame.netData.player.message.ResPlayerStateChangeMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
+	import com.rpgGame.netData.player.message.SCUpdatePlayerTitleMessage;
 	import com.rpgGame.netData.structs.Position;
 	import com.rpgGame.statistics.Statistics;
 	
@@ -185,6 +186,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101104, onResRoundPetMessage);
 			SocketConnection.addCmdListener(101108, onResRoundPetDisappearMessage);
 			SocketConnection.addCmdListener(101134, onResPetTranMoveMessage);
+			SocketConnection.addCmdListener(103217,onSCUpdatePlayerTitleHandler);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,6 +232,27 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onSCUpdatePlayerTitleHandler(msg:SCUpdatePlayerTitleMessage):void
+		{
+			// TODO Auto Generated method stub
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;			
+			if(role)
+			{
+				var head:HeadFace=role.headFace as HeadFace;
+				if (head) 
+				{
+					if (msg.flag==1) 
+					{
+						head.addTilteById(msg.titleId);
+					}
+					else
+					{
+						head.removeTitleById(msg.titleId);
+					}
+				}
+			}
 		}
 		
 		private function onResPlayerStateChangeMessage(msg:ResPlayerStateChangeMessage):void
