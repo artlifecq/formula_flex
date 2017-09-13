@@ -466,7 +466,8 @@ package com.rpgGame.app.utils
 			if (monsterData)
 			{
 				postWalk(monsterData.q_mapid, monsterData.q_center_x,monsterData.q_center_y,onArrive);
-				//MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
+				Lyt.a("任务开始寻路NPC=====");
+				MainRoleSearchPathManager.walkToScenePreAttack(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
 			}
 				
 		}
@@ -488,8 +489,8 @@ package com.rpgGame.app.utils
 		}
 		public static function postWalk(sid : int, posx:Number,posy:Number,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
 		{
-			Lyt.a("任务开始寻路=====");
-			var walking:Boolean=MainRoleSearchPathManager.walkToScenePreAttack(sid, posx, posy,onArrive, 100,data,needSprite);
+			Lyt.a("任务开始寻路TASK=====");
+			MainRoleSearchPathManager.walkToScenePreAttack(sid, posx, posy,onArrive, 100,data,true,true);
 		}
 		/**
 		 * 寻路跳跃点

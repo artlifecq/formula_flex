@@ -5,6 +5,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
@@ -132,7 +133,6 @@ package com.rpgGame.app.controller.keyboard
 				case "30": //U
 					break;
 				case "6": //V pk
-					MainButtonManager.openActivityButton(EmMainBtnID.QIRIHAOLI);
 					//AppManager.showApp(AppConstant.MOUNT_PANEL);
 					//					PKMamager.ChangeNextPkModel();
 					break;
@@ -144,9 +144,7 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JUEXUE);
 					break;
 				case "2": //Z 
-					//AppManager.showAppNoHide(AppConstant.SEVENDAY_PANEL);
-					MainButtonManager.openActivityButton(EmMainBtnID.QIRIHAOLI);
-					MainButtonManager.setActivityPointNumButton(EmMainBtnID.QIRIHAOLI,10);
+					
 					break;
 				case "50": //显示掉落物图标
 					//DropGoodsManager.getInstance().showScaneName(isdown);
