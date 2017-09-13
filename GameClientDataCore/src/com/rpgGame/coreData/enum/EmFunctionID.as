@@ -111,6 +111,15 @@ package com.rpgGame.coreData.enum
 		/** 护宝 **/
 		public static const EM_VIP:int=7;
 		
-		
+		/** 福利大厅 **/
+		public static const EM_FULIDATING:int=1201;
+		/** 等级礼包 **/
+		public static const EM_DENGJI:int=1203;
+		/** 签到 **/
+		public static const EM_QIANDAO:int=1204;
+		/** 在线奖励 **/
+		public static const EM_ZAIXIAN:int=1205;		
+		/** 激活码 **/
+		public static const EM_JIHUOMA:int=1206;		
 	}
 }

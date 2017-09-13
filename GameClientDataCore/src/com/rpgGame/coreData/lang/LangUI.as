@@ -86,6 +86,8 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT36:String = "UI_TEXT36";
 		 /**  展开 */
 		public static const UI_TEXT37:String = "UI_TEXT37";
+		 /**  继承后材料装备$将会消失，被继承装备将与您绑定，是否继续? */
+		public static const UI_TEXT38:String = "UI_TEXT38";
 
 	}
 }
