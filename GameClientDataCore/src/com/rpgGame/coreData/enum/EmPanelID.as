@@ -109,7 +109,10 @@ package com.rpgGame.coreData.enum
 		 */
 		public static const BATTLE_SHOP_PANEL:int=25;
 
-		
+		/**
+		 * 福利大厅
+		 */
+		public static const ACTIVITY_FULI:int=27;
 		public function EmPanelID()
 		{
 		}

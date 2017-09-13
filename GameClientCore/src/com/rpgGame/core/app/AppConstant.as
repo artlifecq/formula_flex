@@ -582,6 +582,6 @@ package com.rpgGame.core.app
 		/**背包快满了提示*/
 		public static var BACK_FULL_TISHI:String = createAppInfo("role.BaoGuoTiShiPanel","baoguo");
 		/**福利大厅*/
-		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating");
+		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating",EmPanelID.ACTIVITY_FULI);
 	}
 }

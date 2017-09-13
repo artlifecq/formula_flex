@@ -1491,7 +1491,7 @@ package com.rpgGame.app.manager.goods
 			var starindex:int=getMrg(containerID).curUnlockIndex+1;
 			for(var i:int=starindex;i<=index;i++)
 			{
-				var id:String=type+"_"+index;
+				var id:String=type+"_"+i;
 				var cfg:Q_backpack_grid=GridOpenCfg.getCfgById(id);
 				if(cfg){
 					pice+=cfg.q_cost;
