@@ -62,7 +62,7 @@ package com.rpgGame.coreData.enum
 		/** 极限挑战 **/
 		public static const JIXIANTIAOZHAN:int=210;
 		/** 七日豪礼 **/
-		public static const QIRIHAOLI:int=10005;
+		public static const QIRIHAOLI:int=20001;
 		public function EmMainBtnID()
 		{
 		}

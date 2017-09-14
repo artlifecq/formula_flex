@@ -329,6 +329,9 @@ package com.rpgGame.appModule.hubao
 		private function updateNowSelectBaoWu(lv:int):void
 		{
 			_q_con=HuBaoData.getmodByLv(lv);
+			if(!_q_con){
+				return;
+			}
 			var usearr:Array=JSONUtil.decode(_q_con.q_refresh_item);
 			_useItemId=parseInt(usearr[0].mod);
 			_useNum=parseInt(usearr[0].num);

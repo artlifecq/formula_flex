@@ -18,6 +18,7 @@ package com.rpgGame.app.ui.tab
 	public class FuncTabBar extends UITabBar
 	{
 		private var _checkToTabHandler:Function;	
+		private var _checkOpenHandler:Function;
 		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>,crosswise:Boolean=true)
 		{
 			super(tab, datas,crosswise);
@@ -97,9 +98,9 @@ package com.rpgGame.app.ui.tab
 		
 		private function updateTabData():void
 		{
-			if(_allDatas.length!=_tabBar.numChildren){//没有全部开启
-				checkOpen();
-			}
+//			if(_allDatas.length!=_tabBar.numChildren){//没有全部开启
+			checkOpen();
+//			}
 		}
 		
 		private function checkOpen():void
@@ -108,7 +109,10 @@ package com.rpgGame.app.ui.tab
 			var item:UITabBarData;
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
-				if((item.openShow&&FunctionOpenManager.functionIsOpen(item.tabKey))||!item.openShow){//已经开启了或者不需要开启
+				if(!_checkOpenHandler){
+					_checkOpenHandler=defaultCheckOpen;
+				}
+				if(_checkOpenHandler(item)){//已经开启了或者不需要开启
 					addTabDataWithTabKey(item.tabKey);
 				}else{
 					removeTabDataWithTabKey(item.tabKey);
@@ -118,6 +122,16 @@ package com.rpgGame.app.ui.tab
 				return ;
 			this.updata();
 //			this.switchTabKey(this._currentKey);
+		}
+		
+		private function defaultCheckOpen(item:UITabBarData):Boolean
+		{
+			return (item.openShow&&FunctionOpenManager.functionIsOpen(item.tabKey))||!item.openShow;
+		}
+		
+		public function set checkOpenHandler(value:Function):void
+		{
+			_checkOpenHandler=value;
 		}
 
 		public function set checkToTabHandler(value:Function):void

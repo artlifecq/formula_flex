@@ -1,7 +1,6 @@
 ﻿package com.rpgGame.app.manager
 {
     import com.rpgGame.app.manager.chat.NoticeManager;
-    import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.pop.UIPopManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.ui.OpenPanel;
@@ -14,7 +13,6 @@
     import com.rpgGame.coreData.clientConfig.Q_map;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     import com.rpgGame.coreData.clientConfig.Q_panel;
-    import com.rpgGame.coreData.enum.EmFunctionID;
     import com.rpgGame.coreData.enum.EmOpenType;
     import com.rpgGame.coreData.enum.EmPanelID;
     import com.rpgGame.coreData.info.MapDataManager;
@@ -154,6 +152,7 @@
 			{
 				return;
 			}
+
 			if(isAutoHide){
 				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 			}else{
@@ -184,6 +183,7 @@
 			{
 				return;
 			}
+
 			if(isAutoHide){
 				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 			}else{
@@ -224,35 +224,15 @@
 			{
 				return;
 			}
+
+			var tab:int=funcCfg?funcCfg.q_id:0;
 			if(isAutoHide){
-				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,tab);
 			}else{
-				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,tab);
 			}
 		}
 		
-		private static function checkOtherCondicion(panelId:int):Boolean
-		{
-			switch(panelId)
-			{
-				case EmPanelID.ZU_DUI:
-				{
-					var map:Q_map=MapDataManager.currentScene.getData();
-					if (map&&EnumMapType.MAP_TYPE_TOWERS==map.q_map_type)
-					{
-						NoticeManager.showNotifyById(13058);
-						return false;
-					}
-					break;
-				}
-					
-				default:
-				{
-					break;
-				}
-			}
-			return true;
-		}
 		/**
 		 *通过按钮信息打开 
 		 * @param btnCfg
@@ -283,6 +263,7 @@
 				{
 					return;
 				}
+
 				if(isAutoHide){
 					AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
 				}else{
@@ -290,5 +271,31 @@
 				}
 			}
 		}
+		if (!checkOtherCondicion(panelCfg.main_id)) 
+		{
+			return;
+		}
+		private static function checkOtherCondicion(panelId:int):Boolean
+		{
+			switch(panelId)
+			{
+				case EmPanelID.ZU_DUI:
+				{
+					var map:Q_map=MapDataManager.currentScene.getData();
+					if (map&&EnumMapType.MAP_TYPE_TOWERS==map.q_map_type)
+					{
+						NoticeManager.showNotifyById(13058);
+						return false;
+					}
+					break;
+				}
+				default:
+				{
+					break;
+				}
+			}
+			return true;
+		}
+
     }
 }

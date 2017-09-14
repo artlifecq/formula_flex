@@ -39,5 +39,10 @@ package com.rpgGame.coreData.cfg
 		{
 			return _map.getValue(id);
 		}
+		
+		public static function get idList():Array
+		{
+			return _map.getValues();
+		}
 	}
 }

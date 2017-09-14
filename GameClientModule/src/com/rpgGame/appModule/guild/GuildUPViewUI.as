@@ -41,16 +41,18 @@ package com.rpgGame.appModule.guild
 			//EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			refeashValue();
 			finishMation(TaskType.MAINTYPE_GUILDDAILYTASK);
-			_proBorder=this.playInter3DAt(ClientConfig.getEffect("ui_bangpailiuguang"),_skin.proJindu.x+210,_skin.proJindu.y+10,0);
+			_proBorder=this.playInter3DAt(ClientConfig.getEffect("ui_bangpailiuguang"),_skin.proJindu.x+208,_skin.proJindu.y+10,0);
 		}
 		
 		override protected function onHide():void
 		{
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashValue);
 			//EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
-			_proBorder.stop();
-			_proBorder.dispose();
-			_proBorder=null;
+			if(_proBorder){
+				_proBorder.stop();
+				_proBorder.dispose();
+				_proBorder=null;
+			}
 		}
 		
 		private function finishMation(type:int):void

@@ -178,7 +178,9 @@ package com.rpgGame.coreData.type
 				case JobEnum.ROLE_1_TYPE:
 					return AssetUrl.HEAD_ICON_1+ret;
 				case JobEnum.ROLE_2_TYPE:
-					return AssetUrl.HEAD_ICON_2+ret;	
+					if(sex==1)
+						return AssetUrl.HEAD_ICON_2+ret;	
+					else return AssetUrl.HEAD_ICON_3+ret;	
 				case JobEnum.ROLE_3_TYPE:
 					return AssetUrl.HEAD_ICON_3+ret;	
 				case JobEnum.ROLE_4_TYPE:

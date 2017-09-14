@@ -234,10 +234,10 @@ package com.rpgGame.app.state.role.control
 
 		internal function end() : void
 		{
-			if (leftPath) 
-			{
+
+			if(leftPath)
 				this.leftPath.length=0;
-			}
+
 			if (_endFunc != null)
 				_endFunc(this);
 		}

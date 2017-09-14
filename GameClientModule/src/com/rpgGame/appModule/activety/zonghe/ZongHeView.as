@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety.zonghe
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
@@ -145,9 +146,9 @@ package com.rpgGame.appModule.activety.zonghe
 			if(selectedInfo.info.joinState==ActivityJoinStateEnum.JOINING){
 				if(selectedInfo.actCfg.q_trans){
 					//跳到对应标签的对应活动
-					var panelCfg:Q_panel=PanelCfgData.getPanelCfg(selectedInfo.actCfg.q_trans);
-					var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
-					AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),selectedInfo,funcCfg.q_id);
+//					var panelCfg:Q_panel=PanelCfgData.getPanelCfg(selectedInfo.actCfg.q_trans);
+//					var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfgByPanelId(panelCfg.id);
+					FunctionOpenManager.openPanelBypanelId(selectedInfo.actCfg.q_trans);
 				}else{
 					SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
 				}

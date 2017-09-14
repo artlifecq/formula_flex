@@ -158,7 +158,7 @@ package com.editor.display
 				{
 					var areaData : ClientMapAreaData = _data as ClientMapAreaData;
 					var bounds : Vector3D = MathUtil.getPolygonBounds(points);
-					if (bounds)
+					if (bounds&&bounds.length==4)
 					{
 						var gridMaxCount : int = ((bounds[2] - bounds[0]) / areaData.mGridWidth) * ((bounds[3] - bounds[1]) / areaData.mGridHeight);
 						if (gridMaxCount > 0)
