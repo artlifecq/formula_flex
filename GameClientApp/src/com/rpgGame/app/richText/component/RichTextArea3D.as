@@ -1059,7 +1059,7 @@
 						
 						//						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
 						var rowH:int=Math.ceil($_rect.height);
-						unit.displayObj.y=$_rect.y+(rowH-unit.displayObj.height)/2+$_txtLineMetrics.descent+unit.unitData.offsetY;
+						unit.displayObj.y=$_rect.y+(rowH-unit.displayObj.height)/2+$_txtLineMetrics.descent-4;
 					}
 					//					else
 					//					{
