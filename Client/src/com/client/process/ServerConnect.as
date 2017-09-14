@@ -216,6 +216,8 @@ package com.client.process
             GameLog.addShow("重连中一次");
 			if (isProcessing)
 			{
+				SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
+				SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
 				connect();
 			}
 			else
