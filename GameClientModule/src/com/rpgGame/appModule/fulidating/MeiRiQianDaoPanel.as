@@ -50,7 +50,7 @@ package com.rpgGame.appModule.fulidating
 		
 		public function updatePanel():void
 		{
-			var signVO:SignVO = Mgr.signManager.signVO;
+			var signVO:SignVO = Mgr.signMgr.signVO;
 			var nowDate:Date = SystemTimeManager.sysDateTime	;
 			var startDate:Date = new Date( nowDate.fullYear , nowDate.month , 1 , 12 );
 			startDate.date -= startDate.day;

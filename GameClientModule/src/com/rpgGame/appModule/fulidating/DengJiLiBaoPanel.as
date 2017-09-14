@@ -33,8 +33,18 @@ package com.rpgGame.appModule.fulidating
 			list.padding=0;
 			
 			var arr:Array=DengJiCfg.getLvArr();
+			if(arr){
+				arr.sort(short);
+			}
 			list.dataProvider=new ListCollection(arr);
 			list.selectedIndex=0;
+		}
+		
+		private function short(lv1:int,lv2:int):int
+		{
+			if(lv1<lv2) return -1;
+			else if(lv1>lv2) return 1;
+			return 0;
 		}
 		
 		private function creatLiBaoItemCell():LiBaoItemRender
@@ -47,7 +57,7 @@ package com.rpgGame.appModule.fulidating
 		{
 			super.onShow();
 			if(_skin.listCont.dataProvider!=null){
-				_skin.listCont.selectedIndex=0;
+				_skin.listCont.scrollToDisplayIndex(0);
 			}
 		}
 		

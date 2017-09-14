@@ -29,5 +29,10 @@ package com.rpgGame.coreData.cfg.fulidating
 		{
 			return _dataDic[lv];
 		}
+		
+		public static function getIdByLv(lv:int):int
+		{
+			return (_dataDic[lv] as Q_upgrade).q_id;
+		}
 	}
 }

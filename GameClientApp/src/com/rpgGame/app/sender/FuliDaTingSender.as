@@ -2,10 +2,10 @@ package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.netData.gameactivities.message.CSGetSevenDayRewardMessage;
-	import com.rpgGame.netData.map.message.CSAreaJumpMessage;
+	import com.rpgGame.netData.gameactivities.message.ReqGotGrownGiftMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-
+	
 	public class FuliDaTingSender extends BaseSender
 	{
 		/**
@@ -13,7 +13,7 @@ package com.rpgGame.app.sender
 		 * */
 		public static function reqCardToServerMessage(text:String):void
 		{
-		
+			
 		}
 		
 		/**
@@ -21,7 +21,9 @@ package com.rpgGame.app.sender
 		 * */
 		public static function reqGotGrownGiftMessage(lv:int):void
 		{
-			
+			var msg:ReqGotGrownGiftMessage=new ReqGotGrownGiftMessage();
+			msg.level=lv;
+			SocketConnection.send(msg);
 		}
 		
 		
