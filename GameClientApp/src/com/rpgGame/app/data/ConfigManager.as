@@ -87,6 +87,9 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.cheats.CheatsNodeCfg;
+	import com.rpgGame.coreData.cfg.fulidating.DengJiCfg;
+	import com.rpgGame.coreData.cfg.fulidating.SignCfg;
+	import com.rpgGame.coreData.cfg.fulidating.ZaiXianCfg;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinSkillData;
 	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
@@ -329,6 +332,11 @@ package com.rpgGame.app.data
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
 			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
 			MibaoCfgData.setup(dic[ConfigClassRegister.Q_mibao_monster],dic[ConfigClassRegister.Q_mibao_reward]);//秦陵秘宝
+			
+			//福利大厅
+			DengJiCfg.setup(dic[ConfigClassRegister.Q_upgrade]); //等级礼包
+			ZaiXianCfg.setup(dic[ConfigClassRegister.Q_online]); //在线奖励
+			SignCfg.setup(dic[ConfigClassRegister.Q_sign_accumulate]); //每日签到
 			
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
