@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager
 {
+	import com.rpgGame.app.manager.fulidating.SignManager;
 	import com.rpgGame.app.manager.pet.PetManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.manager.yunBiao.CheatsMgr;
@@ -58,6 +59,10 @@ package com.rpgGame.app.manager
 		public static function get activityPanelMgr():ActivityPanelMgr
 		{
 			return ActivityPanelMgr.ins;
+		}	
+		public static function get signManager():SignManager
+		{
+			return SignManager.instance;
 		}
 	}
 }

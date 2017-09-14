@@ -4,11 +4,13 @@ package com.rpgGame.appModule.pet
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.pet.PetManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -484,6 +486,10 @@ package com.rpgGame.appModule.pet
 			EventManager.addEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.addEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);
 			super.onShow();
+			if(!PetManager.ins.isHaveData()){
+				GameLog.addError( "美人数据异常，未接收到服务端数据");
+				return;
+			}
 			onBuyNumChange();
 			//重新设置数据
 			for each (var item:PetHeadItemExt in _headItems) 

@@ -95,7 +95,10 @@ package com.rpgGame.appModule.redreward
 					this._headImg.styleName="ui/mainui/head/touxiang/bingjia/middle.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					this._headImg.styleName="ui/mainui/head/touxiang/mojia/middle.png";
+					if(_redRewardInfo.sendPlayerSex==1)
+						this._headImg.styleName="ui/mainui/head/touxiang/mojia/middle.png";
+					else
+						this._headImg.styleName="ui/mainui/head/touxiang/mojia2/middle.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
 					this._headImg.styleName="ui/mainui/head/touxiang/mojia2/middle.png";
@@ -227,7 +230,7 @@ package com.rpgGame.appModule.redreward
 				cell.updata(i,_playerInfolist,_redRewardInfo.sendPlayerId.IsZero());
 			}
 		}
-
+		
 		
 		
 		private function getOneNextCell(index:int):RedRewardOneCell

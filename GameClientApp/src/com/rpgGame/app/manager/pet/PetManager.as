@@ -59,6 +59,11 @@ package com.rpgGame.app.manager.pet
 			return _glodNum;
 		}
 		
+		public function isHaveData():Boolean
+		{
+			return _petHash!=null&&_petHash.values().length>0;
+		}
+		
 		public function resExtraBuyHandler(msg:ResExtraBuyMessage):void
 		{
 			if(_bindGlodNum!=msg.cashBuy||_glodNum!=msg.goldBuy)

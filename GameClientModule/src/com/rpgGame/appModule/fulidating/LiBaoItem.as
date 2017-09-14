@@ -4,6 +4,8 @@ package com.rpgGame.appModule.fulidating
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.FuliDaTingSender;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.fulidating.DengJiCfg;
+	import com.rpgGame.coreData.clientConfig.Q_upgrade;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	
@@ -31,7 +33,9 @@ package com.rpgGame.appModule.fulidating
 		{
 			_lv=data as int;
 			_skin.uiName.styleName="ui/app/fulidating/word/"+_lv+"ji.png";
-			
+			var cfg:Q_upgrade=DengJiCfg.getCfgByLv(_lv);
+			if(!cfg) return;
+			_groupList.setRewardByJsonStr(cfg.q_reward);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -44,23 +48,23 @@ package com.rpgGame.appModule.fulidating
 			}
 		}
 		
-		public function setBtnState(bool:Boolean):void
+		override protected function onShow():void
 		{
-			if(!bool&&MainRoleManager.actorInfo.totalStat.level>=_lv)
+			super.onShow();
+			updateBtnState();
+		}
+		
+		public function updateBtnState():void
+		{
+			if(MainRoleManager.actorInfo.totalStat.level>=_lv)
 			{
-				if(bool)
-					GrayFilter.gray(_skin.btnLingqu);
-				else
-					_skin.btnLingqu.filter=null;
+				_skin.btnLingqu.filter=null;
 			}
-			else if(!bool&&MainRoleManager.actorInfo.totalStat.level<_lv)
+			else if(MainRoleManager.actorInfo.totalStat.level<_lv)
 			{
-				if(bool)
-					_skin.btnLingqu.filter=null;
-				else
-					GrayFilter.gray(_skin.btnLingqu);
+				GrayFilter.gray(_skin.btnLingqu);
 			}
-			_skin.uiLingqu.visible=bool;
+			_skin.uiLingqu.visible=MainRoleManager.actorInfo.totalStat.level>=_lv;
 		}
 		
 		public function get level():int
@@ -70,7 +74,7 @@ package com.rpgGame.appModule.fulidating
 		
 		private function reqReceiveReward():void
 		{
-			if(_skin.btnLingqu!=null) return;
+			if(_skin.btnLingqu.filter!=null) return;
 			FuliDaTingSender.reqGotGrownGiftMessage(_lv);
 		}
 	}
