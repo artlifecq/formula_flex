@@ -308,7 +308,10 @@ package com.rpgGame.app.ui.main.head
 					this._skin.icon.styleName = "ui/mainui/head/touxiang/bingjia/middle.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
+					if(_roleData.sex==1)
+						this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
+					else 
+						this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia2/middle.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
 					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia2/middle.png";

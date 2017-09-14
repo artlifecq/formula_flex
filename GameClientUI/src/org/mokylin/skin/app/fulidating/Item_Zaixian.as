@@ -21,6 +21,8 @@ package org.mokylin.skin.app.fulidating
 
 		public var icon:feathers.controls.UIAsset;
 
+		public var lb_name:feathers.controls.Label;
+
 		public var uiName:feathers.controls.UIAsset;
 
 
@@ -34,7 +36,7 @@ package org.mokylin.skin.app.fulidating
 			this.currentState = "normal";
 			this.height = 383;
 			this.width = 184;
-			this.elementsContent = [__Item_Zaixian_UIAsset1_i(),uiName_i(),icon_i(),__Item_Zaixian_Label1_i(),btnOK_i()];
+			this.elementsContent = [__Item_Zaixian_UIAsset1_i(),uiName_i(),icon_i(),lb_name_i(),btnOK_i()];
 			
 			states = {
 			};
@@ -45,17 +47,6 @@ package org.mokylin.skin.app.fulidating
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Item_Zaixian_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "绑定铜钱";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 62;
-			temp.y = 248;
-			return temp;
-		}
-
 		private function __Item_Zaixian_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -89,6 +80,19 @@ package org.mokylin.skin.app.fulidating
 			temp.styleName = "ui/app/fulidating/tubiaokuang.png";
 			temp.x = 57;
 			temp.y = 170;
+			return temp;
+		}
+
+		private function lb_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_name = temp;
+			temp.name = "lb_name";
+			temp.text = "绑定铜钱";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 62;
+			temp.y = 248;
 			return temp;
 		}
 

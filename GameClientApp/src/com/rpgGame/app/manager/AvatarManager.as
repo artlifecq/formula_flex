@@ -123,6 +123,9 @@ package com.rpgGame.app.manager
 		public static function updateSimpleShadow() : void
 		{
 			var scene : GameScene3D = SceneManager.getScene();
+			if(!scene){
+				return;
+			}
 			var baseObjList : Vector.<BaseObj3D> = scene.sceneRenderLayer.baseObjList;
 			for each (var baseObj : BaseObj3D in baseObjList)
 			{

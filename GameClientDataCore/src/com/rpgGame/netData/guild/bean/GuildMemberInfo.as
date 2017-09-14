@@ -54,6 +54,9 @@ package com.rpgGame.netData.guild.bean{
 		//是否是代理帮主,1:是,0:不是
 		private var _isProxyChief: int;
 		
+		//vip等级
+		private var _vip: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -84,6 +87,8 @@ package com.rpgGame.netData.guild.bean{
 			writeByte(_isLeader);
 			//是否是代理帮主,1:是,0:不是
 			writeByte(_isProxyChief);
+			//vip等级
+			writeByte(_vip);
 			return true;
 		}
 		
@@ -117,6 +122,8 @@ package com.rpgGame.netData.guild.bean{
 			_isLeader = readByte();
 			//是否是代理帮主,1:是,0:不是
 			_isProxyChief = readByte();
+			//vip等级
+			_vip = readByte();
 			return true;
 		}
 		
@@ -313,6 +320,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set isProxyChief(value: int): void{
 			this._isProxyChief = value;
+		}
+		
+		/**
+		 * get vip等级
+		 * @return 
+		 */
+		public function get vip(): int{
+			return _vip;
+		}
+		
+		/**
+		 * set vip等级
+		 */
+		public function set vip(value: int): void{
+			this._vip = value;
 		}
 		
 	}

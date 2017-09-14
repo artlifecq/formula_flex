@@ -4,7 +4,6 @@ package org.mokylin.skin.app.fulidating
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.app.fulidating.Item_Zaixian;
 	import org.mokylin.skin.app.fulidating.number.UINumberShuzi;
 
 	/**
@@ -19,13 +18,7 @@ package org.mokylin.skin.app.fulidating
 		//==========================================================================
 		public var Time:feathers.controls.UINumber;
 
-		public var skinCont1:feathers.controls.SkinnableContainer;
-
-		public var skinCont2:feathers.controls.SkinnableContainer;
-
-		public var skinCont3:feathers.controls.SkinnableContainer;
-
-		public var skinCont4:feathers.controls.SkinnableContainer;
+		public var itemContainer:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -37,7 +30,7 @@ package org.mokylin.skin.app.fulidating
 			
 			this.currentState = "normal";
 			this.width = 756;
-			this.elementsContent = [__FLDT_Zaixianjiangli_UIAsset1_i(),Time_i(),skinCont1_i(),skinCont2_i(),skinCont3_i(),skinCont4_i()];
+			this.elementsContent = [__FLDT_Zaixianjiangli_UIAsset1_i(),Time_i(),itemContainer_i()];
 			
 			states = {
 			};
@@ -72,50 +65,14 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function skinCont1_i():feathers.controls.SkinnableContainer
+		private function itemContainer_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skinCont1 = temp;
-			temp.name = "skinCont1";
-			var skin:StateSkin = new org.mokylin.skin.app.fulidating.Item_Zaixian()
-			temp.skin = skin
-			temp.x = 0;
-			temp.y = 117;
-			return temp;
-		}
-
-		private function skinCont2_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skinCont2 = temp;
-			temp.name = "skinCont2";
-			var skin:StateSkin = new org.mokylin.skin.app.fulidating.Item_Zaixian()
-			temp.skin = skin
-			temp.x = 187;
-			temp.y = 117;
-			return temp;
-		}
-
-		private function skinCont3_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skinCont3 = temp;
-			temp.name = "skinCont3";
-			var skin:StateSkin = new org.mokylin.skin.app.fulidating.Item_Zaixian()
-			temp.skin = skin
-			temp.x = 374;
-			temp.y = 117;
-			return temp;
-		}
-
-		private function skinCont4_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skinCont4 = temp;
-			temp.name = "skinCont4";
-			var skin:StateSkin = new org.mokylin.skin.app.fulidating.Item_Zaixian()
-			temp.skin = skin
-			temp.x = 561;
+			itemContainer = temp;
+			temp.name = "itemContainer";
+			temp.height = 385;
+			temp.width = 746;
+			temp.x = 2;
 			temp.y = 117;
 			return temp;
 		}
