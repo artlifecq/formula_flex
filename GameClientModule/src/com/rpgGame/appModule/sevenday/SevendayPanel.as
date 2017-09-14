@@ -179,6 +179,7 @@ package com.rpgGame.appModule.sevenday
 			{
 				setIconShow();
 				setNowDay(nowDay);
+				selectInfo(SevendayManager.getRewardOneSubNum());
 			}
 		}
 		/**领取奖励*/
@@ -189,7 +190,7 @@ package com.rpgGame.appModule.sevenday
 			_skin.uiOk.visible=true;
 			_skin.btnLingqu.isEnabled=false;
 			reward.tweeRewardInBag(1);
-			
+			selectInfo(SevendayManager.getRewardOneSubNum());
 		}
 		
 		
@@ -218,7 +219,7 @@ package com.rpgGame.appModule.sevenday
 				dayData=SevendayCfgData.getSevenday(i+1);
 				if(dayData!=null)
 				{
-					dayitemList[i].dayIcon.styleName="ui/app/sevenday/"+dayData.q_icon+".png";
+					dayitemList[i].dayIcon.styleName="ui/app/sevenday/"+SevendayCfgData.getSevendayModByJob(dayData.q_icon,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex)+".png";
 				}
 			}
 		}
@@ -250,7 +251,7 @@ package com.rpgGame.appModule.sevenday
 				dayitemList[nowDay].uiKeling.visible=true;
 			}
 			
-			selectInfo(nowDay);
+			
 		}
 		/**是否领取奖励*/
 		private function getIsReceiveDay(day:int):Boolean
@@ -274,6 +275,8 @@ package com.rpgGame.appModule.sevenday
 		/**设置选中信息*/
 		private function selectInfo(id:int):void
 		{
+			if(id<1)
+				return;
 			var dayData:Q_sevenday=SevendayCfgData.getSevenday(id);
 			var dayItem:Day_Item=dayitemList[id-1];
 			if(dayData==null||dayItem==null)

@@ -27,6 +27,7 @@ package com.rpgGame.app.manager.goods
 				rewardSuccess.push(info.state);
 			}
 		}
+		/**领奖成功*/
 		public static function setRewardSeccessData(day:int):void
 		{
 			var id:int=day-1;
@@ -35,6 +36,43 @@ package com.rpgGame.app.manager.goods
 				rewardSuccess[id]=2;
 			}
 		}
+		
+		/**领取次数*/
+		public static function getRewardNum(type:int=0):int
+		{
+			var num:int=0
+			if(rewardSuccess)
+			{
+				for(var i:int=0;i<rewardSuccess.length;i++)
+				{
+					if(rewardSuccess[i]==type)
+					{
+						num++;
+					}
+				}
+			}
+			
+			return num;
+		}
+		/**第一个可领取但未领取天*/
+		public static function getRewardOneSubNum():int
+		{
+			var num:int=0
+			if(rewardSuccess)
+			{
+				for(var i:int=0;i<rewardSuccess.length;i++)
+				{
+					if(rewardSuccess[i]==1)
+					{
+						return i+1;
+					}
+				}
+			}
+			
+			return 0;
+		}
+		
+		
 		private static function onSort(a:SevenDayInfo,b:SevenDayInfo):int
 		{
 			if (a.activeId>b.activeId) 
