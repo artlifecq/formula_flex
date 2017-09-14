@@ -8,7 +8,7 @@ package com.rpgGame.app.state.role.control
 	import flash.geom.Vector3D;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
-	
+
 	/**
 	 *
 	 * 行走移动状态引用
@@ -32,7 +32,7 @@ package com.rpgGame.app.state.role.control
 		 */
 		private var _speed : int;
 		private var _spacing : int;
-		
+
 		private var _readyFunc : Function;
 		private var _unableFunc : Function;
 		private var _throughFunc : Function;
@@ -89,63 +89,63 @@ package com.rpgGame.app.state.role.control
 			isServerStop = false;
 			needSpriteUp=false;
 		}
-		
+
 		public function get vectorPath() : Vector3D
 		{
 			return _vectorPath;
 		}
-		
+
 		public function get moveInfo() : RoleMoveInfo
 		{
 			return _moveInfo;
 		}
-		
+
 		public function get speed() : int
 		{
 			return _speed;
 		}
-		
+
 		public function get spacing() : int
 		{
 			return _spacing;
 		}
-		
+
 		public function onReady(func : Function) : WalkMoveStateReference
 		{
 			_readyFunc = func;
 			return this;
 		}
-		
+
 		public function onUnable(func : Function) : WalkMoveStateReference
 		{
 			_unableFunc = func;
 			return this;
 		}
-		
+
 		public function onThrough(func : Function, ... args) : WalkMoveStateReference
 		{
 			_throughFunc = func;
 			_throughFuncArgs = args;
 			return this;
 		}
-		
+
 		public function get throughFuncArgs() : Array
 		{
 			return _throughFuncArgs;
 		}
-		
+
 		public function onMove(func : Function) : WalkMoveStateReference
 		{
 			_moveFunc = func;
 			return this;
 		}
-		
+
 		public function onUpdate(func : Function) : WalkMoveStateReference
 		{
 			_updateFunc = func;
 			return this;
 		}
-		
+
 		public function onArrive(func : Function, ... args) : WalkMoveStateReference
 		{
 			_arriveFunc = func;
@@ -162,31 +162,31 @@ package com.rpgGame.app.state.role.control
 			_stopFunc = func;
 			return this;
 		}
-		
+
 		public function onEnd(func : Function) : WalkMoveStateReference
 		{
 			_endFunc = func;
 			return this;
 		}
-		
+
 		public function onSync(func : Function) : WalkMoveStateReference
 		{
 			_syncFunc = func;
 			return this;
 		}
-		
+
 		internal function ready() : void
 		{
 			if (_readyFunc != null)
 				_readyFunc(this);
 		}
-		
+
 		internal function unable() : void
 		{
 			if (_unableFunc != null)
 				_unableFunc(this);
 		}
-		
+
 		internal function through() : void
 		{
 			var args : Array;
@@ -197,19 +197,19 @@ package com.rpgGame.app.state.role.control
 			if (_throughFunc != null)
 				_throughFunc.apply(null, args);
 		}
-		
+
 		internal function move() : void
 		{
 			if (_moveFunc != null)
 				_moveFunc(this);
 		}
-		
+
 		internal function update() : void
 		{
 			if (_updateFunc != null)
 				_updateFunc(this);
 		}
-		
+
 		internal function arrive() : void
 		{
 			var args : Array;
@@ -225,27 +225,27 @@ package com.rpgGame.app.state.role.control
 				_debugPosFunc.apply(null, [this]);
 			}
 		}
-		
+
 		internal function stop() : void
 		{
 			if (_stopFunc != null)
 				_stopFunc(this);
 		}
-		
+
 		internal function end() : void
 		{
-			if(this.leftPath&&this.leftPath.length>0)
+			if(leftPath)
 				this.leftPath.length=0;
 			if (_endFunc != null)
 				_endFunc(this);
 		}
-		
+
 		internal function sync() : void
 		{
 			if (_syncFunc != null)
 				_syncFunc(this);
 		}
-		
+
 		override public function dispose() : void
 		{
 			_vectorPath = null;

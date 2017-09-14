@@ -2,8 +2,9 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.SevendayManager;
-	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.ServerActiveEvent;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.netData.gameactivities.message.ResGotSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.ResGrownInfoMessage;
 	import com.rpgGame.netData.gameactivities.message.SCRewardSuccessMessage;
@@ -40,12 +41,23 @@ package com.rpgGame.app.cmdlistener
 		{
 			SevendayManager.setSevenData(msg.loginDay,msg.info);
 			EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SEVENDAY_UPDATE);
+			MainButtonManager.openActivityButton(EmMainBtnID.QIRIHAOLI);
+			MainButtonManager.setActivityPointNumButton(EmMainBtnID.QIRIHAOLI,SevendayManager.getRewardNum(1));
 		}
 		/**7日豪礼领奖成功*/
 		private function onSCRewardSuccessMessage(msg:SCRewardSuccessMessage):void
 		{
 			SevendayManager.setRewardSeccessData(msg.success);
 			EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SEVENDAY_REWARD);
+			if(SevendayManager.getRewardNum(2)==SevendayManager.rewardSuccess.length)
+			{
+				MainButtonManager.closeActivityButton(EmMainBtnID.QIRIHAOLI);
+			}
+			else
+			{
+				MainButtonManager.setActivityPointNumButton(EmMainBtnID.QIRIHAOLI,SevendayManager.getRewardNum(1));
+			}
+			
 		}
 		
 		/**等级礼包领取反馈数据*/
