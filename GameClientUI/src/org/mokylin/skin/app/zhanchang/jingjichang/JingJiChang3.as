@@ -225,9 +225,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 563;
-			temp.y = 453;
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.x = 604;
+			temp.y = 455;
 			return temp;
 		}
 

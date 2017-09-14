@@ -518,7 +518,7 @@ package com.rpgGame.core.app
 		public static var BATTLE_D1V1_HEAD_PANEL:String = createAppInfo("battle.dfdj.D1v1HeadPanelExt","zhanchang");
 		/**1v1战斗结束**/
 		public static var BATTLE_D1V1_RESULT_PANEL:String = createAppInfo("battle.dfdj.D1v1FightResultPanelExt","zhanchang");
-		
+		public static var BATTLE_JJBT_HEAD_PANEL:String = createAppInfo("battle.jjzb.JJBattleHeadPanelExt");
 		/**九层妖塔战场日志**/
 		public static var BATTLE_NINE_TOWER_LOG_PANEL:String = createAppInfo("battle.jcyt.NineTowerLogPanelExt","zhanchang");
 		/**九层妖塔提示**/

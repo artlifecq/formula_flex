@@ -22,6 +22,8 @@ package com.rpgGame.appModule.battle.jcyt
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.JiuCengYaoTa_Skin;
 	
@@ -105,6 +107,14 @@ package com.rpgGame.appModule.battle.jcyt
 			showRewardEffect(state==1);
 			_skin.btnOpen.visible=!bool;
 			_skin.btnStart.visible=bool;
+			if (!bool) 
+			{
+				GrayFilter.gray(_skin.gBtn);
+			}
+			else
+			{
+				GrayFilter.unGray(_skin.gBtn);
+			}
 		}
 		private function addEft(render:RenderUnit3D):void
 		{

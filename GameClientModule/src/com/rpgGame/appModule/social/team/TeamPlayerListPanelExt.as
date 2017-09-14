@@ -185,7 +185,7 @@ package  com.rpgGame.appModule.social.team
 			playerList.sort(SortList);
 			_skin.Duiwu_list.dataProvider=new ListCollection(playerList);
 			TeamPlayerListItemExt.curItem=null;
-//			_skin.ui_fujin.visible=playerList.length==0;
+			_skin.ui_fujin.visible=playerList.length==0;
 		}
 		/**
 		 *未组队的玩家排在已组队的玩家之前；

@@ -205,7 +205,7 @@ package  com.rpgGame.appModule.social.team
 		
 			teamList.sort(SortList);
 			_skin.Duiwu_list.dataProvider=new ListCollection(teamList);
-//			_skin.ui_fujin.visible=teamList.length==0;
+			_skin.ui_fujin.visible=teamList.length==0;
 			TeamListItemExt.curItem=null;
 		}
 		/**
