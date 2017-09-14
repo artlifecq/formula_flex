@@ -1,5 +1,6 @@
 package  com.rpgGame.appModule.social.team
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -30,12 +31,14 @@ package  com.rpgGame.appModule.social.team
 			_skin=new DuiWu_Item();
 			super(_skin);
 			TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.TEAM_NEAR_TEAM_TIP,_tipData));
+			setSelectbg(false);
 		}	
 		public function setData(team:*,index:int):void
 		{
 			this._data=team as MapTeamInfo;
 			this._skin.bg1.visible=index%2==0;
 			this._skin.bg2.visible=!_skin.bg1.visible;
+			this._skin.selectUsBg.visible=Mgr.teamMgr.hasTeam&&Mgr.teamMgr.teamInfo.teamId.EqualTo(_data.teamid);
 			this._tipData.data=data;
 			_skin.lbName.text=team.captainname;
 			_skin.lbLevel.text=team.captainlv+NotifyCfgData.getNotifyTextByID(61019);
@@ -52,7 +55,7 @@ package  com.rpgGame.appModule.social.team
 			}
 			_skin.lbMap.text=MapDataManager.getMapInfo( _data.captainMap).getData().q_map_name;
 			
-			setSelectbg(false);
+			
 		}
 		public function setSelectbg(bool:Boolean):void
 		{

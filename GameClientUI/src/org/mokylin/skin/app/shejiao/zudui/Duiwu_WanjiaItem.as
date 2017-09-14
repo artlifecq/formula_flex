@@ -37,6 +37,8 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var selectBg:feathers.controls.UIAsset;
 
+		public var selectUsBg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -46,13 +48,15 @@ package org.mokylin.skin.app.shejiao.zudui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 23;
+			this.height = 33;
 			this.width = 894;
-			this.elementsContent = [bg1_i(),bg2_i(),selectBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbBanghui_i(),lbMap_i(),rdoSelect_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),selectUsBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbBanghui_i(),lbMap_i(),rdoSelect_i()];
+			selectBg_i();
+			
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"hover":"ui/common/hover/liangkuang2.png"};
 		}
 
 
@@ -64,7 +68,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.height = 23;
+			temp.height = 33;
 			temp.styleName = "ui/common/titilebg/ItemBg.png";
 			temp.width = 894;
 			temp.x = 0;
@@ -77,7 +81,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg2 = temp;
 			temp.name = "bg2";
-			temp.height = 23;
+			temp.height = 33;
 			temp.styleName = "ui/common/titilebg/ItemBghei.png";
 			temp.width = 894;
 			temp.x = 0;
@@ -96,7 +100,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 190;
 			temp.x = 531;
-			temp.y = 2;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -111,7 +115,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 86;
 			temp.x = 189;
-			temp.y = 2;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -126,7 +130,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 148;
 			temp.x = 740;
-			temp.y = 2;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -141,7 +145,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 172;
 			temp.x = 11;
-			temp.y = 2;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -156,7 +160,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
 			temp.x = 435;
-			temp.y = 2;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -171,7 +175,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 154;
 			temp.x = 277;
-			temp.y = 2;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -180,11 +184,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			rdoSelect = temp;
 			temp.name = "rdoSelect";
-			temp.height = 32;
+			temp.height = 33;
 			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
 			temp.width = 894;
 			temp.x = 0;
-			temp.y = -4;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -193,10 +197,24 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			selectBg = temp;
 			temp.name = "selectBg";
-			temp.styleName = "ui/app/shejiao/zudui/xuanzhongtiao.png";
+			temp.bottom = 0;
+			temp.styleName = "ui/common/hover/liangkuang2.png";
+			temp.top = 0;
 			temp.width = 894;
 			temp.x = 0;
-			temp.y = -4;
+			return temp;
+		}
+
+		private function selectUsBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			selectUsBg = temp;
+			temp.name = "selectUsBg";
+			temp.height = 33;
+			temp.styleName = "ui/app/shejiao/zudui/zijiliebiao.png";
+			temp.width = 894;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

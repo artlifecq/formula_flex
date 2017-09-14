@@ -4,6 +4,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.JJBattleEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhengba.bean.AwardItemInfo;
 	
@@ -50,7 +51,7 @@ package com.rpgGame.appModule.battle.jjzb
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
-			super.show(data,openTable,parentContiner);
+			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			var arr:Array=data;
 			var isWin:Boolean=arr[0];
 			_skin.uiTip.visible=!isWin;

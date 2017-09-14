@@ -1,6 +1,8 @@
 package  com.rpgGame.appModule.social.team
 {
 
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -23,12 +25,14 @@ package  com.rpgGame.appModule.social.team
 		{
 			_skin=new Duiwu_WanjiaItem();
 			super(_skin);
+			setSelectbg(false);
 		}	
 		public function setData(team:*,index:int):void
 		{
 			this._data=team as MapPlayerInfo;
 			this._skin.bg1.visible=index%2==0;
 			this._skin.bg2.visible=!_skin.bg1.visible;
+			this._skin.selectUsBg.visible=MainRoleManager.actorID==_data.playerid.ToGID();
 			_skin.lbName.text=_data.playername;
 			_skin.lbLevel.text=_data.playerlv+NotifyCfgData.getNotifyTextByID(61019);
 			_skin.lbZhanli.text=_data.fightPower+"";
@@ -53,7 +57,7 @@ package  com.rpgGame.appModule.social.team
 			//_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
 			var qMap:Q_map=MapDataManager.getMapInfo( MapDataManager.currentScene.sceneId).getData() as Q_map;
 			_skin.lbMap.text=qMap.q_map_name;
-			setSelectbg(false);
+		
 		}
 		public function setSelectbg(bool:Boolean):void
 		{

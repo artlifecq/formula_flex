@@ -7,7 +7,7 @@ package org.mokylin.skin.app.zhanchang
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.common.TongYongPanelbg1;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -55,7 +55,7 @@ package org.mokylin.skin.app.zhanchang
 		private function __ZhanChang_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = 1;
+			temp.gap = 0;
 			return temp;
 		}
 
@@ -76,8 +76,8 @@ package org.mokylin.skin.app.zhanchang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhanchang/jingjichang/zhanchang.png";
-			temp.x = 450;
-			temp.y = 17;
+			temp.x = 453;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -100,12 +100,12 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.btnWidth = 77;
+			temp.btnWidth = 78;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 31;
-			temp.y = 54;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
+			temp.x = 39;
+			temp.y = 50;
 			temp.layout = __ZhanChang_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __ZhanChang_Skin_ArrayCollection1_i();
 			return temp;

@@ -74,8 +74,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhanchang/shangcheng/shengwang_title.png";
-			temp.x = 444;
-			temp.y = 20;
+			temp.x = 428;
+			temp.y = 7;
 			return temp;
 		}
 

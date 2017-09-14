@@ -1,5 +1,6 @@
 package   com.rpgGame.app.manager.debug
 {	
+	import com.game.engine3D.manager.InputManger;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
@@ -20,6 +21,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -526,6 +528,35 @@ package   com.rpgGame.app.manager.debug
 				else
 				{
 					(MainRoleManager.actor.headFace as HeadFace).addTilteById(arg[0]);
+				}
+				
+			});
+			commandList.put( ".mainui", function (...arg):void
+			{
+				if (arg[0]==1) 
+				{
+					MainUIManager.setMainUIVisible(true);
+					InputManger.getInstance().openOperate();
+				}
+				else 
+				{
+					MainUIManager.setMainUIVisible(false);
+					InputManger.getInstance().closeOperate();
+				}
+				
+			});
+			commandList.put( ".look", function (...arg):void
+			{
+				if (arg[0]==1) 
+				{
+					//var pt:Vector3D=new Vector3D(arg[1],arg[2],arg[3]);
+					//MainRoleManager.actor.lookPos=pt;
+					Mgr.jjBattleMgr.unLockCamera();
+				}
+				else 
+				{
+					//MainRoleManager.actor.lookPos=null;
+					Mgr.jjBattleMgr.lockCamera();
 				}
 				
 			});

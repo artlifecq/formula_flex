@@ -6,7 +6,7 @@ package org.mokylin.skin.app.shejiao.zudui
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		private function __ZuiDuiSkin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = 1;
+			temp.gap = 0;
 			return temp;
 		}
 
@@ -67,12 +67,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_duiwu = temp;
 			temp.name = "tab_duiwu";
-			temp.btnWidth = 77;
+			temp.btnWidth = 78;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 33;
-			temp.y = 54;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
+			temp.x = 39;
+			temp.y = 50;
 			temp.layout = __ZuiDuiSkin_HorizontalLayout1_i();
 			temp.dataProvider = __ZuiDuiSkin_ArrayCollection1_i();
 			return temp;

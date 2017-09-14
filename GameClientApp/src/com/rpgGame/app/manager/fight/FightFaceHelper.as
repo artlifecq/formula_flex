@@ -8,6 +8,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.LostSkillManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -185,6 +186,10 @@ package com.rpgGame.app.manager.fight
 			if (hurter==null) 
 			{
 				return false;
+			}
+			if (Mgr.jjBattleMgr.isJJZB()) 
+			{
+				return true;
 			}
 			var showFace:Boolean = false;
 			var roleData:RoleData;

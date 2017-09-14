@@ -67,6 +67,8 @@ package com.rpgGame.coreData.info.map
 		 * 美人副本
 		 */
 		public static const MAP_TYPE_MEIREN:int = rEnum.next;//14
+		/**竞技争霸**/
+		public static const MAP_TYPE_JJZB:int=rEnum.next;//15
 
 	}
 }
