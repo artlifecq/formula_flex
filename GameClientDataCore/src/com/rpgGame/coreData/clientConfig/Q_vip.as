@@ -36,6 +36,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_attr_id:int;
 		 /**  VIP激活奖励 */
 		public var q_first_gift:String;
+		 /**  签到_补签、提前签次数 */
+		public var q_sign_times:String;
 
 	}
 }

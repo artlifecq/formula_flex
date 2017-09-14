@@ -5,13 +5,14 @@ package com.rpgGame.coreData.cfg.fulidating
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	public class signCfg
+	public class SignCfg
 	{
 		private static var _dataDic:Dictionary;
 		public static function setup( data:ByteArray ):void
 		{
 			_dataDic = new Dictionary();
-			for each(var info :Q_sign_accumulate in data) {
+			var arr : Array = data.readObject();
+			for each(var info :Q_sign_accumulate in arr) {
 				_dataDic[info.q_day] = info;
 			}
 		}

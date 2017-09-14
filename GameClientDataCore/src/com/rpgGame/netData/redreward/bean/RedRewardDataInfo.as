@@ -24,6 +24,9 @@ package com.rpgGame.netData.redreward.bean{
 		//发送者职业
 		private var _sendPlayerJob: int;
 		
+		//发送者性别(1男，2女)
+		private var _sendPlayerSex: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -34,6 +37,8 @@ package com.rpgGame.netData.redreward.bean{
 			writeString(_sendPlayerName);
 			//发送者职业
 			writeByte(_sendPlayerJob);
+			//发送者性别(1男，2女)
+			writeByte(_sendPlayerSex);
 			return true;
 		}
 		
@@ -47,6 +52,8 @@ package com.rpgGame.netData.redreward.bean{
 			_sendPlayerName = readString();
 			//发送者职业
 			_sendPlayerJob = readByte();
+			//发送者性别(1男，2女)
+			_sendPlayerSex = readByte();
 			return true;
 		}
 		
@@ -93,6 +100,21 @@ package com.rpgGame.netData.redreward.bean{
 		 */
 		public function set sendPlayerJob(value: int): void{
 			this._sendPlayerJob = value;
+		}
+		
+		/**
+		 * get 发送者性别(1男，2女)
+		 * @return 
+		 */
+		public function get sendPlayerSex(): int{
+			return _sendPlayerSex;
+		}
+		
+		/**
+		 * set 发送者性别(1男，2女)
+		 */
+		public function set sendPlayerSex(value: int): void{
+			this._sendPlayerSex = value;
 		}
 		
 	}

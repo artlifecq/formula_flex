@@ -2,10 +2,12 @@ package com.rpgGame.appModule.fulidating
 {
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.fulidating.render.LiBaoItemRender;
+	import com.rpgGame.coreData.cfg.fulidating.DengJiCfg;
 	
 	import feathers.controls.List;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
+	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.fulidating.FLDT_Dengjilibao;
 	
@@ -29,6 +31,20 @@ package com.rpgGame.appModule.fulidating
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=0;
+			
+			var arr:Array=DengJiCfg.getLvArr();
+			if(arr){
+				arr.sort(short);
+			}
+			list.dataProvider=new ListCollection(arr);
+			list.selectedIndex=0;
+		}
+		
+		private function short(lv1:int,lv2:int):int
+		{
+			if(lv1<lv2) return -1;
+			else if(lv1>lv2) return 1;
+			return 0;
 		}
 		
 		private function creatLiBaoItemCell():LiBaoItemRender
@@ -37,7 +53,13 @@ package com.rpgGame.appModule.fulidating
 			return render;
 		}
 		
-		
+		override protected function onShow():void
+		{
+			super.onShow();
+			if(_skin.listCont.dataProvider!=null){
+				_skin.listCont.scrollToDisplayIndex(0);
+			}
+		}
 		
 	}
 }

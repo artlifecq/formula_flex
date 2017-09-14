@@ -109,18 +109,18 @@ package   com.rpgGame.app.ui.main.team
 						SceneRoleSelectManager.selectedRole=role;
 					}
 				}
-//				else
-//				{
-//					var state:int=Mgr.teamMgr.getNearState(_data.memberId);
-//					if (state==1) 
-//					{
-//						FloatingText.showUp("该玩家离你太远");
-//					}
-//					else if (state==2) 
-//					{
-//						FloatingText.showUp("该玩家已下线");
-//					}
-//				}
+				//				else
+				//				{
+				//					var state:int=Mgr.teamMgr.getNearState(_data.memberId);
+				//					if (state==1) 
+				//					{
+				//						FloatingText.showUp("该玩家离你太远");
+				//					}
+				//					else if (state==2) 
+				//					{
+				//						FloatingText.showUp("该玩家已下线");
+				//					}
+				//				}
 			}
 		}
 		private function onTeamAttrChange(event:TeamEvent):void
@@ -158,7 +158,10 @@ package   com.rpgGame.app.ui.main.team
 					this._skin.icon.styleName = "ui/mainui/head/touxiang/bingjia/small.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/small.png";
+					if(data.appearanceInfo.sex==1)
+						this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/small.png";
+					else
+						this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia2/small.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
 					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia2/small.png";

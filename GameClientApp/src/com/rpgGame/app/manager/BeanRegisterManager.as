@@ -37,6 +37,7 @@
 	import com.rpgGame.app.cmdlistener.RedRewardCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
 	import com.rpgGame.app.cmdlistener.RollCmdListener;
+	import com.rpgGame.app.cmdlistener.ServerActiveCmdListener;
 	import com.rpgGame.app.cmdlistener.ShopCmdListener;
 	import com.rpgGame.app.cmdlistener.SpecialActivitiesCmdListener;
 	import com.rpgGame.app.cmdlistener.SpellCmdListener;
@@ -177,6 +178,9 @@
 			register("PetCmdListerner",PetCmdListerner);
 			register("RankCmdListener",RankCmdListener);
 			register("OpenActivityCmdListener",OpenActivityCmdListener);
+			register("ServerActiveCmdListener",ServerActiveCmdListener);//服务器活动
+			
+			
 		}
 	}
 }
