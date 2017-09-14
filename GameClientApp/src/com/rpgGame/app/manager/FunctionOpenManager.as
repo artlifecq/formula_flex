@@ -271,10 +271,6 @@
 				}
 			}
 		}
-		if (!checkOtherCondicion(panelCfg.main_id)) 
-		{
-			return;
-		}
 		private static function checkOtherCondicion(panelId:int):Boolean
 		{
 			switch(panelId)
