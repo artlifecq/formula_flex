@@ -336,7 +336,7 @@ package com.rpgGame.app.data
 			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
 			RankDesignationData.setup(dic[ConfigClassRegister.Q_rank_designation]);//排行榜名称
 			AttributeCfg.setup(dic[ConfigClassRegister.Q_shuxing]);//属性
-			SevendayCfgData.setup(dic[ConfigClassRegister.Q_sevenday]);
+			SevendayCfgData.setup(dic[ConfigClassRegister.Q_sevenday]);//七日豪礼
 			TitleControlCfg.setup(dic[ConfigClassRegister.Q_title_control]);//属性
 		}
 		

@@ -44,11 +44,12 @@ package com.rpgGame.app.state.ai
 
 		private function gotoAttackMonster() : void
 		{
-			if (SceneRoleSelectManager.selectedRole && SceneRoleSelectManager.selectedRole.usable && SceneRoleSelectManager.selectedRole.isInViewDistance)
+			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
+			if (selectedRole&&selectedRole.usable&&selectedRole.isInViewDistance&&!selectedRole.stateMachine.isDeadState)
 			{
-				if (!SceneRoleSelectManager.selectedRole.stateMachine.isDeadState)
+				var modeState : int = FightManager.getFightRoleState(selectedRole);
+				if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 				{
-					//transition(AIStateType.ATTACK_TARGET);
 					return;
 				}
 			}
