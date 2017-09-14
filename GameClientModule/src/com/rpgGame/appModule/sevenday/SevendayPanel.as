@@ -2,9 +2,13 @@ package com.rpgGame.appModule.sevenday
 {
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.SevendayManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.FuliDaTingSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.core.events.ServerActiveEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.SevendayCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_sevenday;
@@ -15,6 +19,7 @@ package com.rpgGame.appModule.sevenday
 	
 	import gs.TweenLite;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.sevenday.Day_Item;
 	import org.mokylin.skin.app.sevenday.SevenDay_Skin;
 	
@@ -50,15 +55,25 @@ package com.rpgGame.appModule.sevenday
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			showInit();
-			setIconShow();
-			setNowDay(3);
+			upDate();
+			addEvent();
 		}
+		
 		override public function hide():void
 		{
 			super.hide();
+			removeEvent();
 		}
-		
+		private function addEvent():void
+		{
+			EventManager.addEvent(ServerActiveEvent.SERVERACTIVE_SEVENDAY_UPDATE,upDate);//7日豪礼更新
+			EventManager.addEvent(ServerActiveEvent.SERVERACTIVE_SEVENDAY_REWARD,subReward);//7日豪礼领奖成功
+		}
+		private function removeEvent():void
+		{
+			EventManager.removeEvent(ServerActiveEvent.SERVERACTIVE_SEVENDAY_UPDATE,upDate);//7日豪礼更新
+			EventManager.removeEvent(ServerActiveEvent.SERVERACTIVE_SEVENDAY_REWARD,subReward);//7日豪礼领奖成功
+		}
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
@@ -66,7 +81,8 @@ package com.rpgGame.appModule.sevenday
 				case "btnLingqu":// 领取奖励该奖励暂不可领取
 					if(selectId<=nowDay)
 					{
-						subReward(selectId);
+						//subReward(selectId);
+						FuliDaTingSender.reqSevenDayRewardMessage(selectId);
 					}
 					else
 					{
@@ -90,8 +106,7 @@ package com.rpgGame.appModule.sevenday
 			//_skin.uiMsg.styleName="";
 			reward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon0,RewardGroup.ALIN_CENTER,6,9,0,true,6);
 			avateUI=new UIAvatar3D(_skin.modGrp,2);
-			receiveDay=new Array();
-			receiveDay.push(1);
+			
 			showInit();
 		}
 		private function showInit():void
@@ -113,19 +128,6 @@ package com.rpgGame.appModule.sevenday
 			avateUI.visible=false;
 			
 		}
-		/**领取奖励*/
-		private function subReward(day:int):void
-		{
-			receiveDay.push(day);
-			changeIconShow();
-			_skin.uiOk.visible=true;
-			_skin.btnLingqu.isEnabled=false;
-			reward.tweeRewardInBag(1);
-			
-		}
-		
-		
-		
 		
 		private var isOutTouch:Boolean=true;
 		private function onTouch(e : TouchEvent) : void
@@ -167,6 +169,32 @@ package com.rpgGame.appModule.sevenday
 			
 			
 		}
+		
+		private function upDate():void
+		{
+			nowDay=SevendayManager.loginDay;
+			receiveDay=SevendayManager.rewardSuccess;
+			showInit();
+			if(nowDay>0&&receiveDay!=null)
+			{
+				setIconShow();
+				setNowDay(nowDay);
+			}
+		}
+		/**领取奖励*/
+		private function subReward():void
+		{
+			//receiveDay.push(day);
+			changeIconShow();
+			_skin.uiOk.visible=true;
+			_skin.btnLingqu.isEnabled=false;
+			reward.tweeRewardInBag(1);
+			
+		}
+		
+		
+		
+		
 		/**设置图标未选中*/
 		private function iconOutShow():void
 		{
@@ -228,13 +256,19 @@ package com.rpgGame.appModule.sevenday
 		private function getIsReceiveDay(day:int):Boolean
 		{
 			var i:int;
-			for(i=0;i<receiveDay.length;i++)
+			var id:int=day-1;
+			if(receiveDay&&receiveDay.length>id&&receiveDay[id]==2)
+			{
+				return true;
+			}
+			
+			/*for(i=0;i<receiveDay.length;i++)
 			{
 				if(receiveDay[i]==day)
 				{
 					return true;
 				}
-			}
+			}*/
 			return false;
 		}
 		/**设置选中信息*/

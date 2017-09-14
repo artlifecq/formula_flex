@@ -1,5 +1,11 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.app.utils.ReqLockUtil;
+	import com.rpgGame.netData.gameactivities.message.CSGetSevenDayRewardMessage;
+	import com.rpgGame.netData.map.message.CSAreaJumpMessage;
+	
+	import org.game.netCore.connection.SocketConnection;
+
 	public class FuliDaTingSender extends BaseSender
 	{
 		/**
@@ -17,5 +23,20 @@ package com.rpgGame.app.sender
 		{
 			
 		}
+		
+		
+		/**
+		 * 7日豪礼领取请求
+		 * */
+		public static function reqSevenDayRewardMessage(day:int):void
+		{
+			if (ReqLockUtil.isReqLocked(410201))
+				return;
+			ReqLockUtil.lockReq(410201,2000);
+			var msg:CSGetSevenDayRewardMessage = new CSGetSevenDayRewardMessage();
+			msg.activeId = day;
+			SocketConnection.send(msg);
+		}
+		
 	}
 }
