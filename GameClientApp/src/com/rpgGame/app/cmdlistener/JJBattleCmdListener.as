@@ -18,7 +18,10 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(127106,Mgr.jjBattleMgr.SCDrawAwardResultHandler);
 			SocketConnection.addCmdListener(127107,  Mgr.jjBattleMgr.SCUpdateZhengBaDataHandler);
 			SocketConnection.addCmdListener(127109, Mgr.jjBattleMgr.SCOpenArardPanelHandler);
+			SocketConnection.addCmdListener(127111, Mgr.jjBattleMgr.SCJJReadyToStartHandler);
 			finish();
 		}	
+		
+		
 	}
 }

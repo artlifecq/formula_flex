@@ -50,7 +50,10 @@ package com.rpgGame.app.manager
 		{
 			mainui.hide();
 		}
-
+		public static function setMainUIVisible(bool:Boolean):void
+		{
+			mainui.visible=bool;
+		}
 		/**
 		 * 显示与隐藏主界面
 		 * @author 卢国征  2015-4-28

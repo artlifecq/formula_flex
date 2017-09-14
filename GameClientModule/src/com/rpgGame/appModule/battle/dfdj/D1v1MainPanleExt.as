@@ -23,6 +23,8 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.DianFeng_Skin;
 	
@@ -115,6 +117,14 @@ package com.rpgGame.appModule.battle.dfdj
 			showRewardEffect(state==1);
 			_skin.btnOpen.visible=!bool;
 			_skin.btnStart.visible=bool;
+			if (!bool) 
+			{
+				GrayFilter.gray(_skin.gBtn);
+			}
+			else
+			{
+				GrayFilter.unGray(_skin.gBtn);
+			}
 		}
 		private function addEft(render:RenderUnit3D):void
 		{

@@ -234,7 +234,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhanchang/paihangbang/kuafupaihangbang.png";
 			temp.x = 418;
-			temp.y = 17;
+			temp.y = 8;
 			return temp;
 		}
 

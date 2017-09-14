@@ -46,11 +46,11 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			lbGuize = temp;
 			temp.name = "lbGuize";
 			temp.height = 111;
-			temp.htmlText = "战场规则：<br>  1.每层击杀相应的人数可进入下一层，共<font color='#00ff33'>9</font>层。<br>  2.高层复活点复活有几率降回前一层，原地复活不降层。<br>  3.<font color='#00ff33'>1-5</font>层死亡复活点不会降层。<br>  4.战场内可获得积分奖励和层数奖励。<br>  5.<font color='#00ff33'>9</font>层玩家可争夺镇妖塔宝箱。";
+			temp.htmlText = "战场规则：<br>  1.每层击杀怪物或玩家可获得积分，积分达到一定数量可<br>  进入下一层，共<font color='#00ff33'>9</font>层。<br>  2.高层复活点复活有几率降回前一层，原地复活不降层。<br>  3.<font color='#00ff33'>1-5</font>层死亡复活点不会降层。<br>  4.战场内可获得积分奖励和层数奖励。<br>  5.<font color='#00ff33'>9</font>层玩家可争夺镇妖塔宝箱。";
 			temp.leading = 4;
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 401;
+			temp.width = 371;
 			temp.x = 0;
 			temp.y = 20;
 			return temp;

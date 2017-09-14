@@ -27,7 +27,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			super();
 			
 			this.currentState = "up";
-			this.height = 32;
+			this.height = 33;
 			this.width = 894;
 			this.elementsContent = [];
 			
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.shejiao.zudui
 						}
 					]
 			};
-			skinNames={"down":"ui/app/shejiao/zudui/shubiaoyishangtiao.png", "hover":"ui/app/shejiao/zudui/shubiaoyishangtiao.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
+			skinNames={"down":"ui/common/hover/liangkuang2.png", "hover":"ui/common/hover/liangkuang2.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
 		}
 
 

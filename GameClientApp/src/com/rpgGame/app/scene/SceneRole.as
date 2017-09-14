@@ -540,5 +540,7 @@ package com.rpgGame.app.scene
 //				trace("main move z");
 //			}
 		}
+		//==================主玩家用
+		public var lookPos:Vector3D;
 	}
 }

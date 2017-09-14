@@ -12,6 +12,7 @@ package com.game.engine3D.core
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
 	import com.game.engine3D.vo.BaseRole;
+	import com.game.engine3D.vo.CameraObjSyncInfo;
 	import com.game.engine3D.vo.MapTextureLoader;
 	
 	import flash.geom.Rectangle;
@@ -1064,7 +1065,7 @@ package com.game.engine3D.core
 				
 				if (_mainChar)
 				{
-					_mainChar.addSyncInfo(new BaseObjSyncInfo(getCameraTarget(), true));//这个是用来把镜头的虚拟对象与主角关联起来，实现同步
+					_mainChar.addSyncInfo(new CameraObjSyncInfo(_mainChar,getCameraTarget(), true));//这个是用来把镜头的虚拟对象与主角关联起来，实现同步
 					
 					_mainCharSyncPosLight = _sceneMapLayer.getObj(MAIN_CHAR_SYNC_POS_LIGHT_NAME) as LightBase;//永远跟着主角的一盏灯
 					if (_mainCharSyncPosLight)

@@ -32,7 +32,7 @@ package com.rpgGame.coreData.cfg
 		public static var clientParams:Object=new Object();
 		public static var loginAreaId : uint = 1;
 		public static var loginTime : uint = 0;
-		public static var policyPort : uint = 8002; //9374;
+		public static var policyPort : uint = 8001; //9374;
 		public static var agent : String = "";
         public static var browser : String = "";
         public static var gameName : String = "";

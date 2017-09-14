@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.TabBarPanel;
+	import com.rpgGame.app.ui.tab.UITabBarData;
 	import com.rpgGame.appModule.guild.war.HczbPlayerViewUI;
 	import com.rpgGame.appModule.guild.war.WczbWarViewUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
@@ -19,10 +20,27 @@ package com.rpgGame.appModule.guild
 			_skin = new BangHui_Skin();
 			super(_skin);
 			_tabBar.checkToTabHandler=checkToTabHandler;
+			_tabBar.checkOpenHandler=checkOpenHandler;
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_INFO,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_INFO).button,65,GuildManager.instance().hasDailyGift,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_UP,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_UPLEVEL).button,65,GuildManager.instance().hasGuildLevelUp,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_MEM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_CHENGYUAN).button,65,GuildManager.instance().hasApplyList,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_SKILL,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_SPELL).button,65,GuildManager.instance().hasSkill2LevelUp,false,null,true);
+		}
+		
+		private function checkOpenHandler(item:UITabBarData):Boolean
+		{
+			var funcID:int=item.tabKey;
+			switch(funcID){
+				case EmFunctionID.EM_BANGHUI_CHENGYUAN:
+				case EmFunctionID.EM_BANGHUI_UPLEVEL:
+				case EmFunctionID.EM_BANGHUI_SPELL:
+				case EmFunctionID.EM_BANGHUI_INFO:
+					if(GuildManager.instance().haveGuild==false){
+						return false;
+					}
+					break;
+			}
+			return true
 		}
 		
 		private function checkToTabHandler(funcID:int):Boolean
@@ -31,9 +49,7 @@ package com.rpgGame.appModule.guild
 				case EmFunctionID.EM_BANGHUI_CHENGYUAN:
 				case EmFunctionID.EM_BANGHUI_UPLEVEL:
 				case EmFunctionID.EM_BANGHUI_SPELL:
-				case EmFunctionID.EM_BANGHUI_WAR:
 				case EmFunctionID.EM_BANGHUI_INFO:
-				case EmFunctionID.EM_HCZB_INFO_GUILD:
 					if(GuildManager.instance().haveGuild==false){
 						NoticeManager.showNotifyById(22004);
 						return false;
