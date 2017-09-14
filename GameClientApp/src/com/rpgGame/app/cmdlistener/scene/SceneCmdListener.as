@@ -387,7 +387,12 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id)
 			{
-				AppManager.showApp(AppConstant.DIE_PANEL,msg);
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				if(qmap.q_revive_area!=0||qmap.q_rose_resurrection!=1){
+					AppManager.showApp(AppConstant.DIE_PANEL,msg);
+				}
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
 				SceneManager.scene.addGrayScene();
 			}
