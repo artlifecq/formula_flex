@@ -12,11 +12,16 @@ package com.rpgGame.netData.activities.message{
 	 */
 	public class ReqActivitiesInfoMessage extends Message {
 	
+		//活动面板类型
+		private var _mainPanelType: int;
+		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			//活动面板类型
+			writeInt(_mainPanelType);
 			return true;
 		}
 		
@@ -24,6 +29,8 @@ package com.rpgGame.netData.activities.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			//活动面板类型
+			_mainPanelType = readInt();
 			return true;
 		}
 		
@@ -33,6 +40,21 @@ package com.rpgGame.netData.activities.message{
 		 */
 		override public function getId(): int {
 			return 181202;
+		}
+		
+		/**
+		 * get 活动面板类型
+		 * @return 
+		 */
+		public function get mainPanelType(): int{
+			return _mainPanelType;
+		}
+		
+		/**
+		 * set 活动面板类型
+		 */
+		public function set mainPanelType(value: int): void{
+			this._mainPanelType = value;
 		}
 		
 	}

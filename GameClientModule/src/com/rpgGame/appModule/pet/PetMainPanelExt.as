@@ -1,5 +1,9 @@
 package com.rpgGame.appModule.pet
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.display3D.UIAvatar3D;
@@ -19,6 +23,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
@@ -62,6 +67,8 @@ package com.rpgGame.appModule.pet
 		private var bindGoldBuyMod:Q_global;
 		
 		private var _avatar : UIAvatar3D;
+		private var _jiemianEff:InterObject3D;
+		private var _jiemianEffContaner:Inter3DContainer;
 		public function PetMainPanelExt()
 		{
 			_skin=new MeiRen_Skin();
@@ -72,6 +79,7 @@ package com.rpgGame.appModule.pet
 		private function initConfig():void
 		{
 			_avatar=new UIAvatar3D(_skin.avatarGrp,2.3);
+			_jiemianEffContaner=new Inter3DContainer();
 			goldBuyMod=GlobalSheetData.getSettingInfo(845);
 			bindGoldBuyMod=GlobalSheetData.getSettingInfo(846);
 			var pets:Array=PetCfg.dataArr;
@@ -311,6 +319,26 @@ package com.rpgGame.appModule.pet
 		private function showPetModEff(data:PetInfo):void
 		{
 			var qPet:Q_girl_pet=PetCfg.getPet(data.modelId);
+			var index:int=_skin.container.getChildIndex(_skin.avatarGrp);
+			if(data.modelId>=3)
+				_skin.container.addChildAt(_jiemianEffContaner,index+1);
+			else _skin.container.addChildAt(_jiemianEffContaner,index-1);
+			if(_jiemianEff != null)
+			{
+				_jiemianEff.dispose();
+				_jiemianEff=null;
+			}
+			_jiemianEff=new InterObject3D();
+			var data3d : RenderParamData3D= new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(qPet.q_effect_panel));
+			data3d.forceLoad=true;//ui上的3d特效强制加载
+			var unit : RenderUnit3D = _jiemianEff.addRenderUnitWith(data3d, 0);	
+			_jiemianEff.x=417;
+			_jiemianEff.y=490;
+			unit.setScale(2.3);
+			unit.addUnitAtComposite(unit);
+			_jiemianEffContaner.addChild3D(_jiemianEff);
+			//			_jiemianEff=_jiemianEffContaner.playInter3DAt(ClientConfig.getEffect(qPet.q_effect_panel),405,490,0);
+			if(_avatar)_avatar.transition(RoleStateType.ACTION_IDLE);
 			_avatar.updateBodyWithRes(qPet.q_panel_show_id);
 			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}

@@ -57,7 +57,7 @@ package com.rpgGame.appModule.zhangong
 			ClearData();
 			_lv=data as int;
 			updateBtnState(CharAttributeType.LV);
-			_skin.bg.styleName = "ui/app/beibao/zhangong/name/"+_lv+".png";
+			_skin.bg.styleName = "ui/zhangongmapname/"+_lv+".png";
 			updatePanel();
 		}
 		

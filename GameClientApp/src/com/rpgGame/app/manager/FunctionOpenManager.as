@@ -209,11 +209,11 @@
 					return ;
 				}
 			}
-			
+			var tab:int=funcCfg?funcCfg.q_id:0;
 			if(isAutoHide){
-				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				AppManager.showApp(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,tab);
 			}else{
-				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,funcCfg.q_id);
+				AppManager.showAppNoHide(AppConstant.getAppNameByPanelId(panelCfg.main_id),data,tab);
 			}
 		}
 		

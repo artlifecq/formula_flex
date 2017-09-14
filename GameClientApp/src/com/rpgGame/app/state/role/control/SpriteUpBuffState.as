@@ -32,13 +32,16 @@ package com.rpgGame.app.state.role.control
 			{
 				
 				var role:SceneRole=_ref.owner as SceneRole;
-				var animatData : Q_SpellAnimation =AnimationDataManager.getData(EFFECT_ID);
-				if (animatData)
+				if (role.isMainChar) 
 				{
-					var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(role, 0, RenderUnitType.BUFF +EFFECT_ID, animatData.role_res, animatData.bind_bone, 0);
-					if (ru) 
+					var animatData : Q_SpellAnimation =AnimationDataManager.getData(EFFECT_ID);
+					if (animatData)
 					{
-						ru.rotationY=role.rotationY;
+						var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(role, 0, RenderUnitType.BUFF +EFFECT_ID, animatData.role_res, animatData.bind_bone, 0);
+						if (ru) 
+						{
+							ru.rotationY=role.rotationY;
+						}
 					}
 				}
 			}
@@ -49,7 +52,7 @@ package com.rpgGame.app.state.role.control
 		{
 			super.leave();
 			var role:SceneRole=_ref.owner as SceneRole;
-			if (role) 
+			if (role&&role.isMainChar) 
 			{
 				role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + EFFECT_ID);
 			}

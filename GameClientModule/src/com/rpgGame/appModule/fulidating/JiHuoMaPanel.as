@@ -27,6 +27,7 @@ package com.rpgGame.appModule.fulidating
 		private function initView():void
 		{
 			_skin.txtInput.maxChars=32;
+			_skin.txtInput.y=_skin.txtInput.y+2;
 		}
 		
 		override protected function onShow():void

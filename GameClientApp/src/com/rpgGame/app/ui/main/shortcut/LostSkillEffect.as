@@ -136,7 +136,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(this.parent==null)
 			{
 				_bindBtn.parent.addChildAt(this,0);
-				this.rotation = Math.PI*0.1;
+				this.rotation = Math.PI*0.18;
 				this.x = _bindBtn.x +_bindBtn.width/2-2;
 				this.y = _bindBtn.y +_bindBtn.height/2+13;
 				starPlay();

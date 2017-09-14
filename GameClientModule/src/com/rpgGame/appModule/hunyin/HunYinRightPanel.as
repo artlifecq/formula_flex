@@ -150,7 +150,7 @@ package com.rpgGame.appModule.hunyin
 		//更新祝福值
 		public function updateBestWishesValue():void
 		{
-			var num:int=Mgr.hunyinMgr.marriageInfos.intimacyValue;
+			var num:int=Mgr.hunyinMgr.marriageInfos?Mgr.hunyinMgr.marriageInfos.intimacyValue:0;
 			var needNum:int=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv).q_max_intimacy;
 			_skin.lbJindu.text=num.toString()+"/"+needNum.toString();
 			if(num>=needNum) _skin.lbJindu.color=StaticValue.GREEN_TEXT;

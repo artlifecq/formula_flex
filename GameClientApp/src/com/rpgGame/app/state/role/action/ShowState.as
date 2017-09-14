@@ -150,7 +150,7 @@ package com.rpgGame.app.state.role.action
 		{
 			var role:SceneRole=_machine.owner as SceneRole;
 			
-			if(Math.round(role.parent.parent.rotationY)!=_stateReference.defaultRotationY){//不在展示角度不做下次展示
+			if((_stateReference&&Math.round(role.parent.parent.rotationY)!=_stateReference.defaultRotationY)||role.parent.parent.rotationY==0){//不在展示角度不做下次展示
 				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);
 				return;
 			}

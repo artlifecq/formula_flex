@@ -21,6 +21,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.SearchMapData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
@@ -32,7 +33,6 @@ package com.rpgGame.app.manager
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
-	import com.rpgGame.coreData.info.SearchMapData;
 	
 	
 	
@@ -296,8 +296,14 @@ package com.rpgGame.app.manager
 		 */		
 		public function UpdatePlayerTeamInfo(teamId:long , playerId:long):void
 		{
-			trace("===========================================================");
-			trace("UpdatePlayerTeamInfo");
+			//主要处理主玩家的短线重连
+			if (playerId.ToGID()==MainRoleManager.actorID) 
+			{
+				if (teamId.IsZero()) 
+				{
+					PlayerLeaveTeam(playerId);
+				}
+			}
 		}
 		
 		/**

@@ -2,8 +2,9 @@ package com.rpgGame.app.graphics
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.graphics.title.IBaseTitle;
 	
-	public class HeadFaceEffect extends Inter3DContainer
+	public class HeadFaceEffect extends Inter3DContainer 
 	{
 		private var _tw:int;
 		private var _th:int;
@@ -19,7 +20,7 @@ package com.rpgGame.app.graphics
 			return _url;
 		}
 
-		public function playEffect(w:int,h:int,url : String, x : int, y : int, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : InterObject3D
+		public function playEffect(w:int,h:int,url : String, x : int, y : int, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : *
 		{
 			this._tw=w;
 			this._th=h;

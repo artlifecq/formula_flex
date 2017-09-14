@@ -586,6 +586,11 @@ package com.rpgGame.core.app
 		public static var SEVENDAY_PANEL:String = createAppInfo("sevenday.SevendayPanel","sevenday",EmPanelID.SEVENDAY_PANEL);
 
 		/**福利大厅*/
-		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating");
+		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating",EmPanelID.ACTIVITY_FULI);
+		//开服bug
+		public static const ACT_BUG:String=createAppInfo("openActivity.bug.BugSubmitPanelExt","youjiang");
+		public static const ACT_37_PLATFORM:String=createAppInfo("openActivity.plat37.P37PlatformTokenPanelExt","tequan");
+		public static const ACT_37_SUPER_VIP:String=createAppInfo("openActivity.plat37.P37SuperVIPExt","showgirl");
+		public static const ACT_37_PHONE:String=createAppInfo("openActivity.plat37.P37PhonePanelExt","shoujilibao");
 	}
 }

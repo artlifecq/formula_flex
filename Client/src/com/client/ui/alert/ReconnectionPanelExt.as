@@ -187,7 +187,7 @@ package com.client.ui.alert
 			if (!SocketConnection.messageMgr.isReplace)
 			{
 				SocketConnection.messageMgr.SetSocket(trySocket,0);
-				LoginSender.SendLoginMessage(1);
+				LoginSender.sendRelogin();
 			}
 			if(this.parent)
 			{
