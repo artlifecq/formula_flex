@@ -7,11 +7,13 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.task.TaskInfoDecoder;
+	import com.rpgGame.app.ui.main.fight.MapAreaPop;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
@@ -236,7 +238,6 @@ package com.rpgGame.app.manager
 				return;
 			}
 			var areaDatas : Array = mapData.areaDatas;
-			trace(areaDatas);
 			for each (var areaData : ClientMapAreaData in areaDatas)
 			{
 				if (areaData.type == MapAreaTypeEnum.SAFE || areaData.type == MapAreaTypeEnum.ATHLETICS || areaData.type == MapAreaTypeEnum.SPELL_FORBID|| areaData.type == MapAreaTypeEnum.STALL)
@@ -329,17 +330,11 @@ package com.rpgGame.app.manager
 				actor.mapAreaType = areaType;
 				switch (areaType)
 				{
-					case MapAreaTypeEnum.ATHLETICS:
-						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
-						break;
 					case MapAreaTypeEnum.SAFE:
-						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
+						UIPopManager.showAlonePopUI(MapAreaPop,"jinruanquanqu");
 						break;
-					case MapAreaTypeEnum.STALL:
-						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
-						break;
-					case MapAreaTypeEnum.SPELL_FORBID:
-						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
+					default:
+						UIPopManager.showAlonePopUI(MapAreaPop,"likaianquanqu");
 						break;
 				}
 			}

@@ -41,7 +41,7 @@ package com.rpgGame.appModule.guild
 			//EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			refeashValue();
 			finishMation(TaskType.MAINTYPE_GUILDDAILYTASK);
-			_proBorder=this.playInter3DAt(ClientConfig.getEffect("ui_bangpailiuguang"),_skin.proJindu.x+210,_skin.proJindu.y+10,0);
+			_proBorder=this.playInter3DAt(ClientConfig.getEffect("ui_bangpailiuguang"),_skin.proJindu.x+208,_skin.proJindu.y+10,0);
 		}
 		
 		override protected function onHide():void

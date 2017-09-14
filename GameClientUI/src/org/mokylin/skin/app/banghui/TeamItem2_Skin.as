@@ -37,6 +37,8 @@ package org.mokylin.skin.app.banghui
 
 		public var uiTongShuai:feathers.controls.UIAsset;
 
+		public var uivip:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -48,7 +50,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 908;
-			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i(),uiTongShuai_i()];
+			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i(),uiTongShuai_i(),uivip_i()];
 			
 			states = {
 			};
@@ -81,7 +83,7 @@ package org.mokylin.skin.app.banghui
 			temp.text = "在线";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 827;
+			temp.x = 848;
 			temp.y = 8;
 			return temp;
 		}
@@ -96,7 +98,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 79;
-			temp.x = 434;
+			temp.x = 494;
 			temp.y = 8;
 			return temp;
 		}
@@ -109,12 +111,12 @@ package org.mokylin.skin.app.banghui
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "[00000]玩家名六个字";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 160;
-			temp.x = 126;
+			temp.x = 168;
 			temp.y = 8;
 			return temp;
 		}
@@ -129,7 +131,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 133;
-			temp.x = 278;
+			temp.x = 334;
 			temp.y = 8;
 			return temp;
 		}
@@ -144,7 +146,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 75;
-			temp.x = 558;
+			temp.x = 616;
 			temp.y = 8;
 			return temp;
 		}
@@ -159,7 +161,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
-			temp.x = 677;
+			temp.x = 717;
 			temp.y = 8;
 			return temp;
 		}
@@ -197,6 +199,17 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/app/banghui/tongshuaitubiao.png";
 			temp.x = 22;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function uivip_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uivip = temp;
+			temp.name = "uivip";
+			temp.styleName = "ui/common/tubiao/vips2.png";
+			temp.x = 134;
+			temp.y = 6;
 			return temp;
 		}
 
