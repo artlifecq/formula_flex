@@ -527,7 +527,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else if (animatData.role_res)
 				{
-					rud = new RenderParamData3D(hurtEffectObjID, SceneCharType.BORN_EFFECT, ClientConfig.getEffect(animatData.role_res));
+					rud = new RenderParamData3D(bornEffectID, SceneCharType.BORN_EFFECT, ClientConfig.getEffect(animatData.role_res));
 					
 					if (animatData.bind_bone)
 						effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, animatData.bind_bone, rud);
