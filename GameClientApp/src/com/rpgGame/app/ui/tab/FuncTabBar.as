@@ -98,9 +98,9 @@ package com.rpgGame.app.ui.tab
 		
 		private function updateTabData():void
 		{
-			if(_allDatas.length!=_tabBar.numChildren){//没有全部开启
-				checkOpen();
-			}
+//			if(_allDatas.length!=_tabBar.numChildren){//没有全部开启
+			checkOpen();
+//			}
 		}
 		
 		private function checkOpen():void

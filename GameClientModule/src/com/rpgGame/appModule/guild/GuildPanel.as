@@ -34,9 +34,7 @@ package com.rpgGame.appModule.guild
 				case EmFunctionID.EM_BANGHUI_CHENGYUAN:
 				case EmFunctionID.EM_BANGHUI_UPLEVEL:
 				case EmFunctionID.EM_BANGHUI_SPELL:
-				case EmFunctionID.EM_BANGHUI_WAR:
 				case EmFunctionID.EM_BANGHUI_INFO:
-				case EmFunctionID.EM_HCZB_INFO_GUILD:
 					if(GuildManager.instance().haveGuild==false){
 						return false;
 					}
@@ -51,9 +49,7 @@ package com.rpgGame.appModule.guild
 				case EmFunctionID.EM_BANGHUI_CHENGYUAN:
 				case EmFunctionID.EM_BANGHUI_UPLEVEL:
 				case EmFunctionID.EM_BANGHUI_SPELL:
-				case EmFunctionID.EM_BANGHUI_WAR:
 				case EmFunctionID.EM_BANGHUI_INFO:
-				case EmFunctionID.EM_HCZB_INFO_GUILD:
 					if(GuildManager.instance().haveGuild==false){
 						NoticeManager.showNotifyById(22004);
 						return false;

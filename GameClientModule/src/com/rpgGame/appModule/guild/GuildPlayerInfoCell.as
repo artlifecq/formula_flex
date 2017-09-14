@@ -82,6 +82,7 @@ package com.rpgGame.appModule.guild
 				_skin.numList2.visible = false;
 				_skin.uiFirt.visible = false;
 				_skin.uiTongShuai.visible = false;
+				_skin.uivip.visible = false;
 				return ;
 			}else{
 				_skin.lbOnLine.visible = true;
@@ -105,6 +106,10 @@ package com.rpgGame.appModule.guild
 			_skin.lbZhouHuoYue.text = _guildMemberInfo.curActive.toString();
 			_skin.lbZongHuoYue.text = _guildMemberInfo.allActive.toString();
 			_skin.uiTongShuai.visible = _guildMemberInfo.isLeader ==1;
+			_skin.uivip.visible = _guildMemberInfo.vip>0;
+			if(_skin.uivip.visible){
+				_skin.uivip.styleName = "ui/common/tubiao/vips"+_guildMemberInfo.vip+".png";
+			}
 			if(_guildMemberInfo.online==1)
 			{
 				_skin.lbOnLine.text = "在线";

@@ -1058,8 +1058,7 @@
 						}
 						
 						//						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
-						var rowH:int=Math.ceil($_rect.height);
-						unit.displayObj.y=$_rect.y+(rowH-unit.displayObj.height)/2+$_txtLineMetrics.descent-4;
+						unit.displayObj.y=$_rect.y+($_txtLineMetrics.height-unit.displayObj.height)/2-4;
 					}
 					//					else
 					//					{
