@@ -1,14 +1,12 @@
 package com.rpgGame.appModule.battle.jjzb
 {
-	import com.game.engine2D.config.staticdata.CharAngleType;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.core.events.JJBattleEvent;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhengba.bean.AwardItemInfo;
-	
-	import app.message.GoodsType;
 	
 	import away3d.events.Event;
 	
@@ -23,7 +21,7 @@ package com.rpgGame.appModule.battle.jjzb
 	{
 		private var _skin:TiaoZhanJieSuan_Shengli;
 		private var _hash:HashMap=new HashMap();
-		private var _fightScene:JJBattleSceneView;
+		
 		public function JJBattleResultPanelExt()
 		{
 			_skin=new TiaoZhanJieSuan_Shengli();
@@ -41,12 +39,8 @@ package com.rpgGame.appModule.battle.jjzb
 		private function onClose(eve:Event):void
 		{
 			// TODO Auto Generated method stub
+			DungeonSender.reqQuitDungeon();
 			hide();
-			if (_fightScene) 
-			{
-				_fightScene.hide();
-			}
-			EventManager.dispatchEvent(JJBattleEvent.GOBACK);
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
@@ -73,8 +67,23 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				_hash.getValue(awards[i].type).label=awards[i].value;
 			}
-			_fightScene=arr[3];
+			
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onSwitchStart);
 		}
 		
+		private function onSwitchStart():void
+		{
+			// TODO Auto Generated method stub
+			hide();
+		}
+		override protected function onHide():void
+		{
+			super.onHide();
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_START, onSwitchStart);
+		}
 	}
 }

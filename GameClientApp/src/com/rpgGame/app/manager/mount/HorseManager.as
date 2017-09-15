@@ -309,7 +309,13 @@ package com.rpgGame.app.manager.mount
 			{
 				return;
 			}
-			
+			if (isRide) 
+			{
+				if (MainRoleManager.actor.stateMachine.isShapeshifting) 
+				{
+					return;
+				}
+			}
 			//坐骑未开放
 			if(_horsedataInfo == null)
 				return ;

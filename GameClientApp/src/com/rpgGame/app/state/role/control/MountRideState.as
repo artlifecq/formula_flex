@@ -62,6 +62,10 @@ package com.rpgGame.app.state.role.control
 //				if((prevState.ref as MountRideStateReference).isRide)
 //					return false;
 //			}
+			if ((_machine as RoleStateMachine).isShapeshifting) 
+			{
+				return false;
+			}
 			if ((_machine as RoleStateMachine).isIdle)
 			{
 				return true;

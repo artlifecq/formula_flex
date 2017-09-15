@@ -217,7 +217,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yaota()
 			temp.skin = skin
 			temp.x = 550;
-			temp.y = 223;
+			temp.y = 215;
 			return temp;
 		}
 
