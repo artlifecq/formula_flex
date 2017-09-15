@@ -9,7 +9,6 @@ package org.mokylin.skin.mainui.renwu
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
@@ -129,8 +128,8 @@ package org.mokylin.skin.mainui.renwu
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 301;
-			temp.y = 7;
+			temp.x = 302;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -142,7 +141,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "取 消";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 57;

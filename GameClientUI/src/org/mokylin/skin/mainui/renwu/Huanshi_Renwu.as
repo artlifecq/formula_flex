@@ -117,7 +117,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.bottom = 7;
 			temp.left = 7;
 			temp.right = 7;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.top = 34;
 			return temp;
 		}
@@ -191,9 +191,9 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnClose = temp;
 			temp.name = "btnClose";
-			temp.right = 6;
+			temp.right = 4;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.top = 6;
+			temp.top = 5;
 			return temp;
 		}
 

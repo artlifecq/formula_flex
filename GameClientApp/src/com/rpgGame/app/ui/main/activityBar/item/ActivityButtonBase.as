@@ -91,7 +91,7 @@
 			if(!_openState){
 				return false;
 			}
-			if(_funcInfo.q_level>MainRoleManager.actorInfo.totalStat.level)
+			if(_funcInfo&&_funcInfo.q_level>MainRoleManager.actorInfo.totalStat.level)
 				return false;
 			return true;
 		}
@@ -314,7 +314,8 @@
         {
             _openTime = 0;
             _runing = false;
-			timer.stop();
+			if(timer)
+				timer.stop();
         }
 
         public function debugInfo():void

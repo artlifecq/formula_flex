@@ -54,6 +54,7 @@ package com.rpgGame.appModule.sevenday
 		}
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
+			
 			super.show(data,openTable,parentContiner);
 			upDate();
 			addEvent();
@@ -105,7 +106,7 @@ package com.rpgGame.appModule.sevenday
 			}
 			//_skin.uiMsg.styleName="";
 			reward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon0,RewardGroup.ALIN_CENTER,6,9,0,true,6);
-			avateUI=new UIAvatar3D(_skin.modGrp,2);
+			avateUI=new UIAvatar3D(_skin.modGrp,1.5);
 			
 			showInit();
 		}

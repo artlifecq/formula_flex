@@ -135,6 +135,7 @@ package com.rpgGame.app.manager
 			if(!isAutoFightRunning&&!MainRoleManager.actor.stateMachine.isRunning&&!_isLeftDown)
 			{
 				_isFightActorRunning=true;
+				SceneRoleSelectManager.selectedRole=null;
 				startFightTarget(_targetRoles);
 			}
 			
@@ -169,7 +170,6 @@ package com.rpgGame.app.manager
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			_isFightSelect=false;
 			_targetRoles = targetRoles;
-			SceneRoleSelectManager.selectedRole=null;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			_gTimer.start();
 			onUpdate(true);

@@ -48,6 +48,10 @@ package com.rpgGame.appModule.maps
 			{
 				super.show(data, openTable, parentContiner);
 				var sceneId:int=sceneData.sceneId;
+				clearMapsData();
+				clearMapsView();
+				updataMapsData();
+				_bigMap.onClearPath();
 				if(sceneId!=BigMapsData.currentMapId)//如果大地图上显示场景ID不是当前场景，则重新加载地图
 				{
 					BigMapsData.isMapLoadComplete=false;
@@ -55,11 +59,7 @@ package com.rpgGame.appModule.maps
 					loadBigMapView(sceneId);
 					
 				}
-				clearMapsData();
-				clearMapsView();
-				updataMapsData();
 				scollBoxView();
-				_bigMap.onClearPath();
 				onDrawPath();
 				siteView();
 				setMapName(sceneData.name);
@@ -71,6 +71,8 @@ package com.rpgGame.appModule.maps
 		override public function hide():void 
 		{
 			super.hide();
+			clearMapsData();
+			clearMapsView();
 			_bigMap.onClearPath();
 			removeEvent();
 		}
@@ -327,6 +329,9 @@ package com.rpgGame.appModule.maps
 			for(i=BigMapsData.mapsMonsterData.length-1; i>=0; i--) {
 				BigMapsData.mapsMonsterData.pop();
 			}
+			/*BigMapsData.mapsNpcData.length=0;
+			BigMapsData.mapsThansData.length=0;
+			BigMapsData.mapsMonsterData.length=0;*/
 		}
 		
 		
