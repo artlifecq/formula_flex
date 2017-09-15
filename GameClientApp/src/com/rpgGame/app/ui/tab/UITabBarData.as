@@ -1,7 +1,7 @@
 package com.rpgGame.app.ui.tab
 {
 	import feathers.controls.ToggleButton;
-
+	
 	/**
 	 *自定义tabbar数据信息 
 	 * @author dik
@@ -44,13 +44,14 @@ package com.rpgGame.app.ui.tab
 		 * Y
 		 * */
 		public var initY:int;
-		public function UITabBarData(tabStyle:Class,viewStyle:Class,openShow:Boolean,x:int=0,y:int=0)
+		public function UITabBarData(tabStyle:Class,viewStyle:Class,openShow:Boolean,x:int=0,y:int=0,stylename:String="")
 		{
 			this.tabStyle=tabStyle;
 			this.viewStyle=viewStyle;
 			this.openShow=openShow;
 			this.initX=x;
 			this.initY=y;
+			this.text=stylename;
 		}
 	}
 }
