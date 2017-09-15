@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityPointNumButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
+	import com.rpgGame.app.ui.main.activityBar.item.ActivitySevendayButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
 	import com.rpgGame.coreData.cfg.MainBtnCfgData;
@@ -135,7 +136,7 @@ package com.rpgGame.app.ui.main.buttons
 				case EmMainBtnID.HONGBAO:
 					return new ActivityRedRewardButton();
 				case EmMainBtnID.QIRIHAOLI:
-					return new ActivityPointNumButton();
+					return new ActivitySevendayButton();
 				case EmMainBtnID.PIPEIDUILIE:
 					return new MultyActivityButton();
 				case EmMainBtnID.SHIJIEBOSS:
