@@ -168,6 +168,7 @@ package com.rpgGame.app.ui.scene
 			EventManager.removeEvent(ActivityEvent.UPDATE_ACTIVITY,updateBossAct);
 			actInfo=null;
 			rewardGrp.clear();
+			AppManager.hideApp(AppConstant.ACTIVETY_BOSS_HURTRANK);
 		}
 	}
 }

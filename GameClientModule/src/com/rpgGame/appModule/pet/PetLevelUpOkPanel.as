@@ -74,7 +74,6 @@ package com.rpgGame.appModule.pet
 			var q_pet:Q_girl_pet=PetCfg.getPet(info.modelId);
 			var cfg:Q_girl_advance=PetAdvanceCfg.getPet(info.modelId,info.rank);
 			_avateUI.updateBodyWithRes(q_pet.q_panel_show_id);
-			_avateUI.transition(RoleStateType.ACTION_SHOW);
 			_skin.mc_jieshu.styleName="ui/pet/jieshu/"+info.rank+".png";
 			_skin.uiJName.styleName="ui/app/meiren/head_icon/"+q_pet.q_head_word+".png";
 			

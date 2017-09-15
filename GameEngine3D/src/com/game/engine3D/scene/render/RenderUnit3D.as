@@ -2270,6 +2270,7 @@ package com.game.engine3D.scene.render
 					validateGraphic();
 					validateProperties();
 					validateUnitChildren();
+					validateAnimation();
 					//执行添加回调
 					if (_addedCallBackList)
 					{

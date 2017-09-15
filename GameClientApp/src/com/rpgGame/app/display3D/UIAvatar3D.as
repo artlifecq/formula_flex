@@ -9,6 +9,7 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.ShowStateReference;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
+	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
@@ -26,6 +27,7 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AvatarMaskType;
+	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -42,6 +44,8 @@ package com.rpgGame.app.display3D
 	import feathers.core.FeathersControl;
 	
 	import gs.TweenLite;
+	
+	import org.client.mainCore.manager.EventManager;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -63,8 +67,9 @@ package com.rpgGame.app.display3D
 		private var touchZone:DisplayObject;
 		private var _touchID:int=-1;
 		private var startX:Number;
-		private var defaultRotationY:int;
+		private var _defaultRotationY:int;
 		private var _roleData:RoleData;
+		private var _isUpdateBody:Boolean;
 		
 //		public static const SHOW_ROTATIONX:int=-GlobalConfig.mapCameraAngle;
 		
@@ -79,7 +84,6 @@ package com.rpgGame.app.display3D
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
-			
 			avatar3d=new InterObject3D();
 			_roleData= new RoleData(0);
 			this._role = SceneRole.create(SceneCharType.DUMMY, _roleData.id);
@@ -92,6 +96,8 @@ package com.rpgGame.app.display3D
 			_role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
 			this.addChild3D(avatar3d);
 			bindContainer(container);
+			
+			EventManager.addEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatar);
 		}
 		
 		private function __onAddedToStage(e : Event = null) : void
@@ -101,8 +107,9 @@ package com.rpgGame.app.display3D
 		
 		protected function onShow() : void
 		{
-//			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
-			transition(RoleStateType.ACTION_SHOW); //切换到“站立状态”
+			if(_isUpdateBody){
+				transition(RoleStateType.ACTION_SHOW); //切换到“站立状态”
+			}
 			startRender3D();
 		}
 		
@@ -212,11 +219,11 @@ package com.rpgGame.app.display3D
 				}else if (touch.phase == TouchPhase.ENDED)	{
 					this._touchID = -1;
 //					avatar3d.rotationY = defaultRotationY;
-					TweenLite.to(avatar3d,1,{rotationY:defaultRotationY});
+					TweenLite.to(avatar3d,1,{rotationY:_defaultRotationY});
 				}
 			}else{
 				var currRo:int=Math.round(avatar3d.rotationY);
-				if(currRo!=defaultRotationY){
+				if(currRo!=_defaultRotationY){
 					return;
 				}
 				touch = e.getTouch(this.touchZone, TouchPhase.BEGAN);
@@ -299,16 +306,15 @@ package com.rpgGame.app.display3D
 		 * @param actionType
 		 * 
 		 */
-		public function transition(actionType : int) : void
+		private function transition(actionType : int) : void
 		{
 			if (_role != null)
 			{
 				var actionRef : ShowStateReference = _role.stateMachine.getReference(ShowStateReference) as ShowStateReference;
-				actionRef.defaultRotationY=defaultRotationY;
-				_role.stateMachine.transition(actionType,actionRef);
+				actionRef.avatar3d=this;
+				_role.stateMachine.transition(actionType,actionRef,true);
 			}
 		}
-		
 		/**
 		 *设置可见性 
 		 * @param value
@@ -363,10 +369,10 @@ package com.rpgGame.app.display3D
 		 */
 		public function setRotationY(value:int):void
 		{
-			defaultRotationY=value;
-			avatar3d.rotationY=defaultRotationY;
+			_defaultRotationY=value;
+			avatar3d.rotationY=_defaultRotationY;
 			var actionRef : ShowStateReference = _role.stateMachine.getReference(ShowStateReference) as ShowStateReference;
-			actionRef.defaultRotationY=defaultRotationY;
+			actionRef.avatar3d=this;
 		}
 		
 		/**
@@ -385,6 +391,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function updateBodyWithRes(res:String,animat:String=null):void
 		{
+			isUpdateBody=false;
 			avatarInfo.setBodyResID(res,animat);
 			AvatarManager.updateBody(_role);
 		}
@@ -395,6 +402,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function updateWithAvatarInfo(info:AvatarInfo):void
 		{
+			isUpdateBody=false;
 			avatarInfo.setBodyResID(info.bodyResID, info.bodyAnimatResID);
 			avatarInfo.hairResID = info.hairResID;
 			avatarInfo.weaponResID = info.weaponResID;
@@ -411,7 +419,7 @@ package com.rpgGame.app.display3D
 		public function updateWithPlayerAppearanceInfo(info:PlayerAppearanceInfo):void
 		{
 			var animatResID : String = null;
-			
+			isUpdateBody=false;
 			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(info.cloths);
 			if (!clothesRes)
 			{
@@ -626,7 +634,33 @@ package com.rpgGame.app.display3D
 		 */
 		public function updateWithRenderUnitID(ID:int,data:AvatarInfo):void
 		{
+			if(ID==RenderUnitID.BODY){
+				isUpdateBody=false;
+			}
 			_role.updateWithRenderUnitID(ID,data);
+		}
+
+		private function set isUpdateBody(value:Boolean):void
+		{
+			_isUpdateBody = value;
+			if(!_isUpdateBody){
+				this.transition(RoleStateType.ACTION_IDLE);
+			}else{
+				this.transition(RoleStateType.ACTION_SHOW);
+			}
+		}
+
+		
+		private function onUpateAvatar(role:SceneRole,id:int):void
+		{
+			if(role&&_role&&_role==role&&id==RenderUnitID.BODY){
+				isUpdateBody=true;
+			}
+		}
+		
+		public function get defaultRotationY():int
+		{
+			return _defaultRotationY;
 		}
 	}
 }
