@@ -41,7 +41,7 @@ package org.mokylin.skin.app.jianghu
 		private function __JiangHu_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 499;
+			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
 			temp.x = 18;

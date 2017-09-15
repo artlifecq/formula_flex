@@ -40,7 +40,9 @@ package com.rpgGame.app.ui.main.buttons
 		
 		public function canOpen():Boolean
 		{
-			return _funcInfo.q_level<=MainRoleManager.actorInfo.totalStat.level;
+			if(_funcInfo)
+				return _funcInfo.q_level<=MainRoleManager.actorInfo.totalStat.level;
+			return true;
 		}
 		
 		private var _needPlayFirstAm:Boolean = false;

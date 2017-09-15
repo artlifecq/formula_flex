@@ -62,7 +62,7 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
 				case RenderUnitType.ZHANQI:
-				case RenderUnitType.HURT:
+//				case RenderUnitType.HURT:
 					render.isHiding = false;
 					render.castsShadows = true;
 					break;
@@ -95,7 +95,7 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
 				case RenderUnitType.ZHANQI:
 				case RenderUnitType.EFFECT:
-				case RenderUnitType.HURT:
+//				case RenderUnitType.HURT:
 					render.isHiding = true;
 					render.castsShadows = false;
 					break;

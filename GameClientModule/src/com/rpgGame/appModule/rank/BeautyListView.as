@@ -122,14 +122,6 @@ class BeautyRightGroup extends RightGroupBase
 		
 	}
 	
-	override protected function refeashModle():void
-	{
-		//			super.refeashModle();
-		if(_avatar){
-			_avatar.transition(RoleStateType.ACTION_SHOW);
-		}
-	}
-	
 	override protected function refeashEquip():void
 	{
 		_skin.weapons.visible = false;
@@ -164,13 +156,6 @@ class BeautyRightGroup extends RightGroupBase
 		}
 		else{
 			_skin.grpHead.visible = false;
-		}
-	}
-	
-	private function updateTime():void
-	{
-		if(_avatar){
-			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 	}
 }

@@ -5,15 +5,15 @@ package  com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.CharAttributeUpdateEvent;
-	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.utils.TextUtil;
-	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.netData.dianfeng.message.SCReadyToStartMessage;
 	import com.rpgGame.netData.zhengba.message.SCJJReadyToStartMessage;
 	
 	import flash.utils.clearTimeout;
@@ -22,7 +22,6 @@ package  com.rpgGame.appModule.battle.jjzb
 	
 	import feathers.controls.UIAsset;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.Head_Role_Left;
 	import org.mokylin.skin.app.zhanchang.Head__Role_Right;
 	import org.mokylin.skin.app.zhanchang.VS_Skin;
@@ -49,6 +48,7 @@ package  com.rpgGame.appModule.battle.jjzb
 			super(_skin);
 			_rightHpX=(_skin.skinRight.skin as Head__Role_Right).role_xuecao.x;
 			_initW=(_skin.skinRight.skin as Head__Role_Right).role_xuecao.width;
+			MCUtil.removeSelf(_skin.uiTime);
 		}
 		
 		private function onTimer():void
@@ -107,8 +107,8 @@ package  com.rpgGame.appModule.battle.jjzb
 			_leftGid=msg.jJPlayerInfo_1.enemyPlayerId.ToGID();
 			CharAttributeManager.addEvent(_leftGid,CharAttributeType.HP,myHpChange);
 			CharAttributeManager.addEvent(_otherGid,CharAttributeType.HP,otherHpChange);
-			//_delay=setTimeout(onFightStart,msg.delayTime*1000);
-			onFightStart();
+			_delay=setTimeout(onFightStart,msg.delayTime*1000);
+			//onFightStart();
 		}
 		
 		private function otherHpChange(eve:CharAttributeUpdateEvent):void
@@ -155,6 +155,8 @@ package  com.rpgGame.appModule.battle.jjzb
 		private function onFightStart():void
 		{
 			// TODO Auto Generated method stub
+			AppManager.showApp(AppConstant.BATTLE_JJBT_OVER_PANEL);
+			return;
 			if (!_timer) 
 			{
 				_timer=new GameTimer("JJBattleHeadPanelExt");
@@ -183,6 +185,7 @@ package  com.rpgGame.appModule.battle.jjzb
 				clearTimeout(_delay);
 				_delay=0;
 			}
+			
 		}
 	}
 }

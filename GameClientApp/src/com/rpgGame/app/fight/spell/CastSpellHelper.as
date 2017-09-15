@@ -160,6 +160,10 @@ package com.rpgGame.app.fight.spell
 			//三连击释放失败
 			if (CASE_STATE_FAIL==caseState) 
 			{
+				if (!caseInfo.spellData) 
+				{
+					return false;
+				}
 				//把动作切换为战斗待机状态
 				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(caseInfo.spellData.q_skillID)) 
 				{

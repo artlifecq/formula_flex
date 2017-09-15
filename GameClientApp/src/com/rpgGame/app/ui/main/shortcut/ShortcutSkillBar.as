@@ -208,7 +208,7 @@ package com.rpgGame.app.ui.main.shortcut
 				GuildWarSender.reqUseLeaderSkill();
 				return;
 			}
-			if(ShortcutsManger.getInstance().useShortcuts(cd.index)){
+			if(ShortcutsManger.getInstance().useShortcuts(cd.index,true)){
 				cd.tweenGrid();
 			}
 		}

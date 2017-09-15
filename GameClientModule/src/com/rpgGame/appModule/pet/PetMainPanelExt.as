@@ -340,9 +340,7 @@ package com.rpgGame.appModule.pet
 			unit.addUnitAtComposite(unit);
 			_jiemianEffContaner.addChild3D(_jiemianEff);
 			//			_jiemianEff=_jiemianEffContaner.playInter3DAt(ClientConfig.getEffect(qPet.q_effect_panel),405,490,0);
-			if(_avatar)_avatar.transition(RoleStateType.ACTION_IDLE);
 			_avatar.updateBodyWithRes(qPet.q_panel_show_id);
-			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
 		private function showSubPetData(data:PetInfo):void

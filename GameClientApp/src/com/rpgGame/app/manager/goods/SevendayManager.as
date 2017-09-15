@@ -57,7 +57,6 @@ package com.rpgGame.app.manager.goods
 		/**第一个可领取但未领取天*/
 		public static function getRewardOneSubNum():int
 		{
-			var num:int=0
 			if(rewardSuccess)
 			{
 				for(var i:int=0;i<rewardSuccess.length;i++)
@@ -69,7 +68,7 @@ package com.rpgGame.app.manager.goods
 				}
 			}
 			
-			return 0;
+			return loginDay;
 		}
 		
 		

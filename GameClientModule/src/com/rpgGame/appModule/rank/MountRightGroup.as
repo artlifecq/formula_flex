@@ -84,11 +84,6 @@ package com.rpgGame.appModule.rank
 		{
 			
 		}
-		override protected function refeashModle():void
-		{
-//			super.refeashModle();
-			_avatar.transition(RoleStateType.ACTION_SHOW);
-		}
 		
 		override protected function refeashName():void
 		{
@@ -141,12 +136,5 @@ package com.rpgGame.appModule.rank
 			}
 			return false;
 		}
-		
-		
-		private function updateTime():void
-		{
-			_avatar.transition(RoleStateType.ACTION_SHOW);
-		}
-		
 	}
 }
