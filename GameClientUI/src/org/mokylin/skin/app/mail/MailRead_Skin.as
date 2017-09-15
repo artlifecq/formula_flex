@@ -47,7 +47,7 @@ package org.mokylin.skin.app.mail
 			this.currentState = "normal";
 			this.height = 586;
 			this.width = 437;
-			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),__MailRead_Skin_UIAsset22_i(),vs_bar_i()];
+			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),__MailRead_Skin_UIAsset10_i(),vs_bar_i()];
 			
 			states = {
 			};
@@ -61,7 +61,7 @@ package org.mokylin.skin.app.mail
 		private function __MailRead_Skin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 586;
+			temp.height = 600;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
 			temp.width = 437;
@@ -70,25 +70,25 @@ package org.mokylin.skin.app.mail
 			return temp;
 		}
 
-		private function __MailRead_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 440;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 404;
-			temp.x = 18;
-			temp.y = 82;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset22_i():feathers.controls.UIAsset
+		private function __MailRead_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/mail/dqyj.png";
 			temp.x = 173;
-			temp.y = 16;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function __MailRead_Skin_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 440;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 404;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 

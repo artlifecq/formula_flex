@@ -15,7 +15,7 @@ package org.mokylin.skin.app.mail
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -78,7 +78,7 @@ package org.mokylin.skin.app.mail
 		private function __MailReceive_Skin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 586;
+			temp.height = 600;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
 			temp.x = 0;
@@ -90,7 +90,7 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 440;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 404;
 			temp.x = 18;
 			temp.y = 82;
@@ -102,7 +102,7 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/quanxuan.png";
 			temp.x = 67;
-			temp.y = 553;
+			temp.y = 544;
 			return temp;
 		}
 
@@ -112,8 +112,8 @@ package org.mokylin.skin.app.mail
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/mail/sxx.png";
-			temp.x = 183.5;
-			temp.y = 16;
+			temp.x = 183;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -156,7 +156,7 @@ package org.mokylin.skin.app.mail
 			temp.name = "chkSelect";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.x = 41;
-			temp.y = 550;
+			temp.y = 541;
 			return temp;
 		}
 
@@ -190,10 +190,10 @@ package org.mokylin.skin.app.mail
 			tab_nv = temp;
 			temp.name = "tab_nv";
 			temp.btnWidth = 70;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.width = 71;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
+			temp.width = 80;
 			temp.x = 24;
-			temp.y = 55;
+			temp.y = 51;
 			temp.layout = __MailReceive_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __MailReceive_Skin_ArrayCollection1_i();
 			return temp;
