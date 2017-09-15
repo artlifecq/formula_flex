@@ -1,7 +1,5 @@
 package com.rpgGame.app.ui.tab
 {
-	import com.rpgGame.app.manager.FunctionOpenManager;
-	
 	import flash.events.Event;
 	
 	import feathers.controls.TabBar;
@@ -9,6 +7,7 @@ package com.rpgGame.app.ui.tab
 	import feathers.core.ToggleGroup;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	
 	import starling.display.DisplayObjectContainer;
 	
@@ -65,6 +64,7 @@ package com.rpgGame.app.ui.tab
 				button.toggleGroup = _touchGroup;
 				if(item.text){
 					button.label = item.text;
+					button.labelOffsetY = 2;
 				}
 				if(item.tabStyle){
 					button.styleClass=item.tabStyle;

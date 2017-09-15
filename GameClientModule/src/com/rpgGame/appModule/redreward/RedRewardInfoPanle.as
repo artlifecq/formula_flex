@@ -9,10 +9,13 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.type.TipType;
 	
+	import feathers.controls.StateSkin;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.hongbao.HongBao_Fa;
 	import org.mokylin.skin.app.hongbao.HongBao_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -36,8 +39,8 @@ package com.rpgGame.appModule.redreward
 		
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,RedRewardListView,EmFunctionID.EM_REDREWARDList);
-			addTabDatas(TabBarSkin_pack,RedRewardLogList,EmFunctionID.EM_REDREWARDGETLOG);
+			addTabDatas(TabBarSkin_tab,RedRewardListView,EmFunctionID.EM_REDREWARDList,true,294,117,"红包列表");
+			addTabDatas(TabBarSkin_tab,RedRewardLogList,EmFunctionID.EM_REDREWARDGETLOG,true,294,117,"领取记录");
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
