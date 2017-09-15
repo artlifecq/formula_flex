@@ -58,7 +58,7 @@ package org.mokylin.skin.app.activety.zonghe
 			this.currentState = "normal";
 			this.height = 498;
 			this.width = 421;
-			this.elementsContent = [bg_i(),__Active_LiJinPaiHang_UIAsset1_i(),btnClose_i(),__Active_LiJinPaiHang_Group1_i(),__Active_LiJinPaiHang_Group2_i(),list0_i(),list1_i(),list2_i(),list3_i(),list4_i(),list5_i(),list6_i(),list7_i(),list8_i(),list9_i(),list10_i(),tishi_i(),__Active_LiJinPaiHang_UIAsset9_i()];
+			this.elementsContent = [bg_i(),__Active_LiJinPaiHang_UIAsset1_i(),btnClose_i(),__Active_LiJinPaiHang_Group1_i(),__Active_LiJinPaiHang_Group2_i(),list0_i(),list1_i(),list2_i(),list3_i(),list4_i(),list5_i(),list6_i(),list7_i(),list8_i(),list9_i(),list10_i(),tishi_i(),__Active_LiJinPaiHang_UIAsset12_i()];
 			
 			states = {
 			};
@@ -74,7 +74,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 41;
-			temp.elementsContent = [__Active_LiJinPaiHang_UIAsset2_i(),__Active_LiJinPaiHang_UIAsset3_i(),__Active_LiJinPaiHang_UIAsset4_i(),__Active_LiJinPaiHang_UIAsset5_i(),__Active_LiJinPaiHang_UIAsset6_i()];
+			temp.elementsContent = [__Active_LiJinPaiHang_UIAsset2_i(),__Active_LiJinPaiHang_UIAsset3_i(),__Active_LiJinPaiHang_UIAsset4_i(),__Active_LiJinPaiHang_UIAsset5_i(),__Active_LiJinPaiHang_UIAsset6_i(),__Active_LiJinPaiHang_UIAsset7_i(),__Active_LiJinPaiHang_UIAsset8_i(),__Active_LiJinPaiHang_UIAsset9_i()];
 			return temp;
 		}
 
@@ -83,7 +83,37 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 402;
-			temp.elementsContent = [__Active_LiJinPaiHang_UIAsset7_i(),__Active_LiJinPaiHang_UIAsset8_i()];
+			temp.elementsContent = [__Active_LiJinPaiHang_UIAsset10_i(),__Active_LiJinPaiHang_UIAsset11_i()];
+			return temp;
+		}
+
+		private function __Active_LiJinPaiHang_UIAsset10_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 399;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __Active_LiJinPaiHang_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/wodepaiming.png";
+			temp.x = 171;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __Active_LiJinPaiHang_UIAsset12_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/activety/zonghe/lijingpaihang.png";
+			temp.x = 166;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -101,7 +131,8 @@ package org.mokylin.skin.app.activety.zonghe
 		private function __Active_LiJinPaiHang_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/zhanchangrizhibg.png";
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 50;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -110,64 +141,65 @@ package org.mokylin.skin.app.activety.zonghe
 		private function __Active_LiJinPaiHang_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/paiming.png";
-			temp.x = 23;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 145;
+			temp.x = 50;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __Active_LiJinPaiHang_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/mingzi.png";
-			temp.x = 110;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 145;
+			temp.x = 195;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __Active_LiJinPaiHang_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/banghui.png";
-			temp.x = 249;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 59;
+			temp.x = 340;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __Active_LiJinPaiHang_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/bangdingyuanbao.png";
-			temp.x = 343;
-			temp.y = 7;
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/paiming.png";
+			temp.x = 10;
+			temp.y = 6;
 			return temp;
 		}
 
 		private function __Active_LiJinPaiHang_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/zhanchangrizhibg.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/mingzi.png";
+			temp.x = 109;
+			temp.y = 6;
 			return temp;
 		}
 
 		private function __Active_LiJinPaiHang_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/wodepaiming.png";
-			temp.x = 171;
-			temp.y = 7;
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/banghui.png";
+			temp.x = 249;
+			temp.y = 6;
 			return temp;
 		}
 
 		private function __Active_LiJinPaiHang_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/app/activety/zonghe/lijingpaihang.png";
-			temp.x = 166;
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/bangdingyuanbao.png";
+			temp.x = 353;
 			temp.y = 6;
 			return temp;
 		}
@@ -192,8 +224,8 @@ package org.mokylin.skin.app.activety.zonghe
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 386;
-			temp.y = 7;
+			temp.x = 385;
+			temp.y = 4;
 			return temp;
 		}
 

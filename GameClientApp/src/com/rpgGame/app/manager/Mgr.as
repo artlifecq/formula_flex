@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.fulidating.DengJiLiBaoManager;
 	import com.rpgGame.app.manager.fulidating.SignManager;
+	import com.rpgGame.app.manager.fulidating.ZaiXianManager;
 	import com.rpgGame.app.manager.pet.PetManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.manager.yunBiao.CheatsMgr;
@@ -68,6 +69,10 @@ package com.rpgGame.app.manager
 		public static function get dengjiMgr():DengJiLiBaoManager
 		{
 			return DengJiLiBaoManager.instance;
+		}
+		public static function get zaiXianMgr():ZaiXianManager
+		{
+			return ZaiXianManager.instance;
 		}
 	}
 }

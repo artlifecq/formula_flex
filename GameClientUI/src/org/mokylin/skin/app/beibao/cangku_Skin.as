@@ -83,8 +83,8 @@ package org.mokylin.skin.app.beibao
 		private function __cangku_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
 		{
 			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
-			temp.requestedColumnCount = 8;
-			temp.requestedRowCount = 8;
+			temp.requestedColumnCount = 7;
+			temp.requestedRowCount = 6;
 			return temp;
 		}
 
@@ -92,7 +92,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 447;
-			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 383;
 			temp.x = 0;
 			temp.y = 0;
@@ -125,7 +125,8 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/beibao/cangku/ckmtiao.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 375;
 			temp.x = 3;
 			temp.y = 3;
 			return temp;
@@ -137,7 +138,7 @@ package org.mokylin.skin.app.beibao
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
-			temp.x = 362;
+			temp.x = 359;
 			temp.y = 9;
 			return temp;
 		}

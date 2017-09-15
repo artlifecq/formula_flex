@@ -107,7 +107,7 @@ package org.mokylin.skin.app.openActivity
 			temp.touchGroup = true;
 			temp.width = 76;
 			temp.x = 436;
-			temp.y = 19;
+			temp.y = 9;
 			return temp;
 		}
 

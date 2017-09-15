@@ -83,8 +83,8 @@ package org.mokylin.skin.app.showgirl
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/showgirl/chaojihuiyuan.png";
-			temp.x = 430;
-			temp.y = 18;
+			temp.x = 427;
+			temp.y = 8;
 			return temp;
 		}
 

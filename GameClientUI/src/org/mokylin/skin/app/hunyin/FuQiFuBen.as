@@ -85,8 +85,8 @@ package org.mokylin.skin.app.hunyin
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/hunyin/fuqifuben.png";
-			temp.x = 434;
-			temp.y = 14;
+			temp.x = 430;
+			temp.y = 7;
 			return temp;
 		}
 

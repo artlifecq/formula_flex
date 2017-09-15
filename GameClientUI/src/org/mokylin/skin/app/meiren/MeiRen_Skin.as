@@ -245,8 +245,8 @@ package org.mokylin.skin.app.meiren
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/meiren/meiren.png";
-			temp.x = 454;
-			temp.y = 17;
+			temp.x = 451;
+			temp.y = 7;
 			return temp;
 		}
 

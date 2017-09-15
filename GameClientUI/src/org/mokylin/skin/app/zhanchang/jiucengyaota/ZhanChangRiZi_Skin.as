@@ -56,7 +56,25 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
 			temp.y = 41;
-			temp.elementsContent = [__ZhanChangRiZi_Skin_UIAsset2_i(),__ZhanChangRiZi_Skin_UIAsset3_i(),__ZhanChangRiZi_Skin_UIAsset4_i(),__ZhanChangRiZi_Skin_UIAsset5_i(),__ZhanChangRiZi_Skin_UIAsset6_i(),__ZhanChangRiZi_Skin_UIAsset7_i()];
+			temp.elementsContent = [__ZhanChangRiZi_Skin_UIAsset2_i(),__ZhanChangRiZi_Skin_UIAsset3_i(),__ZhanChangRiZi_Skin_UIAsset4_i(),__ZhanChangRiZi_Skin_UIAsset5_i(),__ZhanChangRiZi_Skin_UIAsset6_i(),__ZhanChangRiZi_Skin_UIAsset7_i(),__ZhanChangRiZi_Skin_UIAsset8_i(),__ZhanChangRiZi_Skin_UIAsset9_i(),__ZhanChangRiZi_Skin_UIAsset10_i(),__ZhanChangRiZi_Skin_UIAsset11_i()];
+			return temp;
+		}
+
+		private function __ZhanChangRiZi_Skin_UIAsset10_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/jisha.png";
+			temp.x = 284;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function __ZhanChangRiZi_Skin_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/jifen.png";
+			temp.x = 348;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -74,8 +92,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		private function __ZhanChangRiZi_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/titilebg/headbg1.png";
-			temp.width = 399;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 57;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -84,45 +102,67 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		private function __ZhanChangRiZi_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiucengyaota/paiming.png";
-			temp.x = 23;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 149;
+			temp.x = 57;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __ZhanChangRiZi_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiucengyaota/mingzi.png";
-			temp.x = 109;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 63;
+			temp.x = 206;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __ZhanChangRiZi_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiucengyaota/zuigaocengshu.png";
-			temp.x = 207;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 57;
+			temp.x = 269;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __ZhanChangRiZi_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiucengyaota/jisha.png";
-			temp.x = 284;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 73;
+			temp.x = 326;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __ZhanChangRiZi_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiucengyaota/jifen.png";
-			temp.x = 348;
-			temp.y = 7;
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/paiming.png";
+			temp.x = 16;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function __ZhanChangRiZi_Skin_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/mingzi.png";
+			temp.x = 115;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function __ZhanChangRiZi_Skin_UIAsset9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/zuigaocengshu.png";
+			temp.x = 208;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -146,8 +186,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 386;
-			temp.y = 7;
+			temp.x = 385;
+			temp.y = 4;
 			return temp;
 		}
 

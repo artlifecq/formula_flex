@@ -202,7 +202,7 @@ package org.mokylin.skin.app.hunyin
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/hunyin/hunying.png";
 			temp.x = 454;
-			temp.y = 19;
+			temp.y = 8;
 			return temp;
 		}
 

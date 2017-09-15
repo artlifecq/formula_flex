@@ -30,7 +30,7 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__TongYongPanelbg1_UIAsset1_i(),btnClose_i()];
+			this.elementsContent = [bg_i(),__TongYongPanelbg1_UIAsset1_i(),__TongYongPanelbg1_UIAsset2_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -48,6 +48,17 @@ package org.mokylin.skin.common
 			temp.styleName = "ui/common/background/tongyongV2_di.png";
 			temp.width = 958;
 			temp.y = 82;
+			return temp;
+		}
+
+		private function __TongYongPanelbg1_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 512;
+			temp.left = 17;
+			temp.right = 15;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.top = 82;
 			return temp;
 		}
 

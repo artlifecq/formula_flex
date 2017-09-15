@@ -68,8 +68,8 @@ package org.mokylin.skin.app.shoucang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/shoucang/shoucangyouxi.png";
-			temp.x = 379;
-			temp.y = 71;
+			temp.x = 381;
+			temp.y = 63;
 			return temp;
 		}
 
@@ -78,7 +78,7 @@ package org.mokylin.skin.app.shoucang
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 329;
+			temp.height = 343;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
 			temp.width = 437;

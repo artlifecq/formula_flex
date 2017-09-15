@@ -8,7 +8,7 @@ package org.mokylin.skin.app.paihangbang
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.common.TongYongPanelbg1;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.paihangbang
 		private function __PaiHangBangTotal_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = 1;
+			temp.gap = 0;
 			return temp;
 		}
 
@@ -167,8 +167,8 @@ package org.mokylin.skin.app.paihangbang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/paihangbang/word/quanpingtaipaihangbang.png";
-			temp.x = 413;
-			temp.y = 18;
+			temp.x = 401;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -230,10 +230,10 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.btnWidth = 70;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 33;
-			temp.y = 54;
+			temp.btnWidth = 78;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
+			temp.x = 39;
+			temp.y = 50;
 			temp.layout = __PaiHangBangTotal_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __PaiHangBangTotal_Skin_ArrayCollection1_i();
 			return temp;

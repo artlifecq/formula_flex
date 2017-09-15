@@ -62,7 +62,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 557;
 			this.width = 292;
-			this.elementsContent = [bg_i(),__Xinfa_Shuxin_UIAsset1_i(),__Xinfa_Shuxin_UIAsset2_i(),btnClose_i(),grpXueWei_i(),grpBianShi_i(),__Xinfa_Shuxin_Group3_i(),__Xinfa_Shuxin_Group4_i(),__Xinfa_Shuxin_UIAsset45_i()];
+			this.elementsContent = [bg_i(),__Xinfa_Shuxin_UIAsset1_i(),__Xinfa_Shuxin_UIAsset2_i(),btnClose_i(),grpXueWei_i(),grpBianShi_i(),__Xinfa_Shuxin_Group1_i(),__Xinfa_Shuxin_Group2_i(),__Xinfa_Shuxin_UIAsset9_i()];
 			
 			states = {
 			};
@@ -73,21 +73,21 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Xinfa_Shuxin_Group3_i():feathers.controls.Group
+		private function __Xinfa_Shuxin_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 30;
 			temp.y = 50;
-			temp.elementsContent = [__Xinfa_Shuxin_UIAsset39_i(),__Xinfa_Shuxin_UIAsset40_i(),__Xinfa_Shuxin_UIAsset41_i()];
+			temp.elementsContent = [__Xinfa_Shuxin_UIAsset3_i(),__Xinfa_Shuxin_UIAsset4_i(),__Xinfa_Shuxin_UIAsset5_i()];
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_Group4_i():feathers.controls.Group
+		private function __Xinfa_Shuxin_Group2_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 30;
 			temp.y = 264;
-			temp.elementsContent = [__Xinfa_Shuxin_UIAsset42_i(),__Xinfa_Shuxin_UIAsset43_i(),__Xinfa_Shuxin_UIAsset44_i()];
+			temp.elementsContent = [__Xinfa_Shuxin_UIAsset6_i(),__Xinfa_Shuxin_UIAsset7_i(),__Xinfa_Shuxin_UIAsset8_i()];
 			return temp;
 		}
 
@@ -111,7 +111,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset39_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/jingmai/meishuzi/xueweijiachengshuxing.png";
@@ -120,7 +120,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset40_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/wenshi/huawen_1.png";
@@ -129,7 +129,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset41_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/wenshi/huawen_2.png";
@@ -138,7 +138,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset42_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/jingmai/meishuzi/bianshijiachengshuxing.png";
@@ -147,7 +147,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset43_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/wenshi/huawen_1.png";
@@ -156,7 +156,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset44_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/wenshi/huawen_2.png";
@@ -165,7 +165,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Xinfa_Shuxin_UIAsset45_i():feathers.controls.UIAsset
+		private function __Xinfa_Shuxin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
@@ -196,8 +196,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 258;
-			temp.y = 5;
+			temp.x = 256;
+			temp.y = 4;
 			return temp;
 		}
 

@@ -5,6 +5,7 @@ package org.mokylin.skin.app.fulidating
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.VerticalLayout;
+	import org.mokylin.skin.app.fulidating.FLDT_Dengjilibao;
 	import org.mokylin.skin.common.TongYongPanelbg1;
 
 	/**
@@ -19,6 +20,8 @@ package org.mokylin.skin.app.fulidating
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
+		public var skinCont:feathers.controls.SkinnableContainer;
+
 		public var tabBar:feathers.controls.TabBar;
 
 
@@ -32,7 +35,7 @@ package org.mokylin.skin.app.fulidating
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__Fulidating_Skin_UIAsset1_i(),__Fulidating_Skin_UIAsset2_i(),__Fulidating_Skin_UIAsset3_i(),tabBar_i(),__Fulidating_Skin_UIAsset4_i()];
+			this.elementsContent = [bg_i(),__Fulidating_Skin_UIAsset1_i(),__Fulidating_Skin_UIAsset2_i(),__Fulidating_Skin_UIAsset3_i(),skinCont_i(),tabBar_i(),__Fulidating_Skin_UIAsset4_i()];
 			
 			states = {
 			};
@@ -82,8 +85,8 @@ package org.mokylin.skin.app.fulidating
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/fulidating/word/fldt.png";
-			temp.x = 431;
-			temp.y = 18;
+			temp.x = 427;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -104,6 +107,21 @@ package org.mokylin.skin.app.fulidating
 			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function skinCont_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinCont = temp;
+			temp.name = "skinCont";
+			temp.height = 500;
+			var skin:StateSkin = new org.mokylin.skin.app.fulidating.FLDT_Dengjilibao()
+			temp.skin = skin
+			temp.visible = false;
+			temp.width = 749;
+			temp.x = 186;
+			temp.y = 88;
 			return temp;
 		}
 

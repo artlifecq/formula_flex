@@ -84,8 +84,8 @@ package org.mokylin.skin.app.sevenday
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/sevenday/word/qrhl.png";
-			temp.x = 429;
-			temp.y = 19;
+			temp.x = 426;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -140,8 +140,8 @@ package org.mokylin.skin.app.sevenday
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			modGrp = temp;
 			temp.name = "modGrp";
-			temp.x = 298;
-			temp.y = 489;
+			temp.x = 296;
+			temp.y = 485;
 			return temp;
 		}
 

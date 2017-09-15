@@ -3,11 +3,11 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.banghui.ItemTongShuaiShuXing;
+	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.banghui.button.ButtonJinengup;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
 	 * @private
@@ -29,11 +29,11 @@ package org.mokylin.skin.app.banghui
 
 		public var lbYuanbao:feathers.controls.Label;
 
-		public var skinFangyu:feathers.controls.SkinnableContainer;
+		public var skinFangyu:feathers.controls.UINumber;
 
-		public var skinGongji:feathers.controls.SkinnableContainer;
+		public var skinGongji:feathers.controls.UINumber;
 
-		public var skinShengming:feathers.controls.SkinnableContainer;
+		public var skinShengming:feathers.controls.UINumber;
 
 
 		//==========================================================================
@@ -45,8 +45,8 @@ package org.mokylin.skin.app.banghui
 			
 			this.currentState = "normal";
 			this.height = 506;
-			this.width = 788;
-			this.elementsContent = [__Skill_TongShuai_UIAsset1_i(),icon_i(),__Skill_TongShuai_UIAsset2_i(),__Skill_TongShuai_UIAsset3_i(),__Skill_TongShuai_UIAsset4_i(),__Skill_TongShuai_UIAsset5_i(),__Skill_TongShuai_UIAsset6_i(),__Skill_TongShuai_Label1_i(),__Skill_TongShuai_UIAsset7_i(),lbYuanbao_i(),lbXiaohao_i(),btnUP_i(),__Skill_TongShuai_UIAsset8_i(),skinGongji_i(),skinFangyu_i(),skinShengming_i(),imgmax_i()];
+			this.width = 785;
+			this.elementsContent = [__Skill_TongShuai_UIAsset1_i(),__Skill_TongShuai_UIAsset2_i(),__Skill_TongShuai_UIAsset3_i(),lbYuanbao_i(),lbXiaohao_i(),btnUP_i(),icon_i(),__Skill_TongShuai_UIAsset4_i(),imgmax_i(),skinGongji_i(),skinFangyu_i(),skinShengming_i(),__Skill_TongShuai_Label1_i(),__Skill_TongShuai_Label2_i()];
 			
 			states = {
 			};
@@ -60,11 +60,28 @@ package org.mokylin.skin.app.banghui
 		private function __Skill_TongShuai_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "统帅技能将在每周日24时重置，重置后技能将变成未激活状态";
-			temp.color = 0xCFC6AE;
+			temp.height = 62;
+			temp.leading = 5;
+			temp.text = "统帅技能在每周日24时重置，重置后技能将变为激活状态";
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 24;
-			temp.y = 479;
+			temp.width = 135;
+			temp.x = 62;
+			temp.y = 303;
+			return temp;
+		}
+
+		private function __Skill_TongShuai_Label2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.height = 62;
+			temp.leading = 5;
+			temp.text = "统帅技能赋予属性仅会在争霸战中生效";
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 135;
+			temp.x = 57;
+			temp.y = 369;
 			return temp;
 		}
 
@@ -80,64 +97,27 @@ package org.mokylin.skin.app.banghui
 		private function __Skill_TongShuai_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/shuxingjiacheng.png";
-			temp.x = 25;
-			temp.y = 349;
+			temp.styleName = "ui/big_bg/banghui/qizi.png";
+			temp.x = 26;
+			temp.y = 23;
 			return temp;
 		}
 
 		private function __Skill_TongShuai_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.scaleX = -1;
-			temp.styleName = "ui/app/banghui/huawen1.png";
-			temp.x = 162;
-			temp.y = 355;
+			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
+			temp.x = 488;
+			temp.y = 477;
 			return temp;
 		}
 
 		private function __Skill_TongShuai_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/gongji.png";
-			temp.x = 26;
-			temp.y = 378;
-			return temp;
-		}
-
-		private function __Skill_TongShuai_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/fangyu.png";
-			temp.x = 25;
-			temp.y = 404;
-			return temp;
-		}
-
-		private function __Skill_TongShuai_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/shengmin.png";
-			temp.x = 25;
-			temp.y = 431;
-			return temp;
-		}
-
-		private function __Skill_TongShuai_UIAsset7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
-			temp.x = 455;
-			temp.y = 475;
-			return temp;
-		}
-
-		private function __Skill_TongShuai_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/icon/11.png";
-			temp.x = 46;
-			temp.y = 270;
+			temp.x = 70;
+			temp.y = 53;
 			return temp;
 		}
 
@@ -151,8 +131,8 @@ package org.mokylin.skin.app.banghui
 			temp.fontSize = 18;
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonJinengup;
 			temp.color = 0xCFC6AE;
-			temp.x = 598;
-			temp.y = 416;
+			temp.x = 581;
+			temp.y = 422;
 			return temp;
 		}
 
@@ -162,8 +142,8 @@ package org.mokylin.skin.app.banghui
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/app/banghui/tubiaokuang.png";
-			temp.x = 41;
-			temp.y = 265;
+			temp.x = 65;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -183,12 +163,12 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbXiaohao = temp;
 			temp.name = "lbXiaohao";
-			temp.htmlText = "本次花费元宝<font color='#5DBD37'>9999</font>";
+			temp.htmlText = "本次花费元宝：<font color='#00ff33'>9999</font>";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 164;
-			temp.x = 614;
-			temp.y = 478;
+			temp.width = 144;
+			temp.x = 601;
+			temp.y = 482;
 			return temp;
 		}
 
@@ -197,54 +177,57 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbYuanbao = temp;
 			temp.name = "lbYuanbao";
-			temp.text = "元宝：99999999999";
+			temp.text = "9999999999";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 130;
-			temp.x = 480;
-			temp.y = 479;
+			temp.width = 85;
+			temp.x = 515;
+			temp.y = 481;
 			return temp;
 		}
 
-		private function skinFangyu_i():feathers.controls.SkinnableContainer
+		private function skinFangyu_i():feathers.controls.UINumber
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			skinFangyu = temp;
 			temp.name = "skinFangyu";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemTongShuaiShuXing()
-			temp.skin = skin
-			temp.width = 129;
-			temp.x = 47;
-			temp.y = 405;
+			temp.gap = -5;
+			temp.height = 25;
+			temp.label = "x6298";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 94;
+			temp.x = 104;
+			temp.y = 227;
 			return temp;
 		}
 
-		private function skinGongji_i():feathers.controls.SkinnableContainer
+		private function skinGongji_i():feathers.controls.UINumber
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			skinGongji = temp;
 			temp.name = "skinGongji";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemTongShuaiShuXing()
-			temp.skin = skin
-			temp.width = 129;
-			temp.x = 47;
-			temp.y = 378;
+			temp.gap = -5;
+			temp.height = 25;
+			temp.label = "x6298";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 94;
+			temp.x = 104;
+			temp.y = 196;
 			return temp;
 		}
 
-		private function skinShengming_i():feathers.controls.SkinnableContainer
+		private function skinShengming_i():feathers.controls.UINumber
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			skinShengming = temp;
 			temp.name = "skinShengming";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemTongShuaiShuXing()
-			temp.skin = skin
-			temp.width = 129;
-			temp.x = 47;
-			temp.y = 432;
+			temp.gap = -5;
+			temp.height = 25;
+			temp.label = "x6298";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 94;
+			temp.x = 104;
+			temp.y = 258;
 			return temp;
 		}
 

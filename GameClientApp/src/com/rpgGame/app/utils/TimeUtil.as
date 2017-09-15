@@ -4,7 +4,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.utils.NumberFormatter;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangText;
-
+	
 	public class TimeUtil
 	{
 		private static var _tmpDate : Date = new Date();
@@ -20,13 +20,13 @@ package com.rpgGame.app.utils
 		public static var MINUTE_MICRO_SECONDS : uint = 60 * 1000;
 		/** 一秒钟的毫秒数 **/
 		public static var SECOND_MICRO_SECONDS : uint = 1000;
-
+		
 		/** 获取当天零点毫秒数 */
 		public static function getTodayZeroTime() : Number
 		{
 			return getTodayTime(SystemTimeManager.curtTm);
 		}
-
+		
 		/** 检测是否在同一天 */
 		public static function getIsInSameDay(time : Number) : Boolean
 		{
@@ -47,7 +47,7 @@ package com.rpgGame.app.utils
 			var result:String=timeStr.slice(0,2)+":"+timeStr.slice(2);
 			return result;
 		}
-
+		
 		/***
 		 * 把毫秒转换为指定格式的字符串
 		 * 可以更换间隔符号 2015-01-26 21:26
@@ -81,8 +81,8 @@ package com.rpgGame.app.utils
 			str = str.split("s").join(_tmpDate.getSeconds());
 			return str;
 		}
-
-
+		
+		
 		/**
 		 * 将秒数转化为日期
 		 * @param _second
@@ -99,7 +99,7 @@ package com.rpgGame.app.utils
 				return changeDateToDateStr(_tmpDate, index, isOnlyDay, isOnMinue);
 			return changeDateToSpecStr(_tmpDate, index, isOnlyDay);
 		}
-
+		
 		/**
 		 * 将日期转化为中文
 		 * @param _date
@@ -127,13 +127,13 @@ package com.rpgGame.app.utils
 				_dateStr = _dateStr + $date.getDate() + LanguageConfig.getText(LangText.TIME_DAY);
 			}
 			;
-
+			
 			//只显示到日期
 			if ($isOnlyDay)
 				return _dateStr;
-
+			
 			_dateStr += " ";
-
+			
 			_dateStr = _dateStr + $date.getHours();
 			minite = $date.getMinutes();
 			if (minite < 10)
@@ -161,7 +161,7 @@ package com.rpgGame.app.utils
 			;
 			return _dateStr;
 		}
-
+		
 		/**
 		 * 将日期转换成短线连接:2013-08-26 14:30
 		 * @param	time
@@ -173,7 +173,7 @@ package com.rpgGame.app.utils
 			_tmpDate.setTime(time);
 			return changeDateToSpecStr(_tmpDate, index, isOnlyDay);
 		}
-
+		
 		/**
 		 * 将日期转换成短线连接:2013-08-26 14:30
 		 * @param	_date
@@ -200,13 +200,13 @@ package com.rpgGame.app.utils
 				_dateStr = _dateStr + _date.getDate() + " ";
 			}
 			;
-
+			
 			//只显示到日期
 			if (isOnlyDay)
 				return _dateStr;
-
+			
 			_dateStr = _dateStr + _date.getHours();
-
+			
 			minite = _date.getMinutes();
 			if (minite < 10)
 			{
@@ -231,7 +231,7 @@ package com.rpgGame.app.utils
 			;
 			return _dateStr;
 		}
-
+		
 		/**
 		 * 把一秒数转换成。**:**:**
 		 *
@@ -274,7 +274,7 @@ package com.rpgGame.app.utils
 			}
 			return secondStr;
 		}
-
+		
 		/**
 		 * 把秒数转换成。2h:2m:2s
 		 * @param time 注意是秒不是毫秒
@@ -298,7 +298,7 @@ package com.rpgGame.app.utils
 			ret += temp + "s";
 			return ret;
 		}
-
+		
 		/**
 		 * 将指定的时间长度格式化为一个字符串<br/>
 		 * 举例：<br/>
@@ -316,7 +316,7 @@ package com.rpgGame.app.utils
 		{
 			return NumberFormatter.format(seconds, arrUnit, arrPos, 0, true, arrFill, showCount);
 		}
-
+		
 		/**
 		 * 将指定时间长度格式化为一个字符串，例如：2天18小时
 		 * @param seconds 时间长度，以秒为单位
@@ -328,7 +328,7 @@ package com.rpgGame.app.utils
 		{
 			return NumberFormatter.format(seconds, ["天", "小时", "分", "秒"], [24 * 3600, 3600, 60, 1], 0, isFloor, [0, 0, 0, 0], showCount);
 		}
-
+		
 		public static function offlineTimeCH(offlineSeconds : int) : String
 		{
 			var dayStr : String = "";
@@ -342,7 +342,7 @@ package com.rpgGame.app.utils
 			}
 			return "离线" + dayStr;
 		}
-
+		
 		private static function formatNum(num : int, digi : uint = 2) : String
 		{
 			var nums : String = String(num);
@@ -352,7 +352,7 @@ package com.rpgGame.app.utils
 			}
 			return nums;
 		}
-
+		
 		/**通过秒数获得格式为00:00的字符串*/
 		public static function formatTimeToTimeString(time : int) : String
 		{
@@ -367,7 +367,7 @@ package com.rpgGame.app.utils
 				return formatNum(int((time % 3600) / 60)) + ":" + formatNum(time % 60);
 			}
 		}
-
+		
 		/**通过秒数获得格式为00:00:00的字符串*/
 		public static function format3TimeType(time : int) : String
 		{
@@ -375,7 +375,15 @@ package com.rpgGame.app.utils
 				time = 0;
 			return formatNum(int(time / 3600)) + ":" + formatNum(int((time % 3600) / 60)) + ":" + formatNum(time % 60);
 		}
-
+		
+		/**通过秒数获得格式为00x00x00的字符串*/
+		public static function format3TimeToString(time : int) : String
+		{
+			if (time < 0)
+				time = 0;
+			return formatNum(int(time / 3600)) + "x" + formatNum(int((time % 3600) / 60)) + "x" + formatNum(time % 60);
+		}
+		
 		/**
 		 * 转换时间为文字描述
 		 *
@@ -430,7 +438,7 @@ package com.rpgGame.app.utils
 				{
 					_hms += String(minite);
 				}
-
+				
 				if (showChinese)
 				{
 					_hms += LanguageConfig.getText(LangText.TIME_MINUTE);
@@ -468,7 +476,7 @@ package com.rpgGame.app.utils
 				{
 					_hms += String(seconds);
 				}
-
+				
 				if (showChinese)
 				{
 					_hms += LanguageConfig.getText(LangText.TIME_SECOND);
@@ -481,14 +489,14 @@ package com.rpgGame.app.utils
 			}
 			return _hms;
 		}
-
+		
 		private static var _timezoneOffset : Number = ((new Date()).timezoneOffset * TimeUtil.MINUTE_MICRO_SECONDS);
-
+		
 		public static function get timezoneOffset() : Number
 		{
 			return _timezoneOffset;
 		}
-
+		
 		/**
 		 * 判断2个时间是否是同一天
 		 * @param timeOne
@@ -499,7 +507,7 @@ package com.rpgGame.app.utils
 		{
 			return 0 == getDayCount(timeOne, timeTwo);
 		}
-
+		
 		/**
 		 * 获得timeOne到timeTwo两个时间点之间的天数差
 		 * @param timeOne
@@ -511,7 +519,7 @@ package com.rpgGame.app.utils
 		{
 			return getDay(timeTwo) - getDay(timeOne);
 		}
-
+		
 		/**
 		 * 返回本地时间从1970年1月1日开始到现在的天数
 		 * @param time 时间点
@@ -522,7 +530,7 @@ package com.rpgGame.app.utils
 		{
 			return ((time - _timezoneOffset) / TimeUtil.DAY_MICRO_SECONDS) >> 0;
 		}
-
+		
 		/**
 		 * 返回本地时间当天经过了多少毫秒
 		 * @param time 时间点
@@ -533,7 +541,7 @@ package com.rpgGame.app.utils
 		{
 			return (time - _timezoneOffset) % TimeUtil.DAY_MICRO_SECONDS;
 		}
-
+		
 		/**
 		 * 获取今天指定时间点的毫秒数
 		 * @param $time 今天的任意一个时间点
@@ -549,7 +557,7 @@ package com.rpgGame.app.utils
 			return ((($time - _timezoneOffset) / TimeUtil.DAY_MICRO_SECONDS) >> 0) * TimeUtil.DAY_MICRO_SECONDS + _timezoneOffset //
 				+ $hour * TimeUtil.HOUR_MICRO_SECONDS + $min * TimeUtil.MINUTE_MICRO_SECONDS + $sceond * SECOND_MICRO_SECONDS + $millisecond;
 		}
-
+		
 		public static function getDayString(day : int) : String
 		{
 			switch (day)
@@ -585,12 +593,12 @@ package com.rpgGame.app.utils
 			}
 			return "";
 		}
-
+		
 		public static function getCurrentTimeFromt() : String
 		{
 			return formatTimeToSpecString(SystemTimeManager.curtTm, "Y-M-D H:I");
 		}
-
+		
 		/**
 		 * 获取传入时间的，月份
 		 * @param time
@@ -600,7 +608,7 @@ package com.rpgGame.app.utils
 			_tmpDate.setTime(time);
 			return _tmpDate.getMonth() + 1;
 		}
-
+		
 		/**
 		 * 后去传入时间的，天
 		 * @param time
@@ -610,7 +618,7 @@ package com.rpgGame.app.utils
 			_tmpDate.setTime(time);
 			return _tmpDate.getDate()
 		}
-
+		
 		/**
 		 * 活动规则的时间    这是每天都有的活动
 		 * @param time 如：10:10-23:30;
@@ -623,7 +631,7 @@ package com.rpgGame.app.utils
 			var endDate : Date = new Date(time.getTime() + dust);
 			return changeTime(time.hours) + ":" + changeTime(time.minutes) + "-" + changeTime(endDate.hours) + ":" + changeTime(endDate.minutes);
 		}
-
+		
 		/**
 		 * 补全数字为两位数
 		 * @param time
@@ -634,9 +642,9 @@ package com.rpgGame.app.utils
 		{
 			if (time < 10)
 				return "0" + time;
-
+			
 			return time + "";
 		}
-
+		
 	}
 }

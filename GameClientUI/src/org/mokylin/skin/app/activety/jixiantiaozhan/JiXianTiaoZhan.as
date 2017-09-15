@@ -61,9 +61,9 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianTiaoZhan_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 632;
+			temp.x = 631;
 			temp.y = 114;
-			temp.elementsContent = [__JiXianTiaoZhan_UIAsset17_i(),__JiXianTiaoZhan_UIAsset18_i(),__JiXianTiaoZhan_UIAsset19_i(),__JiXianTiaoZhan_UIAsset20_i()];
+			temp.elementsContent = [__JiXianTiaoZhan_UIAsset17_i(),__JiXianTiaoZhan_UIAsset18_i(),__JiXianTiaoZhan_UIAsset19_i(),__JiXianTiaoZhan_UIAsset20_i(),__JiXianTiaoZhan_UIAsset21_i(),__JiXianTiaoZhan_UIAsset22_i()];
 			return temp;
 		}
 
@@ -146,8 +146,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianTiaoZhan_UIAsset17_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/titilebg/headbg1.png";
-			temp.width = 303;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 67;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -156,26 +156,46 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianTiaoZhan_UIAsset18_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/paiming.png";
-			temp.x = 29;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 155;
+			temp.x = 67;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __JiXianTiaoZhan_UIAsset19_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/mingzi.png";
-			temp.x = 122;
-			temp.y = 7;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 84;
+			temp.x = 222;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __JiXianTiaoZhan_UIAsset20_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/paiming.png";
+			temp.x = 20;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function __JiXianTiaoZhan_UIAsset21_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/mingzi.png";
+			temp.x = 130;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function __JiXianTiaoZhan_UIAsset22_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/shanghai.png";
-			temp.x = 237;
+			temp.x = 250;
 			temp.y = 7;
 			return temp;
 		}

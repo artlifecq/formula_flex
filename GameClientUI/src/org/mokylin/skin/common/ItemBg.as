@@ -26,6 +26,8 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
+			this.height = 20;
+			this.width = 20;
 			this.elementsContent = [bg2_i(),bg1_i()];
 			
 			states = {

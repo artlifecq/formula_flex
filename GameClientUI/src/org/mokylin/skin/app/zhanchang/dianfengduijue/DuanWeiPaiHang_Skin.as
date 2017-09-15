@@ -165,8 +165,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 545;
-			temp.y = 7;
+			temp.x = 544;
+			temp.y = 4;
 			return temp;
 		}
 

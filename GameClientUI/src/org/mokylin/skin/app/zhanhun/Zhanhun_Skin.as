@@ -480,8 +480,8 @@ package org.mokylin.skin.app.zhanhun
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhanhun/zhanhun.png";
-			temp.x = 450;
-			temp.y = 17;
+			temp.x = 453;
+			temp.y = 8;
 			return temp;
 		}
 

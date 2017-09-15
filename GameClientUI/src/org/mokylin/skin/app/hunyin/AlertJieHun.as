@@ -8,7 +8,6 @@ package org.mokylin.skin.app.hunyin
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
@@ -88,8 +87,8 @@ package org.mokylin.skin.app.hunyin
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 293;
-			temp.y = 5;
+			temp.x = 290;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -116,7 +115,7 @@ package org.mokylin.skin.app.hunyin
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "拒 绝";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.width = 88;
 			temp.x = 181;
 			temp.y = 216;

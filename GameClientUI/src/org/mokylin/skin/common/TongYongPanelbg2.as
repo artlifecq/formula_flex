@@ -44,10 +44,10 @@ package org.mokylin.skin.common
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.bottom = 0;
-			temp.styleName = "ui/common/background/tongyong_di.png";
-			temp.top = 83;
-			temp.width = 659;
-			temp.x = 8;
+			temp.styleName = "ui/common/background/tongyongV2_di.png";
+			temp.top = 82;
+			temp.width = 681;
+			temp.x = -3;
 			return temp;
 		}
 
@@ -56,9 +56,9 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/common/background/tongyong_2.png";
-			temp.top = 0;
-			temp.x = 0;
+			temp.styleName = "ui/common/background/tongyongV2_2.png";
+			temp.x = -20;
+			temp.y = -8;
 			return temp;
 		}
 
@@ -67,9 +67,9 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnClose = temp;
 			temp.name = "btnClose";
+			temp.right = 20;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.top = 35;
-			temp.x = 637;
+			temp.top = 13;
 			return temp;
 		}
 

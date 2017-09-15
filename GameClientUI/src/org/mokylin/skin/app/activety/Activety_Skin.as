@@ -6,7 +6,7 @@ package org.mokylin.skin.app.activety
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.common.TongYongPanelbg1;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -54,10 +54,10 @@ package org.mokylin.skin.app.activety
 		private function __Activety_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 498;
+			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 922;
-			temp.x = 18;
+			temp.width = 924;
+			temp.x = 17;
 			temp.y = 82;
 			return temp;
 		}
@@ -69,7 +69,7 @@ package org.mokylin.skin.app.activety
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/activety/zonghe/hddt.png";
 			temp.x = 433;
-			temp.y = 17;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -91,10 +91,10 @@ package org.mokylin.skin.app.activety
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.btnWidth = 75;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 23;
-			temp.y = 54;
+			temp.btnWidth = 78;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
+			temp.x = 39;
+			temp.y = 49;
 			temp.layout = __Activety_Skin_HorizontalLayout1_i();
 			return temp;
 		}
