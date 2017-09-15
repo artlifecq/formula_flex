@@ -8,6 +8,7 @@ package com.rpgGame.app.sender
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
+	import com.rpgGame.netData.zhengba.message.CSJJQuickFinishMessage;
 
 	public class JJBattleSender extends BaseSender
 	{
@@ -44,6 +45,11 @@ package com.rpgGame.app.sender
 		{
 			var msg:CSOpenArardPanelMessage=new CSOpenArardPanelMessage();
 			SocketConnection.send(msg);
+		}
+		
+		public static function reqJumpOver():void
+		{
+			SocketConnection.send(new CSJJQuickFinishMessage());
 		}
 	}
 }

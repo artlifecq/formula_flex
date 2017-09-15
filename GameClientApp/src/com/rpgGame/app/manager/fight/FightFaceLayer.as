@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.fight
 {
 	import com.game.engine3D.scene.display.BindableSprite;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -46,6 +47,10 @@ package com.rpgGame.app.manager.fight
 			if (_bindTarget && _view&&MapDataManager.currentScene)
 			{
 				var pos:Vector3D=_bindTarget.position;
+				if ((MainRoleManager.actor).lookPos) 
+				{
+					pos=(MainRoleManager.actor).lookPos;
+				}
 				var getData:Q_map = MapDataManager.currentScene.getData();
 				
 				var tx:int=viewRect.width/2-pos.x;

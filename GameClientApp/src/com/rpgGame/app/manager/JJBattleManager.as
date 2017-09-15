@@ -110,6 +110,7 @@ package com.rpgGame.app.manager
 			//EventManager.dispatchEvent(JJBattleEvent.GET_FIGHT_RESULT,msg);
 			AppManager.showApp(AppConstant.BATTLE_RESULT_PANEL,[msg.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),msg.rank,msg.awardItemInfos]);
 			AppManager.hideApp(AppConstant.BATTLE_JJBT_HEAD_PANEL);
+			AppManager.hideApp(AppConstant.BATTLE_JJBT_OVER_PANEL);
 		}
 		
 		public function SCChallengeDataHandler(msg:SCChallengeDataMessage):void
@@ -156,6 +157,7 @@ package com.rpgGame.app.manager
 				_lockRole.speed=MainRoleManager.actor.speed;
 				
 			}
+			AppManager.hideApp(AppConstant.BATTLE_MAIN_PANEL);
 			MainRoleManager.actor.lookPos=_lockPos;
 			SceneManager.scene.cameraLookAt(_lockRole);
 			MainUIManager.setMainUIVisible(false);
@@ -178,6 +180,11 @@ package com.rpgGame.app.manager
 		{
 			// TODO Auto Generated method stub
 			AppManager.showApp(AppConstant.BATTLE_JJBT_HEAD_PANEL,msg);
+			AppManager.hideApp(AppConstant.BATTLE_MAIN_PANEL);
+		}
+		public function reqJumpOver():void
+		{
+			JJBattleSender.reqJumpOver();
 		}
 	}
 }
