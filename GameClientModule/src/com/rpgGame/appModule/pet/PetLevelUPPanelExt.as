@@ -238,13 +238,23 @@ package com.rpgGame.appModule.pet
 						setAutoState(false);
 					}
 					_data=Mgr.petMgr.getPet(_data.modelId);
-					setData(_data);
+					updateShow(_data);
 				}
 				else
 				{
 					autoReq=TweenLite.delayedCall(0.25,auToing,[exp]);
 				}
 			}
+		}
+		
+		private function updateShow(data:PetInfo):void
+		{
+			this._data=data;
+			if(data.rank>=_qPet.q_max_grade) return;
+			_skin.uiLevel.styleName="ui/pet/jieshu/"+data.rank+".png";
+			updateNeedItems();
+			updateBlessData();
+			setAutoState(false);		
 		}
 		
 		private function auToing(...arg):void

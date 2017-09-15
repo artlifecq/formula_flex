@@ -60,9 +60,9 @@ package com.rpgGame.app.ui
 		 * @param x 子项的坐标
 		 * @param y 子项的坐标
 		 */
-		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int,openShow:Boolean=true,x:int=0,y:int=0):void
+		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:int,openShow:Boolean=true,x:int=0,y:int=0,styleName:String=""):void
 		{
-			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle,openShow,x,y);
+			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle,openShow,x,y,styleName);
 			item.tabKey=funcKey;
 			var fundata:Q_newfunc = NewFuncCfgData.getFuncCfg(item.tabKey);
 			var panelData:Q_panel=PanelCfgData.getPanelCfg(fundata.q_open_panel);

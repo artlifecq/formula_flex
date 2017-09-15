@@ -13,7 +13,7 @@ package org.mokylin.skin.app.hongbao
 	import org.mokylin.skin.app.hongbao.HongBao_Fa;
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_info;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -116,8 +116,8 @@ package org.mokylin.skin.app.hongbao
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/hongbao/wodehongbao.png";
-			temp.x = 435;
-			temp.y = 17;
+			temp.x = 428;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -236,10 +236,10 @@ package org.mokylin.skin.app.hongbao
 			tabBar = temp;
 			temp.name = "tabBar";
 			temp.btnWidth = 78;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 			temp.width = 331;
 			temp.x = 304;
-			temp.y = 89;
+			temp.y = 86;
 			temp.layout = __HongBao_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __HongBao_Skin_ArrayCollection1_i();
 			return temp;

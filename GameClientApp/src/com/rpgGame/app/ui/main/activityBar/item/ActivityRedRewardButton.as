@@ -1,15 +1,18 @@
 package com.rpgGame.app.ui.main.activityBar.item
 {
 	
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.RedRewardManager;
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.common.YuanDian_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-
+	
 	public class ActivityRedRewardButton extends ActivityButton
 	{
 		private var _lableContent:Sprite;
@@ -37,6 +40,29 @@ package com.rpgGame.app.ui.main.activityBar.item
 			super.onShow();
 			EventManager.addEvent(RedRewardEvent.UPDATA_COUNTINFO,refeashCount);
 			refeashCount();
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			var _local2:ActivityButtonBase = this;
+			var name : String = target.name;
+			switch (name)
+			{
+				case "btnClose":
+				case "closeBtn":
+					this.removeFromParent();
+					break;
+			}
+			switch (target)
+			{
+				case ui.btnBar:
+					onButtonClick();
+					if(RedRewardManager.instance().canGetReward)
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_REDREWARD);
+					else
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_REDREWARDGETLOG);
+					return;
+			}
 		}
 		
 		private function refeashCount():void
