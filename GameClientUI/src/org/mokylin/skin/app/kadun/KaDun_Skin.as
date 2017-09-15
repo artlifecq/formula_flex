@@ -53,8 +53,8 @@ package org.mokylin.skin.app.kadun
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/kadun/youxikadun.png";
-			temp.x = 391;
-			temp.y = 17;
+			temp.x = 375;
+			temp.y = 7;
 			return temp;
 		}
 

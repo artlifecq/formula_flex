@@ -9,7 +9,6 @@ package org.mokylin.skin.app.wuxue.jineng
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
@@ -71,7 +70,8 @@ package org.mokylin.skin.app.wuxue.jineng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "是否一键升级到技能可升级的最高等级";
-			temp.color = 0xcfc6ae;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 42;
 			temp.y = 53;
 			return temp;
@@ -81,7 +81,8 @@ package org.mokylin.skin.app.wuxue.jineng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "本次登录不再提示";
-			temp.color = 0x6bcc08;
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 120;
 			temp.y = 170;
 			return temp;
@@ -118,8 +119,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 293;
-			temp.y = 5;
+			temp.x = 290;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -131,7 +132,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "取 消";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 181;
@@ -204,9 +205,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb1 = temp;
 			temp.name = "lb1";
-			temp.htmlText = "技能可升至<font color='#5DBD37'>31</font>级";
+			temp.htmlText = "技能可升至<font color='#00FF33'>31</font>级";
 			temp.letterSpacing = 1;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 68;
 			temp.y = 77;
@@ -218,9 +219,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb2 = temp;
 			temp.name = "lb2";
-			temp.htmlText = "<font color='#5DBD37'>10</font>点物理伤害";
+			temp.htmlText = "<font color='#00FF33'>10</font>点物理伤害";
 			temp.letterSpacing = 1;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 68;
 			temp.y = 101;
@@ -232,9 +233,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb3 = temp;
 			temp.name = "lb3";
-			temp.htmlText = "<font color='#5DBD37'>3%</font>六连击总计造成的秒伤伤害";
+			temp.htmlText = "<font color='#00FF33'>3%</font>六连击总计造成的秒伤伤害";
 			temp.letterSpacing = 1;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 68;
 			temp.y = 126;

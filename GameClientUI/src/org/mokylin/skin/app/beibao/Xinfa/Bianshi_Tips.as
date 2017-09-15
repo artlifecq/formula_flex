@@ -61,7 +61,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.bottom = 13;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.top = 35;
 			temp.width = 316;
 			temp.x = 7;
@@ -97,8 +97,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 297;
-			temp.y = 7;
+			temp.x = 295;
+			temp.y = 4;
 			return temp;
 		}
 

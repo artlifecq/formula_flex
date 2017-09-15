@@ -8,10 +8,10 @@ package org.mokylin.skin.common
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.TongYongTanKuang_bg;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -95,7 +95,7 @@ package org.mokylin.skin.common
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 581;
-			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
 			temp.skin = skin
 			temp.width = 337;
 			temp.x = 0;
@@ -109,8 +109,8 @@ package org.mokylin.skin.common
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 302;
-			temp.y = 6;
+			temp.x = 301;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -133,9 +133,9 @@ package org.mokylin.skin.common
 			tab_zizhi = temp;
 			temp.name = "tab_zizhi";
 			temp.btnWidth = 66;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 			temp.x = 21;
-			temp.y = 41;
+			temp.y = 38;
 			temp.layout = __panel_ziriSkin_HorizontalLayout1_i();
 			temp.dataProvider = __panel_ziriSkin_ArrayCollection1_i();
 			return temp;

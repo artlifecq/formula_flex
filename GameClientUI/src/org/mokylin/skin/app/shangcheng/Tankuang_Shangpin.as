@@ -11,7 +11,6 @@ package org.mokylin.skin.app.shangcheng
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.button.ButtonSkin_putong3;
 
@@ -160,7 +159,7 @@ package org.mokylin.skin.app.shangcheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "取 消";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 181;
@@ -174,8 +173,8 @@ package org.mokylin.skin.app.shangcheng
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 293;
-			temp.y = 5;
+			temp.x = 290;
+			temp.y = 4;
 			return temp;
 		}
 

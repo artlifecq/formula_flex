@@ -203,7 +203,7 @@ package org.mokylin.skin.app.zhuangbei
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.TitileHead()
 			temp.skin = skin
 			temp.width = 333;
-			temp.x = 2;
+			temp.x = 3;
 			temp.y = 3;
 			return temp;
 		}
@@ -217,7 +217,7 @@ package org.mokylin.skin.app.zhuangbei
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.TitileHead()
 			temp.skin = skin
 			temp.width = 333;
-			temp.x = 2;
+			temp.x = 3;
 			temp.y = 249;
 			return temp;
 		}

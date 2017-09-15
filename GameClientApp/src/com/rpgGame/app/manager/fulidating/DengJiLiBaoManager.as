@@ -2,8 +2,11 @@ package com.rpgGame.app.manager.fulidating
 {
 	import com.rpgGame.core.events.ServerActiveEvent;
 	import com.rpgGame.netData.gameactivities.bean.GrownInfo;
+	import com.rpgGame.netData.gameactivities.bean.onlineInfo;
 	import com.rpgGame.netData.gameactivities.message.ResGotSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.ResGrownInfoMessage;
+	import com.rpgGame.netData.gameactivities.message.SCOnlineInfoMessage;
+	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	

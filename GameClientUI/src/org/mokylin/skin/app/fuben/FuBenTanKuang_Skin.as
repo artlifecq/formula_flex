@@ -10,7 +10,6 @@ package org.mokylin.skin.app.fuben
 	import org.mokylin.skin.app.fuben.ListItem_Skin;
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
@@ -127,10 +126,10 @@ package org.mokylin.skin.app.fuben
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "拒 绝";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
-			temp.x = 187;
+			temp.x = 181;
 			temp.y = 267;
 			return temp;
 		}
@@ -141,8 +140,8 @@ package org.mokylin.skin.app.fuben
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 297;
-			temp.y = 7;
+			temp.x = 290;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -157,7 +156,7 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
-			temp.x = 56;
+			temp.x = 57;
 			temp.y = 267;
 			return temp;
 		}

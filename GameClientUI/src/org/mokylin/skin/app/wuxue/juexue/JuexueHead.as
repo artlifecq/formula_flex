@@ -56,8 +56,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			uiName = temp;
 			temp.name = "uiName";
 			temp.styleName = "ui/app/wuxue/juexue/dqhzb.png";
-			temp.x = 20;
-			temp.y = 5;
+			temp.x = 33;
+			temp.y = 3;
 			return temp;
 		}
 

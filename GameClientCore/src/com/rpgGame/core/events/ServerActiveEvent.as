@@ -1,7 +1,7 @@
 package com.rpgGame.core.events
 {
 	import com.rpgGame.coreData.UNIQUEID;
-
+	
 	/**
 	 * 
 	 * @author YT
@@ -24,5 +24,13 @@ package com.rpgGame.core.events
 		 *等级礼包领取反馈
 		 */
 		public static const SERVERACTIVE_DENGJI_PICKUP:int = UNIQUEID.NEXT;
+		/**
+		 *返回在线时间
+		 */
+		public static const SERVERACTIVE_ONLINE_TIME:int = UNIQUEID.NEXT;
+		/**
+		 *在线奖励领取反馈
+		 */
+		public static const SERVERACTIVE_ONLINE_PICKUP:int = UNIQUEID.NEXT;
 	}
 }

@@ -119,7 +119,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 447;
-			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 383;
 			temp.x = 0;
 			temp.y = 0;
@@ -130,7 +130,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 391;
-			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 383;
 			temp.x = 0;
 			temp.y = 56;
@@ -161,7 +161,8 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/beibao/cangku/ckmtiao.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 376;
 			temp.x = 3;
 			temp.y = 3;
 			return temp;
@@ -208,8 +209,8 @@ package org.mokylin.skin.app.beibao
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/beibao/shangdian/suishenshangidan.png";
-			temp.x = 30;
-			temp.y = 7;
+			temp.x = 36;
+			temp.y = 6;
 			return temp;
 		}
 

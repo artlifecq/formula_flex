@@ -190,8 +190,8 @@ package org.mokylin.skin.app.paihangbang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/paihangbang/word/weiwoduzun.png";
-			temp.x = 438;
-			temp.y = 18;
+			temp.x = 435;
+			temp.y = 8;
 			return temp;
 		}
 

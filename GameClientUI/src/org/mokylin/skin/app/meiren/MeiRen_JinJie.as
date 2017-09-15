@@ -167,8 +167,8 @@ package org.mokylin.skin.app.meiren
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 289;
-			temp.y = 3;
+			temp.x = 285;
+			temp.y = 4;
 			return temp;
 		}
 

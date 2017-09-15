@@ -73,8 +73,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/siwangfuhuo/tzsb.png";
-			temp.x = 193;
-			temp.y = 0;
+			temp.x = 200;
+			temp.y = -22;
 			return temp;
 		}
 
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 415;
+			temp.height = 440;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg2()
 			temp.skin = skin
 			temp.width = 675;

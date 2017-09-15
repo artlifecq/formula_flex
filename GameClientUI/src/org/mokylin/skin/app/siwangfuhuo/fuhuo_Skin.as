@@ -72,8 +72,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/siwangfuhuo/swfh.png";
-			temp.x = 292.5;
-			temp.y = 16;
+			temp.x = 292;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -91,7 +91,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 429;
+			temp.height = 440;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg2()
 			temp.skin = skin
 			temp.x = 0;
@@ -110,7 +110,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
 			temp.width = 125;
-			temp.x = 386;
+			temp.x = 270;
 			temp.y = 374;
 			return temp;
 		}
@@ -163,10 +163,11 @@ package org.mokylin.skin.app.siwangfuhuo
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbMianfei = temp;
 			temp.name = "lbMianfei";
+			temp.height = 22;
 			temp.text = "免费";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 431;
+			temp.x = 320;
 			temp.y = 353;
 			return temp;
 		}

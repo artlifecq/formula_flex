@@ -7,6 +7,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.netData.gameactivities.message.ResGotSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.ResGrownInfoMessage;
+	import com.rpgGame.netData.gameactivities.message.SCOnlineInfoMessage;
+	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
 	import com.rpgGame.netData.gameactivities.message.SCRewardSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.SCSevenDayGiftinfoMessage;
 	
@@ -33,6 +35,9 @@ package com.rpgGame.app.cmdlistener
 			/*等级礼包*/
 			SocketConnection.addCmdListener(192101, onResGrownInfoMessage);
 			SocketConnection.addCmdListener(192102, onResGotSuccessMessage);
+			/*在线奖励*/
+			SocketConnection.addCmdListener(411101, onSCOnlineInfoMessage);
+			SocketConnection.addCmdListener(411102, onSCOnlineRewardMessage);
 			
 			finish();
 		}
@@ -70,6 +75,18 @@ package com.rpgGame.app.cmdlistener
 		private function onResGrownInfoMessage(msg:ResGrownInfoMessage):void
 		{
 			Mgr.dengjiMgr.onResGrownInfoMessage(msg);
+		}
+		
+		/**在线信息数据*/
+		private function onSCOnlineInfoMessage(msg:SCOnlineInfoMessage):void
+		{
+			Mgr.zaiXianMgr.onSCOnlineInfoMessage(msg);
+		}
+		
+		/**在线奖励领取反馈*/		
+		private function onSCOnlineRewardMessage(msg:SCOnlineRewardMessage):void
+		{
+			Mgr.zaiXianMgr.onSCOnlineRewardMessage(msg);
 		}
 	}
 	

@@ -129,6 +129,7 @@ package org.mokylin.skin.app.sevenday
 			icon0 = temp;
 			temp.name = "icon0";
 			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.visible = false;
 			temp.x = 700.5;
 			temp.y = 413;
 			return temp;
@@ -139,10 +140,8 @@ package org.mokylin.skin.app.sevenday
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			modGrp = temp;
 			temp.name = "modGrp";
-			temp.height = 257;
-			temp.width = 314;
-			temp.x = 125;
-			temp.y = 251;
+			temp.x = 296;
+			temp.y = 485;
 			return temp;
 		}
 

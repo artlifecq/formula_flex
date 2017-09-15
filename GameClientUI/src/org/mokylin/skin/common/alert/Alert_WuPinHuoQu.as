@@ -218,7 +218,7 @@ package org.mokylin.skin.common.alert
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 518;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 280;
 			temp.x = 6;
 			temp.y = 33;
@@ -340,8 +340,8 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 259;
-			temp.y = 6;
+			temp.x = 256;
+			temp.y = 4;
 			return temp;
 		}
 

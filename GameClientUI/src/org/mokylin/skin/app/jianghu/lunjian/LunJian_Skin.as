@@ -77,7 +77,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jianghu/lunjian/lunjian.png";
 			temp.x = 450;
-			temp.y = 17;
+			temp.y = 8;
 			return temp;
 		}
 

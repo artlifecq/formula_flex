@@ -22,7 +22,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			
 			this.currentState = "normal";
 			this.height = 27;
-			this.width = 333;
+			this.width = 331;
 			this.elementsContent = [__TitileHead_UIAsset1_i(),uiLabel_i()];
 			
 			states = {
@@ -38,6 +38,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 331;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

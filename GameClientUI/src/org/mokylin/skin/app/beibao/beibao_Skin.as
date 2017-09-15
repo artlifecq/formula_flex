@@ -46,7 +46,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 453;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 922;
 			temp.x = 18;
 			temp.y = 82;
@@ -60,7 +60,7 @@ package org.mokylin.skin.app.beibao
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/beibao/renwu.png";
 			temp.x = 455;
-			temp.y = 19;
+			temp.y = 8;
 			return temp;
 		}
 

@@ -56,7 +56,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__BangHui_Info_UIAsset2_i(),__BangHui_Info_UIAsset3_i(),uiRole_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),ui_zhandou_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
+			this.elementsContent = [__BangHui_Info_UIAsset2_i(),uiRole_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),ui_zhandou_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
 			
 			states = {
 			};
@@ -86,17 +86,8 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_Info_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/dibg.png";
-			temp.x = 293;
-			temp.y = 527;
-			return temp;
-		}
-
-		private function __BangHui_Info_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/banghui/bg1_right.png";
-			temp.x = 290;
+			temp.x = 288;
 			temp.y = 85;
 			return temp;
 		}

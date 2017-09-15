@@ -128,8 +128,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 288;
-			temp.y = 6;
+			temp.x = 285;
+			temp.y = 4;
 			return temp;
 		}
 

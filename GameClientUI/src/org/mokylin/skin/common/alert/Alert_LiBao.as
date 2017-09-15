@@ -4,12 +4,14 @@ package org.mokylin.skin.common.alert
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -37,6 +39,8 @@ package org.mokylin.skin.common.alert
 
 		public var lbTime:feathers.controls.Label;
 
+		public var listCont:feathers.controls.List;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -48,7 +52,7 @@ package org.mokylin.skin.common.alert
 			this.currentState = "normal";
 			this.height = 267;
 			this.width = 326;
-			this.elementsContent = [bg_i(),btnClose_i(),__Alert_LiBao_UIAsset1_i(),gBtn_i(),__Alert_LiBao_Group1_i(),icon1_i()];
+			this.elementsContent = [bg_i(),btnClose_i(),__Alert_LiBao_UIAsset1_i(),gBtn_i(),__Alert_LiBao_Group1_i(),icon1_i(),listCont_i()];
 			
 			states = {
 			};
@@ -62,9 +66,9 @@ package org.mokylin.skin.common.alert
 		private function __Alert_LiBao_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 29;
-			temp.y = 40;
-			temp.elementsContent = [__Alert_LiBao_UIAsset3_i(),labName_i()];
+			temp.x = 9;
+			temp.y = 44;
+			temp.elementsContent = [labName_i()];
 			return temp;
 		}
 
@@ -81,15 +85,6 @@ package org.mokylin.skin.common.alert
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/xian_heng.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Alert_LiBao_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/titilebg/di.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -115,8 +110,8 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 293;
-			temp.y = 5;
+			temp.x = 290;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -176,13 +171,13 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labName = temp;
 			temp.name = "labName";
-			temp.fontSize = 16;
-			temp.text = "一级补血丹";
+			temp.htmlText = "提示<font color='#ee0699'>国家BOSS帮派伤害</font>礼包，获得：";
+			temp.fontSize = 14;
 			temp.textAlign = "center";
-			temp.color = 0xEEEEEE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 161;
-			temp.x = 53;
+			temp.width = 308;
+			temp.x = 0;
 			temp.y = 1;
 			return temp;
 		}
@@ -199,6 +194,19 @@ package org.mokylin.skin.common.alert
 			temp.width = 140;
 			temp.x = 58;
 			temp.y = 11;
+			return temp;
+		}
+
+		private function listCont_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			listCont = temp;
+			temp.name = "listCont";
+			temp.height = 103;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 294;
+			temp.x = 17;
+			temp.y = 66;
 			return temp;
 		}
 

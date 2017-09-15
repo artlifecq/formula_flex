@@ -41,7 +41,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__BangHui_List_UIAsset2_i(),btnExit_i(),__BangHui_List_UIAsset3_i(),__BangHui_List_Group1_i(),grpFlip_i()];
+			this.elementsContent = [btnExit_i(),__BangHui_List_UIAsset2_i(),__BangHui_List_Group1_i(),grpFlip_i()];
 			
 			states = {
 			};
@@ -55,22 +55,58 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_List_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 295;
-			temp.y = 90;
-			temp.elementsContent = [__BangHui_List_UIAsset4_i(),__BangHui_List_UIAsset5_i(),__BangHui_List_UIAsset6_i(),__BangHui_List_UIAsset7_i(),__BangHui_List_UIAsset8_i(),__BangHui_List_UIAsset9_i(),__BangHui_List_UIAsset10_i()];
+			temp.x = 291;
+			temp.y = 89;
+			temp.elementsContent = [__BangHui_List_UIAsset3_i(),__BangHui_List_UIAsset4_i(),__BangHui_List_UIAsset5_i(),__BangHui_List_UIAsset6_i(),__BangHui_List_UIAsset7_i(),__BangHui_List_UIAsset8_i(),__BangHui_List_UIAsset9_i(),__BangHui_List_UIAsset10_i(),__BangHui_List_UIAsset11_i(),__BangHui_List_UIAsset12_i(),__BangHui_List_UIAsset13_i(),__BangHui_List_UIAsset14_i()];
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/zongzhanli.png";
-			temp.x = 535;
-			temp.y = 6;
+			temp.styleName = "ui/app/banghui/word/bangpaimingcheng.png";
+			temp.x = 118;
+			temp.y = 5;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/word/dengji.png";
+			temp.x = 237;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __BangHui_List_UIAsset12_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/word/bangzhu.png";
+			temp.x = 338;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __BangHui_List_UIAsset13_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/word/renshu.png";
+			temp.x = 448;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __BangHui_List_UIAsset14_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/word/zongzhanli.png";
+			temp.x = 553;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __BangHui_List_UIAsset15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/jiantoubg.png";
@@ -82,29 +118,30 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_List_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/dibg.png";
-			temp.x = 293;
-			temp.y = 527;
+			temp.height = 442;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 647;
+			temp.x = 288;
+			temp.y = 86;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 442;
-			temp.styleName = "ui/app/banghui/kuang1.png";
-			temp.width = 645;
-			temp.x = 290;
-			temp.y = 85;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 69;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/titilebg/headbg1.png";
-			temp.width = 636;
-			temp.x = 0;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 157;
+			temp.x = 69;
 			temp.y = 0;
 			return temp;
 		}
@@ -112,45 +149,49 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_List_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/paiming.png";
-			temp.x = 33;
-			temp.y = 6;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 53;
+			temp.x = 226;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/bangpaimingcheng.png";
-			temp.x = 114;
-			temp.y = 6;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 146;
+			temp.x = 279;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/dengji.png";
-			temp.x = 233;
-			temp.y = 6;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 79;
+			temp.x = 425;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/bangzhu.png";
-			temp.x = 327;
-			temp.y = 6;
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 137;
+			temp.x = 504;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __BangHui_List_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/word/renshu.png";
-			temp.x = 437;
-			temp.y = 6;
+			temp.styleName = "ui/app/banghui/word/paiming.png";
+			temp.x = 28;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -165,7 +206,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.width = 112;
 			temp.x = 802;
-			temp.y = 545;
+			temp.y = 544;
 			return temp;
 		}
 
@@ -199,7 +240,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "grpFlip";
 			temp.x = 576;
 			temp.y = 513;
-			temp.elementsContent = [__BangHui_List_UIAsset11_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
+			temp.elementsContent = [__BangHui_List_UIAsset15_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}
 

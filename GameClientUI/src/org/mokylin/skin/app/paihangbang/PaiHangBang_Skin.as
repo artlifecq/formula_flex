@@ -94,8 +94,8 @@ package org.mokylin.skin.app.paihangbang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/paihangbang/word/paihangbang.png";
-			temp.x = 442;
-			temp.y = 18;
+			temp.x = 440;
+			temp.y = 8;
 			return temp;
 		}
 

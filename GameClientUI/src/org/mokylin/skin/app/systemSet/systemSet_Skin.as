@@ -11,7 +11,7 @@ package org.mokylin.skin.app.systemSet
 	import org.mokylin.skin.app.systemSet.pingbiset_Skin;
 	import org.mokylin.skin.app.systemSet.xitong_Skin;
 	import org.mokylin.skin.common.TongYongPanelbg3;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	/**
 	 * @private
@@ -67,7 +67,7 @@ package org.mokylin.skin.app.systemSet
 		private function __systemSet_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = 1;
+			temp.gap = 0;
 			return temp;
 		}
 
@@ -98,7 +98,7 @@ package org.mokylin.skin.app.systemSet
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/systemSet/shezhi.png";
 			temp.x = 198;
-			temp.y = 19;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -107,7 +107,7 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 565;
+			temp.height = 579;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
 			temp.x = 0;
@@ -164,10 +164,10 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_set = temp;
 			temp.name = "tab_set";
-			temp.btnWidth = 67;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+			temp.btnWidth = 78;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 			temp.x = 23;
-			temp.y = 54;
+			temp.y = 49;
 			temp.layout = __systemSet_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __systemSet_Skin_ArrayCollection1_i();
 			return temp;

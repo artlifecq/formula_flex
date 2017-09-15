@@ -118,8 +118,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.top = 6;
-			temp.x = 288;
+			temp.top = 4;
+			temp.x = 285;
 			return temp;
 		}
 

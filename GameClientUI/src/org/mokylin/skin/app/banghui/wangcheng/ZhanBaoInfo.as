@@ -184,8 +184,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 			btnClose1 = temp;
 			temp.name = "btnClose1";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 591;
-			temp.y = 7;
+			temp.x = 589;
+			temp.y = 4;
 			return temp;
 		}
 

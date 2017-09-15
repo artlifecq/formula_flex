@@ -51,7 +51,7 @@ package org.mokylin.skin.common
 			temp.bottom = 54;
 			temp.left = 7;
 			temp.right = 7;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.top = 34;
 			return temp;
 		}

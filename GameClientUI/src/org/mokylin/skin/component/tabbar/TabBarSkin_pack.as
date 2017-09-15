@@ -34,7 +34,17 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:7
+						}
+						,
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
 						}
 					]
 				,
@@ -46,21 +56,41 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:7
+						}
+						,
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
 						}
 					]
 				,
 				down:[
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:7
+						}
+						,
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
 						}
 					]
 				,
 				disabled:[
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:6
 						}
 					]
 				,
@@ -72,7 +102,17 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:7
+						}
+						,
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
 						}
 					]
 				,
@@ -84,7 +124,17 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:7
+						}
+						,
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
 						}
 					]
 				,
@@ -96,14 +146,24 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:7
+						}
+						,
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
 						}
 					]
 				,
 				disabledAndSelected:[
 						{target:"labelDisplay",
 							name:"y",
-							value:10
+							value:6
 						}
 					]
 				,
