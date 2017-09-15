@@ -3,12 +3,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.item.GridBGType;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneRewardPanelInfoMessage;
 	
 	import away3d.events.Event;
@@ -131,7 +126,6 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.lbTime.text=leftTime+"秒后自动退出";
 			if(leftTime<=0){
 				sendQuitDungeon();
-				this.onHide();
 			}
 		}
 		private function sendQuitDungeon():void
@@ -139,10 +133,11 @@ package com.rpgGame.appModule.dungeon.genuine
 			TimerServer.remove(updateTime);
 			icoListGroup.tweeRewardInBag();
 			DungeonSender.reqQuitDungeon();
+			this.hide();
 		}
-		override protected function onHide():void
+		override public function hide() : void
 		{
-			super.onHide();
+			super.hide();
 			TimerServer.remove(updateTime);
 			icoListGroup.clear();
 			/*for each(var icon:IconCDFace in _rewardIcons)

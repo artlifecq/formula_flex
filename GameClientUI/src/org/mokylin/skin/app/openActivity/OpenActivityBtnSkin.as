@@ -32,6 +32,8 @@ package org.mokylin.skin.app.openActivity
 			super();
 			
 			this.currentState = "normal";
+			this.height = 85;
+			this.width = 85;
 			this.elementsContent = [btnBar_i(),bg_i(),lbnum_i()];
 			
 			states = {
@@ -64,8 +66,8 @@ package org.mokylin.skin.app.openActivity
 			temp.styleClass = org.mokylin.skin.mainui.activityBar.button.ButtonRacing;
 			temp.color = 0xF9F0CC;
 			temp.width = 75;
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 5;
+			temp.y = 5;
 			return temp;
 		}
 

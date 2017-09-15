@@ -25,8 +25,8 @@ package com.rpgGame.appModule.redreward
 		}
 		private function initView():void
 		{
-			this.x = 294;
-			this.y = 117;
+//			this.x = 294;
+//			this.y = 117;
 			_skin.ListItem.itemRendererType = RedRewardListCell;
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
