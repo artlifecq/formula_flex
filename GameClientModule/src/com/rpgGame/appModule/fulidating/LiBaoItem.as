@@ -37,6 +37,7 @@ package com.rpgGame.appModule.fulidating
 			var cfg:Q_upgrade=DengJiCfg.getCfgByLv(_lv);
 			if(!cfg) return;
 			_groupList.setRewardByJsonStr(cfg.q_reward);
+			updateBtnState();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
