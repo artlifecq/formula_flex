@@ -75,6 +75,7 @@ package com.rpgGame.app.state.role.action
 		
 		override public function execute():void
 		{
+			trace("execute showState");
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
@@ -102,7 +103,6 @@ package com.rpgGame.app.state.role.action
 				_showType=RoleActionType.ATTACK;
 			}else{
 				_showType=RoleActionType.SHOW_IDLE;
-//				_showType=RoleActionType.IDLE;
 			}
 			_repeatNum=1;			
 		}
@@ -125,7 +125,7 @@ package com.rpgGame.app.state.role.action
 				_totalFrameTween = TweenLite.delayedCall(totalFrameTm * 0.001, onTotalFrameCmp);
 			}else{
 				onTotalFrameCmp();
-			}			
+			}		
 		}
 		
 		private function onTotalFrameCmp() : void
@@ -150,7 +150,7 @@ package com.rpgGame.app.state.role.action
 		{
 			var role:SceneRole=_machine.owner as SceneRole;
 			
-			if((_stateReference&&Math.round(role.parent.parent.rotationY)!=_stateReference.defaultRotationY)||role.parent.parent.rotationY==0){//不在展示角度不做下次展示
+			if((_stateReference&&Math.round(role.parent.parent.rotationY)!=_stateReference.avatar3d.defaultRotationY)||role.parent.parent.rotationY!=0){//不在展示角度不做下次展示
 				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);
 				return;
 			}
@@ -202,6 +202,13 @@ package com.rpgGame.app.state.role.action
 		 */
 		override public function leavePass(nextState:IState, force:Boolean=false):Boolean
 		{
+			if(force){
+				if(_totalFrameTween){
+					_totalFrameTween.kill();
+					_totalFrameTween=null;
+				}
+				return true;
+			}
 			if(!nextState){
 				return false;
 			}

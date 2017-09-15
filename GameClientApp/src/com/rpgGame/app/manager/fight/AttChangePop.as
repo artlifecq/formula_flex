@@ -2,12 +2,11 @@ package com.rpgGame.app.manager.fight
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
+	import flash.geom.Point;
 	import flash.utils.getTimer;
-	
-	import gs.TimelineLite;
-	import gs.TweenLite;
 	
 	import starling.display.Sprite;
 	
@@ -18,7 +17,6 @@ package com.rpgGame.app.manager.fight
 		private var maxWait:int=10;
 		private var oneFaceH:int=29;
 		private var prePlayTime:int;
-		private var timeLineMap:HashMap;
 		
 		private var showTime:Number=0.2*2;
 		private var moveTime:Number=0.6+0.4;
@@ -37,19 +35,11 @@ package com.rpgGame.app.manager.fight
 			this.y = y;
 			waitEftDatas=new Vector.<AttEftData>();
 			playList=new Vector.<AttackFace>();
-			timeLineMap=new HashMap();
 		}
 		
 		public function clear():void
 		{
 			waitEftDatas.length=0;
-			
-//			while(playList.length>0){
-//				var attackFace : AttackFace=playList.pop();
-//				var myTimeline: TimelineLite=timeLineMap.remove(attackFace);
-//				myTimeline.killTweensOf(attackFace);
-//				FightFaceHelper.onAtackFaceComplete(attackFace);
-//			}
 		}
 		
 		public function addChangeHandler(hash:HashMap):void
@@ -123,12 +113,15 @@ package com.rpgGame.app.manager.fight
 		
 		private function tweenContent(content:AttackFace):void
 		{
+			var sp:Point=new Point(content.x,content.y);
+			var ep:Point=new Point(content.x,content.y-missEndY);
+			SpellResultTweenUtil.TweenExp(content,sp,ep,contTweenComplete);
+		/*	
 			var myTimeline: TimelineLite= new TimelineLite({onComplete:contTweenComplete,onCompleteParams:[content]});
 			myTimeline.clear();
 			myTimeline.append(new TweenLite(content, showTime, {alpha:1,y:content.y-showEndY}));
 			myTimeline.append(new TweenLite(content, moveTime, {y:content.y-moveEndY}));
-			myTimeline.append(new TweenLite(content, missTime, {alpha:0,y:content.y-missEndY}));
-			timeLineMap.put(content,myTimeline);
+			myTimeline.append(new TweenLite(content, missTime, {alpha:0,y:content.y-missEndY}));*/
 		}
 		
 		private function showComplete():void
@@ -138,12 +131,7 @@ package com.rpgGame.app.manager.fight
 		
 		private function contTweenComplete(attackFace:AttackFace):void
 		{
-			timeLineMap.remove(attackFace);
 			var index:int=playList.indexOf(attackFace);
-			if (index==-1) 
-			{
-				trace("gg");
-			}
 			playList.removeAt(index);
 			FightFaceHelper.onAtackFaceComplete(attackFace);
 			if(playList.length==0){

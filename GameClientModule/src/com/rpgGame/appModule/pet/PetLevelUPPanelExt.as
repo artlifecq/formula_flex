@@ -81,7 +81,6 @@ package com.rpgGame.appModule.pet
 		{
 			_qPet=PetCfg.getPet(_data.modelId);
 			_avatar.updateBodyWithRes(_qPet.q_panel_show_id);
-			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
 		private function updateNeedItems():void
