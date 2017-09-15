@@ -220,7 +220,7 @@ package com.rpgGame.appModule.sevenday
 				dayData=SevendayCfgData.getSevenday(i+1);
 				if(dayData!=null)
 				{
-					dayitemList[i].dayIcon.styleName="ui/app/sevenday/"+SevendayCfgData.getSevendayModByJob(dayData.q_icon,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex)+".png";
+					dayitemList[i].dayIcon.styleName="ui/app/sevenday/"+SevendayCfgData.getSevendayModByJob(dayData.q_icon,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex)+".png";		
 				}
 			}
 		}
