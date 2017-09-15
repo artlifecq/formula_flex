@@ -16,7 +16,7 @@ package org.mokylin.skin.app.maps
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	import org.mokylin.skin.component.text.textInput3_Skin;
 
 	/**
@@ -53,6 +53,8 @@ package org.mokylin.skin.app.maps
 
 		public var tab:feathers.controls.TabBar;
 
+		public var uiOver:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -64,7 +66,7 @@ package org.mokylin.skin.app.maps
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__maps_Skin_UIAsset1_i(),tab_i(),grp_cont_i(),__maps_Skin_UIAsset2_i(),__maps_Skin_UIAsset3_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
+			this.elementsContent = [bg_i(),__maps_Skin_UIAsset1_i(),tab_i(),grp_cont_i(),uiOver_i(),__maps_Skin_UIAsset2_i(),__maps_Skin_UIAsset3_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
 			
 			states = {
 			};
@@ -127,7 +129,7 @@ package org.mokylin.skin.app.maps
 		private function __maps_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = 1;
+			temp.gap = 0;
 			return temp;
 		}
 
@@ -168,7 +170,7 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 459;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 922;
 			temp.x = 18;
 			temp.y = 82;
@@ -179,7 +181,7 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 459;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 278;
 			temp.x = 662;
 			temp.y = 82;
@@ -190,8 +192,8 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/maps/ditu.png";
-			temp.x = 450;
-			temp.y = 17;
+			temp.x = 453;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -323,14 +325,27 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab = temp;
 			temp.name = "tab";
-			temp.btnWidth = 75;
+			temp.btnWidth = 78;
 			temp.height = 30;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 			temp.width = 174;
 			temp.x = 27;
 			temp.y = 54;
 			temp.layout = __maps_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __maps_Skin_ArrayCollection1_i();
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.height = 449;
+			temp.styleName = "ui/app/maps/bggg.png";
+			temp.width = 638;
+			temp.x = 23;
+			temp.y = 88;
 			return temp;
 		}
 

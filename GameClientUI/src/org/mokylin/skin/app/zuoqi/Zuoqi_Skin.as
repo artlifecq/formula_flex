@@ -47,7 +47,7 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 453;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 922;
 			temp.x = 18;
 			temp.y = 82;
@@ -60,8 +60,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zuoqi/jinjie.png";
-			temp.x = 450;
-			temp.y = 17;
+			temp.x = 447;
+			temp.y = 8;
 			return temp;
 		}
 
