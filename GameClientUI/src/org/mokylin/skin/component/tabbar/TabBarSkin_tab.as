@@ -51,7 +51,7 @@ package org.mokylin.skin.component.tabbar
 						}
 					]
 				,
-				hhoverAndSelected:[
+				hoverAndSelected:[
 						{target:"labelDisplay",
 							name:"color",
 							value:0xEAEABC
