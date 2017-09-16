@@ -96,7 +96,7 @@ package org.mokylin.skin.app.banghui.button
 						}
 					]
 				,
-				hhoverAndSelected:[
+				hoverAndSelected:[
 						{target:"__Button_TongShuai_UIAsset2",
 							name:"x",
 							value:0
