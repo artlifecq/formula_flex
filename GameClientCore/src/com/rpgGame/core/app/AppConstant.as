@@ -506,7 +506,7 @@ package com.rpgGame.core.app
 		public static var HUBAO_ZHUIZONG:String = createAppInfo("dungeon.HuBaoTracjerBar","hubao");
 		
 		/**巅峰开始倒计时**/
-		public static var BATTLE_D1V1_READY_PANEL:String = createAppInfo("battle.dfdj.D1v1ReafyPanelExt","zhanchang");
+		public static var BATTLE_D1V1_READY_PANEL:String = createAppInfo("battle.dfdj.D1V1TimeCountPanelExt","zhanchang");
 		/**巅峰匹配倒计时**/
 		public static var BATTLE_D1V1_MATCH_PANEL:String = createAppInfo("battle.dfdj.D1v1MatchPanelExt","zhanchang");
 		/**巅峰排行榜**/

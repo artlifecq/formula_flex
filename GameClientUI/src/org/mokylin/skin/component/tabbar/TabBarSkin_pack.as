@@ -182,6 +182,11 @@ package org.mokylin.skin.component.tabbar
 							name:"nativeFilters",
 							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
+						,
+						{target:"labelDisplay",
+							name:"verticalAlign",
+							value:"middle"
+						}
 					]
 			};
 			skinNames={"down":"ui/component/tabbar/skin_pack/down.png",
@@ -199,12 +204,13 @@ package org.mokylin.skin.component.tabbar
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.height = 21;
-			temp.left = 0;
-			temp.right = 0;
 			temp.text = "活动大厅";
 			temp.textAlign = "center";
 			temp.color = 0xe4d075;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.verticalAlign = "middle";
+			temp.width = 75;
+			temp.x = 0;
 			return temp;
 		}
 

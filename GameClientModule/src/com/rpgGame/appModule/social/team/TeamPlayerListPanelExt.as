@@ -95,6 +95,11 @@ package  com.rpgGame.appModule.social.team
 			super.onHide();
 			timer.stop();
 			TeamSender.ReqOpenOrCloseTeamPanel(2,1);
+			if (TeamPlayerListItemExt.curItem) 
+			{
+				TeamPlayerListItemExt.curItem.setSelected(false);
+				TeamPlayerListItemExt.curItem=null;
+			}
 		}
 		private function doRefresh(isAuto:Boolean):void
 		{
