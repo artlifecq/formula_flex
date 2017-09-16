@@ -1,5 +1,6 @@
 package  com.rpgGame.appModule.social.team
 {
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.core.events.TeamEvent;
@@ -26,13 +27,30 @@ package  com.rpgGame.appModule.social.team
 		private var _data:MapTeamInfo;
 		private var _skin:DuiWu_Item;
 		private var _tipData:DynamicTipData=new DynamicTipData();
+		private var _isSelected:Boolean;
 		public function TeamListItemExt()
 		{
 			_skin=new DuiWu_Item();
 			super(_skin);
 			TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.TEAM_NEAR_TEAM_TIP,_tipData));
-			setSelectbg(false);
+			setSelected(false);
+			var touch:TouchCtrl=new TouchCtrl(this,null,onOver,onOut);
 		}	
+		
+		private function onOut():void
+		{
+			// TODO Auto Generated method stub
+			if (!_isSelected) 
+			{
+				_skin.selectBg.visible=false;
+			}
+		}
+		
+		private function onOver():void
+		{
+			// TODO Auto Generated method stub
+			_skin.selectBg.visible=true;
+		}
 		public function setData(team:*,index:int):void
 		{
 			this._data=team as MapTeamInfo;
@@ -55,10 +73,11 @@ package  com.rpgGame.appModule.social.team
 			}
 			_skin.lbMap.text=MapDataManager.getMapInfo( _data.captainMap).getData().q_map_name;
 			
-			
+			setSelected(false);
 		}
-		public function setSelectbg(bool:Boolean):void
+		public function setSelected(bool:Boolean):void
 		{
+			_isSelected=bool;
 			_skin.selectBg.visible=bool;
 		}
 		public function get data():MapTeamInfo
@@ -76,10 +95,10 @@ package  com.rpgGame.appModule.social.team
 			super.onTouchTarget(target);
 			if (curItem) 
 			{
-				curItem.setSelectbg(false);
+				curItem.setSelected(false);
 			}
 			curItem=this;
-			curItem.setSelectbg(true);
+			curItem.setSelected(true);
 			EventManager.dispatchEvent(TeamEvent.TEAM_SLEECT_TEAM,this._data);
 		}
 	}

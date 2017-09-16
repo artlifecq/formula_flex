@@ -11,7 +11,7 @@ package org.mokylin.skin.app.shejiao.zudui
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_Head;
 	import org.mokylin.skin.app.shejiao.zudui.number.UINumberJiacheng;
-	import org.mokylin.skin.component.button.ButtonSkin_putong4;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
@@ -135,11 +135,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_add";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "添加队员";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 808;
-			temp.y = 412;
+			temp.y = 395;
 			return temp;
 		}
 
@@ -150,11 +150,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_create";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "创建队伍";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 808;
-			temp.y = 397;
+			temp.y = 395;
 			return temp;
 		}
 
@@ -165,11 +165,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_exit";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出队伍";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
-			temp.x = 808;
-			temp.y = 382;
+			temp.x = 698;
+			temp.y = 395;
 			return temp;
 		}
 
@@ -337,7 +337,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_jingyan = temp;
 			temp.name = "grp_jingyan";
-			temp.x = 495;
+			temp.x = 375;
 			temp.y = 380;
 			temp.elementsContent = [jingyanbg_i(),jingyanbg2_i(),jingyanjiacheng_i(),num_jingyan_i()];
 			return temp;

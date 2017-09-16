@@ -11,6 +11,7 @@ package com.rpgGame.appModule.guild
 	
 	import org.mokylin.skin.app.banghui.BangHui_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 
 	public class GuildPanel extends TabBarPanel
 	{
@@ -61,13 +62,13 @@ package com.rpgGame.appModule.guild
 		
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,GuildInfoViewUI,EmFunctionID.EM_BANGHUI_INFO);
-			addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_CHENGYUAN);
-			addTabDatas(TabBarSkin_pack,GuildUPViewUI,EmFunctionID.EM_BANGHUI_UPLEVEL);
-			addTabDatas(TabBarSkin_pack,GuildSkillViewUI,EmFunctionID.EM_BANGHUI_SPELL);
-			addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
-			addTabDatas(TabBarSkin_pack,WczbWarViewUI,EmFunctionID.EM_BANGHUI_WAR);
-			addTabDatas(TabBarSkin_pack,HczbPlayerViewUI,EmFunctionID.EM_HCZB_INFO_GUILD);
+			addTabDatas(TabBarSkin_tab,GuildInfoViewUI,EmFunctionID.EM_BANGHUI_INFO);
+			addTabDatas(TabBarSkin_tab,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_CHENGYUAN);
+			addTabDatas(TabBarSkin_tab,GuildUPViewUI,EmFunctionID.EM_BANGHUI_UPLEVEL);
+			addTabDatas(TabBarSkin_tab,GuildSkillViewUI,EmFunctionID.EM_BANGHUI_SPELL);
+			addTabDatas(TabBarSkin_tab,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
+			addTabDatas(TabBarSkin_tab,WczbWarViewUI,EmFunctionID.EM_BANGHUI_WAR);
+			addTabDatas(TabBarSkin_tab,HczbPlayerViewUI,EmFunctionID.EM_HCZB_INFO_GUILD);
 		}
 	}
 }

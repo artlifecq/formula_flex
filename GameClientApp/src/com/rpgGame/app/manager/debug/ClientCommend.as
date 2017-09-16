@@ -560,6 +560,10 @@ package   com.rpgGame.app.manager.debug
 				}
 				
 			});
+			commandList.put( ".time", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.BATTLE_D1V1_READY_PANEL);
+			});
 		}
 		
 		
