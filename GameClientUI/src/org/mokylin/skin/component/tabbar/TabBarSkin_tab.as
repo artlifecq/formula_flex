@@ -21,7 +21,7 @@ package org.mokylin.skin.component.tabbar
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "up";
 			this.height = 33;
 			this.width = 80;
 			this.elementsContent = [];

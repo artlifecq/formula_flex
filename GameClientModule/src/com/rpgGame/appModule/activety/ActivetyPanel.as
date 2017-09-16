@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.activety
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.activety.boss.BossView;
 	import com.rpgGame.appModule.activety.jixiantiaozhan.JiXianTiaoZhanPenelExt;
@@ -15,6 +14,7 @@ package com.rpgGame.appModule.activety
 	
 	import org.mokylin.skin.app.activety.Activety_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	
 	import starling.display.DisplayObjectContainer;
 	

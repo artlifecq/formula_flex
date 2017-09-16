@@ -62,14 +62,18 @@ package com.rpgGame.app.ui.tab
 				item = _allDatas[i];
 				button = new ToggleButton();
 				button.toggleGroup = _touchGroup;
+				if(!_tabBar.styleName){
+					if(item.tabStyle){
+						button.styleClass=item.tabStyle;
+					}
+				}else{
+					button.styleName=_tabBar.styleName;
+				}
+				item.button = button;
 				if(item.text){
 					button.label = item.text;
 					button.labelOffsetY = 2;
 				}
-				if(item.tabStyle){
-					button.styleClass=item.tabStyle;
-				}
-				item.button = button;
 			}
 		}
 		/*private function onTabInitializer(tab:ToggleButton, item:UITabBarData ):void
