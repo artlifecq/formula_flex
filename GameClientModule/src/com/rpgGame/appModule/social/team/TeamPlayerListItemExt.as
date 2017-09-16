@@ -1,6 +1,7 @@
 package  com.rpgGame.appModule.social.team
 {
 
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -21,11 +22,28 @@ package  com.rpgGame.appModule.social.team
 		public static var curItem:TeamPlayerListItemExt;
 		private var _data:MapPlayerInfo;
 		private var _skin:Duiwu_WanjiaItem;
+		private var _isSelected:Boolean;
 		public function TeamPlayerListItemExt()
 		{
 			_skin=new Duiwu_WanjiaItem();
 			super(_skin);
-			setSelectbg(false);
+			setSelected(false);
+			var touch:TouchCtrl=new TouchCtrl(this,null,onOver,onOut);
+		}	
+		
+		private function onOut():void
+		{
+			// TODO Auto Generated method stub
+			if (!_isSelected) 
+			{
+				_skin.selectBg.visible=false;
+			}
+		}
+		
+		private function onOver():void
+		{
+			// TODO Auto Generated method stub
+			_skin.selectBg.visible=true;
 		}	
 		public function setData(team:*,index:int):void
 		{
@@ -57,10 +75,11 @@ package  com.rpgGame.appModule.social.team
 			//_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
 			var qMap:Q_map=MapDataManager.getMapInfo( MapDataManager.currentScene.sceneId).getData() as Q_map;
 			_skin.lbMap.text=qMap.q_map_name;
-		
+			setSelected(false);
 		}
-		public function setSelectbg(bool:Boolean):void
+		public function setSelected(bool:Boolean):void
 		{
+			_isSelected=bool;
 			_skin.selectBg.visible=bool;
 		}
 
@@ -78,10 +97,10 @@ package  com.rpgGame.appModule.social.team
 			super.onTouchTarget(target);
 			if (curItem) 
 			{
-				curItem.setSelectbg(false);
+				curItem.setSelected(false);
 			}
 			curItem=this;
-			curItem.setSelectbg(true);
+			curItem.setSelected(true);
 		}
 	}
 }

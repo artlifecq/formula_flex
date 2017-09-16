@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety.boss
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -14,6 +15,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
@@ -22,6 +24,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -55,7 +58,7 @@ package com.rpgGame.appModule.activety.boss
 		private var actList:Vector.<ActivetyInfo>;
 		private var _richText:RichTextArea3D;
 		private var _defaultFormat:TextFormat;
-		
+		private var _bossEffectCon:Inter3DContainer;
 		public function BossView()
 		{
 			_skin=new ShiJieBoss_Skin();
@@ -281,6 +284,25 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateList);
 			EventManager.removeEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);
+		
+		}
+		override protected function onHide():void
+		{
+			super.onHide();
+			_bossEffectCon.dispose();
+			_bossEffectCon=null;
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			if (!_bossEffectCon) 
+			{
+				_bossEffectCon=new Inter3DContainer();
+				_bossEffectCon.x=_skin.avatarGrp.x+_skin.avatarGrp.width/2;
+				_bossEffectCon.y=_skin.avatarGrp.y+_skin.avatarGrp.height;
+				_skin.container.addChild(_bossEffectCon);
+				_bossEffectCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.EFFECT_BOSS),0,0,0);
+			}
 		}
 	}
 }
