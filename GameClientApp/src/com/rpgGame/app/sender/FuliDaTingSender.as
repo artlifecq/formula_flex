@@ -58,7 +58,7 @@ package com.rpgGame.app.sender
 		{
 			if (ReqLockUtil.isReqLocked(410201))
 				return;
-			ReqLockUtil.lockReq(410201,2000);
+			ReqLockUtil.lockReq(410201,1000);
 			var msg:CSGetSevenDayRewardMessage = new CSGetSevenDayRewardMessage();
 			msg.activeId = day;
 			SocketConnection.send(msg);
