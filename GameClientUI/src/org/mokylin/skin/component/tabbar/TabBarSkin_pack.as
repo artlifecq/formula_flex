@@ -21,7 +21,7 @@ package org.mokylin.skin.component.tabbar
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "up";
 			this.height = 29;
 			this.width = 75;
 			this.elementsContent = [];
@@ -115,7 +115,7 @@ package org.mokylin.skin.component.tabbar
 			temp.left = 0;
 			temp.right = 0;
 			temp.text = "标签标签";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 3;
