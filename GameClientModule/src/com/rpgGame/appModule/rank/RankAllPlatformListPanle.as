@@ -17,8 +17,8 @@ package com.rpgGame.appModule.rank
 		
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,AllCombatPowerList,EmFunctionID.EM_AllCOMBATPOWERRANK);
-			addTabDatas(TabBarSkin_pack,AllDuiJueList,EmFunctionID.EM_ALLDUIJUERANK);
+			addTabDatas(TabBarSkin_pack,AllCombatPowerList,EmFunctionID.EM_AllCOMBATPOWERRANK,true,25,50);
+			addTabDatas(TabBarSkin_pack,AllDuiJueList,EmFunctionID.EM_ALLDUIJUERANK,true,25,50);
 		}
 
 	}

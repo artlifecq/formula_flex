@@ -218,7 +218,7 @@ package com.rpgGame.app.display3D
 					avatar3d.rotationY = (avatar3d.rotationY+movex)*0.3;
 				}else if (touch.phase == TouchPhase.ENDED)	{
 					this._touchID = -1;
-//					avatar3d.rotationY = defaultRotationY;
+					avatar3d.rotationY = avatar3d.rotationY%360;
 					TweenLite.to(avatar3d,1,{rotationY:_defaultRotationY});
 				}
 			}else{
