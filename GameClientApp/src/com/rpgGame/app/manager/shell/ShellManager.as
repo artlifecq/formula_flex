@@ -21,6 +21,7 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;
+    import com.gameClient.utils.HashMap;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -48,14 +49,17 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.state.role.control.RidingStateReference;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
     import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
+    import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
+    import com.rpgGame.coreData.cfg.AttValueConfig;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.PanelCfgData;
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.cfg.item.ItemConfig;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.clientConfig.Q_panel;
+    import com.rpgGame.coreData.enum.AttChangeEnum;
     import com.rpgGame.coreData.enum.BoneNameEnum;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.JobEnum;
@@ -68,6 +72,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.SceneDropGoodsData;
     import com.rpgGame.coreData.role.SceneTranportData;
     import com.rpgGame.coreData.role.TrapInfo;
+    import com.rpgGame.coreData.type.CharAttributeType;
     import com.rpgGame.coreData.type.EffectUrl;
     import com.rpgGame.coreData.type.RenderUnitID;
     import com.rpgGame.coreData.type.RenderUnitType;
@@ -76,6 +81,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.netData.backpack.bean.TempItemInfo;
     import com.rpgGame.netData.drop.bean.RollItemInfo;
     import com.rpgGame.netData.map.bean.DropGoodsInfo;
+    import com.rpgGame.netData.player.bean.AttributeItem;
     
     import flash.display.BitmapData;
     import flash.geom.Point;
@@ -98,6 +104,7 @@ package com.rpgGame.app.manager.shell
     import gs.TweenLite;
     import gs.easing.Linear;
     
+    import org.client.mainCore.manager.EventManager;
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
     
@@ -157,6 +164,7 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&testRoll".toLowerCase()] = this.testRoll;
 			this._funcs["&sound".toLowerCase()] = this.sound;
 			this._funcs["&showAttChange".toLowerCase()] = this.showAttChange;
+			this._funcs["&showUIAttChange".toLowerCase()] = this.showUIAttChange;
 			this._funcs["&cdShowPanel".toLowerCase()] = this.cdShowPanel;
 			
             
@@ -216,6 +224,28 @@ package com.rpgGame.app.manager.shell
 		private function showAttChange(type : String, count : int,show:int=0) : void
 		{
 			FightFaceHelper.showAttChange(type,count,show);
+		}
+		
+		private function showUIAttChange():void
+		{
+			if(TimerServer.has(addChangeAtt)){
+				TimerServer.remove(addChangeAtt);
+			}else{
+				TimerServer.addLoop(addChangeAtt,200);
+			}
+		}
+		
+		private function addChangeAtt():void
+		{
+			var changeUtil:HashMap=new HashMap();
+			for(var i:int = 0;i<length;i++)
+			{
+				var item:AttributeItem = new AttributeItem();
+				item.type=Math.random()>0.5?CharAttributeType.HP:CharAttributeType.GENGU;
+				item.value=100;
+				changeUtil.put(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
+			}
+			EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,AttChangeEnum.MOUNT_MODLE,changeUtil);
 		}
 		
 		private function sound(type:String,value:String):void

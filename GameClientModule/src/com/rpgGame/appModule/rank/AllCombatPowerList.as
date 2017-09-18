@@ -20,8 +20,8 @@ package com.rpgGame.appModule.rank
 		private var _leftGroup:AllRankLeftGroup;
 		private function initView():void
 		{
-			this.x = 22;
-			this.y = 54;
+//			this.x = 22;
+//			this.y = 54;
 			_type = RankListType.All_COMBATPOWER_TYPE;
 			_leftGroup = new AllRankLeftGroup(_skin.cellgroup,_type);
 			_leftGroup.bindPageBtn(_skin.skinFlip.skin  as Flip2_Skin);
