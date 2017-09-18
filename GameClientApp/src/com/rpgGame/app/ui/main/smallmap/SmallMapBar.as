@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.smallmap 
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.MenuManager;
@@ -68,7 +69,7 @@ package com.rpgGame.app.ui.main.smallmap
 			this._skin = new map_Skin();
 			super(this._skin);
 			_smallmapHideMenu=new SmallmapHideMenu();
-			_skin.grp_cont.addChild(_smallmapHideMenu);
+			_skin.gHide.addChild(_smallmapHideMenu);
 			_smallmapHideMenu.x=_skin.btnHide.x;
 			_smallmapHideMenu.y=_skin.btnHide.y+30;
 			_smallmapHideMenu.visible=false;
@@ -89,6 +90,22 @@ package com.rpgGame.app.ui.main.smallmap
 			
 			//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
 			//			sound_mute_one();
+			var touch:TouchCtrl=new TouchCtrl(_skin.gHide,null,onOver,onOut);
+		}
+		
+		private function onOver():void
+		{
+			// TODO Auto Generated method stub
+			if (_smallmapHideMenu.visible==false) 
+			{
+				_smallmapHideMenu.visible=true;	
+			}
+		}
+		
+		private function onOut():void
+		{
+			// TODO Auto Generated method stub
+			_smallmapHideMenu.visible=false;	
 		}
 		
 		public function resize(w : int, h : int) : void {
@@ -148,14 +165,20 @@ package com.rpgGame.app.ui.main.smallmap
 					//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnHide://屏蔽场景
-					var menus : Array = SystemSetUtil.getShieldingMenu();
-					ShieldingMenu.GetInstance().show(menus,-1,-1,80);
+					//var menus : Array = SystemSetUtil.getShieldingMenu();
+				//	ShieldingMenu.GetInstance().show(menus,-1,-1,80);
+					GameSettingManager.aKeyBlock=!GameSettingManager.aKeyBlock;
+					if (_smallmapHideMenu.visible) 
+					{
+						_smallmapHideMenu.visible=false;
+					}
+					//_smallmapHideMenu.visible=!_smallmapHideMenu.visible;
 					break;
 				case this._skin.btnWeb://打开官网
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSelect://换线
-					menus = MenuUtil.getsystemChangeLine();
+					var menus : Array  = MenuUtil.getsystemChangeLine();
 					MenuManager.showMenu(menus,null, -1, -1, 80);
 					break;
 			}
