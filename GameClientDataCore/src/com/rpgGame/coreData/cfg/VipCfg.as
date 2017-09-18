@@ -1,16 +1,17 @@
 package  com.rpgGame.coreData.cfg
 {
-
-	
-
 	
 	
 	
+	
+	
+	
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.Q_vip;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-
+	
 	public class VipCfg
 	{
 		public function VipCfg()
@@ -32,7 +33,19 @@ package  com.rpgGame.coreData.cfg
 		{
 			return _dataDic[id];
 		}
-
-
+		
+		public static function getBuQianNum(lv:int):int
+		{
+			var cfg:Q_vip=_dataDic[lv];
+			var arr:Array=JSONUtil.decode(cfg.q_sign_times);
+			return arr[0];
+		}
+		
+		public static function getTIQianNum(lv:int):int
+		{
+			var cfg:Q_vip=_dataDic[lv];
+			var arr:Array=JSONUtil.decode(cfg.q_sign_times);
+			return arr[1];
+		}
 	}
 }

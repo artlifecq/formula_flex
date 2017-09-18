@@ -4,7 +4,6 @@ package com.rpgGame.appModule.fulidating
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.sender.FuliDaTingSender;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.ServerActiveEvent;
@@ -13,12 +12,11 @@ package com.rpgGame.appModule.fulidating
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.fulidating.ZaiXianCfg;
-	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_online;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.gameactivities.bean.onlineInfo;
 	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
@@ -41,7 +39,7 @@ package com.rpgGame.appModule.fulidating
 		private var _showItemId:int;
 		private var _prizeEffect:InterObject3D
 		
-		private const interval:int=10*1000;
+		private const interval:int=3*1000;
 		private var _gameTimer:GameTimer;
 		public function ZaiXianItem()
 		{
@@ -85,6 +83,7 @@ package com.rpgGame.appModule.fulidating
 		{
 			super.onHide();
 			EventManager.removeEvent(ServerActiveEvent.SERVERACTIVE_ONLINE_PICKUP,updateItem);
+			if(_gameTimer) _gameTimer.stop();
 		}
 		
 		public function updateBtnState():void
@@ -93,12 +92,15 @@ package com.rpgGame.appModule.fulidating
 			if(!info||info.state==2){
 				GrayFilter.gray(_skin.btnOK);
 				_gameTimer.stop();
+				setIco(info.hasRewardItemId);
 			}else if(info.state==0){
 				GrayFilter.gray(_skin.btnOK);
 				_gameTimer.start();
+				updateShow();
 			}else if(info.state==1){
 				_skin.btnOK.filter=null;
 				_gameTimer.start();
+				updateShow();
 			}
 		}
 		
@@ -113,15 +115,17 @@ package com.rpgGame.appModule.fulidating
 		private function showPrizeEff():void
 		{
 			_ico.visible=false;
-			_gameTimer.stop();
+			_skin.lb_name.visible=false;
+			_gameTimer.stop();	
 			if(_prizeEffect&&_prizeEffect.isStarted) return;
-			_prizeEffect=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_da"),_ico.x+_ico.width/2,_ico.y+_ico.height/2,1,completeHandle);
+			_prizeEffect=this.playInter3DAt(ClientConfig.getEffect("ui_tubiaogundong"),_ico.x+_ico.width/2,_ico.y+_ico.height/2,1,completeHandle);
 		}
 		
 		private function completeHandle(sr3D : InterObject3D):void
 		{
 			setIco(_showItemId);
 			_ico.visible=true;
+			_skin.lb_name.visible=true;
 			_prizeEffect = null;
 		}
 		
@@ -129,12 +133,13 @@ package com.rpgGame.appModule.fulidating
 		private function updateShow():void
 		{
 			if(_index>=_prizes.length) _index=0;
-			setIco(_prizes[_index]);
+			setIco(_prizes[_index].mod);
+			_index++;
 		}
 		
 		private function setIco(id:int):void
 		{
-			var arr:Array=getArrById(id);
+			var arr:*=getArrById(id);
 			if(arr){
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr.mod,arr.num,arr.bind);
 				var url:String=ClientConfig.getItemIcon(arr.mod, IcoSizeEnum.ICON_48 )
@@ -142,6 +147,8 @@ package com.rpgGame.appModule.fulidating
 				_ico.count=arr.num;
 				_ico.setIsBind(arr.bind==1?true:false);
 				_ico.showQuality(itemInfo.qItem);
+				_skin.lb_name.text=itemInfo.qItem.q_name;
+				_skin.lb_name.color=ItemConfig.getItemQualityColor(itemInfo.cfgId);
 				switch( itemInfo.type )
 				{
 					case GoodsType.EQUIPMENT://装备
@@ -156,7 +163,7 @@ package com.rpgGame.appModule.fulidating
 			}
 		}
 		
-		private function getArrById(id:int):Array
+		private function getArrById(id:int):Object
 		{
 			if(!_prizes) return null;
 			for(var i:int=0;i<_prizes.length;i++)

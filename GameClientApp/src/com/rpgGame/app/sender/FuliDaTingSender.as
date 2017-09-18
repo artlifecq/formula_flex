@@ -84,9 +84,10 @@ package com.rpgGame.app.sender
 		/**
 		 * Vip领取额外奖励
 		 * */
-		public static function reqSignObtainAwardMessage():void
+		public static function reqSignObtainAwardMessage(type:int):void
 		{
 			var msg:ReqSignObtainAwardMessage = new ReqSignObtainAwardMessage();
+			msg.isVip=type;
 			SocketConnection.send(msg);
 		}
 		

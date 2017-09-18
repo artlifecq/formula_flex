@@ -48,13 +48,12 @@ package com.rpgGame.coreData.cfg.fulidating
 				if(i>0&&keys[keys.length-1]<day)
 				{
 					return keys.length-1;
-				}
-				else 	if(i>0&&keys[i]>=day&&keys[i-1]<day)
+				}else if(keys[i]==day)
 				{
 					return i;
-				}
-				else{
-					return 0;
+				}else if(i>0&&(keys[i]>day&&keys[i-1]<day))
+				{
+					return i;
 				}
 			}
 			return 0;

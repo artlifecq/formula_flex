@@ -78,6 +78,8 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbDate = temp;
 			temp.name = "lbDate";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.fontSize = 16;
 			temp.text = "21";
 			temp.textAlign = "center";
@@ -94,6 +96,8 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBuqian = temp;
 			temp.name = "uiBuqian";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/fulidating/word/bq.png";
 			temp.x = 47;
 			temp.y = 19;
@@ -105,6 +109,8 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiJin = temp;
 			temp.name = "uiJin";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/fulidating/jin.png";
 			temp.x = 0;
 			temp.y = 0;
@@ -116,6 +122,8 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiOK = temp;
 			temp.name = "uiOK";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/fulidating/gou.png";
 			temp.x = 64;
 			temp.y = 26;
@@ -127,6 +135,8 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiTiqian = temp;
 			temp.name = "uiTiqian";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/fulidating/word/tqq.png";
 			temp.x = 47;
 			temp.y = 19;

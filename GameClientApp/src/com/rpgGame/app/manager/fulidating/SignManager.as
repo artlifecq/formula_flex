@@ -39,13 +39,13 @@ package com.rpgGame.app.manager.fulidating
 		
 		public function isHaveSignDay(day:int):Boolean
 		{
-			if(_signVO.getedSignReward==null||_signVO.getedSignReward.length==0) return true;
+			if(_signVO.getedSignReward==null||_signVO.getedSignReward.length==0) return false;
 			for(var i:int=0;i<_signVO.getedSignReward.length;i++)
 			{
 				if(day==_signVO.getedSignReward[i])
-					return false;
+					return true;
 			}
-			return true;
+			return false;
 		}
 		
 		/**
@@ -102,18 +102,16 @@ package com.rpgGame.app.manager.fulidating
 			return false;
 		}
 		
-		public function getBuQianNum():int
+		public function isCanBuQian(day:int):Boolean
 		{
-			var vipCfg:Q_vip=VipCfg.getVip(Mgr.vipMgr.vipLv);
-			var arr:Array=JSONUtil.decode(vipCfg.q_sign_times);
-			return arr[0];
+			if(signVO.signAddNum==0) return false;
+			return true;
 		}
 		
-		public function getTiQianNum():int
+		public function isCanTiQian(day:int):Boolean
 		{
-			var vipCfg:Q_vip=VipCfg.getVip(Mgr.vipMgr.vipLv);
-			var arr:Array=JSONUtil.decode(vipCfg.q_sign_times);
-			return arr[1];
+			if(signVO.strikeSignSum==0) return false;
+			return true;
 		}
 		
 		/**签到信息数据*/
@@ -128,7 +126,7 @@ package com.rpgGame.app.manager.fulidating
 			_signVO.dayList = msg.signInfo.dayList;
 			_signVO.getedSignReward = msg.signInfo.sumList;
 			_signVO.openServerTime=new Date(msg.signInfo.openTime.fValue*1000);
-			EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SIGN_GETINFOS,_signVO);
+			EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SIGN_GETINFOS);
 		}
 		
 		/**签到结果反馈*/		
@@ -137,7 +135,7 @@ package com.rpgGame.app.manager.fulidating
 			if(msg.signResult > 0)
 			{
 				_signVO.dayList.push( msg.signResult );
-				EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SIGN_GETINFOS,_signVO);
+				EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SIGN_GETINFOS);
 			}
 		}
 		
