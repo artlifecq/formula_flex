@@ -4,6 +4,7 @@ package com.game.engine3D.scene.render
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
+	import com.game.engine3D.enum.NameEnum;
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
 	import com.game.engine3D.scene.render.vo.MaterialPropertyData;
 	import com.game.engine3D.scene.render.vo.MethodData;
@@ -3597,7 +3598,7 @@ package com.game.engine3D.scene.render
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
-					if(element.name.indexOf("chest") != -1 || element.name.indexOf("zero") != -1)//这里处理下策划自己加的挂点到模型里面去，干扰了模型的包围盒
+					if(element.name.indexOf(NameEnum.TYPE_CHEST) != -1 || element.name.indexOf(NameEnum.TYPE_ZERO) != -1)//这里处理下策划自己加的挂点到模型里面去，干扰了模型的包围盒
 					{
 						continue;
 					}
@@ -4124,7 +4125,8 @@ package com.game.engine3D.scene.render
 			}
 			for each(var virtual : ObjectContainer3D in this._baseVirtualElements) 
 			{
-                if (-1 != virtual.name.indexOf("st_")) {
+                if (-1 != virtual.name.indexOf(NameEnum.TYPE_ZT)) 
+				{
                     continue;
                 }
 				for each(var unit : RenderUnitChild in _currChildUnitList) 
@@ -4132,10 +4134,10 @@ package com.game.engine3D.scene.render
 					if (virtual.name == unit.childName) 
 					{
 						unit.renderUnit.parent = null;
-						unit.boneName = "c_0_body_01";
+						unit.boneName = NameEnum.BONE_NAME;
 						if (toBone)
 						{
-							addUnitAtBone(unit.renderUnit, "c_0_body_01");
+							addUnitAtBone(unit.renderUnit, NameEnum.BONE_NAME);
 						}
 						else
 						{
