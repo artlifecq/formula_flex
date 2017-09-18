@@ -114,6 +114,11 @@ package  com.rpgGame.appModule.social.team
 		 override protected function onHide():void
 		 {
 			 super.onHide();
+			 if (TeamListItemExt.curItem) 
+			 {
+				 TeamListItemExt.curItem.setSelected(false);
+				 TeamListItemExt.curItem=null;
+			 }
 			 timer.stop();
 			 TeamSender.ReqOpenOrCloseTeamPanel(1,1);
 		 }

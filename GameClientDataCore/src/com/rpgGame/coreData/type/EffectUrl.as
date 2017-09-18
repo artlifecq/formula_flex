@@ -241,7 +241,8 @@ package com.rpgGame.coreData.type
 		public static const GRID_OPEN:String="ui_gezi_3";
 		/**跳跃落地特效*/
 		public static const EFFECT_JUMPDOWN:String="tx_tiaoyueyan";
-		
+		public static const EFFECT_TIME_10:String="ui_daojishi";
+		public static const EFFECT_BOSS:String="tx_boss_uimianbanzhanshi";
 		public function EffectUrl()
 		{
 		}

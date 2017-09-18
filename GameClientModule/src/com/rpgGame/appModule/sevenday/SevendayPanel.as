@@ -106,7 +106,7 @@ package com.rpgGame.appModule.sevenday
 			}
 			//_skin.uiMsg.styleName="";
 			reward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon0,RewardGroup.ALIN_CENTER,6,9,0,true,6);
-			avateUI=new UIAvatar3D(_skin.modGrp,1.5);
+			avateUI=new UIAvatar3D(_skin.modGrp);
 			
 			showInit();
 		}
@@ -286,8 +286,9 @@ package com.rpgGame.appModule.sevenday
 			iconOutShow();
 			dayItem.bg2.visible=true;
 			_skin.uiMsg.styleName="ui/app/sevenday/"+dayData.q_reward_img+".png";
-			
+			//q_mod_scale
 			avateUI.updateBodyWithRes(SevendayCfgData.getSevendayModByJob(dayData.q_mode,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
+			avateUI.scaleRole=dayData.q_mod_scale*0.01;
 			avateUI.visible=true;
 			reward.setRewardByJsonStr(dayData.q_reward);
 			reward.visible=true;

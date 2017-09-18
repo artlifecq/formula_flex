@@ -46,7 +46,7 @@ package org.mokylin.skin.app.shejiao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 453;
-			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
 			temp.x = 18;
 			temp.y = 82;

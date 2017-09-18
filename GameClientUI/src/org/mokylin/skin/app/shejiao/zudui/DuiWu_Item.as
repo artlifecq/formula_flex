@@ -1,11 +1,9 @@
 package org.mokylin.skin.app.shejiao.zudui
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
 
 	/**
 	 * @private
@@ -31,8 +29,6 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var lbZhanli:feathers.controls.Label;
 
-		public var rdoSelect:feathers.controls.Button;
-
 		public var selectBg:feathers.controls.UIAsset;
 
 		public var selectUsBg:feathers.controls.UIAsset;
@@ -48,13 +44,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 894;
-			this.elementsContent = [bg1_i(),bg2_i(),selectUsBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbMap_i(),rdoSelect_i()];
-			selectBg_i();
-			
+			this.elementsContent = [bg1_i(),bg2_i(),selectUsBg_i(),selectBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbMap_i()];
 			
 			states = {
 			};
-			skinNames={"hover":"ui/common/hover/liangkuang2.png"};
+			skinNames={};
 		}
 
 
@@ -162,29 +156,16 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function rdoSelect_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			rdoSelect = temp;
-			temp.name = "rdoSelect";
-			temp.height = 33;
-			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
-			temp.width = 894;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function selectBg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			selectBg = temp;
 			temp.name = "selectBg";
-			temp.bottom = 0;
-			temp.styleName = "ui/common/hover/liangkuang2.png";
-			temp.top = 0;
+			temp.height = 33;
+			temp.styleName = "ui/common/hover/liangkuang.png";
 			temp.width = 894;
 			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

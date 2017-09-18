@@ -9,6 +9,7 @@ package com.rpgGame.appModule.dungeon.multy
 	
 	import org.mokylin.skin.app.fuben.FuBen_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	
 	import starling.display.DisplayObject;
 
@@ -28,10 +29,10 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,MultyView,EmFunctionID.EM_DUORENFUBEN);
-			addTabDatas(TabBarSkin_pack,EquipDungeon,EmFunctionID.EM_ZHUANGBEIFUBEN);
-			addTabDatas(TabBarSkin_pack,GenuineDungeon,EmFunctionID.EM_ZHENGQIFUBEN);
-			addTabDatas(TabBarSkin_pack,ExpDungeon,EmFunctionID.EM_JINGYANFUBEN);
+			addTabDatas(TabBarSkin_tab,MultyView,EmFunctionID.EM_DUORENFUBEN);
+			addTabDatas(TabBarSkin_tab,EquipDungeon,EmFunctionID.EM_ZHUANGBEIFUBEN);
+			addTabDatas(TabBarSkin_tab,GenuineDungeon,EmFunctionID.EM_ZHENGQIFUBEN);
+			addTabDatas(TabBarSkin_tab,ExpDungeon,EmFunctionID.EM_JINGYANFUBEN);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void 

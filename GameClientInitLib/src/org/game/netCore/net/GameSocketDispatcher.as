@@ -1,5 +1,7 @@
 ﻿package org.game.netCore.net
 {
+    import com.gameClient.alert.AlertPanel;
+    
     import flash.utils.Dictionary;
 
     public class GameSocketDispatcher 
@@ -37,7 +39,7 @@
 //                fun(data);
             }else{
 				if(BeanConfig.isInit){
-//					AlertPanel.showMsg("客户端缺少对消息的处理:" + type );
+					AlertPanel.showMsg("客户端缺少对消息的处理:" + type );
 				}else{
 					if(data is Message){
 						cacheMsgs.push(data);

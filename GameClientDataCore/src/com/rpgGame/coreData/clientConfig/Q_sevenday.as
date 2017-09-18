@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_icon:String;
 		 /**  奖励模型(可区分职业性别，没有就不区分) */
 		public var q_mode:String;
+		 /**  奖励模型缩放值100 */
+		public var q_mod_scale:int;
 		 /**  奖励文字图片（app\sevenday目录下） */
 		public var q_reward_img:String;
 

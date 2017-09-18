@@ -9,6 +9,7 @@ package com.rpgGame.appModule.battle
 	
 	import org.mokylin.skin.app.zhanchang.ZhanChang_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	
 	public class BattleMainPanelExt extends TabBarPanel
 	{
@@ -22,10 +23,10 @@ package com.rpgGame.appModule.battle
 		}
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,NineTowerMainPanelExt,EmFunctionID.EM_TOWERS);
-			addTabDatas(TabBarSkin_pack,D1v1MainPanleExt,EmFunctionID.EM_DIANFENGDUIJUE);
-			addTabDatas(TabBarSkin_pack,JJBattlePanelExt,EmFunctionID.EM_JINGJIZHENGBA);
-			addTabDatas(TabBarSkin_pack,HczbPlayerViewUI,EmFunctionID.EM_HCZB_INFO_ZHANC);
+			addTabDatas(TabBarSkin_tab,NineTowerMainPanelExt,EmFunctionID.EM_TOWERS);
+			addTabDatas(TabBarSkin_tab,D1v1MainPanleExt,EmFunctionID.EM_DIANFENGDUIJUE);
+			addTabDatas(TabBarSkin_tab,JJBattlePanelExt,EmFunctionID.EM_JINGJIZHENGBA);
+			addTabDatas(TabBarSkin_tab,HczbPlayerViewUI,EmFunctionID.EM_HCZB_INFO_ZHANC);
 		}
 	}
 }

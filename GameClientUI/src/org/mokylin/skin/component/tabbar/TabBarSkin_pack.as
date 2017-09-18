@@ -21,7 +21,8 @@ package org.mokylin.skin.component.tabbar
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "up";
+			this.height = 29;
 			this.width = 75;
 			this.elementsContent = [];
 			
@@ -29,141 +30,48 @@ package org.mokylin.skin.component.tabbar
 				upAndSelected:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xeaeabc
+							value:0xEAEABC
 						}
 						,
 						{target:"labelDisplay",
-							name:"y",
-							value:7
-						}
-						,
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 					]
 				,
 				hover:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xeaeabc
+							value:0xEAEABC
 						}
 						,
 						{target:"labelDisplay",
-							name:"y",
-							value:7
-						}
-						,
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 					]
 				,
-				down:[
-						{target:"labelDisplay",
-							name:"y",
-							value:7
-						}
-						,
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
-						}
-					]
-				,
-				disabled:[
-						{target:"labelDisplay",
-							name:"y",
-							value:6
-						}
-					]
-				,
-				up:[
+				hoverAndSelected:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xe4d075
+							value:0xEAEABC
 						}
 						,
 						{target:"labelDisplay",
-							name:"y",
-							value:7
-						}
-						,
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
-						}
-					]
-				,
-				hhoverAndSelected:[
-						{target:"labelDisplay",
-							name:"color",
-							value:0xeaeabc
-						}
-						,
-						{target:"labelDisplay",
-							name:"y",
-							value:7
-						}
-						,
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 					]
 				,
 				downAndSelected:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xeaeabc
+							value:0xEAEABC
 						}
 						,
 						{target:"labelDisplay",
-							name:"y",
-							value:7
-						}
-						,
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
-						}
-					]
-				,
-				disabledAndSelected:[
-						{target:"labelDisplay",
-							name:"y",
-							value:6
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 					]
 				,
@@ -175,12 +83,17 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xe4d075
+							value:0xBBBDAA
 						}
 						,
 						{target:"labelDisplay",
 							name:"nativeFilters",
 							value:Fontter.filterObj["textFilterBlackGreen"]
+						}
+						,
+						{target:"labelDisplay",
+							name:"verticalAlign",
+							value:"middle"
 						}
 					]
 			};
@@ -198,13 +111,15 @@ package org.mokylin.skin.component.tabbar
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 21;
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "活动大厅";
-			temp.textAlign = "center";
-			temp.color = 0xe4d075;
+			temp.text = "标签标签";
+			temp.textAlign = "left";
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.top = 3;
+			temp.verticalAlign = "middle";
 			return temp;
 		}
 
