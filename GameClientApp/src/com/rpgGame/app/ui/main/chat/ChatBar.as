@@ -333,11 +333,18 @@ package com.rpgGame.app.ui.main.chat {
 		 */		
 		private function showChatMsg( info:ResChatMessage ):void
 		{
-			_skin.listBar.dataProvider.addItem(info);
-			if (_skin.listBar.dataProvider.length > ChatManager.MAX_CHATSHOWITEMCACEHE)
+			if (_skin.listBar.dataProvider.length== ChatManager.MAX_CHATSHOWITEMCACEHE)
 			{
 				_skin.listBar.dataProvider.removeItemAt(0);
 			}
+			_skin.listBar.dataProvider.addItem(info);
+			_skin.listBar.addEventListener(Event.RESIZE,onResizeChat);
+			scrollToBottom();
+		}
+		
+		private function onResizeChat(event:Event):void
+		{
+			_skin.listBar.removeEventListener(Event.RESIZE,onResizeChat);
 			scrollToBottom();
 		}
 		
@@ -366,6 +373,7 @@ package com.rpgGame.app.ui.main.chat {
 				_skin.listBar.dataProvider.addItem(msgs[i]);
 			}
 			
+			_skin.listBar.addEventListener(Event.RESIZE,onResizeChat);
 			scrollToBottom();
 		}
 		

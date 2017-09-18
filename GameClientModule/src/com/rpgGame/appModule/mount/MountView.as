@@ -12,6 +12,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_marriage_skills;
@@ -35,6 +36,7 @@ package com.rpgGame.appModule.mount
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import com.game.engine3D.display.InterObject3D;
 	
 	public class MountView extends AttChangeView
 	{
@@ -71,6 +73,8 @@ package com.rpgGame.appModule.mount
 			refeashSpellIcon();
 			refeashExpHandler();
 			initEvent();
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_zuoqizhandouli"),_skin.grpZhanli.x+110,_skin.grpZhanli.y+75,0);
+			_skin.container.addChild(_skin.grpZhanli);
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
 		{
@@ -129,6 +133,7 @@ package com.rpgGame.appModule.mount
 		
 		private var _uplevelSuccess:MountUpLevelSucessPane;
 		private var autoReq:TweenLite;
+		private var eft:InterObject3D;
 		private function showUplevel():void
 		{
 			if(_uplevelSuccess==null)
@@ -359,6 +364,7 @@ package com.rpgGame.appModule.mount
 			_mountupContent.isAutoing = false;
 			_mountupContent.hide();
 			super.hide();
+			eft.stop();
 		}
 	}
 }
