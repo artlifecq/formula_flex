@@ -213,7 +213,7 @@ package com.rpgGame.app.process
 					LayerManager.showOrHideMM();
 				}
 				
-				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+//				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 			}
 		}
 		
@@ -223,7 +223,7 @@ package com.rpgGame.app.process
 			{
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			}			
-			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+//			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 		}
 		
 		private function tipsSetup() : void
