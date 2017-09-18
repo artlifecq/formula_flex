@@ -18,6 +18,14 @@ package com.rpgGame.coreData.cfg.fulidating
 				_dataDic[info.q_id] = info;
 				_onlineArr.push(info.q_id);
 			}
+			_onlineArr.sort(short);
+		}
+		
+		private static function short(time1:int,time2:int):int
+		{
+			if(time1<time2) return -1;
+			else if(time1>time2) return 1;
+			return 0;
 		}
 		
 		public static function getOnLineArr():Array

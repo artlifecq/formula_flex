@@ -76,6 +76,10 @@ package org.mokylin.skin.app.fulidating
 
 		public var tab_pack:feathers.controls.TabBar;
 
+		public var uiLq1:feathers.controls.UIAsset;
+
+		public var uiLq2:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -86,7 +90,7 @@ package org.mokylin.skin.app.fulidating
 			
 			this.currentState = "normal";
 			this.width = 768;
-			this.elementsContent = [__FLDT_Meiriqiandao_UIAsset1_i(),__FLDT_Meiriqiandao_UIAsset2_i(),__FLDT_Meiriqiandao_UIAsset3_i(),__FLDT_Meiriqiandao_Group1_i(),grpDate_i(),__FLDT_Meiriqiandao_UIAsset11_i(),__FLDT_Meiriqiandao_UIAsset12_i(),qicon1_i(),__FLDT_Meiriqiandao_UIAsset13_i(),qicon2_i(),btnQiandao_i(),btnLingqu_i(),tab_pack_i(),__FLDT_Meiriqiandao_UIAsset14_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i(),icon6_i(),btnLingjiang_i(),__FLDT_Meiriqiandao_UIAsset15_i(),__FLDT_Meiriqiandao_Label1_i(),btnVIP_i(),lbDate_i(),days_container_i(),__FLDT_Meiriqiandao_Group2_i()];
+			this.elementsContent = [__FLDT_Meiriqiandao_UIAsset1_i(),__FLDT_Meiriqiandao_UIAsset2_i(),__FLDT_Meiriqiandao_UIAsset3_i(),__FLDT_Meiriqiandao_UIAsset4_i(),__FLDT_Meiriqiandao_Group1_i(),grpDate_i(),__FLDT_Meiriqiandao_UIAsset12_i(),__FLDT_Meiriqiandao_UIAsset13_i(),qicon1_i(),__FLDT_Meiriqiandao_UIAsset14_i(),qicon2_i(),btnQiandao_i(),btnLingqu_i(),tab_pack_i(),__FLDT_Meiriqiandao_UIAsset15_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i(),icon6_i(),btnLingjiang_i(),__FLDT_Meiriqiandao_UIAsset16_i(),__FLDT_Meiriqiandao_Label1_i(),btnVIP_i(),num_i(),lbDate_i(),uiLq1_i(),uiLq2_i(),days_container_i()];
 			
 			states = {
 			};
@@ -109,19 +113,7 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 0;
 			temp.y = 41;
-			temp.elementsContent = [__FLDT_Meiriqiandao_UIAsset4_i(),__FLDT_Meiriqiandao_UIAsset5_i(),__FLDT_Meiriqiandao_UIAsset6_i(),__FLDT_Meiriqiandao_UIAsset7_i(),__FLDT_Meiriqiandao_UIAsset8_i(),__FLDT_Meiriqiandao_UIAsset9_i(),__FLDT_Meiriqiandao_UIAsset10_i()];
-			return temp;
-		}
-
-		private function __FLDT_Meiriqiandao_Group2_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.height = 30;
-			temp.width = 200;
-			temp.x = 544;
-			temp.y = 5;
-			temp.layout = __FLDT_Meiriqiandao_HorizontalLayout2_i();
-			temp.elementsContent = [__FLDT_Meiriqiandao_UIAsset16_i(),num_i()];
+			temp.elementsContent = [__FLDT_Meiriqiandao_UIAsset5_i(),__FLDT_Meiriqiandao_UIAsset6_i(),__FLDT_Meiriqiandao_UIAsset7_i(),__FLDT_Meiriqiandao_UIAsset8_i(),__FLDT_Meiriqiandao_UIAsset9_i(),__FLDT_Meiriqiandao_UIAsset10_i(),__FLDT_Meiriqiandao_UIAsset11_i()];
 			return temp;
 		}
 
@@ -129,14 +121,6 @@ package org.mokylin.skin.app.fulidating
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
 			temp.gap = 2;
-			return temp;
-		}
-
-		private function __FLDT_Meiriqiandao_HorizontalLayout2_i():feathers.layout.HorizontalLayout
-		{
-			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.horizontalAlign = "right";
-			temp.verticalAlign = "middle";
 			return temp;
 		}
 
@@ -156,12 +140,21 @@ package org.mokylin.skin.app.fulidating
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/fyx.png";
-			temp.x = 486;
+			temp.x = 405;
 			temp.y = 8;
 			return temp;
 		}
 
 		private function __FLDT_Meiriqiandao_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/fulidating/fyx.png";
+			temp.x = 486;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function __FLDT_Meiriqiandao_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/qdbg.jpg";
@@ -170,7 +163,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset12_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/word/qdjkhd.png";
@@ -179,7 +172,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset13_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/word/vipewlq.png";
@@ -188,7 +181,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset14_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/qtxia.jpg";
@@ -197,21 +190,12 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset15_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/word/bjvipkzdqd.png";
 			temp.x = 14;
 			temp.y = 473;
-			return temp;
-		}
-
-		private function __FLDT_Meiriqiandao_UIAsset16_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fulidating/word/byljqdcs.png";
-			temp.x = 450;
-			temp.y = -104;
 			return temp;
 		}
 
@@ -227,13 +211,22 @@ package org.mokylin.skin.app.fulidating
 		private function __FLDT_Meiriqiandao_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/fulidating/word/byljqdcs.png";
+			temp.x = 570;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __FLDT_Meiriqiandao_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/wenshi/huawen_3.png";
 			temp.x = 246;
 			temp.y = 12;
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset3_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.scaleX = -1;
@@ -243,7 +236,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset4_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/qd_xiaodi.png";
@@ -253,7 +246,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset5_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/fyx.png";
@@ -262,7 +255,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset6_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/fyx.png";
@@ -271,7 +264,7 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset7_i():feathers.controls.UIAsset
+		private function __FLDT_Meiriqiandao_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/fyx.png";
@@ -280,20 +273,11 @@ package org.mokylin.skin.app.fulidating
 			return temp;
 		}
 
-		private function __FLDT_Meiriqiandao_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fulidating/fyx.png";
-			temp.x = 324;
-			temp.y = 8;
-			return temp;
-		}
-
 		private function __FLDT_Meiriqiandao_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fulidating/fyx.png";
-			temp.x = 405;
+			temp.x = 324;
 			temp.y = 8;
 			return temp;
 		}
@@ -365,10 +349,10 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			days_container = temp;
 			temp.name = "days_container";
-			temp.height = 266;
-			temp.width = 569;
+			temp.height = 268;
+			temp.width = 568;
 			temp.x = 1;
-			temp.y = 78;
+			temp.y = 77;
 			return temp;
 		}
 
@@ -572,10 +556,9 @@ package org.mokylin.skin.app.fulidating
 			temp.height = 25;
 			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.app.fulidating.number.UINumberShuzi;
-			temp.textAlign = "left";
 			temp.width = 50;
-			temp.x = 583;
-			temp.y = -106;
+			temp.x = 700;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -613,6 +596,28 @@ package org.mokylin.skin.app.fulidating
 			temp.y = 346;
 			temp.layout = __FLDT_Meiriqiandao_HorizontalLayout1_i();
 			temp.dataProvider = __FLDT_Meiriqiandao_ArrayCollection1_i();
+			return temp;
+		}
+
+		private function uiLq1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiLq1 = temp;
+			temp.name = "uiLq1";
+			temp.styleName = "ui/common/yilingqu3.png";
+			temp.x = 609;
+			temp.y = 133;
+			return temp;
+		}
+
+		private function uiLq2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiLq2 = temp;
+			temp.name = "uiLq2";
+			temp.styleName = "ui/common/yilingqu3.png";
+			temp.x = 609;
+			temp.y = 280;
 			return temp;
 		}
 

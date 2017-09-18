@@ -9,7 +9,7 @@ package com.rpgGame.netData.sign.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 发送签到信息
+	 * 登录发送已签到信息
 	 */
 	public class ResSendSignInfoToClientMessage extends Message {
 	

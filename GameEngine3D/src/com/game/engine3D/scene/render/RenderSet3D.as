@@ -369,7 +369,7 @@ package com.game.engine3D.scene.render
 		}
 
 		/**
-		 * 添加指定的显示对象到对应的虚拟挂节点上
+		 * 添加指定的显示对象到对应的虚拟挂节点上,骨骼，都可以
 		 * @param value
 		 * @param obj
 		 * @return

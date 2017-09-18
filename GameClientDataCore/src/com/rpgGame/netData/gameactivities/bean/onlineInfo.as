@@ -20,6 +20,9 @@ package com.rpgGame.netData.gameactivities.bean{
 		//1 可领 2已领
 		private var _state: int;
 		
+		//已经领过的物品ID
+		private var _hasRewardItemId: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -28,6 +31,8 @@ package com.rpgGame.netData.gameactivities.bean{
 			writeInt(_time);
 			//1 可领 2已领
 			writeByte(_state);
+			//已经领过的物品ID
+			writeInt(_hasRewardItemId);
 			return true;
 		}
 		
@@ -39,6 +44,8 @@ package com.rpgGame.netData.gameactivities.bean{
 			_time = readInt();
 			//1 可领 2已领
 			_state = readByte();
+			//已经领过的物品ID
+			_hasRewardItemId = readInt();
 			return true;
 		}
 		
@@ -70,6 +77,21 @@ package com.rpgGame.netData.gameactivities.bean{
 		 */
 		public function set state(value: int): void{
 			this._state = value;
+		}
+		
+		/**
+		 * get 已经领过的物品ID
+		 * @return 
+		 */
+		public function get hasRewardItemId(): int{
+			return _hasRewardItemId;
+		}
+		
+		/**
+		 * set 已经领过的物品ID
+		 */
+		public function set hasRewardItemId(value: int): void{
+			this._hasRewardItemId = value;
 		}
 		
 	}
