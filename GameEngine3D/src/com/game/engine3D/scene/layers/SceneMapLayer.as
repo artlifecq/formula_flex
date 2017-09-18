@@ -164,7 +164,7 @@ package com.game.engine3D.scene.layers
 			_lights = new Vector.<LightBase>();
 			_useLight = true;
 			_castsShadows = true;
-			_plantCastsShadows = false;
+			_plantCastsShadows = true;
 			_showDistrictWireframe = false;
 			_sceneMapData = null;
 			_animatorMap = new HashMap();
@@ -389,6 +389,7 @@ package com.game.engine3D.scene.layers
 						{
 							addMapObject(obj as ObjectContainer3D);
 						}
+						objTransformPlanared(obj as ObjectContainer3D);
 						break;
 					case AssetType.DISTRICT:
 						_district = obj as DistrictWithPath;
