@@ -214,7 +214,9 @@ package com.game.engine3D.scene.render.vo
 		
 		private function addVirtualElements(element:ObjectContainer3D):void
 		{
-			if(element.name.indexOf(NameEnum.TYPE_CHEST) || element.name.indexOf(NameEnum.TYPE_ZERO) || element.name.indexOf(NameEnum.TYPE_ZT))
+			if(element.name.indexOf(NameEnum.TYPE_CHEST) != -1 
+				|| element.name.indexOf(NameEnum.TYPE_ZERO) != -1 
+				|| element.name.indexOf(NameEnum.TYPE_ZT) != -1)
 			{
 				_baseVirtualElements.push(ObjectContainer3D(element));
 			}
