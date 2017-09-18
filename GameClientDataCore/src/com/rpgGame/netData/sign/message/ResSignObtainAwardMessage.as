@@ -8,20 +8,20 @@ package com.rpgGame.netData.sign.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求领取累计签到奖励
+	 * 领取首签奖励
 	 */
-	public class ReqSignSumAwardToGameMessage extends Message {
+	public class ResSignObtainAwardMessage extends Message {
 	
-		//累计签到天数
-		private var _day: int;
+		//领取结果 1成功 0失败
+		private var _result: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//累计签到天数
-			writeInt(_day);
+			//领取结果 1成功 0失败
+			writeByte(_result);
 			return true;
 		}
 		
@@ -29,8 +29,8 @@ package com.rpgGame.netData.sign.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//累计签到天数
-			_day = readInt();
+			//领取结果 1成功 0失败
+			_result = readByte();
 			return true;
 		}
 		
@@ -39,22 +39,22 @@ package com.rpgGame.netData.sign.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 154203;
+			return 154104;
 		}
 		
 		/**
-		 * get 累计签到天数
+		 * get 领取结果 1成功 0失败
 		 * @return 
 		 */
-		public function get day(): int{
-			return _day;
+		public function get result(): int{
+			return _result;
 		}
 		
 		/**
-		 * set 累计签到天数
+		 * set 领取结果 1成功 0失败
 		 */
-		public function set day(value: int): void{
-			this._day = value;
+		public function set result(value: int): void{
+			this._result = value;
 		}
 		
 	}

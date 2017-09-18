@@ -4,16 +4,26 @@ package com.rpgGame.appModule.fulidating
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.sender.FuliDaTingSender;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.ServerActiveEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.fulidating.ZaiXianCfg;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_online;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.type.AssetUrl;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.gameactivities.bean.onlineInfo;
 	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
+	
+	import app.message.GoodsType;
 	
 	import feathers.utils.filter.GrayFilter;
 	
@@ -126,10 +136,23 @@ package com.rpgGame.appModule.fulidating
 		{
 			var arr:Array=getArrById(id);
 			if(arr){
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr.mod,arr.num,arr.bind);
 				var url:String=ClientConfig.getItemIcon(arr.mod, IcoSizeEnum.ICON_48 )
 				_ico.setIconResName(url,false);
 				_ico.count=arr.num;
 				_ico.setIsBind(arr.bind==1?true:false);
+				_ico.showQuality(itemInfo.qItem);
+				switch( itemInfo.type )
+				{
+					case GoodsType.EQUIPMENT://装备
+					case GoodsType.EQUIPMENT1://装备
+					case GoodsType.EQUIPMENT2://装备
+						TipTargetManager.show( _ico, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+						break;
+					default:
+						TipTargetManager.show( _ico, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
+						break;
+				}
 			}
 		}
 		
