@@ -8,20 +8,20 @@ package com.rpgGame.netData.sign.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求领取累计签到奖励
+	 * Vip领取额外奖励
 	 */
-	public class ReqSignSumAwardToGameMessage extends Message {
+	public class ReqSignObtainAwardMessage extends Message {
 	
-		//累计签到天数
-		private var _day: int;
+		//vip 1成功  首签  0
+		private var _isVip: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//累计签到天数
-			writeInt(_day);
+			//vip 1成功  首签  0
+			writeByte(_isVip);
 			return true;
 		}
 		
@@ -29,8 +29,8 @@ package com.rpgGame.netData.sign.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//累计签到天数
-			_day = readInt();
+			//vip 1成功  首签  0
+			_isVip = readByte();
 			return true;
 		}
 		
@@ -39,22 +39,22 @@ package com.rpgGame.netData.sign.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 154203;
+			return 154204;
 		}
 		
 		/**
-		 * get 累计签到天数
+		 * get vip 1成功  首签  0
 		 * @return 
 		 */
-		public function get day(): int{
-			return _day;
+		public function get isVip(): int{
+			return _isVip;
 		}
 		
 		/**
-		 * set 累计签到天数
+		 * set vip 1成功  首签  0
 		 */
-		public function set day(value: int): void{
-			this._day = value;
+		public function set isVip(value: int): void{
+			this._isVip = value;
 		}
 		
 	}

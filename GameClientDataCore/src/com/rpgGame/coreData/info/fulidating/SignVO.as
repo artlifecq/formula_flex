@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.fulidating
 {
 	
-
+	
 	public class SignVO extends Object
 	{
 		public static const REWARD_NUM:Vector.<int> = Vector.<int>([ 2 , 5 , 10 , 17 , 26 ]);
@@ -12,6 +12,12 @@ package com.rpgGame.coreData.info.fulidating
 		public var monthSignSum: int;
 		// 历史累计签到次数
 		public var historySignSum: int;
+		// 提前签到次数
+		public var strikeSignSum: int;
+		//首签奖励领取  1领取 0未领
+		public var firstAward: int;	
+		//VIP奖励领取  1领取 0未领
+		public var vipAward: int;
 		// 已经签到过的号数(1-31)集合
 		public var dayList: Vector.<int> = new Vector.<int>();
 		// 已经领取的累计签到天数奖励集合
@@ -65,9 +71,9 @@ package com.rpgGame.coreData.info.fulidating
 			}
 		}
 		
-		public function dayIsSign( date:Date ):Boolean
+		public function dayIsSign( day:int ):Boolean
 		{		
-			return dayList.indexOf( date.date ) != -1;
+			return dayList.indexOf( day ) != -1;
 		}
 		
 		public function get openServerTime():Date

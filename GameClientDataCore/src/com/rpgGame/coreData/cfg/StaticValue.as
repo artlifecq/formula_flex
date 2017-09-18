@@ -36,6 +36,10 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static const GRAY_TEXT:uint = 0xb2b4a2;
 		/**
+		 *星期显示灰色文本 
+		 */
+		public static const GRAY_TEXT_WEEK:uint = 0xbbbdaa;
+		/**
 		 * 特殊蓝
 		 */
 		public static const BLUE_TEXT:uint = 0x14a3f3;

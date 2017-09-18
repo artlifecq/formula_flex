@@ -55,6 +55,8 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.PetTiaoZhanTip;
     import com.rpgGame.app.ui.tips.PetTip;
     import com.rpgGame.app.ui.tips.ShiJieBossRewardTips;
+    import com.rpgGame.app.ui.tips.SignBuQianTip;
+    import com.rpgGame.app.ui.tips.SignTiQianTip;
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
@@ -275,6 +277,9 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.MEIREN_GUANQIA_TIP,MeiRenGuanQiaTip);
 			TipManager.registerTipsParserClass(TipType.TASK_LEAD_TIP,TaskLeadTips);
 			TipManager.registerTipsParserClass(TipType.TASK_LOOP_TIP,TaskloopTips);
+			
+			TipManager.registerTipsParserClass(TipType.SIGN_BUQIAN_TIP,SignBuQianTip);
+			TipManager.registerTipsParserClass(TipType.SIGN_TIQIAN_TIP,SignTiQianTip);
 			
 			TipManager.registerTipsParserClass(TipType.HUNYIN_JIEZI_TIP,HunJieTip);
 		}

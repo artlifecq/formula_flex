@@ -11,6 +11,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
 	import com.rpgGame.netData.gameactivities.message.SCRewardSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.SCSevenDayGiftinfoMessage;
+	import com.rpgGame.netData.sign.message.ResSendSignInfoToClientMessage;
+	import com.rpgGame.netData.sign.message.ResSendSignResultToClientMessage;
+	import com.rpgGame.netData.sign.message.ResSignObtainAwardMessage;
+	import com.rpgGame.netData.sign.message.ResSignSumAwardResultToClientMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -38,6 +42,11 @@ package com.rpgGame.app.cmdlistener
 			/*在线奖励*/
 			SocketConnection.addCmdListener(411101, onSCOnlineInfoMessage);
 			SocketConnection.addCmdListener(411102, onSCOnlineRewardMessage);
+			/*每日签到*/
+			SocketConnection.addCmdListener(154101, onResSendSignInfoToClientMessage);
+			SocketConnection.addCmdListener(154102, onResSendSignResultToClientMessage);
+			SocketConnection.addCmdListener(154104, onResSignObtainAwardMessage);
+			SocketConnection.addCmdListener(154103, onResSignSumAwardResultToClientMessage);
 			
 			finish();
 		}
@@ -87,6 +96,30 @@ package com.rpgGame.app.cmdlistener
 		private function onSCOnlineRewardMessage(msg:SCOnlineRewardMessage):void
 		{
 			Mgr.zaiXianMgr.onSCOnlineRewardMessage(msg);
+		}
+		
+		/**签到信息数据*/
+		private function onResSendSignInfoToClientMessage(msg:ResSendSignInfoToClientMessage):void
+		{
+			Mgr.signMgr.onResSendSignInfoToClientMessage(msg);
+		}
+		
+		/**签到结果反馈*/		
+		private function onResSendSignResultToClientMessage(msg:ResSendSignResultToClientMessage):void
+		{
+			Mgr.signMgr.onResSendSignResultToClientMessage(msg);
+		}
+		
+		/**VIP额外签到领取反馈*/
+		private function onResSignObtainAwardMessage(msg:ResSignObtainAwardMessage):void
+		{
+			Mgr.signMgr.onResSignObtainAwardMessage(msg);
+		}
+		
+		/**在线奖励领取反馈*/		
+		private function onResSignSumAwardResultToClientMessage(msg:ResSignSumAwardResultToClientMessage):void
+		{
+			Mgr.signMgr.onResSignSumAwardResultToClientMessage(msg);
 		}
 	}
 	

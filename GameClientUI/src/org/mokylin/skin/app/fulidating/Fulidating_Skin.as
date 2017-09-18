@@ -130,10 +130,10 @@ package org.mokylin.skin.app.fulidating
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.height = 504;
-			temp.width = 160;
-			temp.x = 21;
-			temp.y = 85;
+			temp.height = 500;
+			temp.width = 150;
+			temp.x = 28;
+			temp.y = 88;
 			temp.layout = __Fulidating_Skin_VerticalLayout1_i();
 			return temp;
 		}

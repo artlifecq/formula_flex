@@ -89,9 +89,11 @@ package org.mokylin.skin.app.fulidating
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.text = "绑定铜钱";
+			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 62;
+			temp.width = 150;
+			temp.x = 17;
 			temp.y = 248;
 			return temp;
 		}

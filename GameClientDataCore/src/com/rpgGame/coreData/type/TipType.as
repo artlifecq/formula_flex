@@ -127,5 +127,9 @@ package com.rpgGame.coreData.type
 		
 		/** 婚戒tips */
 		public static const HUNYIN_JIEZI_TIP : int = rEnum.next;
+		/** 补签tips */
+		public static const SIGN_BUQIAN_TIP : int = rEnum.next;
+		/** 提前签到tips */
+		public static const SIGN_TIQIAN_TIP : int = rEnum.next;
 	}
 }

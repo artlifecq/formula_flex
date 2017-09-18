@@ -4,6 +4,10 @@ package com.rpgGame.app.manager.fulidating
 	import com.rpgGame.netData.gameactivities.bean.onlineInfo;
 	import com.rpgGame.netData.gameactivities.message.SCOnlineInfoMessage;
 	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
+	import com.rpgGame.netData.sign.message.ResSendSignInfoToClientMessage;
+	import com.rpgGame.netData.sign.message.ResSendSignResultToClientMessage;
+	import com.rpgGame.netData.sign.message.ResSignObtainAwardMessage;
+	import com.rpgGame.netData.sign.message.ResSignSumAwardResultToClientMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	
