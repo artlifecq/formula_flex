@@ -152,6 +152,13 @@ package com.rpgGame.app.manager
 			if (_lockPos==null) 
 			{
 				_lockPos=new Vector3D(1347,-1198,-1198);
+				var arr:Array=JSONUtil.decode(GlobalSheetData.getStrValue(907)) as Array;
+				if (arr) 
+				{
+					_lockPos.x=int(arr[0]);
+					_lockPos.y=int(arr[1]);
+					_lockPos.z=int(arr[1]);
+				}
 				_lockRole=new SceneRole(SceneCharType.DUMMY,0);
 				_lockRole.position=_lockPos;
 				_lockRole.speed=MainRoleManager.actor.speed;
