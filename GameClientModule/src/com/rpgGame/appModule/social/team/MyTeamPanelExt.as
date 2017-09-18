@@ -216,7 +216,7 @@ package com.rpgGame.appModule.social.team
 			super.onHide();
 			clearModel();
 			Mgr.teamMgr.removeEventListener(TeamEvent.GET_TEAM_INFO , OnTeamInfoChange);
-			Mgr.teamMgr.removeEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
+			//Mgr.teamMgr.removeEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
 		}
 		private function clearModel():void
 		{
@@ -234,7 +234,7 @@ package com.rpgGame.appModule.social.team
 			TweenPanel();
 			
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_TEAM_INFO , OnTeamInfoChange);
-			Mgr.teamMgr.addEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
+			//Mgr.teamMgr.addEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
 			
 		}
 		
@@ -247,16 +247,17 @@ package com.rpgGame.appModule.social.team
 		
 		private function UpdateSetInfo():void
 		{
+			return;
 			var isAutoAccept:Boolean=false;//!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM)
-			if(_skin.chk_accept_invite.isEnabled ==isAutoAccept )
+			if(_skin.chk_accept_invite.touchable ==isAutoAccept )
 				return ;
 			if(!isAutoAccept)
 			{
-				_skin.chk_accept_invite.isEnabled = false;
+				_skin.chk_accept_invite.touchable = false;
 				TipTargetManager.show(_skin.chk_accept_invite,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61014))));
 			}else
 			{
-				_skin.chk_accept_invite.isEnabled = true;
+				_skin.chk_accept_invite.touchable = true;
 				TipTargetManager.remove(_skin.chk_accept_invite);
 			}
 			

@@ -7,6 +7,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.SkinnableContainer;
+	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.zhanchang.jingjichang.RoleItem2;
 
@@ -16,13 +17,15 @@ package com.rpgGame.appModule.battle.jjzb
 		private var topArr:Array;
 		private var btnBack:Button;
 		private var players:Vector.<JJBattlePlayerMediator>;
-		public function SubTop3View(g:Group,top:Array,backBtn:Button)
+		private var _bg:UIAsset;
+		public function SubTop3View(bg:UIAsset,g:Group,top:Array,backBtn:Button)
 		{
 			this.gTop=g;
 			this.topArr=top;
 			this.gTop.visible=false;
 			this.btnBack=backBtn;
-			
+			this._bg=bg;
+			this._bg.visible=false;
 			players=new Vector.<JJBattlePlayerMediator>();
 			var len:int=top.length;
 			var tmp:JJBattlePlayerMediator;
@@ -39,6 +42,7 @@ package com.rpgGame.appModule.battle.jjzb
 		public function show():void
 		{
 			gTop.visible=true;
+			this._bg.visible=true;
 			this.btnBack.visible=true
 			Mgr.jjBattleMgr.reqChallegeRankData(2);
 		}
@@ -46,6 +50,7 @@ package com.rpgGame.appModule.battle.jjzb
 		public function hide():void
 		{
 			gTop.visible=false;
+			this._bg.visible=false;
 			this.btnBack.visible=false
 			for each (var player:JJBattlePlayerMediator in players) 
 			{

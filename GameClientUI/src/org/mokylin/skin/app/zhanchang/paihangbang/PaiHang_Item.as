@@ -1,11 +1,9 @@
 package org.mokylin.skin.app.zhanchang.paihangbang
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.zhanchang.paihangbang.ZhanChangPaiHangBtn;
 
 	/**
 	 * @private
@@ -19,6 +17,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		//==========================================================================
 		public var bg1:feathers.controls.UIAsset;
 
+		public var hoverBg:feathers.controls.UIAsset;
+
 		public var icon:feathers.controls.UIAsset;
 
 		public var lbId:feathers.controls.Label;
@@ -28,8 +28,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		public var lbLevel:feathers.controls.Label;
 
 		public var lbName:feathers.controls.Label;
-
-		public var rdoSelect:feathers.controls.Button;
 
 		public var selectBg:feathers.controls.UIAsset;
 
@@ -46,7 +44,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			this.currentState = "normal";
 			this.height = 30;
 			this.width = 545;
-			this.elementsContent = [bg1_i(),icon_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),uiVip_i(),selectBg_i(),rdoSelect_i()];
+			this.elementsContent = [bg1_i(),icon_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),uiVip_i(),selectBg_i(),hoverBg_i()];
 			
 			states = {
 			};
@@ -63,6 +61,19 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			bg1 = temp;
 			temp.name = "bg1";
 			temp.styleName = "ui/common/titilebg/list.png";
+			temp.width = 545;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function hoverBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			hoverBg = temp;
+			temp.name = "hoverBg";
+			temp.height = 30;
+			temp.styleName = "ui/app/zhanchang/paihangbang/hover.png";
 			temp.width = 545;
 			temp.x = 0;
 			temp.y = 0;
@@ -138,19 +149,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.width = 159;
 			temp.x = 149;
 			temp.y = 6;
-			return temp;
-		}
-
-		private function rdoSelect_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			rdoSelect = temp;
-			temp.name = "rdoSelect";
-			temp.height = 30;
-			temp.styleClass = org.mokylin.skin.app.zhanchang.paihangbang.ZhanChangPaiHangBtn;
-			temp.width = 545;
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 
