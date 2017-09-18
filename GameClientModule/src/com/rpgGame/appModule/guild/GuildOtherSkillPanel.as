@@ -16,7 +16,6 @@ package com.rpgGame.appModule.guild
 	import away3d.events.Event;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.banghui.ItemTongShuaiShuXing;
 	import org.mokylin.skin.app.banghui.Skill_TongShuai;
 	
 	import starling.display.DisplayObject;
@@ -42,9 +41,9 @@ package com.rpgGame.appModule.guild
 		private function initView():void
 		{
 			_propList = new Vector.<SkillPropCell>();
-			_propList.push(new SkillPropCell(CharAttributeType.WAI_GONG,_skin.skinGongji.skin as ItemTongShuaiShuXing));
-			_propList.push(new SkillPropCell(CharAttributeType.DEFENSE_PER,_skin.skinFangyu.skin as ItemTongShuaiShuXing));
-			_propList.push(new SkillPropCell(CharAttributeType.MAX_HP,_skin.skinShengming.skin as ItemTongShuaiShuXing));
+			_propList.push(new SkillPropCell(CharAttributeType.WAI_GONG,_skin.skinGongji));
+			_propList.push(new SkillPropCell(CharAttributeType.DEFENSE_PER,_skin.skinFangyu));
+			_propList.push(new SkillPropCell(CharAttributeType.MAX_HP,_skin.skinShengming));
 			_skin.btnUP.addEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btnUP.addEventListener(Event.TRIGGERED, triggeredHandler);
 			SkinUI.addNode(RTNodeID.GUILD_SKILL_LEADER,RTNodeID.GUILD_SKILL_SELF_LEADER_BTN,_skin.btnUP,177,GuildManager.instance().hasLeaderSkill2LevelUp);
@@ -141,14 +140,14 @@ import com.rpgGame.coreData.cfg.AttValueConfig;
 import com.rpgGame.coreData.clientConfig.Q_att_values;
 import com.rpgGame.coreData.type.CharAttributeType;
 
-import org.mokylin.skin.app.banghui.ItemTongShuaiShuXing;
+import feathers.controls.UINumber;
 
 
 class SkillPropCell
 {
 	private var _attid:int;
-	private var _skin:ItemTongShuaiShuXing
-	public function SkillPropCell(id:int,skin:ItemTongShuaiShuXing)
+	private var _skin:UINumber;
+	public function SkillPropCell(id:int,skin:UINumber)
 	{
 		_attid = id;
 		_skin = skin;
@@ -190,22 +189,16 @@ class SkillPropCell
 	
 	private function  refeashValue():void
 	{
-		var str:String;
-		if(CharAttributeType.WAI_GONG== _attid)
-			str = "攻击:";
-		else if(CharAttributeType.DEFENSE_PER== _attid)
-			str = "防御:";
-		else
-			str = "生命:";
-		_skin.lbGongji.text = str+_currentValue.toString();
-		_skin.lbUp.text = "+"+(_nextValue-_currentValue).toString();
+//		_skin.lbGongji.text = str+_currentValue.toString();
+//		_skin.lbUp.text = "+"+(_nextValue-_currentValue).toString();
+		_skin.label="+"+_currentValue;
 		
 	}
 	private var _showHide:Boolean;
 	public function showHide(value:Boolean):void
 	{
 		_showHide = value;
-		_skin.lbUp.visible = value;
-		_skin.uiUp.visible = value;
+//		_skin.lbUp.visible = value;
+//		_skin.uiUp.visible = value;
 	}
 }
