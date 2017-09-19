@@ -31,6 +31,11 @@ package com.rpgGame.core.events
 		/**
 		 *在线奖励领取反馈
 		 */
-		public static const SERVERACTIVE_ONLINE_PICKUP:int = UNIQUEID.NEXT;
+		public static const SERVERACTIVE_ONLINE_PICKUP:int = UNIQUEID.NEXT;		
+		/**
+		 *获取签到信息
+		 */
+		public static const SERVERACTIVE_SIGN_GETINFOS:int = UNIQUEID.NEXT;
+
 	}
 }

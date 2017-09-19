@@ -101,7 +101,8 @@ package com.rpgGame.app.cmdlistener
 			if(msg.success==1){
 				AppManager.showApp(AppConstant.SWORD_RESULT_SUCCESS,msg.ljId);
 			}else{
-				AppManager.showApp(AppConstant.SWORD_RESULT_FAIL,msg.ljId);
+//				AppManager.showApp(AppConstant.SWORD_RESULT_FAIL,msg.ljId);
+				AppManager.showApp(AppConstant.ZONEDIE_PANEL);//注他们要求用这个面板了 哎
 			}
 		}
 		

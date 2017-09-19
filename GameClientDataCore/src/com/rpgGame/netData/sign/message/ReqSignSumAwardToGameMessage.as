@@ -39,7 +39,7 @@ package com.rpgGame.netData.sign.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 154205;
+			return 154203;
 		}
 		
 		/**

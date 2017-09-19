@@ -4,9 +4,12 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
+	import com.rpgGame.netData.gameactivities.bean.onlineInfo;
 	
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.renderers.BaseDefaultListItemRenderer;
 	import feathers.controls.text.Fontter;
@@ -49,6 +52,7 @@ package com.rpgGame.app.ui.main.chat
 			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
 			_richText.wordWrap = true;
 			_richText.multiline = true;
+			_richText.addEventListener(Event.RESIZE,onTxtResize);
 			
 			if(!textFormat)
 			{
@@ -66,6 +70,13 @@ package com.rpgGame.app.ui.main.chat
 			}
 			_richText.defaultTextFormat = _defaultFormat;
 			this.addChild(_richText);
+		}
+		
+		private function onTxtResize(event:Event):void
+		{
+			if(this._owner){
+				this._owner.dispatchEvent(event)
+			}
 		}
 		
 		override protected function commitData():void

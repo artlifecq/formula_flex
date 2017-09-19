@@ -449,13 +449,17 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_baseVirtualElements) {
-				for each(var virtualElement : ObjectContainer3D in _baseVirtualElements) {
-					if (name == virtualElement.name) {
+			if (_baseVirtualElements) 
+			{
+				for each(var virtualElement : ObjectContainer3D in _baseVirtualElements) 
+				{
+					if (name == virtualElement.name) 
+					{
 						return virtualElement;
 					}
 					child = getChild(virtualElement, name);
-					if (child) {
+					if (child)
+					{
 						return child;
 					}
 				}
