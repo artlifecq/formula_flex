@@ -85,6 +85,11 @@ package com.rpgGame.appModule.rank
 			
 		}
 		
+		override protected function refeashModle():void
+		{
+			
+		}
+		
 		override protected function refeashName():void
 		{
 			_skin.grpHead.visible = true;

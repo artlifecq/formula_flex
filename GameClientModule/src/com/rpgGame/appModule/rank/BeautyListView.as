@@ -122,6 +122,11 @@ class BeautyRightGroup extends RightGroupBase
 		
 	}
 	
+	override protected function refeashModle():void
+	{
+		
+	}
+	
 	override protected function refeashEquip():void
 	{
 		_skin.weapons.visible = false;
