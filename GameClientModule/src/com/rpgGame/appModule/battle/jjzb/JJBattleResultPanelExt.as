@@ -3,6 +3,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -17,7 +18,7 @@ package com.rpgGame.appModule.battle.jjzb
 	
 	import starling.display.DisplayObjectContainer;
 	
-	public class JJBattleResultPanelExt extends SkinUIPanel
+	public class JJBattleResultPanelExt extends ExitScenePanel
 	{
 		private var _skin:TiaoZhanJieSuan_Shengli;
 		private var _hash:HashMap=new HashMap();
@@ -39,7 +40,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private function onClose(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			DungeonSender.reqQuitDungeon();
+			DungeonSender.reqQuitDungeon(sceneId);
 			hide();
 		}
 		

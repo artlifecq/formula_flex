@@ -4,6 +4,7 @@ package com.rpgGame.appModule.zone
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -16,7 +17,7 @@ package com.rpgGame.appModule.zone
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
-	public class CommonZoneResultPanelExt extends SkinUIPanel
+	public class CommonZoneResultPanelExt extends ExitScenePanel
 	{
 		private var _skin:HunYinFuBenJieSuanSkin;
 		private var _timer:GameTimer;
@@ -94,7 +95,7 @@ package com.rpgGame.appModule.zone
 		override public function hide():void
 		{
 			super.hide();
-			DungeonSender.reqQuitDungeon();
+			DungeonSender.reqQuitDungeon(sceneId);
 		}
 		override protected function onHide():void
 		{

@@ -3,6 +3,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneRewardPanelInfoMessage;
 	
@@ -15,7 +16,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import utils.TimerServer;
 	
-	public class DailyDungeonSuccessPanel extends SkinUIPanel
+	public class DailyDungeonSuccessPanel extends ExitScenePanel
 	{
 		private var _skin:FuBenJieSuan_Shengli;
 		private var _effectList:Vector.<StarEffect>;
@@ -132,7 +133,7 @@ package com.rpgGame.appModule.dungeon.genuine
 		{
 			TimerServer.remove(updateTime);
 			icoListGroup.tweeRewardInBag();
-			DungeonSender.reqQuitDungeon();
+			DungeonSender.reqQuitDungeon(sceneId);
 			this.hide();
 		}
 		override public function hide() : void

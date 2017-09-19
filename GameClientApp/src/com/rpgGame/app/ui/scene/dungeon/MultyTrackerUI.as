@@ -1,58 +1,38 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
-	import com.game.mainCore.core.timer.GameTimer;
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
-	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
-	import com.rpgGame.coreData.clientConfig.Q_item;
-	import com.rpgGame.coreData.clientConfig.Q_lunjian;
-	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
-	import com.rpgGame.coreData.type.TaskType;
-	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	import com.rpgGame.netData.zone.bean.KillMonsterInfo;
 	
 	import flash.geom.Point;
 	
 	import feathers.controls.SkinnableContainer;
-	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.FuBen_Skin;
-	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
 	import starling.display.DisplayObject;
@@ -358,7 +338,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE)
 			{
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 			}
 			
 		}

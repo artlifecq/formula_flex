@@ -54,6 +54,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
 	import com.rpgGame.netData.skill.message.ResSkillChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
+	import com.rpgGame.netData.skill.message.ResSkillRemoveMessage;
 	import com.rpgGame.netData.skill.message.SCSkillLevelUpResultMessage;
 	
 	import flash.utils.setTimeout;

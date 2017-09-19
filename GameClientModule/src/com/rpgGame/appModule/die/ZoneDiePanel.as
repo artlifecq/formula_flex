@@ -4,6 +4,7 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.coreData.clientConfig.Q_die;
 	
 	import flash.utils.getTimer;
@@ -14,7 +15,7 @@ package com.rpgGame.appModule.die
 	
 	import starling.display.DisplayObject;
 	
-	public class ZoneDiePanel extends SkinUIPanel
+	public class ZoneDiePanel extends ExitScenePanel
 	{
 		private var _skin:TiaoZhanShiBai_Skin;
 		private var _listContent:ContentList;
@@ -42,7 +43,7 @@ package com.rpgGame.appModule.die
 			else
 			{
 				_timer.stop();
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 				this.hide();
 			}
 		}
@@ -76,7 +77,7 @@ package com.rpgGame.appModule.die
 			if(item==null)
 				return ;
 			SceneSwitchManager.needOpenNewFuncId = item.q_panel;
-			DungeonSender.reqQuitDungeon();
+			DungeonSender.reqQuitDungeon(sceneId);
 			this.hide();
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -84,7 +85,7 @@ package com.rpgGame.appModule.die
 			super.onTouchTarget(target);
 			if(target == _skin.btn_ok)
 			{
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 				this.hide();
 			}
 		}
