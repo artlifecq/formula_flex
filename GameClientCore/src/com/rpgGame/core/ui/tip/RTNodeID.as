@@ -69,7 +69,7 @@ package com.rpgGame.core.ui.tip
 		
 		//福利大厅
 		public static const MAIN_FULI:String="mainfuli";
-		public static const FULI_ZAILIAN:String=MAIN_FULI+"_zaixian";
+		public static const FULI_ZAIXIAN:String=MAIN_FULI+"_zaixian";
 		public static const FULI_QIANDAO:String=MAIN_FULI+"_qiandao";
 		public static const FULI_JIHUOMA:String=MAIN_FULI+"_jihuoma";
 		public static const FULI_DENGJI:String=MAIN_FULI+"_dengji";

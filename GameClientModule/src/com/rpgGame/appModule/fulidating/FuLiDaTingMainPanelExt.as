@@ -19,7 +19,7 @@ package com.rpgGame.appModule.fulidating
 		{
 			_skin=new Fulidating_Skin();
 			super(_skin,false);
-//			addRTN();
+			addRTN();
 		}
 		
 		override protected function initTabBarDatas():void
@@ -32,9 +32,9 @@ package com.rpgGame.appModule.fulidating
 		
 		protected function addRTN():void
 		{
-			addNode(RTNodeID.MAIN_FULI,RTNodeID.FULI_ZAILIAN,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZAIXIAN).button,140,Mgr.meridianMgr.checkHasNodeCanClick,false,null,true);
-			addNode(RTNodeID.MAIN_FULI,RTNodeID.FULI_QIANDAO,_tabBar.getTabDataByTabKey(EmFunctionID.EM_QIANDAO).button,140,Mgr.cheatsMgr.checkHasNodeCanClick,false,null,true);
-			addNode(RTNodeID.MAIN_FULI,RTNodeID.FULI_DENGJI,_tabBar.getTabDataByTabKey(EmFunctionID.EM_DENGJI).button,140,JunJieManager.ins.getCanActivation,false,null,true);
+			addNode(RTNodeID.MAIN_FULI,RTNodeID.FULI_ZAIXIAN,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZAIXIAN).button,154,Mgr.zaiXianMgr.chackNot,false,null,true);
+			addNode(RTNodeID.MAIN_FULI,RTNodeID.FULI_QIANDAO,_tabBar.getTabDataByTabKey(EmFunctionID.EM_QIANDAO).button,154,Mgr.signMgr.chackNot,false,null,true);
+			addNode(RTNodeID.MAIN_FULI,RTNodeID.FULI_DENGJI,_tabBar.getTabDataByTabKey(EmFunctionID.EM_DENGJI).button,154,Mgr.dengjiMgr.chackNot,false,null,true);
 		}
 	}
 }

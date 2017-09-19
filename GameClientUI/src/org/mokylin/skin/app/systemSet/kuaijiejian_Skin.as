@@ -447,7 +447,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label23_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "打坐";
+			temp.text = "心法";
 			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;

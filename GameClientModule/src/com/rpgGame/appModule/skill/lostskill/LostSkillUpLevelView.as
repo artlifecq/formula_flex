@@ -1,10 +1,13 @@
 package com.rpgGame.appModule.skill.lostskill
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.appModule.shop.ItemGetNoticeShowPanelExt;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -24,14 +27,11 @@ package com.rpgGame.appModule.skill.lostskill
 	
 	import away3d.events.Event;
 	
-	import feathers.core.ui_internal;
-	
 	import org.game.netCore.connection.SocketConnection;
-	import org.mokylin.skin.app.wuxue.Title_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Item_shuxing;
 	import org.mokylin.skin.app.wuxue.juexue.JuexueHead;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
-
+	
 	public class LostSkillUpLevelView
 	{
 		private static const maxLevel:int = 100;
@@ -51,6 +51,14 @@ package com.rpgGame.appModule.skill.lostskill
 			_skin.btn_yinyong.addEventListener(Event.TRIGGERED,changeStateHandler);
 			setTitleValue(_skin.tile_1.skin as JuexueHead,"dqhzb");
 			setTitleValue(_skin.tile_2.skin as JuexueHead,"sjtj");
+			var ctrl:TouchCtrl=new TouchCtrl(_skin.lb_lujing,onClickLuJing);
+			TaskUtil.addLabelEvet(_skin.lb_lujing);
+		}
+		
+		private function onClickLuJing():void
+		{
+			var item:int=_itemInfo.qItem.q_id;
+			ItemGetNoticeShowPanelExt.showItem(item);
 		}
 		
 		private function setTitleValue(skin:JuexueHead,title:String):void
