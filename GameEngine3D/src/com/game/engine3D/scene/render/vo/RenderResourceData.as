@@ -170,14 +170,11 @@ package com.game.engine3D.scene.render.vo
 					if (element is Mesh)
 					{
 						_drawElements.unshift(Mesh(element));
-					} 
-					else if(element is ObjectContainer3D)
-					{
-						addVirtualElements(element);
 					}
 					else
 					{
 						_drawElements.push(Mesh(element));
+						addVirtualElements(element);
 					}
 				}
 			}
@@ -215,13 +212,9 @@ package com.game.engine3D.scene.render.vo
 					{
 						_animatorElements.push(CompositeMesh(element));
 					} 
-					else if(element is ObjectContainer3D)
-					{
-						addVirtualElements(element);
-					}
 					else
 					{
-						
+						addVirtualElements(element);
 					}
 				}
 			}
