@@ -295,7 +295,6 @@ package com.rpgGame.app.utils
 				case LangMenu.INVITE_JOIN_SOCIETY://邀请加入帮派
 					//					SocietyManager.reqInviteJoin(heroId);
 					break;
-				case LangMenu.SEND_MAIL://发送邮件
 				case LangMenu.INVITE_JOIN_GUILD:
 					GuildSender.reqGuildInvite(heroId,0);
 					break;

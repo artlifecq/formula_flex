@@ -189,7 +189,7 @@ package com.rpgGame.appModule.sevenday
 			//receiveDay.push(day);
 			changeIconShow();
 			_skin.uiOk.visible=true;
-			_skin.btnLingqu.isEnabled=false;
+			_skin.btnLingqu.visible=false;
 			reward.tweeRewardInBag(1);
 			selectInfo(SevendayManager.getRewardOneSubNum());
 		}
@@ -292,17 +292,17 @@ package com.rpgGame.appModule.sevenday
 			avateUI.visible=true;
 			reward.setRewardByJsonStr(dayData.q_reward);
 			reward.visible=true;
-			_skin.btnLingqu.visible=true;
+			//_skin.btnLingqu.visible=true;
 			if(getIsReceiveDay(selectId))
 			{
 				_skin.uiOk.visible=true;
-				_skin.btnLingqu.isEnabled=false;
+				_skin.btnLingqu.visible=false;
 				reward.gray=true;
 			}
 			else
 			{
 				_skin.uiOk.visible=false;
-				_skin.btnLingqu.isEnabled=true;
+				_skin.btnLingqu.visible=true;
 				reward.gray=false;
 			}
 			if(selectId<=nowDay)

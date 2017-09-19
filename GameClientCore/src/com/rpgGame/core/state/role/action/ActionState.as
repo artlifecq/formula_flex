@@ -42,8 +42,11 @@ package com.rpgGame.core.state.role.action
 					this.type == RoleStateType.ACTION_COLLECT ||
 					this.type == RoleStateType.ACTION_PLAY_ACTION ||
 					this.type == RoleStateType.ACTION_ATTACK_UI ||
-					this.type == RoleStateType.ACTION_TRAIL) {
-				} else {
+					this.type == RoleStateType.ACTION_TRAIL) 
+				{
+				} 
+				else
+				{
 					var role : BaseRole = _machine.owner as BaseRole;
 					GameLog.add("[ActionState] roleName:" + role.name + " changeBaseVirtualParent(true) state:" + this.type);
 					role.avatar.forEachRenderUnit(function (unit : RenderUnit3D) : void {
@@ -53,8 +56,10 @@ package com.rpgGame.core.state.role.action
 			}
 		}
 		
-		override public function afterLeave() : void {
-			if (_machine && !_machine.isInPool) {
+		override public function afterLeave() : void 
+		{
+			if (_machine && !_machine.isInPool) 
+			{
 				super.afterLeave();
 				if (this.type == RoleStateType.ACTION_IDLE ||
 					this.type == RoleStateType.ACTION_WALK ||
@@ -66,7 +71,9 @@ package com.rpgGame.core.state.role.action
 					this.type == RoleStateType.ACTION_PLAY_ACTION ||
 					this.type == RoleStateType.ACTION_TRAIL||
 					this.type == RoleStateType.ACTION_ATTACK_UI) {
-				} else {
+				} 
+				else
+				{
 					var role : BaseRole = _machine.owner as BaseRole;
 					GameLog.add("[ActionState] roleName:" + role.name + " changeBaseVirtualParent(false) state:" + this.type);
 					role.avatar.forEachRenderUnit(function (unit : RenderUnit3D) : void {

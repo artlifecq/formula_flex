@@ -93,8 +93,6 @@ package com.rpgGame.app.manager
 			
 			role.avatar.secondStatusGetter = getSecondStatus;
 			
-			
-			role.avatar.buildSyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
 			//上“坐骑”
 			updateMount(role);
 			//穿“主体”

@@ -449,13 +449,17 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_baseVirtualElements) {
-				for each(var virtualElement : ObjectContainer3D in _baseVirtualElements) {
-					if (name == virtualElement.name) {
+			if (_baseVirtualElements) 
+			{
+				for each(var virtualElement : ObjectContainer3D in _baseVirtualElements) 
+				{
+					if (name == virtualElement.name) 
+					{
 						return virtualElement;
 					}
 					child = getChild(virtualElement, name);
-					if (child) {
+					if (child)
+					{
 						return child;
 					}
 				}
@@ -514,20 +518,23 @@ package com.game.engine3D.scene.render.vo
 			}
 			if (_drawElements)
 			{
-				for each (var drawElement : Mesh in _drawElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					animator = null;
-					if (drawElement is IAnimatorOwner)
+					if(drawElement is Mesh)
 					{
-						animator = (drawElement as IAnimatorOwner).animator;
-					}
-					if (animator is SkeletonAnimator)
-					{
-						index = drawElement.getBoneIndex(name);
-						if (index >= 0)
+						animator = null;
+						if (drawElement is IAnimatorOwner)
 						{
-							bone = drawElement.getBone(index);
-							return bone;
+							animator = (drawElement as IAnimatorOwner).animator;
+						}
+						if (animator is SkeletonAnimator)
+						{
+							index = (drawElement as Mesh).getBoneIndex(name);
+							if (index >= 0)
+							{
+								bone = (drawElement as Mesh).getBone(index);
+								return bone;
+							}
 						}
 					}
 				}

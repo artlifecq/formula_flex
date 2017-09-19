@@ -1,5 +1,6 @@
 package com.game.engine3D.scene.render.vo
 {
+	import com.game.engine3D.enum.NameEnum;
 	import com.game.engine3D.scene.render.RenderUnitLoader;
 	import com.game.engine3D.scene.render.SceneRenderCache;
 	import com.game.engine3D.utils.CallBackUtil;
@@ -31,7 +32,7 @@ package com.game.engine3D.scene.render.vo
 	{
 		private var _drawElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
-		private var _baseVirtualElements : Vector.<ObjectContainer3D>;
+		private var _baseVirtualElements : Vector.<ObjectContainer3D> = new Vector.<ObjectContainer3D>();;
 		
 		private var _soundBox : SoundBox;
 		private var _camera : Camera3D;
@@ -160,9 +161,25 @@ package com.game.engine3D.scene.render.vo
 			if (!_renderMeshLoader)
 				return;
 			
-			_drawElements = _renderMeshLoader.elements;
-			_drawElements.sort(meshSortFunc);
+			var elements : Vector.<ObjectContainer3D> = _renderMeshLoader.elements;
+			if(elements)
+			{
+				_drawElements = new Vector.<ObjectContainer3D>();
+				for each (var element : ObjectContainer3D in elements)
+				{
+					if (element is Mesh)
+					{
+						_drawElements.unshift(Mesh(element));
+					}
+					else
+					{
+						_drawElements.push(element);
+						addVirtualElements(element);
+					}
+				}
+			}
 			
+//			_drawElements.sort(meshSortFunc);
 			_lightPickerMap = _renderMeshLoader.lightPickerMap;
 			_lights = _renderMeshLoader.lights;
 			_methods = _renderMeshLoader.methods;
@@ -188,22 +205,32 @@ package com.game.engine3D.scene.render.vo
 			if (elements)
 			{
 				_animatorElements = new Vector.<CompositeMesh>();
-				_baseVirtualElements = new Vector.<ObjectContainer3D>();
+				
 				for each (var element : ObjectContainer3D in elements)
 				{
 					if (element is CompositeMesh)
 					{
 						_animatorElements.push(CompositeMesh(element));
 					} 
-					else if (element is ObjectContainer3D)
+					else
 					{
-						_baseVirtualElements.push(ObjectContainer3D(element));
+						addVirtualElements(element);
 					}
 				}
 			}
 			
 			tryResourceComplete();
 			tryResourceAsyncComplete();
+		}
+		
+		private function addVirtualElements(element:ObjectContainer3D):void
+		{
+			if(element.name.indexOf(NameEnum.TYPE_CHEST) != -1 
+				|| element.name.indexOf(NameEnum.TYPE_ZERO) != -1 
+				|| element.name.indexOf(NameEnum.TYPE_ZT) != -1)
+			{
+				_baseVirtualElements.push(ObjectContainer3D(element));
+			}
 		}
 
 		private function onAnimatorError(loader : RenderUnitLoader) : void
@@ -407,15 +434,19 @@ package com.game.engine3D.scene.render.vo
 			return elements;
 		}
 		
-		public function cloneBaseVirtualElements() : Vector.<ObjectContainer3D> {
-			if (!_baseVirtualElements) {
+		public function cloneBaseVirtualElements() : Vector.<ObjectContainer3D> 
+		{
+			if (!_baseVirtualElements)
+			{
 				return null;
 			}
-			if (_isOnlyInstance) {
+			if (_isOnlyInstance) 
+			{
 				return _baseVirtualElements;
 			}
 			var elements : Vector.<ObjectContainer3D> = new Vector.<ObjectContainer3D>();
-			for each(var element : ObjectContainer3D in _baseVirtualElements) {
+			for each(var element : ObjectContainer3D in _baseVirtualElements) 
+			{
 				elements.push(ObjectContainer3D(element.clone()));
 			}
 			return elements;
