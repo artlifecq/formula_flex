@@ -161,14 +161,25 @@ package com.game.engine3D.scene.render.vo
 			if (!_renderMeshLoader)
 				return;
 			
-			_drawElements = _renderMeshLoader.elements;
-			_drawElements.sort(meshSortFunc);
-			
-			for each (var element : ObjectContainer3D in _drawElements)
+			var elements : Vector.<ObjectContainer3D> = _renderMeshLoader.elements;
+			if(elements)
 			{
-				addVirtualElements(element);
+				_drawElements = new Vector.<ObjectContainer3D>();
+				for each (var element : ObjectContainer3D in elements)
+				{
+					if (element is Mesh)
+					{
+						_drawElements.unshift(Mesh(element));
+					}
+					else
+					{
+						_drawElements.push(element);
+						addVirtualElements(element);
+					}
+				}
 			}
 			
+//			_drawElements.sort(meshSortFunc);
 			_lightPickerMap = _renderMeshLoader.lightPickerMap;
 			_lights = _renderMeshLoader.lights;
 			_methods = _renderMeshLoader.methods;

@@ -43,6 +43,9 @@ package com.rpgGame.core.events
 		public static const MAP_JUMP_COMPLETE : int = UNIQUEID.NEXT;
 		/** 飞鞋完成 **/
 		public static const MAP_FLY_COMPLETE : int = UNIQUEID.NEXT;
+		/** 飞鞋完成 **/
+		public static const MAP_ROLEPOS_UPDATE : int = UNIQUEID.NEXT;
+		
 		
 	}
 }

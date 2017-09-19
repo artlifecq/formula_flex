@@ -13,6 +13,8 @@ package com.rpgGame.appModule.maps
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
+	import com.rpgGame.app.manager.map.BigMapsManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 
 	/**
 	 * 处理大地图上的 右边滚动框里面的相关显示和控制
@@ -240,9 +242,10 @@ package com.rpgGame.appModule.maps
 		/**npc栏位设置*/
 		public function setItem():void
 		{
-			npcList.addChild(getBackBar(BigMapsData.mapsNpcData));
-			monsterList.addChild(getBackBar(BigMapsData.mapsMonsterData));
-			thansList.addChild(getBackBar(BigMapsData.mapsThansData));
+			npcList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.NPC)));
+			npcList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.COLLECT)));
+			monsterList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.MONSTER)));
+			thansList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.TRANS)));
 			npcItemSpr.y=2;
 			monsterItemSpr.y=npcItemSpr.y+npcItemSpr.height;
 			thansItemSpr.y=monsterItemSpr.y+monsterItemSpr.height;
@@ -293,8 +296,8 @@ package com.rpgGame.appModule.maps
 					skin= new NpcItem();
 					skin.lbl_name.htmlText=name;
 					skin.lbl_level.htmlText=data[i].type==SceneCharType.MONSTER?data[i].level+"级":"";
-					skin.btn_over.name="ROLE_"+data[i].type+"_"+i+"_1";
-					skin.btnSend.name="ROLE_"+data[i].type+"_"+i+"_2";
+					skin.btn_over.name="ROLE_"+data[i].id+"_1";
+					skin.btnSend.name="ROLE_"+data[i].id+"_2";
 					temp.skin = skin;
 				}
 				else
@@ -302,8 +305,8 @@ package com.rpgGame.appModule.maps
 					skin2 = new NpcItem2();
 					skin2.lbl_name.htmlText=name;
 					skin2.lbl_level.htmlText=data[i].type==SceneCharType.MONSTER?data[i].level+"级":"";
-					skin2.btn_over.name="ROLE_"+data[i].type+"_"+i+"_1";
-					skin2.btnSend.name="ROLE_"+data[i].type+"_"+i+"_2";
+					skin2.btn_over.name="ROLE_"+data[i].id+"_1";
+					skin2.btnSend.name="ROLE_"+data[i].id+"_2";
 					temp.skin = skin2;
 				}
 				temp.y=i*temp.height;
