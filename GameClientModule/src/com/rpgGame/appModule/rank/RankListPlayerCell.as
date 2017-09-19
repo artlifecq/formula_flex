@@ -131,7 +131,7 @@ package com.rpgGame.appModule.rank
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			if(target == _skin.lbName)
+			if(target == _skin.lbName&&_isSelect)
 			{
 				var uise:*= _topInfo.playerid.hexValue;
 				var userName : String = _topInfo.playername;
