@@ -153,7 +153,7 @@ package com.rpgGame.app.scene
 		override protected function removeFromGraphic() : void
 		{
 			super.removeFromGraphic();
-			if (_headFace)
+			if (_headFace&&SceneCharType.PLAYER!=type)
 				_headFace.hide();
 			if (_dialogFace)
 				_dialogFace.hide();
@@ -198,6 +198,7 @@ package com.rpgGame.app.scene
 			}
 			if (_headFace)
 			{
+				_headFace.hide();
 				_headFace.recycleSelf();
 				_headFace = null;
 			}

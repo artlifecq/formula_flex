@@ -125,7 +125,7 @@ package com.rpgGame.app.ui.roll
 		{
 			if(_isRandomEnd)
 				return ;
-			DropGoodsManager.getInstance().reqRollPoint(_roleItem);
+			DropGoodsManager.getInstance().reqRollPoint(_roleItem,1);
 			_roleskin.btnRandom.alpha=1;
 			_roleskin.btnRandom.isEnabled = false;
 			if(saiziRender){
@@ -225,6 +225,11 @@ package com.rpgGame.app.ui.roll
 		
 		private function closeHander():void
 		{
+			//说明没有
+			if (_roleskin.btnRandom.isEnabled&&_roleItem) 
+			{
+				DropGoodsManager.getInstance().reqRollPoint(_roleItem,3);
+			}
 			if(Starling.juggler.contains(this))
 				Starling.juggler.remove(this);
 			StarlingLayerManager.hintUILayer.removeChild(this,true);

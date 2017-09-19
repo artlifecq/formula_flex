@@ -6,6 +6,7 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
 	import com.rpgGame.app.graphics.decor.DecorCtrl;
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -115,7 +116,7 @@ package com.rpgGame.app.graphics
 		{
 			if (_role) 
 			{
-				this.isSheildState=_role.isInViewDistance;
+				this.isSheildState=!_role.isInViewDistance;
 			}
 		}
 		public function displayVisible(attachType : String, visible : Boolean) : void
@@ -338,13 +339,17 @@ package com.rpgGame.app.graphics
 			if (element == null)
 				return;
 			//是否是屏蔽状态，玩家要显示名字和血条
-			if (!isShow&&_isSheildState&&_role) 
+			if (_isSheildState&&_role) 
 			{
 				if(SceneCharType.PLAYER==_role.type)
 				{
 					if (DecorCtrl.TOP_NAME==sortLevel||DecorCtrl.TOP_HPMP==sortLevel) 
 					{
 						isShow=true;
+					}
+					else 
+					{
+						isShow=false;
 					}
 				}
 			}
@@ -399,7 +404,18 @@ package com.rpgGame.app.graphics
 			StarlingLayerManager.headFaceLayer.addChild(this);
 			updateBind();
 		}
-		
+		/**初始化的时候玩家刚好被屏蔽了*/
+		public function checkSheildShow():void
+		{
+			if (_role) 
+			{
+				//初始化问题，刚好不可见
+				if (!GameSettingManager.viewFilter(_role)&&SceneCharType.PLAYER==_role.type) 
+				{
+					this.show();
+				}
+			}
+		}
 		public function hide() : void
 		{
 			if (this.parent)

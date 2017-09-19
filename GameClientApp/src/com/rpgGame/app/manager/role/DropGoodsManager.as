@@ -142,8 +142,13 @@ package com.rpgGame.app.manager.role
 				refeashRollPanePosition();
 			}
 		}
-		
-		public function reqRollPoint(info:RollItemInfo):void
+		/**
+		 *roll 
+		 * @param info
+		 * @param type 1需求3放弃
+		 * 
+		 */		
+		public function reqRollPoint(info:RollItemInfo,type:int):void
 		{
 			if(info.tempItemInfo.ltime*1000<SystemTimeManager.curtTm)
 			{
@@ -151,6 +156,7 @@ package com.rpgGame.app.manager.role
 			}
 			var msg:ReqRollPointMessage = new ReqRollPointMessage();
 			msg.uniqueId = info.uniqueId;
+			msg.type=type;
 			SocketConnection.send(msg);
 		}
 		

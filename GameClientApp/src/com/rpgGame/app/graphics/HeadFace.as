@@ -1455,7 +1455,11 @@ package com.rpgGame.app.graphics
 				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
 				{
 					MCUtil.removeSelf(_teamCaptainFlag);
-					_bloodBar.x=-_bloodBar.width/2;
+					if (_bloodBar) 
+					{
+						_bloodBar.x=-_bloodBar.width/2;
+					}
+				
 					//	deCtrl.sortTop();
 				}
 			}

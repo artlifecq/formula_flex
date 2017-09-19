@@ -16,7 +16,7 @@ package com.rpgGame.netData.drop.message{
 		//唯一ID
 		private var _uniqueId: long;
 		
-		//0需求 1贪婪 2弃权
+		//0 没有roll1需求 2贪婪 3弃权
 		private var _type: int;
 		
 		
