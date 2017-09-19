@@ -173,7 +173,7 @@ package com.game.engine3D.scene.render.vo
 					}
 					else
 					{
-						_drawElements.push(Mesh(element));
+						_drawElements.push(element);
 						addVirtualElements(element);
 					}
 				}
