@@ -9,6 +9,7 @@
 	import com.rpgGame.app.sender.HeroMiscSender;
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MenuEvent;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.enum.EnumCustomTagType;
 	import com.rpgGame.coreData.lang.LangShieldingMenu;
 	import com.rpgGame.coreData.role.GirlPetData;
@@ -56,6 +57,10 @@
 		 */
 		public static function set checktOherGirlPet(value:Boolean):void
 		{
+			if (_checktOherGirlPet==value) 
+			{
+				return;
+			}
 			_checktOherGirlPet = value;
 			if(!_checktOherGirlPet&&aKeyBlock){
 				_aKeyBlock=false;
@@ -77,6 +82,10 @@
 		 */
 		public static function set checkOtherEffect(value:Boolean):void
 		{
+			if (_checkOtherEffect==value) 
+			{
+				return;
+			}
 			_checkOtherEffect = value;
 			if(!_checkOtherEffect&&aKeyBlock){
 				_aKeyBlock=false;
@@ -101,6 +110,10 @@
 		
 		public static function set aKeyBlock(value:Boolean):void
 		{
+			if (_aKeyBlock==value) 
+			{
+				return;
+			}
 			_aKeyBlock=value;
 			filtrateAll(_aKeyBlock);
 		}
@@ -112,6 +125,10 @@
 		
 		public static function set checkFiltrateGuaiWu(value:Boolean):void
 		{
+			if (_checkFiltrateDuiWu==value) 
+			{
+				return;
+			}
 			_checkFiltrateGuaiWu=value;
 			if(!_checkFiltrateGuaiWu&&aKeyBlock){
 				_aKeyBlock=false;
@@ -135,6 +152,10 @@
 		
 		public static function set checkFiltrateDuiWu(value:Boolean):void
 		{
+			if (_checkFiltrateDuiWu==value) 
+			{
+				return;
+			}
 			_checkFiltrateDuiWu=value;
 			if(!_checkFiltrateDuiWu&&aKeyBlock){
 				_aKeyBlock=false;
@@ -151,6 +172,10 @@
 		
 		public static function set checkFiltrateBangHui(value:Boolean):void
 		{
+			if (_checkFiltrateBangHui==value) 
+			{
+				return;
+			}
 			_checkFiltrateBangHui=value;
 			if(!_checkFiltrateBangHui&&aKeyBlock){
 				_aKeyBlock=false;
@@ -218,7 +243,7 @@
 				return true;
 			}
 			//屏蔽非队友
-			if (checkFiltrateDuiWu && Mgr.teamMgr.hasTeam&&Mgr.teamMgr.isInMyTeam(HeroData(role.data).serverID)==false)
+			if (checkFiltrateDuiWu &&Mgr.teamMgr.isInMyTeam(HeroData(role.data).serverID)==false)
 			{
 				return false;
 			}
@@ -288,6 +313,12 @@
 					return checkFiltrateGuaiWu;
 				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_PLAYERS:
 					return checkFiltrateBangHui;
+				case LangShieldingMenu.SYSTEMSET_HIDE_PLAYERS:
+					return checkFiltrateDuiWu;
+				case LangShieldingMenu.SYSTEMSET_HIDE_OTHER_GIRL:
+					return checktOherGirlPet;
+				case LangShieldingMenu.SYSTEMSET_HIDE_DOTHER_EFFECTS:
+					return checkOtherEffect;
 			}
 			return false;
 		}
@@ -303,23 +334,30 @@
 					checkFiltrateGuaiWu=state;
 					break;
 				case LangShieldingMenu.SYSTEMSET_HIDE_PLAYERS:
-					
+					checkFiltrateDuiWu=state;
 					break;				
 				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_PLAYERS:
 					checkFiltrateBangHui=state;
 					break;
 				case LangShieldingMenu.SYSTEMSET_HIDE_DOTHER_EFFECTS:
+					checkOtherEffect=state;
 					break;
 				case LangShieldingMenu.SYSTEMSET_HIDE_OTHER_GIRL:
+					checktOherGirlPet=state;
 					break;			
 			}
 		}
 		
-		public static function showEffect(role:SceneRole):Boolean
+		public static function showEffect(role:SceneRole,animation:Q_SpellAnimation):Boolean
 		{
 			if (!role) 
 			{
 				return false;
+			}
+			//强制不屏蔽特效
+			if (animation&&animation.hide_effect==1) 
+			{
+				return true;
 			}
 			if (role.isMainChar) 
 			{
@@ -335,9 +373,9 @@
 				var see:Boolean= canSeePlayer(role);
 				if (see) 
 				{
-					return checkOtherEffect;
+					return !checkOtherEffect;
 				}
-				return false
+				return true
 			}
 			else if (SceneCharType.GIRL_PET==role.type) 
 			{

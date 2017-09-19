@@ -5,6 +5,7 @@ package com.rpgGame.app.scene
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
 	import com.rpgGame.app.state.role.control.FlyUpStateReference;
@@ -229,7 +230,7 @@ package com.rpgGame.app.scene
 					{
 						animation = animationsNum[i];
 						animatData = animation > 0 ? AnimationDataManager.getData(animation) : null;
-						if (animatData)
+						if (animatData&&GameSettingManager.showEffect(_role,animatData))
 						{
 							var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
 							ru.stop(buffData.curtStackCount*1000+1100);
@@ -245,7 +246,7 @@ package com.rpgGame.app.scene
 					{
 						animation = animations[i];
 						animatData = animation > 0 ? AnimationDataManager.getData(animation) : null;
-						if (animatData)
+						if (animatData&&GameSettingManager.showEffect(_role,animatData))
 						{
 							SpellAnimationHelper.addBuffEffect(_role, i+animationsNum.length, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
 						}

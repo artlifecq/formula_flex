@@ -5,11 +5,10 @@ package com.rpgGame.app.ui.main.smallmap
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.sound.GameSoundManager;
 	import com.rpgGame.app.utils.MenuUtil;
-	import com.rpgGame.app.utils.SystemSetUtil;
-	import com.rpgGame.app.view.uiComponent.menu.ShieldingMenu;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GameSettingEvent;
@@ -28,9 +27,6 @@ package com.rpgGame.app.ui.main.smallmap
 	
 	import away3d.utils.SoundUtil;
 	
-	import game.rpgGame.login.data.CreateRoleData;
-	import game.rpgGame.login.state.RoleStateType;
-	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -38,9 +34,6 @@ package com.rpgGame.app.ui.main.smallmap
 	
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 	
 	public class SmallMapBar extends SkinUI {
 		private static const MAXMAPSCALE : Number = 1;
@@ -68,11 +61,7 @@ package com.rpgGame.app.ui.main.smallmap
 		public function SmallMapBar() {
 			this._skin = new map_Skin();
 			super(this._skin);
-			_smallmapHideMenu=new SmallmapHideMenu();
-			_skin.gHide.addChild(_smallmapHideMenu);
-			_smallmapHideMenu.x=_skin.btnHide.x;
-			_smallmapHideMenu.y=_skin.btnHide.y+30;
-			_smallmapHideMenu.visible=false;
+			
 			isPlay=true;
 			this._initBgX = this._skin.grp_cont.x;
 			
@@ -91,21 +80,34 @@ package com.rpgGame.app.ui.main.smallmap
 			//			EventManager.addEvent(GameSettingEvent.SOUND_MUTE_ONE, sound_mute_one);
 			//			sound_mute_one();
 			var touch:TouchCtrl=new TouchCtrl(_skin.gHide,null,onOver,onOut);
+			updatePingbiBtnState();
 		}
-		
+		public function get smallmapHideMenu():SmallmapHideMenu
+		{
+			if (!_smallmapHideMenu) 
+			{
+				_smallmapHideMenu=new SmallmapHideMenu();
+				_skin.gHide.addChild(_smallmapHideMenu);
+				_smallmapHideMenu.x=_skin.btnHide.x;
+				_smallmapHideMenu.y=_skin.btnHide.y+30;
+				_smallmapHideMenu.visible=false;
+			}
+			return _smallmapHideMenu;
+		}
 		private function onOver():void
 		{
 			// TODO Auto Generated method stub
-			if (_smallmapHideMenu.visible==false) 
+			if (smallmapHideMenu.visible==false) 
 			{
-				_smallmapHideMenu.visible=true;	
+				smallmapHideMenu.visible=true;	
 			}
 		}
 		
 		private function onOut():void
 		{
 			// TODO Auto Generated method stub
-			_smallmapHideMenu.visible=false;	
+			//_smallmapHideMenu.visible=false;	
+			smallmapHideMenu.close();
 		}
 		
 		public function resize(w : int, h : int) : void {
@@ -168,9 +170,17 @@ package com.rpgGame.app.ui.main.smallmap
 					//var menus : Array = SystemSetUtil.getShieldingMenu();
 				//	ShieldingMenu.GetInstance().show(menus,-1,-1,80);
 					GameSettingManager.aKeyBlock=!GameSettingManager.aKeyBlock;
-					if (_smallmapHideMenu.visible) 
+					if (GameSettingManager.aKeyBlock) 
 					{
-						_smallmapHideMenu.visible=false;
+						FloatingText.showUp("屏蔽状态开启");
+					}
+					else  
+					{
+						FloatingText.showUp("屏蔽状态关闭");
+					}
+					if (smallmapHideMenu.visible) 
+					{
+						smallmapHideMenu.close();
 					}
 					//_smallmapHideMenu.visible=!_smallmapHideMenu.visible;
 					break;
@@ -184,69 +194,7 @@ package com.rpgGame.app.ui.main.smallmap
 			}
 		}
 		
-		private function onTouch(e : TouchEvent) : void
-		{
-			var t : Touch = e.getTouch(this, TouchPhase.HOVER);
-			if (t != null && t.target != null)
-			{
-				if(t.target==_smallmapHideMenu)
-				{
-					if(_smallmapHideMenu&&!_smallmapHideMenu.visible){
-						_smallmapHideMenu.visible=true;
-					}		
-					return;
-				}
-				else if (t.target ==_skin.btnHide)
-				{
-					if(_smallmapHideMenu&&!_smallmapHideMenu.visible){
-						_smallmapHideMenu.visible=true;
-					}	
-					return;
-				}
-			}		
-			
-			t = e.getTouch(this, TouchPhase.MOVED);
-			if (t != null && t.target != null)
-			{
-				if(t.target==_smallmapHideMenu)
-				{
-					if(_smallmapHideMenu&&!_smallmapHideMenu.visible){
-						_smallmapHideMenu.visible=true;
-					}		
-					return;
-				}
-				else if (t.target ==_skin.btnHide)
-				{
-					if(_smallmapHideMenu&&!_smallmapHideMenu.visible){
-						_smallmapHideMenu.visible=true;
-					}	
-					return;
-				}
-			}		
-			
-			t = e.getTouch(this, TouchPhase.ENDED);
-			if (t != null && t.target != null)
-			{
-				if(t.target==_smallmapHideMenu)
-				{
-					if(_smallmapHideMenu&&!_smallmapHideMenu.visible){
-						_smallmapHideMenu.visible=true;
-					}		
-					return;
-				}
-				else if (t.target ==_skin.btnHide)
-				{
-					if(_smallmapHideMenu&&!_smallmapHideMenu.visible){
-						_smallmapHideMenu.visible=true;
-					}	
-					return;
-				}
-			}		
-			
-			if(_smallmapHideMenu&&_smallmapHideMenu.visible){
-				_smallmapHideMenu.visible=false;
-			}	
-		}
+
 		
 		private function updatePingbiBtnState():void
 		{

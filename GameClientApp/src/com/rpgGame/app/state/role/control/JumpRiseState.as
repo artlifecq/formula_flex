@@ -134,12 +134,12 @@ package com.rpgGame.app.state.role.control
 					transition(RoleStateType.ACTION_IDLE);
 					
 				}
-				if (!GameSettingManager.showEffect(_machine.owner as SceneRole)) 
+				if ((_machine.owner as SceneRole).isMainChar) 
 				{
-					return;
+					//落地特效
+					SpellAnimationHelper.createSceneEffect(EffectUrl.EFFECT_JUMPDOWN,RenderUnitID.JUMP_DOWN,SceneCharType.SCENE_DEST_EFFECT,_machine.owner.x,_machine.owner.z);
 				}
-				//落地特效
-				SpellAnimationHelper.createSceneEffect(EffectUrl.EFFECT_JUMPDOWN,RenderUnitID.JUMP_DOWN,SceneCharType.SCENE_DEST_EFFECT,_machine.owner.x,_machine.owner.z);
+				
 				
 			}
 		}

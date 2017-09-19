@@ -11,6 +11,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SexType;
 	
 	import flash.geom.Vector3D;
@@ -41,6 +42,7 @@ package com.rpgGame.app.graphics
 		private var _isDisposed : Boolean;
 		
 		protected var deCtrl:DecorCtrl;
+		private var _isSheildState:Boolean;
 		public function BaseHeadFace()
 		{
 			super();
@@ -50,10 +52,44 @@ package com.rpgGame.app.graphics
 			_isDestroyed = false;
 			deCtrl=new DecorCtrl(this);
 		}
+
+		/**
+		 *是否屏蔽状态 
+		 */
+		public function get isSheildState():Boolean
+		{
+			return _isSheildState;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isSheildState(value:Boolean):void
+		{
+			if (_isSheildState==value) 
+			{
+				return;
+			}
+			_isSheildState = value;
+			if(SceneCharType.PLAYER==_role.type)
+			{
+				if (this.parent==null) 
+				{
+					show();
+				}
+				updateShowAndHide();
+			}
+		
+		}
+
 		public function set headVisible(value:Boolean):void
 		{
 			_visible = value;
 			this.visible=value;
+		}
+		override public function set visible(value:Boolean):void
+		{
+			super.visible=value;
 		}
 		public function get isDestroyed():Boolean
 		{
@@ -69,8 +105,19 @@ package com.rpgGame.app.graphics
 		{
 			_isDisposed = false;
 			_bodyRu = null;
+			_role=parameters[0];
+			if (_role) 
+			{
+				_role.addInViewDistanceChangedCallback(addInOutViewCall);
+			}
 		}
-		
+		private function addInOutViewCall(...arg):void
+		{
+			if (_role) 
+			{
+				this.isSheildState=_role.isInViewDistance;
+			}
+		}
 		public function displayVisible(attachType : String, visible : Boolean) : void
 		{
 			switch (attachType)
@@ -98,7 +145,7 @@ package com.rpgGame.app.graphics
 			updateShowAndHide();
 		}
 		
-		public function updateBind():void
+		private function updateBind():void
 		{
 			var nameBindTarget : ObjectContainer3D = null;
 			if (!_role.parent)
@@ -156,8 +203,7 @@ package com.rpgGame.app.graphics
 				bind(_bindDis, null);
 				isTemporary = true;
 			}
-			addAllBar();
-			updateAllBarPosition();
+		
 			updateTranform();
 		}
 		
@@ -179,6 +225,8 @@ package com.rpgGame.app.graphics
 		{
 			_bodyRu = ru;
 			updateBind();
+			addAllBar();
+			updateAllBarPosition();
 //			var nameBindTarget : ObjectContainer3D = ru.getChildByName(BoneNameEnum.c_0_name_01);
 //			if (nameBindTarget == null)
 //				return;
@@ -238,7 +286,7 @@ package com.rpgGame.app.graphics
 //			updateTranform();
 //		}
 		
-		final protected function addElement(element : DisplayObject,sortLevel:int=-1) : void
+		final protected function addElement(element : DisplayObject,sortLevel:int=-1,bSort:Boolean=true) : void
 		{
 			if (element == null)
 				return;
@@ -246,11 +294,19 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!addElement", (element as UIAsset).styleName);
 			}
-			deCtrl.addTop(element,sortLevel);
+			if (bSort) 
+			{
+				deCtrl.addTop(element,sortLevel);
+			}
+			else
+			{
+				deCtrl.addTopNotSort(element,sortLevel);
+			}
+			
 			//this.addChild(element);
 		}
 		
-		final protected function removeElement(element : DisplayObject) : void
+		final protected function removeElement(element : DisplayObject,bSort:Boolean) : void
 		{
 			if (element == null)
 				return;
@@ -258,14 +314,21 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!removeElement", (element as UIAsset).styleName);
 			}
-			deCtrl.removeTop(element);
+			if (bSort) 
+			{
+				deCtrl.removeTop(element);
+			}
+			else
+			{
+				deCtrl.removeTopNoSort(element);
+			}
 			//
 			//this.removeChild(element);
 		}
 		
 		//-----------------------------------------------------
 		/**
-		 * 显示隐藏某元素
+		 * 显示隐藏某元素，这个方法不排序
 		 * @param element
 		 * @param isShow
 		 *
@@ -274,9 +337,19 @@ package com.rpgGame.app.graphics
 		{
 			if (element == null)
 				return;
-			
+			//是否是屏蔽状态，玩家要显示名字和血条
+			if (!isShow&&_isSheildState&&_role) 
+			{
+				if(SceneCharType.PLAYER==_role.type)
+				{
+					if (DecorCtrl.TOP_NAME==sortLevel||DecorCtrl.TOP_HPMP==sortLevel) 
+					{
+						isShow=true;
+					}
+				}
+			}
 			//			element.visible = isShow;
-			isShow ? addElement(element,sortLevel) : removeElement(element)
+			isShow ? addElement(element,sortLevel,false) : removeElement(element,false)
 		}
 		
 		/**
@@ -311,7 +384,7 @@ package com.rpgGame.app.graphics
 		 */		
 		protected function updateShowAndHide():void
 		{
-			
+			deCtrl.sortTop();
 		}
 		public function showHead() : void
 		{
@@ -324,6 +397,7 @@ package com.rpgGame.app.graphics
 		public function show() : void
 		{
 			StarlingLayerManager.headFaceLayer.addChild(this);
+			updateBind();
 		}
 		
 		public function hide() : void
@@ -349,6 +423,11 @@ package com.rpgGame.app.graphics
 				parent.removeChild(this);
 			}
 			_bodyRu = null;
+			if (_role) 
+			{
+				_role.removeInViewDistanceChangedCallback(addInOutViewCall);
+			}
+			_isSheildState=false;
 			_role = null;
 			_isDisposed = true;
 			deCtrl.removeAll();

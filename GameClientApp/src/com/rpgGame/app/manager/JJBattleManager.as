@@ -13,6 +13,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -182,6 +183,8 @@ package com.rpgGame.app.manager
 			SceneManager.scene.cameraLookAt(MainRoleManager.actor);
 			MainUIManager.setMainUIVisible(true);
 			InputManger.getInstance().openOperate();
+			//AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL);
+			FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JINGJIZHENGBA);
 		}
 		public function SCJJReadyToStartHandler(msg:SCJJReadyToStartMessage):void
 		{

@@ -64,16 +64,17 @@ package com.rpgGame.app.fight.spell
 			var atkor : SceneRole = info.atkor;
 			if (atkor == null || !atkor.usable || !atkor.isInViewDistance)
 				return;
-			if (!GameSettingManager.showEffect(atkor)) 
-			{
-				return;
-			}
+			
 			if (atkor.isPlayer&&!SpellEffectRecordCtrl.testEffectShow((atkor.data as HeroData).id,info.spellData.q_skillID)) 
 			{
 				return;
 			}
 			atkor.avatar.removeRenderUnitsByType(RenderUnitType.KNIFE_LIGHT);
 			var animatData : Q_SpellAnimation = info.fromAni;
+			if (!GameSettingManager.showEffect(atkor,animatData)) 
+			{
+				return;
+			}
 			/** 特效 **/
 			if (animatData)
 			{
@@ -163,7 +164,8 @@ package com.rpgGame.app.fight.spell
 			var atkor : SceneRole = info.atkor;
 			if (atkor == null || !atkor.usable || !atkor.isInViewDistance)
 				return;
-			if (!GameSettingManager.showEffect(atkor)) 
+			var animatData : Q_SpellAnimation = info.selfAni;
+			if (!GameSettingManager.showEffect(atkor,animatData)) 
 			{
 				return;
 			}
@@ -171,7 +173,7 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
-			var animatData : Q_SpellAnimation = info.selfAni;
+			
 			/** 特效 **/
 			if (animatData)
 			{
@@ -251,7 +253,7 @@ package com.rpgGame.app.fight.spell
 		 */		
 		public static function addSelfDestEffect(role : SceneRole, animatData : Q_SpellAnimation) : void
 		{
-			if (!GameSettingManager.showEffect(role)) 
+			if (!GameSettingManager.showEffect(role,animatData)) 
 			{
 				return;
 			}
@@ -336,7 +338,7 @@ package com.rpgGame.app.fight.spell
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
 				return null;
-			if (!GameSettingManager.showEffect(target)) 
+			if (!GameSettingManager.viewFilter(target)&&GameSettingManager.checkOtherEffect) 
 			{
 				return null;
 			}
@@ -384,10 +386,7 @@ package com.rpgGame.app.fight.spell
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
 				return null;
-			if (!GameSettingManager.showEffect(target)) 
-			{
-				return null;
-			}
+			
 			if (effectRes)
 			{
 				if (!offset)
@@ -443,7 +442,7 @@ package com.rpgGame.app.fight.spell
 			/** 受击者 **/
 			if (targetRole == null || !targetRole.usable || !targetRole.isInViewDistance)
 				return;
-			if (!GameSettingManager.showEffect(targetRole)) 
+			if (!GameSettingManager.showEffect(targetRole,animatData)) 
 			{
 				return;
 			}
@@ -516,11 +515,12 @@ package com.rpgGame.app.fight.spell
 		private static var bornEffectID:int = 0;
 		public static function addBornEffect(role : SceneRole,destX : int, destZ : int,effectID:int,mountResID:String="",finishFunc:Function=null):void
 		{
-			if (!GameSettingManager.showEffect(role)) 
+			var animatData:Q_SpellAnimation = AnimationDataManager.getData(effectID);
+			if (!GameSettingManager.showEffect(role,animatData)) 
 			{
 				return;
 			}
-			var animatData:Q_SpellAnimation = AnimationDataManager.getData(effectID);
+			
 			/** 特效 **/
 			if (animatData)
 			{
@@ -597,7 +597,7 @@ package com.rpgGame.app.fight.spell
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
-			if (!GameSettingManager.showEffect(atkor)) 
+			if (!GameSettingManager.showEffect(atkor,animatData)) 
 			{
 				return;
 			}
@@ -689,11 +689,12 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
-			if (!GameSettingManager.showEffect(info.atkor)) 
+			var animatData : Q_SpellAnimation = info.posAni;
+			if (!GameSettingManager.showEffect(info.atkor,animatData)) 
 			{
 				return;
 			}
-			var animatData : Q_SpellAnimation = info.posAni;
+			
 			
 			/** 特效 **/
 			if (animatData)
@@ -833,7 +834,7 @@ package com.rpgGame.app.fight.spell
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
-			if (!GameSettingManager.showEffect(info.atkor)) 
+			if (!GameSettingManager.viewFilter(info.atkor)) 
 			{
 				return;
 			}
@@ -872,11 +873,12 @@ package com.rpgGame.app.fight.spell
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
-			if (!GameSettingManager.showEffect(info.atkor)&&!GameSettingManager.showEffect(info.targetRole)) 
+			var animatData : Q_SpellAnimation = info.passAni;
+			if (!GameSettingManager.showEffect(info.atkor,animatData)&&!GameSettingManager.showEffect(info.targetRole,animatData)) 
 			{
 				return;
 			}
-			var animatData : Q_SpellAnimation = info.passAni;
+			
 			
 			if (animatData)
 			{
@@ -1064,12 +1066,13 @@ package com.rpgGame.app.fight.spell
 			var atkor : SceneRole = role;
 			if (atkor == null || !atkor.usable || !atkor.isInViewDistance)
 				return;
-			if (!GameSettingManager.showEffect(atkor)) 
+			var animatData : Q_SpellAnimation = AnimationDataManager.getData(spellEffectData.self_dest_animation);
+			if (!GameSettingManager.showEffect(atkor,animatData)) 
 			{
 				return;
 			}
 			var spellEffectData:Q_SpellEffect = SpellDataManager.getSpellEffectData(spellID);
-			var animatData : Q_SpellAnimation = AnimationDataManager.getData(spellEffectData.self_dest_animation);
+			
 			/** 特效 **/
 			if (animatData)
 			{
@@ -1143,12 +1146,13 @@ package com.rpgGame.app.fight.spell
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
-			if (!GameSettingManager.showEffect(role)) 
+			var animatData : Q_SpellAnimation = AnimationDataManager.getData(spellEffectData.dest_animation);
+			if (!GameSettingManager.showEffect(role,animatData)) 
 			{
 				return;
 			}
 			var spellEffectData:Q_SpellEffect = SpellDataManager.getSpellEffectData(spellID);
-			var animatData : Q_SpellAnimation = AnimationDataManager.getData(spellEffectData.dest_animation);
+			
 
 			/** 特效 **/
 			if (animatData)

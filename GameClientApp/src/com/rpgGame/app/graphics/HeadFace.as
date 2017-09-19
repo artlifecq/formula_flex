@@ -380,6 +380,7 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_familyWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
 			showAndHideElement(_moodMC, true);
 			showAndHideElement(_debugPosBar, debug,DecorCtrl.TOP_POS);
+			super.updateShowAndHide();
 		}
 		
 		private function sortAttackFace():void
@@ -414,131 +415,6 @@ package com.rpgGame.app.graphics
 			//不管是临时，还是模型加载完成的，这是不能为NULL
 			updateShowAndHide();
 			return;
-			var startPosy : int = 0; //不是临时的，说明模型那么就按名字绑定点就好了
-			if (isTemporary)
-			{
-				//临时的或都模型没有血条的那么这就是固定值，从脚底再加上这个值的位置
-				startPosy = -100;
-			}
-			
-			var upPosy : int = startPosy;
-			var downPosy : int = 0;
-			offsetY = startPosy;
-			
-			if (_bloodBar != null) //血条位置
-			{
-				_bloodBar.x = -_bloodBar.realWidth * 0.5;
-				_bloodBar.y = upPosy - _bloodBar.realHeight;
-				upPosy = _bloodBar.y - _bloodBar.textHeight;
-			}
-			
-			//玩家名字为标准位置
-			if (_nameBar != null) //名字位置
-			{
-				_nameBar.x = int(-_nameBar.realWidth * 0.5);
-				_nameBar.y = int(upPosy - _nameBar.realHeight);
-				upPosy = _nameBar.y;
-				offsetY = _nameBar.y;// - _nameBar.realHeight
-				downPosy = _nameBar.y + _nameBar.realHeight;
-			}
-			//			if (_countryNameBar != null)
-			//			{
-			//				_countryNameBar.x = _nameBar.x + _nameBar.realWidth;
-			//				_countryNameBar.y = _nameBar.y;
-			//			}
-			
-			if (_junXianBar != null)
-			{
-				_junXianBar.x = -_junXianBar.width / 2;
-				_junXianBar.y = offsetY - _junXianBar.realHeight;
-				offsetY = _junXianBar.y;
-			}
-			if (_title != null)
-			{
-				_title.x = -3;
-				_title.y = offsetY - 30;
-				offsetY = _title.y;
-			}
-			
-			if(_huabotitle != null)
-			{
-				_huabotitle.x = -3;
-				_huabotitle.y = offsetY - 30;
-				offsetY = _huabotitle.y;
-			}
-			
-			if(_NPCtitle != null)
-			{
-				_NPCtitle.x = 0;
-				_NPCtitle.y = offsetY - 45;
-				offsetY = _NPCtitle.y;
-			}
-			
-			if (_office && _office.parent) //官职
-			{
-				_office.x = 0;
-				_office.y = offsetY - 40;
-				offsetY = _office.y;
-			}
-			
-			if (_countryWarIcon != null)
-			{
-				_countryWarIcon.x = _nameBar.x - _countryWarIcon.width;
-				_countryWarIcon.y = _nameBar.y + (_nameBar.height - _countryWarIcon.height) / 2;
-				//trace("!!!!!!updateAllBarPosition:", _countryWarIcon.styleName, _nameBar.height, _countryWarIcon.height);
-			}
-			if (_biaoFlagIcon != null)
-			{
-				_biaoFlagIcon.x = _nameBar.x - _biaoFlagIcon.width;
-				_biaoFlagIcon.y = _nameBar.y + (_nameBar.height - _biaoFlagIcon.height) / 2;
-			}
-			if (_familyWarIcon != null)
-			{
-				_familyWarIcon.x = _nameBar.x - _familyWarIcon.width;
-				_familyWarIcon.y = _nameBar.y + (_nameBar.height - _familyWarIcon.height) / 2;
-				//trace("!!!!!!updateAllBarPosition:", _familyWarIcon.styleName, _nameBar.height, _familyWarIcon.height);
-			}
-			if (_icoImage) //任务图标
-			{
-				_icoImage.x = -_icoImage.width / 2;
-				_icoImage.y = upPosy - _icoImage.height;
-				upPosy = _icoImage.y;
-			}
-			if (_moodMC && _moodMC.parent) //心情动画
-			{
-				var mcWidth : int = 56;
-				var mcHeight : int = 56;
-				_moodMC.x = -mcWidth / 2;
-				_moodMC.y = _nameBar.y - mcHeight;
-			}
-			flowerY = effectGroup.layout();
-			//			Render3DTextUtil.refreshHeadFlowerTextLayout(_role); //原来的
-			//Render3DTextUtil.addHeadFlowerTextToTarget(_role);
-			//-------------------------------------
-			//玩家名字之下的
-			
-			if (_guildNameBar != null && _guildNameBar.text != "")
-			{
-				_guildNameBar.x = -_guildNameBar.width / 2;
-				_guildNameBar.y = downPosy;
-				downPosy = _guildNameBar.y + _guildNameBar.realHeight;
-			}
-			
-			if (_familNameBar != null && _familNameBar.text != "")
-			{
-				_familNameBar.x = -_familNameBar.width / 2;
-				_familNameBar.y = downPosy;
-				downPosy = _familNameBar.y + _familNameBar.realHeight;
-			}
-			
-			if (_bodyImage != null)
-			{
-				_bodyImage.x = upPosy - _bodyImage.width;
-				_bodyImage.y = upPosy - _bodyImage.height;
-			}
-			
-			//-------------------更新显示隐藏状态
-			updateShowAndHide();
 		}
 		
 		//---------------------------------------------血条
@@ -1570,6 +1446,7 @@ package com.rpgGame.app.graphics
 				if (_bloodBar) 
 				{
 					_bloodBar.addChild(_teamCaptainFlag);
+					_bloodBar.x=-_bloodBar.width/2;
 					//deCtrl.sortTop();
 				}
 			}
@@ -1578,6 +1455,7 @@ package com.rpgGame.app.graphics
 				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
 				{
 					MCUtil.removeSelf(_teamCaptainFlag);
+					_bloodBar.x=-_bloodBar.width/2;
 					//	deCtrl.sortTop();
 				}
 			}
