@@ -381,6 +381,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function update():void
 		{
+			isUpdateBody=false;			
 			AvatarManager.updateAllPart(_role);
 		}
 		
@@ -428,7 +429,6 @@ package com.rpgGame.app.display3D
 			
 			var bodyResID:String = clothesRes.bodyRes;
 			var bodyEffectResID:String = clothesRes.effectRes;
-			
 			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(info.hair);
 			if (!hairRes)
 			{
@@ -535,7 +535,7 @@ package com.rpgGame.app.display3D
 			
 			var bodyResID:String = clothesRes.bodyRes;
 			var bodyEffectResID:String = clothesRes.effectRes;
-			
+			isUpdateBody=false;
 			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(info.hair);
 			if (!hairRes)
 			{
