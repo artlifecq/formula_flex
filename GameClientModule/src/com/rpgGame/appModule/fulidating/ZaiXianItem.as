@@ -90,14 +90,17 @@ package com.rpgGame.appModule.fulidating
 		{
 			var info:onlineInfo=Mgr.zaiXianMgr.getonlineInfoByTime(_online);
 			if(!info||info.state==2){
+				_skin.uiOk.visible=true;
 				GrayFilter.gray(_skin.btnOK);
 				_gameTimer.stop();
 				setIco(info.hasRewardItemId);
 			}else if(info.state==0){
+				_skin.uiOk.visible=false;
 				GrayFilter.gray(_skin.btnOK);
 				_gameTimer.start();
 				updateShow();
 			}else if(info.state==1){
+				_skin.uiOk.visible=false;
 				_skin.btnOK.filter=null;
 				_gameTimer.start();
 				updateShow();
@@ -142,7 +145,7 @@ package com.rpgGame.appModule.fulidating
 			var arr:*=getArrById(id);
 			if(arr){
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr.mod,arr.num,arr.bind);
-				var url:String=ClientConfig.getItemIcon(arr.mod, IcoSizeEnum.ICON_48 )
+				var url:String=ClientConfig.getItemIcon(itemInfo.icoName, IcoSizeEnum.ICON_48 )
 				_ico.setIconResName(url,false);
 				_ico.count=arr.num;
 				_ico.setIsBind(arr.bind==1?true:false);

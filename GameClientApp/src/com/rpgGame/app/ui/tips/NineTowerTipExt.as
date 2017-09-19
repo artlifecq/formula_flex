@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.tips
 	
 	import feathers.controls.StateSkin;
 	
-	import org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yaota;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yata2;
 	
 	public class NineTowerTipExt extends SkinUI implements ITip
