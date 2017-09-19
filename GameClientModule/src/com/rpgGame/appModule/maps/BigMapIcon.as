@@ -4,6 +4,9 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
+	
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
@@ -12,6 +15,7 @@ package com.rpgGame.appModule.maps
 	import org.mokylin.skin.app.maps.Locations;
 	import org.mokylin.skin.app.maps.NpcName;
 	import org.mokylin.skin.app.maps.NpcName2;
+	import org.mokylin.skin.app.maps.OtherName;
 	import org.mokylin.skin.app.maps.ThansName;
 	
 	import starling.display.Sprite;
@@ -24,18 +28,26 @@ package com.rpgGame.appModule.maps
 	{
 		
 		private var _ico : UIAsset;
-		private var _icnName:String;//显示名称
-		private var _level:int;
-		private var _icontype:String;
+		//private var _icnName:String;//显示名称
+		//private var _level:int;
+		//private var _icontype:String;
+		private var _icoData:BigMapIocnDataMode;
 		public var icoName:Label;
-		public function BigMapIcon(icontype:String,icoName:String="",level:int=0,pointx:int=0,pointy:int=0)
+		public function BigMapIcon(icoData:BigMapIocnDataMode/*icontype:String,icoName:String="",level:int=0,pointx:int=0,pointy:int=0*/)
 		{
-			_icontype=icontype;
-			_icnName=icoName;
-			_level=level;
-			this.x = pointx;
-			this.y = pointy;
-			setIconBit(icontype);
+			//_icontype=icontype;
+			//_icnName=icoName;
+			//_level=level;
+			_icoData=icoData;
+			var point:Point;
+			var pos3d : Vector3D = new Vector3D();
+			pos3d.x = _icoData.x;
+			pos3d.z = _icoData.y;
+			point=BigMaps.getChangeSceneToMap(pos3d);
+			
+			this.x = point.x;
+			this.y = point.y;
+			setIconBit(_icoData.type);
 		}
 		public function updatePos(pointx:Number,pointy:Number) : void 
 		{
@@ -64,6 +76,9 @@ package com.rpgGame.appModule.maps
 				case SceneCharType.NPC:
 					setNpcIco();
 					//setMonsterIco();
+					break;
+				default:
+					setOtherIco();
 					break;
 			}
 		}
@@ -99,7 +114,7 @@ package com.rpgGame.appModule.maps
 			temp.x=-62;
 			temp.y=-35;
 			var skin:ThansName = new ThansName();
-			skin.lbl_name.htmlText="通往"+_icnName;
+			skin.lbl_name.htmlText="通往"+_icoData.name;
 			temp.skin=skin;
 			icoName=skin.lbl_name;
 			addChild(temp);
@@ -112,7 +127,7 @@ package com.rpgGame.appModule.maps
 			temp.x=-45;
 			temp.y=-35;
 			var skin:NpcName2 = new NpcName2();
-			skin.lbl_name.htmlText=_icnName;//"Lv."+_level+" "+
+			skin.lbl_name.htmlText=_icoData.name;
 			temp.skin=skin;
 			icoName=skin.lbl_name;
 			addChild(temp);
@@ -125,11 +140,24 @@ package com.rpgGame.appModule.maps
 			temp.x=-45;
 			temp.y=-45;
 			var skin:NpcName = new NpcName();
-			skin.lbl_name.htmlText=_icnName;
+			skin.lbl_name.htmlText=_icoData.name;
 			temp.skin=skin;
 			icoName=skin.lbl_name;
 			addChild(temp);
 		}
+		private function setOtherIco():void
+		{
+			var temp:SkinnableContainer = new SkinnableContainer();
+			temp.x=-45;
+			temp.y=-45;
+			var skin:OtherName = new OtherName();
+			skin.lbl_name.htmlText=_icoData.name;
+			skin.ico.styleName=_icoData.img;
+			temp.skin=skin;
+			icoName=skin.lbl_name;
+			addChild(temp);
+		}
+		
 		
 	}
 }

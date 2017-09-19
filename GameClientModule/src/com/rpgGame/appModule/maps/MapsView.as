@@ -67,38 +67,43 @@ package com.rpgGame.appModule.maps
 			
 			var name:String=target.name;
 			var nameSplit:Array=name.split("_");
-			//分解名字字符，0 标记  1 类型  2 位置ID
-			if(nameSplit.length>=3&&nameSplit[0]=="ROLE")
+			//分解名字字符，0 标记  1  位置ID
+			if(nameSplit.length>=2&&nameSplit[0]=="ROLE")
 			{
 				var i:int,length:int,id:int;
 				var releData:BigMapIocnDataMode;
-				id=int(nameSplit[2]);
+				id=int(nameSplit[1]);
+				
+				
+				/*
 				if(nameSplit[1]=="3")
 				{
-					if(id<BigMapsData.mapsNpcData.length)
-					{
-						releData=BigMapsData.mapsNpcData[id];
-					}
-					
-					
+				if(id<BigMapsData.mapsNpcData.length)
+				{
+				releData=BigMapsData.mapsNpcData[id];
+				}
+				
+				
 				}
 				else if(nameSplit[1]=="2")
 				{
-					if(id<BigMapsData.mapsMonsterData.length)
-					{
-						releData=BigMapsData.mapsMonsterData[id];
-					}
+				if(id<BigMapsData.mapsMonsterData.length)
+				{
+				releData=BigMapsData.mapsMonsterData[id];
+				}
 				}
 				else if(nameSplit[1]=="6")
 				{
-					if(id<BigMapsData.mapsThansData.length)
-					{
-						releData=BigMapsData.mapsThansData[id];
-					}
+				if(id<BigMapsData.mapsThansData.length)
+				{
+				releData=BigMapsData.mapsThansData[id];
 				}
+				}*/
+				
+				releData=BigMapsData.getMapsIconDataByid(id);
 				if(releData)
 				{
-					if(nameSplit[3]==1)
+					if(nameSplit[2]==1)
 					{
 						_bigMap.roleWalk(releData.x,releData.y,100);
 					}

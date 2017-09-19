@@ -93,6 +93,7 @@ package com.rpgGame.appModule.maps
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
+			_skin.uiOver.touchable=false;
 			_mapWidth = _skin.grp_cont.width;
 			_mapHeight = _skin.grp_cont.height;
 			skinSpr=new Sprite();
@@ -104,6 +105,7 @@ package com.rpgGame.appModule.maps
 		}
 		public function init():void
 		{
+			//_skin.uiOver.isEnabled=false;
 			baseSpr = new Sprite();
 			skinSpr.addChild(baseSpr);
 			
@@ -232,11 +234,14 @@ package com.rpgGame.appModule.maps
 			var mapY:Number=(_mapHeight-thumbnaiImage.height*_scale)/2;
 			baseSpr.x=mapX;
 			baseSpr.y=mapY;
-			
-			
 			thumbnaiSpr.scaleX = thumbnaiSpr.scaleY = _scale;
 			scaleMapX = (thumbnaiImage.width / absMaxWidth) * _scale;
 			scaleMapY = (thumbnaiImage.height / absMaxHeight) * _scale;
+			
+			_skin.uiOver.x=baseSpr.x+_skin.grp_cont.x;
+			_skin.uiOver.y=baseSpr.y+_skin.grp_cont.y;
+			_skin.uiOver.width=baseSpr.width;
+			_skin.uiOver.height=baseSpr.height;
 			loadMapEnd();
 			
 		}
@@ -334,43 +339,51 @@ package com.rpgGame.appModule.maps
 		{
 			clearAllRole();
 			var i:int,length:int;
+			var roleList:Vector.<BigMapIocnDataMode>
+			roleList=BigMapsData.getMapsIconList();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+				updateRolePosShow(roleList[i]);
+			}
+			/*roleList=BigMapsData.getMapsNpcData();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+			updateRolePosShow(roleList[i]);
+			}
+			roleList=BigMapsData.getMapsThansData();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+			updateRolePosShow(roleList[i]);
+			}
+			roleList=BigMapsData.getMapsOtherData();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+			updateRolePosShow(roleList[i]);
+			}*/
 			
-			length=BigMapsData.mapsMonsterData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsMonsterData[i]);
-			}
-			length=BigMapsData.mapsNpcData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsNpcData[i]);
-			}
-			length=BigMapsData.mapsThansData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsThansData[i]);
-			}
+			
 			//updateTeamatesPoint();
 		}
 		private function updateRolePosShow(roleData:BigMapIocnDataMode) : void
 		{
 			if(!roleData.show)
 				return;
-			var point:Point;
-			var pos3d : Vector3D = new Vector3D();
-			pos3d.x = roleData.x;
-			pos3d.z = roleData.y;
-			point=getChangeSceneToMap(pos3d);
-			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
+			
+			//var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
+			var roleIcon:BigMapIcon=new BigMapIcon(roleData);
 			
 			//roleIcon.icoName.x=point.x<10?point.x:0;
-			if(point.x<(roleIcon.icoName.textWidth*0.5))
+			if(roleIcon.x<(roleIcon.icoName.textWidth*0.5))
 			{
-				roleIcon.icoName.x=roleIcon.icoName.textWidth*0.5-point.x;
+				roleIcon.icoName.x=roleIcon.icoName.textWidth*0.5-roleIcon.x;
 			}
-			if(point.x>(thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5))
+			if(roleIcon.x>(thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5))
 			{
-				roleIcon.icoName.x=(-point.x+thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5);
+				roleIcon.icoName.x=(-roleIcon.x+thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5);
 			}
 			
 			//roleIcon.icoName.x=point.x>(thumbnaiSpr.width-120)?(-point.x+thumbnaiSpr.width-120):0;

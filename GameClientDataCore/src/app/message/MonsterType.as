@@ -9,10 +9,11 @@ package app.message
 		/**BOSS*/
 		public static const BOSS:int = 3;
 		/**NPC*/
-		/**采集物资*/
 		public static const NPC:int = 4;
+		/**采集物资*/
 		public static const COLLECT:int = 5;
-		
+		/**排行榜雕像*/
+		public static const STATUE:int = 6;
 		public function MonsterType()
 		{
 			

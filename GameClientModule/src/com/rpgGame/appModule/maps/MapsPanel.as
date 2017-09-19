@@ -252,32 +252,42 @@ package com.rpgGame.appModule.maps
 				for(i=0;i<length;i++)
 				{
 					monsterData = monsterList[i];
-					roleMode=new BigMapIocnDataMode();
+					/*roleMode=new BigMapIocnDataMode();
 					roleMode.name=monsterData.name;
 					roleMode.level=monsterData.level;
 					roleMode.show=monsterData.show;
 					roleMode.x=monsterData.x;
-					roleMode.y=monsterData.y;
-					if(monsterData.type==4)
+					roleMode.y=monsterData.y;*/
+					var type:String;
+					switch(monsterData.type)
 					{
-						roleMode.type=SceneCharType.NPC;
-						BigMapsData.mapsNpcData.push(roleMode);
+						case 4:
+						case 6:
+							type=SceneCharType.NPC
+							break;
+						case 5:
+							type=SceneCharType.COLLECT
+							break;
+						default:
+							type=SceneCharType.MONSTER
+							break;
 					}
-					else if(monsterData.type==5)
-					{
-						roleMode.type=SceneCharType.COLLECT;
-						BigMapsData.mapsNpcData.push(roleMode);
-					}
-					else if(monsterData.type==6)
-					{
-						roleMode.type=SceneCharType.NPC;
-						BigMapsData.mapsNpcData.push(roleMode);
-					}
-					else
-					{
-						roleMode.type=SceneCharType.MONSTER;
-						BigMapsData.mapsMonsterData.push(roleMode);
-					}
+					
+					
+					BigMapsData.addMapsIcon(type,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+//					if(monsterData.type==4||monsterData.type==6)
+//					{
+//						BigMapsData.addMapsNpcIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+//						//BigMapsData.mapsNpcData.push(roleMode);
+//					}
+//					else if(monsterData.type==5)
+//					{
+//						BigMapsData.addMapsNpcIcon(SceneCharType.COLLECT,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+//					}
+//					else
+//					{
+//						BigMapsData.addMapsMonsterIcon(SceneCharType.MONSTER,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+//					}
 				}
 			}
 			if(transList&&transList.length>0)
@@ -287,9 +297,7 @@ package com.rpgGame.appModule.maps
 				for(i=0;i<length;i++)
 				{
 					transData = transList[i];
-					roleMode=new BigMapIocnDataMode();
-					roleMode.type=SceneCharType.TRANS;
-					roleMode.name=transData.q_name;
+					var name:String=transData.q_name;
 					if(transData.q_tran_dest_area_by_job!="")
 					{
 						var jobArea:Array=JSONUtil.decode(transData.q_tran_dest_area_by_job);
@@ -301,16 +309,17 @@ package com.rpgGame.appModule.maps
 								{
 									var mapID:int= AreaCfgData.getAreaMapidByID(jobArea[j][1]);
 									var map:Q_map=MapDataManager.getMapInfo(mapID).getData();
-									roleMode.name=map.q_map_name;
+									name=map.q_map_name;
 									break;
 								}
 							}
 						}
 					}
-					roleMode.show=true;
-					roleMode.x=transData.q_tran_res_x;
-					roleMode.y=transData.q_tran_res_y;
-					BigMapsData.mapsThansData.push(roleMode);
+					BigMapsData.addMapsIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
+
+					//BigMapsData.addMapsThansIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
+					
+					//BigMapsData.mapsThansData.push(roleMode);
 				}
 			}
 			
@@ -320,7 +329,7 @@ package com.rpgGame.appModule.maps
 		{
 			
 			var i:int;
-			for(i=BigMapsData.mapsNpcData.length-1; i>=0; i--) {
+			/*for(i=BigMapsData.mapsNpcData.length-1; i>=0; i--) {
 				BigMapsData.mapsNpcData.pop();
 			}
 			for(i=BigMapsData.mapsThansData.length-1; i>=0; i--) {
@@ -328,10 +337,8 @@ package com.rpgGame.appModule.maps
 			}
 			for(i=BigMapsData.mapsMonsterData.length-1; i>=0; i--) {
 				BigMapsData.mapsMonsterData.pop();
-			}
-			/*BigMapsData.mapsNpcData.length=0;
-			BigMapsData.mapsThansData.length=0;
-			BigMapsData.mapsMonsterData.length=0;*/
+			}*/
+			BigMapsData.clearMapsData();
 		}
 		
 		
