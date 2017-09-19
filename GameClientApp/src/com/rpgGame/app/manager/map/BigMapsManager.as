@@ -1,8 +1,10 @@
-package com.rpgGame.appModule.maps
+package com.rpgGame.app.manager.map
 {
-	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.core.events.MapEvent;
+	
+	import org.client.mainCore.manager.EventManager;
 
-	public class BigMapsData
+	public class BigMapsManager
 	{
 		/**当前大地图显示的对应的地图ID*/
 		public static var currentMapId:int=-1;
@@ -28,11 +30,32 @@ package com.rpgGame.appModule.maps
 		private static var mapsIconID:int=0;
 		private static var mapsIconData:Vector.<BigMapIocnDataMode>=new Vector.<BigMapIocnDataMode>;
 		
-		public static function addMapsIcon(type:String,name:String,x:Number,y:Number,level:int=0,show:Boolean=true,img:String=""):void
+		public static function showMapsIcon(type:String,name:String,x:Number,y:Number,level:int=0,show:Boolean=true,img:String=""):int
+		{
+			var id:int=addMapsIcon(type,name,x,y,level,show,img);
+			EventManager.dispatchEvent(MapEvent.MAP_ROLEPOS_UPDATE);
+			return id;
+		}
+		
+		
+		public static function addMapsIcon(type:String,name:String,x:Number,y:Number,level:int=0,show:Boolean=true,img:String=""):int
 		{
 			mapsIconID++;
 			var roleMode:BigMapIocnDataMode=new BigMapIocnDataMode(mapsIconID,type,x,y,name,level,show,img);
 			mapsIconData.push(roleMode);
+			return roleMode.id;
+		}
+		public static function removeMapsIcon(id:int):void
+		{
+			for(var i:int=0;i<mapsIconData.length;i++)
+			{
+				if(mapsIconData[i].id==id)
+				{
+					mapsIconData.splice(i,1);
+				}
+			}
+			EventManager.dispatchEvent(MapEvent.MAP_ROLEPOS_UPDATE);
+			
 		}
 		public static function getMapsIconList():Vector.<BigMapIocnDataMode>
 		{
@@ -133,13 +156,14 @@ package com.rpgGame.appModule.maps
 			mapsThansData.length=0;
 			mapsMonsterData.length=0;
 			mapsIconData.length=0;
+			mapsIconID=0;
 		}
 		
 		/*public static function getMapIocnDataMode(type:String,id:int):BigMapIocnDataMode
 		{
 			
 		}*/
-		public function BigMapsData()
+		public function BigMapsManager()
 		{
 		}
 	}

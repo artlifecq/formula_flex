@@ -2,9 +2,10 @@ package com.rpgGame.appModule.maps
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
+	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
@@ -20,8 +21,6 @@ package com.rpgGame.appModule.maps
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.component.text.textInput2_Skin;
-	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -52,12 +51,16 @@ package com.rpgGame.appModule.maps
 				clearMapsView();
 				updataMapsData();
 				_bigMap.onClearPath();
-				if(sceneId!=BigMapsData.currentMapId)//如果大地图上显示场景ID不是当前场景，则重新加载地图
+				if(sceneId!=BigMapsManager.currentMapId)//如果大地图上显示场景ID不是当前场景，则重新加载地图
 				{
-					BigMapsData.isMapLoadComplete=false;
+					BigMapsManager.isMapLoadComplete=false;
 					_bigMap.clearView();
 					loadBigMapView(sceneId);
 					
+				}
+				else
+				{
+					_bigMap.updateRolePos();
 				}
 				scollBoxView();
 				onDrawPath();
@@ -111,6 +114,8 @@ package com.rpgGame.appModule.maps
 			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
 			//EventManager.addEvent(UserMoveEvent.MOVE_END, onMoveEnd)
 			EventManager.addEvent(MapEvent.MAP_CLICK,onMoveEnd);
+			EventManager.addEvent(MapEvent.MAP_ROLEPOS_UPDATE,onUpdateRolePos);
+			
 			if (gTime == null)
 			{
 				gTime = new GameTimer("MapsPanel", 100, 0, onDrawPath);
@@ -130,6 +135,7 @@ package com.rpgGame.appModule.maps
 			EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
 			//EventManager.removeEvent(UserMoveEvent.MOVE_END, onMoveEnd)
 			EventManager.removeEvent(MapEvent.MAP_CLICK,onMoveEnd);
+			EventManager.removeEvent(MapEvent.MAP_ROLEPOS_UPDATE,onUpdateRolePos);
 			if (gTime != null)
 			{
 				gTime.stop();
@@ -218,7 +224,7 @@ package com.rpgGame.appModule.maps
 		
 		private function onDrawPath() : void
 		{
-			if(BigMapsData.isMapLoadComplete)//大地图是否加载
+			if(BigMapsManager.isMapLoadComplete)//大地图是否加载
 			{
 				_bigMap.updateMyselfPos();
 				//siteView();
@@ -274,7 +280,7 @@ package com.rpgGame.appModule.maps
 					}
 					
 					
-					BigMapsData.addMapsIcon(type,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+					BigMapsManager.addMapsIcon(type,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
 //					if(monsterData.type==4||monsterData.type==6)
 //					{
 //						BigMapsData.addMapsNpcIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
@@ -315,7 +321,7 @@ package com.rpgGame.appModule.maps
 							}
 						}
 					}
-					BigMapsData.addMapsIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
+					BigMapsManager.addMapsIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
 
 					//BigMapsData.addMapsThansIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
 					
@@ -324,6 +330,15 @@ package com.rpgGame.appModule.maps
 			}
 			
 		}
+		
+		
+		private function onUpdateRolePos():void
+		{
+			_bigMap.updateRolePos();
+			_scoll.boxView();
+		}
+		
+		
 		/**清除大地图数据*/
 		private function clearMapsData():void
 		{
@@ -338,7 +353,7 @@ package com.rpgGame.appModule.maps
 			for(i=BigMapsData.mapsMonsterData.length-1; i>=0; i--) {
 				BigMapsData.mapsMonsterData.pop();
 			}*/
-			BigMapsData.clearMapsData();
+			BigMapsManager.clearMapsData();
 		}
 		
 		

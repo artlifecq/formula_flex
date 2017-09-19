@@ -1,4 +1,4 @@
-package com.rpgGame.appModule.maps
+package com.rpgGame.app.manager.map
 {
 	public class BigMapIocnDataMode
 	{

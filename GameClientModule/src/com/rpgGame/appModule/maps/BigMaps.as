@@ -41,6 +41,8 @@ package com.rpgGame.appModule.maps
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.textures.IStarlingTexture;
+	import com.rpgGame.app.manager.map.BigMapsManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 	
 	
 	/**
@@ -135,6 +137,7 @@ package com.rpgGame.appModule.maps
 			skinSpr.addChild(mask);
 			baseSpr.mask = mask;
 			
+			skinSpr.addChild(_skin.uiOver);
 			tips=new BigMapTips(_mapWidth,_mapHeight);
 			skinSpr.addChild(tips);
 		}
@@ -238,8 +241,8 @@ package com.rpgGame.appModule.maps
 			scaleMapX = (thumbnaiImage.width / absMaxWidth) * _scale;
 			scaleMapY = (thumbnaiImage.height / absMaxHeight) * _scale;
 			
-			_skin.uiOver.x=baseSpr.x+_skin.grp_cont.x;
-			_skin.uiOver.y=baseSpr.y+_skin.grp_cont.y;
+			_skin.uiOver.x=baseSpr.x;
+			_skin.uiOver.y=baseSpr.y;
 			_skin.uiOver.width=baseSpr.width;
 			_skin.uiOver.height=baseSpr.height;
 			loadMapEnd();
@@ -249,10 +252,10 @@ package com.rpgGame.appModule.maps
 		protected function loadMapEnd():void
 		{
 			_isMapLoadComplete = true;
-			BigMapsData.isMapLoadComplete=true;
-			BigMapsData.currentMapId=_currentMapId;
-			BigMapsData.scaleMapX=scaleMapX;
-			BigMapsData.scaleMapY=scaleMapY;
+			BigMapsManager.isMapLoadComplete=true;
+			BigMapsManager.currentMapId=_currentMapId;
+			BigMapsManager.scaleMapX=scaleMapX;
+			BigMapsManager.scaleMapY=scaleMapY;
 			updateMyselfPos();
 			updateRolePos();
 			
@@ -340,7 +343,7 @@ package com.rpgGame.appModule.maps
 			clearAllRole();
 			var i:int,length:int;
 			var roleList:Vector.<BigMapIocnDataMode>
-			roleList=BigMapsData.getMapsIconList();
+			roleList=BigMapsManager.getMapsIconList();
 			length=roleList.length
 			for(i=0;i<length;i++)
 			{
@@ -545,8 +548,8 @@ package com.rpgGame.appModule.maps
 //			var pos : Point = MathUtil.projection(posx, posy, tilt, pan, roll);
 //			pos.x += mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsData.scaleMapX;
 //			pos.y += mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsData.scaleMapY;
-			var posx : int = position.x *BigMapsData.scaleMapX;
-			var posy : int = -position.z*BigMapsData.scaleMapY;
+			var posx : int = position.x *BigMapsManager.scaleMapX;
+			var posy : int = -position.z*BigMapsManager.scaleMapY;
 			var tilt : Number = MathUtil.angleToRadian(mapData.miniCorrectTilt);
 			var pos : Point =new Point(posx,posy);
 			return pos;
@@ -565,14 +568,14 @@ package com.rpgGame.appModule.maps
 				return null;
 			
 			
-			var offsetX : int = mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsData.scaleMapX;
-			var offsetY : int = mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsData.scaleMapY;
+			var offsetX : int = mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsManager.scaleMapX;
+			var offsetY : int = mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsManager.scaleMapY;
 			var tilt : Number = MathUtil.angleToRadian(mapData.miniCorrectTilt);
 			var pan : Number = MathUtil.angleToRadian(mapData.miniCorrectPan);
 			var roll : Number = MathUtil.angleToRadian(mapData.miniCorrectRoll);
 			var pos : Point = MathUtil.backProjection(posx - offsetX, posy - offsetY, tilt, pan, roll);
-			pos.x = pos.x / (mapData.miniScaleX * BigMapsData.scaleMapX);
-			pos.y = /*absMaxHeight*/ -pos.y / (mapData.miniScaleY * BigMapsData.scaleMapY);
+			pos.x = pos.x / (mapData.miniScaleX * BigMapsManager.scaleMapX);
+			pos.y = /*absMaxHeight*/ -pos.y / (mapData.miniScaleY * BigMapsManager.scaleMapY);
 			
 			//LOG.a(pos.x+":"+pos.y);
 			return pos;

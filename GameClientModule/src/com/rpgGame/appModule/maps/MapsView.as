@@ -15,6 +15,8 @@ package com.rpgGame.appModule.maps
 	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.DisplayObject;
+	import com.rpgGame.app.manager.map.BigMapsManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 
 	/**
 	 *大地图显示类，里面包含所有显示对象 
@@ -100,7 +102,7 @@ package com.rpgGame.appModule.maps
 				}
 				}*/
 				
-				releData=BigMapsData.getMapsIconDataByid(id);
+				releData=BigMapsManager.getMapsIconDataByid(id);
 				if(releData)
 				{
 					if(nameSplit[2]==1)

@@ -19,6 +19,7 @@ package com.rpgGame.appModule.maps
 	import org.mokylin.skin.app.maps.ThansName;
 	
 	import starling.display.Sprite;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 
 	
 	/**

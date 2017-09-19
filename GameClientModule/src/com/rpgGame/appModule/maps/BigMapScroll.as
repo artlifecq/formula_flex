@@ -13,6 +13,8 @@ package com.rpgGame.appModule.maps
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
+	import com.rpgGame.app.manager.map.BigMapsManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 
 	/**
 	 * 处理大地图上的 右边滚动框里面的相关显示和控制
@@ -240,10 +242,10 @@ package com.rpgGame.appModule.maps
 		/**npc栏位设置*/
 		public function setItem():void
 		{
-			npcList.addChild(getBackBar(BigMapsData.getMapsIconListByType(SceneCharType.NPC)));
-			npcList.addChild(getBackBar(BigMapsData.getMapsIconListByType(SceneCharType.COLLECT)));
-			monsterList.addChild(getBackBar(BigMapsData.getMapsIconListByType(SceneCharType.MONSTER)));
-			thansList.addChild(getBackBar(BigMapsData.getMapsIconListByType(SceneCharType.TRANS)));
+			npcList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.NPC)));
+			npcList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.COLLECT)));
+			monsterList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.MONSTER)));
+			thansList.addChild(getBackBar(BigMapsManager.getMapsIconListByType(SceneCharType.TRANS)));
 			npcItemSpr.y=2;
 			monsterItemSpr.y=npcItemSpr.y+npcItemSpr.height;
 			thansItemSpr.y=monsterItemSpr.y+monsterItemSpr.height;
