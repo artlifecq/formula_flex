@@ -1,28 +1,21 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -34,7 +27,6 @@ package com.rpgGame.app.ui.scene.dungeon
 	import flash.geom.Point;
 	
 	import feathers.controls.SkinnableContainer;
-	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
 	
@@ -96,6 +88,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onShow() : void
 		{
+			super.onShow();
 			addEvent();
 			enterZone();
 		}
@@ -309,7 +302,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE)
 			{
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 			}
 			
 		}

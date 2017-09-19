@@ -10,8 +10,10 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangUI_2;
@@ -114,6 +116,11 @@ package com.rpgGame.appModule.skill.lostskill
 			}
 			TipTargetManager.remove(_skin.lb_xiaohao);
 			TipTargetManager.show(_skin.lb_xiaohao,TargetTipsMaker.makeTips(TipType.ITEM_TIP,_itemInfo));
+			TipTargetManager.remove(_skin.lb_lujing);
+			var info:Q_tipsinfo=new Q_tipsinfo();
+			info.q_describe_tittle="[获取途径]";
+			info.q_describe=_itemInfo.qItem.q_output;
+			TipTargetManager.show( _skin.lb_lujing,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 			_skin.isopen.visible = _state.skillId == LostSkillManager.instance().curSkillId;
 			_skin.btn_yinyong.visible = _state.skillId != LostSkillManager.instance().curSkillId;
 		}

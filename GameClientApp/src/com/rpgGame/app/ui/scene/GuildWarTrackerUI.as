@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.scene
 {
-	import com.rpgGame.app.cmdlistener.enum.EGuildMemberType;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -131,7 +130,7 @@ package com.rpgGame.app.ui.scene
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.sec_Exit:
-					DungeonSender.reqQuitDungeon();
+					DungeonSender.reqQuitDungeon(sceneId);
 					(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 					break;
 				case _skin.lbInfo1:

@@ -58,9 +58,10 @@ package com.rpgGame.app.sender
 		 *请求退出当前地图，返回上一张地图 
 		 * 
 		 */
-		public static function reqOutMap():void
+		public static function reqOutMap(verityMapId:long):void
 		{
 			var msg:SCOutMapMessage=new SCOutMapMessage();
+			msg.verityMapId=verityMapId;
 			sendMsg(msg);
 		}
 		

@@ -54,6 +54,17 @@ package com.rpgGame.coreData.info.fight.skill
 			}
 		}
 		
+		/**
+		 *移除技能 
+		 * @param spellID
+		 * 
+		 */
+		public function removeSkill(spellID : int):void
+		{
+			_skillInfoMap.remove(spellID);
+			_spellMap.remove(spellID);
+		}
+		
 		public function addSkillData(spellInfo:SkillInfo):void
 		{
 			addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId,spellInfo.skillLevel));

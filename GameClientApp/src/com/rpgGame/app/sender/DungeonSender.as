@@ -15,6 +15,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.zone.message.ReqZoneOutToGameMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 
 	/**
 	 *副本请求器
@@ -44,9 +45,10 @@ package com.rpgGame.app.sender
 		 *请求退出副本 
 		 * 
 		 */
-		public static function reqQuitDungeon():void
+		public static function reqQuitDungeon(verityMapId:long):void
 		{
 			var msg:ReqZoneCommonQuitMessage=new ReqZoneCommonQuitMessage();
+			msg.verityMapId=verityMapId;
 			SocketConnection.send(msg);
 		}
 		

@@ -118,7 +118,7 @@ package com.rpgGame.app.ui.scene
 					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
 					break;
 				case _skin.sec_subbut2:
-					SceneSender.reqOutMap();
+					SceneSender.reqOutMap(sceneId);
 					break;
 			}
 		}
