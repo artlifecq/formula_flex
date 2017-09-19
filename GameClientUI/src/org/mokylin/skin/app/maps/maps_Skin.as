@@ -342,6 +342,8 @@ package org.mokylin.skin.app.maps
 			uiOver = temp;
 			temp.name = "uiOver";
 			temp.height = 449;
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/maps/bggg.png";
 			temp.width = 638;
 			temp.x = 23;
