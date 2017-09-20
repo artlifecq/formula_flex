@@ -25,7 +25,6 @@
     import com.rpgGame.app.state.role.control.UnmovableStateReference;
     import com.rpgGame.app.utils.Render3DTextUtil;
     import com.rpgGame.app.utils.TimeUtil;
-    import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.FunctionMessageBarEvent;
     import com.rpgGame.core.events.YunBiaoEvent;
@@ -544,7 +543,7 @@
         {
             var _local4:*;
             var _local2:*;
-            var _local3 = null;
+            var _local3:Array = null;
             if (str == "1")
             {
                 _local4 = new Vector.<MapPointSet>();
@@ -621,7 +620,7 @@
 
         private function changeHeroCount(sendStr:String):void
         {
-            GamePerformsManager.canAdjustView = (sendStr == 0);
+            GamePerformsManager.canAdjustView = (Number(sendStr) == 0);
 //            SceneManager.serverHeroCount = (((sendStr)==0) ? 20 : sendStr);
         }
 

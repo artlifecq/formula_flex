@@ -38,6 +38,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
@@ -237,7 +238,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onSCUpdatePlayerTitleHandler(msg:SCUpdatePlayerTitleMessage):void
 		{
 			// TODO Auto Generated method stub
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;			
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;			
 			if(role)
 			{
 				var head:HeadFace=role.headFace as HeadFace;
@@ -506,7 +507,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */		
 		private function RecvResPlayerRunEndMessage(msg:ResPlayerRunEndMessage):void
 		{	
-			var objId : Number = msg.personId.ToGID();
+			var objId : Number = msg.personId;
 			if(MainRoleManager.actorID == objId)
 			{
 				//				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
@@ -516,7 +517,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var posX : int = msg.position.x;
 			var posY : int = msg.position.y;
 			GameLog.addShow("%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 收到对象停止消息 :   " + posX + "   " + posY);
-			GameLog.addShow("============================= 收到对象停止消息，对象id为：" + msg.personId.ToString());
+			GameLog.addShow("============================= 收到对象停止消息，对象id为：" + msg.personId);
 			var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
 			if (role && role.usable)
 			{
@@ -554,7 +555,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function RecvResPlayerRunFailMessage(msg:ResPlayerRunFailMessage):void
 		{
-			if(msg.personId.ToGID() != MainRoleManager.actorID)
+			if(MainRoleManager.isSelfBySceneId(msg.personId))
 			{
 				GameLog.addShow("ResPlayerRunEndMessage这个message根本就不应该来！应该是针对主角的");
 				return;
@@ -1109,6 +1110,16 @@ package com.rpgGame.app.cmdlistener.scene
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
 				//				ReliveManager.autoHideRelive();
+			}else{
+				if(msg.attributeChange.type==CharAttributeType.HP)
+				{
+					var data:MonsterData=role.data as MonsterData;
+					var bornData : Q_monster = MonsterDataManager.getData(data.modelID); 
+					var type:int=bornData.q_monster_type;
+					if(type== MonsterType.NORMAL||MonsterType.ELITE||type== MonsterType.BOSS){
+						EventManager.dispatchEvent(MainPlayerEvent.BOSSHP_CHANGE, role);
+					}
+				}
 			}
 			if (CharAttributeType.SPEED==msg.attributeChange.type) 
 			{

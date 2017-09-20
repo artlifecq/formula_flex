@@ -7,7 +7,6 @@ package com.rpgGame.appModule.storage
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.app.sender.ItemSender;
@@ -20,10 +19,8 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.enum.MouseCursorEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -32,7 +29,6 @@ package com.rpgGame.appModule.storage
 	import com.rpgGame.netData.backpack.message.ResOpenCellResultMessage;
 	
 	import flash.geom.Point;
-	import flash.ui.Mouse;
 	
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;

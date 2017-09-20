@@ -21,7 +21,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;

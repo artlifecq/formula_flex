@@ -106,7 +106,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getResGuildWarOreInfoMessage(msg:ResGuildWarOreInfoMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 			if(role){
 				(role.headFace as HeadFace).updateGuildWarInfoBar(msg.oreList);
 			}

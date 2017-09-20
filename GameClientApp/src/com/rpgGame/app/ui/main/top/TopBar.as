@@ -4,7 +4,6 @@ package com.rpgGame.app.ui.main.top {
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
-	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.login.message.ResHeartMessage;

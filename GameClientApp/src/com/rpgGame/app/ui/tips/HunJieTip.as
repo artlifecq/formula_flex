@@ -70,7 +70,7 @@ package com.rpgGame.app.ui.tips
 			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(_hunjieLv);		
 			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
 			
-			var obj:DisplayObject=_skin.bg.getChildAt(itemInfo.qItem.q_default-2);
+			var obj:DisplayObject=_skin.bg.getChildAt(itemInfo.qItem.q_default-3);
 			if(!obj) obj=_skin.bg.getChildAt(0);
 			var ui_bg:UIAsset=obj as UIAsset;
 			ui_bg.visible=true;

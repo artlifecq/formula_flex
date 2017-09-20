@@ -186,14 +186,10 @@
 				data.buffList.push(buffData);
 			}
 			readGeneric(data,new Point(info.position.x,info.position.y));
-            if (null == info.sign) {
+            if (0 == info.sign) {
                 data.ownerId = -1;
             } else {
-                var ownerId : String = info.sign;
-                for (i = ownerId.length; i < 16; ++i) {
-                    ownerId = "0" + ownerId;
-                }
-                data.ownerId = LongIdMap.getGidByStringValue(ownerId);
+                data.ownerId = info.sign;
             }
 
 		}

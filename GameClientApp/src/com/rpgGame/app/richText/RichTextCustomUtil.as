@@ -407,7 +407,7 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.QIUHUN:
 					var name:Array=unitData.linkData.split(',');
 					id = new long(name[1]);
-					if (MainRoleManager.isSelf(id.fValue))
+					if (MainRoleManager.isSelfByServerId(id))
 					{
 						//自己
 						return;

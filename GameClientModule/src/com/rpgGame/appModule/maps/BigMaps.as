@@ -12,6 +12,8 @@ package com.rpgGame.appModule.maps
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
+	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -19,6 +21,7 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
+	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -41,8 +44,6 @@ package com.rpgGame.appModule.maps
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.textures.IStarlingTexture;
-	import com.rpgGame.app.manager.map.BigMapsManager;
-	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 	
 	
 	/**
@@ -91,7 +92,7 @@ package com.rpgGame.appModule.maps
 		private var tips:BigMapTips;
 		private var teamatesIconList:Vector.<BigMapTeamIcon>=new Vector.<BigMapTeamIcon>();
 		private var walkPoint:Vector3D;
-		private var isWalkClick:Boolean=false;
+		public var isWalkClick:Boolean=false;
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
@@ -259,7 +260,7 @@ package com.rpgGame.appModule.maps
 			BigMapsManager.scaleMapY=scaleMapY;
 			updateMyselfPos();
 			updateRolePos();
-			
+			onDrawPathRoad();
 			
 		}
 		
@@ -462,10 +463,10 @@ package com.rpgGame.appModule.maps
 			var position : Vector3D = new Vector3D(x, -Math.abs(y), -Math.abs(y));
 			if(PathFinderUtil.isPointInSide(SceneManager.getDistrict(), position))
 			{
+				isWalkClick=true;
 				walkPoint=position;
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, spacing,null);
-				isWalkClick=true;
-				onDrawPathRoad();
+				///onDrawPathRoad();
 			}
 			else
 			{
@@ -473,14 +474,33 @@ package com.rpgGame.appModule.maps
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"该目标点不可到达");
 			}
 		}
-		private function addEndFly(position : Vector3D) : void
+		private function addEndFly(walkPoint:Vector3D=null) : void
 		{
 			if (!MainRoleManager.actor.stateMachine.isWalkMoving)
 				return;
-			var point:Point=getChangeSceneToMap(position);
-			flyPoin.x=point.x-6;
-			flyPoin.y=point.y-10;
-			flyPoin.visible=true;
+			if(walkPoint==null)
+			{
+				var ref : WalkMoveStateReference;
+				var camouflageEntity : SceneRole = MainRoleManager.actor.getCamouflageEntity() as SceneRole;
+				if (camouflageEntity)
+					ref = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				else
+					ref = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				
+				if(ref==null||ref.vectorPath==null)
+					return;
+				
+				walkPoint=ref.vectorPath;
+			}
+			if(walkPoint!=null)
+			{
+				var point:Point=getChangeSceneToMap(walkPoint);
+				flyPoin.x=point.x-6;
+				flyPoin.y=point.y-10;
+				flyPoin.visible=true;
+			}
+			
+			
 			//pathSpr.addChild(flyPoin);
 		}
 		
@@ -518,14 +538,22 @@ package com.rpgGame.appModule.maps
 		public function onDrawPathRoad() : void
 		{
 			if(isWalkClick)
-			{
-				isWalkClick=false;
+			{				
 				addEndFly(walkPoint);
+				roadSpr.onDrawPathRoad(walkPoint);//walkPoint
 			}
-			roadSpr.onDrawPathRoad(walkPoint);
+			
+			else
+			{
+				addEndFly();
+				roadSpr.onDrawPathRoad();//walkPoint
+			}
+			
+			
 		}
 		public function onClearPath() : void
 		{
+			isWalkClick=false;
 			flyPoin.visible=false;
 			roadSpr.onClearPath();
 		}

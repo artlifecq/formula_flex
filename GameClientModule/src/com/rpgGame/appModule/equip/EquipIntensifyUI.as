@@ -205,7 +205,7 @@ package com.rpgGame.appModule.equip
 			selectedUse=new Vector.<ClientItemInfo>();
 			
 			lvDatas=new Array();
-			for(var i:int=1;i<11;i++){
+			for(i=1;i<11;i++){
 				lvDatas.push(ItemUtil.getLevele(i));
 			}
 			_skin.cmb_dengjie.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);

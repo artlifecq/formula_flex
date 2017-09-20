@@ -16,6 +16,9 @@ package com.rpgGame.netData.guild.message{
 		//玩家Id
 		private var _playerId: long;
 		
+		//玩家shortId
+		private var _playerShortId: int;
+		
 		//帮派Id,-1:为离开帮派
 		private var _guildId: long;
 		
@@ -35,6 +38,8 @@ package com.rpgGame.netData.guild.message{
 		override protected function writing(): Boolean{
 			//玩家Id
 			writeLong(_playerId);
+			//玩家shortId
+			writeShort(_playerShortId);
 			//帮派Id,-1:为离开帮派
 			writeLong(_guildId);
 			//帮派名
@@ -52,6 +57,8 @@ package com.rpgGame.netData.guild.message{
 		override protected function reading(): Boolean{
 			//玩家Id
 			_playerId = readLong();
+			//玩家shortId
+			_playerShortId = readShort();
 			//帮派Id,-1:为离开帮派
 			_guildId = readLong();
 			//帮派名
@@ -84,6 +91,21 @@ package com.rpgGame.netData.guild.message{
 		 */
 		public function set playerId(value: long): void{
 			this._playerId = value;
+		}
+		
+		/**
+		 * get 玩家shortId
+		 * @return 
+		 */
+		public function get playerShortId(): int{
+			return _playerShortId;
+		}
+		
+		/**
+		 * set 玩家shortId
+		 */
+		public function set playerShortId(value: int): void{
+			this._playerShortId = value;
 		}
 		
 		/**

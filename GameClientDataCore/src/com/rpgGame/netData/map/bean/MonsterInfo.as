@@ -61,8 +61,8 @@ package com.rpgGame.netData.map.bean{
 		//怪物面对方向
 		private var _dir: int;
 		
-		//怪物标志(不为空表示召唤者的唯一ID)
-		private var _sign: String;
+		//召唤者的唯一ID
+		private var _sign: int;
 		
 		//跑步坐标集合
 		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
@@ -102,8 +102,8 @@ package com.rpgGame.netData.map.bean{
 			writeShort(_speed);
 			//怪物面对方向
 			writeShort(_dir);
-			//怪物标志(不为空表示召唤者的唯一ID)
-			writeString(_sign);
+			//召唤者的唯一ID
+			writeShort(_sign);
 			//跑步坐标集合
 			writeShort(_positions.length);
 			for (var i: int = 0; i < _positions.length; i++) {
@@ -151,8 +151,8 @@ package com.rpgGame.netData.map.bean{
 			_speed = readShort();
 			//怪物面对方向
 			_dir = readShort();
-			//怪物标志(不为空表示召唤者的唯一ID)
-			_sign = readString();
+			//召唤者的唯一ID
+			_sign = readShort();
 			//跑步坐标集合
 			var positions_length : int = readShort();
 			for (var i: int = 0; i < positions_length; i++) {
@@ -392,17 +392,17 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 怪物标志(不为空表示召唤者的唯一ID)
+		 * get 召唤者的唯一ID
 		 * @return 
 		 */
-		public function get sign(): String{
+		public function get sign(): int{
 			return _sign;
 		}
 		
 		/**
-		 * set 怪物标志(不为空表示召唤者的唯一ID)
+		 * set 召唤者的唯一ID
 		 */
-		public function set sign(value: String): void{
+		public function set sign(value: int): void{
 			this._sign = value;
 		}
 		

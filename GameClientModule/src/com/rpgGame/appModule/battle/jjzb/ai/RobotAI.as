@@ -345,7 +345,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 			_loserActionArr=getRandomHpList(winHpLose,_round*2,skillCtrl);
 			_skillDic[_loser.avatar.curRole]=_loserActionArr;
 			str="";
-			for (var i:int = 0; i < _loserActionArr.length; i++) 
+			for (i = 0; i < _loserActionArr.length; i++) 
 			{
 				str+=JSONUtil.encode(_loserActionArr[i])+" ";
 			}
