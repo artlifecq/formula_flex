@@ -37,7 +37,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.marriage.message.SCUpGradeMessage;
 	import com.rpgGame.netData.marriage.message.SCUpdateZoneSubNumMessage;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.client.mainCore.manager.EventManager;
+	
+	import utils.TimerServer;
 	
 	public class HunYinManager
 	{
@@ -48,6 +52,7 @@ package com.rpgGame.app.manager
 		
 		private var _qiuhuntishiPanel:QiuHunTiShiPanelExt;
 		private var _qiuhunListVo:Vector.<QiuHunVo>=new Vector.<QiuHunVo>();
+		
 		/**
 		 * 获取当前的战斗力
 		 * */
@@ -385,6 +390,35 @@ package com.rpgGame.app.manager
 				}
 			}
 			return id;
+		}
+		
+		private var _timenum:int=5;
+		private var _isCanQiuHun:Boolean=true;
+		public function qiuHunTimer():void
+		{
+			_timenum=30;
+			TimerServer.addLoop(updateTimeBtnShow,1000);
+			updateTimeBtnShow();
+		}
+		
+		public function get isCanQiuHun():Boolean
+		{
+			return _isCanQiuHun;
+		}
+		
+		private function updateTimeBtnShow():void
+		{
+			_timenum--;
+			if(_timenum==0)
+			{
+				TimerServer.remove(updateTimeBtnShow);			
+				_isCanQiuHun=true;
+				EventManager.dispatchEvent(HunYinEvent.HUNYIN_ZHENGHUN);
+			}
+			else
+			{
+				_isCanQiuHun=false;
+			}
 		}
 	}
 }
