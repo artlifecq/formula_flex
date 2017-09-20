@@ -532,6 +532,11 @@ package com.rpgGame.app.scene
 //			{
 //				trace("main move");
 //			}
+			//主要屏蔽了底层不抛事件了
+			if (_headFace&&_headFace.isSheildState) 
+			{
+				_headFace.updateTranform();
+			}
 		}
 		override public function set z(value:Number):void
 		{
@@ -540,6 +545,10 @@ package com.rpgGame.app.scene
 //			{
 //				trace("main move z");
 //			}
+			if (_headFace&&_headFace.isSheildState) 
+			{
+				_headFace.updateTranform();
+			}
 		}
 		//==================主玩家用
 		public var lookPos:Vector3D;

@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_res_1:String;
 		 /**  绑定器 */
 		public var q_attachs:String;
+		 /**  隐藏特效是否有效（0有效，1无效） */
+		public var hide_effect:int;
 
 	}
 }
