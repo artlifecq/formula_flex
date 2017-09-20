@@ -78,11 +78,11 @@ package com.rpgGame.app.fight.spell
 			hurtResultVO.hasPositionFly = resultInfo.fightResult == 16;
 			hurtResultVO.stiffTime = hurtResultVO.deadLaunchDistance/hurtResultVO.deadLaunchSpeed * 1000;
 			
-			hurtResultVO.targetID = resultInfo.targetId.ToGID();//目标
+			hurtResultVO.targetID = resultInfo.targetId;//目标
 			hurtResultVO.targetRole = SceneManager.getSceneObjByID(hurtResultVO.targetID) as BaseRole;
 			if(hurtResultVO.targetRole == null)
 			{
-				GameLog.addShow("被攻击者为空!攻击者服务器ID为：\t " + resultInfo.targetId.ToString());
+				GameLog.addShow("被攻击者为空!攻击者服务器ID为：\t " + resultInfo.targetId);
 			}
 			
 			if(hurtResultVO.targetRole && hurtResultVO.targetRole.usable)
@@ -91,11 +91,11 @@ package com.rpgGame.app.fight.spell
 			}
 			
 			///攻击者的信息
-			hurtResultVO.atkorID = resultInfo.attackerId.ToGID();//攻击者
+			hurtResultVO.atkorID = resultInfo.attackerId;//攻击者
 			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
 			if(hurtResultVO.atkor == null)
 			{
-				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId.ToString());
+				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId);
 			}
 			
 			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)

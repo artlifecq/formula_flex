@@ -3,7 +3,6 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.common.NumSelectUICtrl;
 	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.app.AppConstant;
@@ -127,7 +126,7 @@ package com.rpgGame.appModule.battle.dfdj
 				{
 					if (_rightData) 
 					{
-						Mgr.teamMgr.loopPlayer(_rightData.playerId);
+						Mgr.teamMgr.loopPlayer(_rightData.playerName);
 					}
 					break;
 				}

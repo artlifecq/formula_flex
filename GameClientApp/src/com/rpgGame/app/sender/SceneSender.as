@@ -297,7 +297,7 @@ package com.rpgGame.app.sender
 		 *
 		 * varint64 物品id
 		 */
-		public static function requestPickUpGoodsInfo(sceneGoodsId : long) : void
+		public static function requestPickUpGoodsInfo(sceneGoodsId : int) : void
 		{
 			var msg:ReqTakeUpMessage=new ReqTakeUpMessage();
 			msg.goodsId=sceneGoodsId;
@@ -366,7 +366,7 @@ package com.rpgGame.app.sender
 		}
 		
 		/**传送请求*/
-		public static function reqPetTransferMessage(id:long):void
+		public static function reqPetTransferMessage(id:int):void
 		{
 			var msg:ReqPetTransferMessage=new ReqPetTransferMessage();
 			msg.playerId=id;

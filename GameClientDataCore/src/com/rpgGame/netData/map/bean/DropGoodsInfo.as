@@ -16,7 +16,7 @@ package com.rpgGame.netData.map.bean{
 	public class DropGoodsInfo extends Bean {
 	
 		//物品Id
-		private var _dropGoodsId: long;
+		private var _dropGoodsId: int;
 		
 		//物品模板Id
 		private var _itemModelId: int;
@@ -49,7 +49,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//物品Id
-			writeLong(_dropGoodsId);
+			writeShort(_dropGoodsId);
 			//物品模板Id
 			writeInt(_itemModelId);
 			//数量
@@ -79,7 +79,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//物品Id
-			_dropGoodsId = readLong();
+			_dropGoodsId = readShort();
 			//物品模板Id
 			_itemModelId = readInt();
 			//数量
@@ -108,14 +108,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 物品Id
 		 * @return 
 		 */
-		public function get dropGoodsId(): long{
+		public function get dropGoodsId(): int{
 			return _dropGoodsId;
 		}
 		
 		/**
 		 * set 物品Id
 		 */
-		public function set dropGoodsId(value: long): void{
+		public function set dropGoodsId(value: int): void{
 			this._dropGoodsId = value;
 		}
 		

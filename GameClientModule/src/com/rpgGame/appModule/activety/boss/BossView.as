@@ -263,10 +263,7 @@ package com.rpgGame.appModule.activety.boss
 			text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"最后一击:");
 			_richText.text="";
 			if(selectedInfo.killerName&&selectedInfo.killerName.length!=0){
-				var linkData:String;
-				if(selectedInfo.killerId){
-					linkData=selectedInfo.killerId.lValue+","+selectedInfo.killerId.hValue+","+selectedInfo.killerId.hexValue;
-				}
+				var linkData:String=selectedInfo.killerName;
 				var linkName:String=RichTextCustomUtil.getTextLinkCode(selectedInfo.killerName,StaticValue.GREEN_TEXT,
 					RichTextCustomLinkType.SEE_OTHER_NAME,linkData);
 				text+=linkName;

@@ -110,7 +110,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if(member != null)
 			{
-				Mgr.teamMgr.loopPlayer( member.memberId );			
+				Mgr.teamMgr.loopPlayer( member.memberName );			
 			}
 		}
 		private function OnAgree(event:Event):void

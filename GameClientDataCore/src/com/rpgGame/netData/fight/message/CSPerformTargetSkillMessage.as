@@ -1,5 +1,4 @@
 package com.rpgGame.netData.fight.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -20,7 +19,7 @@ package com.rpgGame.netData.fight.message{
 		private var _fightDirection: int;
 		
 		//攻击目标
-		private var _targetId: long;
+		private var _targetId: int;
 		
 		
 		/**
@@ -32,7 +31,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击朝向
 			writeShort(_fightDirection);
 			//攻击目标
-			writeLong(_targetId);
+			writeShort(_targetId);
 			return true;
 		}
 		
@@ -45,7 +44,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击朝向
 			_fightDirection = readShort();
 			//攻击目标
-			_targetId = readLong();
+			_targetId = readShort();
 			return true;
 		}
 		
@@ -91,14 +90,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 攻击目标
 		 * @return 
 		 */
-		public function get targetId(): long{
+		public function get targetId(): int{
 			return _targetId;
 		}
 		
 		/**
 		 * set 攻击目标
 		 */
-		public function set targetId(value: long): void{
+		public function set targetId(value: int): void{
 			this._targetId = value;
 		}
 		

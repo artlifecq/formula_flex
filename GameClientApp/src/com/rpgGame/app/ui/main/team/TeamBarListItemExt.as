@@ -94,7 +94,7 @@ package   com.rpgGame.app.ui.main.team
 			// TODO Auto Generated method stub
 			if (_data) 
 			{
-				Mgr.teamMgr.loopPlayer(_data.memberId);
+				Mgr.teamMgr.loopPlayer(_data.memberName);
 			}
 		}
 		private function onSelectPlayer():void

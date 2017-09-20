@@ -12,7 +12,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.stall.StallManager;
 	import com.rpgGame.app.manager.task.PickAutoManager;
-	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
@@ -229,7 +228,7 @@ package com.rpgGame.app.manager
 				{
 					if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
 					{
-						TaskSender.sendStartGatherMessage(collectData.serverID);
+						TaskSender.sendStartGatherMessage(collectData.id);
 					}
 					
 				}
@@ -237,7 +236,7 @@ package com.rpgGame.app.manager
 				{
 					if(collectData.faction==MainRoleManager.actorInfo.faction||collectData.faction==EnumfFaction.COMMON||collectData.modelID==EnumItemId.ZHUFUSHI)//祝福石特殊处理
 					{
-						TaskSender.sendStartGatherMessage(collectData.serverID);
+						TaskSender.sendStartGatherMessage(collectData.id);
 					}else{
 						NoticeManager.showNotifyById(60103);
 					}

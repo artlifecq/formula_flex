@@ -2,19 +2,14 @@ package  com.rpgGame.app.manager.ctrl
 {
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.utils.HashMap;
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.SystemSetManager;
 	import com.rpgGame.app.manager.WalkToRoleManager;
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.SceneSender;
-	import com.rpgGame.app.state.role.control.StopWalkMoveStateReference;
-	import com.rpgGame.app.state.role.control.WalkMoveState;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -438,7 +433,7 @@ package  com.rpgGame.app.manager.ctrl
 					continue;
 				}
 				
-				if ( IsNotAutoPick(( item.data as SceneDropGoodsData).goodsDatas.dropGoodsId.hexValue ) )
+				if ( IsNotAutoPick(( item.data as SceneDropGoodsData).goodsDatas.dropGoodsId ) )
 				{
 					continue;
 				}
@@ -531,7 +526,7 @@ package  com.rpgGame.app.manager.ctrl
 					continue;
 				}
 				
-				if ( IsNotAutoPick(( item.data as SceneDropGoodsData).goodsDatas.dropGoodsId.hexValue ) )
+				if ( IsNotAutoPick(( item.data as SceneDropGoodsData).goodsDatas.dropGoodsId ) )
 				{
 					continue;
 				}
@@ -676,14 +671,14 @@ package  com.rpgGame.app.manager.ctrl
 		 *  
 		 * @param sidStr
 		 */
-		public function IsNotAutoPick( sidStr :String ):Boolean
+		public function IsNotAutoPick( id :int ):Boolean
 		{
-			if ( _latelySendCache.containsKey( sidStr ) )
+			if ( _latelySendCache.containsKey( id ) )
 			{
-				var t :int = _latelySendCache.get( sidStr );
+				var t :int = _latelySendCache.get( id );
 				if ( getTimer() > t )
 				{
-					_latelySendCache.remove( sidStr );
+					_latelySendCache.remove( id );
 					return false;
 				}
 				

@@ -14,7 +14,7 @@ package com.rpgGame.netData.buff.message{
 	public class ResRemoveBuffMessage extends Message {
 	
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//战斗状态
 		private var _fightState: int;
@@ -28,7 +28,7 @@ package com.rpgGame.netData.buff.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//战斗状态
 			writeInt(_fightState);
 			//buff Id
@@ -41,7 +41,7 @@ package com.rpgGame.netData.buff.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//战斗状态
 			_fightState = readInt();
 			//buff Id
@@ -61,14 +61,14 @@ package com.rpgGame.netData.buff.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		

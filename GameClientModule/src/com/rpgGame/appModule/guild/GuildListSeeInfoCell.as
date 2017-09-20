@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.guild
 {
-	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.LookSender;
@@ -8,8 +7,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildListInfo;
-	
-	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.mokylin.skin.app.banghui.TeamItemList;
 	import org.mokylin.skin.common.ItemBg;
@@ -38,7 +35,7 @@ package com.rpgGame.appModule.guild
 			{
 				GuildSender.reqGuildBriefnessInfo(_guildListinfo.guildId,0);
 			}else if(_skin.lbRolenName == target){
-				LookSender.lookOtherPlayer(_guildListinfo.chiefId);
+				LookSender.lookOtherPlayer(_guildListinfo.chiefName);
 			}
 			
 		}

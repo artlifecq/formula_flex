@@ -1,6 +1,5 @@
 package com.rpgGame.netData.player.message{
 	import com.rpgGame.netData.structs.Position;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.player.message{
 	public class ResPlayerDieMessage extends Message {
 	
 		//死亡的角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//是否自动复活(1自动 0不自动)
 		private var _autoRevive: int;
@@ -27,7 +26,7 @@ package com.rpgGame.netData.player.message{
 		private var _monstermodelid: int;
 		
 		//攻击者玩家ID
-		private var _attackerid: long;
+		private var _attackerid: int;
 		
 		//攻击者玩家名字
 		private var _attackername: String;
@@ -47,7 +46,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function writing(): Boolean{
 			//死亡的角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//是否自动复活(1自动 0不自动)
 			writeByte(_autoRevive);
 			//自动复活时间
@@ -55,7 +54,7 @@ package com.rpgGame.netData.player.message{
 			//怪物模型ID
 			writeInt(_monstermodelid);
 			//攻击者玩家ID
-			writeLong(_attackerid);
+			writeShort(_attackerid);
 			//攻击者玩家名字
 			writeString(_attackername);
 			//死亡位置
@@ -72,7 +71,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			//死亡的角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//是否自动复活(1自动 0不自动)
 			_autoRevive = readByte();
 			//自动复活时间
@@ -80,7 +79,7 @@ package com.rpgGame.netData.player.message{
 			//怪物模型ID
 			_monstermodelid = readInt();
 			//攻击者玩家ID
-			_attackerid = readLong();
+			_attackerid = readShort();
 			//攻击者玩家名字
 			_attackername = readString();
 			//死亡位置
@@ -104,14 +103,14 @@ package com.rpgGame.netData.player.message{
 		 * get 死亡的角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 死亡的角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		
@@ -164,14 +163,14 @@ package com.rpgGame.netData.player.message{
 		 * get 攻击者玩家ID
 		 * @return 
 		 */
-		public function get attackerid(): long{
+		public function get attackerid(): int{
 			return _attackerid;
 		}
 		
 		/**
 		 * set 攻击者玩家ID
 		 */
-		public function set attackerid(value: long): void{
+		public function set attackerid(value: int): void{
 			this._attackerid = value;
 		}
 		

@@ -8,7 +8,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.skill.message.ReqLevelUpSkillMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -41,10 +40,10 @@ package com.rpgGame.app.sender
 		 * varint64 目标id，如果无目标id则发送0，后面附带技能坐标
 		 *
 		 */
-		public static function releaseSpell(spellID : int, x : int, y : int, angle : int, targetID : long) : void
+		public static function releaseSpell(spellID : int, x : int, y : int, angle : int, targetID : int) : void
 		{
 			GameLog.addShow("马上要释放技能id:\t" + spellID);
-			if(targetID != null)
+			if(targetID != 0)
 			{
 				releaseSpellAtTarget(spellID,angle,targetID);
 			}
@@ -65,7 +64,7 @@ package com.rpgGame.app.sender
 			GameLog.addShow("============================发给服务器的技能点为：\t" + x  + "  _  " +y);
 		}
 		
-		public static function releaseSpellAtTarget(spellID:int,angle:int,targetID:long):void
+		public static function releaseSpellAtTarget(spellID:int,angle:int,targetID:int):void
 		{
 			var msg:CSPerformTargetSkillMessage = new CSPerformTargetSkillMessage();
 			msg.skillId = spellID;

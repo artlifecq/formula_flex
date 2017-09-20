@@ -1,6 +1,5 @@
 package com.rpgGame.netData.player.message{
 	import com.rpgGame.netData.player.bean.AttributeItem;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.player.message{
 	public class BroadcastPlayerAttriChangeMessage extends Message {
 	
 		//玩家id
-		private var _playerid: long;
+		private var _playerid: int;
 		
 		//变更的属性
 		private var _attributeChange: AttributeItem;
@@ -29,7 +28,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function writing(): Boolean{
 			//玩家id
-			writeLong(_playerid);
+			writeShort(_playerid);
 			//变更的属性
 			writeBean(_attributeChange);
 			//是否显示特效（0不显示，1显示）
@@ -42,7 +41,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			//玩家id
-			_playerid = readLong();
+			_playerid = readShort();
 			//变更的属性
 			_attributeChange = readBean(AttributeItem) as AttributeItem;
 			//是否显示特效（0不显示，1显示）
@@ -62,14 +61,14 @@ package com.rpgGame.netData.player.message{
 		 * get 玩家id
 		 * @return 
 		 */
-		public function get playerid(): long{
+		public function get playerid(): int{
 			return _playerid;
 		}
 		
 		/**
 		 * set 玩家id
 		 */
-		public function set playerid(value: long): void{
+		public function set playerid(value: int): void{
 			this._playerid = value;
 		}
 		

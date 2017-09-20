@@ -10,8 +10,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import gs.TweenLite;
-	
-	import org.game.netCore.data.long;
 
 	/**
 	*
@@ -51,7 +49,7 @@ package com.rpgGame.app.manager
 				return;
 			
 			
-			if(!soulFightId||FightManager.getFightRoleState( SceneManager.getSceneObjByID(soulFightId.ToGID()) as SceneRole)==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
+			if(!soulFightId||FightManager.getFightRoleState( SceneManager.getSceneObjByID(soulFightId) as SceneRole)==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
 			{
 				stopFightSoulAuto();
 				return;
@@ -68,7 +66,7 @@ package com.rpgGame.app.manager
 		{
 			_stateMachine = new AIStateMachine(role);
 		}
-		public function startFightSoulAuto(targetId:long,type:int) : void
+		public function startFightSoulAuto(targetId:int,type:int) : void
 		{
 			fightSoulTarget(targetId,type);
 			if(!_isFightSoulRunning&&_stateMachine!=null)
@@ -87,7 +85,7 @@ package com.rpgGame.app.manager
 				return;
 			_isBroken = false;
 			_isFightSoulRunning = false;
-			soulFightId=null;
+			soulFightId=0;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			stop();
 		}
@@ -110,18 +108,18 @@ package com.rpgGame.app.manager
 			TweenLite.delayedCall(0.5, onDelayedUnbroken);
 		}
 		
-		private var _soulFightId:long;
+		private var _soulFightId:int;
 		private var soulType:int;
 		/**设置攻击目标*/
-		public function fightSoulTarget(targetId:long,type:int):void
+		public function fightSoulTarget(targetId:int,type:int):void
 		{
 			
-			var srole:SceneRole=SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole;
+			var srole:SceneRole=SceneManager.getSceneObjByID(targetId) as SceneRole;
 			if(!srole)
 				return ;
 			if (srole.type != SceneCharType.MONSTER)
 				return ;
-			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole);//攻击类型
+			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId) as SceneRole);//攻击类型
 			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
 				return ;
 			if(!soulFightId)
@@ -173,12 +171,12 @@ package com.rpgGame.app.manager
 		
 		
 
-		public function get soulFightId():long
+		public function get soulFightId():int
 		{
 			return _soulFightId;
 		}
 
-		public function set soulFightId(value:long):void
+		public function set soulFightId(value:int):void
 		{
 			_soulFightId = value;
 		}

@@ -1,5 +1,4 @@
 package com.rpgGame.netData.fight.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,13 +13,13 @@ package com.rpgGame.netData.fight.message{
 	public class SCBuffSkillMessage extends Message {
 	
 		//施法者ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//技能ID
 		private var _skillId: int;
 		
 		//目标对象列表
-		private var _targets: Vector.<long> = new Vector.<long>();
+		private var _targets: Vector.<int> = new Vector.<int>();
 		
 		/**
 		 * 写入字节缓存
@@ -28,13 +27,13 @@ package com.rpgGame.netData.fight.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//施法者ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//技能ID
 			writeInt(_skillId);
 			//目标对象列表
 			writeShort(_targets.length);
 			for (i = 0; i < _targets.length; i++) {
-				writeLong(_targets[i]);
+				writeShort(_targets[i]);
 			}
 			return true;
 		}
@@ -45,13 +44,13 @@ package com.rpgGame.netData.fight.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//施法者ID
-			_playerId = readLong();
+			_playerId = readShort();
 			//技能ID
 			_skillId = readInt();
 			//目标对象列表
 			var targets_length : int = readShort();
 			for (i = 0; i < targets_length; i++) {
-				_targets[i] = readLong();
+				_targets[i] = readShort();
 			}
 			return true;
 		}
@@ -68,14 +67,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 施法者ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 施法者ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		
@@ -98,14 +97,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 目标对象列表
 		 * @return 
 		 */
-		public function get targets(): Vector.<long>{
+		public function get targets(): Vector.<int>{
 			return _targets;
 		}
 		
 		/**
 		 * set 目标对象列表
 		 */
-		public function set targets(value: Vector.<long>): void{
+		public function set targets(value: Vector.<int>): void{
 			this._targets = value;
 		}
 		
