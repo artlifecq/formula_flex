@@ -883,7 +883,7 @@ package com.rpgGame.app.manager.guild
 		/** 通知玩家帮派Id改变 */
 		public function changeGuildId(msg:ResGuildChangeGuildIdMessage):void
 		{
-			if(MainRoleManager.isSelfByServerId(msg.playerId))
+			if(MainRoleManager.isSelfBySceneId(msg.playerShortId))
 			{
 				ClientConfig.loginData.guildId = msg.guildId;
 				ClientConfig.loginData.guildMemberType = msg.guildMemberType;

@@ -153,7 +153,7 @@ package com.rpgGame.app.cmdlistener
 		private function getResGuildChangeGuildId(msg:ResGuildChangeGuildIdMessage):void
 		{
 			GuildManager.instance().changeGuildId(msg);
-			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerShortId) as SceneRole;
 			if(role && role.usable)
 			{
 				var herodata:HeroData = role.data as HeroData;

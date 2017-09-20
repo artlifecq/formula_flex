@@ -1,5 +1,4 @@
 package com.rpgGame.netData.monster.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,13 +13,13 @@ package com.rpgGame.netData.monster.message{
 	public class ResMonsterDieMessage extends Message {
 	
 		//角色Id
-		private var _monsterId: long;
+		private var _monsterId: int;
 		
 		//死亡状态 2-假死 3-死亡
 		private var _die: int;
 		
 		//杀死人Id
-		private var _killer: long;
+		private var _killer: int;
 		
 		//死亡特效(0正常死亡 1龙卷风秒杀)
 		private var _type: int;
@@ -31,11 +30,11 @@ package com.rpgGame.netData.monster.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_monsterId);
+			writeShort(_monsterId);
 			//死亡状态 2-假死 3-死亡
 			writeByte(_die);
 			//杀死人Id
-			writeLong(_killer);
+			writeShort(_killer);
 			//死亡特效(0正常死亡 1龙卷风秒杀)
 			writeByte(_type);
 			return true;
@@ -46,11 +45,11 @@ package com.rpgGame.netData.monster.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_monsterId = readLong();
+			_monsterId = readShort();
 			//死亡状态 2-假死 3-死亡
 			_die = readByte();
 			//杀死人Id
-			_killer = readLong();
+			_killer = readShort();
 			//死亡特效(0正常死亡 1龙卷风秒杀)
 			_type = readByte();
 			return true;
@@ -68,14 +67,14 @@ package com.rpgGame.netData.monster.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get monsterId(): long{
+		public function get monsterId(): int{
 			return _monsterId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set monsterId(value: long): void{
+		public function set monsterId(value: int): void{
 			this._monsterId = value;
 		}
 		
@@ -98,14 +97,14 @@ package com.rpgGame.netData.monster.message{
 		 * get 杀死人Id
 		 * @return 
 		 */
-		public function get killer(): long{
+		public function get killer(): int{
 			return _killer;
 		}
 		
 		/**
 		 * set 杀死人Id
 		 */
-		public function set killer(value: long): void{
+		public function set killer(value: int): void{
 			this._killer = value;
 		}
 		

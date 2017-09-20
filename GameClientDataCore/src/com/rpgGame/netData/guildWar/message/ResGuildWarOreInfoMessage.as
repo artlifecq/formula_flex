@@ -1,6 +1,5 @@
 package com.rpgGame.netData.guildWar.message{
 	import com.rpgGame.netData.structs.IntKeyValue;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.guildWar.message{
 	public class ResGuildWarOreInfoMessage extends Message {
 	
 		//玩家Id
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//矿列表
 		private var _oreList: Vector.<com.rpgGame.netData.structs.IntKeyValue> = new Vector.<com.rpgGame.netData.structs.IntKeyValue>();
@@ -26,7 +25,7 @@ package com.rpgGame.netData.guildWar.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//玩家Id
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//矿列表
 			writeShort(_oreList.length);
 			for (i = 0; i < _oreList.length; i++) {
@@ -41,7 +40,7 @@ package com.rpgGame.netData.guildWar.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//玩家Id
-			_playerId = readLong();
+			_playerId = readShort();
 			//矿列表
 			var oreList_length : int = readShort();
 			for (i = 0; i < oreList_length; i++) {
@@ -62,14 +61,14 @@ package com.rpgGame.netData.guildWar.message{
 		 * get 玩家Id
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 玩家Id
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		
