@@ -34,6 +34,7 @@ package com.rpgGame.app.view.uiComponent.menu
 			super.onShow();
 			EventManager.addEvent( MenuEvent.SAKEYBLOCK, onSetBtnState );
 			EventManager.addEvent(MenuEvent.CANCEL_LOCK,setBtnFalse);
+			_skin.btn_shield.isSelected=GameSettingManager.getBtnStateByType(_type);
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 

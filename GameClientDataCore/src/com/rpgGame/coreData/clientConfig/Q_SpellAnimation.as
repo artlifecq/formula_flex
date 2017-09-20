@@ -56,6 +56,8 @@ package com.rpgGame.coreData.clientConfig
 		public var sound_name:int;
 		 /**  特效是否是多方向，刀光填1 */
 		public var is_multi_direction:int;
+		 /**  隐藏特效是否有效（0有效，1无效） */
+		public var hide_effect:int;
 
 	}
 }

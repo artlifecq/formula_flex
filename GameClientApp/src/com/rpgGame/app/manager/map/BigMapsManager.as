@@ -29,7 +29,18 @@ package com.rpgGame.app.manager.map
 		
 		private static var mapsIconID:int=0;
 		private static var mapsIconData:Vector.<BigMapIocnDataMode>=new Vector.<BigMapIocnDataMode>;
-		
+		/**
+		 *大地图中显示一个图标 
+		 * @param type 类型 SceneCharType NPC MONSTER TRANS 会对应显示在右边滚动栏中
+		 * @param name 可带颜色
+		 * @param x 场景坐标
+		 * @param y 场景坐标
+		 * @param level
+		 * @param show 是否显示在地图图片上与type配合和只显示在滚动栏
+		 * @param img 图标路径
+		 * @return 图标id 可用此id删除图标
+		 * 
+		 */		
 		public static function showMapsIcon(type:String,name:String,x:Number,y:Number,level:int=0,show:Boolean=true,img:String=""):int
 		{
 			var id:int=addMapsIcon(type,name,x,y,level,show,img);
@@ -37,7 +48,7 @@ package com.rpgGame.app.manager.map
 			return id;
 		}
 		
-		
+		/**大地图中加入图标数据：不会马上显示，需马上显示请使用  showMapsIcon 方法*/
 		public static function addMapsIcon(type:String,name:String,x:Number,y:Number,level:int=0,show:Boolean=true,img:String=""):int
 		{
 			mapsIconID++;

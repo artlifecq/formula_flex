@@ -152,7 +152,7 @@ package com.rpgGame.app.manager.role
 		/**寻路前先拾取物品*/	
 		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false,isOffset:Boolean=false) : void
 		{
-			Lyt.a("走之前拾取物品");
+			//Lyt.a("走之前拾取物品");
 			var obj:Object=new Object();
 			obj.targetSceneId=targetSceneId;
 			obj.posx=posx;
@@ -191,7 +191,7 @@ package com.rpgGame.app.manager.role
 			}
 			if(!walking)
 			{
-				Lyt.a("寻路失败了----");
+				//Lyt.a("寻路失败了----");
 			}
 		}
 		/**寻路偏移量*/	
@@ -291,7 +291,7 @@ package com.rpgGame.app.manager.role
 			if (mapID == targetSceneId)
 			{
 				return jumpWalkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
-				EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
+				
 			}
 			else
 			{

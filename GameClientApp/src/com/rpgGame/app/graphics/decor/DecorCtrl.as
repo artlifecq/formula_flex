@@ -78,13 +78,23 @@ package  com.rpgGame.app.graphics.decor
 			topLayer.add( obj, sortLevel );
 		}
 		
-		public function addTopNotSort( obj :DisplayObject):void
+		public function addTopNotSort( obj :DisplayObject, sortLevel :int = -1 ):void
 		{
 			if (obj == null) return;
 			
-			topLayer.addNotSort( obj );
+			topLayer.addNotSort( obj,sortLevel);
 		}
-		
+		/**
+		 * 删除一个组件 
+		 * @param obj
+		 */		
+		public function removeTopNoSort( obj :DisplayObject ):void
+		{
+			if (obj == null || obj.parent == null)
+				return;
+			
+			topLayer.removeNotSort( obj );
+		}
 		public function sortTop():void
 		{
 			topLayer.sortLevelList();

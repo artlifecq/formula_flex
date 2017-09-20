@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.battle.dfdj
 {
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
@@ -22,12 +23,26 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			_skin=new PaiHang_Item();
 			super(_skin);
-			
+			_skin.bg1.touchable=true;
 			//_skin.bg1.visible=index%2==0;
 			//_skin.bg2.visible=!_skin.bg1.visible;
 			//_skin.lbId.width=50;
 			//_skin.bg3.visible=false;
 			_skin.selectBg.visible=false;	
+			_skin.hoverBg.visible=false;
+			var touch:TouchCtrl=new TouchCtrl(this,null,onOver,onOut);
+		}
+		
+		private function onOut():void
+		{
+			// TODO Auto Generated method stub
+			_skin.hoverBg.visible=false;
+		}
+		
+		private function onOver():void
+		{
+			// TODO Auto Generated method stub
+			_skin.hoverBg.visible=true;
 		}
 		public function setSelect(bool:Boolean):void
 		{
@@ -97,6 +112,7 @@ package com.rpgGame.appModule.battle.dfdj
 			}
 			_skin.lbJifen.text=_data.currentIntegral+"";
 			this.visible=true;
+			_skin.hoverBg.visible=false;
 		}
 		public static function gain(index:int):D1v1RankCellExt
 		{

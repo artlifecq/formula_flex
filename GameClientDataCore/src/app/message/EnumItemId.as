@@ -12,6 +12,8 @@ package app.message
 		
 		public static const GOLD:int=3;
 		public static const BIND_GOLD:int=5;
+		public static const MONEY:int=4;
+		public static const BIND_MONEY:int=6;
 		public function EnumItemId()
 		{
 		}

@@ -2,6 +2,7 @@ package com.rpgGame.appModule.equip
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -11,6 +12,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
@@ -30,6 +32,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_equip_inherit_cost;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -99,7 +102,7 @@ package com.rpgGame.appModule.equip
 		private var tweenEquip:TweenMax;
 		
 		private var pointY:Array;
-		
+		private var _costCtrl:CostConditionCtrl;
 		public function EquipInheritUI()
 		{
 			_skin=new Jicheng_Skin();
@@ -118,7 +121,8 @@ package com.rpgGame.appModule.equip
 		override public function hide():void
 		{
 			deleteTargetEquip();
-			_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+		//	_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			_costCtrl.reset();
 			clearEvent();
 		}
 		
@@ -175,7 +179,8 @@ package com.rpgGame.appModule.equip
 		{
 			_optionsList=new Vector.<EquipJiChengItem>();
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
-			_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			//_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			_costCtrl=new CostConditionCtrl(_leftSkin);
 			//设置格子组标题
 			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/jichengjieguo.png";
 			(_leftSkin.title2.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/jichengcailiao.png";
@@ -460,21 +465,27 @@ package com.rpgGame.appModule.equip
 		{
 			if(_targetEquipInfo!=null&&_useEuipInfo!=null)
 			{
-				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg
-					
-					(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
+				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
 				if(q_jicheng)
-					var useMon:int=q_jicheng.q_cast;
+				{
+					//var useMon:int=q_jicheng.q_cast;
+					_costCtrl.setData(q_jicheng.q_type,q_jicheng.q_cast,q_jicheng.q_type2);
+				}
 				else
-					useMon=0;
-				var userMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
-					
-					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
+				{
+					_costCtrl.reset();
+//					useMon=0;
+//					var userMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
+//						
+//						MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+//					_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
+				}
+			
 			}
 			else
 			{
-				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+				//_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+				_costCtrl.reset();
 			}
 		}
 		
@@ -690,12 +701,13 @@ package com.rpgGame.appModule.equip
 				if(q_jicheng)
 					var useMon:int=q_jicheng.q_cast;
 				else useMon=0;
-				var userMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
-					
-					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+//				var userMon:Number=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
+//					
+//					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+				var userMon:int=Mgr.shopMgr.getCurrency(q_jicheng.q_type)+Mgr.shopMgr.getCurrency(q_jicheng.q_type2);
 				if(useMon>userMon)
 				{
-					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(2007));
+					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, ItemConfig.getItemName(q_jicheng.q_type)+"不足");
 					return false;
 				}
 			}		
@@ -744,11 +756,39 @@ package com.rpgGame.appModule.equip
 			switch(gameAlert.clickType)
 			{
 				case AlertClickTypeEnum.TYPE_SURE:
-					ItemSender.reqEquipInheritMessage(opaqueType,fromEquipId,toEquipId,toType,index);		
+					//ItemSender.reqEquipInheritMessage(opaqueType,fromEquipId,toEquipId,toType,index);		
+					if(!checkMoneyAlert(opaqueType,fromEquipId,toEquipId,toType,index))
+					{
+						ItemSender.reqEquipInheritMessage(opaqueType,fromEquipId,toEquipId,toType,index);
+					}
 					break;
 			}		
 		}
-		
+		private function checkMoneyAlert(opaqueType:int,fromEquipId:long,toEquipId:long,toType:int,index:int):Boolean
+		{
+			if(_targetEquipInfo!=null&&_useEuipInfo!=null)
+			{
+				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg
+					
+					(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
+				if(q_jicheng)
+					var useMon:int=q_jicheng.q_cast;
+				else useMon=0;
+				var num1:int=Mgr.shopMgr.getCurrency(q_jicheng.q_type);
+				var num2:int=Mgr.shopMgr.getCurrency(q_jicheng.q_type2);
+				var userMon:int=num1+num2;
+				if(useMon<=userMon)
+				{
+					if (useMon>num1) 
+					{
+						var str:String=ItemConfig.getItemName(q_jicheng.q_type)+"数量不足，还需额外消耗"+(useMon-num1)+ItemConfig.getItemName(q_jicheng.q_type2)+",是否继续？";
+						GameAlertExt.show(str,ItemSender.reqEquipInheritMessage,[opaqueType,fromEquipId,toEquipId,toType,index]);
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 		private function onTab(e:Event):void
 		{
 			var type:int=-1;
@@ -792,7 +832,7 @@ package com.rpgGame.appModule.equip
 		
 		private function updateMoney(type:int=3):void
 		{
-			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_BIND_GOLD){
+			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_BIND_GOLD&&type!=CharAttributeType.RES_MONEY&&CharAttributeType.RES_BIND_MONEY!=type){
 				return;
 			}
 			showMoney();

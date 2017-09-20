@@ -20,7 +20,7 @@ package com.rpgGame.app.manager.map
 			_show=show;
 			_img=img;
 			_x=x;
-			_y=y;
+			_y=-Math.abs(y);
 		}
 		
 		/**

@@ -245,6 +245,7 @@ package com.rpgGame.appModule.maps
 			_skin.uiOver.y=baseSpr.y;
 			_skin.uiOver.width=baseSpr.width;
 			_skin.uiOver.height=baseSpr.height;
+			_skin.uiOver.visible=true;
 			loadMapEnd();
 			
 		}
@@ -503,6 +504,7 @@ package com.rpgGame.appModule.maps
 			myselfSpr.visible=false;
 			flyPoin.visible=false;
 			thumbnaiSpr.visible=false;
+			_skin.uiOver.visible=false;
 			tips.visible=false;
 			clearAllRole();
 			onClearPath();
