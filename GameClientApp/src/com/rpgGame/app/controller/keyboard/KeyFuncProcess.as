@@ -3,7 +3,6 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -18,8 +17,6 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.coreData.info.key.KeyInfo;
-	import com.rpgGame.coreData.type.SceneCharType;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.utils.getTimer;
 	
