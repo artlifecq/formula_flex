@@ -39,7 +39,7 @@ package com.rpgGame.app.cmdlistener.mount
 		 */		
 		private function getSCHorseIllusionToClientMessage(msg:SCHorseIllusionToClientMessage):void
 		{
-			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 			if (null == role || role.data ==null) {
 				return;
 			}
