@@ -1,6 +1,5 @@
 package com.rpgGame.netData.fight.message{
 	import com.rpgGame.netData.structs.Position;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,13 +14,13 @@ package com.rpgGame.netData.fight.message{
 	public class SCSkillWarningInfoMessage extends Message {
 	
 		//预警者ID
-		private var _monsterId: long;
+		private var _monsterId: int;
 		
 		//技能ID
 		private var _skillId: int;
 		
 		//目标对象列表
-		private var _targets: Vector.<long> = new Vector.<long>();
+		private var _targets: Vector.<int> = new Vector.<int>();
 		//目标点列表
 		private var _posList: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		
@@ -31,13 +30,13 @@ package com.rpgGame.netData.fight.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//预警者ID
-			writeLong(_monsterId);
+			writeShort(_monsterId);
 			//技能ID
 			writeInt(_skillId);
 			//目标对象列表
 			writeShort(_targets.length);
 			for (i = 0; i < _targets.length; i++) {
-				writeLong(_targets[i]);
+				writeShort(_targets[i]);
 			}
 			//目标点列表
 			writeShort(_posList.length);
@@ -53,13 +52,13 @@ package com.rpgGame.netData.fight.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//预警者ID
-			_monsterId = readLong();
+			_monsterId = readShort();
 			//技能ID
 			_skillId = readInt();
 			//目标对象列表
 			var targets_length : int = readShort();
 			for (i = 0; i < targets_length; i++) {
-				_targets[i] = readLong();
+				_targets[i] = readShort();
 			}
 			//目标点列表
 			var posList_length : int = readShort();
@@ -81,14 +80,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 预警者ID
 		 * @return 
 		 */
-		public function get monsterId(): long{
+		public function get monsterId(): int{
 			return _monsterId;
 		}
 		
 		/**
 		 * set 预警者ID
 		 */
-		public function set monsterId(value: long): void{
+		public function set monsterId(value: int): void{
 			this._monsterId = value;
 		}
 		
@@ -111,14 +110,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 目标对象列表
 		 * @return 
 		 */
-		public function get targets(): Vector.<long>{
+		public function get targets(): Vector.<int>{
 			return _targets;
 		}
 		
 		/**
 		 * set 目标对象列表
 		 */
-		public function set targets(value: Vector.<long>): void{
+		public function set targets(value: Vector.<int>): void{
 			this._targets = value;
 		}
 		

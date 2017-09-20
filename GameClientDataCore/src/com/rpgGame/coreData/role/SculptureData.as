@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.role
 {
-	import org.game.netCore.data.long;
+	
 
 	/**
 	 * 雕塑数据
@@ -9,8 +9,6 @@ package com.rpgGame.coreData.role
 	 */
 	public class SculptureData extends RoleData
 	{
-		/** 第一名玩家id*/
-		public var roleId:long;
 		/** 模型id*/
 		public var modleId:int ;
 		

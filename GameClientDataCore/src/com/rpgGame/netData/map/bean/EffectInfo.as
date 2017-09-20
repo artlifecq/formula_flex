@@ -16,7 +16,7 @@ package com.rpgGame.netData.map.bean{
 	public class EffectInfo extends Bean {
 	
 		//EffectID
-		private var _effectId: long;
+		private var _effectId: int;
 		
 		//Effect模型ID
 		private var _effectModelId: int;
@@ -49,7 +49,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//EffectID
-			writeLong(_effectId);
+			writeShort(_effectId);
 			//Effect模型ID
 			writeInt(_effectModelId);
 			//播放类型(0-1次 1-不停)
@@ -79,7 +79,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//EffectID
-			_effectId = readLong();
+			_effectId = readShort();
 			//Effect模型ID
 			_effectModelId = readInt();
 			//播放类型(0-1次 1-不停)
@@ -108,14 +108,14 @@ package com.rpgGame.netData.map.bean{
 		 * get EffectID
 		 * @return 
 		 */
-		public function get effectId(): long{
+		public function get effectId(): int{
 			return _effectId;
 		}
 		
 		/**
 		 * set EffectID
 		 */
-		public function set effectId(value: long): void{
+		public function set effectId(value: int): void{
 			this._effectId = value;
 		}
 		

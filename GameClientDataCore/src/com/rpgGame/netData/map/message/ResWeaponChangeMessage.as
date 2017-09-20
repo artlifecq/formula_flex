@@ -1,5 +1,4 @@
 package com.rpgGame.netData.map.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.map.message{
 	public class ResWeaponChangeMessage extends Message {
 	
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//武器资源Id
 		private var _weaponResId: int;
@@ -34,7 +33,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//武器资源Id
 			writeInt(_weaponResId);
 			//副武器资源Id
@@ -51,7 +50,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//武器资源Id
 			_weaponResId = readInt();
 			//副武器资源Id
@@ -75,14 +74,14 @@ package com.rpgGame.netData.map.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		

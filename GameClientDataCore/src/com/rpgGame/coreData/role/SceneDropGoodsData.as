@@ -43,7 +43,7 @@ package com.rpgGame.coreData.role
 		
 		public function get haveowner():Boolean
 		{
-			return goodsDatas.dropGoodsId.IsZero();
+			return goodsDatas.dropGoodsId==0;
 		}
 		
 
@@ -67,7 +67,7 @@ package com.rpgGame.coreData.role
 		public function updateWithGoodsData(goods:DropGoodsInfo):void
 		{
 			goodsDatas=goods;
-			id=goodsDatas.dropGoodsId.ToGID();
+			id=goodsDatas.dropGoodsId;
 			_qitem = ItemConfig.getQItemByID(goods.itemModelId);
 			this.name = _qitem.q_name;
 			avatarRes="drop/"+_qitem.q_drop_model;

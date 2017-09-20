@@ -225,7 +225,7 @@ package com.rpgGame.app.ui.main.head
 		{
 			switch (target) {
 				case this._skin.btn_cha:
-					LookSender.lookOtherPlayer(_roleData.serverID);
+					LookSender.lookOtherPlayer(_roleData.name);
 					break;
 				case this._skin.btn_zu:
 					//Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);

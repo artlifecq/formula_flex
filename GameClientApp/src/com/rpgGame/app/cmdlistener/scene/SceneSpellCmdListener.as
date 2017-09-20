@@ -140,10 +140,10 @@ package com.rpgGame.app.cmdlistener.scene
 				return;
 			if (info.atkor.isPlayer) 
 			{
-				SpellEffectRecordCtrl.clear(msg.personId.ToGID());
+				SpellEffectRecordCtrl.clear(msg.personId);
 			}
 			
-			if (msg.personId.ToGID()==MainRoleManager.actorID) 
+			if (msg.personId==MainRoleManager.actorID) 
 			{
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
@@ -151,7 +151,7 @@ package com.rpgGame.app.cmdlistener.scene
 			ReleaseSpellHelper.releaseSpell(info);
 			var skillId:int=msg.skillModelId&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
-			if(skillData!=null&&skillData.q_performType==0&&msg.personId.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			if(skillData!=null&&skillData.q_performType==0&&msg.personId == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
 			{
 				EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
 			}
@@ -171,13 +171,13 @@ package com.rpgGame.app.cmdlistener.scene
 				return;
 			if (info.atkor.isPlayer)
 			{
-				SpellEffectRecordCtrl.clear(msg.playerid.ToGID());
+				SpellEffectRecordCtrl.clear(msg.playerid);
 			}
 			
 			var skillId:int=msg.fightType&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
 			
-			if (msg.playerid.ToGID()==MainRoleManager.actorID) 
+			if (msg.playerid==MainRoleManager.actorID) 
 			{
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
@@ -194,7 +194,7 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 			}
 
-			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y+"skillid:"+info.spellData.q_skillID);
+			GameLog.addShow("释放技能\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y+"skillid:"+info.spellData.q_skillID);
 			if(skillData.q_performType==1)
 				ReleaseSpellHelper.fightSoulSpell(info);
 			else
@@ -293,19 +293,19 @@ package com.rpgGame.app.cmdlistener.scene
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
 			if(skillData!=null&&skillData.q_performType==0)//判断不是战魂的技能  ---yt
 			{
-				if(state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击别人
+				if(state.attackerId== MainRoleManager.actorID)//自己攻击别人
 				{
 					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
 					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(state.targetId,1);//战魂帮忙打
 				}
-				else if(state.targetId.ToGID() == MainRoleManager.actorID)//别人攻击自己
+				else if(state.targetId == MainRoleManager.actorID)//别人攻击自己
 				{
 					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(state.attackerId,2);//战魂还击
 				}
 			}
 			/**--------------------是否攻击任务怪-----------------*/
 			
-			if(state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击
+			if(state.attackerId == MainRoleManager.actorID)//自己攻击
 			{
 				if (info.hurtList.length > 0)
 				{
@@ -401,7 +401,7 @@ package com.rpgGame.app.cmdlistener.scene
         }
         
         private function onBuffSkillMessage(msg : SCBuffSkillMessage) : void {
-            var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+            var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
             if (null == role || !role.usable) {
                 return;
             }
@@ -419,7 +419,7 @@ package com.rpgGame.app.cmdlistener.scene
             info.flyTargetPosList = new Vector.<Position>();
             info.flyTargets = new Vector.<SceneRole>();
             for (var i : int = 0, len : int = msg.targets.length; i < len; ++i) {
-                var targetRole : SceneRole = SceneManager.getSceneObjByID(msg.targets[i].ToGID()) as SceneRole;
+                var targetRole : SceneRole = SceneManager.getSceneObjByID(msg.targets[i]) as SceneRole;
                 if (null == targetRole || !targetRole.usable) {
                     continue;
                 }
@@ -433,7 +433,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onSCSkillWarningInfoMessage(msg : SCSkillWarningInfoMessage) : void 
 		{
 			
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.monsterId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.monsterId) as SceneRole;
 			if (null == role || !role.usable) {
 				return;
 			}
@@ -451,9 +451,9 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			if(msg.targets&&msg.targets.length>0)
 			{
-				for each(var targets:long in msg.targets)
+				for each(var targets:int in msg.targets)
 				{
-					var targetsRole : SceneRole = SceneManager.getSceneObjByID(targets.ToGID()) as SceneRole;
+					var targetsRole : SceneRole = SceneManager.getSceneObjByID(targets) as SceneRole;
 					if (role &&role.usable) {
 						FightHeadEffectManager.addHeadWarningEffect(role,warningData.q_time);
 					}

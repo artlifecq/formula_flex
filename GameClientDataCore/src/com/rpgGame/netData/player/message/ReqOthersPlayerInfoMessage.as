@@ -1,5 +1,4 @@
 package com.rpgGame.netData.player.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -13,16 +12,16 @@ package com.rpgGame.netData.player.message{
 	 */
 	public class ReqOthersPlayerInfoMessage extends Message {
 	
-		//角色Id
-		private var _personId: long;
+		//角色名称
+		private var _personName: String;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//角色Id
-			writeLong(_personId);
+			//角色名称
+			writeString(_personName);
 			return true;
 		}
 		
@@ -30,8 +29,8 @@ package com.rpgGame.netData.player.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//角色Id
-			_personId = readLong();
+			//角色名称
+			_personName = readString();
 			return true;
 		}
 		
@@ -44,18 +43,18 @@ package com.rpgGame.netData.player.message{
 		}
 		
 		/**
-		 * get 角色Id
+		 * get 角色名称
 		 * @return 
 		 */
-		public function get personId(): long{
-			return _personId;
+		public function get personName(): String{
+			return _personName;
 		}
 		
 		/**
-		 * set 角色Id
+		 * set 角色名称
 		 */
-		public function set personId(value: long): void{
-			this._personId = value;
+		public function set personName(value: String): void{
+			this._personName = value;
 		}
 		
 	}

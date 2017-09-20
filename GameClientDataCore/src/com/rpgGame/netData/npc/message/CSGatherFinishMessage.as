@@ -1,5 +1,4 @@
 package com.rpgGame.netData.npc.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.npc.message{
 	public class CSGatherFinishMessage extends Message {
 	
 		//采集物id
-		private var _gatherId: long;
+		private var _gatherId: int;
 		
 		
 		/**
@@ -22,7 +21,7 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function writing(): Boolean{
 			//采集物id
-			writeLong(_gatherId);
+			writeShort(_gatherId);
 			return true;
 		}
 		
@@ -31,7 +30,7 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function reading(): Boolean{
 			//采集物id
-			_gatherId = readLong();
+			_gatherId = readShort();
 			return true;
 		}
 		
@@ -47,14 +46,14 @@ package com.rpgGame.netData.npc.message{
 		 * get 采集物id
 		 * @return 
 		 */
-		public function get gatherId(): long{
+		public function get gatherId(): int{
 			return _gatherId;
 		}
 		
 		/**
 		 * set 采集物id
 		 */
-		public function set gatherId(value: long): void{
+		public function set gatherId(value: int): void{
 			this._gatherId = value;
 		}
 		

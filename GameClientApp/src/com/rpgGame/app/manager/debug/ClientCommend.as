@@ -344,7 +344,7 @@ package   com.rpgGame.app.manager.debug
 					msg.skillId= 16779233;
 					msg.targets.push(MainRoleManager.actorInfo.serverID);
 					
-					var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+					var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 					if (null == role || !role.usable) {
 						return;
 					}

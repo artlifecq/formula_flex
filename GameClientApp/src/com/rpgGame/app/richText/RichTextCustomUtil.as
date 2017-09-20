@@ -303,7 +303,6 @@ package com.rpgGame.app.richText
 					//trace( "点击打开这个人的属性面板，id：",data.id," 英雄名字：",data.data1 );
 					//					var userID : String = unitData.linkData;
 					var id:long = new long(unitData.linkData);
-					//					var uise:Number=(new long(userID)).ToGID();
 					if (MainRoleManager.actorID==id.ToGID())
 					{
 						return;
@@ -390,13 +389,7 @@ package com.rpgGame.app.richText
 					if(!unitData.linkData){
 						return;
 					}
-					var ids:Array=unitData.linkData.split(",");
-					var ret:long = new long();
-					var _lValue:int=ids[0];
-					var _hValue:int=ids[1];
-					var _hexValue:String=ids[2];
-					ret.SetRawData(_lValue, _hValue, _hexValue);
-					LookSender.lookOtherPlayer(ret);
+					LookSender.lookOtherPlayer(unitData.linkData);
 					break;
 				case RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE:
 					var scenePosArr : Array = unitData.linkData.split(",");
@@ -427,7 +420,6 @@ package com.rpgGame.app.richText
 					break;
 				
 				case RichTextCustomLinkType.TEAM_APPLY:
-					//					var teamId:Number=(new long(unitData.linkData)).ToGID();
 					id = new long(unitData.linkData);
 					TeamManager.ins.reqJoinToTeam(id);
 					break;

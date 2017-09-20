@@ -280,10 +280,10 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResChangeFactionMessage(msg:ResChangeFactionMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;			
 			if(role){
 				(role.data as RoleData).faction=msg.faction;
-			}else if(msg.personId.ToGID()==MainRoleManager.actorInfo.id){
+			}else if(msg.personId==MainRoleManager.actorInfo.id){
 				MainRoleManager.actorInfo.faction=msg.faction;
 			}
 		}
@@ -299,10 +299,9 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			var info:TopLeaderInfo = msg.topLeaderInfo;
 			var sculp:SculptureData = new SculptureData(RoleType.Type_SCULPTURE);
-			sculp.id = info.id.ToGID();
+			sculp.id = info.id;
 			sculp.modleId = info.modelId;
 			sculp.name = info.playerName;
-			sculp.roleId = info.playerId;
 			sculp.updataTopType(info.topType);
 			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
 			sculp.avatarRes = qData.q_body_res;
@@ -310,7 +309,7 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 		private function onResChangePKStateMessage(msg:ResChangePKStateMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if(role){
 				(role.data as HeroData).pkMode=msg.pkState;
 			}
@@ -324,7 +323,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResChangePositionMessage(msg:ResChangePositionMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if (!role) 
 			{
 				return;
@@ -341,7 +340,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		// 陷阱状态改变
 		private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void {
-			var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId.ToGID()) as RenderUnit3D;
+			var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId) as RenderUnit3D;
 			if (null == trap) {
 				return;
 			}
@@ -360,7 +359,7 @@ package com.rpgGame.app.cmdlistener.scene
 		/**地图跳跃*///-------yt
 		private function onSCAreaJumpMessage(msg : SCAreaJumpMessage) : void 
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 			if (role && role.usable)
 			{
 				var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
@@ -385,7 +384,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
 		{
-			if(msg.personId.ToGID()==MainRoleManager.actor.id)
+			if(msg.personId==MainRoleManager.actor.id)
 			{
 				var mapID : int = SceneSwitchManager.currentMapId;
 				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
@@ -400,7 +399,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResArmorChangeMessage(msg:ResArmorChangeMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if(!role){
 				return;
 			}
@@ -409,7 +408,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if(!role){
 				return;
 			}
@@ -417,7 +416,7 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if(!role){
 				return;
 			}
@@ -446,12 +445,14 @@ package com.rpgGame.app.cmdlistener.scene
 			if (playerData == null)
 				return;
 			RoleData.readGeneric(playerData, new Point(msg.pos.x,msg.pos.y));
-			
 			//			playerData.pkMode = pkMode;
+			//每次进地图跟新
 			playerData.line = line;
 			playerData.sceneSequence = 0;
 			playerData.verityMapId=msg.verityMapId;
-			
+			playerData.id=msg.shortId;
+			MainRoleManager.actor.id=msg.shortId;
+			SceneManager.getScene().updateSceneObjID(playerData.id,MainRoleManager.actor);
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
 
 			EventManager.dispatchEvent(MapEvent.MAP_FLY_COMPLETE);
@@ -593,14 +594,14 @@ package com.rpgGame.app.cmdlistener.scene
 		private function RecvSCSceneObjMoveMessage(msg:SCSceneObjMoveMessage):void
 		{
 			//chongci
-			if(msg.objId.ToGID() == MainRoleManager.actorID&&msg.type!=1)
+			if(msg.objId == MainRoleManager.actorID&&msg.type!=1)
 			{
 //				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
 				return;
 			}
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.objId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.objId) as SceneRole;
 			if(!role){
-				trace("居然同步了一个不存在的角色啊!!");
+				GameLog.addShow("同步了一个找不到的对象ID:" + msg.objId);
 				return;
 			}
 			if (role && role.usable &&SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
@@ -669,13 +670,13 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 //			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.removeObjs.length);
 //			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加对象个数：" + msg.objInfos.length);
-			var delArr:Vector.<long> = msg.removeObjs;
+			var delArr:Vector.<int> = msg.removeObjs;
 			for(var i:int=0;i<delArr.length;i++)
 			{
-				var roleID:uint = delArr[i].ToGID();
+				var roleID:int = delArr[i];
 				onSceneRemoveObject(roleID);
 				SpellEffectRecordCtrl.clear(roleID);
-//				GameLog.addShow("删除对象客户端id：" + roleID);
+				GameLog.addShow("删除对象客户端id：" + roleID);
 //				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
 			
@@ -761,7 +762,7 @@ package com.rpgGame.app.cmdlistener.scene
 				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,Position.FromXY(msg.pet.x,msg.pet.y),msg.pet.positions);
 				RoleStateUtil.walkByInfos(mInfo);
 			}
-			GameLog.addShow("同步对象服务器id：" + msg.pet.petId.ToString()+"\n"+"美人位子:"+msg.pet.x+"_"+msg.pet.y);
+			GameLog.addShow("同步对象服务器id：" + msg.pet.petId+"\n"+"美人位子:"+msg.pet.x+"_"+msg.pet.y);
 		}
 		
 		private function onResRoundPetDisappearMessage(msg:ResRoundPetDisappearMessage):void
@@ -797,10 +798,9 @@ package com.rpgGame.app.cmdlistener.scene
 			var info:TopLeaderInfo=new TopLeaderInfo();
 			info.read(buffer);
 			var sculp:SculptureData = new SculptureData(RoleType.Type_SCULPTURE);
-			sculp.id = info.id.ToGID();
+			sculp.id = info.id;
 			sculp.modleId = info.modelId;
 			sculp.name = info.playerName;
-			sculp.roleId = info.playerId;
 			sculp.updataTopType(info.topType);
 			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
 			sculp.avatarRes = qData.q_body_res;
@@ -841,7 +841,7 @@ package com.rpgGame.app.cmdlistener.scene
 				GameLog.add("陷阱配置不存在:" + data.modelId);
 				return;
 			}
-			var data : TrapInfo = new TrapInfo(info.id, info.id.ToGID(), info.modelId, info.state, info.position.x, info.position.y);
+			var data : TrapInfo = new TrapInfo(info.id, info.modelId, info.state, info.position.x, info.position.y);
 			SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
 		}
 		
@@ -850,7 +850,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 * @param buffer
 		 *
 		 */
-		private function onSceneRemoveObject(roleID : uint) : void
+		private function onSceneRemoveObject(roleID : int) : void
 		{
 			var unit : BaseObj3D = SceneManager.getSceneObjByID(roleID);
 			if (null == unit) {
@@ -911,7 +911,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var sceneRole : SceneRole = SceneRoleManager.getInstance().createHero(data);
 			
 			GameLog.addShow("添加角色对象id：" + data.id);
-			GameLog.addShow("添加对象服务器id：" + data.serverID.ToString());
+//			GameLog.addShow("添加对象服务器id：" + data.serverID.ToString());
 			//角色自带寻路
 			if (info.positions.length>0) 
 			{
@@ -958,8 +958,8 @@ package com.rpgGame.app.cmdlistener.scene
 			if(qData.q_monster_type==MonsterType.COLLECT)//如果是采集物 去走采集物创建流程
 			{
 				var collectData : SceneCollectData = new SceneCollectData();
-				collectData.serverID = info.monsterId;
-				collectData.id = info.monsterId.ToGID();
+//				collectData.serverID = info.monsterId;
+				collectData.id = info.monsterId;
 				collectData.modelID = info.modelId;
 				collectData.sceneID = info.mapModelId;
 				collectData.distributeId=info.distributeId;
@@ -978,26 +978,25 @@ package com.rpgGame.app.cmdlistener.scene
 			else if(qData.q_monster_type==MonsterType.NPC)//npc创建流程
 			{
 				data = new MonsterData(RoleType.TYPE_NPC);
-				data.serverID = info.monsterId;
-				data.id = info.monsterId.ToGID();
+//				data.serverID = info.monsterId;
+				data.id = info.monsterId;
 				data.modelID = info.modelId;
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createNPC(data, SceneCharType.NPC);	
 				
 				GameLog.addShow("添加NPC客户端id：" + data.id);
-				GameLog.addShow("添加NPC服务器id：" + data.serverID.ToString());
 			}
 			else//走怪物创建流程
 			{
 				data = new MonsterData(RoleType.TYPE_MONSTER);
-				data.serverID = info.monsterId;
-				data.id = info.monsterId.ToGID();
+//				data.serverID = info.monsterId;
+				data.id = info.monsterId;
 				data.modelID = info.modelId;
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-//				GameLog.addShow("添加怪物客户端id：" + data.id);
+				GameLog.addShow("添加怪物客户端id：" + data.id);
 //				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 			}
 			if (sceneRole&&info.positions.length>0) 
@@ -1033,8 +1032,8 @@ package com.rpgGame.app.cmdlistener.scene
 			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC,LoadPriorityType.LEVEL_CUSTOM_1);
 			
 			var info : NpcInfo = new NpcInfo();
-			data.serverID = info.npcId;
-			data.id = info.npcId.ToGID();
+//			data.serverID = info.npcId;
+			data.id = info.npcId;
 			data.modelID = info.npcModelId;
 			RoleData.readNpc(data, info);
 			
@@ -1079,7 +1078,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function RecvBroadcastPlayerAttriChangeMessage(msg : BroadcastPlayerAttriChangeMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerid.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerid) as SceneRole;
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
@@ -1219,7 +1218,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void 
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;

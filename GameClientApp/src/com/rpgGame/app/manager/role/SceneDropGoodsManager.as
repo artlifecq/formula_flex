@@ -44,7 +44,7 @@ package com.rpgGame.app.manager.role
 			}
 			if (dropGoodsData.goodsDatas)
 			{
-				SceneSender.requestPickUpGoodsInfo(dropGoodsData.goodsDatas.dropGoodsId);
+//				SceneSender.requestPickUpGoodsInfo(dropGoodsData.goodsDatas.dropGoodsId);//暂时注释因为id累心换了还没修改协议
 //				dropGoodsDatasInit(dropGoodsData);
 				PickAutoManager.getInstance().autoPickCtrl.SetPickingState(false);
 			}

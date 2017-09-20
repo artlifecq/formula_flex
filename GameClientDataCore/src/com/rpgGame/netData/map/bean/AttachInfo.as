@@ -1,7 +1,6 @@
 package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.structs.Position;
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -17,7 +16,10 @@ package com.rpgGame.netData.map.bean{
 	public class AttachInfo extends Bean {
 	
 		//唯一ID
-		private var _id: long;
+		private var _id: int;
+		
+		//释放者ID
+		private var _ownerId: int;
 		
 		//坐标
 		private var _position: com.rpgGame.netData.structs.Position;
@@ -33,7 +35,9 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//唯一ID
-			writeLong(_id);
+			writeShort(_id);
+			//释放者ID
+			writeShort(_ownerId);
 			//坐标
 			writeBean(_position);
 			//模型ID
@@ -48,7 +52,9 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//唯一ID
-			_id = readLong();
+			_id = readShort();
+			//释放者ID
+			_ownerId = readShort();
 			//坐标
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//模型ID
@@ -62,15 +68,30 @@ package com.rpgGame.netData.map.bean{
 		 * get 唯一ID
 		 * @return 
 		 */
-		public function get id(): long{
+		public function get id(): int{
 			return _id;
 		}
 		
 		/**
 		 * set 唯一ID
 		 */
-		public function set id(value: long): void{
+		public function set id(value: int): void{
 			this._id = value;
+		}
+		
+		/**
+		 * get 释放者ID
+		 * @return 
+		 */
+		public function get ownerId(): int{
+			return _ownerId;
+		}
+		
+		/**
+		 * set 释放者ID
+		 */
+		public function set ownerId(value: int): void{
+			this._ownerId = value;
 		}
 		
 		/**

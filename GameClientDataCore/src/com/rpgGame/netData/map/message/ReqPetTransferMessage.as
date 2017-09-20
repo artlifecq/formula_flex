@@ -1,5 +1,4 @@
 package com.rpgGame.netData.map.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.map.message{
 	public class ReqPetTransferMessage extends Message {
 	
 		//主人ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		
 		/**
@@ -22,7 +21,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function writing(): Boolean{
 			//主人ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			return true;
 		}
 		
@@ -31,7 +30,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function reading(): Boolean{
 			//主人ID
-			_playerId = readLong();
+			_playerId = readShort();
 			return true;
 		}
 		
@@ -47,14 +46,14 @@ package com.rpgGame.netData.map.message{
 		 * get 主人ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 主人ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

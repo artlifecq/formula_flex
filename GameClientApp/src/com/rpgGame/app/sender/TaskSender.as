@@ -43,7 +43,7 @@ package com.rpgGame.app.sender
 		 * 
 		 * 
 		 */		
-		public static function sendStartGatherMessage(tid:long):void
+		public static function sendStartGatherMessage(tid:int):void
 		{
 			var msg:ReqNpcServicesMessage = new ReqNpcServicesMessage();
 			msg.npcId=tid;
@@ -54,7 +54,7 @@ package com.rpgGame.app.sender
 		 * 结束采集
 		 * @param tid 
 		 */	
-		public static function sendFinishGatherMessage(tid:long):void
+		public static function sendFinishGatherMessage(tid:int):void
 		{
 			var msg:CSGatherFinishMessage = new CSGatherFinishMessage();
 			msg.gatherId=tid;

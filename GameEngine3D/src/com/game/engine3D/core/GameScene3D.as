@@ -836,6 +836,21 @@ package com.game.engine3D.core
 		}
 		
 		/**
+		 *根据id和对象更新 
+		 * @param id
+		 * @param obj
+		 * 
+		 */
+		public function updateSceneObjID(id:Number,obj:BaseObj3D):void
+		{
+			var key:String=_sceneObjMap.getKey(obj);
+			if(key){
+				_sceneObjMap.removeForKey(key);
+			}
+			_sceneObjMap.addForKey(id+"_"+obj.type,obj);
+		}
+		
+		/**
 		 * 从场景中查找角色
 		 * @parm type 角色类型
 		 */

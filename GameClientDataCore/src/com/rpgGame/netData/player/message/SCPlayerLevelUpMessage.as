@@ -1,5 +1,4 @@
 package com.rpgGame.netData.player.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.player.message{
 	public class SCPlayerLevelUpMessage extends Message {
 	
 		//角色ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//新等级
 		private var _newLevel: int;
@@ -25,7 +24,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//新等级
 			writeInt(_newLevel);
 			return true;
@@ -36,7 +35,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色ID
-			_playerId = readLong();
+			_playerId = readShort();
 			//新等级
 			_newLevel = readInt();
 			return true;
@@ -54,14 +53,14 @@ package com.rpgGame.netData.player.message{
 		 * get 角色ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 角色ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

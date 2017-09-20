@@ -164,14 +164,14 @@ package com.rpgGame.app.cmdlistener.task
 		/**开始采集	*/
 		private function onResStartGatherMessage(msg:ResStartGatherMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if (null == role) {
 				return;
 			}
 			if (role.isMainChar||role.ownerIsMainChar) 
 			{
 				var singStr:String="采集中";
-				var tatgetRole:SceneRole = SceneManager.getSceneObjByID(msg.tatget.ToGID()) as SceneRole;
+				var tatgetRole:SceneRole = SceneManager.getSceneObjByID(msg.tatget) as SceneRole;
 				if (tatgetRole!=null && tatgetRole.data!=null) {
 					var collectData : SceneCollectData = tatgetRole.data as SceneCollectData;
 					if (collectData != null)
@@ -196,7 +196,7 @@ package com.rpgGame.app.cmdlistener.task
 			ref.setParams(msg.costtime);
 			role.stateMachine.transition(RoleStateType.ACTION_COLLECT, ref);
 		}
-		private function sendFinishGather(tid:long):void
+		private function sendFinishGather(tid:int):void
 		{
 			TaskSender.sendFinishGatherMessage(tid);
 		}
@@ -205,7 +205,7 @@ package com.rpgGame.app.cmdlistener.task
 		/**停止采集	*/
 		private function onResStopGatherMessage(msg:ResStopGatherMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if (null == role) {
 				return;
 			}

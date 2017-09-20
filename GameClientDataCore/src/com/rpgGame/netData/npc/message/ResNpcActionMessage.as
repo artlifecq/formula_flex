@@ -14,7 +14,7 @@ package com.rpgGame.netData.npc.message{
 	public class ResNpcActionMessage extends Message {
 	
 		//npcId
-		private var _npcId: long;
+		private var _npcId: int;
 		
 		//行为目标
 		private var _tatget: long;
@@ -28,7 +28,7 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function writing(): Boolean{
 			//npcId
-			writeLong(_npcId);
+			writeShort(_npcId);
 			//行为目标
 			writeLong(_tatget);
 			//行为类型
@@ -41,7 +41,7 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function reading(): Boolean{
 			//npcId
-			_npcId = readLong();
+			_npcId = readShort();
 			//行为目标
 			_tatget = readLong();
 			//行为类型
@@ -61,14 +61,14 @@ package com.rpgGame.netData.npc.message{
 		 * get npcId
 		 * @return 
 		 */
-		public function get npcId(): long{
+		public function get npcId(): int{
 			return _npcId;
 		}
 		
 		/**
 		 * set npcId
 		 */
-		public function set npcId(value: long): void{
+		public function set npcId(value: int): void{
 			this._npcId = value;
 		}
 		
