@@ -16,7 +16,7 @@ package com.rpgGame.netData.player.bean{
 	public class HyperlinkInfo extends Bean {
 	
 		//动态参数位置
-		private var _i: int;
+		private var _i: int; 
 		
 		//动态参数类型 已前段为准
 		private var _t: int;

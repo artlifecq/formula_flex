@@ -20,7 +20,7 @@ package com.rpgGame.netData.player.message{
 		private var _values: Vector.<String> = new Vector.<String>();
 		//子参数
 		private var _hyperlinkInfos: Vector.<HyperlinkInfo> = new Vector.<HyperlinkInfo>();
-		
+		 
 		/**
 		 * 写入字节缓存
 		 */

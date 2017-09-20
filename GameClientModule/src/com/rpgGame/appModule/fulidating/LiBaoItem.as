@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.fulidating
 {
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.FuliDaTingSender;
@@ -23,6 +24,7 @@ package com.rpgGame.appModule.fulidating
 		private var _skin:Item_Libao;
 		private var _lv:int;
 		private var _groupList:RewardGroup;
+		private var _info:GrownInfo;
 		public function LiBaoItem()
 		{
 			_skin=new Item_Libao();
@@ -75,15 +77,15 @@ package com.rpgGame.appModule.fulidating
 		
 		public function updateBtnState():void
 		{
-			var info:GrownInfo=Mgr.dengjiMgr.getGrownInfoByLv(_lv);
-			if(!info){
+			_info=Mgr.dengjiMgr.getGrownInfoByLv(_lv);
+			if(!_info){
 				GrayFilter.gray(_skin.btnLingqu);
 				_skin.uiLingqu.visible=false;
 			}else{
-				if(info.state==0){
+				if(_info.state==0){
 					GrayFilter.gray(_skin.btnLingqu);
 					_skin.uiLingqu.visible=false;
-				}else if(info.state==1){
+				}else if(_info.state==1){
 					_skin.btnLingqu.filter=null;
 					_skin.uiLingqu.visible=false;
 				}else{
@@ -100,9 +102,18 @@ package com.rpgGame.appModule.fulidating
 		
 		private function reqReceiveReward():void
 		{
-			if(_skin.btnLingqu.filter!=null) return;
-			var id:int=DengJiCfg.getIdByLv(_lv);
-			FuliDaTingSender.reqGotGrownGiftMessage(id);
+			if(_info.state==0)
+			{
+				NoticeManager.showNotifyById(4005);
+				return;
+			}else if(_info.state==1){
+				var id:int=DengJiCfg.getIdByLv(_lv);
+				FuliDaTingSender.reqGotGrownGiftMessage(id);
+				return;
+			}else{
+				NoticeManager.showNotifyById(5);
+				return;
+			}
 		}
 	}
 }
