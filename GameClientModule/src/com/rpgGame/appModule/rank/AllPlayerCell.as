@@ -126,7 +126,7 @@ package com.rpgGame.appModule.rank
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			if(target == _skin.lbName)
+			if(target == _skin.lbName&&_isSelect)
 			{
 				var uise:*= _topInfo.playerid.hexValue;
 				var userName : String = _topInfo.playername;
@@ -134,11 +134,10 @@ package com.rpgGame.appModule.rank
 				{
 					MenuManager.showMenu(MenuUtil.getPlayerTargetRank(), [uise, userName], -1, -1, 80);
 				}
-			}else{
-				if(_triggeredFun!=null)
-				{
-					_triggeredFun(_topInfo);
-				}
+			}
+			if(_triggeredFun!=null)
+			{
+				_triggeredFun(_topInfo);
 			}
 		}
 		private var _isSelect:Boolean;

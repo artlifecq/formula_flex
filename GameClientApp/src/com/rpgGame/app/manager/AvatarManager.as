@@ -93,8 +93,6 @@ package com.rpgGame.app.manager
 			
 			role.avatar.secondStatusGetter = getSecondStatus;
 			
-			
-			role.avatar.buildSyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
 			//上“坐骑”
 			updateMount(role);
 			//穿“主体”
@@ -170,15 +168,12 @@ package com.rpgGame.app.manager
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(roleData.mount);
 			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(roleData.zhanqiLv);
 			
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
-			if (!clothesRes)
-			{
-				clothesRes = AvatarClothesResCfgData.getInfo(roleData.job);
-			}
+			
+			var clothesRes:AvatarClothesRes=AvatarClothesResCfgData.getBodyAvatarInfo(roleData.cloths,roleData.job);
 			
 			if (clothesRes)
 			{
-				bodyResID = clothesRes.bodyRes;
+				bodyResID =  AvatarClothesResCfgData.getBodyRes(roleData.cloths,roleData.job,roleData.sex);
 				bodyEffectResID = clothesRes.effectRes;
 				
 				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(roleData.hair);

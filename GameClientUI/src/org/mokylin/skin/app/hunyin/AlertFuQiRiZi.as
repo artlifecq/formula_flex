@@ -40,7 +40,7 @@ package org.mokylin.skin.app.hunyin
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 625;
-			this.elementsContent = [bg_i(),__AlertFuQiRiZi_UIAsset1_i(),__AlertFuQiRiZi_UIAsset2_i(),btnClose_i(),__AlertFuQiRiZi_UIAsset3_i(),lbInfo_i(),ListRizi_i(),__AlertFuQiRiZi_Label1_i()];
+			this.elementsContent = [bg_i(),__AlertFuQiRiZi_UIAsset1_i(),__AlertFuQiRiZi_UIAsset2_i(),btnClose_i(),__AlertFuQiRiZi_UIAsset3_i(),lbInfo_i(),ListRizi_i()];
 			
 			states = {
 			};
@@ -61,17 +61,6 @@ package org.mokylin.skin.app.hunyin
 			temp.width = 597;
 			temp.x = 14;
 			temp.y = 43;
-			return temp;
-		}
-
-		private function __AlertFuQiRiZi_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.htmlText = "<font color='#00dfff'>2017-6-19 09:36:31 </font>熬血红颜也TA的伴侣<font color='#00ff33'>洞房</font> 双方增加了<font color='#ffea00'>5000000</font>点亲密度";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
-			temp.y = 48;
 			return temp;
 		}
 

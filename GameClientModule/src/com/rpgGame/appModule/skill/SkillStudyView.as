@@ -6,7 +6,6 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
@@ -62,6 +61,7 @@ package com.rpgGame.appModule.skill
 		private var _levelUpTip:RewardMarkTip;
 		private var _upGradeTip:RewardMarkTip;
 		private var _tabBtns:Array;
+		private var _btns:Array;
 		public function SkillStudyView()
 		{
 			_skin=new jineng_Skin();
@@ -227,7 +227,7 @@ package com.rpgGame.appModule.skill
 		
 		override public function hide():void
 		{
-		
+			
 		}
 		override protected function onShow():void
 		{
@@ -240,7 +240,7 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
-//			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
+			//			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
 		}
 		override protected function onHide():void
 		{
@@ -253,7 +253,7 @@ package com.rpgGame.appModule.skill
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);
-//			EventManager.removeEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
+			//			EventManager.removeEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
 			skillUpgrade.onHide();
 			skillRise.onHide();
 		}
@@ -261,7 +261,7 @@ package com.rpgGame.appModule.skill
 		{
 			updateZhenqi();
 			updateSkillList();
-		
+			
 		}
 		
 		private function addItem(itemInfo : ClientItemInfo) : void
@@ -306,7 +306,19 @@ package com.rpgGame.appModule.skill
 			}
 			selectedItem=skillItem;
 			selectedItem.selected=true;
-			
+			if(selectedItem.skillCfg,selectedItem.skillInfo.skillModelId==1){
+				_skin.tab_zizhi.selectedIndex=0;
+				if(_skin.tab_zizhi.isCreated){
+					var btn:ToggleButton=_skin.tab_zizhi.getButtonByIndex(1);
+					btn.visible=false;
+				}
+				onTab(null);
+			}else{
+				if(_skin.tab_zizhi.isCreated){
+					btn=_skin.tab_zizhi.getButtonByIndex(1);
+					btn.visible=true;
+				}
+			}
 			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
 			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
 			var ret:int=SpellManager.canUpOrRise(selectedItem.skillCfg.q_skillID);

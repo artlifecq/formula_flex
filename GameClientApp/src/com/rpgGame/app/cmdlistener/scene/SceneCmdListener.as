@@ -450,6 +450,7 @@ package com.rpgGame.app.cmdlistener.scene
 			//			playerData.pkMode = pkMode;
 			playerData.line = line;
 			playerData.sceneSequence = 0;
+			playerData.verityMapId=msg.verityMapId;
 			
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
 

@@ -41,6 +41,8 @@ package com.rpgGame.appModule.maps
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.textures.IStarlingTexture;
+	import com.rpgGame.app.manager.map.BigMapsManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 	
 	
 	/**
@@ -93,6 +95,7 @@ package com.rpgGame.appModule.maps
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
+			_skin.uiOver.touchable=false;
 			_mapWidth = _skin.grp_cont.width;
 			_mapHeight = _skin.grp_cont.height;
 			skinSpr=new Sprite();
@@ -104,6 +107,7 @@ package com.rpgGame.appModule.maps
 		}
 		public function init():void
 		{
+			//_skin.uiOver.isEnabled=false;
 			baseSpr = new Sprite();
 			skinSpr.addChild(baseSpr);
 			
@@ -133,6 +137,7 @@ package com.rpgGame.appModule.maps
 			skinSpr.addChild(mask);
 			baseSpr.mask = mask;
 			
+			skinSpr.addChild(_skin.uiOver);
 			tips=new BigMapTips(_mapWidth,_mapHeight);
 			skinSpr.addChild(tips);
 		}
@@ -232,11 +237,14 @@ package com.rpgGame.appModule.maps
 			var mapY:Number=(_mapHeight-thumbnaiImage.height*_scale)/2;
 			baseSpr.x=mapX;
 			baseSpr.y=mapY;
-			
-			
 			thumbnaiSpr.scaleX = thumbnaiSpr.scaleY = _scale;
 			scaleMapX = (thumbnaiImage.width / absMaxWidth) * _scale;
 			scaleMapY = (thumbnaiImage.height / absMaxHeight) * _scale;
+			
+			_skin.uiOver.x=baseSpr.x;
+			_skin.uiOver.y=baseSpr.y;
+			_skin.uiOver.width=baseSpr.width;
+			_skin.uiOver.height=baseSpr.height;
 			loadMapEnd();
 			
 		}
@@ -244,10 +252,10 @@ package com.rpgGame.appModule.maps
 		protected function loadMapEnd():void
 		{
 			_isMapLoadComplete = true;
-			BigMapsData.isMapLoadComplete=true;
-			BigMapsData.currentMapId=_currentMapId;
-			BigMapsData.scaleMapX=scaleMapX;
-			BigMapsData.scaleMapY=scaleMapY;
+			BigMapsManager.isMapLoadComplete=true;
+			BigMapsManager.currentMapId=_currentMapId;
+			BigMapsManager.scaleMapX=scaleMapX;
+			BigMapsManager.scaleMapY=scaleMapY;
 			updateMyselfPos();
 			updateRolePos();
 			
@@ -334,43 +342,51 @@ package com.rpgGame.appModule.maps
 		{
 			clearAllRole();
 			var i:int,length:int;
+			var roleList:Vector.<BigMapIocnDataMode>
+			roleList=BigMapsManager.getMapsIconList();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+				updateRolePosShow(roleList[i]);
+			}
+			/*roleList=BigMapsData.getMapsNpcData();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+			updateRolePosShow(roleList[i]);
+			}
+			roleList=BigMapsData.getMapsThansData();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+			updateRolePosShow(roleList[i]);
+			}
+			roleList=BigMapsData.getMapsOtherData();
+			length=roleList.length
+			for(i=0;i<length;i++)
+			{
+			updateRolePosShow(roleList[i]);
+			}*/
 			
-			length=BigMapsData.mapsMonsterData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsMonsterData[i]);
-			}
-			length=BigMapsData.mapsNpcData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsNpcData[i]);
-			}
-			length=BigMapsData.mapsThansData.length
-			for(i=0;i<length;i++)
-			{
-				updateRolePosShow(BigMapsData.mapsThansData[i]);
-			}
+			
 			//updateTeamatesPoint();
 		}
 		private function updateRolePosShow(roleData:BigMapIocnDataMode) : void
 		{
 			if(!roleData.show)
 				return;
-			var point:Point;
-			var pos3d : Vector3D = new Vector3D();
-			pos3d.x = roleData.x;
-			pos3d.z = roleData.y;
-			point=getChangeSceneToMap(pos3d);
-			var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
+			
+			//var roleIcon:BigMapIcon=new BigMapIcon(roleData.type,roleData.name,roleData.level,point.x,point.y);
+			var roleIcon:BigMapIcon=new BigMapIcon(roleData);
 			
 			//roleIcon.icoName.x=point.x<10?point.x:0;
-			if(point.x<(roleIcon.icoName.textWidth*0.5))
+			if(roleIcon.x<(roleIcon.icoName.textWidth*0.5))
 			{
-				roleIcon.icoName.x=roleIcon.icoName.textWidth*0.5-point.x;
+				roleIcon.icoName.x=roleIcon.icoName.textWidth*0.5-roleIcon.x;
 			}
-			if(point.x>(thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5))
+			if(roleIcon.x>(thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5))
 			{
-				roleIcon.icoName.x=(-point.x+thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5);
+				roleIcon.icoName.x=(-roleIcon.x+thumbnaiSpr.width-roleIcon.icoName.textWidth*0.5);
 			}
 			
 			//roleIcon.icoName.x=point.x>(thumbnaiSpr.width-120)?(-point.x+thumbnaiSpr.width-120):0;
@@ -532,8 +548,8 @@ package com.rpgGame.appModule.maps
 //			var pos : Point = MathUtil.projection(posx, posy, tilt, pan, roll);
 //			pos.x += mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsData.scaleMapX;
 //			pos.y += mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsData.scaleMapY;
-			var posx : int = position.x *BigMapsData.scaleMapX;
-			var posy : int = -position.z*BigMapsData.scaleMapY;
+			var posx : int = position.x *BigMapsManager.scaleMapX;
+			var posy : int = -position.z*BigMapsManager.scaleMapY;
 			var tilt : Number = MathUtil.angleToRadian(mapData.miniCorrectTilt);
 			var pos : Point =new Point(posx,posy);
 			return pos;
@@ -552,14 +568,14 @@ package com.rpgGame.appModule.maps
 				return null;
 			
 			
-			var offsetX : int = mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsData.scaleMapX;
-			var offsetY : int = mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsData.scaleMapY;
+			var offsetX : int = mapData.miniCorrectOffsetX * mapData.miniScaleX * BigMapsManager.scaleMapX;
+			var offsetY : int = mapData.miniCorrectOffsetY * mapData.miniScaleY * BigMapsManager.scaleMapY;
 			var tilt : Number = MathUtil.angleToRadian(mapData.miniCorrectTilt);
 			var pan : Number = MathUtil.angleToRadian(mapData.miniCorrectPan);
 			var roll : Number = MathUtil.angleToRadian(mapData.miniCorrectRoll);
 			var pos : Point = MathUtil.backProjection(posx - offsetX, posy - offsetY, tilt, pan, roll);
-			pos.x = pos.x / (mapData.miniScaleX * BigMapsData.scaleMapX);
-			pos.y = /*absMaxHeight*/ -pos.y / (mapData.miniScaleY * BigMapsData.scaleMapY);
+			pos.x = pos.x / (mapData.miniScaleX * BigMapsManager.scaleMapX);
+			pos.y = /*absMaxHeight*/ -pos.y / (mapData.miniScaleY * BigMapsManager.scaleMapY);
 			
 			//LOG.a(pos.x+":"+pos.y);
 			return pos;

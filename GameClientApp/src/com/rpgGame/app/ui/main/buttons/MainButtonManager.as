@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
+	import com.rpgGame.app.ui.main.activityBar.item.ActivityFuLiDaTingButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityPointNumButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivitySevendayButton;
@@ -28,7 +29,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zudui;
-
+	
 	public class MainButtonManager
 	{
 		private static var _classMap:HashMap;
@@ -137,6 +138,9 @@ package com.rpgGame.app.ui.main.buttons
 					return new ActivityRedRewardButton();
 				case EmMainBtnID.QIRIHAOLI:
 					return new ActivitySevendayButton();
+				case EmMainBtnID.FULIDATING:
+				case EmMainBtnID.ZAIXIAN:
+					return new ActivityFuLiDaTingButton();
 				case EmMainBtnID.PIPEIDUILIE:
 					return new MultyActivityButton();
 				case EmMainBtnID.SHIJIEBOSS:

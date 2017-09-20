@@ -9,6 +9,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -24,6 +25,7 @@ package com.rpgGame.appModule.mount
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import com.game.engine3D.display.InterObject3D;
 	
 	public class ZhanQiPanelExt extends AttChangeView
 	{
@@ -103,6 +105,8 @@ package com.rpgGame.appModule.mount
 			_zhanqiUpExpConent.updateExp();
 			_zhanqiUpExpConent.isAutoing = false;
 			initEvent();
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_zuoqizhandouli"),_skin.grpZhanli.x+100,_skin.grpZhanli.y+75,0);
+			_skin.container.addChild(_skin.grpZhanli);
 		}
 		
 		override public function hide():void
@@ -115,6 +119,11 @@ package com.rpgGame.appModule.mount
 			}
 			_zhanqiUpExpConent.hide();
 			super.hide();
+			if(eft){
+				eft.stop();
+				eft.dispose();
+				eft=null;
+			}
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -237,6 +246,7 @@ package com.rpgGame.appModule.mount
 		
 		private var _uplevelSuccess:ZhanQiUpLevelSucessPanelExt;
 		private var autoReq:TweenLite;
+		private var eft:InterObject3D;
 		private function showUplevel():void
 		{
 			if(_uplevelSuccess==null)	

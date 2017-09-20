@@ -1,8 +1,6 @@
 package com.rpgGame.app.ui.main.activityBar.item
 {
 	import com.rpgGame.app.manager.ActivetyDataManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
-	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;

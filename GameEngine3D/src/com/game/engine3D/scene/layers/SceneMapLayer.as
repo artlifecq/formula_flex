@@ -164,7 +164,7 @@ package com.game.engine3D.scene.layers
 			_lights = new Vector.<LightBase>();
 			_useLight = true;
 			_castsShadows = true;
-			_plantCastsShadows = true;
+			_plantCastsShadows = false;
 			_showDistrictWireframe = false;
 			_sceneMapData = null;
 			_animatorMap = new HashMap();

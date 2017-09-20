@@ -227,7 +227,7 @@ package org.mokylin.skin.app.paihangbang
 		private function __PaiHangTotal_zhanli_UIAsset25_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/paihangbang/word/zhanli.png";
+			temp.styleName = "ui/app/paihangbang/word/jieshu.png";
 			temp.x = 459;
 			temp.y = 5;
 			return temp;
@@ -239,7 +239,7 @@ package org.mokylin.skin.app.paihangbang
 			btnLinQu = temp;
 			temp.name = "btnLinQu";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "排行奖励";
+			temp.label = "领取奖励";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;

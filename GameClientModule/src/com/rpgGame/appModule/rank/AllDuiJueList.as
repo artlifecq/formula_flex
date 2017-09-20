@@ -4,6 +4,8 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TouchableUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
@@ -64,16 +66,24 @@ package com.rpgGame.appModule.rank
 				{
 					_gReward.setRewardByJsonStr(qRank.q_reward);
 				}
-				if (data.drawAward==1) 
-				{
-					TouchableUtil.gray(_skin.btnLinQu);
-				}
-				else 
-				{
-					TouchableUtil.ungray(_skin.btnLinQu);
-				}
+				setBtnState(data.drawAward);
+			}else{
+				setBtnState(0);
 			}
-			
+		}
+		
+		private function setBtnState(state:int):void
+		{
+			if (state==1) 
+			{
+				TouchableUtil.gray(_skin.btnLinQu);
+				_skin.btnLinQu.label="已领取";
+			}
+			else 
+			{
+				TouchableUtil.ungray(_skin.btnLinQu);
+				_skin.btnLinQu.label="领取奖励";
+			}
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -86,6 +96,9 @@ package com.rpgGame.appModule.rank
 					Mgr.d1v1Mgr.reqGetReward();
 					break;
 				}
+				case _skin.lbMsg:
+					AppManager.showApp(AppConstant.BATTLE_D1V1_LEVEL_UP_PANEL);
+					break;
 			}
 		}
 		override protected function onHide():void

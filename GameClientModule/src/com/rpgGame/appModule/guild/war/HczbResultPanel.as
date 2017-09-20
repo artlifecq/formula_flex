@@ -6,6 +6,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
@@ -24,7 +25,7 @@ package com.rpgGame.appModule.guild.war
 	 * @author dik
 	 * 2017-8-2
 	 */
-	public class HczbResultPanel extends SkinUIPanel
+	public class HczbResultPanel extends ExitScenePanel
 	{
 		private var _skin:HuangChengJieSuan;
 		private var rewardGrp:RewardGroup;
@@ -79,7 +80,7 @@ package com.rpgGame.appModule.guild.war
 			super.onTouchTarget(target);
 			if(target==_skin.getRewardBtn){
 				this.hide();
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 			}
 		}
 	}

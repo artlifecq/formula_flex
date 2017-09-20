@@ -787,13 +787,11 @@ package com.rpgGame.appModule.equip
 		
 		private function getOneKeyUse():void
 		{
-			cancelAllUse();
-			
+			cancelAllUse();		
 			if(!targetEquipInfo){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4204));
 				return;
 			}
-			
 			
 			var lv:int=_skin.cmb_dengjie.selectedIndex+1;
 			var quality:int=_skin.cmb_pinzhi.selectedIndex+1;
@@ -820,11 +818,26 @@ package com.rpgGame.appModule.equip
 			useListIds=new Vector.<long>();
 			isToUp=false;
 			var maxCfg:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.qItem.q_max_strengthen);
-			for(var i:int=0;i<result.length;i++){
-				item=result[i];
-				if(item.type==GoodsType.STRENGTH){
-					for(var j:int=0;j<item.itemInfo.num;j++)
-					{
+			if(result!=null&&result.length>0){
+				for(var i:int=0;i<1;i++){
+					item=result[i];
+					if(item.type==GoodsType.STRENGTH){
+						for(var j:int=0;j<item.itemInfo.num;j++)
+						{
+							addExp+=item.qItem.q_strengthen_num;
+							useMon=addExp*perMon;
+							if(userMon<useMon){//钱不够
+								addExp-=item.qItem.q_strengthen_num;
+								break;
+							}
+							useListIds.push(item.itemInfo.itemId);
+							if(addExp>maxCfg.q_exp){
+								isToUp=true;//到顶级了
+								break;
+							}
+						}
+					}
+					else{
 						addExp+=item.qItem.q_strengthen_num;
 						useMon=addExp*perMon;
 						if(userMon<useMon){//钱不够
@@ -836,19 +849,6 @@ package com.rpgGame.appModule.equip
 							isToUp=true;//到顶级了
 							break;
 						}
-					}
-				}
-				else{
-					addExp+=item.qItem.q_strengthen_num;
-					useMon=addExp*perMon;
-					if(userMon<useMon){//钱不够
-						addExp-=item.qItem.q_strengthen_num;
-						break;
-					}
-					useListIds.push(item.itemInfo.itemId);
-					if(addExp>maxCfg.q_exp){
-						isToUp=true;//到顶级了
-						break;
 					}
 				}
 			}
@@ -868,14 +868,14 @@ package com.rpgGame.appModule.equip
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
-			
-			useMon=addExp*perMon;
-			userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-			
-			if(userMon<useMon){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4202));
-				return;
-			}
+			//			
+			//			useMon=addExp*perMon;
+			//			userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+			//			
+			//			if(userMon<useMon){
+			//				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4202));
+			//				return;
+			//			}
 			
 			var p:Point=new Point(this._stage.mouseX,this._stage.mouseY);
 			p=this.globalToLocal(p);
@@ -883,7 +883,8 @@ package com.rpgGame.appModule.equip
 			this.playInter3DAt(ClientConfig.getEffect("ui_zhuomojuji"),(_targetEquip.x+_targetEquip.width/2),(_targetEquip.y+_targetEquip.height/2),1);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			isLockRefresh=true;
-			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_ONEKEY);
+			//			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_ONEKEY);
+			ItemSender.strengthAllEquip(EquipOperateType.STRENGTH_ONEKEY,targetEquipInfo.itemInfo.itemId,type,lv,quality);
 		}
 		
 		

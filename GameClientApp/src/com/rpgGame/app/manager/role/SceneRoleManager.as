@@ -777,11 +777,14 @@ package com.rpgGame.app.manager.role
 			{
 				return fightSoulRole;
 			}
+			
 			fightSoulRole = SceneRole.create(SceneCharType.FIGHT_SOUL, owner.id);
+			
 			var roleData:RoleData = new RoleData(RoleType.TYPE_FIGHT_SOUL);
 			roleData.ownerId = owner.id;
 			roleData.id = owner.id;
 			roleData.name = "";
+			
 			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
 			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 			
@@ -799,7 +802,7 @@ package com.rpgGame.app.manager.role
 			fightSoulRole.setScale(model.q_sceneScale/100);
 			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
 			fightSoulRole.rotationY = 0;
-			SceneManager.addSceneObjToScene(fightSoulRole, false);
+			SceneManager.addSceneObjToScene(fightSoulRole, true);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 			fightSoulFollowAnimator.radius = model.q_radius;
 			owner.setRenderAnimator(fightSoulFollowAnimator);

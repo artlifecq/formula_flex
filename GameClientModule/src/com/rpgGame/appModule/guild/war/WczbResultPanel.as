@@ -7,6 +7,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
@@ -28,7 +29,7 @@ package com.rpgGame.appModule.guild.war
 	 *@author dik
 	 *2017-7-3
 	 **/
-	public class WczbResultPanel extends SkinUIPanel
+	public class WczbResultPanel extends ExitScenePanel
 	{
 		private var showTime:int=15;
 		
@@ -138,7 +139,7 @@ package com.rpgGame.appModule.guild.war
 			super.onTouchTarget(target);
 			if(target==_skin.btnLingQu){
 				this.hide();
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 			}
 		}
 	}
