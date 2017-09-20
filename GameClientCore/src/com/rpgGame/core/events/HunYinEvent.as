@@ -45,5 +45,9 @@ package com.rpgGame.core.events
 		 * 副本挑战次数变化
 		 * */
 		public static const HUNYIN_FUBENCISHU:int=UNIQUEID.NEXT;
+		/**
+		 *征婚时间计时
+		 * */
+		public static const HUNYIN_ZHENGHUN:int=UNIQUEID.NEXT;
 	}
 }
