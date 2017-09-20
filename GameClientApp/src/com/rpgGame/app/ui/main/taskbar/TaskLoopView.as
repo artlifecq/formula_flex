@@ -38,7 +38,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
 	import starling.display.Shape;
-
+	
 	public class TaskLoopView
 	{
 		private var _skin:RenWuZhuiZong_Skin;
@@ -120,7 +120,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			//skinList.push(_skin.sec_subbut2);
-		/*	navi1=RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1;
+			/*	navi1=RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1;
 			navi2=RenWuTitle_Skin(_skin.sec_navi2.skin).sec_navi1;
 			navi3=RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1;*/
 			navi1=_skin.sec_navi1;
@@ -358,6 +358,7 @@ package com.rpgGame.app.ui.main.taskbar
 			hideMainTaskView();
 			var task:TaskInfo=TaskMissionManager.mainTaskInfo;
 			var taskData:Q_mission_base=TaskMissionManager.mainTaskData;
+			TipTargetManager.remove(_skin.sec_navi1);
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_MAINTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getMainTaskIsFinish(),navi1,null,taskData.q_describe);
@@ -397,6 +398,7 @@ package com.rpgGame.app.ui.main.taskbar
 			hideDailyTaskView();
 			var task:TaskInfo=TaskMissionManager.dailyTaskInfo;
 			var taskData:Q_mission_base=TaskMissionManager.dailyTaskData;
+			TipTargetManager.remove(_skin.sec_navi2);
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
@@ -458,6 +460,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(task!=null&&taskData!=null)
 			{
+				TipTargetManager.remove(_skin.sec_navi3);
 				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
@@ -496,6 +499,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.treasuerTaskData;
 			if(task!=null&&taskData!=null)
 			{
+				TipTargetManager.remove(_skin.sec_navi3);
 				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				TipTargetManager.show( _skin.sec_navi3, TargetTipsMaker.makeTips( TipType.TASK_LOOP_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id,loopRewardId:task.loopRewardId,loopNumber:task.loopNumber}));
@@ -513,6 +517,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(task!=null&&taskData!=null)
 			{
+				TipTargetManager.remove(_skin.sec_navi4);
 				setNavView(TaskType.MAINTYPE_GUILDDAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(), _skin.sec_navi4);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
 				icoList3Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
@@ -539,10 +544,11 @@ package com.rpgGame.app.ui.main.taskbar
 		/**更新帮会任务显示*/
 		public function upGuildTaskView():void
 		{
-			var task:TaskInfo=TaskMissionManager.getOtherTaskInfo(TaskType.MAINTYPE_GUILDDAILYTASK)
-			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.MAINTYPE_GUILDDAILYTASK)
+			var task:TaskInfo=TaskMissionManager.getOtherTaskInfo(TaskType.MAINTYPE_GUILDDAILYTASK);
+			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.MAINTYPE_GUILDDAILYTASK);
 			if(task!=null&&taskData!=null)
 			{
+				TipTargetManager.remove(_skin.sec_navi4);
 				setNavView(TaskType.MAINTYPE_GUILDDAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK),_skin.sec_navi4);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
 				TipTargetManager.show( _skin.sec_navi4, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
@@ -590,7 +596,7 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			setUisite();
 		}
-	
+		
 		/**设置引导任务隐藏*/
 		public function hideGuideTaskView():void
 		{
@@ -606,7 +612,7 @@ package com.rpgGame.app.ui.main.taskbar
 			hideWorshipTaskView()
 			var task:TaskInfo=TaskMissionManager.getOtherTaskInfo(TaskType.MAINTYPE_WORSHIP)
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.MAINTYPE_WORSHIP)
-			
+			TipTargetManager.remove(_skin.sec_navi5);
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_WORSHIP,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_WORSHIP), _skin.sec_navi5);
@@ -714,6 +720,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskId);
 			if(taskData!=null)
 			{
+				TipTargetManager.remove(_skin.sec_navi1);
 				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name;
 				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级才能接取";
 				TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
@@ -791,7 +798,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 170;
-		//	temp.x = 12;
+			//	temp.x = 12;
 			//temp.y = 57;
 			return temp;
 		}
@@ -854,6 +861,6 @@ package com.rpgGame.app.ui.main.taskbar
 		
 		
 		
-
+		
 	}
 }
