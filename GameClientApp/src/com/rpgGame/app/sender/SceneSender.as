@@ -105,6 +105,7 @@ package com.rpgGame.app.sender
 			ReqLockUtil.lockReq(101206, 3000);
 			//切换场景
 			GameLog.addShow("------------------------------3_9：准备换场景  传送门ID:\t" +transId);
+			Lyt.a("发送传送消息：" +transId);
 			var msg:ReqChangeMapByMoveMessage = new ReqChangeMapByMoveMessage();
 			msg.line = 0;
 			msg.tranId = transId;

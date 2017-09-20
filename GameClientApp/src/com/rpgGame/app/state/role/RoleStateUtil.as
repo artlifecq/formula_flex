@@ -1,6 +1,6 @@
 package com.rpgGame.app.state.role
 {
-	import com.game.engine3D.state.StateRefOverrideType;
+	import com.rpgGame.app.state.role.state.StateRefOverrideType;
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -24,6 +24,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.core.events.WorldMapEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
@@ -291,12 +292,15 @@ package com.rpgGame.app.state.role
 				if (walkRole.stateMachine.isWalkMoving)
 				{
 					HorseManager.instance().autoRiding(role, pos);
+					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
+					
+				}
+				if(!walkRole.stateMachine.isWalkMoving)
+				{
+					Lyt.a("walk-00000000000000000");
 				}
 			}
-			if(!walkRole.stateMachine.isWalkMoving)
-			{
-				Lyt.a("walk-00000000000000000");
-			}
+			
 			return walkRole.stateMachine.isWalkMoving;
 		}
 		

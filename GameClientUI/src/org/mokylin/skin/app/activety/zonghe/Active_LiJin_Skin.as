@@ -11,6 +11,7 @@ package org.mokylin.skin.app.activety.zonghe
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.activety.number.UINumberNum;
 	import org.mokylin.skin.component.button.ButtonSkin_hide;
+	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
@@ -25,6 +26,8 @@ package org.mokylin.skin.app.activety.zonghe
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnMsg:feathers.controls.Button;
+
 		public var btn_close:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
@@ -169,6 +172,17 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btnMsg_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnMsg = temp;
+			temp.name = "btnMsg";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
+			temp.x = 16;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -624,7 +638,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__Active_LiJin_Skin_UIAsset3_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_ico1_0_i(),sec_ico2_0_i(),sec_navi0_i(),sec_subbut1_i(),sec_subbut2_i(),lbRenWu_i(),chkAotu_i(),chkLab_i(),killbut0_i(),killbut1_i(),killbut2_i(),lbTime1_i(),sec_navi1_i()];
+			temp.elementsContent = [ui_bg_i(),__Active_LiJin_Skin_UIAsset3_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_ico1_0_i(),sec_ico2_0_i(),sec_navi0_i(),sec_subbut1_i(),sec_subbut2_i(),lbRenWu_i(),chkAotu_i(),chkLab_i(),killbut0_i(),killbut1_i(),killbut2_i(),lbTime1_i(),sec_navi1_i(),btnMsg_i()];
 			return temp;
 		}
 

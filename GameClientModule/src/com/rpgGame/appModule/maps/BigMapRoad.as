@@ -71,8 +71,8 @@ package com.rpgGame.appModule.maps
 		}
 		public function onDrawPathRoad(walkPoint:Vector3D) : void
 		{
-			if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
-				return;
+			/*if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
+				return;*/
 			onClearPath();
 			if (MainRoleManager.actor == null)
 				return;

@@ -65,6 +65,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		{
 			icoList1Group.tweeRewardInBag();
 			super.hide();
+			TimerServer.remove(updateTime);
 			//TweenLite.killDelayedCallsTo(hide);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 

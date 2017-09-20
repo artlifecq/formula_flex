@@ -61,8 +61,8 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.lbTongqian.text = msg.money.toString();			
 			_skin.lbzhenqi.text = msg.zhenqi.toString();
 			_skin.lbzhenqi.visible=_skin.lb_zhenqiName.visible=msg.zhenqi>0;
-			
 			icoListGroup.setRewardByItemInfo(msg.itemInfoList);
+			tweenComplete();
 			/*var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
 			var length:int = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
@@ -86,7 +86,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			index++;
 			if(index == _star)
 			{
-				tweenComplete();
+				
 				return ;
 			}
 			_effectList[index].playEffect();
