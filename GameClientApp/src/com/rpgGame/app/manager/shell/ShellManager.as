@@ -862,7 +862,7 @@ package com.rpgGame.app.manager.shell
 		}
         
         private function addTrap(id : int) : void {
-            var data : TrapInfo = new TrapInfo(new long(), id, id, 0, MainRoleManager.actor.x, MainRoleManager.actor.z);
+            var data : TrapInfo = new TrapInfo(id, id, 0, MainRoleManager.actor.x, MainRoleManager.actor.z);
             SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
             setTimeout(function () : void {
                 changeTrap(id, 1);
@@ -1072,7 +1072,7 @@ package com.rpgGame.app.manager.shell
 			var info:DropGoodsInfo=new DropGoodsInfo();
 			info.ownerId=new long();
 			info.itemModelId=5088;
-			info.dropGoodsId=new long();
+			info.dropGoodsId=10000;
 			info.x=MainRoleManager.actor.x;
 			info.y=MainRoleManager.actor.z;
 			data.updateWithGoodsData(info);

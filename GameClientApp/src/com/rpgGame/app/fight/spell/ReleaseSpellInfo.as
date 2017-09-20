@@ -17,8 +17,6 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	
-	import away3d.log.Log;
-	
 	import org.game.netCore.net.Message;
 
 	/**
@@ -190,7 +188,7 @@ package com.rpgGame.app.fight.spell
 				}
 				
 				
-				_atkorID = fightTargetMsg.personId.ToGID();
+				_atkorID = fightTargetMsg.personId;
 				
 				if (_atkorID > 0&&EnumSkillPerformType.T_PLAYER==_spellData.q_performType)
 				{
@@ -212,11 +210,11 @@ package com.rpgGame.app.fight.spell
 				}
 				if(_atkor == null)
 				{
-					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId.ToString());
+					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId);
 					return;
 				}
 				
-				_targetID = fightTargetMsg.fightTarget.ToGID();
+				_targetID = fightTargetMsg.fightTarget;
 				if (_targetID > 0)
 				{
 					_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
@@ -226,7 +224,7 @@ package com.rpgGame.app.fight.spell
 				
 				if(_targetRole == null)
 				{
-					GameLog.addShow("被攻击者为空!被攻击者服务器ID为：\t" + fightTargetMsg.fightTarget.ToString());
+					GameLog.addShow("被攻击者为空!被攻击者服务器ID为：\t" + fightTargetMsg.fightTarget);
 					return;
 				}
 				_atkorPos = new Point(_atkor.x, _atkor.z);
@@ -237,7 +235,7 @@ package com.rpgGame.app.fight.spell
                 _flyTargets = new Vector.<SceneRole>();
 				for(var i:int =0;i<fightTargetMsg.targets.length;i++)
 				{
-					targetID = fightTargetMsg.targets[i].ToGID();
+					targetID = fightTargetMsg.targets[i];
 					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
                     _flyTargets.push(targetRole);
 				}
@@ -255,7 +253,7 @@ package com.rpgGame.app.fight.spell
 				}
 				
 				
-				_atkorID = fightPosMsg.playerid.ToGID();
+				_atkorID = fightPosMsg.playerid;
 				if (_atkorID > 0)
 				{
 					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
@@ -265,7 +263,7 @@ package com.rpgGame.app.fight.spell
 				
 				if(_atkor == null)
 				{
-					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightPosMsg.playerid.ToString());
+					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightPosMsg.playerid);
 					return;
 				}
 				
@@ -276,7 +274,7 @@ package com.rpgGame.app.fight.spell
                 _flyTargets = new Vector.<SceneRole>();
 				for(var j:int =0;j<fightPosMsg.targets.length;j++)
 				{
-					targetID = fightPosMsg.targets[j].ToGID();
+					targetID = fightPosMsg.targets[j];
 					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
                     _flyTargets.push(targetRole);
 				}
@@ -379,76 +377,6 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-//		private function createSingleResult(info:ReleaseSpellInfo,msg : ResAttackResultMessage):void
-//		{
-//			var isHited : Boolean = false;
-//			var resultInfo:AttackResultInfo = msg.state;
-//			
-//			var roleID:Number = resultInfo.targetId.ToGID();
-//			var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
-//			hurtResultVO.curLife = resultInfo.damage;
-//			
-//			var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
-//			
-//			hurtResultVO.hasPositionChange = hasPositionChange;
-//			if (hurtResultVO.hasPositionChange)
-//			{
-//				hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
-//			}
-//			
-//			hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
-//			
-//			var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
-//			if (hasStiffTime)
-//			{
-//				hurtResultVO.stiffTime = 0;
-//			}
-//			
-//			var hurtTypeAmount : int = resultInfo.damage;
-//			var hurtType : int = resultInfo.fightResult
-//			var hurtAmount : int = resultInfo.damage; //本次
-//			var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
-//			hurtResultVO.addHurt(sVo);
-//			
-//			//
-//			var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-//			if (role)
-//			{
-//				//role.isServerLiving = hurtResultVO.curLife > 0;
-//			}
-//			//
-//			if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
-//			{
-//				if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
-//				{
-//					isHited = true;
-//				}
-//			}
-//			
-//			_atkorID = resultInfo.attackerId.ToGID();
-//			if (_atkorID > 0)
-//			{
-//				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
-//				if (_atkor && !_atkor.usable)
-//					_atkor = null;
-//			}
-//			
-//			if(_atkor == null)
-//			{
-//				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
-//			}
-//			
-//			if(_atkor && _atkor.usable)
-//			{
-//				_atkorPos = new Point(_atkor.x, _atkor.z);
-//			}
-//			
-//			info.spellData = SpellDataManager.getSpellData(resultInfo.skillId);
-//			info.isMainCharHited = isHited;
-//			info.singleHurtVo = hurtResultVO;
-//			
-//			readSpellEffectData(info.spellData.q_spell_effect);
-//		}
 
 		public function get isFlyCross() : Boolean
 		{

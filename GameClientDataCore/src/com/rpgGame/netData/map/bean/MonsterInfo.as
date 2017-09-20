@@ -2,7 +2,6 @@ package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	import com.rpgGame.netData.structs.Position;
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -18,7 +17,7 @@ package com.rpgGame.netData.map.bean{
 	public class MonsterInfo extends Bean {
 	
 		//怪物Id
-		private var _monsterId: long;
+		private var _monsterId: int;
 		
 		//怪物模板Id
 		private var _modelId: int;
@@ -74,7 +73,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//怪物Id
-			writeLong(_monsterId);
+			writeShort(_monsterId);
 			//怪物模板Id
 			writeInt(_modelId);
 			//分布Id
@@ -123,7 +122,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//怪物Id
-			_monsterId = readLong();
+			_monsterId = readShort();
 			//怪物模板Id
 			_modelId = readInt();
 			//分布Id
@@ -171,14 +170,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 怪物Id
 		 * @return 
 		 */
-		public function get monsterId(): long{
+		public function get monsterId(): int{
 			return _monsterId;
 		}
 		
 		/**
 		 * set 怪物Id
 		 */
-		public function set monsterId(value: long): void{
+		public function set monsterId(value: int): void{
 			this._monsterId = value;
 		}
 		

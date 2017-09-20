@@ -1,5 +1,4 @@
 package com.rpgGame.netData.npc.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.npc.message{
 	public class ResStopGatherMessage extends Message {
 	
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		
 		/**
@@ -22,7 +21,7 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			return true;
 		}
 		
@@ -31,7 +30,7 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			return true;
 		}
 		
@@ -47,14 +46,14 @@ package com.rpgGame.netData.npc.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		

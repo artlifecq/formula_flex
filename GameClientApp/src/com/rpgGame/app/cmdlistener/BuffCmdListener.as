@@ -45,7 +45,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResRemoveBuffMessage(msg:ResRemoveBuffMessage):void
 		{
-			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
 			if (tarObj != null)
 			{
 				tarObj.buffSet.removeBuffByBuffID( msg.buffId.ToGID());
@@ -56,11 +56,11 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResChangeBuffMessage(msg:ResChangeBuffMessage):void
 		{
-			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
-			var srcObj :SceneRole = SceneManager.getSceneObjByID(msg.sourceId.ToGID()) as SceneRole;
+			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
+			var srcObj :SceneRole = SceneManager.getSceneObjByID(msg.sourceId) as SceneRole;
 			if (tarObj != null)
 			{
-				var buffData:BuffData = new BuffData(msg.personId.ToGID());
+				var buffData:BuffData = new BuffData(msg.personId);
 				buffData.buffInfo = msg.buff;
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
@@ -99,12 +99,12 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResAddBuffMessage(msg:ResAddBuffMessage):void
 		{
-			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
-			var srcObj :SceneRole = SceneManager.getSceneObjByID(msg.sourceId.ToGID()) as SceneRole;
+			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
+			var srcObj :SceneRole = SceneManager.getSceneObjByID(msg.sourceId) as SceneRole;
 			if (tarObj != null)
 			{
 				//				tarObj.SetFightState(msg.fightState);
-				var buffData:BuffData = new BuffData(msg.personId.ToGID());
+				var buffData:BuffData = new BuffData(msg.personId);
 				buffData.buffInfo = msg.buff;
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);

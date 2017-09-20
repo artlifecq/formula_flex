@@ -6,12 +6,9 @@ package com.rpgGame.coreData.role
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.clientConfig.Attach_effect;
     import com.rpgGame.coreData.type.SceneCharType;
-    
-    import org.game.netCore.data.long;
 
     public class TrapInfo
     {
-        private var _serverId : long;
         private var _id : int;
         private var _state : int = -1;
         private var _modelId : int;
@@ -20,8 +17,7 @@ package com.rpgGame.coreData.role
         private var _normalEffect : RenderUnit3D;
         private var _effect : RenderUnit3D;
         
-        public function TrapInfo(serverId : long, id : int, modelId : int, state : int, x : int, y : int) {
-            this._serverId = serverId;
+        public function TrapInfo(id : int, modelId : int, state : int, x : int, y : int) {
             this._id = id;
             this._modelId = modelId;
             this._state = state;
@@ -88,16 +84,6 @@ package com.rpgGame.coreData.role
         public function set modelId(value:int):void
         {
             _modelId = value;
-        }
-
-        public function get serverId():long
-        {
-            return _serverId;
-        }
-
-        public function set serverId(value:long):void
-        {
-            _serverId = value;
         }
 
         public function get id():int

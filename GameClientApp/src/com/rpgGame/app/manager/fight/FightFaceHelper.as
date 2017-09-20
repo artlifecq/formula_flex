@@ -555,14 +555,14 @@ package com.rpgGame.app.manager.fight
 			face.x=-face.width/2;
 		}
 		//主要绝学
-		public static function showBuffNameEffect(buff:int,attackerId:long,value:int=0):void
+		public static function showBuffNameEffect(buff:int,attackerId:int,value:int=0):void
 		{
 			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(buff);
 			if (!qSkill) 
 			{
 				return;
 			}
-			var attacker:SceneRole=SceneManager.getSceneObjByID(attackerId.ToGID()) as SceneRole;
+			var attacker:SceneRole=SceneManager.getSceneObjByID(attackerId) as SceneRole;
 			if (!attacker) 
 			{
 				return;
@@ -634,7 +634,7 @@ package com.rpgGame.app.manager.fight
 					var extAtf:AttackFace=null;
 					if (show==2) 
 					{
-						extAtf=LostSkillManager.instance().hasXiQuHpAtf((MainRoleManager.actor.data as RoleData).serverID,0);
+						extAtf=LostSkillManager.instance().hasXiQuHpAtf((MainRoleManager.actor.data as RoleData).id,0);
 					}
 					
 					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao1,extAtf)
@@ -646,7 +646,7 @@ package com.rpgGame.app.manager.fight
 					return;
 				case EnumHurtType.EXP: //经验
 					numberColor = NUMBER_PC_EXP;
-					var exdata:AttackFace=LostSkillManager.instance().hasExpAddAtf(MainRoleManager.actorInfo.serverID,count);
+					var exdata:AttackFace=LostSkillManager.instance().hasExpAddAtf(MainRoleManager.actorInfo.id,count);
 					//showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp,exdata);
 					return;

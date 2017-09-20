@@ -1,6 +1,5 @@
 package com.rpgGame.netData.map.message{
 	import com.rpgGame.netData.structs.Position;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.map.message{
 	public class SCAreaJumpMessage extends Message {
 	
 		//跳跃玩家ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//跳跃ID
 		private var _jumpId: int;
@@ -32,7 +31,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function writing(): Boolean{
 			//跳跃玩家ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//跳跃ID
 			writeInt(_jumpId);
 			//跳跃点
@@ -47,7 +46,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function reading(): Boolean{
 			//跳跃玩家ID
-			_playerId = readLong();
+			_playerId = readShort();
 			//跳跃ID
 			_jumpId = readInt();
 			//跳跃点
@@ -69,14 +68,14 @@ package com.rpgGame.netData.map.message{
 		 * get 跳跃玩家ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 跳跃玩家ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

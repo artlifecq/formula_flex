@@ -135,7 +135,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if(TeamListItemExt.curItem != null)
 			{
-				LookSender.lookOtherPlayer( TeamListItemExt.curItem.data.captainid );
+				LookSender.lookOtherPlayer( TeamListItemExt.curItem.data.captainname );
 			}
 			else
 			{

@@ -1,5 +1,4 @@
 package com.rpgGame.netData.npc.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,10 +13,10 @@ package com.rpgGame.netData.npc.message{
 	public class ResStartGatherMessage extends Message {
 	
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//行为目标
-		private var _tatget: long;
+		private var _tatget: int;
 		
 		//采集时间
 		private var _costtime: int;
@@ -28,9 +27,9 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//行为目标
-			writeLong(_tatget);
+			writeShort(_tatget);
 			//采集时间
 			writeInt(_costtime);
 			return true;
@@ -41,9 +40,9 @@ package com.rpgGame.netData.npc.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//行为目标
-			_tatget = readLong();
+			_tatget = readShort();
 			//采集时间
 			_costtime = readInt();
 			return true;
@@ -61,14 +60,14 @@ package com.rpgGame.netData.npc.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		
@@ -76,14 +75,14 @@ package com.rpgGame.netData.npc.message{
 		 * get 行为目标
 		 * @return 
 		 */
-		public function get tatget(): long{
+		public function get tatget(): int{
 			return _tatget;
 		}
 		
 		/**
 		 * set 行为目标
 		 */
-		public function set tatget(value: long): void{
+		public function set tatget(value: int): void{
 			this._tatget = value;
 		}
 		

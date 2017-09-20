@@ -1,20 +1,18 @@
 package com.rpgGame.app.manager.ctrl
 {
-	import org.game.netCore.data.long;
+	
 
 	public class FightDataVo
 	{
-		public var targetId:long;
+		public var targetId:int;
 		public var type:String;
 		public var updateTime:Number;
-		public var targetGid:Number;
 		public function FightDataVo()
 		{
 		}
 		private function clear():void
 		{
-			targetGid=0;
-			targetId=null;
+			targetId=0;
 			updateTime=0;
 			type="";
 		}

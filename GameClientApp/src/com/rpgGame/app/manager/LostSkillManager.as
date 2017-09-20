@@ -27,7 +27,6 @@ package com.rpgGame.app.manager
 	import app.message.MonsterType;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 
 	public class LostSkillManager
 	{
@@ -166,7 +165,7 @@ package com.rpgGame.app.manager
 		{
 		}
 		
-		public function checkExpNotice(heroId:long):void
+		public function checkExpNotice(heroId:int):void
 		{
 			var need:Boolean=needShowNotice(6001,heroId);
 			if (need) 
@@ -174,7 +173,7 @@ package com.rpgGame.app.manager
 				FightFaceHelper.showBuffNameEffect(6001,heroId);
 			}
 		}
-		public function hasExpAddAtf(heroId:long,value:int):AttackFace
+		public function hasExpAddAtf(heroId:int,value:int):AttackFace
 		{
 			
 			var need:Boolean=needShowNotice(6001,heroId);
@@ -186,7 +185,7 @@ package com.rpgGame.app.manager
 			}
 			return null;
 		}
-		public function hasGoldAddAtf(heroId:long,value:int):AttackFace
+		public function hasGoldAddAtf(heroId:int,value:int):AttackFace
 		{
 			
 			var need:Boolean=needShowNotice(6001,heroId);
@@ -213,10 +212,10 @@ package com.rpgGame.app.manager
 			
 			return -1;
 		}
-		public function hasBossHurtAddAtf(bossId:long,heroId:long,value:int):AttackFace
+		public function hasBossHurtAddAtf(bossId:int,heroId:int,value:int):AttackFace
 		{
 			
-			var target:SceneRole=SceneManager.getSceneObjByID(bossId.ToGID()) as SceneRole;
+			var target:SceneRole=SceneManager.getSceneObjByID(bossId) as SceneRole;
 			if (!target||SceneCharType.MONSTER!=target.type) 
 			{
 				return null;
@@ -237,14 +236,14 @@ package com.rpgGame.app.manager
 
 		public function checkRoll3Complete():void
 		{
-			var heroId:long=MainRoleManager.actorInfo.serverID;
+			var heroId:int=MainRoleManager.actorInfo.id;
 			var need:Boolean=needShowNotice(6003,heroId);
 			if (need) 
 			{
 				FightFaceHelper.showBuffNameEffect(6003,heroId);
 			}
 		}
-		public function checkHideSelf(heroId:long):void
+		public function checkHideSelf(heroId:int):void
 		{
 			var need:Boolean=needShowNotice(6004,heroId);
 			if (need) 
@@ -254,7 +253,7 @@ package com.rpgGame.app.manager
 				FightFaceHelper.showBuffNameEffect(6004,heroId,0);
 			}
 		}
-		public function checkBigSkill(heroId:long):void
+		public function checkBigSkill(heroId:int):void
 		{
 			var need:Boolean=needShowNotice(6005,heroId);
 			if (need) 
@@ -263,10 +262,10 @@ package com.rpgGame.app.manager
 				FightFaceHelper.showBuffNameEffect(6005,heroId);
 			}
 		}
-		public function hasAttackPlayerAddAtf(bossId:long,heroId:long,value:int):AttackFace
+		public function hasAttackPlayerAddAtf(bossId:int,heroId:int,value:int):AttackFace
 		{
 			
-			var target:SceneRole=SceneManager.getSceneObjByID(bossId.ToGID()) as SceneRole;
+			var target:SceneRole=SceneManager.getSceneObjByID(bossId) as SceneRole;
 			if (!target||SceneCharType.PLAYER!=target.type) 
 			{
 				return null;
@@ -281,7 +280,7 @@ package com.rpgGame.app.manager
 			return null;
 		}
 	
-		public function hasXiQuHpAtf(heroId:long,value:int):AttackFace
+		public function hasXiQuHpAtf(heroId:int,value:int):AttackFace
 		{
 			
 			var need:Boolean=needShowNotice(6007,heroId);
@@ -294,9 +293,9 @@ package com.rpgGame.app.manager
 			}
 			return null;
 		}
-		private function needShowNotice(buffId:int,hero:long):Boolean
+		private function needShowNotice(buffId:int,hero:int):Boolean
 		{
-			var role:SceneRole=SceneManager.getSceneObjByID(hero.ToGID()) as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(hero) as SceneRole;
 			if (role&&SceneCharType.PLAYER==role.type) 
 			{
 				if (role.buffSet.hasBuff(buffId)) 

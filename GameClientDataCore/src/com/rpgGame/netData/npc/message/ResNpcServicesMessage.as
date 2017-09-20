@@ -1,6 +1,5 @@
 package com.rpgGame.netData.npc.message{
 	import com.rpgGame.netData.npc.bean.ServiceInfo;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.npc.message{
 	public class ResNpcServicesMessage extends Message {
 	
 		//npcId
-		private var _npcId: long;
+		private var _npcId: int;
 		
 		//npc服务列表集合
 		private var _services: Vector.<ServiceInfo> = new Vector.<ServiceInfo>();
@@ -26,7 +25,7 @@ package com.rpgGame.netData.npc.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//npcId
-			writeLong(_npcId);
+			writeShort(_npcId);
 			//npc服务列表集合
 			writeShort(_services.length);
 			for (i = 0; i < _services.length; i++) {
@@ -41,7 +40,7 @@ package com.rpgGame.netData.npc.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//npcId
-			_npcId = readLong();
+			_npcId = readShort();
 			//npc服务列表集合
 			var services_length : int = readShort();
 			for (i = 0; i < services_length; i++) {
@@ -62,14 +61,14 @@ package com.rpgGame.netData.npc.message{
 		 * get npcId
 		 * @return 
 		 */
-		public function get npcId(): long{
+		public function get npcId(): int{
 			return _npcId;
 		}
 		
 		/**
 		 * set npcId
 		 */
-		public function set npcId(value: long): void{
+		public function set npcId(value: int): void{
 			this._npcId = value;
 		}
 		

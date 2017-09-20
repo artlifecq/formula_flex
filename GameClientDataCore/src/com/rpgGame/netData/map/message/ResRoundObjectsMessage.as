@@ -1,6 +1,5 @@
 package com.rpgGame.netData.map.message{
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -17,7 +16,7 @@ package com.rpgGame.netData.map.message{
 		//玩家周围对象信息
 		private var _objInfos: Vector.<SceneObjInfo> = new Vector.<SceneObjInfo>();
 		//移除的对象
-		private var _removeObjs: Vector.<long> = new Vector.<long>();
+		private var _removeObjs: Vector.<int> = new Vector.<int>();
 		
 		/**
 		 * 写入字节缓存
@@ -32,7 +31,7 @@ package com.rpgGame.netData.map.message{
 			//移除的对象
 			writeShort(_removeObjs.length);
 			for (i = 0; i < _removeObjs.length; i++) {
-				writeLong(_removeObjs[i]);
+				writeShort(_removeObjs[i]);
 			}
 			return true;
 		}
@@ -50,7 +49,7 @@ package com.rpgGame.netData.map.message{
 			//移除的对象
 			var removeObjs_length : int = readShort();
 			for (i = 0; i < removeObjs_length; i++) {
-				_removeObjs[i] = readLong();
+				_removeObjs[i] = readShort();
 			}
 			return true;
 		}
@@ -82,14 +81,14 @@ package com.rpgGame.netData.map.message{
 		 * get 移除的对象
 		 * @return 
 		 */
-		public function get removeObjs(): Vector.<long>{
+		public function get removeObjs(): Vector.<int>{
 			return _removeObjs;
 		}
 		
 		/**
 		 * set 移除的对象
 		 */
-		public function set removeObjs(value: Vector.<long>): void{
+		public function set removeObjs(value: Vector.<int>): void{
 			this._removeObjs = value;
 		}
 		

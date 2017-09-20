@@ -20,7 +20,7 @@ package com.rpgGame.netData.map.bean{
 	public class PlayerInfo extends Bean {
 	
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//角色名字
 		private var _name: String;
@@ -103,7 +103,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//角色名字
 			writeString(_name);
 			//玩家所在位置
@@ -181,7 +181,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//角色名字
 			_name = readString();
 			//玩家所在位置
@@ -258,14 +258,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		
