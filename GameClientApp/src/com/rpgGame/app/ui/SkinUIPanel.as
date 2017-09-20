@@ -430,7 +430,7 @@ package com.rpgGame.app.ui
 			model = false;
 			_appInfo = null;
 			_data = null;
-			_openTab = null;
+			_openTab = 0;
 			_parentContainer = null;
 		}
 	}
