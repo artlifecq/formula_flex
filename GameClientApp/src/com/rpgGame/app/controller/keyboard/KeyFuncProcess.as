@@ -135,8 +135,6 @@ package com.rpgGame.app.controller.keyboard
 					HorseManager.instance().setMountRide();
 					break;
 				case "30": //U
-					BigMapsManager.removeMapsIcon(sid);
-					
 					break;
 				case "6": //V pk
 					//AppManager.showApp(AppConstant.MOUNT_PANEL);
@@ -150,7 +148,7 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_JUEXUE);
 					break;
 				case "2": //Z 
-					sid=BigMapsManager.showMapsIcon("0",HtmlTextUtil.getTextColor(0x00ffff,"测试图标"),2000,-2000,0,true,"ui/app/maps/hong.png");
+					
 					break;
 				case "50": //显示掉落物图标
 					//DropGoodsManager.getInstance().showScaneName(isdown);
@@ -181,7 +179,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 			}
 		}
-		private static var sid:int;
+
 		private static function closeApp() : void
 		{
 			var layer : DisplayObjectContainer = StarlingLayerManager.appUILayer;
