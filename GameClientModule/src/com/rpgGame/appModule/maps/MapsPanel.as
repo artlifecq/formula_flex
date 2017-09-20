@@ -6,7 +6,9 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.core.events.WorldMapEvent;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -21,6 +23,8 @@ package com.rpgGame.appModule.maps
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.component.text.textInput2_Skin;
+	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -63,6 +67,7 @@ package com.rpgGame.appModule.maps
 					_bigMap.updateRolePos();
 				}
 				scollBoxView();
+				onDrawPathRoad();
 				onDrawPath();
 				siteView();
 				setMapName(sceneData.name);
@@ -111,6 +116,7 @@ package com.rpgGame.appModule.maps
 		{
 			_bigMap.thumbnaiSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
+			EventManager.addEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS, onDrawPathRoad);
 			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
 			//EventManager.addEvent(UserMoveEvent.MOVE_END, onMoveEnd)
 			EventManager.addEvent(MapEvent.MAP_CLICK,onMoveEnd);
@@ -132,6 +138,7 @@ package com.rpgGame.appModule.maps
 		{
 			_bigMap.skinSpr.removeEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
+			EventManager.removeEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS, onDrawPathRoad);
 			EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPathRoad);
 			//EventManager.removeEvent(UserMoveEvent.MOVE_END, onMoveEnd)
 			EventManager.removeEvent(MapEvent.MAP_CLICK,onMoveEnd);
@@ -269,18 +276,19 @@ package com.rpgGame.appModule.maps
 					{
 						case 4:
 						case 6:
-							type=SceneCharType.NPC
+							BigMapsManager.addMapsIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
 							break;
 						case 5:
-							type=SceneCharType.COLLECT
+							BigMapsManager.addMapsIcon(SceneCharType.COLLECT,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
 							break;
 						default:
-							type=SceneCharType.MONSTER
+							BigMapsManager.addMapsIcon(SceneCharType.MONSTER,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+							
 							break;
 					}
 					
 					
-					BigMapsManager.addMapsIcon(type,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+					//BigMapsManager.addMapsIcon(type,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
 //					if(monsterData.type==4||monsterData.type==6)
 //					{
 //						BigMapsData.addMapsNpcIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);

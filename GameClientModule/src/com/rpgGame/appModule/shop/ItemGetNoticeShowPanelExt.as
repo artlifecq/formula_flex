@@ -33,7 +33,7 @@ package com.rpgGame.appModule.shop
 			MCUtil.removeSelf(_skin.lbFuben);
 			_pools=[_skin.lbBoss,_skin.lbJixian,_skin.lbFuben];
 			_startY=_skin.lbFuben.y;
-			_skin.uiTitle.styleName="ui/common/background/daojuhuoqu.png";
+			_skin.uiTitle.styleName="ui/art_txt/common/background/daojuhuoqu.png";
 		}
 		
 		public static function showItem(item:int):void

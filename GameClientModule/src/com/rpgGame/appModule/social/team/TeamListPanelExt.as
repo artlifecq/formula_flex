@@ -140,7 +140,7 @@ package  com.rpgGame.appModule.social.team
 			else
 			{
 				//NoticeManager.mouseFollowNotify("请先选中一位队长" );
-				NoticeManager.showNotifyById(13007);
+				NoticeManager.showNotifyById(13002);
 			}
 		}
 		private function OnAddFriend(event:Event):void
@@ -186,7 +186,7 @@ package  com.rpgGame.appModule.social.team
 			else
 			{
 				//NoticeManager.mouseFollowNotify("请先选中一位队长");
-				NoticeManager.showNotifyById(13007);
+				NoticeManager.showNotifyById(13002);
 			}
 		}
 		

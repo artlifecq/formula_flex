@@ -4,11 +4,14 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.utils.filter.GrayFilter;
 	
@@ -94,7 +97,9 @@ package com.rpgGame.app.view.icon
 					TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
 			}
 			else{
-				heidEff();
+				var tipStr:String=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"点击后开启格子");
+				TipTargetManager.show( this, TargetTipsMaker.makeSimpleTextTips(tipStr));
+				//				heidEff();
 			}
 		}	
 		

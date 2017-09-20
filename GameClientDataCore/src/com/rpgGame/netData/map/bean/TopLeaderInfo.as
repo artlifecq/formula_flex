@@ -30,6 +30,10 @@ package com.rpgGame.netData.map.bean{
 		//怪物所在坐标
 		private var _position: com.rpgGame.netData.structs.Position;
 		
+		
+		//称号
+		private var _title: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -44,6 +48,8 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_topType);
 			//怪物所在坐标
 			writeBean(_position);
+			//称号
+			writeInt(_title);
 			return true;
 		}
 		
@@ -61,6 +67,8 @@ package com.rpgGame.netData.map.bean{
 			_topType = readInt();
 			//怪物所在坐标
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			//称号
+			_title = readInt();
 			return true;
 		}
 		
@@ -138,6 +146,19 @@ package com.rpgGame.netData.map.bean{
 		public function set position(value: com.rpgGame.netData.structs.Position): void{
 			this._position = value;
 		}
+		/**
+		 * get 称号
+		 * @return 
+		 */
+		public function get title(): int{
+			return _title;
+		}
 		
+		/**
+		 * set 称号
+		 */
+		public function set title(value: int): void{
+			this._title = value;
+		}
 	}
 }

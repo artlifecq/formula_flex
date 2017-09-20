@@ -83,8 +83,8 @@ package org.mokylin.skin.app.beibao
 		private function __cangku_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
 		{
 			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
-			temp.requestedColumnCount = 7;
-			temp.requestedRowCount = 6;
+			temp.requestedColumnCount = 8;
+			temp.requestedRowCount = 8;
 			return temp;
 		}
 

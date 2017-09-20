@@ -43,8 +43,7 @@ package com.rpgGame.app.ui.roll
 		private static const DurationTime:uint = 30000;
 		private static const DURATION_REMOVE_TIME:uint = 5000;
 		private var _endRunTime:Number;
-		private static var waitList:Array;
-		private static var _isLoad:Boolean;
+		private var _hasRoll:Boolean;
 		public function RollPane(data:RollItemInfo):void
 		{
 			_roleItem = data;
@@ -105,27 +104,39 @@ package com.rpgGame.app.ui.roll
 			_roleskin.btnRandom.addEventListener(Event.TRIGGERED,randomclickHandler);
 			_isRandomEnd = false;
 			_roleskin.btnRandom.alpha=0;
+			if (!_hasRoll) 
+			{
+				this.playInter3DAt(ClientConfig.getEffect("ui_shaizi"),_roleskin.btnRandom.x+14,_roleskin.btnRandom.y+15,0,null,addComple);
+			}
 			
-			this.playInter3DAt(ClientConfig.getEffect("ui_shaizi"),_roleskin.btnRandom.x+14,_roleskin.btnRandom.y+15,0,null,addComple);
 			
 			updateView();
 		}
 		
 		private function addComple(render:RenderUnit3D):void
 		{
-			this.saiziRender=render;
-			var scale:Number=0.3;
-			this.saiziRender.scaleX=scale
-			this.saiziRender.scaleY=scale;
-			this.saiziRender.scaleZ=scale;
-			saiziRender.play(0);
+			if (!_hasRoll) 
+			{
+				this.saiziRender=render;
+				var scale:Number=0.3;
+				this.saiziRender.scaleX=scale
+				this.saiziRender.scaleY=scale;
+				this.saiziRender.scaleZ=scale;
+				saiziRender.play(0);
+			}
+			else
+			{
+				//saiziRender.stop();
+				saiziRender.dispose();
+			}
 		}
 		
 		private function randomclickHandler():void
 		{
 			if(_isRandomEnd)
 				return ;
-			DropGoodsManager.getInstance().reqRollPoint(_roleItem);
+			DropGoodsManager.getInstance().reqRollPoint(_roleItem,1);
+			_hasRoll=true;
 			_roleskin.btnRandom.alpha=1;
 			_roleskin.btnRandom.isEnabled = false;
 			if(saiziRender){
@@ -223,8 +234,14 @@ package com.rpgGame.app.ui.roll
 			_roleskin.btnRandom.visible=true;
 		}
 		
-		private function closeHander():void
+		public function closeHander():void
 		{
+			//说明没有
+			if (_roleskin.btnRandom.isEnabled&&_roleItem) 
+			{
+				DropGoodsManager.getInstance().reqRollPoint(_roleItem,3);
+				_hasRoll=true;
+			}
 			if(Starling.juggler.contains(this))
 				Starling.juggler.remove(this);
 			StarlingLayerManager.hintUILayer.removeChild(this,true);

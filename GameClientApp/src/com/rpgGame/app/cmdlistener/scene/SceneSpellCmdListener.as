@@ -136,7 +136,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
-			if (info.atkor == null || !info.atkor.usable || !info.atkor.isInViewDistance)
+			if (info.atkor == null || !info.atkor.usable || (!info.atkor.isInViewDistance&&info.blinkType==0))
 				return;
 			if (info.atkor.isPlayer) 
 			{
@@ -167,8 +167,10 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
-			if (info.atkor == null || !info.atkor.usable || !info.atkor.isInViewDistance)
+			if (info.atkor == null || !info.atkor.usable || (!info.atkor.isInViewDistance&&info.blinkType==0))
+			{
 				return;
+			}
 			if (info.atkor.isPlayer)
 			{
 				SpellEffectRecordCtrl.clear(msg.playerid);

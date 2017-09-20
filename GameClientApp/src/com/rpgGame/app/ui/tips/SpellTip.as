@@ -80,10 +80,16 @@ package com.rpgGame.app.ui.tips
 				id=data;
 			}else if(data is BaseFaceInfo){
 				id=data.cfgId;
+			}else if(data is SkillInfo){
+				id=data.skillModelId;
 			}
 			var info:SkillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(id);
 			if(info==null)
 				info = MainRoleManager.actorInfo.otherList.getSkillInfo(id);
+			if(info==null&&data is SkillInfo)
+			{
+				info=data as SkillInfo;
+			}
 			if(info == null)
 			{
 				info = new SkillInfo();
@@ -108,12 +114,12 @@ package com.rpgGame.app.ui.tips
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
 			if(!lvData){
 				_spellTip.lbShuoming.htmlText=cfg.q_skillpanel_description1;
-//				_spellTip.lbShuoming.isHtmlText=true;
+				//				_spellTip.lbShuoming.isHtmlText=true;
 			}else{
 				_spellTip.lbShuoming.htmlText= lvData.q_skillpanel_description;
-//				_spellTip.lbShuoming.isHtmlText=true;
+				//				_spellTip.lbShuoming.isHtmlText=true;
 			}
-//			_spellTip.lbShuoming.isHtmlText=true;
+			//			_spellTip.lbShuoming.isHtmlText=true;
 			
 			if(!riseCfg){
 				_spellTip.tipbg.height=_spellTip.lbShuoming.y+_spellTip.lbShuoming.textHeight+20;

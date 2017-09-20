@@ -449,12 +449,27 @@ package com.rpgGame.appModule.equip
 			useListIds.length=0;
 			isToUp=false;
 			userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-			for(var i:int=0;i<result.length;i++){
-				item=result[i];
-				
-				if(item.type==GoodsType.STRENGTH){
-					for(var j:int=0;j<item.itemInfo.num;j++)
-					{
+			if(result!=null&&result.length>0){
+				for(var i:int=0;i<1;i++){
+					item=result[i];
+					
+					if(item.type==GoodsType.STRENGTH){
+						for(var j:int=0;j<item.itemInfo.num;j++)
+						{
+							addExp+=item.qItem.q_strengthen_num;
+							useMon=addExp*perMon;
+							if(userMon<useMon){//钱不够
+								addExp-=item.qItem.q_strengthen_num;
+								break;
+							}
+							useListIds.push(item.itemInfo.itemId);
+							if(addExp>EquipPolishCfg.maxCfg.q_exp){
+								isToUp=true;//到顶级了
+								break;
+							}
+						}
+					}
+					else{
 						addExp+=item.qItem.q_strengthen_num;
 						useMon=addExp*perMon;
 						if(userMon<useMon){//钱不够
@@ -462,27 +477,13 @@ package com.rpgGame.appModule.equip
 							break;
 						}
 						useListIds.push(item.itemInfo.itemId);
-						if(addExp>EquipPolishCfg.maxCfg.q_exp){
-							isToUp=true;//到顶级了
+						if(addExp>EquipPolishCfg.maxCfg.q_exp){//到顶级了
+							isToUp=true;
 							break;
 						}
 					}
 				}
-				else{
-					addExp+=item.qItem.q_strengthen_num;
-					useMon=addExp*perMon;
-					if(userMon<useMon){//钱不够
-						addExp-=item.qItem.q_strengthen_num;
-						break;
-					}
-					useListIds.push(item.itemInfo.itemId);
-					if(addExp>EquipPolishCfg.maxCfg.q_exp){//到顶级了
-						isToUp=true;
-						break;
-					}
-				}
 			}
-			
 			trace("本次消耗的钱："+useMon);
 			
 			if(addExp<0){
@@ -507,7 +508,8 @@ package com.rpgGame.appModule.equip
 			this.playInter3DAt(ClientConfig.getEffect("ui_zhuomojuji"),(_targetEquip.x+_targetEquip.width/2),(_targetEquip.y+_targetEquip.height/2),1);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			isLockRefresh=true;
-			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_ONEKEY);
+			//			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_ONEKEY);
+			ItemSender.polishAllEquip(EquipOperateType.POLISH_ONEKEY,targetEquipInfo.itemInfo.itemId,type,lv,quality);
 		}
 		
 		private function addComplete(render:RenderUnit3D):void

@@ -18,8 +18,10 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipInheritMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipPolisgOneKeyMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipPolishMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipStrengthOneKeyMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipWashMessage;
 	import com.rpgGame.netData.equip.message.ReqItemCompositionMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
@@ -307,6 +309,24 @@ package com.rpgGame.app.sender
 		}
 		
 		/**
+		 *一键强化装备 
+		 * @param equipId 装备ID
+		 * @param type 装备来源
+		 * @param lv 装备阶数
+		 * @param quality 装备品质
+		 */
+		public static function strengthAllEquip(opaqueType:int,equipId:long,type:int,lv:int,quality:int):void
+		{
+			var msg:ReqEquipStrengthOneKeyMessage=new ReqEquipStrengthOneKeyMessage();
+			msg.opaque=opaqueType;
+			msg.equipId=equipId;
+			msg.type=type;
+			msg.order=lv;
+			msg.quality=quality;
+			SocketConnection.send(msg);
+		}
+		
+		/**
 		 * 琢磨装备 
 		 * @param equipId
 		 * @param type
@@ -321,6 +341,24 @@ package com.rpgGame.app.sender
 			msg.type=type;
 			msg.useItemIds=list;
 			msg.opaque=opaqueType;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *一键琢磨装备 
+		 * @param equipId 装备ID
+		 * @param type 装备来源
+		 * @param lv 装备阶数
+		 * @param quality 装备品质
+		 */
+		public static function polishAllEquip(opaqueType:int,equipId:long,type:int,lv:int,quality:int):void
+		{
+			var msg:ReqEquipPolisgOneKeyMessage=new ReqEquipPolisgOneKeyMessage();
+			msg.opaque=opaqueType;
+			msg.equipId=equipId;
+			msg.type=type;
+			msg.order=lv;
+			msg.quality=quality;
 			SocketConnection.send(msg);
 		}
 		

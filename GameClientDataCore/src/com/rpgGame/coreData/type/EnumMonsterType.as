@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.type
 {
+	import com.rpgGame.coreData.role.MonsterData;
+
 	/**
 	 *
 	 * 怪物类型
@@ -16,5 +18,18 @@ package com.rpgGame.coreData.type
 		/** boss*/	
 		public static const BOSS:int = 3;
 		
+		
+		public static function testType(monster:MonsterData,arr:Array):Boolean
+		{
+			if (!monster) 
+			{
+				return false;
+			}
+			if (!arr) 
+			{
+				return false;
+			}
+			return arr.indexOf(monster.monsterData.q_monster_type)!=-1;
+		}
 	}
 }

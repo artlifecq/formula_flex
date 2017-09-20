@@ -564,6 +564,10 @@ package   com.rpgGame.app.manager.debug
 			{
 				AppManager.showApp(AppConstant.BATTLE_D1V1_READY_PANEL);
 			});
+			commandList.put( ".jj", function (...arg):void
+			{
+				(MainRoleManager.actor.headFace as HeadFace).updateTitle(arg[0]);
+			})
 		}
 		
 		

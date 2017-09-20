@@ -18,11 +18,14 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.chat.bean.HyperInfo;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	import com.rpgGame.netData.player.bean.HyperlinkInfo;
 	
 	import flash.utils.ByteArray;
+	
+	import org.game.netCore.data.long;
 	
 	public class ChatUtil
 	{
@@ -381,6 +384,19 @@ package com.rpgGame.app.ui.main.chat
 			return goodsCode;
 		}
 		
+		/**通过Info得到一个物品*/
+		public static function replaceItemInfoShow(info:ItemInfo):String
+		{
+			var cinfo:ClientItemInfo=  ItemUtil.convertClientItemInfo(info);
+			if(cinfo)
+			{
+				var key:String = ChatGoodsManager.addItemInfo(cinfo);
+				var goodsCode:String = RichTextCustomUtil.getItemCode(key,cinfo.name,cinfo.quality);
+				return goodsCode;
+			}
+			return "";
+		}
+		
 		public static function getPinDaoShow(typ:int):String
 		{
 			switch(typ)
@@ -539,7 +555,11 @@ package com.rpgGame.app.ui.main.chat
 							arr[infos[i].i]=replacePlayerShow(str,StaticValue.GREEN_TEXT,infos[i].parameterInfos[0].id.hexValue);
 							break;
 						case 2: //物品
-							arr[infos[i].i]=replaceItemShowByMod(infos[i].parameterInfos[0].mod);
+//							if(!infos[i].parameterInfos[0].itemInfo.itemId.EqualTo(new long(0))){
+//								arr[infos[i].i]=replaceItemInfoShow(infos[i].parameterInfos[0].itemInfo);
+//							}else{
+								arr[infos[i].i]=replaceItemShowByMod(infos[i].parameterInfos[0].mod);
+//							}
 							break;
 						case 3: //组队 
 							var id:String=infos[i].parameterInfos[0].id.hexValue;

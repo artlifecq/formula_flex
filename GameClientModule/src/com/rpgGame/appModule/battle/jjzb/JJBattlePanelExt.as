@@ -45,7 +45,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _skin:JingJiChan1_Skin;
 		private var _normalView:SubNormalView;
 		private var _top3View:SubTop3View;
-		private var _fightView:JJBattleSceneView;
+		
 		private var _infoSkin:JingJi_Info;
 		private var _logSkin:JingJiPaiMing;
 		private var _initTimesStr:String;
@@ -69,9 +69,9 @@ package com.rpgGame.appModule.battle.jjzb
 			_skin=new JingJiChan1_Skin();
 			super(_skin);
 			
-			_normalView=new SubNormalView(_skin.gNormal,[_skin.skinRole3,_skin.skinRole2,_skin.skinRole4,_skin.skinRole1,_skin.skinRole5],_skin.btnTiaoZhanbg);
-			_top3View=new SubTop3View(_skin.gTop,[_skin.top3,_skin.top1,_skin.top2],_skin.btnBack);
-			_fightView=new JJBattleSceneView(_skin.skinBattke);
+			_normalView=new SubNormalView(_skin.bg2,_skin.gNormal,[_skin.skinRole3,_skin.skinRole2,_skin.skinRole4,_skin.skinRole1,_skin.skinRole5],_skin.btnTiaoZhanbg);
+			_top3View=new SubTop3View(_skin.bg1,_skin.gTop,[_skin.top3,_skin.top1,_skin.top2],_skin.btnBack);
+		
 			_infoSkin=_skin.skinInfo.skin as JingJi_Info;
 			_logSkin=_skin.item_msg.skin as JingJiPaiMing;
 			_initTimesStr=_infoSkin.lbCiShu.text;
@@ -231,10 +231,6 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				_curSub=_top3View;
 			}
-			else
-			{
-				_curSub=_fightView;
-			}
 			_curSub.show();
 		}
 		private function onStateResChange(type:int=0):void
@@ -281,7 +277,6 @@ package com.rpgGame.appModule.battle.jjzb
 			_showState=2;
 			updateShowState();
 			//_fightView.show();
-			_fightView.setData(arg[0]);
 		}
 		public function goBack():void
 		{

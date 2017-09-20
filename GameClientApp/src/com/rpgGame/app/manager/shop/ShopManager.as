@@ -15,6 +15,7 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.shop.ShopVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -28,6 +29,8 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.netData.shop.message.SCSendShopListMessage;
 	
 	import flash.events.EventDispatcher;
+	
+	import app.message.GoodsType;
 	
 	import org.game.netCore.data.long;
 	
@@ -107,7 +110,7 @@ package  com.rpgGame.app.manager.shop
 			{
 				return 0;
 			}
-			if (type<100) 
+			if (ItemConfig.getItemType(type)==GoodsType.MONEY) 
 			{
 				return MainRoleManager.actorInfo.totalStat.getResData(type);
 			}

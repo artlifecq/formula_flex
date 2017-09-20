@@ -41,6 +41,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import away3d.events.Event;
 	
@@ -410,8 +411,15 @@ package com.rpgGame.appModule.pet
 			_attrCon.setData(addid,nextAttrId);
 			
 			var skill:Q_skill_model=SpellDataManager.getSpellById(qPetAdv.q_skill_id);
-			if(skill)
-				FaceUtil.SetSkillGrid(_bgIco, FaceUtil.chanceSpellToFaceInfo(skill), true);
+			if(skill){
+				var info:SkillInfo=new SkillInfo();
+				info.skillModelId=skill.q_skillID;
+				info.skillLevel=1;
+				info.skillChildLv=data.rank;
+				_bgIco.setIconResName(ClientConfig.getSkillIcon(skill.q_skillID.toString(),IcoSizeEnum.ICON_42));
+				TipTargetManager.remove(_bgIco);
+				TipTargetManager.show( _bgIco, TargetTipsMaker.makeTips( TipType.SPELL_TIP, info));
+			}
 			//			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{

@@ -27,11 +27,13 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
+	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
@@ -43,6 +45,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.type.item.GridTipType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import flash.geom.Point;
@@ -78,6 +81,8 @@ package com.rpgGame.appModule.role
 		EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];*/
 		private var equipsTypes:Array=[EquipType.WEAPON,EquipType.HELM,EquipType.ARMOR,EquipType.LEGHARNESS,EquipType.SHOE,EquipType.SCAPULA,
 			EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];
+		private var gridTipTypes:Array=[GridTipType.GRID_WEAPON,GridTipType.GRID_HELM,GridTipType.GRID_ARMOR,GridTipType.GRID_LEGHARNESS,GridTipType.GRID_SHOE,GridTipType.GRID_SCAPULA,
+			GridTipType.GRID_RING,GridTipType.GRID_NECKLACE,GridTipType.GRID_BRACER,GridTipType.GRID_JADE];
 		private var equipGrids:Vector.<DragDropItem>;
 		private var listDatas:ListCollection;
 		private var _mgr:RoleEquipmentManager;
@@ -274,7 +279,7 @@ package com.rpgGame.appModule.role
 		private function setGridInfo(index:int, itemInfo:ClientItemInfo, gridIndex:int = -1):void
 		{
 			var gridInfo:GridInfo = listDatas.getItemAt(index) as GridInfo;
-			if(!gridInfo||gridInfo.data==itemInfo)
+			if(!gridInfo||(gridInfo.data!=null&&gridInfo.data==itemInfo))
 				return;
 			gridInfo.data = itemInfo;
 			gridInfo.isEnabled = _mgr.isEnabled(index);
@@ -295,6 +300,10 @@ package com.rpgGame.appModule.role
 			var grid:DragDropItem = equipGrids[index];
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
+			if(!gridInfo.data){
+				var tipinfo:Q_tipsinfo=TipsCfgData.getTipsInfo(gridTipTypes[index]);		
+				TipTargetManager.show(grid,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,tipinfo));
+			}
 		}
 		
 		private function initEvent():void
@@ -457,7 +466,8 @@ package com.rpgGame.appModule.role
 			else
 			{
 				_vipIcon.clear();
-				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+				var info:Q_tipsinfo=TipsCfgData.getTipsInfo(GridTipType.GRID_VIP);		
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,info));
 			}
 		}
 		/**
@@ -468,7 +478,7 @@ package com.rpgGame.appModule.role
 		 */		
 		public function setMarriageRingData(ring:int,hasMarriage:int):void
 		{
-			//TipTargetManager.remove(_marryIcon);
+			TipTargetManager.remove(_marryIcon);
 			if (ring>0&&hasMarriage!=5) 
 			{
 				var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);		
@@ -489,6 +499,8 @@ package com.rpgGame.appModule.role
 			{
 				_marryIcon.clear();
 				_marryIcon.filter=null;
+				var tipinfo:Q_tipsinfo=TipsCfgData.getTipsInfo(GridTipType.GRID_MARRY);		
+				TipTargetManager.show(_marryIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,tipinfo));
 				//TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
 			}
 		}

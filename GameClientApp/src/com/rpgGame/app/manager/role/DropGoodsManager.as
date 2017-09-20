@@ -70,8 +70,8 @@ package com.rpgGame.app.manager.role
 		private var _infos:Vector.<RollItemInfo>=new Vector.<RollItemInfo>();
 		public function addRollGoods(rollInfo: RollItemInfo):void
 		{
-			if(_allDropPane.length>=5)
-				return ;
+//			if(_allDropPane.length>=5)
+//				return ;
 			if(rollInfo!=null&&getRollPaneById(rollInfo.uniqueId))
 			{
 				return ;
@@ -96,6 +96,16 @@ package com.rpgGame.app.manager.role
 		
 		private function onLoadComplete(_appUrl : String = null) : void
 		{
+			trace("roll点资源加载成功！！！");
+			DropGoodsManager.rollPanelIsLoad = true;
+			DropGoodsManager.isLoading=false;
+			for(var i:int=0;i<_infos.length;i++)
+			{
+				var info:RollItemInfo=_infos.shift();
+				showRollPanel(info);
+			}
+			_infos.length=0;
+			return;
 			var _renderParamData:RenderParamData3D=new RenderParamData3D(0,"effect_ui",ClientConfig.getEffect("ui_shaizi"));
 			_renderParamData.priority=LoadPriorityType.LEVEL_CUSTOM_4;
 			var uint:RenderUnit3D=RenderUnit3D.create(_renderParamData);
@@ -142,8 +152,13 @@ package com.rpgGame.app.manager.role
 				refeashRollPanePosition();
 			}
 		}
-		
-		public function reqRollPoint(info:RollItemInfo):void
+		/**
+		 *roll 
+		 * @param info
+		 * @param type 1需求3放弃
+		 * 
+		 */		
+		public function reqRollPoint(info:RollItemInfo,type:int):void
 		{
 			if(info.tempItemInfo.ltime*1000<SystemTimeManager.curtTm)
 			{
@@ -151,6 +166,7 @@ package com.rpgGame.app.manager.role
 			}
 			var msg:ReqRollPointMessage = new ReqRollPointMessage();
 			msg.uniqueId = info.uniqueId;
+			msg.type=type;
 			SocketConnection.send(msg);
 		}
 		
@@ -211,6 +227,7 @@ package com.rpgGame.app.manager.role
 			if(pane == null)
 				return ;
 			pane.setEndHandler();
+			pane.closeHander();
 			if(MainRoleManager.actorInfo.serverID.EqualTo(msg.playerId))
 			{
 				RollGetItemPane.popItem(pane.clientItem);

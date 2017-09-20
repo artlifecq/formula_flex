@@ -84,7 +84,10 @@ package com.rpgGame.appModule.skill
 				skin.lb_renwudengji.visible=false;
 				skin.lb_zhenqi.visible=false;
 				skin.lb_yinliang.visible=false;
-				skin.uiOk.visible=true;
+				if(selectedInfo.skillModelId==1){
+					skin.uiOk.visible=false;
+				}else
+					skin.uiOk.visible=true;
 				//				skin.line1.visible=false;
 				//				skin.line2.visible=false;
 				return;

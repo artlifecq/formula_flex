@@ -271,10 +271,12 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_bangding = temp;
 			temp.name = "lbl_bangding";
-			temp.right = 15;
+			temp.right = 0;
 			temp.text = "【已绑定】";
+			temp.textAlign = "right";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 150;
 			temp.y = 459;
 			return temp;
 		}

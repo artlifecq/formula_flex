@@ -254,6 +254,7 @@ package com.rpgGame.appModule.equip
 			_skin.tree.selectedItem=getDataById(findId);
 			_skin.tree.dataProvider.updateItemAt(oldindex);
 			_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
+			_skin.tree.validate();
 			onSelected(null);
 		}
 		
@@ -306,9 +307,39 @@ package com.rpgGame.appModule.equip
 			var datas:ListCollection=_skin.tree.dataProvider;
 			var arr:Array=datas.data as Array;
 			for(var i:int=0;i<arr.length;i++){
-				var node:TreeNode=arr[i] as TreeNode
-				if(node.data is DetailNodeInfo&&DetailNodeInfo(node.data).data.q_item_id==findId){
-					return node;
+				var node:TreeNode=arr[i] as TreeNode;
+				var info:DetailNodeInfo=getinfoById(node,findId);
+				if(info)
+					return arr[i];
+				//				if(node.data is DetailNodeInfo&&DetailNodeInfo(node.data).data.q_item_id==findId){
+				//					return node;
+				//				}
+			}
+			return null;
+		}
+		
+		private function getinfoById(node:TreeNode,id:int): DetailNodeInfo
+		{
+			if(node.data is MainNodeInfo){
+				findRootNode=node;
+			}
+			var len:int=node.children?node.children.length:0;
+			var child:TreeNode = null;
+			var detailInfo:DetailNodeInfo;
+			var hechengData:Q_hecheng;
+			for(var i:int = 0; i < len;i++ )
+			{
+				child = node.children[i];
+				detailInfo=child.data as DetailNodeInfo;
+				if(detailInfo){//是跟节点
+					hechengData=detailInfo.data;
+					if(hechengData.q_item_id==id){//合成目标物
+						return detailInfo;
+					}
+				}else{
+					if(getinfoById(child,id)){
+						return getinfoById(child,id);
+					}
 				}
 			}
 			return null;
