@@ -167,12 +167,19 @@ package com.rpgGame.appModule.pet
 				return;
 			}	
 			
-			if(_blessPanel==null || _blessPanel.stage==null) 
+			if(_blessPanel==null) 
 			{
 				_blessPanel = new PetLevelUPPanelExt();
 				this.addChild(_blessPanel);
 				_blessPanel.x=this._skin.width;
 				_blessPanel.y=44;
+			}else{
+				if(_blessPanel.stage==null){
+					_blessPanel.visible=true;
+					this.addChild(_blessPanel);
+					_blessPanel.x=this._skin.width;
+					_blessPanel.y=44;
+				}
 			}
 			onStageResize(_stage.stageWidth-_blessPanel.getwidth(),_stage.stageHeight);
 			_blessPanel.setData(_curSelectItem.data);

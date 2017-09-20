@@ -17,6 +17,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -65,7 +66,7 @@ package com.rpgGame.appModule.pet
 		
 		public function setData(data:PetInfo):void
 		{
-			this._data=data;
+			_data=data;
 			initModEff();
 			if(data.rank>=_qPet.q_max_grade) return;
 			_skin.uiLevel.styleName="ui/pet/jieshu/"+data.rank+".png";
@@ -103,7 +104,7 @@ package com.rpgGame.appModule.pet
 				var vaule:int=_data.rankExp-_skin.barJindu.value;
 				if(vaule!=0){
 					var str:String=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+"+vaule);
-//					FloatingText.showUp(str,_skin.lbJindu);
+					//					FloatingText.showUp(str,_skin.lbJindu);
 				}
 			}
 			_skin.barJindu.value=_data.rankExp;
@@ -202,7 +203,6 @@ package com.rpgGame.appModule.pet
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onItemChange);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemChange);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onItemChange);
-			_data=null;
 			setAutoState(false);
 			if(this.parent)
 				(this.parent as PetMainPanelExt).updatePos();
@@ -246,7 +246,7 @@ package com.rpgGame.appModule.pet
 		
 		private function updateShow(data:PetInfo):void
 		{
-			this._data=data;
+			_data=data;
 			if(data.rank>=_qPet.q_max_grade) return;
 			_skin.uiLevel.styleName="ui/pet/jieshu/"+data.rank+".png";
 			updateNeedItems();
