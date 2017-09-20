@@ -26,6 +26,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_windId:int;
 		 /**  军阶名字 */
 		public var q_tittle:String;
+		 /**  军阶特效高度（px） */
+		public var q_effects_high:int;
 
 	}
 }

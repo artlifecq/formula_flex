@@ -8,7 +8,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.app.zhanchang.ZhangCheng_Scene;
 	import org.mokylin.skin.app.zhanchang.button.ButtonFanhui;
 	import org.mokylin.skin.app.zhanchang.button.ButtonJiangli;
 	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqibg;
@@ -56,8 +55,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 
 		public var numZhanli:feathers.controls.UINumber;
 
-		public var skinBattke:feathers.controls.SkinnableContainer;
-
 		public var skinInfo:feathers.controls.SkinnableContainer;
 
 		public var skinRole1:feathers.controls.SkinnableContainer;
@@ -89,7 +86,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg1_i(),bg2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime0_i(),__JingJiChan1_Skin_UIAsset2_i(),__JingJiChan1_Skin_UIAsset3_i(),numZhanli_i(),gBtn2_i(),btnBack_i(),gBtn_i(),item_msg_i(),skinBattke_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),gBtn2_i(),btnBack_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime0_i(),__JingJiChan1_Skin_UIAsset2_i(),__JingJiChan1_Skin_UIAsset3_i(),numZhanli_i(),gBtn_i(),item_msg_i()];
 			
 			states = {
 			};
@@ -135,7 +132,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			bg2 = temp;
 			temp.name = "bg2";
 			temp.styleName = "ui/big_bg/zhanchang/bg1.jpg";
-			temp.visible = false;
 			temp.x = 22;
 			temp.y = 87;
 			return temp;
@@ -147,7 +143,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			btnBack = temp;
 			temp.name = "btnBack";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonFanhui;
-			temp.visible = false;
 			temp.x = 354;
 			temp.y = 87;
 			return temp;
@@ -224,7 +219,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gTop = temp;
 			temp.name = "gTop";
-			temp.visible = false;
 			temp.x = 130;
 			temp.y = 135;
 			temp.elementsContent = [top3_i(),top2_i(),top1_i()];
@@ -271,21 +265,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.width = 122;
 			temp.x = 783;
 			temp.y = 555;
-			return temp;
-		}
-
-		private function skinBattke_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skinBattke = temp;
-			temp.name = "skinBattke";
-			temp.height = 512;
-			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.ZhangCheng_Scene()
-			temp.skin = skin
-			temp.visible = false;
-			temp.width = 922;
-			temp.x = 18;
-			temp.y = 82;
 			return temp;
 		}
 

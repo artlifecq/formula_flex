@@ -153,7 +153,7 @@ package com.rpgGame.app.scene
 		override protected function removeFromGraphic() : void
 		{
 			super.removeFromGraphic();
-			if (_headFace)
+			if (_headFace&&SceneCharType.PLAYER!=type)
 				_headFace.hide();
 			if (_dialogFace)
 				_dialogFace.hide();
@@ -198,6 +198,7 @@ package com.rpgGame.app.scene
 			}
 			if (_headFace)
 			{
+				_headFace.hide();
 				_headFace.recycleSelf();
 				_headFace = null;
 			}
@@ -528,18 +529,10 @@ package com.rpgGame.app.scene
 		override public function set x(value:Number):void
 		{
 			super.x=value;
-//			if (isMainChar) 
-//			{
-//				trace("main move");
-//			}
 		}
 		override public function set z(value:Number):void
 		{
 			super.z=value;
-//			if (isMainChar) 
-//			{
-//				trace("main move z");
-//			}
 		}
 		//==================主玩家用
 		public var lookPos:Vector3D;

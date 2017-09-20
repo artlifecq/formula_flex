@@ -73,8 +73,22 @@ package  com.rpgGame.app.graphics.decor
 		{
 			if ( _sourceContainer.contains(obj) ) return;
 			_sourceContainer.addChild( obj );
+			obj.visible = _visible;
+			sortList.unshift( new SortObject( obj, sortLevel ) );
 		}
-		
+		public  function removeNotSort(obj:DisplayObject):void
+		{
+			var i:int = sortList.length;
+			while ( --i > -1 )
+			{
+				if ( sortList[i].display == obj )
+				{
+					sortList.splice( i, 1 );
+					MCUtil.removeSelf( obj );
+					break;
+				}
+			}
+		}
 		/**
 		 * 移除单类布局中所有子项
 		 * */

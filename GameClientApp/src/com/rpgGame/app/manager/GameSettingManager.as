@@ -9,10 +9,13 @@
 	import com.rpgGame.app.sender.HeroMiscSender;
 	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.core.events.MenuEvent;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.enum.EnumCustomTagType;
 	import com.rpgGame.coreData.lang.LangShieldingMenu;
-	import com.rpgGame.coreData.role.BiaoCheData;
+	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.type.EnumMonsterType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -33,23 +36,64 @@
 		 * 队伍 
 		 */		
 		private static var _checkFiltrateDuiWu:Boolean = false;
-		/**
-		 * 家族
-		 */		
-		private static var _checkFiltrateJiaZu:Boolean = false;
+
 		/**
 		 * 帮会 
 		 */		
 		private static var _checkFiltrateBangHui:Boolean = false;
-		/**
-		 * 镖车 
-		 */		
-		private static var _checkFiltrateBiaoChe:Boolean = false;
-		/**
-		 * 本国
-		 */		
-		private static var _checkFiltrateBenGuo:Boolean = false;
+		private static var _checkOtherEffect:Boolean = false;
+		private static var _checktOherGirlPet:Boolean = false;
 		
+		/**
+		 * 他人美人,true是屏蔽
+		 */
+		public static function get checktOherGirlPet():Boolean
+		{
+			return _checktOherGirlPet;
+		}
+
+		/**
+		 * @private
+		 */
+		public static function set checktOherGirlPet(value:Boolean):void
+		{
+			if (_checktOherGirlPet==value) 
+			{
+				return;
+			}
+			_checktOherGirlPet = value;
+			if(!_checktOherGirlPet&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
+			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
+		}
+
+		/**
+		 * 他人特效
+		 */
+		public static function get checkOtherEffect():Boolean
+		{
+			return _checkOtherEffect;
+		}
+
+		/**
+		 * @private
+		 */
+		public static function set checkOtherEffect(value:Boolean):void
+		{
+			if (_checkOtherEffect==value) 
+			{
+				return;
+			}
+			_checkOtherEffect = value;
+			if(!_checkOtherEffect&&aKeyBlock){
+				_aKeyBlock=false;
+				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
+			}
+			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
+		}
+
 		public static function initData(dataStr:String):void
 		{
 			gameSetObj  = JSONUtil.decode(dataStr)[0];
@@ -58,15 +102,18 @@
 				aKeyBlock=gameSetObj.gameSet.aKeyBlock;
 				checkFiltrateGuaiWu=gameSetObj.gameSet.checkFiltrateGuaiWu;
 				checkFiltrateDuiWu=gameSetObj.gameSet.checkFiltrateDuiWu;
-				checkFiltrateJiaZu=gameSetObj.gameSet.checkFiltrateJiaZu;
 				checkFiltrateBangHui=gameSetObj.gameSet.checkFiltrateBangHui;
-				checkFiltrateBiaoChe=gameSetObj.gameSet.checkFiltrateBiaoChe;
-				checkFiltrateBenGuo=gameSetObj.gameSet.checkFiltrateBenGuo;		
+				checkOtherEffect=gameSetObj.gameSet.checkOtherEffect;
+				checktOherGirlPet=gameSetObj.gameSet.checktOherGirlPet;		
 			}
 		}
 		
 		public static function set aKeyBlock(value:Boolean):void
 		{
+			if (_aKeyBlock==value) 
+			{
+				return;
+			}
 			_aKeyBlock=value;
 			filtrateAll(_aKeyBlock);
 		}
@@ -78,6 +125,10 @@
 		
 		public static function set checkFiltrateGuaiWu(value:Boolean):void
 		{
+			if (_checkFiltrateDuiWu==value) 
+			{
+				return;
+			}
 			_checkFiltrateGuaiWu=value;
 			if(!_checkFiltrateGuaiWu&&aKeyBlock){
 				_aKeyBlock=false;
@@ -101,6 +152,10 @@
 		
 		public static function set checkFiltrateDuiWu(value:Boolean):void
 		{
+			if (_checkFiltrateDuiWu==value) 
+			{
+				return;
+			}
 			_checkFiltrateDuiWu=value;
 			if(!_checkFiltrateDuiWu&&aKeyBlock){
 				_aKeyBlock=false;
@@ -114,23 +169,13 @@
 			return _checkFiltrateDuiWu;
 		}
 		
-		public static function set checkFiltrateJiaZu(value:Boolean):void
-		{
-			_checkFiltrateJiaZu=value;
-			if(!_checkFiltrateJiaZu&&aKeyBlock){
-				_aKeyBlock=false;
-				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
-			}
-			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
-		}
-		
-		public static function get checkFiltrateJiaZu():Boolean
-		{
-			return _checkFiltrateJiaZu;
-		}
 		
 		public static function set checkFiltrateBangHui(value:Boolean):void
 		{
+			if (_checkFiltrateBangHui==value) 
+			{
+				return;
+			}
 			_checkFiltrateBangHui=value;
 			if(!_checkFiltrateBangHui&&aKeyBlock){
 				_aKeyBlock=false;
@@ -143,37 +188,7 @@
 		{
 			return _checkFiltrateBangHui;
 		}
-		
-		public static function set checkFiltrateBiaoChe(value:Boolean):void
-		{
-			_checkFiltrateBiaoChe=value;
-			if(!_checkFiltrateBiaoChe&&aKeyBlock){
-				_aKeyBlock=false;
-				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
-			}
-			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
-		}
-		
-		public static function get checkFiltrateBiaoChe():Boolean
-		{
-			return _checkFiltrateBiaoChe;
-		}
-		
-		public static function set checkFiltrateBenGuo(value:Boolean):void
-		{
-			_checkFiltrateBenGuo=value;
-			if(!_checkFiltrateBenGuo&&aKeyBlock){
-				_aKeyBlock=false;
-				EventManager.dispatchEvent(MenuEvent.CANCEL_LOCK);
-			}
-			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
-		}
-		
-		public static function get checkFiltrateBenGuo():Boolean
-		{
-			return _checkFiltrateBenGuo;
-		}
-		
+	
 		/**
 		 * 保存数据到服务器上去 
 		 * @param map
@@ -188,8 +203,8 @@
 		{
 			var value:String;		
 			var data:Array=[];
-			data.push({gameSet:{aKeyBlock:aKeyBlock,checkFiltrateGuaiWu:checkFiltrateGuaiWu,checkFiltrateDuiWu:checkFiltrateDuiWu,checkFiltrateJiaZu:checkFiltrateJiaZu,
-				checkFiltrateBangHui:checkFiltrateBangHui,checkFiltrateBiaoChe:checkFiltrateBiaoChe,checkFiltrateBenGuo:checkFiltrateBenGuo}});
+			data.push({gameSet:{aKeyBlock:aKeyBlock,checkFiltrateGuaiWu:checkFiltrateGuaiWu,checkFiltrateDuiWu:checkFiltrateDuiWu,
+				checkFiltrateBangHui:checkFiltrateBangHui,checkOtherEffect:checkOtherEffect,checktOherGirlPet:checktOherGirlPet}});
 			value=JSONUtil.encode(data);
 			return value;
 		}
@@ -198,10 +213,9 @@
 		{
 			checkFiltrateGuaiWu = bool;
 			checkFiltrateDuiWu = bool;
-			checkFiltrateJiaZu = bool;
 			checkFiltrateBangHui = bool;
-			checkFiltrateBiaoChe = bool;
-			checkFiltrateBenGuo = bool;
+			checkOtherEffect = bool;
+			checktOherGirlPet = bool;
 			EventManager.dispatchEvent( MenuEvent.SAKEYBLOCK, bool );
 		}
 		//		
@@ -218,11 +232,52 @@
 		/**是否有屏蔽选择*/
 		public static function isHavePingBi():Boolean
 		{
-			if(checkFiltrateGuaiWu||checkFiltrateDuiWu||checkFiltrateJiaZu||checkFiltrateBangHui||checkFiltrateBiaoChe||checkFiltrateBenGuo)
+			if(checkFiltrateGuaiWu||checkFiltrateDuiWu||checkFiltrateBangHui||checkOtherEffect||checktOherGirlPet)
 				return true;
 			else return false;
 		}
-		
+		private static function canSeePlayer(role:SceneRole):Boolean
+		{
+			if (role.isMainChar) 
+			{
+				return true;
+			}
+			//屏蔽非队友
+			if (checkFiltrateDuiWu &&Mgr.teamMgr.isInMyTeam(HeroData(role.data).serverID)==false)
+			{
+				return false;
+			}
+			//屏蔽同帮会
+			if (checkFiltrateBangHui &&MainRoleManager.actorInfo.guildId.IsZero()==false&& HeroData(role.data).guildId.EqualTo(MainRoleManager.actorInfo.guildId))
+			{
+				return false;
+			}
+			return true;
+		}
+		private static function canSeeMonster(role:SceneRole):Boolean
+		{
+			//精英，boss不屏蔽
+			var monster:MonsterData=BaseRole(role).data as MonsterData;
+			if (EnumMonsterType.testType(monster,[EnumMonsterType.ELITE,EnumMonsterType.BOSS])) 
+			{
+				return true;
+			}
+			//我的召唤物
+			if (monster.ownerId==MainRoleManager.actorID) 
+			{
+				return true;
+			}
+			return !checkFiltrateGuaiWu;
+		}
+		private static function canSeeGirlPet(role:SceneRole):Boolean
+		{
+			var pet:GirlPetData=role.data as GirlPetData
+			if (pet.ownerId==MainRoleManager.actorID) 
+			{
+				return true;
+			}
+			return !checktOherGirlPet;
+		}
 		/**屏蔽设置*/
 		public static function viewFilter(baseObj:BaseObj3D):Boolean
 		{
@@ -230,35 +285,18 @@
 			{
 				if (!BaseRole(baseObj).isMainChar && !BaseRole(baseObj).isMainCamouflage)
 				{
+					
 					if (baseObj.type == SceneCharType.PLAYER)
 					{
-						if (checkFiltrateBenGuo && HeroData(baseObj.data).countryId == MainRoleManager.actorInfo.countryId)
-						{
-							return false;
-						}
-						if (checkFiltrateDuiWu && Mgr.teamMgr.isInMyTeam(HeroData(baseObj.data).serverID))
-						{
-							return false;
-						}
-						if (checkFiltrateJiaZu && HeroData(baseObj.data).societyName == MainRoleManager.actorInfo.societyName)
-						{
-							return false;
-						}
-						if (checkFiltrateBangHui && HeroData(baseObj.data).guildName == MainRoleManager.actorInfo.guildName)
-						{
-							return false;
-						}
-					}
-					else if (baseObj.type == SceneCharType.BIAO_CHE)
-					{
-						if (checkFiltrateBiaoChe && BiaoCheData(baseObj.data).countryId == MainRoleManager.actorInfo.countryId)
-						{
-							return false;
-						}
+						return canSeePlayer(baseObj as SceneRole);
 					}
 					else if (baseObj.type == SceneCharType.MONSTER)
 					{
-						return !checkFiltrateGuaiWu;
+						return canSeeMonster(baseObj as SceneRole);
+					}
+					else if (baseObj.type==SceneCharType.GIRL_PET) 
+					{
+						return canSeeGirlPet(baseObj as SceneRole);
 					}
 				}
 			}
@@ -275,6 +313,12 @@
 					return checkFiltrateGuaiWu;
 				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_PLAYERS:
 					return checkFiltrateBangHui;
+				case LangShieldingMenu.SYSTEMSET_HIDE_PLAYERS:
+					return checkFiltrateDuiWu;
+				case LangShieldingMenu.SYSTEMSET_HIDE_OTHER_GIRL:
+					return checktOherGirlPet;
+				case LangShieldingMenu.SYSTEMSET_HIDE_DOTHER_EFFECTS:
+					return checkOtherEffect;
 			}
 			return false;
 		}
@@ -290,16 +334,54 @@
 					checkFiltrateGuaiWu=state;
 					break;
 				case LangShieldingMenu.SYSTEMSET_HIDE_PLAYERS:
-					
+					checkFiltrateDuiWu=state;
 					break;				
 				case LangShieldingMenu.SYSTEMSET_HIDE_GANG_PLAYERS:
 					checkFiltrateBangHui=state;
 					break;
 				case LangShieldingMenu.SYSTEMSET_HIDE_DOTHER_EFFECTS:
+					checkOtherEffect=state;
 					break;
 				case LangShieldingMenu.SYSTEMSET_HIDE_OTHER_GIRL:
+					checktOherGirlPet=state;
 					break;			
 			}
+		}
+		
+		public static function showEffect(role:SceneRole,animation:Q_SpellAnimation):Boolean
+		{
+			if (!role) 
+			{
+				return false;
+			}
+			//强制不屏蔽特效
+			if (animation&&animation.hide_effect==1) 
+			{
+				return true;
+			}
+			if (role.isMainChar) 
+			{
+				return true
+			}
+			//
+			if (SceneCharType.MONSTER==role.type) 
+			{
+				return canSeeMonster(role);
+			}
+			else if (SceneCharType.PLAYER==role.type) 
+			{
+				var see:Boolean= canSeePlayer(role);
+				if (see) 
+				{
+					return !checkOtherEffect;
+				}
+				return true
+			}
+			else if (SceneCharType.GIRL_PET==role.type) 
+			{
+				return canSeeGirlPet(role);
+			}
+			return true;
 		}
 	}
 }
