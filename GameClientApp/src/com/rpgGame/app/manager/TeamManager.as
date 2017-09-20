@@ -15,7 +15,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
-	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
@@ -531,9 +530,9 @@ package com.rpgGame.app.manager
 		{
 			return _teamMemberMap;
 		}
-		public function loopPlayer(playerId:long):void
+		public function loopPlayer(name:String):void
 		{
-			LookSender.lookOtherPlayer(playerId);
+			LookSender.lookOtherPlayer(name);
 		}
 		public function move2TeamMember(heroId:*):void
 		{

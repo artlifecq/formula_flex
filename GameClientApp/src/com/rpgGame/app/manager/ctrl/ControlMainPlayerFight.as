@@ -9,7 +9,6 @@ package com.rpgGame.app.manager.ctrl
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
-	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	
 	import flash.utils.getTimer;
 	
@@ -31,11 +30,11 @@ package com.rpgGame.app.manager.ctrl
 		 *最新打我的 
 		 */		
 		private var _targetAttackMe:Vector.<FightDataVo>=new Vector.<FightDataVo>();
-		private var _mainRole:long;
+		private var _mainRoleID:int;
 		private var _timer:GameTimer;
 		public function ControlMainPlayerFight()
 		{
-			_mainRole=MainRoleManager.actorInfo.serverID;
+			_mainRoleID=MainRoleManager.actorInfo.id;
 			_timer=new GameTimer("ControlMainPlayerFight");
 			_timer.onUpdate=onTimer;
 			_timer.start();
@@ -88,13 +87,13 @@ package com.rpgGame.app.manager.ctrl
 				return;
 			}
 			//我打的
-			if (info.attackerId.EqualTo(_mainRole)) 
+			if (info.attackerId==_mainRoleID) 
 			{
-				var hgid:Number=info.targetId.ToGID();
+				var hgid:int=info.targetId;
 				for each (var vo:FightDataVo in _mytargets) 
 				{
 					//已经有了
-					if (vo.targetGid==hgid) 
+					if (vo.targetId==hgid) 
 					{
 						vo.updateTime=getTimer();
 						return;
@@ -103,13 +102,12 @@ package com.rpgGame.app.manager.ctrl
 				add2List(info.targetId,_mytargets);
 			}
 			//打我的
-			else if (info.targetId.EqualTo(_mainRole)) 
+			else if (info.targetId==_mainRoleID) 
 			{
-				var attackGid:Number=info.attackerId.ToGID();
 				for each (var vo2:FightDataVo in _targetAttackMe) 
 				{
 					//已经有了
-					if (vo2.targetGid==attackGid) 
+					if (vo2.targetId==info.attackerId) 
 					{
 						vo2.updateTime=getTimer();
 						return;
@@ -125,15 +123,15 @@ package com.rpgGame.app.manager.ctrl
 		 * @param targets 挨打列表
 		 * 
 		 */		
-		public function update(personId:long,fightTarget:long,targets:Vector.<long>):void
+		public function update(personId:int,fightTarget:int,targets:Vector.<int>):void
 		{
 			//我打别人
-			if (personId&&personId.EqualTo(_mainRole)) 
+			if (personId&&personId==_mainRoleID) 
 			{
 				updateMyTarget(fightTarget,targets);
 			}
 			//别人打我
-			else if (fightTarget&&fightTarget.EqualTo(_mainRole)) 
+			else if (fightTarget&&fightTarget==_mainRoleID) 
 			{
 				updateFightMe(personId);
 			}
@@ -143,7 +141,7 @@ package com.rpgGame.app.manager.ctrl
 				var len:int=targets.length;
 				for (var i:int = 0; i < len; i++) 
 				{
-					if (targets[i].EqualTo(_mainRole)) 
+					if (targets[i]==_mainRoleID) 
 					{
 						updateFightMe(personId);
 						break;
@@ -153,28 +151,28 @@ package com.rpgGame.app.manager.ctrl
 			}
 		}
 		//更新我打的数据
-		private function updateMyTarget(tar:long,tars:Vector.<long>):void
+		private function updateMyTarget(tar:int,tars:Vector.<int>):void
 		{
 			for each (var vo:FightDataVo in _mytargets) 
 			{
 				FightDataVo.revert(vo);
 			}
 			_mytargets.length=0;
-			if (tar&&tar.IsZero()==false) 
+			if (tar&&tar!=0) 
 			{
 				add2List(tar,_mytargets);
 				//_mytargets.push(tar);
 			}
-			for each (var tmp:long in tars) 
+			for each (var tmp:int in tars) 
 			{
 				add2List(tmp,_mytargets);
 			}
 			
 			//_mytargets=_mytargets.concat(tars);
 		}
-		private function add2List(id:long,list:Vector.<FightDataVo>):void
+		private function add2List(id:int,list:Vector.<FightDataVo>):void
 		{
-			var role:SceneRole=SceneManager.getSceneObjByID(id.ToGID()) as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(id) as SceneRole;
 			if (!role) 
 			{
 				return;
@@ -184,15 +182,14 @@ package com.rpgGame.app.manager.ctrl
 				return;
 			}
 			var vo:FightDataVo=FightDataVo.gain();
-			vo.targetGid=id.ToGID();
 			vo.targetId=id;
 			vo.type=role.type;
 			vo.updateTime=getTimer();
 			list.push(vo);
 		}
-		private function updateFightMe(tar:long):void
+		private function updateFightMe(tar:int):void
 		{
-			var role:SceneRole=SceneManager.getSceneObjByID(tar.ToGID()) as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(tar) as SceneRole;
 			if (!role) 
 			{
 				return;
@@ -205,12 +202,12 @@ package com.rpgGame.app.manager.ctrl
 			if (SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar==false) 
 			{
 				//_targetAttackMe.push((role.data as GirlPetData).ownerLongId);
-				add2List((role.data as GirlPetData).ownerLongId,_targetAttackMe);
+				add2List((role.data as GirlPetData).ownerId,_targetAttackMe);
 			}
 			else if (SceneCharType.MONSTER==role.type&&MonsterData(role.data).ownerId!=0&&role.ownerIsMainChar==false) 
 			{
 				//_targetAttackMe.push(new long((role.data as RoleData).ownerId));
-				add2List(new long((role.data as RoleData).ownerId),_targetAttackMe);
+				add2List((role.data as RoleData).ownerId,_targetAttackMe);
 			}
 			else
 			{
@@ -228,9 +225,9 @@ package com.rpgGame.app.manager.ctrl
 		{
 			return _targetAttackMe;
 		}
-		public function isInFightList(id:long):Boolean
+		public function isInFightList(id:int):Boolean
 		{
-			if (id==null||(_mytargets.length==0&&_targetAttackMe.length==0)) 
+			if (id==0||(_mytargets.length==0&&_targetAttackMe.length==0)) 
 			{
 				return false;
 			}
@@ -238,14 +235,14 @@ package com.rpgGame.app.manager.ctrl
 			var vo:FightDataVo;
 			for each (vo in _mytargets) 
 			{
-				if (vo.targetGid==gid) 
+				if (vo.targetId==gid) 
 				{
 					return true;
 				}
 			}
 			for each (vo in _targetAttackMe) 
 			{
-				if (vo.targetGid==gid) 
+				if (vo.targetId==gid) 
 				{
 					return true;
 				}

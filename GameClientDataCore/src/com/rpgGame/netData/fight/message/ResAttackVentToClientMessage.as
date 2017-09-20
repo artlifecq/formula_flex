@@ -1,6 +1,5 @@
 package com.rpgGame.netData.fight.message{
 	import com.rpgGame.netData.structs.Position;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.fight.message{
 	public class ResAttackVentToClientMessage extends Message {
 	
 		//角色Id
-		private var _playerid: long;
+		private var _playerid: int;
 		
 		//攻击类型(技能ID)
 		private var _fightType: int;
@@ -29,10 +28,7 @@ package com.rpgGame.netData.fight.message{
 		//目标点列表
 		private var _posList: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		//目标对象列表
-		private var _targets: Vector.<long> = new Vector.<long>();
-		//唯一ID
-		private var _uid: int;
-		
+		private var _targets: Vector.<int> = new Vector.<int>();
 		
 		/**
 		 * 写入字节缓存
@@ -40,7 +36,7 @@ package com.rpgGame.netData.fight.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//角色Id
-			writeLong(_playerid);
+			writeShort(_playerid);
 			//攻击类型(技能ID)
 			writeInt(_fightType);
 			//攻击朝向
@@ -55,10 +51,8 @@ package com.rpgGame.netData.fight.message{
 			//目标对象列表
 			writeShort(_targets.length);
 			for (i = 0; i < _targets.length; i++) {
-				writeLong(_targets[i]);
+				writeShort(_targets[i]);
 			}
-			//唯一ID
-			writeInt(_uid);
 			return true;
 		}
 		
@@ -68,7 +62,7 @@ package com.rpgGame.netData.fight.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//角色Id
-			_playerid = readLong();
+			_playerid = readShort();
 			//攻击类型(技能ID)
 			_fightType = readInt();
 			//攻击朝向
@@ -83,10 +77,8 @@ package com.rpgGame.netData.fight.message{
 			//目标对象列表
 			var targets_length : int = readShort();
 			for (i = 0; i < targets_length; i++) {
-				_targets[i] = readLong();
+				_targets[i] = readShort();
 			}
-			//唯一ID
-			_uid = readInt();
 			return true;
 		}
 		
@@ -102,14 +94,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get playerid(): long{
+		public function get playerid(): int{
 			return _playerid;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set playerid(value: long): void{
+		public function set playerid(value: int): void{
 			this._playerid = value;
 		}
 		
@@ -177,30 +169,15 @@ package com.rpgGame.netData.fight.message{
 		 * get 目标对象列表
 		 * @return 
 		 */
-		public function get targets(): Vector.<long>{
+		public function get targets(): Vector.<int>{
 			return _targets;
 		}
 		
 		/**
 		 * set 目标对象列表
 		 */
-		public function set targets(value: Vector.<long>): void{
+		public function set targets(value: Vector.<int>): void{
 			this._targets = value;
-		}
-		
-		/**
-		 * get 唯一ID
-		 * @return 
-		 */
-		public function get uid(): int{
-			return _uid;
-		}
-		
-		/**
-		 * set 唯一ID
-		 */
-		public function set uid(value: int): void{
-			this._uid = value;
 		}
 		
 	}

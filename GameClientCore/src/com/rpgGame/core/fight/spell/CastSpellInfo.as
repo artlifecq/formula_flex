@@ -5,8 +5,6 @@ package com.rpgGame.core.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	
 	import flash.geom.Point;
-	
-	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -19,8 +17,7 @@ package com.rpgGame.core.fight.spell
 	{
 		private var _spellData : Q_skill_model;
 		public var caseSpellData : Q_skill_model;
-		public var targetServerID:long;
-		public var targetID : Number;
+		public var targetID : int;
 		public var targetPos : Point;
 		public var releasePos : Point;
 		public var angle : int;

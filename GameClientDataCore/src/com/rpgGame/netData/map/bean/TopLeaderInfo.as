@@ -1,7 +1,6 @@
 package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.structs.Position;
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -15,15 +14,12 @@ package com.rpgGame.netData.map.bean{
 	 * 排行榜雕像
 	 */
 	public class TopLeaderInfo extends Bean {
-		
+	
 		//唯一id
-		private var _id: long;
+		private var _id: int;
 		
 		//模型id
 		private var _modelId: int;
-		
-		//玩家id
-		private var _playerId: long;
 		
 		//玩家名字
 		private var _playerName: String;
@@ -43,11 +39,9 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//唯一id
-			writeLong(_id);
+			writeShort(_id);
 			//模型id
 			writeInt(_modelId);
-			//玩家id
-			writeLong(_playerId);
 			//玩家名字
 			writeString(_playerName);
 			//排行榜类型
@@ -64,11 +58,9 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//唯一id
-			_id = readLong();
+			_id = readShort();
 			//模型id
 			_modelId = readInt();
-			//玩家id
-			_playerId = readLong();
 			//玩家名字
 			_playerName = readString();
 			//排行榜类型
@@ -84,14 +76,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 唯一id
 		 * @return 
 		 */
-		public function get id(): long{
+		public function get id(): int{
 			return _id;
 		}
 		
 		/**
 		 * set 唯一id
 		 */
-		public function set id(value: long): void{
+		public function set id(value: int): void{
 			this._id = value;
 		}
 		
@@ -108,21 +100,6 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set modelId(value: int): void{
 			this._modelId = value;
-		}
-		
-		/**
-		 * get 玩家id
-		 * @return 
-		 */
-		public function get playerId(): long{
-			return _playerId;
-		}
-		
-		/**
-		 * set 玩家id
-		 */
-		public function set playerId(value: long): void{
-			this._playerId = value;
 		}
 		
 		/**

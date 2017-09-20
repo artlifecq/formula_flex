@@ -1,5 +1,4 @@
 package com.rpgGame.netData.player.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.player.message{
 	public class ResCountdownToClientMessage extends Message {
 	
 		//角色ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//倒计时时间(秒)
 		private var _time: int;
@@ -28,7 +27,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//倒计时时间(秒)
 			writeInt(_time);
 			//倒计时类型1,是头上冒字
@@ -41,7 +40,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色ID
-			_playerId = readLong();
+			_playerId = readShort();
 			//倒计时时间(秒)
 			_time = readInt();
 			//倒计时类型1,是头上冒字
@@ -61,14 +60,14 @@ package com.rpgGame.netData.player.message{
 		 * get 角色ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 角色ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

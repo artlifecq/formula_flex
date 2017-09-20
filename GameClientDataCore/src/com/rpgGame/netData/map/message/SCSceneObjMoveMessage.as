@@ -15,7 +15,7 @@ package com.rpgGame.netData.map.message{
 	public class SCSceneObjMoveMessage extends Message {
 	
 		//移动对象ID
-		private var _objId: long;
+		private var _objId: int;
 		
 		//移动速度
 		private var _speed: int;
@@ -35,7 +35,7 @@ package com.rpgGame.netData.map.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//移动对象ID
-			writeLong(_objId);
+			writeShort(_objId);
 			//移动速度
 			writeShort(_speed);
 			//开始移动时间
@@ -56,7 +56,7 @@ package com.rpgGame.netData.map.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//移动对象ID
-			_objId = readLong();
+			_objId = readShort();
 			//移动速度
 			_speed = readShort();
 			//开始移动时间
@@ -83,14 +83,14 @@ package com.rpgGame.netData.map.message{
 		 * get 移动对象ID
 		 * @return 
 		 */
-		public function get objId(): long{
+		public function get objId(): int{
 			return _objId;
 		}
 		
 		/**
 		 * set 移动对象ID
 		 */
-		public function set objId(value: long): void{
+		public function set objId(value: int): void{
 			this._objId = value;
 		}
 		

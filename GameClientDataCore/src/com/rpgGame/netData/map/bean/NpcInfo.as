@@ -2,7 +2,6 @@ package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	import com.rpgGame.netData.structs.Position;
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -18,7 +17,7 @@ package com.rpgGame.netData.map.bean{
 	public class NpcInfo extends Bean {
 	
 		//NPCID
-		private var _npcId: long;
+		private var _npcId: int;
 		
 		//NPC模型ID
 		private var _npcModelId: int;
@@ -48,7 +47,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//NPCID
-			writeLong(_npcId);
+			writeShort(_npcId);
 			//NPC模型ID
 			writeInt(_npcModelId);
 			//NPC名字
@@ -76,7 +75,7 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//NPCID
-			_npcId = readLong();
+			_npcId = readShort();
 			//NPC模型ID
 			_npcModelId = readInt();
 			//NPC名字
@@ -103,14 +102,14 @@ package com.rpgGame.netData.map.bean{
 		 * get NPCID
 		 * @return 
 		 */
-		public function get npcId(): long{
+		public function get npcId(): int{
 			return _npcId;
 		}
 		
 		/**
 		 * set NPCID
 		 */
-		public function set npcId(value: long): void{
+		public function set npcId(value: int): void{
 			this._npcId = value;
 		}
 		

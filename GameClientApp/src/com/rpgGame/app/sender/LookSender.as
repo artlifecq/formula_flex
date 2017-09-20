@@ -3,7 +3,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.player.message.ReqOthersPlayerInfoMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.data.long;
 	
 	
 	/**
@@ -18,10 +17,10 @@ package com.rpgGame.app.sender
 		 * @param id 玩家id
 		 * 
 		 */
-		public static function lookOtherPlayer(id:long):void
+		public static function lookOtherPlayer(name:String):void
 		{
 			var msg:ReqOthersPlayerInfoMessage=new ReqOthersPlayerInfoMessage();
-			msg.personId=id;
+			msg.personName=name;
 			SocketConnection.send(msg);
 		}
 	}

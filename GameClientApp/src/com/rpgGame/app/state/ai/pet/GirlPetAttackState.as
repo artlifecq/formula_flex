@@ -9,10 +9,7 @@ package com.rpgGame.app.state.ai.pet
 	import com.rpgGame.app.manager.ctrl.FightDataVo;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
-	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
 	import com.rpgGame.app.sender.SpellSender;
@@ -25,15 +22,12 @@ package com.rpgGame.app.state.ai.pet
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
-	import org.game.netCore.data.long;
-	
 	public class GirlPetAttackState extends AIState
 	{
-		private var _curTarget:long;
+		private var _curTarget:int;
 		public function GirlPetAttackState()
 		{
 			super(AIStateType.AI_GIRL_ATTACK);
@@ -80,15 +74,15 @@ package com.rpgGame.app.state.ai.pet
 			super.execute();
 			if (TrusteeshipManager.getInstance().myFighterCtrl.isInFightList(_curTarget)==false) 
 			{
-				_curTarget=null;
+				_curTarget=0;
 			}
-			if (_curTarget==null) 
+			if (_curTarget==0) 
 			{
 				selectTargetWithNone();
 			}
 			else 
 			{
-				var role:SceneRole=SceneManager.getSceneObjByID(_curTarget.ToGID()) as SceneRole;
+				var role:SceneRole=SceneManager.getSceneObjByID(_curTarget) as SceneRole;
 				if (isRoleAvalible(role))
 				{
 					selectTargetWithRole();
@@ -98,12 +92,12 @@ package com.rpgGame.app.state.ai.pet
 					selectTargetWithNone();
 				}
 			}
-			if (_curTarget) 
+			if (_curTarget!=0) 
 			{
 				var skill:Q_skill_model=Mgr.petMgr.getCurPetSkill();
 				if (skill) 
 				{
-					var selRole:SceneRole=SceneManager.getSceneObjByID(_curTarget.ToGID()) as SceneRole;
+					var selRole:SceneRole=SceneManager.getSceneObjByID(_curTarget) as SceneRole;
 					if (selRole) 
 					{
 						var targerPos : Vector3D =selRole.position;
@@ -119,7 +113,7 @@ package com.rpgGame.app.state.ai.pet
 		private function onArrive2Target(wref:WalkMoveStateReference):void
 		{
 			var arr:Array=wref.data as Array;
-			var tar:long=arr[0];
+			var tar:int=arr[0];
 			var skill:Q_skill_model=arr[1];
 			if (!SkillCDManager.getInstance().getSkillHasCDTime(skill)) 
 			{
@@ -162,7 +156,7 @@ package com.rpgGame.app.state.ai.pet
 		}
 		private function selectTargetWithRole():void
 		{
-			var tmp:long;
+			var tmp:int;
 			//主角正在攻击的玩家
 			tmp=getNearestRole(SceneCharType.PLAYER,TrusteeshipManager.getInstance().myFighterCtrl.targets);
 			if (tmp) 
@@ -177,7 +171,7 @@ package com.rpgGame.app.state.ai.pet
 				_curTarget=tmp;
 				return;
 			}
-			var petAttack:SceneRole=SceneManager.getSceneObjByID(_curTarget.ToGID()) as SceneRole;
+			var petAttack:SceneRole=SceneManager.getSceneObjByID(_curTarget) as SceneRole;
 			//美人再打玩家不处理
 			if (petAttack&&SceneCharType.PLAYER==petAttack.type) 
 			{
@@ -203,19 +197,19 @@ package com.rpgGame.app.state.ai.pet
 		 * @return 
 		 * 
 		 */		
-		private function getNearestRole(type:String,roles:Vector.<FightDataVo>):long
+		private function getNearestRole(type:String,roles:Vector.<FightDataVo>):int
 		{
 			var dis:int=0;
 			var role:SceneRole;
 			var len:int=roles.length;
 			var tmp:FightDataVo;
 			var nowDist:int=int.MAX_VALUE;
-			var nowId:long;
+			var nowId:int;
 			var pet:SceneRole=_machine.owner as SceneRole;
 			for (var i:int = 0; i <len; i++) 
 			{
 				tmp=roles[i];
-				role=SceneManager.getSceneObjByID(tmp.targetGid) as SceneRole;
+				role=SceneManager.getSceneObjByID(tmp.targetId) as SceneRole;
 				if (!isRoleAvalible(role)) 
 				{
 					continue;
@@ -271,7 +265,7 @@ package com.rpgGame.app.state.ai.pet
 			return false;
 		}
 	
-		private function getNearestMonster():long
+		private function getNearestMonster():int
 		{
 			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
 			var rerlle:SceneRole;
@@ -298,9 +292,9 @@ package com.rpgGame.app.state.ai.pet
 			}
 			if (rerlle) 
 			{
-				return (rerlle.data as RoleData).serverID;
+				return (rerlle.data as RoleData).id;
 			}
-			return null;
+			return 0;
 		}
 	}
 }

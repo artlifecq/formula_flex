@@ -1,5 +1,4 @@
 package com.rpgGame.netData.backpack.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.backpack.message{
 	public class ReqTakeUpMessage extends Message {
 	
 		//掉落ID
-		private var _goodsId: long;
+		private var _goodsId: int;
 		
 		
 		/**
@@ -22,7 +21,7 @@ package com.rpgGame.netData.backpack.message{
 		 */
 		override protected function writing(): Boolean{
 			//掉落ID
-			writeLong(_goodsId);
+			writeShort(_goodsId);
 			return true;
 		}
 		
@@ -31,7 +30,7 @@ package com.rpgGame.netData.backpack.message{
 		 */
 		override protected function reading(): Boolean{
 			//掉落ID
-			_goodsId = readLong();
+			_goodsId = readShort();
 			return true;
 		}
 		
@@ -47,14 +46,14 @@ package com.rpgGame.netData.backpack.message{
 		 * get 掉落ID
 		 * @return 
 		 */
-		public function get goodsId(): long{
+		public function get goodsId(): int{
 			return _goodsId;
 		}
 		
 		/**
 		 * set 掉落ID
 		 */
-		public function set goodsId(value: long): void{
+		public function set goodsId(value: int): void{
 			this._goodsId = value;
 		}
 		

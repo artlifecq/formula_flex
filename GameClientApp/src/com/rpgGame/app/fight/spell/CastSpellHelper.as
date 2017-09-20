@@ -29,7 +29,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.EnumSkillId;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
-	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -47,7 +46,6 @@ package com.rpgGame.app.fight.spell
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -188,7 +186,7 @@ package com.rpgGame.app.fight.spell
 				//三连击的话直接发送请求
 				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(caseInfo.spellData.q_skillID)) 
 				{
-					caseInfo.targetServerID=null;//改成空放
+					caseInfo.targetID=0;//改成空放
 					caseInfo.releasePos.x=MainRoleManager.actor.x;
 					caseInfo.releasePos.y=MainRoleManager.actor.z;
 					requestReleaseSpell();
@@ -240,7 +238,7 @@ package com.rpgGame.app.fight.spell
 					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
 					
 					//Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
-					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
+					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetID);
 					
 					if(TrusteeshipManager.getInstance().tripleSkillCtrl.isLastTripleSkill(caseInfo.caseSpellData.q_skillID))
 					{
@@ -471,7 +469,6 @@ package com.rpgGame.app.fight.spell
 			}
 			var releaseRange : int = spellData.q_range_limit * SceneConfig.TILE_HEIGHT;
 //			var hurtRange : int = spellData.activeSpell.hurtRange;
-			var targetServerID : long = null;
 			var targetID:Number = 0;
 			var targetRole : SceneRole = null;
 			// 释放技能目标点
@@ -489,7 +486,6 @@ package com.rpgGame.app.fight.spell
                 if (SpellTargetType.SELF == spellData.q_target) 
 				{
                     //对自己施放的技能
-                    targetServerID = MainRoleManager.actorInfo.serverID;
                     targetID = MainRoleManager.actorID;
                     angle = 270 - MainRoleManager.actor.rotationY;
                     releaseTargetPos = new Point(selfPos.x, selfPos.y);
@@ -559,8 +555,6 @@ package com.rpgGame.app.fight.spell
                 targetRole = lockTarget;
                 var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
                 var keepSpacing : int = spellData.q_keep_spacing;
-                
-                targetServerID = (targetRole.data as BaseEntityData).serverID;
                 targetID = targetRole.id;
                 releaseTargetPos = new Point(targetRole.x, targetRole.z);
                 releasePos = new Point(selfPos.x, selfPos.y);
@@ -1124,7 +1118,6 @@ package com.rpgGame.app.fight.spell
 			var range : int =  Point.distance(releasePos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;
 			angle = (angle + 360) % 360;
-			castInfo.targetServerID = targetServerID;
 			castInfo.targetID = targetID;
 			castInfo.targetPos = releasePos;
 			castInfo.releasePos = releaseTargetPos;

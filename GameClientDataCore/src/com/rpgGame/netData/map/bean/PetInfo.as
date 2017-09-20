@@ -2,7 +2,6 @@ package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	import com.rpgGame.netData.structs.Position;
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -18,13 +17,13 @@ package com.rpgGame.netData.map.bean{
 	public class PetInfo extends Bean {
 	
 		//宠物唯一Id
-		private var _petId: long;
+		private var _petId: int;
 		
 		//宠物模板Id
 		private var _petModelId: int;
 		
 		//所有者ID
-		private var _ownerId: long;
+		private var _ownerId: int;
 		
 		//所有者名称
 		private var _ownerName: String;
@@ -53,11 +52,11 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function writing(): Boolean{
 			//宠物唯一Id
-			writeLong(_petId);
+			writeShort(_petId);
 			//宠物模板Id
 			writeShort(_petModelId);
 			//所有者ID
-			writeLong(_ownerId);
+			writeShort(_ownerId);
 			//所有者名称
 			writeString(_ownerName);
 			//宠物等阶
@@ -88,11 +87,11 @@ package com.rpgGame.netData.map.bean{
 		 */
 		override protected function reading(): Boolean{
 			//宠物唯一Id
-			_petId = readLong();
+			_petId = readShort();
 			//宠物模板Id
 			_petModelId = readShort();
 			//所有者ID
-			_ownerId = readLong();
+			_ownerId = readShort();
 			//所有者名称
 			_ownerName = readString();
 			//宠物等阶
@@ -122,14 +121,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 宠物唯一Id
 		 * @return 
 		 */
-		public function get petId(): long{
+		public function get petId(): int{
 			return _petId;
 		}
 		
 		/**
 		 * set 宠物唯一Id
 		 */
-		public function set petId(value: long): void{
+		public function set petId(value: int): void{
 			this._petId = value;
 		}
 		
@@ -152,14 +151,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 所有者ID
 		 * @return 
 		 */
-		public function get ownerId(): long{
+		public function get ownerId(): int{
 			return _ownerId;
 		}
 		
 		/**
 		 * set 所有者ID
 		 */
-		public function set ownerId(value: long): void{
+		public function set ownerId(value: int): void{
 			this._ownerId = value;
 		}
 		

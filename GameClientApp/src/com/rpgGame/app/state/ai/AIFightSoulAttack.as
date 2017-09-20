@@ -24,7 +24,7 @@ package com.rpgGame.app.state.ai
 	public class AIFightSoulAttack extends AIState
 	{
 		private var skill:Q_skill_model;
-		private var soulFightId:long;
+		private var soulFightId:int;
 		private var soulBroken:Boolean=true
 		public function AIFightSoulAttack()
 		{
@@ -61,7 +61,7 @@ package com.rpgGame.app.state.ai
 			if(skill==null||SkillCDManager.getInstance().getSkillHasCDTime(skill))//技能冷却中不能释放技能里
 				return false;
 			soulFightId=TrusteeshipFightSoulManager.getInstance().soulFightId;
-			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(soulFightId.ToGID()) as SceneRole);//攻击类型
+			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(soulFightId) as SceneRole);//攻击类型
 			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
 				return false;
 			return true;

@@ -1,6 +1,5 @@
 package com.rpgGame.netData.buff.message{
 	import com.rpgGame.netData.buff.bean.BuffInfo;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,10 +14,10 @@ package com.rpgGame.netData.buff.message{
 	public class ResAddBuffMessage extends Message {
 	
 		//来源Id
-		private var _sourceId: long;
+		private var _sourceId: int;
 		
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//战斗状态
 		private var _fightState: int;
@@ -32,9 +31,9 @@ package com.rpgGame.netData.buff.message{
 		 */
 		override protected function writing(): Boolean{
 			//来源Id
-			writeLong(_sourceId);
+			writeShort(_sourceId);
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//战斗状态
 			writeInt(_fightState);
 			//buff
@@ -47,9 +46,9 @@ package com.rpgGame.netData.buff.message{
 		 */
 		override protected function reading(): Boolean{
 			//来源Id
-			_sourceId = readLong();
+			_sourceId = readShort();
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//战斗状态
 			_fightState = readInt();
 			//buff
@@ -69,14 +68,14 @@ package com.rpgGame.netData.buff.message{
 		 * get 来源Id
 		 * @return 
 		 */
-		public function get sourceId(): long{
+		public function get sourceId(): int{
 			return _sourceId;
 		}
 		
 		/**
 		 * set 来源Id
 		 */
-		public function set sourceId(value: long): void{
+		public function set sourceId(value: int): void{
 			this._sourceId = value;
 		}
 		
@@ -84,14 +83,14 @@ package com.rpgGame.netData.buff.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		

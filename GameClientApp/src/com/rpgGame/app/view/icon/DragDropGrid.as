@@ -6,6 +6,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MouseListenerUtil;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -382,11 +383,17 @@ package com.rpgGame.app.view.icon
 		private function mouseOut():void
 		{
 			mouseIn = false;
+			if(_gridInfo.isUnlock&&!_gridInfo.unlockInfo){
+				setBg( GridBGType.CHORTCUT_2_MASK );
+			}
 		}
 		
 		private function mouseOver():void
 		{
 			mouseIn = true;
+			if(_gridInfo.isUnlock&&!_gridInfo.unlockInfo){
+				setBg( GridBGType.CHORTCUT_3_MASK );
+			}
 		}
 		
 		private function removeOverAndOut():void

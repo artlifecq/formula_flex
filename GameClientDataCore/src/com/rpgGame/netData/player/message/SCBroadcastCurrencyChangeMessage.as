@@ -1,5 +1,4 @@
 package com.rpgGame.netData.player.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.player.message{
 	public class SCBroadcastCurrencyChangeMessage extends Message {
 	
 		//角色ID
-		private var _personId: long;
+		private var _personId: int;
 		
 		//货币类型
 		private var _curType: int;
@@ -28,7 +27,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色ID
-			writeLong(_personId);
+			writeShort(_personId);
 			//货币类型
 			writeByte(_curType);
 			//货币值
@@ -41,7 +40,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色ID
-			_personId = readLong();
+			_personId = readShort();
 			//货币类型
 			_curType = readByte();
 			//货币值
@@ -61,14 +60,14 @@ package com.rpgGame.netData.player.message{
 		 * get 角色ID
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色ID
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		

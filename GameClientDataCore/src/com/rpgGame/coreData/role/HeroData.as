@@ -393,8 +393,8 @@ package com.rpgGame.coreData.role
 		 */
 		public static function setEnterEyeUserInfo(data : HeroData, info : PlayerInfo) : void
 		{
-			data.serverID = info.personId;
-			data.id = info.personId.ToGID();
+//			data.serverID = info.personId;
+			data.id = info.personId;
 			data.name = info.name;
 			
 			//			data.countryId = buffer.readVarint32();
