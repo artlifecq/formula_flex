@@ -135,7 +135,7 @@ package com.rpgGame.app.manager.guild
 				for(var i:int = 0;i<length;i++)
 				{
 					var menberinfo:GuildMemberInfo = _memberList[i];
-					if(MainRoleManager.isSelf(menberinfo.id.ToGID()))
+					if(MainRoleManager.isSelfByServerId(menberinfo.id))
 					{
 						_selfMemberInfo = menberinfo;
 						MainRoleManager.actorInfo.guildIsLeader=menberinfo.isLeader;
@@ -883,7 +883,7 @@ package com.rpgGame.app.manager.guild
 		/** 通知玩家帮派Id改变 */
 		public function changeGuildId(msg:ResGuildChangeGuildIdMessage):void
 		{
-			if(MainRoleManager.isSelf(msg.playerId.ToGID()))
+			if(MainRoleManager.isSelfByServerId(msg.playerId))
 			{
 				ClientConfig.loginData.guildId = msg.guildId;
 				ClientConfig.loginData.guildMemberType = msg.guildMemberType;
