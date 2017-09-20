@@ -101,7 +101,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResTakeUpSuccessMessage(msg:ResTakeUpSuccessMessage):void
 		{
-			var role : SceneRole = SceneManager.getScene().getSceneObjByID(msg.goodsId.ToGID(), SceneCharType.DROP_GOODS) as SceneRole;
+			var role : SceneRole = SceneManager.getScene().getSceneObjByID(msg.goodsId, SceneCharType.DROP_GOODS) as SceneRole;
 			
 			var cam:Camera3D = SceneManager.scene.view3d.camera;
 			var point:Point = new Point(role.x-cam.x,cam.y-role.z);
