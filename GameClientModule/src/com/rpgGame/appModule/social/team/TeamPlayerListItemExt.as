@@ -50,7 +50,7 @@ package  com.rpgGame.appModule.social.team
 			this._data=team as MapPlayerInfo;
 			this._skin.bg1.visible=index%2==0;
 			this._skin.bg2.visible=!_skin.bg1.visible;
-			this._skin.selectUsBg.visible=MainRoleManager.actorID==_data.playerid.ToGID();
+			this._skin.selectUsBg.visible=MainRoleManager.serverGid==_data.playerid.ToGID();
 			_skin.lbName.text=_data.playername;
 			_skin.lbLevel.text=_data.playerlv+NotifyCfgData.getNotifyTextByID(61019);
 			_skin.lbZhanli.text=_data.fightPower+"";

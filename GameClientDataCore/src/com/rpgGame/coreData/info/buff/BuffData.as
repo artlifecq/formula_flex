@@ -27,15 +27,15 @@ package com.rpgGame.coreData.info.buff
 		private var _specialData : Object = null;
 		private var _description : String = "";
 		
-		private var _totalTime:int = 0;
-		private var _disappearTime : int = 0;
+		private var _totalTime:Number = 0;
+		private var _disappearTime : Number = 0;
 		private var _curtStackCount : uint = 0;
 		private var _buffInfo:BuffInfo;
 		
 		private var _clientData:Object=null;
 		
 		private var _srcRole:BaseRole;
-		private var _endTime:int;
+		private var _endTime:Number;
 		public function BuffData(roleId : Number) : void
 		{
 			_roleId = roleId;
@@ -149,8 +149,10 @@ package com.rpgGame.coreData.info.buff
 			_buffId = _buffInfo.buffId.ToGID();
 			cfgId = _buffInfo.buffModelId;
 			_data=BuffStateDataManager.getData(cfgId);
-			_disappearTime = _buffInfo.remainTime;
-			_totalTime = _buffInfo.totalTime;
+			//后端发的秒
+			_disappearTime = _buffInfo.remainTime*1000;
+			//后端发的秒
+			_totalTime = _buffInfo.totalTime*1000;
 			_curtStackCount = _buffInfo.overlay;
 			_endTime=getTimer()+_disappearTime;
 		}
@@ -255,7 +257,7 @@ package com.rpgGame.coreData.info.buff
 		}
 
 		/**结束时间，绝对的**/
-		public function get endTime():int
+		public function get endTime():Number
 		{
 			return _endTime;
 		}

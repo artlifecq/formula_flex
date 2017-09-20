@@ -9,6 +9,8 @@ package com.rpgGame.app.ui.main.buff
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.RoleData;
 	
+	import app.message.EnumBuff;
+	
 	import feathers.controls.StateSkin;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -22,7 +24,7 @@ package com.rpgGame.app.ui.main.buff
 	 */
 	public class BuffBar extends SkinUI
 	{
-		private var roleId:int;
+
 	
 		private var _buffSp:BuffGridCon;
 		private var _debuffSp:BuffGridCon;
@@ -49,12 +51,15 @@ package com.rpgGame.app.ui.main.buff
 			initEvent();
 			this.addChild(_buffSp);
 			this.addChild(_debuffSp);
-			roleId=MainRoleManager.actor.id;
 			var buffList : Vector.<BuffData>=(MainRoleManager.actor.data as RoleData).buffList;
 			var num:int=buffList.length;
 			for(var i:int=0;i<num;i++)
 			{
 				var data:BuffData=buffList[i];
+				if (EnumBuff.isVip(data.cfgId)) 
+				{
+					return;
+				}
 				if(data._data.q_effect_time!=-1)
 					createIcon(data);
 			}
@@ -85,7 +90,7 @@ package com.rpgGame.app.ui.main.buff
 		}
 		private function removeBuff(buffData:BuffData):void
 		{
-			if(buffData.roleId!=roleId||buffData._data.q_effect_time==-1){
+			if(buffData.roleId!=MainRoleManager.actorID||buffData._data.q_effect_time==-1){
 				return;
 			}
 			removeForDatas(buffData);
@@ -109,10 +114,13 @@ package com.rpgGame.app.ui.main.buff
 		
 		private function addBuff(buffData:BuffData):void
 		{
-			if(buffData.roleId!=roleId||buffData._data.q_effect_time==-1){
+			if(buffData.roleId!=MainRoleManager.actorID||buffData._data.q_effect_time==-1){
 				return;
 			}
-		
+			if (EnumBuff.isVip(buffData.cfgId)) 
+			{
+				return;
+			}
 			createIcon(buffData);
 		}
 		
