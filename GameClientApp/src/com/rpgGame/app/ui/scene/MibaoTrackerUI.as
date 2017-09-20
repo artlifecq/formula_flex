@@ -16,9 +16,14 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.cfg.MibaoCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
@@ -98,11 +103,16 @@ package com.rpgGame.app.ui.scene
 		{
 			super.onHide();
 			removeEvent();
+			hidePanel();
 			icoList1Group.clear();
 			icoList1Group=null;
 			icoList2Group.clear();
 			icoList2Group=null;
 			alertOk=null;
+		}
+		private function hidePanel():void
+		{
+			AppManager.hideApp(AppConstant.ACTIVETY_MIBAO_RESULT);
 		}
 		private function addEvent():void
 		{
@@ -353,6 +363,8 @@ package com.rpgGame.app.ui.scene
 			hitList[3].lbNum.color=16771584;
 			
 			alertOk=new AlertSetInfo(LangAlertInfo.MIBAO_EXIT_SURE);
+			TipTargetManager.show( _skin.btnMsg,TargetTipsMaker.makeSimpleTextTips(ActivetyCfgData.getActInfoTextById(7)));
+		
 		}
 		private function outToGame():void
 		{

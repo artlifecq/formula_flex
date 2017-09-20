@@ -1,8 +1,7 @@
 package com.rpgGame.coreData.cfg.active
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
-	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
-	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
 	import flash.utils.ByteArray;
 	
@@ -161,6 +160,33 @@ package com.rpgGame.coreData.cfg.active
 		public static function getActInfoById(id:int):ActivetyInfo
 		{
 			return _infoMap.getValue(id);
+		}
+		
+		public static function getActInfoTextById(id:int):String
+		{
+			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(id);
+			if(info==null)
+				return "";
+			var desObj:Array=JSONUtil.decode(info.actCfg.q_text);
+			
+			if(!desObj){
+				desObj=[];
+			}
+			var num:int=desObj.length;
+			var text:String="";
+			for(var i:int=0;i<num;i++){
+				var obj:Object=desObj[i];
+				var des:String=obj.des;
+				if(obj.reId){
+					var list:Array=des.split("$");
+					text+=list[0];
+					text+=list[1]+"\n";
+				}else{
+					text+=obj.des+"\n";
+				}
+			}
+			
+			return text;
 		}
 	}
 }

@@ -17,11 +17,17 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LijinCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daysdown_gold;
@@ -67,15 +73,9 @@ package com.rpgGame.app.ui.scene
 	{
 		
 		private var _skin:Active_LiJin_Skin;
-		private var _tipsSkin:Active_LiJin_Tips;
-		private var tips:Sprite;
 		private var tween:TweenMax;
 		private var skinList:Array;
-		
-		/*private var ico1List:Vector.<IconCDFace>;
-		private var icoBg1List:Vector.<UIAsset>;
-		private var ico2List:Vector.<IconCDFace>;
-		private var icoBg2List:Vector.<UIAsset>;*/
+
 		private var icoList1Group:RewardGroup;
 		private var icoList2Group:RewardGroup;
 		private var killButList:Vector.<SkinnableContainer>;
@@ -85,18 +85,12 @@ package com.rpgGame.app.ui.scene
 		public function LijinTrackerUI()
 		{
 			_skin=new Active_LiJin_Skin();
-			_tipsSkin=new Active_LiJin_Tips();
 			super(_skin);
 			initUI();
 		}
 		
 		private function initUI():void
 		{
-			tips=_tipsSkin.toSprite();
-			tips.visible=false;
-			_skin.qiang_box.addChild(tips);
-			tips.x=-225;
-			tips.y=50;
 			var i:int;
 			
 			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6);
@@ -128,6 +122,9 @@ package com.rpgGame.app.ui.scene
 			alertOk=new AlertSetInfo(LangAlertInfo.LIJIN_EXIT_SURE);
 			
 			setUisite();
+			
+			TipTargetManager.show( _skin.btnMsg,TargetTipsMaker.makeSimpleTextTips(ActivetyCfgData.getActInfoTextById(12)));
+			
 			
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -192,12 +189,12 @@ package com.rpgGame.app.ui.scene
 			hideReword();
 			hideGotargetInfo();
 			setCashgift(0);
-			setTipsText();
 			allFilish();;
 		}
 		override protected function onHide():void
 		{
 			super.onHide();
+			hidePanel();
 			removeEvent();
 			icoList1Group.clear();
 			icoList1Group=null;
@@ -207,6 +204,14 @@ package com.rpgGame.app.ui.scene
 			tween=null;
 			alertOk=null;
 		}
+		private function hidePanel():void
+		{
+			AppManager.hideApp(AppConstant.ACTIVETY_LIJIN_SCORES);
+			AppManager.hideApp(AppConstant.ACTIVETY_LIJIN_TIMER);
+			AppManager.hideApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
+			AppManager.hideApp(AppConstant.ACTIVETY_LIJIN_RESULT);
+		}
+		
 		private function addEvent():void
 		{
 			//EventManager.addEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
@@ -215,8 +220,6 @@ package com.rpgGame.app.ui.scene
 			TaskUtil.addLabelEvet(_skin.lbName2);
 			TaskUtil.addLabelEvet(_skin.lbPaiHang);
 			TaskUtil.addLabelEvet(_skin.lbTo);
-			_skin.lbName2.addEventListener(TouchEvent.TOUCH, onTouchTips);
-			_skin.lbName.addEventListener(TouchEvent.TOUCH, onTouchTips);
 			EventManager.addEvent(ActivityEvent.LIJIN_CASHGIFT_CHANGE,setCashgift);
 			EventManager.addEvent(ActivityEvent.LIJIN_ACTIVITY_TIME,setTime);
 			EventManager.addEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,setQianduoType);
@@ -235,8 +238,6 @@ package com.rpgGame.app.ui.scene
 			TaskUtil.removeLabelEvet(_skin.lbName2);
 			TaskUtil.removeLabelEvet(_skin.lbPaiHang);
 			TaskUtil.removeLabelEvet(_skin.lbTo);
-			_skin.lbName2.removeEventListener(TouchEvent.TOUCH, onTouchTips);
-			_skin.lbName.removeEventListener(TouchEvent.TOUCH, onTouchTips);
 			EventManager.removeEvent(ActivityEvent.LIJIN_CASHGIFT_CHANGE,setCashgift);
 			EventManager.removeEvent(ActivityEvent.LIJIN_ACTIVITY_TIME,setTime);
 			EventManager.removeEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,setQianduoType);
@@ -246,27 +247,6 @@ package com.rpgGame.app.ui.scene
 			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			
-		}
-		
-		private var isMouseOut : Boolean = true;
-		private function onTouchTips(e:TouchEvent):void
-		{
-			var target : Label  = e.currentTarget as Label;
-			var touch : Touch;
-			touch = e.getTouch(target);
-			if (touch == null&&target!= null )
-			{
-				isMouseOut = true;
-				tips.visible=false;
-				return;
-			}
-			
-			touch = e.getTouch(target, TouchPhase.HOVER);
-			if (touch != null&&target!= null && isMouseOut)
-			{
-				isMouseOut = false;
-				tips.visible=true;
-			}
 		}
 		
 		private function killWalkBut(num:int,key:int):void
@@ -517,12 +497,7 @@ package com.rpgGame.app.ui.scene
 			_skin.numLiJin.label=""+num;
 			
 		}
-		/**设置tips文字*/
-		private function setTipsText():void
-		{
-			_tipsSkin.lbName.htmlText="盗宝小怪";
-			_tipsSkin.lbTip.htmlText="1.活动开启则出现第一波盗宝小怪，<br>第<font color='#5DBD37'>5、10、15</font>分钟刷新。<br>2.攻击盗宝小怪必掉礼金。<br>3.击杀盗宝小怪额外获得<font color='#5DBD37'>5-10礼金</font>。";
-		}
+		
 		private function setIcon(icon:IconCDFace,tiemId:int,num:int,bg:UIAsset=null):void
 		{
 			var item:Q_item=ItemConfig.getQItemByID(tiemId);

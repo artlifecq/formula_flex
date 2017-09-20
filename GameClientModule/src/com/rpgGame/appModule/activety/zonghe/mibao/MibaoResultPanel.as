@@ -60,6 +60,7 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 		override public function hide():void
 		{
 			super.hide();
+			TimerServer.remove(updateTime);
 			//TweenLite.killDelayedCallsTo(hide);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 

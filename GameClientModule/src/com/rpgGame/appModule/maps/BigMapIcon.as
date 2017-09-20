@@ -48,7 +48,15 @@ package com.rpgGame.appModule.maps
 			
 			this.x = point.x;
 			this.y = point.y;
-			setIconBit(_icoData.type);
+			if(_icoData.img!="")
+			{
+				setOtherIco();
+			}
+			else
+			{
+				setIconBit(_icoData.type);
+			}
+			
 		}
 		public function updatePos(pointx:Number,pointy:Number) : void 
 		{
