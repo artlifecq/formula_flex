@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.taskbar
 {
-	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -9,9 +8,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.utils.TaskUtil;
-	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;

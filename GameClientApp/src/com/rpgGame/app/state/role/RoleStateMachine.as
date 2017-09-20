@@ -37,7 +37,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.FastingState;
 	import com.rpgGame.app.state.role.control.FightLeaveEnterBuffState;
 	import com.rpgGame.app.state.role.control.FlyUpState;
-	import com.rpgGame.app.state.role.control.HeadBleedBuffState;
 	import com.rpgGame.app.state.role.control.HiddingState;
 	import com.rpgGame.app.state.role.control.HunLuanState;
 	import com.rpgGame.app.state.role.control.HurtState;
