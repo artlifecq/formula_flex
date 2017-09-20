@@ -12,7 +12,16 @@ package org.mokylin.skin.app.vip
 	 */
 	public class Tips_Vip extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
 		public var imgBG:feathers.controls.UIAsset;
+
+		public var lbCont1:feathers.controls.Label;
+
+		public var lbCont2:feathers.controls.Label;
+
+		public var lbName:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -23,9 +32,9 @@ package org.mokylin.skin.app.vip
 			super();
 			
 			this.currentState = "normal";
-			this.height = 110;
+			this.height = 89;
 			this.width = 206;
-			this.elementsContent = [imgBG_i(),__Tips_Vip_Label1_i(),__Tips_Vip_Label2_i(),__Tips_Vip_Label3_i(),__Tips_Vip_Label4_i(),__Tips_Vip_Label5_i()];
+			this.elementsContent = [imgBG_i(),lbName_i(),lbCont1_i(),lbCont2_i()];
 			
 			states = {
 			};
@@ -36,75 +45,56 @@ package org.mokylin.skin.app.vip
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Tips_Vip_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "墨者令";
-			temp.color = 0xE3D9BF;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
-			temp.width = 102;
-			temp.x = 12;
-			temp.y = 11;
-			return temp;
-		}
-
-		private function __Tips_Vip_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "增强属性：";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 13;
-			temp.y = 49;
-			return temp;
-		}
-
-		private function __Tips_Vip_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "获得路径：";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 13;
-			temp.y = 68;
-			return temp;
-		}
-
-		private function __Tips_Vip_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "气血、攻击、防御";
-			temp.color = 0x00FF33;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 120;
-			temp.x = 78;
-			temp.y = 49;
-			return temp;
-		}
-
-		private function __Tips_Vip_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "购买VIP自动佩戴";
-			temp.color = 0x00FF33;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 120;
-			temp.x = 78;
-			temp.y = 68;
-			return temp;
-		}
-
 		private function imgBG_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBG = temp;
 			temp.name = "imgBG";
-			temp.height = 110;
+			temp.height = 89;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 206;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lbCont1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbCont1 = temp;
+			temp.name = "lbCont1";
+			temp.text = "增强属性：";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 11;
+			temp.y = 34;
+			return temp;
+		}
+
+		private function lbCont2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbCont2 = temp;
+			temp.name = "lbCont2";
+			temp.text = "获得路径：";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 11;
+			temp.y = 62;
+			return temp;
+		}
+
+		private function lbName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbName = temp;
+			temp.name = "lbName";
+			temp.fontSize = 14;
+			temp.text = "墨者令";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 10;
 			return temp;
 		}
 
