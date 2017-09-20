@@ -10,6 +10,8 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	
+	import away3d.materials.compilation.SuperShaderCompiler;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.LunJian_Skin;
 	
@@ -35,6 +37,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onShow() : void
 		{
+			super.onShow();
 			EventManager.addEvent(DungeonEvent.UPDATE_LUNJIAN_TIME,getLunJianTime);
 			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
@@ -90,7 +93,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.sec_subbut1:
-					DungeonSender.reqQuitDungeon();
+					DungeonSender.reqQuitDungeon(sceneId);
 					break;
 			}
 		}

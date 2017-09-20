@@ -2,6 +2,7 @@ package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -133,8 +134,12 @@ package com.rpgGame.app.state.role.control
 					transition(RoleStateType.ACTION_IDLE);
 					
 				}
-				//落地特效
-				SpellAnimationHelper.createSceneEffect(EffectUrl.EFFECT_JUMPDOWN,RenderUnitID.JUMP_DOWN,SceneCharType.SCENE_DEST_EFFECT,_machine.owner.x,_machine.owner.z);
+				if ((_machine.owner as SceneRole).isMainChar) 
+				{
+					//落地特效
+					SpellAnimationHelper.createSceneEffect(EffectUrl.EFFECT_JUMPDOWN,RenderUnitID.JUMP_DOWN,SceneCharType.SCENE_DEST_EFFECT,_machine.owner.x,_machine.owner.z);
+				}
+				
 				
 			}
 		}

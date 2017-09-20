@@ -73,7 +73,7 @@ package com.rpgGame.appModule.mount
 			refeashSpellIcon();
 			refeashExpHandler();
 			initEvent();
-			eft=this.playInter3DAt(ClientConfig.getEffect("ui_zuoqizhandouli"),_skin.grpZhanli.x+110,_skin.grpZhanli.y+75,0);
+			eft=this.playInter3DAt(ClientConfig.getEffect("ui_zuoqizhandouli"),_skin.grpZhanli.x+100,_skin.grpZhanli.y+75,0);
 			_skin.container.addChild(_skin.grpZhanli);
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -364,7 +364,11 @@ package com.rpgGame.appModule.mount
 			_mountupContent.isAutoing = false;
 			_mountupContent.hide();
 			super.hide();
-			eft.stop();
+			if(eft){
+				eft.stop();
+				eft.dispose();
+				eft=null;
+			}
 		}
 	}
 }

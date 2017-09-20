@@ -2,6 +2,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 {
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangUI;
 	
@@ -22,7 +23,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	 *@author dik
 	 *2017-5-11下午5:43:03
 	 */
-	public class LunJianFailPanel extends SkinUIPanel
+	public class LunJianFailPanel extends ExitScenePanel
 	{
 		private var _skin:FuBenJieSuan2_Shibai;
 		private var leftTime:int;
@@ -47,7 +48,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			super.onTouchTarget(target);
 			if(target==_skin.btnEixt){
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 				this.hide();
 			}
 		}
@@ -73,7 +74,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			if(leftTime<=0)
 			{
 				TimerServer.remove(updateTime);
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 				this.hide();
 			}
 		}

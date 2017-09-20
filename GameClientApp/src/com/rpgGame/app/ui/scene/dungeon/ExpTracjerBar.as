@@ -3,34 +3,24 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
-	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.JingYan_Skin;
-	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
-	import starling.animation.IAnimatable;
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
 	import utils.TimerServer;
@@ -96,6 +86,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onShow() : void
 		{			
+			super.onShow();
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
 			EventManager.addEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
@@ -297,7 +288,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.sec_subbut1:
-					DungeonSender.reqQuitDungeon();
+					DungeonSender.reqQuitDungeon(sceneId);
 					break;
 			}
 		}

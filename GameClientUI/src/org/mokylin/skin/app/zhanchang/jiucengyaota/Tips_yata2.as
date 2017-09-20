@@ -28,7 +28,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			super();
 			
 			this.currentState = "normal";
-			this.height = 150;
+			this.height = 165;
 			this.width = 380;
 			this.elementsContent = [imgBG_i(),skinTips_i()];
 			
@@ -46,7 +46,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBG = temp;
 			temp.name = "imgBG";
-			temp.height = 150;
+			temp.height = 165;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 380;
 			temp.x = 0;

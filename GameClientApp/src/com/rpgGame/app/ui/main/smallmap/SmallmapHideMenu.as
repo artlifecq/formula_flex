@@ -51,6 +51,7 @@ package com.rpgGame.app.ui.main.smallmap
 		public function close():void
 		{
 			GameSettingManager.savaMainToServer();
+			this.visible=false;
 		}
 	}
 }

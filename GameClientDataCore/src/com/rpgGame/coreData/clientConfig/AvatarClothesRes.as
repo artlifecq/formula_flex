@@ -16,8 +16,10 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  资源名称 */
 		public var name:String;
-		 /**  身体资源名称 */
-		public var bodyRes:String;
+		 /**  身体资源名称(男) */
+		public var bodyManRes:String;
+		 /**  身体资源名称（女） */
+		public var bodyWomanRes:String;
 		 /**  特效资源路径 */
 		public var effectRes:String;
 		 /**  武器资源ID(作废) */

@@ -72,7 +72,8 @@ package com.rpgGame.app.manager
 		public var nextSpell:Q_skill_model;
 		private var _isNormalSpell:Boolean = false;
 		private var _isAutoWalking:Boolean=false;
-		private var _myFighterCtrl:ControlMainPlayerFight;
+		private var _myFighterCtrl:ControlMainPlayerFight=new ControlMainPlayerFight();
+		
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -89,7 +90,7 @@ package com.rpgGame.app.manager
 			_stateMachine = new AIStateMachine(role);
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
 			_tripleSkillCtrl=new ControlTripleSkill();
-			_myFighterCtrl=new ControlMainPlayerFight();
+			
 			TrusteeshipFightSoulManager.getInstance().setup(role);
 			PickAutoManager.getInstance().setup(role);
 		}

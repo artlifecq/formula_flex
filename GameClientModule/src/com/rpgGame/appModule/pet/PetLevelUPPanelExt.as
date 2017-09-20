@@ -7,9 +7,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.pet.PetShowData;
-	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.sender.PetSender;
-	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -26,7 +24,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
@@ -106,7 +103,7 @@ package com.rpgGame.appModule.pet
 				var vaule:int=_data.rankExp-_skin.barJindu.value;
 				if(vaule!=0){
 					var str:String=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"+"+vaule);
-					FloatingText.showUp(str,_skin.lbJindu);
+//					FloatingText.showUp(str,_skin.lbJindu);
 				}
 			}
 			_skin.barJindu.value=_data.rankExp;

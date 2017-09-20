@@ -63,6 +63,10 @@ package com.rpgGame.coreData.enum
 		public static const JIXIANTIAOZHAN:int=210;
 		/** 七日豪礼 **/
 		public static const QIRIHAOLI:int=20001;
+		/** 福利大厅 **/
+		public static const FULIDATING:int=20000;
+		/** 在线奖励 **/
+		public static const ZAIXIAN:int=20002;
 		public function EmMainBtnID()
 		{
 		}

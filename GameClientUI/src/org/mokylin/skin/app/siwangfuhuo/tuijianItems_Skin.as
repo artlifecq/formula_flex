@@ -60,7 +60,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "uiName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/siwangfuhuo/name/1.png";
+			temp.styleName = "ui/app/siwangfuhuo/name/2.png";
 			temp.x = 40;
 			temp.y = 11;
 			return temp;
@@ -73,7 +73,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "ui_ico";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/siwangfuhuo/icon/1.png";
+			temp.styleName = "ui/app/siwangfuhuo/icon/2.png";
 			temp.x = 19;
 			temp.y = 56;
 			return temp;

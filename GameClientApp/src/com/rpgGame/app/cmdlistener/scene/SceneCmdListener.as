@@ -303,7 +303,7 @@ package com.rpgGame.app.cmdlistener.scene
 			sculp.modleId = info.modelId;
 			sculp.name = info.playerName;
 			sculp.roleId = info.playerId;
-			sculp.updataTopType(info.topType);
+			sculp.updataTopType(info.topType,info.title);
 			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
 			sculp.avatarRes = qData.q_body_res;
 			SceneRoleManager.getInstance().createSculpture(sculp);
@@ -450,6 +450,7 @@ package com.rpgGame.app.cmdlistener.scene
 			//			playerData.pkMode = pkMode;
 			playerData.line = line;
 			playerData.sceneSequence = 0;
+			playerData.verityMapId=msg.verityMapId;
 			
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
 
@@ -800,7 +801,7 @@ package com.rpgGame.app.cmdlistener.scene
 			sculp.modleId = info.modelId;
 			sculp.name = info.playerName;
 			sculp.roleId = info.playerId;
-			sculp.updataTopType(info.topType);
+			sculp.updataTopType(info.topType,info.title);
 			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
 			sculp.avatarRes = qData.q_body_res;
 			sculp.x = info.position.x;

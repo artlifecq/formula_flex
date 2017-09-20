@@ -1,11 +1,14 @@
 package com.rpgGame.app.ui.scene
 {
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import feathers.controls.StateSkin;
 	
 	import gs.TweenMax;
+	
+	import org.game.netCore.data.long;
 	
 	import starling.display.DisplayObject;
 	
@@ -17,6 +20,11 @@ package com.rpgGame.app.ui.scene
 	public class SceneTrackerUI extends SkinUI
 	{
 		private var tween:TweenMax;
+		
+		/**
+		 *进入场景时的唯一id
+		 */
+		protected var sceneId:long;
 		
 		public function SceneTrackerUI(skin:StateSkin=null)
 		{
@@ -34,6 +42,18 @@ package com.rpgGame.app.ui.scene
 					setBoxState(true);
 					break;
 			}
+		}
+		
+		override protected function onShow() : void
+		{
+			super.onShow();
+			sceneId=MainRoleManager.actorInfo.verityMapId;
+		}
+		
+		override protected function onHide() : void
+		{
+			super.onHide();
+			sceneId=null;
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

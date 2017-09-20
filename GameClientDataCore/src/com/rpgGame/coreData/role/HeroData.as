@@ -30,6 +30,8 @@ package com.rpgGame.coreData.role
 	{
 		/** 地图ID */
 		public var mapID : int;
+		/** 地图唯一后台给的ID */
+		public var verityMapId: long;
 		/** 上一个地图ID */
 		public var preMapID : int;
 		/** 职业 **/

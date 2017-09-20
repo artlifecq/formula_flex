@@ -25,6 +25,8 @@ package org.mokylin.skin.app.fulidating
 
 		public var uiName:feathers.controls.UIAsset;
 
+		public var uiOk:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -36,7 +38,7 @@ package org.mokylin.skin.app.fulidating
 			this.currentState = "normal";
 			this.height = 383;
 			this.width = 184;
-			this.elementsContent = [__Item_Zaixian_UIAsset1_i(),uiName_i(),icon_i(),lb_name_i(),btnOK_i()];
+			this.elementsContent = [__Item_Zaixian_UIAsset1_i(),uiName_i(),icon_i(),lb_name_i(),btnOK_i(),uiOk_i()];
 			
 			states = {
 			};
@@ -106,6 +108,19 @@ package org.mokylin.skin.app.fulidating
 			temp.styleName = "ui/app/fulidating/word/5fen.png";
 			temp.x = 47;
 			temp.y = 52;
+			return temp;
+		}
+
+		private function uiOk_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOk = temp;
+			temp.name = "uiOk";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/yilingqu3.png";
+			temp.x = 47;
+			temp.y = 304;
 			return temp;
 		}
 

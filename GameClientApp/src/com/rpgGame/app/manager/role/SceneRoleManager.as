@@ -125,6 +125,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
+			
 			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
 			role.dialogFace=BubbleDialogFace.create(role);
@@ -156,7 +157,9 @@ package com.rpgGame.app.manager.role
 			
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;
+			role.isInViewDistance=true;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
+			role.headFace.show();
 			// 在换装时还未把role添加到场景 添加的buff无效
 			if (data.buffList.length > 0) {
 				role.buffSet.updateBuffEffects();
@@ -774,11 +777,14 @@ package com.rpgGame.app.manager.role
 			{
 				return fightSoulRole;
 			}
+			
 			fightSoulRole = SceneRole.create(SceneCharType.FIGHT_SOUL, owner.id);
+			
 			var roleData:RoleData = new RoleData(RoleType.TYPE_FIGHT_SOUL);
 			roleData.ownerId = owner.id;
 			roleData.id = owner.id;
 			roleData.name = "";
+			
 			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
 			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 			
@@ -796,7 +802,7 @@ package com.rpgGame.app.manager.role
 			fightSoulRole.setScale(model.q_sceneScale/100);
 			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
 			fightSoulRole.rotationY = 0;
-			SceneManager.addSceneObjToScene(fightSoulRole, false);
+			SceneManager.addSceneObjToScene(fightSoulRole, true);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 			fightSoulFollowAnimator.radius = model.q_radius;
 			owner.setRenderAnimator(fightSoulFollowAnimator);

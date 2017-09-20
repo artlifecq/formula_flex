@@ -58,6 +58,8 @@ package org.mokylin.skin.mainui.map
 
 		public var btnWeb:feathers.controls.Button;
 
+		public var gHide:feathers.controls.Group;
+
 		public var grp_cont:feathers.controls.Group;
 
 		public var lbLocation:feathers.controls.Label;
@@ -152,8 +154,8 @@ package org.mokylin.skin.mainui.map
 			btnHide = temp;
 			temp.name = "btnHide";
 			temp.styleClass = org.mokylin.skin.mainui.map.button.ButtonYincang;
-			temp.x = 35;
-			temp.y = 156;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -273,6 +275,17 @@ package org.mokylin.skin.mainui.map
 			return temp;
 		}
 
+		private function gHide_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gHide = temp;
+			temp.name = "gHide";
+			temp.x = 35;
+			temp.y = 156;
+			temp.elementsContent = [btnHide_i(),uiUp_i(),uiSelect_i()];
+			return temp;
+		}
+
 		private function grp_cont_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -280,7 +293,7 @@ package org.mokylin.skin.mainui.map
 			temp.name = "grp_cont";
 			temp.x = 0;
 			temp.y = 27;
-			temp.elementsContent = [UIMap_i(),__map_Skin_UIAsset1_i(),lbTime_i(),lbLocation_i(),btnMail_i(),btnGm_i(),btnSet_i(),btnHide_i(),btnWeb_i(),btnSound_i(),btnSMax_i(),btnSMin_i(),btnMap_i(),btnSelect_i(),btnPaiHang_i(),__map_Skin_UIAsset2_i(),lbName_i(),uiUp_i(),uiSelect_i()];
+			temp.elementsContent = [UIMap_i(),__map_Skin_UIAsset1_i(),lbTime_i(),lbLocation_i(),btnMail_i(),btnGm_i(),btnSet_i(),btnWeb_i(),btnSound_i(),btnSMax_i(),btnSMin_i(),btnMap_i(),btnSelect_i(),btnPaiHang_i(),__map_Skin_UIAsset2_i(),lbName_i(),gHide_i()];
 			return temp;
 		}
 
@@ -342,8 +355,8 @@ package org.mokylin.skin.mainui.map
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/map/button/yincang/select1.png";
-			temp.x = 35;
-			temp.y = 156;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -355,8 +368,8 @@ package org.mokylin.skin.mainui.map
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/map/button/yincang/up1.png";
-			temp.x = 35;
-			temp.y = 156;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

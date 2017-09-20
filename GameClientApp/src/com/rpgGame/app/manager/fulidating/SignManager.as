@@ -1,11 +1,10 @@
 package com.rpgGame.app.manager.fulidating
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.ServerActiveEvent;
-	import com.rpgGame.coreData.cfg.VipCfg;
-	import com.rpgGame.coreData.clientConfig.Q_vip;
+	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.coreData.info.fulidating.SignVO;
 	import com.rpgGame.netData.sign.message.ResSendSignInfoToClientMessage;
 	import com.rpgGame.netData.sign.message.ResSendSignResultToClientMessage;
@@ -126,6 +125,7 @@ package com.rpgGame.app.manager.fulidating
 			_signVO.dayList = msg.signInfo.dayList;
 			_signVO.getedSignReward = msg.signInfo.sumList;
 			_signVO.openServerTime=new Date(msg.signInfo.openTime.fValue*1000);
+			MainButtonManager.setActivityPointNumButton(EmMainBtnID.FULIDATING,Mgr.dengjiMgr.chackCanGetNum());
 			EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SIGN_GETINFOS);
 		}
 		
@@ -135,8 +135,16 @@ package com.rpgGame.app.manager.fulidating
 			if(msg.signResult > 0)
 			{
 				_signVO.dayList.push( msg.signResult );
+				MainButtonManager.setActivityPointNumButton(EmMainBtnID.FULIDATING,Mgr.dengjiMgr.chackCanGetNum());
 				EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_SIGN_GETINFOS);
 			}
+		}
+		
+		public function chackNot():Boolean
+		{
+			var nowDay:int=SystemTimeManager.sysDateTime.date;
+			if(!signVO.dayIsSign( nowDay )) return true;
+			return false;
 		}
 		
 		/**VIP额外签到领取反馈*/

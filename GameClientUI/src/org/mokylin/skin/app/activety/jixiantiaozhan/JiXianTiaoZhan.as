@@ -311,7 +311,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.text = "暂 无";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
+			temp.underline = false;
 			temp.width = 181;
 			temp.x = 161;
 			temp.y = 372;

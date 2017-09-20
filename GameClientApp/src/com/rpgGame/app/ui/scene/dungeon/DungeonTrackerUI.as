@@ -21,6 +21,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		private var tween:TweenMax;
 		private var gTime : GameTimer;
 		private var techTime:Number;
+		
 		public function DungeonTrackerUI(skin:StateSkin=null)
 		{
 			super(skin);

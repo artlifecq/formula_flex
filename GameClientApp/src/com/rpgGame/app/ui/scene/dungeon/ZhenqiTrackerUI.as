@@ -1,46 +1,34 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
-	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
-	import com.rpgGame.coreData.clientConfig.Q_zone;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
-	import com.rpgGame.netData.zone.bean.KillMonsterInfo;
 	
 	import flash.geom.Point;
 	
 	import feathers.controls.SkinnableContainer;
-	import feathers.utils.filter.GrayFilter;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.ZhenQi_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
 	import utils.TimerServer;
@@ -147,7 +135,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function zoneOutToGame():void
 		{
-			DungeonSender.reqQuitDungeon();
+			DungeonSender.reqQuitDungeon(sceneId);
 		}
 		private function addEvent():void
 		{

@@ -88,13 +88,8 @@ package com.rpgGame.appModule.role
 		
 		private function onToBuy():void
 		{
-			if(_index<GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex)
+			if(_buyNum==1&&_index<GoodsContainerMamager.getMrg(_itemContainerID).curUnlockIndex)
 			{
-				//				if(_buyPice>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
-				//				{
-				//					NoticeManager.showNotifyById(2008);
-				//					return;
-				//				}
 				ItemSender.reqOpenTimeCellMessage(_type);
 			}
 			else{

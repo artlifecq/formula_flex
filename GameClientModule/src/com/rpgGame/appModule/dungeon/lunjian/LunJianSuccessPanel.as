@@ -8,6 +8,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
@@ -30,7 +31,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	 *@author dik
 	 *2017-5-11下午4:53:08
 	 */
-	public class LunJianSuccessPanel extends SkinUIPanel
+	public class LunJianSuccessPanel extends ExitScenePanel
 	{
 		private var _skin:FuBenJieSuan2_Shengli;
 		private var _icon:IconCDFace;
@@ -86,7 +87,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			super.onTouchTarget(target);
 			if(target==_skin.btnEixt){
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 				this.hide();
 			}
 		}

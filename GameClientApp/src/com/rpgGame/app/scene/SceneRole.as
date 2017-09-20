@@ -153,7 +153,7 @@ package com.rpgGame.app.scene
 		override protected function removeFromGraphic() : void
 		{
 			super.removeFromGraphic();
-			if (_headFace)
+			if (_headFace&&SceneCharType.PLAYER!=type)
 				_headFace.hide();
 			if (_dialogFace)
 				_dialogFace.hide();
@@ -198,6 +198,7 @@ package com.rpgGame.app.scene
 			}
 			if (_headFace)
 			{
+				_headFace.hide();
 				_headFace.recycleSelf();
 				_headFace = null;
 			}
@@ -281,18 +282,19 @@ package com.rpgGame.app.scene
 		 */
 		public function updateCloth(cloth:int):void
 		{
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(cloth);
+			var clothesRes : AvatarClothesRes;
 			var heroData:HeroData=data as HeroData;
 			if(heroData){
 				heroData.cloths=cloth;
 			}
 			if (!clothesRes&&heroData)
 			{
-				clothesRes = AvatarClothesResCfgData.getInfo(heroData.job);
+				clothesRes =AvatarClothesResCfgData.getBodyAvatarInfo(heroData.cloths,heroData.job);
 			}
 			if(clothesRes){
-				if(clothesRes.bodyRes!=roleData.avatarInfo.bodyResID){
-					roleData.avatarInfo.setBodyResID(clothesRes.bodyRes, roleData.avatarInfo.bodyAnimatResID);
+				var bodyResID:String = AvatarClothesResCfgData.getBodyRes(heroData.cloths,heroData.job,heroData.sex);
+				if(bodyResID!=roleData.avatarInfo.bodyResID){
+					roleData.avatarInfo.setBodyResID(bodyResID, roleData.avatarInfo.bodyAnimatResID);
 					AvatarManager.updateBody(this);
 				}
 				if(roleData.avatarInfo.bodyEffectID!=clothesRes.effectRes){
@@ -527,18 +529,10 @@ package com.rpgGame.app.scene
 		override public function set x(value:Number):void
 		{
 			super.x=value;
-//			if (isMainChar) 
-//			{
-//				trace("main move");
-//			}
 		}
 		override public function set z(value:Number):void
 		{
 			super.z=value;
-//			if (isMainChar) 
-//			{
-//				trace("main move z");
-//			}
 		}
 		//==================主玩家用
 		public var lookPos:Vector3D;
