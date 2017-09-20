@@ -42,7 +42,7 @@ package com.rpgGame.appModule.guild
 			var uise:*= _guildMemberInfo.id.hexValue
 			var userName : String = _guildMemberInfo.name;
 			var menus : Array;
-			if(MainRoleManager.isSelf(_guildMemberInfo.id.ToGID()))
+			if(MainRoleManager.isSelfByServerId(_guildMemberInfo.id))
 			{
 				if(!GuildManager.instance().canLeader)
 					return ;

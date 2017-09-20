@@ -35,6 +35,7 @@ package com.rpgGame.app.manager.role
 	import away3d.utils.SoundUtil;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	
 	/**
 	 *
@@ -75,9 +76,26 @@ package com.rpgGame.app.manager.role
 			return actorInfo.id;
 		}
 		
-		public static function isSelf(id : Number) : Boolean
+		/**
+		 *根据场景id确定 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function isSelfBySceneId(id : Number) : Boolean
 		{
 			return id == actorInfo.id;
+		}
+		
+		/**
+		 *根据后台唯一id确定 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function isSelfByServerId(id : long) : Boolean
+		{
+			return id.ToGID() == actorInfo.serverID.ToGID();
 		}
 		
 		/**主角*/
