@@ -1,6 +1,6 @@
 package com.rpgGame.app.state.role
 {
-	import com.rpgGame.app.state.role.state.StateRefOverrideType;
+	import com.game.engine3D.state.StateRefOverrideType;
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
