@@ -69,31 +69,42 @@ package com.rpgGame.appModule.maps
 			//EventManager.removeEvent(UserMoveEvent.MOVE_END, onClearPath);
 			onClearPath();
 		}
-		public function onDrawPathRoad(walkPoint:Vector3D) : void
+		public function onDrawPathRoad(walkPoint:Vector3D=null) : void
 		{
 			/*if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
 				return;*/
-			onClearPath();
+			
 			if (MainRoleManager.actor == null)
 				return;
 			if (!MainRoleManager.actor.stateMachine.isWalkMoving)
 				return;
+			onClearPath();
 			if (KeyMoveManager.getInstance().keyMoving)
 			{
 				_lastPath = null;
 			}
 			else
 			{
-				var actPo:Vector3D=MainRoleManager.actor.position
+				
+				var ref : WalkMoveStateReference;
+				var camouflageEntity : SceneRole = MainRoleManager.actor.getCamouflageEntity() as SceneRole;
+				if (camouflageEntity)
+					ref = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				else
+					ref = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				
+				if(ref==null||ref.vectorPath==null)
+					return;
+				if(walkPoint==null)
+				{
+					walkPoint=ref.vectorPath;
+				}
+				if(walkPoint==null)
+					return;
+				var actPo:Vector3D=MainRoleManager.actor.position;
 				var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 				if (PolyUtil.isFindPath(districtWithPath, actPo, walkPoint))///有寻路路径直接走
 				{
-					var ref : WalkMoveStateReference;
-					var camouflageEntity : SceneRole = MainRoleManager.actor.getCamouflageEntity() as SceneRole;
-					if (camouflageEntity)
-						ref = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-					else
-						ref = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
 					_lastPath = (ref && ref.path) ? ref.path : null;
 				}
 				else

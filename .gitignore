@@ -6,6 +6,7 @@ bin-release/
 # Other files and folders
 .settings/
 3DEngine/
+engine3d/
 Evil3DFeathersSkin/
 Evil3DStarling/
 Game3DEngine/

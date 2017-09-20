@@ -357,8 +357,6 @@ package com.rpgGame.app.fight.spell
 				_matchTerrain = false;
 				_canWalkRelease = _spellData.q_can_walk_release;//是否边走边放
 				
-			
-				
 				//陷进相关表字段信息
 //				_isTrapSpell = _spellData.q_skill_type == 1;
 //				_repeatTimes = _spellData.q_skill_time;
