@@ -78,6 +78,10 @@ package com.rpgGame.app.graphics
 				{
 					show();
 				}
+				else
+				{
+					updateBind();
+				}
 				updateShowAndHide();
 			}
 		
@@ -153,7 +157,7 @@ package com.rpgGame.app.graphics
 			{
 				return;
 			}
-			if (_bodyRu && _role.isInScene())
+			if (_bodyRu && _role.isInScene()&&_isSheildState==false)
 			{
 				removeBindDis();
 				nameBindTarget = _bodyRu.getChildByName(BoneNameEnum.c_0_name_01);

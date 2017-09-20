@@ -16,10 +16,14 @@ package com.rpgGame.coreData.clientConfig
 		public var ID:int;
 		 /**  部位 */
 		public var q_kind:int;
-		 /**  阶数 */
+		 /**  被继承阶数 */
 		public var q_levelnum:int;
-		 /**  消耗的绑银/银两数 */
+		 /**  消耗数量 */
 		public var q_cast:int;
+		 /**  货币类型（物品表类型） */
+		public var q_type:int;
+		 /**  替代货币类型（物品表类型） */
+		public var q_type2:int;
 
 	}
 }

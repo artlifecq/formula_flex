@@ -528,27 +528,10 @@ package com.rpgGame.app.scene
 		override public function set x(value:Number):void
 		{
 			super.x=value;
-//			if (isMainChar) 
-//			{
-//				trace("main move");
-//			}
-			//主要屏蔽了底层不抛事件了
-			if (_headFace&&_headFace.isSheildState) 
-			{
-				_headFace.updateTranform();
-			}
 		}
 		override public function set z(value:Number):void
 		{
 			super.z=value;
-//			if (isMainChar) 
-//			{
-//				trace("main move z");
-//			}
-			if (_headFace&&_headFace.isSheildState) 
-			{
-				_headFace.updateTranform();
-			}
 		}
 		//==================主玩家用
 		public var lookPos:Vector3D;

@@ -23,6 +23,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
+	import com.rpgGame.coreData.clientConfig.Q_junjie;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_rank_designation;
@@ -1211,7 +1212,8 @@ package com.rpgGame.app.graphics
 				_title = new HeadFaceEffect();
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=JunJieData.getEffById(titleID);
-				_title.playEffect(170,65,ClientConfig.getEffect(effName),0,65,0);
+				var qJJ:Q_junjie=JunJieData.getModByLv(titleID);
+				_title.playEffect(0,qJJ.q_effects_high,ClientConfig.getEffect(effName),0,qJJ.q_effects_high,0);
 				//var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				//_title.addRenderUnitWith(rud, 0);
 				//				this.addChild(_title);
