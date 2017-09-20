@@ -49,7 +49,7 @@ package com.rpgGame.app.scene.animator
 		protected var _renderSet : RenderSet3D;
 		private var _isAttachUnit:Boolean;
 		//现在只有一个目标了
-		private var _targetId:long;
+		private var _targetId:int;
 		private  static var _offsetZ:int=10000;
 		public function RibbonAnimator()
 		{
@@ -61,16 +61,16 @@ package com.rpgGame.app.scene.animator
 		private function onMonsterRemoved(...arg):void
 		{
 			// TODO Auto Generated method stub
-			if (arg[0]==SceneCharType.MONSTER&&_targetId.ToGID()==arg[1]) 
+			if (arg[0]==SceneCharType.MONSTER&&_targetId==arg[1]) 
 			{
 				dispose();
 			}
 		}
 		
-		private function onMonsterDie(monsterId:long):void
+		private function onMonsterDie(monsterId:int):void
 		{
 			// TODO Auto Generated method stub
-			if (monsterId.EqualTo(_targetId)) 
+			if (monsterId==_targetId) 
 			{
 				dispose();
 			}
@@ -152,7 +152,7 @@ package com.rpgGame.app.scene.animator
 			_recycleDelay = 1000;
 			_from = _to = _aktor = null;
 			_renderSet = null;
-			_targetId=null;
+			_targetId=0;
 			_lightMaterial=null;
 		}
 		
@@ -178,7 +178,7 @@ package com.rpgGame.app.scene.animator
 			
 			_to = _targetList.shift();
 			_from = _aktor = aktor;
-			_targetId=_to.data.serverID;
+			_targetId=_to.data.id;
 			//			addTimeHandlerAt(4000, on4000Ms);
 			
 			light(_from,_to);
