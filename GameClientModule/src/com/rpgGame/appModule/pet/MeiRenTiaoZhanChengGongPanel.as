@@ -9,6 +9,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.appModule.pet.sub.PetZoneBall;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.PetCfg;
@@ -31,7 +32,7 @@ package com.rpgGame.appModule.pet
 	
 	import utils.TimerServer;
 	
-	public class MeiRenTiaoZhanChengGongPanel extends SkinUIPanel
+	public class MeiRenTiaoZhanChengGongPanel extends ExitScenePanel
 	{
 		private var _skin:MeiRenTiaoZhan;
 		
@@ -71,7 +72,7 @@ package com.rpgGame.appModule.pet
 		
 		public override function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
 		{
-			super.show();		
+			super.show(data,openTable,parentContiner);		
 			if(_bgEff)
 			{
 				_bgEff.start();
@@ -146,7 +147,7 @@ package com.rpgGame.appModule.pet
 		
 		private function toOutTheZone():void
 		{
-			DungeonSender.reqQuitDungeon();
+			DungeonSender.reqQuitDungeon(sceneId);
 			this.hide();
 		}
 		

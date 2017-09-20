@@ -39,7 +39,6 @@ package com.rpgGame.app.ui.scene.dungeon
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
 	import org.mokylin.skin.app.meiren.MeiRen_ZhuiZong;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
@@ -97,7 +96,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onShow() : void
 		{
-			
+			super.onShow();
 			addEvent();
 			enterZone();
 			finishWalk(null);
@@ -323,7 +322,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE)
 			{
-				DungeonSender.reqQuitDungeon();
+				DungeonSender.reqQuitDungeon(sceneId);
 			}		
 		}
 		

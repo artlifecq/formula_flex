@@ -421,13 +421,8 @@ package com.rpgGame.app.display3D
 		{
 			var animatResID : String = null;
 			isUpdateBody=false;
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(info.cloths);
-			if (!clothesRes)
-			{
-				clothesRes = AvatarClothesResCfgData.getInfo(info.job);
-			}
-			
-			var bodyResID:String = clothesRes.bodyRes;
+			var clothesRes:AvatarClothesRes=AvatarClothesResCfgData.getBodyAvatarInfo(info.cloths,info.job);
+			var bodyResID:String = AvatarClothesResCfgData.getBodyRes(info.cloths,info.job,info.sex);
 			var bodyEffectResID:String = clothesRes.effectRes;
 			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(info.hair);
 			if (!hairRes)
@@ -527,13 +522,8 @@ package com.rpgGame.app.display3D
 		{
 			var animatResID : String = null;
 			
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(info.cloths);
-			if (!clothesRes)
-			{
-				clothesRes = AvatarClothesResCfgData.getInfo(info.job);
-			}
-			
-			var bodyResID:String = clothesRes.bodyRes;
+			var clothesRes:AvatarClothesRes=AvatarClothesResCfgData.getBodyAvatarInfo(info.cloths,info.job);
+			var bodyResID:String = AvatarClothesResCfgData.getBodyRes(info.cloths,info.job,info.sex);
 			var bodyEffectResID:String = clothesRes.effectRes;
 			isUpdateBody=false;
 			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(info.hair);

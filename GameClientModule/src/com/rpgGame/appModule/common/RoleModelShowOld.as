@@ -64,15 +64,12 @@ package com.rpgGame.appModule.common
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(appearanceInfo.body);
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(appearanceInfo.mount);
 		
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(appearanceInfo.cloths);
-			if (!clothesRes)
-			{
-				clothesRes = AvatarClothesResCfgData.getInfo(appearanceInfo.job);
-			}
+			var clothesRes:AvatarClothesRes=AvatarClothesResCfgData.getBodyAvatarInfo(appearanceInfo.cloths,appearanceInfo.job);
+			
 			
 			if (clothesRes)
 			{
-				bodyResID = clothesRes.bodyRes;
+				bodyResID = AvatarClothesResCfgData.getBodyRes(appearanceInfo.cloths,appearanceInfo.job,appearanceInfo.sex);
 				bodyEffectResID = clothesRes.effectRes;
 				
 				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(appearanceInfo.hair);

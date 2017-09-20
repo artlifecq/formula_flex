@@ -93,6 +93,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onShow():void
 		{
+			super.onShow();
 			AppManager.hideApp(AppConstant.ACTIVETY_PANL);
 			EventManager.addEvent(DungeonEvent.ZONE_JIXIAN_TIME,updateZoneTime);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,updateshow);

@@ -1,5 +1,6 @@
 package com.rpgGame.netData.map.message{
 	import com.rpgGame.netData.structs.Position;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -19,6 +20,9 @@ package com.rpgGame.netData.map.message{
 		//坐标
 		private var _pos: com.rpgGame.netData.structs.Position;
 		
+		//地图唯一id
+		private var _verityMapId: long;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -28,6 +32,8 @@ package com.rpgGame.netData.map.message{
 			writeInt(_line);
 			//坐标
 			writeBean(_pos);
+			//地图唯一id
+			writeLong(_verityMapId);
 			return true;
 		}
 		
@@ -39,6 +45,8 @@ package com.rpgGame.netData.map.message{
 			_line = readInt();
 			//坐标
 			_pos = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			//地图唯一id
+			_verityMapId = readLong();
 			return true;
 		}
 		
@@ -78,6 +86,21 @@ package com.rpgGame.netData.map.message{
 		 */
 		public function set pos(value: com.rpgGame.netData.structs.Position): void{
 			this._pos = value;
+		}
+		
+		/**
+		 * get 地图唯一id
+		 * @return 
+		 */
+		public function get verityMapId(): long{
+			return _verityMapId;
+		}
+		
+		/**
+		 * set 地图唯一id
+		 */
+		public function set verityMapId(value: long): void{
+			this._verityMapId = value;
 		}
 		
 	}
