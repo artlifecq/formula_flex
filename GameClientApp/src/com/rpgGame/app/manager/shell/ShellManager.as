@@ -173,13 +173,22 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
 		
-		private function cdShowPanel():void
+		private function cdShowPanel(panelId:int=-1):void
 		{
 			if(TimerServer.has(showPanel)){
 				TimerServer.remove(showPanel);
 			}else{
-				TimerServer.addLoop(showPanel,1000);
+				if(panelId!=-1){
+					TimerServer.addLoop(showPanel1,1000,[panelId]);
+				}else{
+					TimerServer.addLoop(showPanel,1000);
+				}
 			}
+		}
+		
+		private function showPanel1(id:int):void
+		{
+			FunctionOpenManager.openPanelBypanelId(id);	
 		}
 		
 		private function showPanel():void

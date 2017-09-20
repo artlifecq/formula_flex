@@ -32,7 +32,6 @@ package  com.rpgGame.app.ui.alert
 			this.dragAble=true;
 			_skin=new Alert_LiBao();
 			super(_skin);
-			_skin.listCont.visible=false;
 			_gReward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon1,0,4,10,4);
 		}
 		private function onTime():void
