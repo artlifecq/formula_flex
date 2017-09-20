@@ -296,7 +296,7 @@ package com.rpgGame.app.manager
 		public function UpdatePlayerTeamInfo(teamId:long , playerId:long):void
 		{
 			//主要处理主玩家的短线重连
-			if (playerId.ToGID()==MainRoleManager.actorID) 
+			if (playerId.ToGID()==MainRoleManager.serverGid) 
 			{
 				if (teamId.IsZero()) 
 				{
