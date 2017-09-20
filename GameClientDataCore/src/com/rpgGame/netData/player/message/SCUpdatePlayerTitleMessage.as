@@ -1,5 +1,4 @@
 package com.rpgGame.netData.player.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -9,14 +8,14 @@ package com.rpgGame.netData.player.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 更新玩家的称号信息
+	 * 更新玩家的称号信息消息
 	 */
 	public class SCUpdatePlayerTitleMessage extends Message {
 	
-		//角色id
-		private var _playerId: long;
+		//角色Id
+		private var _playerId: int;
 		
-		//1 添加      2 移除
+		//1 添加  2 移除
 		private var _flag: int;
 		
 		//称号编号
@@ -27,9 +26,9 @@ package com.rpgGame.netData.player.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//角色id
-			writeLong(_playerId);
-			//1 添加      2 移除
+			//角色Id
+			writeShort(_playerId);
+			//1 添加  2 移除
 			writeInt(_flag);
 			//称号编号
 			writeInt(_titleId);
@@ -40,9 +39,9 @@ package com.rpgGame.netData.player.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//角色id
-			_playerId = readLong();
-			//1 添加      2 移除
+			//角色Id
+			_playerId = readShort();
+			//1 添加  2 移除
 			_flag = readInt();
 			//称号编号
 			_titleId = readInt();
@@ -58,22 +57,22 @@ package com.rpgGame.netData.player.message{
 		}
 		
 		/**
-		 * get 角色id
+		 * get 角色Id
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
-		 * set 角色id
+		 * set 角色Id
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		
 		/**
-		 * get 1 添加      2 移除
+		 * get 1 添加  2 移除
 		 * @return 
 		 */
 		public function get flag(): int{
@@ -81,7 +80,7 @@ package com.rpgGame.netData.player.message{
 		}
 		
 		/**
-		 * set 1 添加      2 移除
+		 * set 1 添加  2 移除
 		 */
 		public function set flag(value: int): void{
 			this._flag = value;

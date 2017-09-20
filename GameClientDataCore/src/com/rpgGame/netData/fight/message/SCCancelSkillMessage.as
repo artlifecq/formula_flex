@@ -1,5 +1,4 @@
 package com.rpgGame.netData.fight.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.fight.message{
 	public class SCCancelSkillMessage extends Message {
 	
 		//施法者ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//技能ID
 		private var _skillId: int;
@@ -28,7 +27,7 @@ package com.rpgGame.netData.fight.message{
 		 */
 		override protected function writing(): Boolean{
 			//施法者ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//技能ID
 			writeInt(_skillId);
 			//是否是自己取消(0否，1是)
@@ -41,7 +40,7 @@ package com.rpgGame.netData.fight.message{
 		 */
 		override protected function reading(): Boolean{
 			//施法者ID
-			_playerId = readLong();
+			_playerId = readShort();
 			//技能ID
 			_skillId = readInt();
 			//是否是自己取消(0否，1是)
@@ -61,14 +60,14 @@ package com.rpgGame.netData.fight.message{
 		 * get 施法者ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 施法者ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

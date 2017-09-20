@@ -1,6 +1,5 @@
 package com.rpgGame.netData.map.message{
 	import com.rpgGame.netData.structs.Position;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.map.message{
 	public class ResPlayerRunEndMessage extends Message {
 	
 		//角色Id
-		private var _personId: long;
+		private var _personId: int;
 		
 		//修正坐标
 		private var _position: com.rpgGame.netData.structs.Position;
@@ -26,7 +25,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function writing(): Boolean{
 			//角色Id
-			writeLong(_personId);
+			writeShort(_personId);
 			//修正坐标
 			writeBean(_position);
 			return true;
@@ -37,7 +36,7 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function reading(): Boolean{
 			//角色Id
-			_personId = readLong();
+			_personId = readShort();
 			//修正坐标
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			return true;
@@ -55,14 +54,14 @@ package com.rpgGame.netData.map.message{
 		 * get 角色Id
 		 * @return 
 		 */
-		public function get personId(): long{
+		public function get personId(): int{
 			return _personId;
 		}
 		
 		/**
 		 * set 角色Id
 		 */
-		public function set personId(value: long): void{
+		public function set personId(value: int): void{
 			this._personId = value;
 		}
 		
