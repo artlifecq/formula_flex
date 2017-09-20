@@ -89,8 +89,7 @@ package com.rpgGame.appModule.activety.boss
 					_skin.bg1.visible=true;
 					_skin.bg2.visible=true;
 				}
-				var id:Number=info.bossDamageInfo.playerId.ToGID();
-				if(MainRoleManager.isSelf(id)){
+				if(MainRoleManager.isSelfByServerId(info.bossDamageInfo.playerId)){
 					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.RED_TEXT;
 				}else{
 					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.YELLOW_TEXT;

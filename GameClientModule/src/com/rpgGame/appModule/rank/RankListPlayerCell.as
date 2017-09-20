@@ -135,7 +135,7 @@ package com.rpgGame.appModule.rank
 			{
 				var uise:*= _topInfo.playerid.hexValue;
 				var userName : String = _topInfo.playername;
-				if(!MainRoleManager.isSelf(_topInfo.playerid.ToGID()))
+				if(!MainRoleManager.isSelfByServerId(_topInfo.playerid))
 				{
 					MenuManager.showMenu(MenuUtil.getPlayerTargetRank(), [uise, userName], -1, -1, 80);
 				}
