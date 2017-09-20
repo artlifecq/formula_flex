@@ -822,7 +822,7 @@ package com.rpgGame.app.manager.role
 			var targetPos : Vector3D = _jumpPash.pop();
 			if (_jumpPash.length == 0)
 			{
-				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onJumpArrive);
+				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 0, _data, _onJumpArrive);
 				
 				clearJumpPath();
 			}

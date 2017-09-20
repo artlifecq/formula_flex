@@ -292,7 +292,7 @@ package com.rpgGame.app.state.role
 				if (walkRole.stateMachine.isWalkMoving)
 				{
 					HorseManager.instance().autoRiding(role, pos);
-					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
+					
 					
 				}
 				if(!walkRole.stateMachine.isWalkMoving)
