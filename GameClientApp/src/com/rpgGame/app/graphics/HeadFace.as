@@ -1213,7 +1213,7 @@ package com.rpgGame.app.graphics
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=JunJieData.getEffById(titleID);
 				var qJJ:Q_junjie=JunJieData.getModByLv(titleID);
-				_title.playEffect(0,qJJ.q_effects_high,ClientConfig.getEffect(effName),0,qJJ.q_effects_high,0);
+				_title.playEffect(0,qJJ.q_effects_high,ClientConfig.getEffect(effName),0,qJJ.q_effects_high/2,0);
 				//var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				//_title.addRenderUnitWith(rud, 0);
 				//				this.addChild(_title);
