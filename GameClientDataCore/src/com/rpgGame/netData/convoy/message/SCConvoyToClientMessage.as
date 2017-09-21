@@ -1,5 +1,4 @@
 package com.rpgGame.netData.convoy.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -9,12 +8,12 @@ package com.rpgGame.netData.convoy.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 发送护送失败消息
+	 * 发送护送同步消息
 	 */
 	public class SCConvoyToClientMessage extends Message {
 	
 		//玩家id
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//护送宝物id
 		private var _convoyId: int;
@@ -25,7 +24,7 @@ package com.rpgGame.netData.convoy.message{
 		 */
 		override protected function writing(): Boolean{
 			//玩家id
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//护送宝物id
 			writeInt(_convoyId);
 			return true;
@@ -36,7 +35,7 @@ package com.rpgGame.netData.convoy.message{
 		 */
 		override protected function reading(): Boolean{
 			//玩家id
-			_playerId = readLong();
+			_playerId = readShort();
 			//护送宝物id
 			_convoyId = readInt();
 			return true;
@@ -54,14 +53,14 @@ package com.rpgGame.netData.convoy.message{
 		 * get 玩家id
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 玩家id
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

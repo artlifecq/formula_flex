@@ -1,6 +1,5 @@
 package com.rpgGame.netData.guildWar.message{
 	import com.rpgGame.netData.structs.Position;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -15,7 +14,7 @@ package com.rpgGame.netData.guildWar.message{
 	public class ResGuildWarOrePositionMessage extends Message {
 	
 		//矿Id
-		private var _monsterId: long;
+		private var _monsterId: int;
 		
 		//矿位置
 		private var _position: com.rpgGame.netData.structs.Position;
@@ -26,7 +25,7 @@ package com.rpgGame.netData.guildWar.message{
 		 */
 		override protected function writing(): Boolean{
 			//矿Id
-			writeLong(_monsterId);
+			writeShort(_monsterId);
 			//矿位置
 			writeBean(_position);
 			return true;
@@ -37,7 +36,7 @@ package com.rpgGame.netData.guildWar.message{
 		 */
 		override protected function reading(): Boolean{
 			//矿Id
-			_monsterId = readLong();
+			_monsterId = readShort();
 			//矿位置
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			return true;
@@ -55,14 +54,14 @@ package com.rpgGame.netData.guildWar.message{
 		 * get 矿Id
 		 * @return 
 		 */
-		public function get monsterId(): long{
+		public function get monsterId(): int{
 			return _monsterId;
 		}
 		
 		/**
 		 * set 矿Id
 		 */
-		public function set monsterId(value: long): void{
+		public function set monsterId(value: int): void{
 			this._monsterId = value;
 		}
 		

@@ -200,7 +200,7 @@ package com.rpgGame.app.manager
 		
 		public function onSCConvoyToClientMessage(msg:SCConvoyToClientMessage):void
 		{
-			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId)as SceneRole;
 			if(role)
 			{
 				(role.data as HeroData).baowuLv=msg.convoyId;

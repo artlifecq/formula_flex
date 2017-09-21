@@ -103,8 +103,8 @@ package  com.rpgGame.appModule.battle.jjzb
 			skinR.role_xuecao.x=_rightHpX;
 			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(msg.jJPlayerInfo_2.enemyJob,msg.jJPlayerInfo_2.enemySex,"middle");
 			_rightHeadIcon.scaleX=-1;
-			_otherGid=msg.jJPlayerInfo_2.enemyPlayerId.ToGID();
-			_leftGid=msg.jJPlayerInfo_1.enemyPlayerId.ToGID();
+			_otherGid=msg.jJPlayerInfo_2.enemyPlayerId;
+			_leftGid=msg.jJPlayerInfo_1.enemyPlayerId;
 			CharAttributeManager.addEvent(_leftGid,CharAttributeType.HP,myHpChange);
 			CharAttributeManager.addEvent(_otherGid,CharAttributeType.HP,otherHpChange);
 			_delay=setTimeout(onFightStart,msg.delayTime*1000);

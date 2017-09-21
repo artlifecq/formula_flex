@@ -898,7 +898,7 @@ package com.rpgGame.app.manager.chat
 			var str:String=ChatUtil.replaceHyperShow(msg);
 			if(msg.playerId.ToGID()==MainRoleManager.actorID)
 				var sceneRole:SceneRole=MainRoleManager.actor;
-			else sceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
+			else sceneRole=SceneManager.getScenePlayerByName(msg.name)as SceneRole;
 			if(sceneRole)
 				sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,str, 12000);
 		}

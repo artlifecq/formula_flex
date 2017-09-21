@@ -109,7 +109,7 @@ package com.rpgGame.app.manager
 		{
 			// TODO Auto Generated method stub
 			//EventManager.dispatchEvent(JJBattleEvent.GET_FIGHT_RESULT,msg);
-			AppManager.showApp(AppConstant.BATTLE_RESULT_PANEL,[msg.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),msg.rank,msg.awardItemInfos]);
+			AppManager.showApp(AppConstant.BATTLE_RESULT_PANEL,[msg.victoryInfo.playerId.EqualTo(MainRoleManager.serverID),msg.rank,msg.awardItemInfos]);
 			AppManager.hideApp(AppConstant.BATTLE_JJBT_HEAD_PANEL);
 			AppManager.hideApp(AppConstant.BATTLE_JJBT_OVER_PANEL);
 		}

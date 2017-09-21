@@ -101,14 +101,7 @@ package   com.rpgGame.app.ui.main.team
 		{
 			if (_data) 
 			{
-				var role:SceneRole=SceneManager.getSceneObjByID(_data.memberId.ToGID()) as SceneRole;
-				if (role) 
-				{
-					if (role!=SceneRoleSelectManager.selectedRole) 
-					{
-						SceneRoleSelectManager.selectedRole=role;
-					}
-				}
+	
 				//				else
 				//				{
 				//					var state:int=Mgr.teamMgr.getNearState(_data.memberId);

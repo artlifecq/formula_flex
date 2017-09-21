@@ -50,10 +50,19 @@ package com.rpgGame.app.manager.role
 		private static var _actor : SceneRole;
 		private static var _actroInfo : HeroData;
 		private static var _serverGid:Number;
+		private static var _serverID:long;
+		public static const FIGHTSOUL_ID:int=999999;
 		public function MainRoleManager()
 		{
 		}
 		
+		
+
+		public static function get serverID():long
+		{
+			return _serverID;
+		}
+
 		public static function get serverGid():Number
 		{
 			return _serverGid;
@@ -72,7 +81,7 @@ package com.rpgGame.app.manager.role
 		
 		
 		/**
-		 * 获取个人用户ID
+		 * 获取个人用户ID,只是场景中的id
 		 * @return
 		 *
 		 */
@@ -100,7 +109,7 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function isSelfByServerId(id : long) : Boolean
 		{
-			return id.ToGID() == actorInfo.serverID.ToGID();
+			return id.ToGID() == _serverGid;
 		}
 		
 		/**主角*/
@@ -120,6 +129,8 @@ package com.rpgGame.app.manager.role
 		public static function setLoginData(heroInfo : MyPlayerInfo) : void
 		{
 			//角色信息
+			_serverID=heroInfo.personId;
+			_serverGid=_serverID.ToGID();
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
 			PKMamager.setPkMode(heroInfo.pkType);
 			//			FunctionOpenManager.openFunctionByLevel(actorInfo.totalStat.level,false);
@@ -169,7 +180,7 @@ package com.rpgGame.app.manager.role
 				_actor = SceneRoleManager.getInstance().createHero(data, true);
 				_actor.type = SceneCharType.PLAYER;
 				_actor.mouseEnable = false;
-				_serverGid=data.serverID.ToGID();
+				
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
 				SoundUtil.soundReference = _actor.graphicDis;

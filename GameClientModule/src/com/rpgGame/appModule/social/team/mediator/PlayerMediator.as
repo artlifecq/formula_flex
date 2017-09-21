@@ -86,7 +86,7 @@ package   com.rpgGame.appModule.social.team.mediator
 			{
 				return;
 			}
-			if (_member.memberId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+			if (_member.memberId.EqualTo(MainRoleManager.serverID)) 
 			{
 				return;
 			}
@@ -108,7 +108,7 @@ package   com.rpgGame.appModule.social.team.mediator
 			
 			//Clipboard.generalClipboard.clear();
 			//Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,"sssss");
-			if(!_member.memberId.EqualTo( MainRoleManager.actorInfo.serverID))
+			if(!_member.memberId.EqualTo( MainRoleManager.serverID))
 			{
 				var showArr:Array=[LangMenu.LOOK_HERO];
 				if (Mgr.teamMgr.isCaptain) 
@@ -197,7 +197,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				//还需要添加线路
 //				UIUtil.connectLabelHtmltext( labMap , ["Lv."+member.memberLevel+" " + ( map != null?map.q_map_name:"") ]);
 				var str:String=mapName;
-				var isOffline:Boolean=_member.isonline==0&&gid!=MainRoleManager.actorInfo.id;
+				var isOffline:Boolean=_member.isonline==0&&gid!=MainRoleManager.serverGid;
 				if (isOffline) 
 				{
 					setState(2);

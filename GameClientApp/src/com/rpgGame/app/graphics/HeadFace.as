@@ -368,7 +368,7 @@ package com.rpgGame.app.graphics
 				//showAndHideElement(_rankTitle2, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_RANKDESIGNATION1);
 				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
 				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
-				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
+				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).name));
 				if(_guildWarInfoBar){
 					showAndHideElement(_guildWarInfoBar,true,DecorCtrl.TOP_TOWER);//帮会战信息条
 				}

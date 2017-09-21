@@ -1,5 +1,4 @@
 package com.rpgGame.netData.team.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -13,16 +12,16 @@ package com.rpgGame.netData.team.message{
 	 */
 	public class ReqInviteTeamMessage extends Message {
 	
-		//被邀请的玩家Id
-		private var _playerid: long;
+		//被邀请的玩家名称
+		private var _playerName: String;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//被邀请的玩家Id
-			writeLong(_playerid);
+			//被邀请的玩家名称
+			writeString(_playerName);
 			return true;
 		}
 		
@@ -30,8 +29,8 @@ package com.rpgGame.netData.team.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//被邀请的玩家Id
-			_playerid = readLong();
+			//被邀请的玩家名称
+			_playerName = readString();
 			return true;
 		}
 		
@@ -44,18 +43,18 @@ package com.rpgGame.netData.team.message{
 		}
 		
 		/**
-		 * get 被邀请的玩家Id
+		 * get 被邀请的玩家名称
 		 * @return 
 		 */
-		public function get playerid(): long{
-			return _playerid;
+		public function get playerName(): String{
+			return _playerName;
 		}
 		
 		/**
-		 * set 被邀请的玩家Id
+		 * set 被邀请的玩家名称
 		 */
-		public function set playerid(value: long): void{
-			this._playerid = value;
+		public function set playerName(value: String): void{
+			this._playerName = value;
 		}
 		
 	}

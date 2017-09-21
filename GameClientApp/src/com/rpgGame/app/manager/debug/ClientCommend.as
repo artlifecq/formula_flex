@@ -342,7 +342,7 @@ package   com.rpgGame.app.manager.debug
 					var msg:SCBuffSkillMessage=new SCBuffSkillMessage();
 					msg.playerId=SceneRoleSelectManager.selectedRole.data.serverID;
 					msg.skillId= 16779233;
-					msg.targets.push(MainRoleManager.actorInfo.serverID);
+					msg.targets.push(MainRoleManager.actorInfo.id);
 					
 					var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 					if (null == role || !role.usable) {

@@ -196,7 +196,7 @@ package com.rpgGame.app.scene.animator
 				var fromObj : ObjectContainer3D;
 				if(_isAttachUnit)
 				{
-					var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(from.id, SceneCharType.FIGHT_SOUL) as SceneRole);
+					var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(MainRoleManager.FIGHTSOUL_ID, SceneCharType.FIGHT_SOUL) as SceneRole);
 					if(fightSoulRole!=null)
 					{
 						var fightsoul:RenderUnit3D = fightSoulRole.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);

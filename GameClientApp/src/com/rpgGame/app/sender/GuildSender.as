@@ -90,10 +90,10 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 邀请加入帮派 **/
-		public static function reqGuildInvite(playerId:long,opaque:int):void
+		public static function reqGuildInvite(playerId:String,opaque:int):void
 		{
 			var msg:ReqGuildInviteMessage = new ReqGuildInviteMessage();
-			msg.playerId = playerId;
+			msg.playerName = playerId;
 			msg.opaque = opaque;
 			sendMsg(msg);
 		}

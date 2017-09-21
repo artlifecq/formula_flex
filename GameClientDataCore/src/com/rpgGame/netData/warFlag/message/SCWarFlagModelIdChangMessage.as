@@ -1,5 +1,4 @@
 package com.rpgGame.netData.warFlag.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.warFlag.message{
 	public class SCWarFlagModelIdChangMessage extends Message {
 	
 		//玩家ID
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//战旗ID
 		private var _warFlagModelid: int;
@@ -25,7 +24,7 @@ package com.rpgGame.netData.warFlag.message{
 		 */
 		override protected function writing(): Boolean{
 			//玩家ID
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//战旗ID
 			writeShort(_warFlagModelid);
 			return true;
@@ -36,7 +35,7 @@ package com.rpgGame.netData.warFlag.message{
 		 */
 		override protected function reading(): Boolean{
 			//玩家ID
-			_playerId = readLong();
+			_playerId = readShort();
 			//战旗ID
 			_warFlagModelid = readShort();
 			return true;
@@ -54,14 +53,14 @@ package com.rpgGame.netData.warFlag.message{
 		 * get 玩家ID
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 玩家ID
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

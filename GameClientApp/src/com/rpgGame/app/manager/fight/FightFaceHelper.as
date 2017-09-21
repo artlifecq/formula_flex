@@ -278,10 +278,10 @@ package com.rpgGame.app.manager.fight
 									tweenFun=SpellResultTweenUtil.TweenDiaoXue;
 								}
 							}
-							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(RoleData(hurter.data).id,atkor.data.id,hurtAmount);
 							if (!extAtf) 
 							{
-								extAtf=LostSkillManager.instance().hasAttackPlayerAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+								extAtf=LostSkillManager.instance().hasAttackPlayerAddAtf(hurter.data.id,atkor.data.id,hurtAmount);
 							}
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
@@ -309,10 +309,10 @@ package com.rpgGame.app.manager.fight
 							}
 							tweenFun=SpellResultTweenUtil.TweenCirt;
 							
-							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.id,atkor.data.id,hurtAmount);
 							if (!extAtf) 
 							{
-								extAtf=LostSkillManager.instance().hasAttackPlayerAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+								extAtf=LostSkillManager.instance().hasAttackPlayerAddAtf(hurter.data.id,atkor.data.id,hurtAmount);
 							}
 							break;
 						case EnumHurtType.SPELL_ZHANHUN:

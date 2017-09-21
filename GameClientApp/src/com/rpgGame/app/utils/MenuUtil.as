@@ -43,7 +43,7 @@ package com.rpgGame.app.utils
 	public class MenuUtil
 	{
 		
-		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false,isTeam:Boolean= true):Array
+		public static function getPlayerTargetMenu(name:String,fromChat:Boolean = false,isTeam:Boolean= true):Array
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
 //			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
@@ -74,7 +74,7 @@ package com.rpgGame.app.utils
 			//				menus.push(LangMenu.INVITE_JOIN_SOCIETY);
 			//			}
 			if(GuildManager.instance().haveGuild&&GuildManager.instance().canInvite
-				&&GuildManager.instance().getGuildMemberInfoById(targetID.toString())==null)//能否邀请他人加入帮派
+				&&GuildManager.instance().getGuildMemberInfoByName(name)==null)//能否邀请他人加入帮派
 			{
 				menus.push(LangMenu.INVITE_JOIN_GUILD);
 			}
@@ -296,37 +296,37 @@ package com.rpgGame.app.utils
 					//					SocietyManager.reqInviteJoin(heroId);
 					break;
 				case LangMenu.INVITE_JOIN_GUILD:
-					GuildSender.reqGuildInvite(heroId,0);
+					GuildSender.reqGuildInvite(heroName,0);
 					break;
 				case LangMenu.SEND_MAIL://邀请加入帮派
-					AppManager.showAppNoHide(AppConstant.MAIL_PANEL, [MailType.SEND, heroId, heroName, LanguageConfig.getText(LangMisc.NOTHING_INFO)]);
+					//AppManager.showAppNoHide(AppConstant.MAIL_PANEL, [MailType.SEND, heroId, heroName, LanguageConfig.getText(LangMisc.NOTHING_INFO)]);
 					break;
 				case LangMenu.ADD_FRIEND://加为好友
-					FriendManager.requestAddFriend(heroId.fValue);
+				//	FriendManager.requestAddFriend(heroId.fValue);
 					break;
 				case LangMenu.REMOVE_FRIEND://删除
-					FriendManager.requestRemoveFriend(heroId.fValue);
+				//	FriendManager.requestRemoveFriend(heroId.fValue);
 					break;
 				case LangMenu.BLACK_FRIEND://屏蔽
-					FriendManager.requestAddBlack(heroId.fValue);
+					//FriendManager.requestAddBlack(heroId.fValue);
 					break;
 				case LangMenu.REMOVE_BLACK://解除屏蔽
-					FriendManager.requestRemoveBlack(heroId.fValue);
+				//	FriendManager.requestRemoveBlack(heroId.fValue);
 					break;
 				case LangMenu.SOCIETY_CHANGE_JOB://更改职务
-					AppManager.showAppNoHide(AppConstant.SOCIETY_OFFICER_POS_ALERT_PANEL, [heroId]);
+				//	AppManager.showAppNoHide(AppConstant.SOCIETY_OFFICER_POS_ALERT_PANEL, [heroId]);
 					break;
 				case LangMenu.KICK_SOCIETY://逐出帮会
-					SocietyManager.requestExpelled(heroId.fValue, heroName);
+				//	SocietyManager.requestExpelled(heroId.fValue, heroName);
 					break;
 				case LangMenu.TRADE://交易
-					TradeManager.invitePlayerTrade(heroId.fValue);
+			//		TradeManager.invitePlayerTrade(heroId.fValue);
 					break;
 				case LangMenu.TRANSFER_THE_CAPTAIN://转移队长
-					TeamSender.ReqAppointNewCaptain(Mgr.teamMgr.teamInfo.teamId,heroId);
+					TeamSender.ReqAppointNewCaptain(Mgr.teamMgr.teamInfo.teamId,heroName);
 					break;
 				case LangMenu.PLEASE_FROM_THE_TEAM://请离队伍
-					TeamSender.ReqKickTeam(heroId);
+					TeamSender.ReqKickTeam(heroName);
 					break;
 				case LangMenu.LEAVE_TEAM://离开队伍
 					//					if( TeamManager.isTeamLeader( MainRoleManager.actorID ) )//自己是队长
@@ -344,7 +344,7 @@ package com.rpgGame.app.utils
 					EventManager.dispatchEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,heroId,heroName);
 					break;
 				case LangMenu.INVITE_TEAM://组队
-					Mgr.teamMgr.InvitePlayerJoinTeam(heroId);
+					Mgr.teamMgr.InvitePlayerJoinTeam(heroName);
 					//					TeamManager.InvitePlayerJoinTeam( heroId );
 					break;
 				case LangMenu.PLAY://切磋

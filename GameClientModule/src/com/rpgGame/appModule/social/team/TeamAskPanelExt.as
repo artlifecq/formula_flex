@@ -117,7 +117,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if(type ==  TeamManager.TYPE_TEAM_JOIN)
 			{
-				TeamSender.ReqAcceptJionTeam(_teamId , member.memberId  , 1);
+				TeamSender.ReqAcceptJionTeam(_teamId , member.memberName  , 1);
 			}else if( type ==  TeamManager.TYPE_TEAM_INVITE)
 			{
 				TeamSender.ReqAcceptInviteJoin( _teamId , 1);
@@ -131,7 +131,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if(type ==  TeamManager.TYPE_TEAM_JOIN)
 			{
-				TeamSender.ReqAcceptJionTeam(_teamId , member.memberId  , 0);
+				TeamSender.ReqAcceptJionTeam(_teamId , member.memberName  , 0);
 			}else if( type ==  TeamManager.TYPE_TEAM_INVITE)
 			{
 				TeamSender.ReqAcceptInviteJoin( _teamId , 0);

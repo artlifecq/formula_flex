@@ -110,7 +110,7 @@ package com.rpgGame.app.manager.fight
                             break;
                         case PKModeType.TEAM:
                             // 队伍,肯定有组队
-							if (Mgr.teamMgr.isInMyTeam(roleInfo.serverID)) 
+							if (Mgr.teamMgr.isInMyTeam(roleInfo.name)) 
 							{
 								// TODO 现在没有队伍故可攻击
 								modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
@@ -172,7 +172,7 @@ package com.rpgGame.app.manager.fight
 					break;
 				case PKModeType.TEAM:
 					// 队伍,肯定有组队
-					if (Mgr.teamMgr.isInMyTeam(roleInfo.serverID)) 
+					if (Mgr.teamMgr.isInMyTeam(roleInfo.name)) 
 					{
 						// TODO 现在没有队伍故可攻击
 						modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;

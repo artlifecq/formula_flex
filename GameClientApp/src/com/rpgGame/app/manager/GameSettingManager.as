@@ -248,7 +248,7 @@
 				return true;
 			}
 			//屏蔽非队友
-			if (checkFiltrateDuiWu &&Mgr.teamMgr.isInMyTeam(HeroData(role.data).serverID)==false)
+			if (checkFiltrateDuiWu &&Mgr.teamMgr.isInMyTeam(HeroData(role.data).name)==false)
 			{
 				return false;
 			}
