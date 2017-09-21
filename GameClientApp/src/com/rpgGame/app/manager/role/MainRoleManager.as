@@ -51,6 +51,7 @@ package com.rpgGame.app.manager.role
 		private static var _actroInfo : HeroData;
 		private static var _serverGid:Number;
 		private static var _serverID:long;
+		public static const FIGHTSOUL_ID:int=999999;
 		public function MainRoleManager()
 		{
 		}
