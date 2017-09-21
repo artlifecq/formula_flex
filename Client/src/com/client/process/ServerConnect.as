@@ -128,7 +128,7 @@ package com.client.process
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
             
 			Statistics.intance.pushNode(Statistics.STEP_SEND_CONNECT_SOCKET,"发送socket连接请求");
-			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 30000);
+			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 15000);
 		}
 		
 		protected function socketConnectHandle(event:NetEvent):void
