@@ -7,7 +7,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.gameactivities.message.CSRefreshPanelMessage;
 	import com.rpgGame.netData.gameactivities.message.ReqGotGrownGiftMessage;
 	import com.rpgGame.netData.sign.message.ReqSignAddToGameMessage;
-	import com.rpgGame.netData.sign.message.ReqSignInfoToGameMessage;
 	import com.rpgGame.netData.sign.message.ReqSignObtainAwardMessage;
 	import com.rpgGame.netData.sign.message.ReqSignStrikeMessage;
 	import com.rpgGame.netData.sign.message.ReqSignSumAwardToGameMessage;

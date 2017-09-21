@@ -235,7 +235,7 @@ package com.rpgGame.app.fight.spell
 						TrusteeshipManager.getInstance().tripleSkillCtrl.setParams(spellData.q_skillID);
 					}
 					
-					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
+//					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
 					
 					//Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetID);

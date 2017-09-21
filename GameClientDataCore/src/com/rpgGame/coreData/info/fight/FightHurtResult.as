@@ -145,6 +145,7 @@ package com.rpgGame.coreData.info.fight
 			_spellData = SpellDataManager.getSpellDataWithID(spellID);
 			if (!_spellData) 
 			{
+				return;
 				GameLog.addError("客户端战斗结果技能为空,服务器发送id:"+spellID);
 				AlertPanel.showMsg( "客户端战斗结果技能为空,服务器发送id:"+spellID, null );
 			}

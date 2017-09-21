@@ -24,15 +24,11 @@ package com.rpgGame.appModule.vip
 	
 	import flash.utils.getTimer;
 	
-	import app.message.EnumItemId;
 	import app.message.EnumVip;
 	
 	import feathers.controls.Label;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.vip.VipLevel1;
-	import org.mokylin.skin.app.vip.VipLevel2;
-	import org.mokylin.skin.app.vip.VipLevel3;
 	import org.mokylin.skin.app.vip.Vip_Skin;
 	
 	import starling.display.DisplayObject;

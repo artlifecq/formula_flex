@@ -176,7 +176,7 @@ package   com.rpgGame.app.ui.main.team
 			if(arr.length>1)	
 				this._skin.role_name.text = arr[1];
 			else this._skin.role_name.text =  _data.memberName;
-			if(data.memberId.ToGID()==MainRoleManager.actorID){
+			if(data.memberId.ToGID()==MainRoleManager.serverGid){
 				this._skin.btn_more.visible=false;
 				this._skin.role_name.color = StaticValue.YELLOW_TEXT;
 			}

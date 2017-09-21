@@ -242,6 +242,11 @@
 			{
 				return true;
 			}
+			//竞技场不屏蔽
+			if (Mgr.jjBattleMgr.isJJZB()) 
+			{
+				return true;
+			}
 			//屏蔽非队友
 			if (checkFiltrateDuiWu &&Mgr.teamMgr.isInMyTeam(HeroData(role.data).serverID)==false)
 			{
@@ -346,6 +351,7 @@
 					checktOherGirlPet=state;
 					break;			
 			}
+			EventManager.dispatchEvent(GameSettingEvent.FILTRATE_UPDATE);
 		}
 		
 		public static function showEffect(role:SceneRole,animation:Q_SpellAnimation):Boolean
