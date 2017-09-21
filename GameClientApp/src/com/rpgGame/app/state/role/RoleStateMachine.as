@@ -191,9 +191,19 @@ package com.rpgGame.app.state.role
 		override public function transition(type : int, ref : StateReference = null, force : Boolean = false, allowQueue : Boolean = false, dumpTypes : Array = null) : Boolean
 		{
 			if (_role && _role.usable)
-				return super.transition(type, ref, force, allowQueue, dumpTypes);
+			{
+				var transState : IState = extractState(type);
+				var currState : IState = _currStates[transState.tribe];
+				var pass:Boolean=super.transition(type, ref, force, allowQueue, dumpTypes);
+				if(_role.isMainChar&&type==RoleStateType.CONTROL_WALK_MOVE)
+				{
+					Lyt.a("走路状态"+pass+"-C"+(currState?""+currState.type:"null")+"-T"+transState.type);
+				}
+				return pass;
+			}
 			return false;
 		}
+		
 		
 		override public function dispose() : void
 		{
