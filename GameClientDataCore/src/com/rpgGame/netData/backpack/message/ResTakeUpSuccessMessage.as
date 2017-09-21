@@ -1,5 +1,4 @@
 package com.rpgGame.netData.backpack.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.backpack.message{
 	public class ResTakeUpSuccessMessage extends Message {
 	
 		//物品ID
-		private var _goodsId: long;
+		private var _goodsId: int;
 		
 		//物品模型ID
 		private var _goodModelId: int;
@@ -28,7 +27,7 @@ package com.rpgGame.netData.backpack.message{
 		 */
 		override protected function writing(): Boolean{
 			//物品ID
-			writeLong(_goodsId);
+			writeShort(_goodsId);
 			//物品模型ID
 			writeInt(_goodModelId);
 			//物品数量
@@ -41,7 +40,7 @@ package com.rpgGame.netData.backpack.message{
 		 */
 		override protected function reading(): Boolean{
 			//物品ID
-			_goodsId = readLong();
+			_goodsId = readShort();
 			//物品模型ID
 			_goodModelId = readInt();
 			//物品数量
@@ -61,14 +60,14 @@ package com.rpgGame.netData.backpack.message{
 		 * get 物品ID
 		 * @return 
 		 */
-		public function get goodsId(): long{
+		public function get goodsId(): int{
 			return _goodsId;
 		}
 		
 		/**
 		 * set 物品ID
 		 */
-		public function set goodsId(value: long): void{
+		public function set goodsId(value: int): void{
 			this._goodsId = value;
 		}
 		

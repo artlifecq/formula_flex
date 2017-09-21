@@ -11,6 +11,7 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -28,6 +29,7 @@ package com.rpgGame.appModule.hunyin
 	import feathers.events.FeathersEventType;
 	import feathers.utils.filter.GrayFilter;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.hunyin.QiuHun_Skin;
 	
 	import starling.display.DisplayObject;
@@ -65,7 +67,7 @@ package com.rpgGame.appModule.hunyin
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.lbZhenHun: //征婚
-					if(_skin.lbZhenHun.filter==null)
+					if(Mgr.hunyinMgr.isCanQiuHun)
 						onlbZhenHunHandler();
 					else NoticeManager.showNotifyById(22000);
 					break;
@@ -81,23 +83,29 @@ package com.rpgGame.appModule.hunyin
 			_skin.textInput.text = DEFAULT_CHAT_TEXT;
 			_skin.textInput.color=StaticValue.GRAY_TEXT;
 			initEvent();
+			if(Mgr.hunyinMgr.isCanQiuHun){
+				_skin.lbZhenHun.filter=null;
+			}else{
+				GrayFilter.gray(_skin.lbZhenHun);
+			}
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
-			closeEvent();
-			TimerServer.remove(updateTimeBtnShow);			
+			closeEvent();	
 		}
 		
 		private function initEvent():void
 		{
+			EventManager.addEvent(HunYinEvent.HUNYIN_ZHENGHUN,updateZhenHunBtnState);
 			_skin.textInput.addEventListener(FeathersEventType.FOCUS_IN,forceinHandler);
 			_skin.textInput.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
 		}
 		
 		private function closeEvent():void
 		{
+			EventManager.removeEvent(HunYinEvent.HUNYIN_ZHENGHUN,updateZhenHunBtnState);
 			_skin.textInput.removeEventListener(Event.CHANGE,forceinHandler);
 			_skin.textInput.removeEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
 		}
@@ -160,32 +168,16 @@ package com.rpgGame.appModule.hunyin
 			}
 		}	
 		
+		private function updateZhenHunBtnState():void
+		{
+			_skin.lbZhenHun.filter=null;
+		}
+		
 		private function onlbZhenHunHandler():void
 		{		
 			HunYinSender.upCSMarriageSeekingMessage();
-			_timenum=60;
-			TimerServer.addLoop(updateTimeBtnShow,1000);
-			updateTimeBtnShow();
-			//			var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
-			//			if(MainRoleManager.actorInfo.sex==1) str+=boyText;
-			//			else str+=grilText;
-			//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
-			//			ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
-		}
-		
-		private var _timenum:int=5;
-		private function updateTimeBtnShow():void
-		{
-			_timenum--;
-			if(_timenum==0)
-			{
-				TimerServer.remove(updateTimeBtnShow);			
-				_skin.lbZhenHun.filter=null;
-			}
-			else
-			{
-				GrayFilter.gray(_skin.lbZhenHun);
-			}
+			Mgr.hunyinMgr.qiuHunTimer();
+			GrayFilter.gray(_skin.lbZhenHun);	
 		}
 		
 		private function onBtnQiuHunHandler():void

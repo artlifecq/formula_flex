@@ -54,7 +54,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
 	import com.rpgGame.netData.skill.message.ResSkillChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
-	import com.rpgGame.netData.skill.message.ResSkillRemoveMessage;
 	import com.rpgGame.netData.skill.message.SCSkillLevelUpResultMessage;
 	
 	import flash.utils.setTimeout;
@@ -87,6 +86,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(103130,RecvSCModuleAttributesChangeMessage);
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
 			SocketConnection.addCmdListener(123102,RecvResSkillAddMessage);
+//			SocketConnection.addCmdListener(123104,RecvResSkillRemoveMessage);
 			SocketConnection.addCmdListener(123107,RecvResSkillChangeMessage);
 			SocketConnection.addCmdListener(301102,RecvResClientCustomTagMessage);
 			SocketConnection.addCmdListener(103103,RecvResPersonalNoticeMessage);
@@ -124,6 +124,13 @@ package com.rpgGame.app.cmdlistener
 			
 			finish();
 		}
+		
+		/*private function RecvResSkillRemoveMessage(msg:ResSkillRemoveMessage):void
+		{
+			var roleData : HeroData = MainRoleManager.actorInfo;
+			roleData.spellList.removeSkill(msg.skillModelId);
+		}*/
+		
 		RewardTipTree.ins.recordNodeState2Server=HeroMiscSender.reqSetSystemHint;
 		private function SCSystemHintHandler(msg:SCSystemHintMessage):void
 		{

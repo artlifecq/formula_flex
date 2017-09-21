@@ -35,6 +35,7 @@ package com.rpgGame.app.manager.role
 	import away3d.utils.SoundUtil;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	
 	/**
 	 *
@@ -48,11 +49,16 @@ package com.rpgGame.app.manager.role
 		/**主角*/
 		private static var _actor : SceneRole;
 		private static var _actroInfo : HeroData;
-		
+		private static var _serverGid:Number;
 		public function MainRoleManager()
 		{
 		}
 		
+		public static function get serverGid():Number
+		{
+			return _serverGid;
+		}
+
 		/**
 		 * 获取个人用户信息
 		 * @return
@@ -75,9 +81,26 @@ package com.rpgGame.app.manager.role
 			return actorInfo.id;
 		}
 		
-		public static function isSelf(id : Number) : Boolean
+		/**
+		 *根据场景id确定 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function isSelfBySceneId(id : Number) : Boolean
 		{
 			return id == actorInfo.id;
+		}
+		
+		/**
+		 *根据后台唯一id确定 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function isSelfByServerId(id : long) : Boolean
+		{
+			return id.ToGID() == actorInfo.serverID.ToGID();
 		}
 		
 		/**主角*/
@@ -146,7 +169,7 @@ package com.rpgGame.app.manager.role
 				_actor = SceneRoleManager.getInstance().createHero(data, true);
 				_actor.type = SceneCharType.PLAYER;
 				_actor.mouseEnable = false;
-				
+				_serverGid=data.serverID.ToGID();
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
 				SoundUtil.soundReference = _actor.graphicDis;

@@ -70,7 +70,11 @@ package com.rpgGame.app.manager.goods
 			}
 			else if(index<curUnlockIndex){
 				var type:int=GoodsContainerMamager.getGridType(containerId);
-				ItemSender.reqOpenTimeCellMessage(type);
+				if(index-(hasOpenCount-1)==1){
+					ItemSender.reqOpenTimeCellMessage(type);
+				}else{
+					ItemSender.reqOpenCellMessage(type,index+1);
+				}
 				return;
 			}
 			AppManager.showApp(AppConstant.GRID_OPEN_TISHI,[ItemContainerID.Storage,index]);

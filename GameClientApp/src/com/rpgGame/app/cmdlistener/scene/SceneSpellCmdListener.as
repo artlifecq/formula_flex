@@ -209,7 +209,7 @@ package com.rpgGame.app.cmdlistener.scene
 			GameLog.addShow("技能打断：" + msg.skillId);
 			var skillId:int=msg.skillId&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
-			if(skillData!=null&&skillData.q_performType==0&&msg.playerId.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			if(skillData!=null&&skillData.q_performType==0&&MainRoleManager.isSelfBySceneId(msg.playerId))//判断是否是自己的技能但不是战魂的技能  ---yt
 			{
 				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL,skillData.q_skillID);
 			}
@@ -364,7 +364,7 @@ package com.rpgGame.app.cmdlistener.scene
 		}
         
         private function onCanelSkillMessage(msg : SCCancelSkillMessage) : void {
-            var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+            var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
             if (null == role) {
                 return;
             }
@@ -398,7 +398,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			if (role.isPlayer)
 			{
-				SpellEffectRecordCtrl.testCancelEffect(msg.playerId.ToGID(),msg.skillId);
+				SpellEffectRecordCtrl.testCancelEffect(msg.playerId,msg.skillId);
 			}
         }
         
