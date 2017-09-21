@@ -621,6 +621,7 @@ package com.rpgGame.app.cmdlistener.scene
 				onSceneRemoveObject(roleID);
 				SpellEffectRecordCtrl.clear(roleID);
 				GameLog.addShow("删除对象客户端id：" + roleID);
+				trace("==========================服务器通知删除怪物id：" + roleID);
 //				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
 			
@@ -1088,6 +1089,10 @@ package com.rpgGame.app.cmdlistener.scene
 			if (!role)
 				return;
 			
+			var roleData : RoleData = role.data as RoleData;
+			trace("==========================死亡怪物：" + msg.monsterId);
+			trace("==========================怪物血量：" + roleData.totalStat.hp);
+			
 			var hurtResultVO : FightHurtResult = new FightHurtResult();
 //			trace("技能伤害的创建："+resultInfo.skillId);
 			hurtResultVO.readSpellEffectData(msg.skillId);
@@ -1095,7 +1100,8 @@ package com.rpgGame.app.cmdlistener.scene
 			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
 			if(hurtResultVO.atkor == null)
 			{
-				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + msg.killer);
+				GameLog.addShow("==========================ResMonsterDieMessage主角ID为：\t" + MainRoleManager.actorID);
+				GameLog.addShow("==========================ResMonsterDieMessage攻击者为空!攻击者服务器ID为：\t" + msg.killer);
 			}
 			
 			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)
@@ -1122,7 +1128,8 @@ package com.rpgGame.app.cmdlistener.scene
 			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
 			if(hurtResultVO.atkor == null)
 			{
-				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + msg.attackerid);
+				GameLog.addShow("==========================ResPlayerDieMessage主角ID为：\t" + MainRoleManager.actorID);
+				GameLog.addShow("==========================ResPlayerDieMessage攻击者为空!攻击者服务器ID为：\t" + msg.attackerid);
 			}
 			
 			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)

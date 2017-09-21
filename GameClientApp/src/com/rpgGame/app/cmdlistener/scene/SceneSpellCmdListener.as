@@ -49,7 +49,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -146,7 +145,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (msg.personId==MainRoleManager.actorID) 
 			{
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
+				GameLog.addShow("服务器允许主玩家释放技能：\t" + info.spellData.q_skillID);
 			}
 			ReleaseSpellHelper.releaseSpell(info);
 			var skillId:int=msg.skillModelId&0xffffff;
@@ -182,7 +181,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (msg.playerid==MainRoleManager.actorID) 
 			{
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
+				GameLog.addShow("服务器允许主玩家释放技能：\t" + info.spellData.q_skillID);
 				if(skillData!=null&&skillData.q_performType==0)//不是战魂的技能  ---yt
 				{
 					EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
