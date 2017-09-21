@@ -190,12 +190,9 @@ package com.rpgGame.app.state.role
 		override public function transition(type : int, ref : StateReference = null, force : Boolean = false, allowQueue : Boolean = false, dumpTypes : Array = null) : Boolean
 		{
 			if (_role && _role.usable)
-			{
 				return super.transition(type, ref, force, allowQueue, dumpTypes);
-			}
 			return false;
 		}
-		
 		
 		override public function dispose() : void
 		{
