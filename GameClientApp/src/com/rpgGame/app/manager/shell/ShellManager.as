@@ -215,18 +215,20 @@ package com.rpgGame.app.manager.shell
 		
 		private function testRoll():void
 		{
-			var info:RollItemInfo=new RollItemInfo();
-			info.uniqueId=new long(1);
-			var temp:TempItemInfo=new TempItemInfo();
-			temp.isbind=0;
-			temp.itemId=new long(10000);
-			temp.job=0;
-			temp.mod=10000;
-			temp.num=10;
-			temp.ltime=SystemTimeManager.curtTm/1000+10000;
-			info.tempItemInfo=temp;
-			
-			DropGoodsManager.getInstance().addRollGoods(info);
+			for(var i:int=0;i<3;i++){
+				var info:RollItemInfo=new RollItemInfo();
+				info.uniqueId=new long(getTimer()+i);
+				var temp:TempItemInfo=new TempItemInfo();
+				temp.isbind=0;
+				temp.itemId=new long(10000);
+				temp.job=0;
+				temp.mod=10000;
+				temp.num=10;
+				temp.ltime=SystemTimeManager.curtTm/1000+10000;
+				info.tempItemInfo=temp;
+				
+				DropGoodsManager.getInstance().addRollGoods(info);
+			}
 		}
 		
 		private function showAttChange(type : String, count : int,show:int=0) : void
