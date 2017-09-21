@@ -126,6 +126,8 @@ package com.rpgGame.appModule.dungeon.equip
 		{
 			if(_skin.list)
 				_skin.list.dataProvider.updateAll();
+			setDownNum();
+			
 		}
 		private function gettoIndex():int
 		{

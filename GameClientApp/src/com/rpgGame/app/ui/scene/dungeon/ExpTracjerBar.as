@@ -95,6 +95,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		}
 		override protected function onHide():void
 		{
+			super.onHide();
 			stopTimer();
 			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
