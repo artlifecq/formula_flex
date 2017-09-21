@@ -1,6 +1,7 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
@@ -189,28 +190,31 @@ package com.rpgGame.app.fight.spell
 				
 				
 				_atkorID = fightTargetMsg.personId;
+				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+				if (_atkor && !_atkor.usable)
+					_atkor = null;
 				
-				if (_atkorID > 0&&EnumSkillPerformType.T_PLAYER==_spellData.q_performType)
-				{
-					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
-					if (_atkor && !_atkor.usable)
-						_atkor = null;
-				}
-				if (_atkorID > 0&&EnumSkillPerformType.T_FIGHTSOUL==_spellData.q_performType) 
-				{
-					_atkor = SceneManager.getScene().getSceneObjByID(_atkorID, SceneCharType.FIGHT_SOUL) as SceneRole;
-					if (_atkor && !_atkor.usable)
-						_atkor = null;
-				}
-				if (_atkorID > 0&&EnumSkillPerformType.T_GIRLPET==_spellData.q_performType) 
-				{
-					_atkor = SceneManager.getScene().getSceneObjByID(_atkorID, SceneCharType.GIRL_PET) as SceneRole;
-					if (_atkor && !_atkor.usable)
-						_atkor = null;
-				}
+//				if (_atkorID > 0&&EnumSkillPerformType.T_PLAYER==_spellData.q_performType)
+//				{
+//					
+//				}
+//				if (_atkorID > 0&&EnumSkillPerformType.T_FIGHTSOUL==_spellData.q_performType) 
+//				{
+//					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+//					if (_atkor && !_atkor.usable)
+//						_atkor = null;
+//				}
+//				if (_atkorID > 0&&EnumSkillPerformType.T_GIRLPET==_spellData.q_performType) 
+//				{
+//					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+//					if (_atkor && !_atkor.usable)
+//						_atkor = null;
+//				}
 				if(_atkor == null)
 				{
-					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId);
+					GameLog.addShow("==========================ResFightBroadcastMessage技能释放类型为：\t" + _spellData.q_performType);
+					GameLog.addShow("==========================ResFightBroadcastMessage主角ID为：\t" + MainRoleManager.actorID);
+					GameLog.addShow("==========================攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId);
 					return;
 				}
 				
@@ -224,7 +228,7 @@ package com.rpgGame.app.fight.spell
 				
 				if(_targetRole == null)
 				{
-					GameLog.addShow("被攻击者为空!被攻击者服务器ID为：\t" + fightTargetMsg.fightTarget);
+					GameLog.addShow("==========================被攻击者为空!被攻击者服务器ID为：\t" + fightTargetMsg.fightTarget);
 					return;
 				}
 				_atkorPos = new Point(_atkor.x, _atkor.z);
@@ -263,7 +267,8 @@ package com.rpgGame.app.fight.spell
 				
 				if(_atkor == null)
 				{
-					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightPosMsg.playerid);
+					GameLog.addShow("==========================ResAttackVentToClientMessage主角ID为：\t" + MainRoleManager.actorID);
+					GameLog.addShow("==========================攻击者为空!攻击者服务器ID为：\t" + fightPosMsg.playerid);
 					return;
 				}
 				

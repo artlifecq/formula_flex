@@ -96,7 +96,9 @@ package com.rpgGame.app.fight.spell
 			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
 			if(hurtResultVO.atkor == null)
 			{
-				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId);
+				GameLog.addShow("==========================ResAttackResultMessage技能释放类型为：\t" + hurtResultVO.spellData.q_performType);
+				GameLog.addShow("==========================ResAttackResultMessage主角ID为：\t" + MainRoleManager.actorID);
+				GameLog.addShow("==========================攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId);
 			}
 			
 			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)
