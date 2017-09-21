@@ -102,7 +102,7 @@ package com.rpgGame.app.ui.main.head
 			}
 			super.changeHp(data);
 			var allSubHp:int=data.totalStat.life-data.totalStat.hp;
-			curBloodNum=Math.ceil(_monsterData.totalStat.hp/_monsterCfg.q_per_blood);
+			curBloodNum=Math.ceil(data.totalStat.hp/_monsterCfg.q_per_blood);
 //			curBloodNum=2;
 			var leftNum:int=curBloodNum-1;
 			leftNum=leftNum<0?0:leftNum;
@@ -120,9 +120,17 @@ package com.rpgGame.app.ui.main.head
 				allSubHp-=firstBlood;
 				leftHp=maxBlood-allSubHp%maxBlood;
 			}
+			leftHp=data.totalStat.hp==0?0:leftHp;
 			var scaleX:Number=leftHp/maxBlood;
 			scaleX=scaleX>1?1:scaleX;
-			_bloodBar.scaleX=scaleX;
+			if(scaleX==0){
+				_bloodBar.visible=false;
+				if(_bloodBarBg){
+					_bloodBarBg.visible=false;
+				}
+			}else{
+				_bloodBar.scaleX=scaleX;
+			}
 		}
 	}
 }

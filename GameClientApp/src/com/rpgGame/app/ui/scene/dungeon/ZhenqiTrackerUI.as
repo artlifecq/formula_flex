@@ -60,6 +60,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		override protected function onShow() : void
 		{
 			super.onShow();
+			startAutoWalk();
 			addEvent();
 		}
 		override protected function onHide():void

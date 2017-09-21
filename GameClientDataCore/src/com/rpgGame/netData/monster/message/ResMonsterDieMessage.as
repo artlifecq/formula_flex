@@ -11,7 +11,7 @@ package com.rpgGame.netData.monster.message{
 	 * 怪物死亡
 	 */
 	public class ResMonsterDieMessage extends Message {
-	
+		
 		//角色Id
 		private var _monsterId: int;
 		
@@ -21,8 +21,8 @@ package com.rpgGame.netData.monster.message{
 		//杀死人Id
 		private var _killer: int;
 		
-		//死亡特效(0正常死亡 1龙卷风秒杀)
-		private var _type: int;
+		//伤害技能id
+		private var _skillId: int;
 		
 		
 		/**
@@ -35,8 +35,8 @@ package com.rpgGame.netData.monster.message{
 			writeByte(_die);
 			//杀死人Id
 			writeShort(_killer);
-			//死亡特效(0正常死亡 1龙卷风秒杀)
-			writeByte(_type);
+			//伤害技能id
+			writeInt(_skillId);
 			return true;
 		}
 		
@@ -50,8 +50,8 @@ package com.rpgGame.netData.monster.message{
 			_die = readByte();
 			//杀死人Id
 			_killer = readShort();
-			//死亡特效(0正常死亡 1龙卷风秒杀)
-			_type = readByte();
+			//伤害技能id
+			_skillId = readInt();
 			return true;
 		}
 		
@@ -109,18 +109,18 @@ package com.rpgGame.netData.monster.message{
 		}
 		
 		/**
-		 * get 死亡特效(0正常死亡 1龙卷风秒杀)
+		 * get 伤害技能id
 		 * @return 
 		 */
-		public function get type(): int{
-			return _type;
+		public function get skillId(): int{
+			return _skillId;
 		}
 		
 		/**
-		 * set 死亡特效(0正常死亡 1龙卷风秒杀)
+		 * set 伤害技能id
 		 */
-		public function set type(value: int): void{
-			this._type = value;
+		public function set skillId(value: int): void{
+			this._skillId = value;
 		}
 		
 	}

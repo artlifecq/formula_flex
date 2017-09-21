@@ -438,6 +438,9 @@ package com.rpgGame.app.manager.scene
 				
 			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
 			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
+			if(currMapInfo&&currMapInfo.mapType!=mapInfo.mapType){//前往的地图类型和当前的地图类型不一致了
+				AppManager.changeMapCloseApp();
+			}
 			
 			MapDataManager.currentScene = mapInfo;
 			_isMapSameRes=mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map);

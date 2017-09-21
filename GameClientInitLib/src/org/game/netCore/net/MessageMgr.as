@@ -846,7 +846,7 @@ package org.game.netCore.net
 						else
 						{
 							_lastMessageName = DebugUtil.getObjectNameStr( message );
-							GameLog.add("客户端处理消息 " + id + " : " + _lastMessageName);
+//							GameLog.add("客户端处理消息 " + id + " : " + _lastMessageName);
 						}
 						
 						_lastMsgID = id;

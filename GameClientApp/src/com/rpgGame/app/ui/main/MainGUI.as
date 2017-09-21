@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
@@ -34,6 +35,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
+	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -44,6 +46,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -53,8 +56,6 @@ package com.rpgGame.app.ui.main
 	import app.message.MonsterType;
 	
 	import away3d.events.Event;
-	
-	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
 	
@@ -149,9 +150,9 @@ package com.rpgGame.app.ui.main
 		//		private var _yuMaChangActivityBar:HurtRankPanel;
 		/** cd时间 **/
 		private var _cdTime : int = TIME;
-		private var selectedRole:SceneRole;
 		private var lowBloodTween:TweenLite;
 		private var kaBtn:MainButton_Kadun;
+		private var showBloodRole:SceneRole;
 		
 		public function MainGUI()
 		{
@@ -292,7 +293,8 @@ package com.rpgGame.app.ui.main
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showHead);
-			EventManager.addEvent(MainPlayerEvent.BOSSHP_CHANGE, showHead);
+			EventManager.addEvent(RoleEvent.HURTED_ROLE, roleHurted);
+			EventManager.addEvent(MapEvent.ROLE_DIE,hideHead);
 			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,showLowBlood);
 			EventManager.addEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);
@@ -348,9 +350,72 @@ package com.rpgGame.app.ui.main
 //			}
 		}
 		
+		private function hideHead(roleId:int):void
+		{
+			var role:SceneRole= SceneManager.getSceneObjByID(roleId) as SceneRole;
+			if(!role){
+				return;
+			}
+			if(role==showBloodRole){
+				this.removeChild(_playerHead);
+				this.removeChild(_bossHead);
+				this.removeChild(_eliteHead);
+				this.removeChild(_normalHead);
+			}
+		}
+		
+		private function roleHurted(roleId:int):void
+		{
+			if(showBloodRole){
+				return;
+			}
+			var role:SceneRole= SceneManager.getSceneObjByID(roleId) as SceneRole;
+			if(!role||role==showBloodRole){
+				return;
+			}
+			showBloodRole=role;
+			this.removeChild(_playerHead);
+			this.removeChild(_bossHead);
+			this.removeChild(_eliteHead);
+			this.removeChild(_normalHead);
+			
+			switch(role.type){
+				case SceneCharType.PLAYER:
+					if (EnumMapType.MAP_TYPE_D1V1==MapDataManager.currentScene.mapType) 
+					{
+						return;
+					}
+					//					else if (EnumMapType.MAP_TYPE_TOWERS==MapDataManager.currentScene.mapType) 
+					//					{
+					//						return;
+					//					}
+					_playerHead.roleData=role.data as HeroData;
+					this.addChild(_playerHead);
+					break;
+				case SceneCharType.MONSTER:
+					var data:MonsterData=role.data as MonsterData;
+					var bornData : Q_monster = MonsterDataManager.getData(data.modelID); 
+					var type:int=bornData.q_monster_type;
+					if(type== MonsterType.NORMAL){
+						_normalHead.monsterData=data;
+						this.addChild(_normalHead);
+					}else if(type== MonsterType.ELITE){
+						_eliteHead.monsterData=data;
+						this.addChild(_eliteHead);
+					}else if(type== MonsterType.BOSS){
+						_bossHead.monsterData=data;
+						this.addChild(_bossHead);
+					}
+					break;
+				default:
+					showBloodRole=null;
+					break;
+			}
+		}
+		
 		private  function showHead(role : SceneRole) : void
 		{
-			if(selectedRole==role/*||role==MainRoleManager.actor*/){
+			if(showBloodRole==role/*||role==MainRoleManager.actor*/){
 				return;
 			}
 			
@@ -358,8 +423,7 @@ package com.rpgGame.app.ui.main
 			this.removeChild(_bossHead);
 			this.removeChild(_eliteHead);
 			this.removeChild(_normalHead);
-			selectedRole=role;
-			//可以选中自己
+			showBloodRole=role;			//可以选中自己
 			//            if (role==MainRoleManager.actor) {
 			//                // 选中自己是不显示
 			//                return;
@@ -377,6 +441,7 @@ package com.rpgGame.app.ui.main
 //					{
 //						return;
 //					}
+					_playerHead.roleData=role.data as HeroData;
 					this.addChild(_playerHead);
 					break;
 				case SceneCharType.MONSTER:
@@ -384,12 +449,18 @@ package com.rpgGame.app.ui.main
 					var bornData : Q_monster = MonsterDataManager.getData(data.modelID); 
 					var type:int=bornData.q_monster_type;
 					if(type== MonsterType.NORMAL){
+						_normalHead.monsterData=data;
 						this.addChild(_normalHead);
 					}else if(type== MonsterType.ELITE){
+						_eliteHead.monsterData=data;
 						this.addChild(_eliteHead);
 					}else if(type== MonsterType.BOSS){
+						_bossHead.monsterData=data;
 						this.addChild(_bossHead);
 					}
+					break;
+				default:
+					showBloodRole=null;
 					break;
 			}
 		}

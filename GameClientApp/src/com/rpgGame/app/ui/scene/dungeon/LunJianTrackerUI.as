@@ -84,6 +84,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		override protected function onHide():void
 		{
+			super.onHide();
 			EventManager.removeEvent(DungeonEvent.UPDATE_LUNJIAN_TIME,getLunJianTime);
 			TimerServer.remove(updateTime);
 		}

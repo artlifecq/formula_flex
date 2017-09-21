@@ -1,12 +1,9 @@
 package com.rpgGame.app.ui.main.head
 {
-	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
@@ -46,8 +43,8 @@ package com.rpgGame.app.ui.main.head
 		
 		override public function refresh():void
 		{
-			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
-			_monsterData=SceneRoleSelectManager.selectedRole.data as MonsterData;
+		/*	var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
+			_monsterData=SceneRoleSelectManager.selectedRole.data as MonsterData;*/
 			_monsterCfg=MonsterDataManager.getData(_monsterData.modelID);
 			updateNormal();
 			updateAttInfo();
@@ -253,5 +250,11 @@ package com.rpgGame.app.ui.main.head
 			this.x=(w-this.width)/2;
 			this.y=toY;
 		}
+
+		public function set monsterData(value:MonsterData):void
+		{
+			_monsterData = value;
+		}
+
 	}
 }

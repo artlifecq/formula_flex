@@ -1,7 +1,10 @@
 package com.rpgGame.app.ui.scene
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import feathers.controls.StateSkin;
@@ -21,6 +24,8 @@ package com.rpgGame.app.ui.scene
 	{
 		private var tween:TweenMax;
 		
+		private var gTime : GameTimer;
+		private var techTime:Number;
 		/**
 		 *进入场景时的唯一id
 		 */
@@ -48,12 +53,16 @@ package com.rpgGame.app.ui.scene
 		{
 			super.onShow();
 			sceneId=MainRoleManager.actorInfo.verityMapId;
+			
 		}
 		
 		override protected function onHide() : void
 		{
 			super.onHide();
 			sceneId=null;
+			stopAutoWalk();
+			TrusteeshipManager.getInstance().findDist=0;
+			TrusteeshipManager.getInstance().stopAll();
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void
@@ -74,6 +83,36 @@ package com.rpgGame.app.ui.scene
 			}
 			_stateSkin["btn_close"].visible = state;
 			_stateSkin["btn_open"].visible = !state;
+		}
+		
+		public function startAutoWalk():void
+		{
+			if (gTime == null)gTime = new GameTimer("DungeonTrackerUI", 1000, 0, onTime);
+			gTime.start();
+			techTime=SystemTimeManager.curtTm;
+		}
+		public function stopAutoWalk():void
+		{
+			if (gTime != null)gTime.stop();
+		}
+		private function onTime() : void
+		{
+			if(MainRoleManager.actor.stateMachine.isIdle)
+			{
+				if((SystemTimeManager.curtTm-techTime)>=TaskAutoManager.AUTODUNGEON)
+				{
+					techTime=SystemTimeManager.curtTm;
+					autoWalk();
+				}
+			}
+			else
+			{
+				techTime=SystemTimeManager.curtTm;
+			}
+		}
+		protected function autoWalk() : void
+		{
+			
 		}
 	}
 }

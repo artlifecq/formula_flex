@@ -247,9 +247,12 @@ package com.rpgGame.app.manager.role
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var data:HeroData=MainRoleManager.actor.data as HeroData;
-			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1){
+			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1)
+			{
 				MainRoleManager.actor.setScale(data.sizeScale*1.5);//帮会战统帅放大到1.5倍
-			}else{
+			}
+			else
+			{
 				MainRoleManager.actor.setScale(data.sizeScale);
 			}
 		}
