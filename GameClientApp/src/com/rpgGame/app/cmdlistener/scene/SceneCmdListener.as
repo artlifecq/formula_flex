@@ -1187,19 +1187,6 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				//				ReliveManager.autoHideRelive();
 			}
-			else
-			{
-				if(msg.attributeChange.type==CharAttributeType.HP)
-				{
-					var data:MonsterData=role.data as MonsterData;
-					var bornData : Q_monster = MonsterDataManager.getData(data.modelID); 
-					var type:int=bornData.q_monster_type;
-					if(type== MonsterType.NORMAL||MonsterType.ELITE||type== MonsterType.BOSS)
-					{
-						EventManager.dispatchEvent(MainPlayerEvent.MONSTERHP_CHANGE, role);
-					}
-				}
-			}
 			if (CharAttributeType.SPEED==msg.attributeChange.type) 
 			{
 				RoleStateUtil.updateMoveBySpeedChange(role);
