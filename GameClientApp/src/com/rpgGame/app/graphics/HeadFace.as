@@ -542,7 +542,7 @@ package com.rpgGame.app.graphics
 				//原来没有添加一个
 				_nameBar = HeadNameBar.create();
 				//this.addChild(_nameBar); //更新一下容器，从临时的到模型真正容器
-				//this.deCtrl.addTop(_nameBar,DecorCtrl.TOP_NAME);
+				this.deCtrl.addTop(_nameBar,DecorCtrl.TOP_NAME);
 			}
 			var nameColor : uint = HeadBloodUtil.getRoleNameColor(_role);
 			
