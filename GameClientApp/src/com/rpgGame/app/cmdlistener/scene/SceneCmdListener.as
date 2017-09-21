@@ -729,7 +729,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var role:SceneRole=SceneManager.getSceneObjByID(msg.petId.ToGID()) as SceneRole;	
 			if(role)
 			{
-				var p:Point=SceneRoleManager.getInstance().getPetPoint(msg.position..x,msg.position.y,0);
+				var p:Point=SceneRoleManager.getInstance().getPetPoint(msg.position.x,msg.position.y,0);
 				role.setGroundXY(msg.position.x,msg.position.y);
 			}
 			else

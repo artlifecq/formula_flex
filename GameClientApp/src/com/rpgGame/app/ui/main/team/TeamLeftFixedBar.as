@@ -111,7 +111,7 @@ package  com.rpgGame.app.ui.main.team
 				var arr:Array=[];
 				for (var j:int = 0; j < len; j++) 
 				{
-					if (teamInfo.memberinfo[j].memberId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+					if (teamInfo.memberinfo[j].memberId.EqualTo(MainRoleManager.serverID)) 
 					{
 						arr.unshift(teamInfo.memberinfo[j]);
 					}

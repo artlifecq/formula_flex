@@ -12,7 +12,7 @@ package com.rpgGame.coreData.role
 	 */
 	public class BaseEntityData
 	{
-		private var _serverID:long=null;
+		
 		private var _id : Number = 0;
 		/** 名字 */
 		public var name : String = "";
@@ -25,15 +25,6 @@ package com.rpgGame.coreData.role
 		 */
 		public var countryId : int;
 
-		public function get serverID():long
-		{
-			return _serverID;
-		}
-
-		public function set serverID(value:long):void
-		{
-			_serverID = value;
-		}
 
 		/** 坐标y */
 		public function get y():Number
@@ -64,7 +55,7 @@ package com.rpgGame.coreData.role
 		}
 
 		/**
-		 * 标识id (也是场景唯一标识符ID)
+		 * 标识id (也是场景唯一标识符ID,当前场景唯一)
 		 * @return
 		 *
 		 */

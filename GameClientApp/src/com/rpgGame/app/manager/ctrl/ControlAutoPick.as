@@ -128,7 +128,7 @@ package  com.rpgGame.app.manager.ctrl
 			{
 				for each (var id:long in data.goodsDatas.validPickups) 
 				{
-					if (id.EqualTo(MainRoleManager.actorInfo.serverID)) 
+					if (id.EqualTo(MainRoleManager.serverID)) 
 					{
 						return false;
 					}

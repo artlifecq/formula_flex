@@ -30,11 +30,11 @@ package com.rpgGame.app.manager.ctrl
 		 *最新打我的 
 		 */		
 		private var _targetAttackMe:Vector.<FightDataVo>=new Vector.<FightDataVo>();
-		private var _mainRoleID:int;
+
 		private var _timer:GameTimer;
 		public function ControlMainPlayerFight()
 		{
-			_mainRoleID=MainRoleManager.actorInfo.id;
+			
 			_timer=new GameTimer("ControlMainPlayerFight");
 			_timer.onUpdate=onTimer;
 			_timer.start();
@@ -81,13 +81,14 @@ package com.rpgGame.app.manager.ctrl
 		 */		
 		public function addFightInfo(info:AttackResultInfo):void
 		{
+			var mainRoleID:int=MainRoleManager.actorInfo.id;
 			//加血
 			if (info.damage<=0) 
 			{
 				return;
 			}
 			//我打的
-			if (info.attackerId==_mainRoleID) 
+			if (info.attackerId==mainRoleID) 
 			{
 				var hgid:int=info.targetId;
 				for each (var vo:FightDataVo in _mytargets) 
@@ -102,7 +103,7 @@ package com.rpgGame.app.manager.ctrl
 				add2List(info.targetId,_mytargets);
 			}
 			//打我的
-			else if (info.targetId==_mainRoleID) 
+			else if (info.targetId==mainRoleID) 
 			{
 				for each (var vo2:FightDataVo in _targetAttackMe) 
 				{
@@ -125,13 +126,14 @@ package com.rpgGame.app.manager.ctrl
 		 */		
 		public function update(personId:int,fightTarget:int,targets:Vector.<int>):void
 		{
+			var mainRoleID:int=MainRoleManager.actorInfo.id;
 			//我打别人
-			if (personId&&personId==_mainRoleID) 
+			if (personId&&personId==mainRoleID) 
 			{
 				updateMyTarget(fightTarget,targets);
 			}
 			//别人打我
-			else if (fightTarget&&fightTarget==_mainRoleID) 
+			else if (fightTarget&&fightTarget==mainRoleID) 
 			{
 				updateFightMe(personId);
 			}
@@ -141,7 +143,7 @@ package com.rpgGame.app.manager.ctrl
 				var len:int=targets.length;
 				for (var i:int = 0; i < len; i++) 
 				{
-					if (targets[i]==_mainRoleID) 
+					if (targets[i]==mainRoleID) 
 					{
 						updateFightMe(personId);
 						break;

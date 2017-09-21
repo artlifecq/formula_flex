@@ -491,10 +491,10 @@ package com.rpgGame.app.ui.main.chat
 					
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO://私聊	
 				{
-					if(msgInfo.playerId.ToGID()==MainRoleManager.actorID)
+					if(msgInfo.playerId.ToGID()==MainRoleManager.serverGid)
 					{
 						return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,"你对")+getPlayerVipShow(vip)+
-							(replacePlayerShow(ChatManager.currentSiLiaoTargetName,StaticValue.ROSEPOWDER_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,"说 : ")+
+							(replacePlayerShow(ChatManager.currentSiLiaoTargetName,StaticValue.ROSEPOWDER_TEXT,msgInfo.targetPlayerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,"说 : ")+
 							HtmlTextUtil.getTextColor(StaticValue.ROSEPOWDER_TEXT,str);
 					}
 					else

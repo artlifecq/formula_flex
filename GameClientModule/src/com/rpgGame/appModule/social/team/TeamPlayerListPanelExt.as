@@ -164,7 +164,7 @@ package  com.rpgGame.appModule.social.team
 		private function OnInviteJoinTeam(event:Event):void
 		{
 			if(TeamPlayerListItemExt.curItem != null && TeamPlayerListItemExt.curItem.data != null)
-				Mgr.teamMgr.InvitePlayerJoinTeam( TeamPlayerListItemExt.curItem.data.playerid );
+				Mgr.teamMgr.InvitePlayerJoinTeam( TeamPlayerListItemExt.curItem.data.playername);
 			else
 			{
 				//NoticeManager.mouseFollowNotify("请先选中一位玩家" );

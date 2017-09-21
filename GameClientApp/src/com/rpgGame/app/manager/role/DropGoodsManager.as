@@ -228,7 +228,7 @@ package com.rpgGame.app.manager.role
 				return ;
 			pane.setEndHandler();
 			pane.closeHander();
-			if(MainRoleManager.actorInfo.serverID.EqualTo(msg.playerId))
+			if(MainRoleManager.isSelfByServerId(msg.playerId))
 			{
 				RollGetItemPane.popItem(pane.clientItem);
 			}

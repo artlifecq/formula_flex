@@ -31,6 +31,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
@@ -534,6 +535,23 @@ package com.rpgGame.app.manager.scene
 				}
 			}
 			return objList;
+		}
+		/**返回场景玩家,只对玩家有意义*/
+		public static function getScenePlayerByName(playerName:String,sceneName : String = GameScene3DType.MAIN_SCENE) : SceneRole
+		{
+			var objList : Vector.<SceneRole> =getScenePlayerList(sceneName);
+		
+			if (objList)
+			{
+				for each (var baseObj : SceneRole in objList)
+				{
+					if ((baseObj.data as HeroData).name==playerName)
+					{
+						return baseObj;
+					}
+				}
+			}
+			return null;
 		}
 		/**返回场景玩家*/
 		public static function getScenePlayerList(sceneName : String = GameScene3DType.MAIN_SCENE) : Vector.<SceneRole>

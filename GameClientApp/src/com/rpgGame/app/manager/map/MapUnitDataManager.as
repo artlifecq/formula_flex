@@ -431,7 +431,7 @@ package com.rpgGame.app.manager.map
 			var info : MapTeamMemberInfo;
 			for each (var mem:TeamMemberInfo in team.memberinfo) 
 			{
-				if (mem.memberId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+				if (mem.memberId.EqualTo(MainRoleManager.serverID)) 
 				{
 					continue;
 				}
@@ -446,7 +446,7 @@ package com.rpgGame.app.manager.map
 				info = new MapTeamMemberInfo();
 				info.name =mem.memberName;
 				info.id=mem.memberId.ToGID();
-				info.serverID=mem.memberId;
+				//info.serverID=mem.memberId;
 				info.x = mem.x;
 				info.y =mem.y;
 				info.level=mem.memberLevel;

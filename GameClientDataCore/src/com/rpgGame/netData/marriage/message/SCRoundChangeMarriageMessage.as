@@ -1,5 +1,4 @@
 package com.rpgGame.netData.marriage.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.marriage.message{
 	public class SCRoundChangeMarriageMessage extends Message {
 	
 		//发生变化的玩家id
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//婚姻对象的名字   null 没有
 		private var _marriageName: String;
@@ -25,7 +24,7 @@ package com.rpgGame.netData.marriage.message{
 		 */
 		override protected function writing(): Boolean{
 			//发生变化的玩家id
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//婚姻对象的名字   null 没有
 			writeString(_marriageName);
 			return true;
@@ -36,7 +35,7 @@ package com.rpgGame.netData.marriage.message{
 		 */
 		override protected function reading(): Boolean{
 			//发生变化的玩家id
-			_playerId = readLong();
+			_playerId = readShort();
 			//婚姻对象的名字   null 没有
 			_marriageName = readString();
 			return true;
@@ -54,14 +53,14 @@ package com.rpgGame.netData.marriage.message{
 		 * get 发生变化的玩家id
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 发生变化的玩家id
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

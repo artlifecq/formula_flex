@@ -129,7 +129,7 @@ package com.rpgGame.appModule.dungeon.multy
 			var playername:String="";
 			playername=MainRoleManager.actorInfo.name;
 			playername=TextUtil.getByteLen(playername)<=20?playername:TextUtil.sliceToBytelen(playername,17)+"...";
-			if(DungeonManager.isVote(MainRoleManager.actorInfo.serverID))
+			if(DungeonManager.isVote(MainRoleManager.serverID))
 			{
 				naneList[0].lbName.htmlText="<font color='#5cb006'>"+playername;//+"</font>";
 				naneList[0].lbOk.htmlText="<font color='#5cb006'>已同意</font>";
@@ -160,7 +160,7 @@ package com.rpgGame.appModule.dungeon.multy
 					{
 						memberInfo=memberinfoList[add];
 						add++;
-						if(!memberInfo.memberId.EqualTo(MainRoleManager.actorInfo.serverID))
+						if(!memberInfo.memberId.EqualTo(MainRoleManager.serverID))
 						{
 							playername=memberInfo.memberName;
 							playername=TextUtil.getByteLen(playername)<=20?playername:TextUtil.sliceToBytelen(playername,17)+"...";
@@ -207,7 +207,7 @@ package com.rpgGame.appModule.dungeon.multy
 		private function cancel():void
 		{
 			TimerServer.remove(updateTime);
-			if(!DungeonManager.isVote(MainRoleManager.actorInfo.serverID))
+			if(!DungeonManager.isVote(MainRoleManager.serverID))
 			{
 				DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,0);
 			}

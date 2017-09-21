@@ -59,7 +59,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				return;
 			}
-			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),_data.rank,_data.awardItemInfos,this],0
+			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.serverID),_data.rank,_data.awardItemInfos,this],0
 			,StarlingLayerManager.topUILayer);
 		}
 		private function onOver(eve:Event):void
@@ -136,7 +136,7 @@ package com.rpgGame.appModule.battle.jjzb
 			_skin.btnOver.visible=true;
 			_data=data as SCChallengeResultMessage;
 			//给个随机吧
-			var winerIsLeft:Boolean=_data.victoryId.EqualTo(MainRoleManager.actorInfo.serverID);
+			var winerIsLeft:Boolean=_data.victoryId.EqualTo(MainRoleManager.serverID);
 			var leftData:ZhengBaBriefInfo=_data.failureInfo;
 			var rightData:ZhengBaBriefInfo=_data.victoryInfo;
 			if (winerIsLeft) 
