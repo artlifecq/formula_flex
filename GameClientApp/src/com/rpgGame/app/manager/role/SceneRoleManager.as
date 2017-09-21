@@ -772,13 +772,13 @@ package com.rpgGame.app.manager.role
 		public function createFightSoulRole(owner:SceneRole):SceneRole
 		{
 			var fightSoulFollowAnimator:FightSoulFollowAnimator = null;
-			var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(owner.id, SceneCharType.FIGHT_SOUL) as SceneRole);
+			var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(MainRoleManager.FIGHTSOUL_ID, SceneCharType.FIGHT_SOUL) as SceneRole);
 			if (fightSoulRole)
 			{
 				return fightSoulRole;
 			}
 			
-			fightSoulRole = SceneRole.create(SceneCharType.FIGHT_SOUL, owner.id);
+			fightSoulRole = SceneRole.create(SceneCharType.FIGHT_SOUL, MainRoleManager.FIGHTSOUL_ID);
 			
 			var roleData:RoleData = new RoleData(RoleType.TYPE_FIGHT_SOUL);
 			roleData.ownerId = owner.id;
