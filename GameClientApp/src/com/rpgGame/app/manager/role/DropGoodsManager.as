@@ -72,6 +72,7 @@ package com.rpgGame.app.manager.role
 		{
 //			if(_allDropPane.length>=5)
 //				return ;
+			
 			if(rollInfo!=null&&getRollPaneById(rollInfo.uniqueId))
 			{
 				return ;
@@ -99,7 +100,8 @@ package com.rpgGame.app.manager.role
 			trace("roll点资源加载成功！！！");
 			DropGoodsManager.rollPanelIsLoad = true;
 			DropGoodsManager.isLoading=false;
-			for(var i:int=0;i<_infos.length;i++)
+			var length:int=_infos.length;
+			for(var i:int=0;i<length;i++)
 			{
 				var info:RollItemInfo=_infos.shift();
 				showRollPanel(info);
@@ -122,7 +124,8 @@ package com.rpgGame.app.manager.role
 				trace("roll点资源加载成功！！！");
 				DropGoodsManager.rollPanelIsLoad = true;
 				DropGoodsManager.isLoading=false;
-				for(var i:int=0;i<_infos.length;i++)
+				var length:int=_infos.length;
+				for(var i:int=0;i<length;i++)
 				{
 					var info:RollItemInfo=_infos.shift();
 					showRollPanel(info);
@@ -192,7 +195,6 @@ package com.rpgGame.app.manager.role
 			var totalWidth:int = (pane.width+gap)*lenth-gap;
 			var startX:Number = (LayerManager.stage.stageWidth - totalWidth)/2;
 			var startY:Number = (LayerManager.stage.stageHeight - pane.height)/2;
-			
 			for(var i:int = 0;i<lenth;i++)
 			{
 				pane = _allDropPane[i];
