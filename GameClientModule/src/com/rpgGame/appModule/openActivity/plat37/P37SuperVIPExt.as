@@ -1,11 +1,14 @@
 package  com.rpgGame.appModule.openActivity.plat37
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.GlobalFunction;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.main.openActivity.BaseActivityMainPanel;
 	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.openActivity.ActivityVo;
 	import com.rpgGame.coreData.info.openActivity.EnumCampPanelType;
 	
@@ -24,7 +27,7 @@ package  com.rpgGame.appModule.openActivity.plat37
 	import starling.display.Image;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
-
+	
 	public class P37SuperVIPExt extends BaseActivityMainPanel
 	{
 		private var girlQQ:String;
@@ -33,13 +36,25 @@ package  com.rpgGame.appModule.openActivity.plat37
 		private var  loader:Loader=new Loader();
 		private var _skin:ShowGirl_Skin;
 		private var FloatingText:Object;
+		
+		private var _effEftContaner:Inter3DContainer;
+		private var _eff1:InterObject3D;
 		public function P37SuperVIPExt()
 		{
 			_skin=new ShowGirl_Skin();
 			super(EnumCampPanelType.M_SUPER_VIP_37,_skin);
+			initView();
 			registerListeners();
 			loadGirl();
 			RefreshQQInfo(false);
+		}
+		
+		private function initView():void
+		{
+			var index:int=_skin.container.getChildIndex(_skin.imgGirl);
+			_effEftContaner=new Inter3DContainer();
+			_skin.container.addChildAt(_effEftContaner,index);
+			_eff1=_effEftContaner.playInter3DAt(ClientConfig.getEffect("ui_chaojihuiyuan"),498,10,0);
 		}
 		override protected function setData(hash:HashMap):void
 		{
@@ -107,7 +122,7 @@ package  com.rpgGame.appModule.openActivity.plat37
 				_skin.imgGirl.addChild(girlBit);
 			}
 		}		
-	
+		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -137,7 +152,7 @@ package  com.rpgGame.appModule.openActivity.plat37
 				}
 			}
 		}
-
+		
 		private function loadGirl():void
 		{
 			var gurl:String = Mgr.activityPanelMgr.superVIP_girlImageURL;
@@ -168,17 +183,17 @@ package  com.rpgGame.appModule.openActivity.plat37
 			//todo 等后端传
 			girlQQ = Mgr.activityPanelMgr.superVIP_girlQQ;
 			_skin.numQQ.label=girlQQ;
-				
-				
-//			imgMeizhi.setImageUrl();
-//			imglab_QQ.visible=(girlQQ!=null&&girlQQ!="");
-//			imglab_QQ.text=girlQQ;
-//			
-//		
-//			btnCopy.visible = imglab_QQ.visible ;
 			
-		
+			
+			//			imgMeizhi.setImageUrl();
+			//			imglab_QQ.visible=(girlQQ!=null&&girlQQ!="");
+			//			imglab_QQ.text=girlQQ;
+			//			
+			//		
+			//			btnCopy.visible = imglab_QQ.visible ;
+			
+			
 		}
-	
+		
 	}
 }

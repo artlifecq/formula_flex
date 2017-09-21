@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.battle.jcyt
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -34,6 +35,9 @@ package com.rpgGame.appModule.battle.jcyt
 		private var _skin:JiuCengYaoTa_Skin;
 		private var _eff:Inter3DContainer;
 		private var _gReward:RewardGroup;
+		
+		private var _effEftContaner:Inter3DContainer;
+		private var _eff1:InterObject3D;
 		public function NineTowerMainPanelExt()
 		{
 			_skin=new JiuCengYaoTa_Skin();
@@ -43,6 +47,15 @@ package com.rpgGame.appModule.battle.jcyt
 			_skin.btnStart.touchable=false;
 			_gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0);
 			TipTargetManager.show(_skin.iconSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
+			initView();
+		}
+		
+		private function initView():void
+		{
+			var index:int=_skin.container.getChildIndex(_skin.gBtn);
+			_effEftContaner=new Inter3DContainer();
+			_skin.container.addChildAt(_effEftContaner,index);
+			_eff1=_effEftContaner.playInter3DAt(ClientConfig.getEffect("ui_jiucengyaota_mianban"),489,326,0);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
