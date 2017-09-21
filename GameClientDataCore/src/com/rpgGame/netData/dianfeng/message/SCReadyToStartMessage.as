@@ -1,5 +1,4 @@
 package com.rpgGame.netData.dianfeng.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -17,7 +16,7 @@ package com.rpgGame.netData.dianfeng.message{
 		private var _delayTime: int;
 		
 		//敌方id
-		private var _enemyPlayerId: long;
+		private var _enemyPlayerId: int;
 		
 		//敌方名字
 		private var _enemyName: String;
@@ -42,7 +41,7 @@ package com.rpgGame.netData.dianfeng.message{
 			//准备时间  秒
 			writeInt(_delayTime);
 			//敌方id
-			writeLong(_enemyPlayerId);
+			writeShort(_enemyPlayerId);
 			//敌方名字
 			writeString(_enemyName);
 			//敌方血量
@@ -63,7 +62,7 @@ package com.rpgGame.netData.dianfeng.message{
 			//准备时间  秒
 			_delayTime = readInt();
 			//敌方id
-			_enemyPlayerId = readLong();
+			_enemyPlayerId = readShort();
 			//敌方名字
 			_enemyName = readString();
 			//敌方血量
@@ -104,14 +103,14 @@ package com.rpgGame.netData.dianfeng.message{
 		 * get 敌方id
 		 * @return 
 		 */
-		public function get enemyPlayerId(): long{
+		public function get enemyPlayerId(): int{
 			return _enemyPlayerId;
 		}
 		
 		/**
 		 * set 敌方id
 		 */
-		public function set enemyPlayerId(value: long): void{
+		public function set enemyPlayerId(value: int): void{
 			this._enemyPlayerId = value;
 		}
 		

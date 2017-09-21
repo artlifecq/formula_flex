@@ -39,7 +39,7 @@ package com.rpgGame.app.ui.tips
 		private var _tipSkin : Tips_BuffsSkin;//BuffTipsSkin;
 		private var _posy : int = 0;
 		private var _timer:GameTimer;
-		private var _endTime:int;
+		private var _endTime:Number;
 		public function BuffTip()
 		{
 			_tipSkin = new Tips_BuffsSkin();
@@ -56,7 +56,7 @@ package com.rpgGame.app.ui.tips
 		private function onTimer():void
 		{
 			// TODO Auto Generated method stub
-			var left:int=(_endTime-getTimer())/1000;
+			var left:Number=(_endTime-getTimer())/1000;
 			if (left>0) 
 			{
 				_tipSkin.lbl_miaoshu2.text="剩余时间："+TextUtil.SecondToDHMS(left);;

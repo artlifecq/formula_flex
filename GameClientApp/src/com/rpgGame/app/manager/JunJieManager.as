@@ -163,7 +163,7 @@ package com.rpgGame.app.manager
 		 * */
 		public function onSCUpdateRoundMessage(msg:SCUpdateRoundMessage):void
 		{
-			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId)as SceneRole;
 			if(role)
 			{
 				(role.data as HeroData).junjieLv=msg.modelId;

@@ -4,7 +4,6 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
-	import com.rpgGame.netData.gameactivities.bean.onlineInfo;
 	
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;

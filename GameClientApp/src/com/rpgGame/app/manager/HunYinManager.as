@@ -365,7 +365,7 @@ package com.rpgGame.app.manager
 		public function onSCRoundChangeMarriageHandler(msg:SCRoundChangeMarriageMessage):void
 		{
 			// TODO Auto Generated method stub
-			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 			if (role&&role.headFace) 
 			{
 				(role.headFace as HeadFace).updateFuQiTitle(msg.marriageName);

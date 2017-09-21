@@ -66,7 +66,7 @@ package com.rpgGame.core.app
 		{
 			return _isAppShowIng;
 		}
-
+		
 		private function set isAppShowIng(value : Boolean) : void
 		{
 			_isAppShowIng = value;
@@ -107,6 +107,16 @@ package com.rpgGame.core.app
 			_data = data;
 			_openTable = $openTable;
 			_parentContiner = parentContiner;
+		}
+		
+		/**
+		 *是否切地图关闭 
+		 * @return 
+		 * 
+		 */
+		public function get changeMapClose():Boolean
+		{
+			return _app.changeMapClose;
 		}
 
 		public function show() : void

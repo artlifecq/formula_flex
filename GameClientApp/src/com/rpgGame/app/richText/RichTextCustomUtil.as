@@ -303,15 +303,14 @@ package com.rpgGame.app.richText
 					//trace( "点击打开这个人的属性面板，id：",data.id," 英雄名字：",data.data1 );
 					//					var userID : String = unitData.linkData;
 					var id:long = new long(unitData.linkData);
-					if (MainRoleManager.actorID==id.ToGID())
+					if (MainRoleManager.serverGid==id.ToGID())
 					{
 						return;
 					}
-					var lng:long=new long();
 					//					var poswr:Point = unit.displayObj.parent.localToGlobal(new Point(unit.displayObj.x+2,unit.displayObj.y));
 					var userName : String = unitData.label;
-					var menus : Array = MenuUtil.getPlayerTargetMenu(id.fValue, true);
-					MenuManager.showMenu(menus, [id.hexValue, userName], -1, -1, 80);
+					var menus : Array = MenuUtil.getPlayerTargetMenu(userName, true);
+					MenuManager.showMenu(menus, [id, userName], -1, -1, 80);
 					break;
 				case RichTextCustomLinkType.POSITION_TYPE:
 					//获取XY坐标

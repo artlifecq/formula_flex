@@ -8,23 +8,17 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_map;
-	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	
-	import flash.utils.getTimer;
 	
 	import away3d.enum.LoadPriorityType;
 	import away3d.materials.methods.CorrodeMethod;

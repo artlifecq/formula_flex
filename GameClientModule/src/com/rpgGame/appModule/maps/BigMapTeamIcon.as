@@ -30,7 +30,7 @@ package com.rpgGame.appModule.maps
 		{
 			this.data=info;
 			var url:String;
-			var isCaptain:Boolean=Mgr.teamMgr.getPlayerIsCaptain(data.serverID);
+			var isCaptain:Boolean=Mgr.teamMgr.getPlayerIsCaptain(data.name);
 			if (isCaptain) 
 			{	
 				url="ui/mainui/map/hongdian.png";

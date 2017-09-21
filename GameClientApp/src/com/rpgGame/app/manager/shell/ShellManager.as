@@ -56,7 +56,6 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.PanelCfgData;
     import com.rpgGame.coreData.cfg.TransCfgData;
-    import com.rpgGame.coreData.cfg.item.ItemConfig;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.clientConfig.Q_panel;
     import com.rpgGame.coreData.enum.AttChangeEnum;
@@ -216,18 +215,20 @@ package com.rpgGame.app.manager.shell
 		
 		private function testRoll():void
 		{
-			var info:RollItemInfo=new RollItemInfo();
-			info.uniqueId=new long(1);
-			var temp:TempItemInfo=new TempItemInfo();
-			temp.isbind=0;
-			temp.itemId=new long(10000);
-			temp.job=0;
-			temp.mod=10000;
-			temp.num=10;
-			temp.ltime=SystemTimeManager.curtTm/1000+10000;
-			info.tempItemInfo=temp;
-			
-			DropGoodsManager.getInstance().addRollGoods(info);
+			for(var i:int=0;i<3;i++){
+				var info:RollItemInfo=new RollItemInfo();
+				info.uniqueId=new long(getTimer()+i);
+				var temp:TempItemInfo=new TempItemInfo();
+				temp.isbind=0;
+				temp.itemId=new long(10000);
+				temp.job=0;
+				temp.mod=10000;
+				temp.num=10;
+				temp.ltime=SystemTimeManager.curtTm/1000+10000;
+				info.tempItemInfo=temp;
+				
+				DropGoodsManager.getInstance().addRollGoods(info);
+			}
 		}
 		
 		private function showAttChange(type : String, count : int,show:int=0) : void
@@ -813,44 +814,44 @@ package com.rpgGame.app.manager.shell
             //effectRu.setScale(1);
             effectRu.play(1);
             SceneManager.addSceneObjToScene(effectSet);
-            var rud : RenderParamData3D = new RenderParamData3D(2, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
-            var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
-            effectRu.repeat = 0;
-            effectRu.mouseEnable = true;
-            effectRu.x = pos.x; //MainRoleManager.actor.x;
-            effectRu.z = pos.z; //MainRoleManager.actor.z;
-            effectRu.y = pos.y; //MainRoleManager.actor.y;
+            var rud1 : RenderParamData3D = new RenderParamData3D(2, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
+            var effectRu1 : RenderUnit3D = RenderUnit3D.create(rud1, true);
+            effectRu1.repeat = 0;
+            effectRu1.mouseEnable = true;
+            effectRu1.x = pos.x; //MainRoleManager.actor.x;
+            effectRu1.z = pos.z; //MainRoleManager.actor.z;
+            effectRu1.y = pos.y; //MainRoleManager.actor.y;
             //effectRu.setGroundXY(role.x, role.z);
-            effectRu.setScale(1);
-            effectRu.rotationY = MainRoleManager.actor.rotationY;
-            effectRu.play(1);
-            SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
-            var pos : Vector3D = MainRoleManager.actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, "b_r_wq_01");
-            var rud : RenderParamData3D = new RenderParamData3D(3, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
-            var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
-            effectRu.repeat = 0;
-            effectRu.mouseEnable = true;
-            effectRu.x = pos.x; //MainRoleManager.actor.x;
-            effectRu.z = pos.y; //MainRoleManager.actor.z;
-            effectRu.y = 0;//pos.y; //MainRoleManager.actor.y;
+            effectRu1.setScale(1);
+            effectRu1.rotationY = MainRoleManager.actor.rotationY;
+            effectRu1.play(1);
+            SceneManager.addSceneObjToScene(effectRu1/*, true, false, false*/);
+            var pos1 : Vector3D = MainRoleManager.actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, "b_r_wq_01");
+            var rud2 : RenderParamData3D = new RenderParamData3D(3, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
+            var effectRu2 : RenderUnit3D = RenderUnit3D.create(rud2, true);
+            effectRu2.repeat = 0;
+            effectRu2.mouseEnable = true;
+            effectRu2.x = pos1.x; //MainRoleManager.actor.x;
+            effectRu2.z = pos1.y; //MainRoleManager.actor.z;
+            effectRu2.y = 0;//pos.y; //MainRoleManager.actor.y;
             //effectRu.setGroundXY(role.x, role.z);
-            effectRu.setScale(1);
-            effectRu.rotationY = MainRoleManager.actor.rotationY;
-            effectRu.play(1);
-            SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
-            var rud : RenderParamData3D = new RenderParamData3D(4, "effect", ClientConfig.getEffect("tx_role_jishujian_03"), "tx_role_jishujian_03");
-            var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
-            effectRu.repeat = 0;
-            effectRu.mouseEnable = true;
-            effectRu.x = MainRoleManager.actor.x;
-            effectRu.z = MainRoleManager.actor.z;
-            effectRu.y = 0;//MainRoleManager.actor.y;
+            effectRu2.setScale(1);
+            effectRu2.rotationY = MainRoleManager.actor.rotationY;
+            effectRu2.play(1);
+            SceneManager.addSceneObjToScene(effectRu2/*, true, false, false*/);
+            var rud3 : RenderParamData3D = new RenderParamData3D(4, "effect", ClientConfig.getEffect("tx_role_jishujian_03"), "tx_role_jishujian_03");
+            var effectRu3 : RenderUnit3D = RenderUnit3D.create(rud3, true);
+            effectRu3.repeat = 0;
+            effectRu3.mouseEnable = true;
+            effectRu3.x = MainRoleManager.actor.x;
+            effectRu3.z = MainRoleManager.actor.z;
+            effectRu3.y = 0;//MainRoleManager.actor.y;
             //effectRu.setGroundXY(role.x, role.z);
-            effectRu.setScale(1);
-            effectRu.rotationY = MainRoleManager.actor.rotationY;
-            effectRu.rotationX = 35;
-            effectRu.play(1);
-            SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
+            effectRu3.setScale(1);
+            effectRu3.rotationY = MainRoleManager.actor.rotationY;
+            effectRu3.rotationX = 35;
+            effectRu3.play(1);
+            SceneManager.addSceneObjToScene(effectRu3/*, true, false, false*/);
 		}
 		
 		private function setRenderFunc(funcName : String, name : *, name2 : *, name3 : *) : void {

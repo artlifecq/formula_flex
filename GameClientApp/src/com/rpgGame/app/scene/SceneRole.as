@@ -5,6 +5,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.graphics.BaseHeadFace;
 	import com.rpgGame.app.graphics.BubbleDialogFace;
 	import com.rpgGame.app.manager.AvatarManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.AvatarInfo;
@@ -224,9 +225,9 @@ package com.rpgGame.app.scene
 		
 		private function setFightSoulRoleVisible(flag : Boolean) : void
 		{
-			if (this.data is HeroData && (this.data as HeroData).fightSoulLevel > 0)
+			if (this.data is HeroData && (this.data as HeroData).fightSoulLevel > 0&&isMainChar)
 			{
-				var role : SceneRole = SceneManager.getScene().getSceneObjByID(this.id, SceneCharType.FIGHT_SOUL) as SceneRole;
+				var role : SceneRole = SceneManager.getScene().getSceneObjByID(MainRoleManager.FIGHTSOUL_ID, SceneCharType.FIGHT_SOUL) as SceneRole;
 				if (role)
 				{
 					role.visible = flag;

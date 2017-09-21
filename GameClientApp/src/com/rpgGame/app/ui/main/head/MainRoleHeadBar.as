@@ -31,6 +31,8 @@ package com.rpgGame.app.ui.main.head {
 	
 	import flash.geom.Point;
 	
+	import app.message.EnumBuff;
+	
 	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.utils.filter.GrayFilter;
@@ -334,7 +336,7 @@ package com.rpgGame.app.ui.main.head {
 			var num:int=buffList.length;
 			for(var i:int=0;i<num;i++){
 				var data:BuffData=buffList[i];
-				if(data._data.q_effect_time==-1)
+				if(data._data.q_effect_time==-1||EnumBuff.isVip(data.cfgId))
 					createIcon(data);
 			}
 		}
@@ -359,6 +361,7 @@ package com.rpgGame.app.ui.main.head {
 			for(var i:int=0;i<num;i++){
 				icon=_buffList[i];
 				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
+					icon.buffData=data;
 					return true;
 				}
 			}
@@ -444,10 +447,13 @@ package com.rpgGame.app.ui.main.head {
 		
 		private function addBuff(buffData:BuffData):void
 		{
-			if(buffData.roleId!=MainRoleManager.actor.id||buffData._data.q_effect_time!=-1){
+			if(buffData.roleId!=MainRoleManager.actor.id){
 				return;
 			}
-			
+			if (!EnumBuff.isVip(buffData.cfgId)&&buffData._data.q_effect_time!=-1) 
+			{
+				return;
+			}
 			createIcon(buffData);
 		}
 		

@@ -221,9 +221,9 @@ package com.rpgGame.app.ui.scene
 			MainRoleSearchPathManager.walkToScene(mapId,msg.position.x,msg.position.y,onArrive,10,msg.monsterId);
 		}
 		
-		private function onArrive(id:long):void
+		private function onArrive(id:int):void
 		{
-			var sceneRole:SceneRole= SceneManager.getSceneObjByID(id.ToGID()) as SceneRole;
+			var sceneRole:SceneRole= SceneManager.getSceneObjByID(id) as SceneRole;
 			if(sceneRole){
 				WalkToRoleManager.onCollect(sceneRole);
 			}

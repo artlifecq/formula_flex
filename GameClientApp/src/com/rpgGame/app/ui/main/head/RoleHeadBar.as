@@ -61,8 +61,6 @@ package com.rpgGame.app.ui.main.head
 		
 		override public function refresh():void
 		{
-			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
-			_roleData=SceneRoleSelectManager.selectedRole.data as HeroData;
 			updateNormal();
 			updateAttInfo();
 			updateBuff();
@@ -229,11 +227,11 @@ package com.rpgGame.app.ui.main.head
 					break;
 				case this._skin.btn_zu:
 					//Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
-					Mgr.teamMgr.InvitePlayerJoinTeam(_roleData.serverID);
+					Mgr.teamMgr.InvitePlayerJoinTeam(_roleData.name);
 					break;
 				case this._skin.btn_more:
-					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true,false);
-					MenuManager.showMenu(menus, [_roleData.serverID, getPlayerName()], -1, -1, 80);
+					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.name, true,false);
+					MenuManager.showMenu(menus, [_roleData.name, getPlayerName()], -1, -1, 80);
 					break;
 			}
 		}
@@ -321,5 +319,11 @@ package com.rpgGame.app.ui.main.head
 					break;
 			}
 		}
+
+		public function set roleData(value:HeroData):void
+		{
+			_roleData = value;
+		}
+
 	}
 }

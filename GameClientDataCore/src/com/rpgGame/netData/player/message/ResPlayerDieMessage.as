@@ -12,7 +12,7 @@ package com.rpgGame.netData.player.message{
 	 * 玩家死亡消息
 	 */
 	public class ResPlayerDieMessage extends Message {
-	
+		
 		//死亡的角色Id
 		private var _personId: int;
 		
@@ -36,6 +36,9 @@ package com.rpgGame.netData.player.message{
 		
 		//死亡时间
 		private var _time: int;
+		
+		//伤害技能id
+		private var _skillId: int;
 		
 		//是否弹出复活面板(1弹出 0不弹出)
 		private var _panel: int;
@@ -61,6 +64,8 @@ package com.rpgGame.netData.player.message{
 			writeBean(_position);
 			//死亡时间
 			writeInt(_time);
+			//伤害技能id
+			writeInt(_skillId);
 			//是否弹出复活面板(1弹出 0不弹出)
 			writeByte(_panel);
 			return true;
@@ -86,6 +91,8 @@ package com.rpgGame.netData.player.message{
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//死亡时间
 			_time = readInt();
+			//伤害技能id
+			_skillId = readInt();
 			//是否弹出复活面板(1弹出 0不弹出)
 			_panel = readByte();
 			return true;
@@ -217,6 +224,21 @@ package com.rpgGame.netData.player.message{
 		 */
 		public function set time(value: int): void{
 			this._time = value;
+		}
+		
+		/**
+		 * get 伤害技能id
+		 * @return 
+		 */
+		public function get skillId(): int{
+			return _skillId;
+		}
+		
+		/**
+		 * set 伤害技能id
+		 */
+		public function set skillId(value: int): void{
+			this._skillId = value;
 		}
 		
 		/**

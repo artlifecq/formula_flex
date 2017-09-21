@@ -85,7 +85,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "uiOk";
 			temp.styleName = "ui/common/yiwancheng.png";
 			temp.x = 165;
-			temp.y = 39;
+			temp.y = 1;
 			return temp;
 		}
 

@@ -1,5 +1,4 @@
 package com.rpgGame.netData.team.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.team.message{
 	public class ReqKickTeamMessage extends Message {
 	
 		//被踢的玩家Id
-		private var _playerid: long;
+		private var _playerName: String;
 		
 		
 		/**
@@ -22,7 +21,7 @@ package com.rpgGame.netData.team.message{
 		 */
 		override protected function writing(): Boolean{
 			//被踢的玩家Id
-			writeLong(_playerid);
+			writeString(_playerName);
 			return true;
 		}
 		
@@ -31,7 +30,7 @@ package com.rpgGame.netData.team.message{
 		 */
 		override protected function reading(): Boolean{
 			//被踢的玩家Id
-			_playerid = readLong();
+			_playerName = readString();
 			return true;
 		}
 		
@@ -47,15 +46,15 @@ package com.rpgGame.netData.team.message{
 		 * get 被踢的玩家Id
 		 * @return 
 		 */
-		public function get playerid(): long{
-			return _playerid;
+		public function get playerName(): String{
+			return _playerName;
 		}
 		
 		/**
 		 * set 被踢的玩家Id
 		 */
-		public function set playerid(value: long): void{
-			this._playerid = value;
+		public function set playerName(value: String): void{
+			this._playerName = value;
 		}
 		
 	}

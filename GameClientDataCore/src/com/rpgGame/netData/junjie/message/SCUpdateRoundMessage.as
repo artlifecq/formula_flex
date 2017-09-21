@@ -1,5 +1,4 @@
 package com.rpgGame.netData.junjie.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.junjie.message{
 	public class SCUpdateRoundMessage extends Message {
 	
 		//玩家id
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//对应的军阶模型id
 		private var _modelId: int;
@@ -25,7 +24,7 @@ package com.rpgGame.netData.junjie.message{
 		 */
 		override protected function writing(): Boolean{
 			//玩家id
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//对应的军阶模型id
 			writeInt(_modelId);
 			return true;
@@ -36,7 +35,7 @@ package com.rpgGame.netData.junjie.message{
 		 */
 		override protected function reading(): Boolean{
 			//玩家id
-			_playerId = readLong();
+			_playerId = readShort();
 			//对应的军阶模型id
 			_modelId = readInt();
 			return true;
@@ -54,14 +53,14 @@ package com.rpgGame.netData.junjie.message{
 		 * get 玩家id
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 玩家id
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

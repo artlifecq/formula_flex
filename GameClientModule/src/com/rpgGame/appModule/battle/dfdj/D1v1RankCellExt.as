@@ -55,7 +55,7 @@ package com.rpgGame.appModule.battle.dfdj
 				return;
 			}
 			//我自己
-			if (_data.playerId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+			if (_data.playerId.EqualTo(MainRoleManager.serverID)) 
 			{
 				return;
 			}

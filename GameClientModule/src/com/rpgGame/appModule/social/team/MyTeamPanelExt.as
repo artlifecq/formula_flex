@@ -112,7 +112,7 @@ package com.rpgGame.appModule.social.team
 			_skin.btn_exit.visible=false;
 			if(teamInfo != null && !teamInfo.teamId.IsZero())
 			{
-				var myMemberInfo:TeamMemberInfo = Mgr.teamMgr.teamMemberMap.getValue(MainRoleManager.actorInfo.id);
+				var myMemberInfo:TeamMemberInfo = Mgr.teamMgr.teamMemberMap.getValue(MainRoleManager.actorInfo.name);
 				var len:int = playerList.length;
 				var tLen:int = teamInfo.memberinfo.length;
 				_skin.imgCaptain.visible=true;

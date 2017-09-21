@@ -2,6 +2,7 @@ package com.rpgGame.app.cmdlistener.scene
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.game.engine3D.vo.BaseRole;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -29,6 +30,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.process.StartGame;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
+	import com.rpgGame.app.state.role.action.DeadLaunchStateReference;
 	import com.rpgGame.app.state.role.action.JumpStateReference;
 	import com.rpgGame.app.state.role.control.StopWalkMoveStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
@@ -38,7 +40,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.SceneInteractiveEvent;
+	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
@@ -52,6 +54,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
@@ -164,6 +167,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(103129, onResChangeFactionMessage);
 			// 复活成功
 			SocketConnection.addCmdListener(103114, onResPlayerDieMessage);
+			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
 			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
 			SocketConnection.addCmdListener(101146, onResRoundGoodsExtraMessage);
 			SocketConnection.addCmdListener(101103, onResRoundGoodsMessage);
@@ -179,7 +183,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101221, onSCAreaJumpMessage);//地图跳跃
 			
 			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
-			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
+			
 			SocketConnection.addCmdListener(101222, onSCUpdateTopLeaderMessage);
 			SocketConnection.addCmdListener(101152, onSCSyncPlayerPosMessage);
 			SocketConnection.addCmdListener(103109, onResPlayerStateChangeMessage);
@@ -189,48 +193,6 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101134, onResPetTranMoveMessage);
 			SocketConnection.addCmdListener(103217,onSCUpdatePlayerTitleHandler);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
-			
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//////
-			////// 以下为参考代码，是深圳那边的后台协议，不适用
-			//////
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ADD_SENT_NPC, addSentNpc);
-//			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SYNC_SENT_NPC_POS, onSceneSyncSentNpcPos);
-//			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_ADD_STORY_PROTECT_MONSTER, onAddStoryProtectMonster);
-//			
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_TP_SAME_SCENE, onRecHeroTpSameScene);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_TP_SAME_SCENE_BROADCAST, onHeroTp);
-//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_SCENE_REQUEST_NPC_TRANSPORT, onNpcTransSuccess);
-//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_SCENE_REQUEST_NPC_TRANSPORT_FAIL, onNpcTransFail);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_BEEN_TAUNT_TARGET, onBeenTauntTarget);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_LOST_TAUNT_TARGET, onLostTauntTarget);
-//			
-//			
-//			
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_OBJECT_MAX_LIFE_CHANGE, onRecObjectMaxLifeChange);
-//			
-//			
-//			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_FAIL, onLeaveDungeonFail);
-//			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_SUCCESS, onLeaveDungeonSuccess);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP, onHeroJump);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP_FAIL, onHeroJumpFail);
-//			
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ADD_SCENE_BOX, onSceneAddBoxGoods);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_DROP_SCENE_BOX, onSceneDropBoxGoods);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO, onScenePickUpGoodsInfo);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO_FAIL, onScenePickUpGoodsInfoFail);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS, onScenePickUpGoods);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_FAIL, onScenePickUpGoodsFail);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_NEXT_CAN_PICK_UP_TIME_CHANGED, onScenePickUpGoodsNextCanPickTime);
-//			
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_GET_SURROUNDING_SCENE_INFO_FAIL, onGetMapUnitInfoFiald);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_REPLY_SURROUNDING_SCENE_INFO, onGetMapUnitInfoSucced);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK, onPlunderHurtRank);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK_SELF_AMOUNT, onPlunderHurtRankSelfAmount);
-//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_RESET_HURT_RANK, onResetHurtRank);
-			
 			
 			finish();
 		}
@@ -289,13 +251,6 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 		}
 		
-		private function onResMonterDieMessage(msg:ResMonsterDieMessage):void
-		{
-			// TODO Auto Generated method stub
-			//LostSkillManager.instance().checkExpNotice(msg.killer);
-			EventManager.dispatchEvent(MapEvent.ROLE_DIE,msg.monsterId);
-		}
-		
 		private function onSCUpdateTopLeaderMessage(msg:SCUpdateTopLeaderMessage):void
 		{
 			var info:TopLeaderInfo = msg.topLeaderInfo;
@@ -340,16 +295,20 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 		
 		// 陷阱状态改变
-		private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void {
+		private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void 
+		{
 			var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId) as RenderUnit3D;
-			if (null == trap) {
+			if (null == trap) 
+			{
 				return;
 			}
 			var info : TrapInfo = trap.data as TrapInfo;
-			if (null == info || info.state == msg.state) {
+			if (null == info || info.state == msg.state) 
+			{
 				return;
 			}
-			if (info.effect) {
+			if (info.effect) 
+			{
 				info.effect.stop();
 				SceneManager.removeSceneObjFromScene(info.effect);
 			}
@@ -379,22 +338,6 @@ package com.rpgGame.app.cmdlistener.scene
 				ref.setParams(1,msg.costTime,destPoint,isEnd);
 				role.stateMachine.removeState(RoleStateType.ACTION_JUMP);//先移除状态 避免相同状态冲突
 				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref,true);
-			}
-		}
-		
-		
-		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
-		{
-			if(msg.personId==MainRoleManager.actor.id)
-			{
-				var mapID : int = SceneSwitchManager.currentMapId;
-				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
-				var qmap:Q_map=cfg.getData();
-				if(qmap.q_revive_area!=0||qmap.q_rose_resurrection!=1){
-					AppManager.showApp(AppConstant.DIE_PANEL,msg);
-				}
-				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
-				SceneManager.scene.addGrayScene();
 			}
 		}
 		
@@ -678,6 +621,7 @@ package com.rpgGame.app.cmdlistener.scene
 				onSceneRemoveObject(roleID);
 				SpellEffectRecordCtrl.clear(roleID);
 				GameLog.addShow("删除对象客户端id：" + roleID);
+				trace("==========================服务器通知删除怪物id：" + roleID);
 //				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
 			
@@ -785,7 +729,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var role:SceneRole=SceneManager.getSceneObjByID(msg.petId.ToGID()) as SceneRole;	
 			if(role)
 			{
-				var p:Point=SceneRoleManager.getInstance().getPetPoint(msg.position..x,msg.position.y,0);
+				var p:Point=SceneRoleManager.getInstance().getPetPoint(msg.position.x,msg.position.y,0);
 				role.setGroundXY(msg.position.x,msg.position.y);
 			}
 			else
@@ -1073,6 +1017,142 @@ package com.rpgGame.app.cmdlistener.scene
 			//			}
 		}
 		
+		private static function dealCharDeath(hurtInfo : FightHurtResult, target : SceneRole) : void
+		{
+			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
+			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
+			
+			if(!target.isMainChar && target.type== SceneCharType.PLAYER)
+			{
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				if(qmap.q_select_corpse==1)
+				{
+					target.mouseEnable=true;
+				}
+				else
+				{
+					target.mouseEnable=false;
+				}
+			}
+			else
+			{
+				target.mouseEnable = false;
+			}
+			
+			var deadLaunchHeight : int = hurtInfo.deadLaunchHeight;
+			var deadLaunchDistance : int = hurtInfo.deadLaunchDistance;
+			var deadLaunchSpeed : int = hurtInfo.deadLaunchSpeed;
+			
+			var deadBeatDistance : int = hurtInfo.deadBeatDistance;
+			var deadBeatSpeed : int = hurtInfo.deadBeatSpeed;
+			
+			var deadBeatProbability : int = hurtInfo.deadBeatProbability;
+			var deadLaunchProbability : int = hurtInfo.deadLaunchProbability;
+			
+			var prob : int = ((deadBeatDistance > 0 && deadBeatSpeed > 0) || (deadLaunchHeight > 0 && deadLaunchDistance > 0 && deadLaunchSpeed > 0)) ? 100 * Math.random() : 0;
+			if (prob < deadBeatProbability) //击退
+			{
+				deadLaunchHeight = 0;
+			}
+			var canDeadBeat : Boolean = (target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
+			if (canDeadBeat)
+			{
+				var atkorPos : Point = (hurtInfo.atkor && hurtInfo.atkor.usable) ? new Point(hurtInfo.atkor.x, hurtInfo.atkor.z) : hurtInfo.atkorPos;
+				var ref : DeadLaunchStateReference = target.stateMachine.getReference(DeadLaunchStateReference) as DeadLaunchStateReference;
+				if (deadLaunchHeight > 0)
+					ref.setParams(atkorPos, deadLaunchHeight, deadLaunchDistance, deadLaunchSpeed);
+				else
+					ref.setParams(atkorPos, 0, deadBeatDistance, deadBeatSpeed);
+				target.stateMachine.transition(RoleStateType.ACTION_DEAD_LAUNCH, ref);
+			}
+			else
+			{
+				target.stateMachine.transition(RoleStateType.ACTION_DEATH,null,true);
+			}
+			ClientTriggerManager.deathTrigger(target);
+		}
+		
+		/**
+		 * 怪物死亡协议 
+		 * @param msg
+		 * 
+		 */		
+		private function onResMonterDieMessage(msg:ResMonsterDieMessage):void
+		{
+			//LostSkillManager.instance().checkExpNotice(msg.killer);
+			EventManager.dispatchEvent(MapEvent.ROLE_DIE,msg.monsterId);
+			
+			//怪物死了，播放死亡动画，然后移除
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.monsterId) as SceneRole;
+			if (!role)
+				return;
+			
+			var roleData : RoleData = role.data as RoleData;
+			trace("==========================死亡怪物：" + msg.monsterId);
+			trace("==========================怪物血量：" + roleData.totalStat.hp);
+			
+			var hurtResultVO : FightHurtResult = new FightHurtResult();
+//			trace("技能伤害的创建："+resultInfo.skillId);
+			hurtResultVO.readSpellEffectData(msg.skillId);
+			hurtResultVO.atkorID = msg.killer;//攻击者
+			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
+			if(hurtResultVO.atkor == null)
+			{
+				GameLog.addShow("==========================ResMonsterDieMessage主角ID为：\t" + MainRoleManager.actorID);
+				GameLog.addShow("==========================ResMonsterDieMessage攻击者为空!攻击者服务器ID为：\t" + msg.killer);
+			}
+			
+			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)
+			{
+				hurtResultVO.atkorPos = new Point(hurtResultVO.atkor.x, hurtResultVO.atkor.z);
+			}
+			dealCharDeath(hurtResultVO,role);
+		}
+		
+		/**
+		 * 角色死亡协议 
+		 * @param msg
+		 * 
+		 */		
+		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId) as SceneRole;
+			if (!role)
+				return;
+			var hurtResultVO : FightHurtResult = new FightHurtResult();
+//			trace("技能伤害的创建："+resultInfo.skillId);
+			hurtResultVO.readSpellEffectData(msg.skillId);
+			hurtResultVO.atkorID = msg.attackerid;//攻击者
+			hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
+			if(hurtResultVO.atkor == null)
+			{
+				GameLog.addShow("==========================ResPlayerDieMessage主角ID为：\t" + MainRoleManager.actorID);
+				GameLog.addShow("==========================ResPlayerDieMessage攻击者为空!攻击者服务器ID为：\t" + msg.attackerid);
+			}
+			
+			if(hurtResultVO.atkor && hurtResultVO.atkor.usable)
+			{
+				hurtResultVO.atkorPos = new Point(hurtResultVO.atkor.x, hurtResultVO.atkor.z);
+			}
+			dealCharDeath(hurtResultVO,role);
+			role.setGroundXY(msg.position.x,msg.position.y);//重新设置下玩家死亡的位置
+
+			if(msg.personId==MainRoleManager.actor.id)
+			{
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				if(qmap.q_revive_area!=0||qmap.q_rose_resurrection!=1)
+				{
+					AppManager.showApp(AppConstant.DIE_PANEL,msg);
+				}
+				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
+				SceneManager.scene.addGrayScene();
+			}
+		}
+		
 		/**
 		 * 广播人物战斗属性变化消息( 血量最大血量一类 )
 		 * @param msg
@@ -1085,18 +1165,14 @@ package com.rpgGame.app.cmdlistener.scene
 			var roleData : RoleData = role.data as RoleData;
 			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value,msg.showEffect);
 			
-			if(msg.attributeChange.type==CharAttributeType.LV){//升级了
+			if(msg.attributeChange.type==CharAttributeType.LV)//升级了
+			{
 				var animatData : Q_SpellAnimation=AnimationDataManager.getData(9999);//获取升级动画
 				SpellAnimationHelper.addTargetEffect(	role, 
 					RenderUnitID.LEVEL, 
 					RenderUnitType.LEVEL, 
 					animatData.role_res,
 					animatData.bind_bone);
-			}
-			
-			if (roleData.totalStat.hp <= 0)
-			{
-				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}
 			
 			if(roleData.id == MainRoleManager.actorID)
@@ -1110,16 +1186,6 @@ package com.rpgGame.app.cmdlistener.scene
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
 				//				ReliveManager.autoHideRelive();
-			}else{
-				if(msg.attributeChange.type==CharAttributeType.HP)
-				{
-					var data:MonsterData=role.data as MonsterData;
-					var bornData : Q_monster = MonsterDataManager.getData(data.modelID); 
-					var type:int=bornData.q_monster_type;
-					if(type== MonsterType.NORMAL||MonsterType.ELITE||type== MonsterType.BOSS){
-						EventManager.dispatchEvent(MainPlayerEvent.BOSSHP_CHANGE, role);
-					}
-				}
 			}
 			if (CharAttributeType.SPEED==msg.attributeChange.type) 
 			{
@@ -1139,10 +1205,9 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.preMapID=MainRoleManager.actorInfo.mapID;
-			trace(MainRoleManager.actorInfo.mapID);
+			
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
-			
 		}
 		
 		/**
@@ -1170,46 +1235,48 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResChangeMapFailedMessage(msg : ResChangeMapFailedMessage) : void
 		{
 			ReqLockUtil.unlockReq(101206);
-			GameLog.addShow("现在暂时没有切换场景失败的错误提示信息！因为目前，后端没有告诉客户端为什么会切换场景失败！");return;
+//			GameLog.addShow("现在暂时没有切换场景失败的错误提示信息！因为目前，后端没有告诉客户端为什么会切换场景失败！");return;
 			var failId : int = msg.getId();
 			switch (failId)
 			{
 				case 1:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL1);
-					return;
+					break;
 				case 2:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL2);
-					return;
+					break;
 				case 3:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL3);
-					return;
+					break;
 				case 4:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL4);
-					return;
+					break;
 				case 5:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL5);
-					return;
+					break;
 				case 6:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL6);
-					return;
+					break;
 				case 7:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL7);
-					return;
+					break;
 				case 8:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL8);
-					return;
+					break;
 				case 9:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL9);
-					return;
+					break;
 				case 10:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL10);
-					return;
+					break;
 				case 11:
 					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL11);
-					return;
+					break;
+				default:
+					NoticeManager.showHint(failId.toString());;
+					break;
 			}
 		}
-		
 		
 		private function onResRoundGoodsMessage(msg:ResRoundGoodsMessage):void
 		{

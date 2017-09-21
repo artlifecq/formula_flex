@@ -66,6 +66,7 @@ package com.rpgGame.app.manager
 		
 		private var _teamInfo:TeamInfo;
 		private var _captain:TeamMemberInfo;
+		//现在改成名字映射了
 		private var _teamMemberMap:HashMap = new HashMap();
 		
 		
@@ -114,7 +115,7 @@ package com.rpgGame.app.manager
 				{
 					continue;
 				}
-				tmp=SceneManager.getSceneObjByID(mem.memberId.ToGID()) as SceneRole;
+				tmp=SceneManager.getScenePlayerByName(mem.memberName) as SceneRole;
 				if (!tmp) 
 				{
 					continue;
@@ -151,29 +152,29 @@ package com.rpgGame.app.manager
 		{
 			if(_captain == null)
 				return false;
-			return _captain.memberId.EqualTo(MainRoleManager.actorInfo.serverID)
+			return _captain.memberId.EqualTo(MainRoleManager.serverID)
 		}
-		public function getPlayerIsCaptain(playerId:long):Boolean
+		public function getPlayerIsCaptain(playerId:String):Boolean
 		{
 			if(_captain == null)
 				return false;
-			return _captain.memberId.EqualTo(playerId);
+			return _captain.memberName==playerId;
 		}
-		public function isInMyTeam(playerId:long):Boolean
+		public function isInMyTeam(playerId:String):Boolean
+		{
+			if (!hasTeam||!playerId) 
+			{
+				return false;
+			}
+			return _teamMemberMap.containsKey(playerId);
+		}
+		public function isMyCaptian(playerName:String):Boolean
 		{
 			if (!hasTeam) 
 			{
 				return false;
 			}
-			return _teamMemberMap.containsKey(playerId.ToGID());
-		}
-		public function isMyCaptian(player:long):Boolean
-		{
-			if (!hasTeam) 
-			{
-				return false;
-			}
-			return getPlayerIsCaptain(player);
+			return getPlayerIsCaptain(playerName);
 		}
 		/**
 		 * 
@@ -232,7 +233,7 @@ package com.rpgGame.app.manager
 		/**
 		 * 邀请玩家组队
 		 */		
-		public function InvitePlayerJoinTeam(playerId:long):void
+		public function InvitePlayerJoinTeam(playerId:String):void
 		{
 			if(_teamInfo != null && !_teamInfo.teamId.IsZero())
 			{
@@ -296,7 +297,7 @@ package com.rpgGame.app.manager
 		public function UpdatePlayerTeamInfo(teamId:long , playerId:long):void
 		{
 			//主要处理主玩家的短线重连
-			if (playerId.ToGID()==MainRoleManager.actorID) 
+			if (MainRoleManager.isSelfByServerId(playerId)) 
 			{
 				if (teamId.IsZero()) 
 				{
@@ -313,7 +314,8 @@ package com.rpgGame.app.manager
 		{
 			if(teamInfo != null)
 			{
-				if(MainRoleManager.actorInfo.id != playreId.ToGID())
+				var name:String;
+				if(MainRoleManager.serverGid != playreId.ToGID())
 				{
 					var mem:TeamMemberInfo;
 					for each(mem in teamInfo.memberinfo)
@@ -322,12 +324,17 @@ package com.rpgGame.app.manager
 						{
 							var idx:int = teamInfo.memberinfo.indexOf( mem );
 							teamInfo.memberinfo.splice( idx , 1);
+							name=mem.memberName;
 							break;
 						}
 					}
 				}
+				else
+				{
+					name=MainRoleManager.actorInfo.name;
+				}
 				var isDismiss:Boolean = false;
-				if(teamInfo.memberinfo.length <= 1 || MainRoleManager.actorInfo.id == playreId.ToGID())
+				if(teamInfo.memberinfo.length <= 1 || MainRoleManager.serverGid == playreId.ToGID())
 				{
 					teamInfo.memberinfo.length = 0;
 					teamInfo.teamId.Clear();
@@ -336,7 +343,7 @@ package com.rpgGame.app.manager
 				}
 				TeamInfoChange( teamInfo , false , isDismiss );
 				
-				var scenePlayer:SceneRole=SceneManager.getSceneObjByID(playreId.ToGID()) as SceneRole;
+				var scenePlayer:SceneRole=SceneManager.getScenePlayerByName(name) as SceneRole;
 				if(scenePlayer)
 				{
 					(scenePlayer.headFace as HeadFace).checkBloodState();
@@ -352,7 +359,7 @@ package com.rpgGame.app.manager
 				for each(var mem:TeamMemberInfo in teamInfo.memberinfo)
 				{
 					gid = mem.memberId.ToGID();
-					_teamMemberMap.put( mem.memberId.ToGID() , mem);
+					_teamMemberMap.put( mem.memberName , mem);
 					var scenePlayer:SceneRole=SceneManager.getSceneObjByID(gid) as SceneRole;
 					if(scenePlayer)
 					{
@@ -379,7 +386,7 @@ package com.rpgGame.app.manager
 			var players:Vector.<SceneRole> = SceneManager.getScenePlayerList();
 			for each (var tp:SceneRole in players) 
 			{
-				HeadFace(tp.headFace).updateTeamFlag(isMyCaptian((tp.data as HeroData).serverID));
+				HeadFace(tp.headFace).updateTeamFlag(isMyCaptian((tp.data as HeroData).name));
 				
 			}
 			
@@ -402,35 +409,7 @@ package com.rpgGame.app.manager
 			//				}
 			//			}
 		}
-		/**
-		 * 是否是队友
-		 * @param gid
-		 */		
-		public function isTeammate(gid:int):Boolean
-		{
-			return teamMemberMap.containsKey( gid );
-		}
-		
-		/**
-		 * 队友是否在同一张地图
-		 * @param gid
-		 */		
-		public function teammateIsSameMap(gid:int):Boolean
-		{
-			if(teamMemberMap.containsKey( gid ))
-			{
-				var myMem:TeamMemberInfo = teamMemberMap.getValue( MainRoleManager.actorInfo.serverID );
-				var mem:TeamMemberInfo = teamMemberMap.getValue( gid );
-				if(mem != null && myMem !=null && mem.memberMapModelID == MapDataManager.currentScene.sceneId  && myMem.memberMapUniqueID.EqualTo( mem.memberMapUniqueID))
-					return true;
-				else
-					return false;
-			}else
-			{
-				return false;
-			}
-			
-		}
+
 		
 		public function isTeamateById(teamId:long):Boolean
 		{
@@ -632,7 +611,7 @@ package com.rpgGame.app.manager
 		public function getNearState(playerId:long):int
 		{
 			var mem:TeamMemberInfo = getTeamMember(playerId);
-			if (playerId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+			if (playerId.EqualTo(MainRoleManager.serverID)) 
 			{
 				return 0;
 			}
@@ -650,11 +629,7 @@ package com.rpgGame.app.manager
 			}
 			return 0;
 		}
-		/***玩家头像下面组队***/
-		public function reqCreateTeamWithPlayer(player:long):void
-		{
-			TeamSender.reqCreateTeamWithPlayer(player);
-		}
+	
 		
 		public function clearAllNotice():void
 		{

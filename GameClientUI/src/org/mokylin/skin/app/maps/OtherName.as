@@ -44,9 +44,9 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico = temp;
 			temp.name = "ico";
-			temp.styleName = "ui/app/maps/luxian.png";
-			temp.x = 42;
-			temp.y = 21;
+			temp.styleName = "ui/app/maps/baoxiang.png";
+			temp.x = 35;
+			temp.y = 22;
 			return temp;
 		}
 

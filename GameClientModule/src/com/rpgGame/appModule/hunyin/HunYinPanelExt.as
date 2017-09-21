@@ -394,7 +394,7 @@ package com.rpgGame.appModule.hunyin
 		protected function onNameHandler(sex:int):void
 		{
 			if(MainRoleManager.actorInfo.sex==sex) return;
-			var menus : Array = MenuUtil.getPlayerTargetMenu(Mgr.hunyinMgr.marriageInfos.marriagePlayerId.ToGID(), true);
+			var menus : Array = MenuUtil.getPlayerTargetMenu(Mgr.hunyinMgr.marriageInfos.marriagePlayerName, true);
 			MenuManager.showMenu(menus, [Mgr.hunyinMgr.marriageInfos.marriagePlayerId.hexValue, Mgr.hunyinMgr.marriageInfos.marriagePlayerName], -1, -1, 80);
 		}
 		

@@ -49,11 +49,25 @@ package com.rpgGame.app.manager.role
 		/**主角*/
 		private static var _actor : SceneRole;
 		private static var _actroInfo : HeroData;
-		
+		private static var _serverGid:Number;
+		private static var _serverID:long;
+		public static const FIGHTSOUL_ID:int=999999;
 		public function MainRoleManager()
 		{
 		}
 		
+		
+
+		public static function get serverID():long
+		{
+			return _serverID;
+		}
+
+		public static function get serverGid():Number
+		{
+			return _serverGid;
+		}
+
 		/**
 		 * 获取个人用户信息
 		 * @return
@@ -67,7 +81,7 @@ package com.rpgGame.app.manager.role
 		
 		
 		/**
-		 * 获取个人用户ID
+		 * 获取个人用户ID,只是场景中的id
 		 * @return
 		 *
 		 */
@@ -95,7 +109,7 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function isSelfByServerId(id : long) : Boolean
 		{
-			return id.ToGID() == actorInfo.serverID.ToGID();
+			return id.ToGID() == _serverGid;
 		}
 		
 		/**主角*/
@@ -115,6 +129,8 @@ package com.rpgGame.app.manager.role
 		public static function setLoginData(heroInfo : MyPlayerInfo) : void
 		{
 			//角色信息
+			_serverID=heroInfo.personId;
+			_serverGid=_serverID.ToGID();
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
 			PKMamager.setPkMode(heroInfo.pkType);
 			//			FunctionOpenManager.openFunctionByLevel(actorInfo.totalStat.level,false);
@@ -232,9 +248,12 @@ package com.rpgGame.app.manager.role
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var data:HeroData=MainRoleManager.actor.data as HeroData;
-			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1){
+			if(sceneData.mapType==EnumMapType.MAP_TYPE_WCZB&&data.guildIsLeader==1)
+			{
 				MainRoleManager.actor.setScale(data.sizeScale*1.5);//帮会战统帅放大到1.5倍
-			}else{
+			}
+			else
+			{
 				MainRoleManager.actor.setScale(data.sizeScale);
 			}
 		}
