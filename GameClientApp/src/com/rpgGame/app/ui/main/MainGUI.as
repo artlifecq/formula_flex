@@ -292,7 +292,7 @@ package com.rpgGame.app.ui.main
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showHead);
-			EventManager.addEvent(MainPlayerEvent.BOSSHP_CHANGE, showHead);
+			EventManager.addEvent(MainPlayerEvent.MONSTERHP_CHANGE, showHead);
 			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,showLowBlood);
 			EventManager.addEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);

@@ -78,6 +78,7 @@ package com.rpgGame.app.fight.spell
 			hurtResultVO.hasPositionFly = resultInfo.fightResult == 16;
 			hurtResultVO.stiffTime = hurtResultVO.deadLaunchDistance/hurtResultVO.deadLaunchSpeed * 1000;
 			
+			//受击者信息
 			hurtResultVO.targetID = resultInfo.targetId;//目标
 			hurtResultVO.targetRole = SceneManager.getSceneObjByID(hurtResultVO.targetID) as BaseRole;
 			if(hurtResultVO.targetRole == null)
