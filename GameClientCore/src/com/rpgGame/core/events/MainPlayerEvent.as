@@ -20,16 +20,6 @@ package com.rpgGame.core.events
 		public static const NOWEXP_CHANGE:int = UNIQUEID.NEXT;
 		/** 经验最大值变化*/
 		public static const MAXEXP_CHANGE:int = UNIQUEID.NEXT;
-<<<<<<< HEAD
-=======
-		/** boss血量变化*/
-		public static const BOSSHP_CHANGE:int = UNIQUEID.NEXT;
-		/**
-		 * 怪物，boss的血条在变化 
-		 */		
-		public static const MONSTERHP_CHANGE:int = UNIQUEID.NEXT;
->>>>>>> 3df5faeec64dd58f6b2c8fe941a39a8db43deafd
-		
 		/** PK模式变化*/
 		public static const PK_MODE_CHANGE:int = UNIQUEID.NEXT;
 		/** PK值变化*/
