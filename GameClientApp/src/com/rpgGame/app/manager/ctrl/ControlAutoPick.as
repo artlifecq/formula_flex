@@ -136,7 +136,7 @@ package  com.rpgGame.app.manager.ctrl
 				
 			}
 			var owerId:Number=data.goodsDatas.ownerId.ToGID();
-			var myId:int=MainRoleManager.actorInfo.id;
+			var myId:int=MainRoleManager.serverGid;
 			if (owerId==0) 
 			{
 				return false;
