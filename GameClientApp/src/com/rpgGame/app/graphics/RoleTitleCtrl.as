@@ -64,7 +64,7 @@ package com.rpgGame.app.graphics
 			var tmp:Array=[];
 			for (var k:int = 0; k <len; k++) 
 			{
-				if (allArr[k].lenght) 
+				if (allArr[k].length) 
 				{
 					tmp.push(allArr[k][0]);
 				}
@@ -74,7 +74,10 @@ package com.rpgGame.app.graphics
 			{
 				addTitle(tmp[j]);
 			}
-			
+			if (len>0) 
+			{
+				sortTitle();
+			}
 		}
 		private function sortSameType(arr:Array):void
 		{

@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.shop
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.GlobalFunction;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -9,6 +11,7 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.core.events.ShopEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
@@ -40,6 +43,9 @@ package com.rpgGame.appModule.shop
 		private var cellList:Vector.<MallItemExt>=new Vector.<MallItemExt>();
 		private var shopVo:ShopVo;
 		private var _shopBtns:Array;
+		
+		private var _shangchengEftContaner1:Inter3DContainer;
+		private var _shangchengEff:InterObject3D;
 		public function MallMainPanelExt()
 		{
 			_skin=new ShangCheng_Skin();
@@ -51,6 +57,9 @@ package com.rpgGame.appModule.shop
 		}
 		private function init():void
 		{
+			_shangchengEftContaner1=new Inter3DContainer();
+			_skin.container.addChildAt(_shangchengEftContaner1,1);
+			_shangchengEff=_shangchengEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_shangcheng"),662,438,0);
 			_shopBtns=[_skin.btnRexiao,_skin.btnBianqiang,_skin.btnLijin,_skin.btnVip];
 			var cell:MallItemExt;
 			var startX:int=410;
@@ -68,7 +77,7 @@ package com.rpgGame.appModule.shop
 		}
 		private function initEvent():void
 		{
-//			_skin.tab_nv.addEventListener(Event.CHANGE, onTab);
+			//			_skin.tab_nv.addEventListener(Event.CHANGE, onTab);
 			
 		}
 		
