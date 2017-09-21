@@ -71,6 +71,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		override protected function onShow() : void
 		{
 			super.onShow();
+			startAutoWalk();
 			addEvent();
 			enterZone();
 //			GameAlert.showAlert(alertOk,onAlert);

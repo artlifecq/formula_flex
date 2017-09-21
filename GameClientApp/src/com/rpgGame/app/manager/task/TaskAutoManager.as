@@ -487,12 +487,12 @@ package com.rpgGame.app.manager.task
 					TaskUtil.postTaskWalk(postPath,gotoTaskonArrive);
 					break;
 				case TaskType.SUB_QUIT_ZONE:
-					FunctionOpenManager.openPanelByFuncID(int(TaskMissionManager.getTaskDataByType(taskType).q_emid));
+					FunctionOpenManager.openPanelBypanelId(int(TaskMissionManager.getTaskDataByType(taskType).q_emid));
 					TweenLite.killDelayedCallsTo(teamMatchVote);
 					TweenLite.delayedCall(5, teamMatchVote);
 					break;
 				default:
-					FunctionOpenManager.openPanelByFuncID(int(TaskMissionManager.getTaskDataByType(taskType).q_emid));
+					FunctionOpenManager.openPanelBypanelId(int(TaskMissionManager.getTaskDataByType(taskType).q_emid));
 					break;
 			}
 			

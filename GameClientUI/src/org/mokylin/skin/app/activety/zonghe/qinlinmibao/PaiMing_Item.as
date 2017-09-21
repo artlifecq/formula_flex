@@ -3,6 +3,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
@@ -20,6 +21,12 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 
 		public var lbNum:feathers.controls.Label;
 
+		public var uiMy:feathers.controls.UIAsset;
+
+		public var uiOver:feathers.controls.UIAsset;
+
+		public var uiSelect:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -29,9 +36,9 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			super();
 			
 			this.currentState = "normal";
-			this.height = 20;
+			this.height = 23;
 			this.width = 246;
-			this.elementsContent = [lbNo_i(),lbName_i(),lbNum_i()];
+			this.elementsContent = [lbNo_i(),lbName_i(),lbNum_i(),uiMy_i(),uiSelect_i(),uiOver_i()];
 			
 			states = {
 			};
@@ -52,8 +59,8 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 145;
-			temp.x = 22;
-			temp.y = 0;
+			temp.x = 31;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -66,9 +73,9 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 25;
-			temp.x = 0;
-			temp.y = 0;
+			temp.width = 49;
+			temp.x = -6;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -77,12 +84,51 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.text = "250024(52%)";
+			temp.text = "250024";
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 88;
-			temp.x = 163;
+			temp.width = 70;
+			temp.x = 177;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function uiMy_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiMy = temp;
+			temp.name = "uiMy";
+			temp.height = 23;
+			temp.styleName = "ui/common/hover/bossSelect.png";
+			temp.width = 246;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.height = 23;
+			temp.styleName = "ui/common/hover/bossOver.png";
+			temp.width = 246;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function uiSelect_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiSelect = temp;
+			temp.name = "uiSelect";
+			temp.height = 23;
+			temp.styleName = "ui/common/hover/bossOver.png";
+			temp.width = 246;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}

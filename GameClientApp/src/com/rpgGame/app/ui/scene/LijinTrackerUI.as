@@ -182,6 +182,7 @@ package com.rpgGame.app.ui.scene
 			//setReword();
 			//setUisite();
 			//setQianduoType();
+			startAutoWalk();
 			_skin.lbTime1.text="00:00:00";
 			_skin.grpshuaxin.visible=false;
 			_skin.grpto.visible=false;
@@ -203,6 +204,10 @@ package com.rpgGame.app.ui.scene
 			if(tween)tween.kill();
 			tween=null;
 			alertOk=null;
+		}
+		override protected function autoWalk():void
+		{
+			taskAuto(true);
 		}
 		private function hidePanel():void
 		{

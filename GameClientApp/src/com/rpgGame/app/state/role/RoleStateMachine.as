@@ -191,14 +191,7 @@ package com.rpgGame.app.state.role
 		{
 			if (_role && _role.usable)
 			{
-				var transState : IState = extractState(type);
-				var currState : IState = _currStates[transState.tribe];
-				var pass:Boolean=super.transition(type, ref, force, allowQueue, dumpTypes);
-				if(_role.isMainChar&&type==RoleStateType.CONTROL_WALK_MOVE)
-				{
-					Lyt.a("走路状态"+pass+"-C"+(currState?""+currState.type:"null")+"-T"+transState.type);
-				}
-				return pass;
+				return super.transition(type, ref, force, allowQueue, dumpTypes);
 			}
 			return false;
 		}

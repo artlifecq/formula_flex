@@ -299,6 +299,7 @@ package com.rpgGame.app.state.role
 				{
 					Lyt.a("walk-00000000000000000");
 				}
+				
 			}
 			
 			return walkRole.stateMachine.isWalkMoving;

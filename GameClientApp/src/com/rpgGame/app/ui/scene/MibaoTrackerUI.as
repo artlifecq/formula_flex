@@ -40,6 +40,7 @@ package com.rpgGame.app.ui.scene
 	import flash.geom.Point;
 	
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
@@ -49,6 +50,9 @@ package com.rpgGame.app.ui.scene
 	import org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	import utils.TimerServer;
 	
@@ -92,9 +96,49 @@ package com.rpgGame.app.ui.scene
 					break;
 			}
 		}
+		
+		private var isOutTouch:Boolean=true;
+		private function pmOnTouch(e : TouchEvent) : void
+		{
+			var target:SkinnableContainer=e.currentTarget as SkinnableContainer;
+			var item:PaiMing_Item=target.skin as PaiMing_Item;
+			
+			
+			var touch1 : Touch;
+			var touch2 : Touch;
+			touch1 = e.getTouch(target, TouchPhase.HOVER);
+			if (touch1 != null&&isOutTouch)
+			{
+				item.uiOver.visible=true;
+				isOutTouch=false;
+				return;
+			}
+			touch1 = e.getTouch(target);
+			touch2 = e.getTouch(target, TouchPhase.ENDED);
+			if (touch1 == null||touch2 != null)
+			{
+				item.uiOver.visible=false;
+				isOutTouch=true;
+				return;
+			}
+			touch2 = e.getTouch(target, TouchPhase.BEGAN);
+			if (touch2 != null)
+			{
+				for(var i:int=0;i<hitList.length;i++)
+				{
+					hitList[i].uiSelect.visible=false;
+				}
+				item.uiSelect.visible=true;
+				return;
+			}
+			
+			
+		}
+		
 		override protected function onShow() : void
 		{
 			super.onShow();
+			startAutoWalk();
 			addEvent();
 			setUiRefresh();
 			setUisite();
@@ -110,6 +154,12 @@ package com.rpgGame.app.ui.scene
 			icoList2Group=null;
 			alertOk=null;
 		}
+		override protected function autoWalk():void
+		{
+			walkWave(0);
+		}
+			
+		
 		private function hidePanel():void
 		{
 			AppManager.hideApp(AppConstant.ACTIVETY_MIBAO_RESULT);
@@ -271,15 +321,16 @@ package com.rpgGame.app.ui.scene
 		private function setHurtRank(msg:ResBossDamageInfosToClientMessage):void
 		{
 			var i:int;
-			var length:int=msg.BossDamageInfos.length<=3?msg.BossDamageInfos.length:3
+			var length:int=msg.BossDamageInfos.length<=3?msg.BossDamageInfos.length:3;
 			for(i=0;i<length;i++)
 			{
-				hitList[i].lbName.text=MainRoleManager.getPlayerName(msg.BossDamageInfos[i].playerName,6);
-				hitList[i].lbNum.text=msg.BossDamageInfos[i].damage+"("+int(msg.BossDamageInfos[i].damage/msg.totalHp*100)+"%)";
+				hitList[i].lbName.text=msg.BossDamageInfos[i].playerName/*MainRoleManager.getPlayerName(msg.BossDamageInfos[i].playerName,6)*/;
+				hitList[i].lbNum.text=""+msg.BossDamageInfos[i].damage/*+"("+int(msg.BossDamageInfos[i].damage/msg.totalHp*100)+"%)"*/;
+				hitList[i].uiMy.visible=msg.BossDamageInfos[i].playerName==MainRoleManager.actorInfo.name;
 			}
 			hitList[3].lbNo.text=msg.rank.toString();
-			hitList[3].lbName.text=MainRoleManager.getPlayerName(MainRoleManager.actorInfo.name,6);
-			hitList[3].lbNum.text=msg.damage+"("+int(msg.damage/msg.totalHp*100)+"%)";
+			hitList[3].lbName.text=MainRoleManager.actorInfo.name/*MainRoleManager.getPlayerName(MainRoleManager.actorInfo.name,6)*/;
+			hitList[3].lbNum.text=""+msg.damage/*+"("+int(msg.damage/msg.totalHp*100)+"%)"*/;
 			if(MibaoManager.getBossHp()>0)
 			{
 				setShanghaiReword(int(msg.damage/MibaoManager.getBossHp()*100));
@@ -339,6 +390,7 @@ package com.rpgGame.app.ui.scene
 			skinList.push(icoList1Group);
 			skinList.push(_skin.sec_navi2);
 			skinList.push(_skin.shanghai_List);
+			skinList.push(_skin.sec_navi4);
 			skinList.push(icoList2Group);
 			skinList.push(_skin.sec_info);
 			skinList.push(_skin.sec_subbut1);
@@ -351,16 +403,24 @@ package com.rpgGame.app.ui.scene
 				killOkList.push(_skin["jisha"+i]);
 				TaskUtil.addLabelEvet(_skin["lbItem"+i]);
 			}
-			
+			for(i=0;i<3;i++)
+			{
+				
+			}
 			hitList=new Vector.<PaiMing_Item>();
 			for(i=0;i<4;i++)
 			{
-				hitList.push(_skin["pmItem"+i].skin as PaiMing_Item);
+				_skin["pmItem"+i].addEventListener(TouchEvent.TOUCH, pmOnTouch);
+				var item:PaiMing_Item=_skin["pmItem"+i].skin as PaiMing_Item;
+				item.uiOver.visible=false;
+				item.uiSelect.visible=false;
+				item.uiMy.visible=false;
+				hitList.push(item);
 			}
 			
-			hitList[3].lbNo.color=16771584;
-			hitList[3].lbName.color=16771584;
-			hitList[3].lbNum.color=16771584;
+			hitList[3].lbNo.color=65331;
+			hitList[3].lbName.color=65331;
+			hitList[3].lbNum.color=65331;
 			
 			alertOk=new AlertSetInfo(LangAlertInfo.MIBAO_EXIT_SURE);
 			TipTargetManager.show( _skin.btnMsg,TargetTipsMaker.makeSimpleTextTips(ActivetyCfgData.getActInfoTextById(7)));
