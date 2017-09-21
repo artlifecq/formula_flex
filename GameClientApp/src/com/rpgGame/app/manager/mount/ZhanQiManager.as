@@ -129,7 +129,7 @@ package com.rpgGame.app.manager.mount
 		 * */
 		public function onSCWarFlagModelIdChangMessage(msg:SCWarFlagModelIdChangMessage):void
 		{
-			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId)as SceneRole;
 			if(role)
 			{
 				role.updateFlag(msg.warFlagModelid);

@@ -156,7 +156,7 @@ package com.rpgGame.app.manager
 		public function playerRankTileChange(msg:SCUpdateTopLeaderTitleMessage):void
 		{
 			// TODO Auto Generated method stub
-			var player:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			var player:SceneRole=SceneManager.getSceneObjByID(msg.playerId) as SceneRole;
 			if (player) 
 			{
 				(player.data as HeroData).topLeaderTypes=msg.topLeaderTypes;

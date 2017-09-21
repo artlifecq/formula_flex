@@ -723,7 +723,26 @@ package com.rpgGame.app.manager.guild
 			}
 			return null;
 		}
-		
+		/**
+		 * 根据id获取帮派信息 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public function getGuildMemberInfoByName(name:String):GuildMemberInfo
+		{
+			if(_memberList == null)
+				return null;
+			var length:int = _memberList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(_memberList[i].name == name)
+				{
+					return _memberList[i];
+				}
+			}
+			return null;
+		}
 		public function setGuildApplyListInfo(list:Vector.<GuildApplyInfo>):void
 		{
 			_hasApply=false;
@@ -1086,7 +1105,7 @@ package com.rpgGame.app.manager.guild
 		public function onG2CNotifyGuildMemberActiveHandler(msg:G2CNotifyGuildMemberActiveMessage):void
 		{
 			// TODO Auto Generated method stub
-			if (msg.playerId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+			if (msg.playerId.EqualTo(MainRoleManager.serverID)) 
 			{
 				selfMemberInfo.allActive=msg.allActive;
 				selfMemberInfo.contribution=msg.contribution;

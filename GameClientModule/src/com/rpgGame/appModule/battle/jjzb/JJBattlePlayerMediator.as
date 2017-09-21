@@ -74,7 +74,7 @@ package    com.rpgGame.appModule.battle.jjzb
 			{
 				return;
 			}
-			if (_data.playerId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+			if (_data.playerId.EqualTo(MainRoleManager.serverID)) 
 			{
 				return;
 			}

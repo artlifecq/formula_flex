@@ -315,7 +315,7 @@ package com.rpgGame.coreData.role
 		public static function setUserLoginInfo(data : HeroData, heroInfo : MyPlayerInfo) : void
 		{
 			///角色基本信息
-			data.serverID = heroInfo.personId;
+			//data.serverID = heroInfo.personId;
 			data.id = heroInfo.personId.ToGID();
 			data.name = heroInfo.name;
 			data.mapID = heroInfo.mapModelId;
@@ -377,7 +377,7 @@ package com.rpgGame.coreData.role
 			//			if (heroProto.relationModuleObj)
 			//				info.mood = heroProto.relationModuleObj.hasMood ? BytesUtil.bytes2UTF(heroProto.relationModuleObj.mood) : "";
 			//			info.spellList.setHeroData(heroProto.spellModuleObj.learnRaceSpells);
-			GameLog.addShow("主角的服务器id为：  " + data.serverID.ToString());
+			//GameLog.addShow("主角的服务器id为：  " + data.serverID.ToString());
 		}
 		
 		public  function setSomeType(type:int,value:int):void

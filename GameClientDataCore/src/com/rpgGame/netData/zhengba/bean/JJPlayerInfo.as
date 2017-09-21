@@ -1,6 +1,5 @@
 package com.rpgGame.netData.zhengba.bean{
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -16,7 +15,7 @@ package com.rpgGame.netData.zhengba.bean{
 	public class JJPlayerInfo extends Bean {
 	
 		//敌方id
-		private var _enemyPlayerId: long;
+		private var _enemyPlayerId: int;
 		
 		//敌方名字
 		private var _enemyName: String;
@@ -38,7 +37,7 @@ package com.rpgGame.netData.zhengba.bean{
 		 */
 		override protected function writing(): Boolean{
 			//敌方id
-			writeLong(_enemyPlayerId);
+			writeShort(_enemyPlayerId);
 			//敌方名字
 			writeString(_enemyName);
 			//敌方血量
@@ -57,7 +56,7 @@ package com.rpgGame.netData.zhengba.bean{
 		 */
 		override protected function reading(): Boolean{
 			//敌方id
-			_enemyPlayerId = readLong();
+			_enemyPlayerId = readShort();
 			//敌方名字
 			_enemyName = readString();
 			//敌方血量
@@ -75,14 +74,14 @@ package com.rpgGame.netData.zhengba.bean{
 		 * get 敌方id
 		 * @return 
 		 */
-		public function get enemyPlayerId(): long{
+		public function get enemyPlayerId(): int{
 			return _enemyPlayerId;
 		}
 		
 		/**
 		 * set 敌方id
 		 */
-		public function set enemyPlayerId(value: long): void{
+		public function set enemyPlayerId(value: int): void{
 			this._enemyPlayerId = value;
 		}
 		

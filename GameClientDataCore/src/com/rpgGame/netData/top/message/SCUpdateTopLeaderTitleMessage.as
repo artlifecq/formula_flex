@@ -1,5 +1,4 @@
 package com.rpgGame.netData.top.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.top.message{
 	public class SCUpdateTopLeaderTitleMessage extends Message {
 	
 		//玩家id
-		private var _playerId: long;
+		private var _playerId: int;
 		
 		//称号列表
 		private var _topLeaderTypes: Vector.<int> = new Vector.<int>();
@@ -25,7 +24,7 @@ package com.rpgGame.netData.top.message{
 		override protected function writing(): Boolean{
 			var i: int = 0;
 			//玩家id
-			writeLong(_playerId);
+			writeShort(_playerId);
 			//称号列表
 			writeShort(_topLeaderTypes.length);
 			for (i = 0; i < _topLeaderTypes.length; i++) {
@@ -40,7 +39,7 @@ package com.rpgGame.netData.top.message{
 		override protected function reading(): Boolean{
 			var i: int = 0;
 			//玩家id
-			_playerId = readLong();
+			_playerId = readShort();
 			//称号列表
 			var topLeaderTypes_length : int = readShort();
 			for (i = 0; i < topLeaderTypes_length; i++) {
@@ -61,14 +60,14 @@ package com.rpgGame.netData.top.message{
 		 * get 玩家id
 		 * @return 
 		 */
-		public function get playerId(): long{
+		public function get playerId(): int{
 			return _playerId;
 		}
 		
 		/**
 		 * set 玩家id
 		 */
-		public function set playerId(value: long): void{
+		public function set playerId(value: int): void{
 			this._playerId = value;
 		}
 		

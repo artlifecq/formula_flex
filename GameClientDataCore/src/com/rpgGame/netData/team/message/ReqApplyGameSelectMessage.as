@@ -16,8 +16,8 @@ package com.rpgGame.netData.team.message{
 		//队伍Id
 		private var _teamid: long;
 		
-		//玩家ID
-		private var _playerid: long;
+		//玩家名称
+		private var _playerName: String;
 		
 		//1同意，0拒绝
 		private var _select: int;
@@ -29,8 +29,8 @@ package com.rpgGame.netData.team.message{
 		override protected function writing(): Boolean{
 			//队伍Id
 			writeLong(_teamid);
-			//玩家ID
-			writeLong(_playerid);
+			//玩家名称
+			writeString(_playerName);
 			//1同意，0拒绝
 			writeByte(_select);
 			return true;
@@ -42,8 +42,8 @@ package com.rpgGame.netData.team.message{
 		override protected function reading(): Boolean{
 			//队伍Id
 			_teamid = readLong();
-			//玩家ID
-			_playerid = readLong();
+			//玩家名称
+			_playerName = readString();
 			//1同意，0拒绝
 			_select = readByte();
 			return true;
@@ -73,18 +73,18 @@ package com.rpgGame.netData.team.message{
 		}
 		
 		/**
-		 * get 玩家ID
+		 * get 玩家名称
 		 * @return 
 		 */
-		public function get playerid(): long{
-			return _playerid;
+		public function get playerName(): String{
+			return _playerName;
 		}
 		
 		/**
-		 * set 玩家ID
+		 * set 玩家名称
 		 */
-		public function set playerid(value: long): void{
-			this._playerid = value;
+		public function set playerName(value: String): void{
+			this._playerName = value;
 		}
 		
 		/**

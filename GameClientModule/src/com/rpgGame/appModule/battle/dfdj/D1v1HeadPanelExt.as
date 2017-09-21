@@ -100,7 +100,7 @@ package com.rpgGame.appModule.battle.dfdj
 			skinR.role_xuecao.x=_rightHpX;
 			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(msg.enemyJob,msg.enemySex,"middle");
 			_rightHeadIcon.scaleX=-1;
-			_otherGid=msg.enemyPlayerId.ToGID();
+			_otherGid=msg.enemyPlayerId;
 			CharAttributeManager.addEvent(MainRoleManager.actorInfo.id,CharAttributeType.HP,myHpChange);
 			CharAttributeManager.addEvent(_otherGid,CharAttributeType.HP,otherHpChange);
 		}

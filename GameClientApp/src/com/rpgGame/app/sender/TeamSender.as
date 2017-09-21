@@ -31,22 +31,18 @@ package com.rpgGame.app.sender
 	public class TeamSender extends BaseSender
 	{
 		//====================== 请求消息 =============================
-		
-		public static function reqCreateTeamWithPlayer(player:long):void
-		{
-			ReqInviteJoinTeam(player);
-		}
+
 		/**
 		 * 任命新队长
 		 * @param teamId
 		 * @param playerId
 		 */		
-		public static function ReqAppointNewCaptain(teamId:long , playerId:long):void
+		public static function ReqAppointNewCaptain(teamId:long , playerId:String):void
 		{
 			var msg:ReqAppointGameMessage = new ReqAppointGameMessage();
 			msg.teamid = teamId;
-			msg.playerid = playerId;
-				SocketConnection.send(msg);
+			msg.playerName = playerId;
+			SocketConnection.send(msg);
 		}
 		/**
 		 * 玩家是否同意接受队长任命
@@ -72,10 +68,10 @@ package com.rpgGame.app.sender
 		 * 邀请玩家加入队伍
 		 * @param playerId
 		 */		
-		public static function ReqInviteJoinTeam( playerId:long ):void
+		public static function ReqInviteJoinTeam( playerId:String ):void
 		{
 			var msg:ReqInviteTeamMessage = new ReqInviteTeamMessage();
-			msg.playerid = playerId;
+			msg.playerName = playerId;
 			SocketConnection.send(msg);
 		}
 		/**
@@ -106,11 +102,11 @@ package com.rpgGame.app.sender
 		 * @param playerId
 		 * @param select
 		 */
-		public static function ReqAcceptJionTeam( teamId:long , playerId:long , select:int ):void
+		public static function ReqAcceptJionTeam( teamId:long , playerId:String , select:int ):void
 		{
 			var msg:ReqApplyGameSelectMessage = new ReqApplyGameSelectMessage();
 			msg.teamid = teamId;
-			msg.playerid = playerId;
+			msg.playerName = playerId;
 			msg.select = select;
 			SocketConnection.send(msg);
 		}
@@ -118,10 +114,10 @@ package com.rpgGame.app.sender
 		 * 开除队友
 		 * @param playerId
 		 */		
-		public static function ReqKickTeam( playerId:long ):void
+		public static function ReqKickTeam( playerId:String ):void
 		{
 			var msg:ReqKickTeamMessage = new ReqKickTeamMessage();
-			msg.playerid = playerId;
+			msg.playerName = playerId;
 			SocketConnection.send(msg);
 		}
 		/**

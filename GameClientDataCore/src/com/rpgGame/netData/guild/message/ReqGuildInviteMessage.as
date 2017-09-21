@@ -1,5 +1,4 @@
 package com.rpgGame.netData.guild.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +13,7 @@ package com.rpgGame.netData.guild.message{
 	public class ReqGuildInviteMessage extends Message {
 	
 		//邀请玩家Id
-		private var _playerId: long;
+		private var _playerName: String;
 		
 		//本次操作标识
 		private var _opaque: int;
@@ -25,7 +24,7 @@ package com.rpgGame.netData.guild.message{
 		 */
 		override protected function writing(): Boolean{
 			//邀请玩家Id
-			writeLong(_playerId);
+			writeString(_playerName);
 			//本次操作标识
 			writeInt(_opaque);
 			return true;
@@ -36,7 +35,7 @@ package com.rpgGame.netData.guild.message{
 		 */
 		override protected function reading(): Boolean{
 			//邀请玩家Id
-			_playerId = readLong();
+			_playerName = readString();
 			//本次操作标识
 			_opaque = readInt();
 			return true;
@@ -54,15 +53,15 @@ package com.rpgGame.netData.guild.message{
 		 * get 邀请玩家Id
 		 * @return 
 		 */
-		public function get playerId(): long{
-			return _playerId;
+		public function get playerName(): String{
+			return _playerName;
 		}
 		
 		/**
 		 * set 邀请玩家Id
 		 */
-		public function set playerId(value: long): void{
-			this._playerId = value;
+		public function set playerName(value: String): void{
+			this._playerName = value;
 		}
 		
 		/**
