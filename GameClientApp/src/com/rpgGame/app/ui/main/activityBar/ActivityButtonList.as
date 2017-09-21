@@ -85,7 +85,7 @@
 				width = GRID_WIDTH[i];
 				for(var j:int=0;j<len;j++){
 					btnInfo = list[j] as Q_mainbtn;
-					if(q_map_zones==1&&btnInfo.q_show_zone==q_map_zones)
+					if(q_map_zones==1&&btnInfo.q_show_zone!=q_map_zones)
 						continue;
 					if (btnInfo.q_is_activity) 
 					{
