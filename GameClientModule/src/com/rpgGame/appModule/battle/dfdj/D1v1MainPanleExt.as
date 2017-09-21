@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.battle.dfdj
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -34,15 +35,25 @@ package com.rpgGame.appModule.battle.dfdj
 	{
 		private var _skin:DianFeng_Skin;
 		private var _eff:Inter3DContainer;
+		
+		private var _effEftContaner:Inter3DContainer;
+		private var _eff1:InterObject3D;
 		public function D1v1MainPanleExt()
 		{
 			_skin=new DianFeng_Skin();
 			super(_skin);
 			_skin.btnOpen.touchable=false;
 			_skin.btnStart.touchable=false;
-		
+			initView();
 			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 			TipTargetManager.show(_skin.icoSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
+		}
+		
+		private function initView():void
+		{
+			_effEftContaner=new Inter3DContainer();
+			_skin.container.addChildAt(_effEftContaner,1);
+			_eff1=_effEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dianfengduijue_mianban"),489,341,0);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

@@ -3,16 +3,10 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
-	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.state.role.RoleStateUtil;
-	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
-	import com.rpgGame.app.utils.TaskUtil;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AIStateType;
-	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;

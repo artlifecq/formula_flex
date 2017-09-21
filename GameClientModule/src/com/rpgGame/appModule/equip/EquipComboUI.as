@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -45,7 +47,6 @@ package com.rpgGame.appModule.equip
 	
 	import feathers.controls.Label;
 	import feathers.controls.ScrollBarDisplayMode;
-	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
 	import feathers.data.TreeNode;
@@ -89,6 +90,8 @@ package com.rpgGame.appModule.equip
 		private var firstId:int;
 		private var findId:int;
 		
+		private var _huoEftContaner1:Inter3DContainer;
+		private var _huoEff:InterObject3D;
 		public function EquipComboUI()
 		{
 			_skin=new HeCheng_Skin();
@@ -185,6 +188,9 @@ package com.rpgGame.appModule.equip
 		
 		private function initView():void
 		{
+			_huoEftContaner1=new Inter3DContainer();
+			_skin.container.addChildAt(_huoEftContaner1,_skin.container.numChildren);
+			_huoEff=_huoEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_ronglu_huoyan"),590,216,0);
 			_skin.input_txt.restrict = "0-9";
 			_skin.input_txt.maxChars = 3;
 			_cailiao=new Vector.<IconCDFace>();
@@ -234,7 +240,7 @@ package com.rpgGame.appModule.equip
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			
 			var node:TreeNode=_skin.tree.rootNode;
-			//			node.expanded=false;
+//			node.expanded=false;
 			if(data){
 				var info:ComboItemInfo=data as ComboItemInfo;
 				if(info.targetId!=0){
@@ -310,7 +316,7 @@ package com.rpgGame.appModule.equip
 				var node:TreeNode=arr[i] as TreeNode;
 				var info:DetailNodeInfo=getinfoById(node,findId);
 				if(info)
-					return arr[i];
+					return node.children[0];
 				//				if(node.data is DetailNodeInfo&&DetailNodeInfo(node.data).data.q_item_id==findId){
 				//					return node;
 				//				}

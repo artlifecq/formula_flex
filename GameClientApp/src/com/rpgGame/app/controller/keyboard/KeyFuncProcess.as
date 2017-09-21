@@ -3,6 +3,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -21,7 +22,7 @@ package com.rpgGame.app.controller.keyboard
 	import flash.utils.getTimer;
 	
 	import starling.display.DisplayObjectContainer;
-
+	
 	public class KeyFuncProcess
 	{
 		private static var _keyDownTm : uint;
@@ -52,8 +53,8 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ROLE);
 					break;
 				case "6": //V pk
-						//AppManager.showApp(AppConstant.MOUNT_PANEL);
-//					PKMamager.ChangeNextPkModel();
+					//AppManager.showApp(AppConstant.MOUNT_PANEL);
+					//					PKMamager.ChangeNextPkModel();
 					break;
 				case "23": //N 坐骑
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUOQI);
@@ -84,7 +85,11 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZHANHUN);
 					break;
 				case "17": //H 帮派
-					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO);
+					if(GuildManager.instance().haveGuild){
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_INFO);
+					}else{
+						FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_BANGHUI_LIEBIAO);
+					}
 					break;
 				case "18": //I 显示掉落
 					DropGoodsManager.getInstance().showScaneName(isdown);
@@ -105,7 +110,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "18": //I
 					DropGoodsManager.getInstance().showScaneName(isdown);
-//					CountryWarChengMenManager.testRemoveChengMen();
+					//					CountryWarChengMenManager.testRemoveChengMen();
 					//FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_MERIDIAN);
 				case "3": //M 地图
 					AppManager.showApp(AppConstant.BIGMAP_PANEL);
@@ -120,7 +125,7 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openPanelByFuncID(EmFunctionID.EM_ZUDUI);
 					break;
 				case "12": //Q 无
-//					AppManager.showApp(AppConstant.EQUIP_CHANGE);
+					//					AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();
@@ -151,10 +156,10 @@ package com.rpgGame.app.controller.keyboard
 					//DropGoodsManager.getInstance().showScaneName(isdown);
 					break;
 				case "51": //TAB
-                    var curTime : uint = getTimer();
-                    var next : Boolean = (curTime - _keyDownTabTm) < 500;
-                    _keyDownTabTm = curTime;
-                    SceneRoleSelectManager.selectedRole = CastSpellHelper.getNearestCanAtkRole(null, next);
+					var curTime : uint = getTimer();
+					var next : Boolean = (curTime - _keyDownTabTm) < 500;
+					_keyDownTabTm = curTime;
+					SceneRoleSelectManager.selectedRole = CastSpellHelper.getNearestCanAtkRole(null, next);
 					break;
 				case "52": //ESC
 					if (EscActionManager.executeAction() == false)
@@ -176,7 +181,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 			}
 		}
-
+		
 		private static function closeApp() : void
 		{
 			var layer : DisplayObjectContainer = StarlingLayerManager.appUILayer;
