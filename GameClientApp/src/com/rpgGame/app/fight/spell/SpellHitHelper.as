@@ -1,31 +1,20 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
-	import com.rpgGame.app.state.role.action.DeadLaunchStateReference;
 	import com.rpgGame.app.state.role.action.HitStateReference;
 	import com.rpgGame.app.state.role.control.HurtStateReference;
-	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
-	import com.rpgGame.coreData.clientConfig.Q_map;
-	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
-	import com.rpgGame.coreData.info.map.SceneData;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
-	
-	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *
@@ -143,61 +132,10 @@ package com.rpgGame.app.fight.spell
 			{
 				YunBiaoManager.showInvivcibleBiaoEffect(hortVo.atkor as SceneRole, attackerId, role, hurtType, hurtAmount);
 			}
-
-			if (roleData.totalStat.hp <= 0)
-			{
-				dealCharDeath(hortVo, role);
-			}
-		}
-
-		private static function dealCharDeath(hortVo : FightHurtResult, target : SceneRole) : void
-		{
-			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
-			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
-			if(!target.isMainChar && target.type== SceneCharType.PLAYER){
-				var mapID : int = SceneSwitchManager.currentMapId;
-				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
-				var qmap:Q_map=cfg.getData();
-				if(qmap.q_select_corpse==1){
-					target.mouseEnable=true;
-				}else{
-					target.mouseEnable=false;
-				}
-			}else{
-				target.mouseEnable = false;
-			}
-			
-			var deadLaunchHeight : int = hortVo.deadLaunchHeight;
-			var deadLaunchDistance : int = hortVo.deadLaunchDistance;
-			var deadLaunchSpeed : int = hortVo.deadLaunchSpeed;
-			
-			var deadBeatDistance : int = hortVo.deadBeatDistance;
-			var deadBeatSpeed : int = hortVo.deadBeatSpeed;
-			
-			var deadBeatProbability : int = hortVo.deadBeatProbability;
-			var deadLaunchProbability : int = hortVo.deadLaunchProbability;
-			
-			var prob : int = ((deadBeatDistance > 0 && deadBeatSpeed > 0) || (deadLaunchHeight > 0 && deadLaunchDistance > 0 && deadLaunchSpeed > 0)) ? 100 * Math.random() : 0;
-			if (prob < deadBeatProbability) //击退
-			{
-				deadLaunchHeight = 0;
-			}
-			var canDeadBeat : Boolean = (target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
-			if (canDeadBeat)
-			{
-				var atkorPos : Point = (hortVo.atkor && hortVo.atkor.usable) ? new Point(hortVo.atkor.x, hortVo.atkor.z) : hortVo.atkorPos;
-				var ref : DeadLaunchStateReference = target.stateMachine.getReference(DeadLaunchStateReference) as DeadLaunchStateReference;
-				if (deadLaunchHeight > 0)
-					ref.setParams(atkorPos, deadLaunchHeight, deadLaunchDistance, deadLaunchSpeed);
-				else
-					ref.setParams(atkorPos, 0, deadBeatDistance, deadBeatSpeed);
-				target.stateMachine.transition(RoleStateType.ACTION_DEAD_LAUNCH, ref);
-			}
-			else
-			{
-				target.stateMachine.transition(RoleStateType.ACTION_DEATH);
-			}
-			ClientTriggerManager.deathTrigger(target);
+//			if (roleData.totalStat.hp <= 0)
+//			{
+//				dealCharDeath(hortVo, role);
+//			}
 		}
 
 		/**

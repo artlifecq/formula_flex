@@ -3,9 +3,7 @@ package com.rpgGame.app.cmdlistener
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.AreaMapData;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
-	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -17,7 +15,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
-	import com.rpgGame.app.state.role.action.JumpStateReference;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -25,7 +22,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
-	import com.rpgGame.coreData.cfg.ClientTrigger;
 	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
@@ -35,10 +31,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
-	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	
-	import flash.geom.Vector3D;
 	
 	import gs.TweenLite;
 	
@@ -89,6 +82,7 @@ package com.rpgGame.app.cmdlistener
 			if (SceneRoleSelectManager.selectedRole == role && SceneCharType.PLAYER != role.type)
 				SceneRoleSelectManager.selectedRole = null;
 		}
+		
 		private var jumpBink:Boolean=false;
 		private function sendJump(jumpid:int,force:Boolean=false):void
 		{
@@ -96,6 +90,7 @@ package com.rpgGame.app.cmdlistener
 			HorseManager.instance().setMountRideDown();//跳跃之前下马
 			SceneSender.jumppointTrigger(jumpid,force);
 		}
+		
 		private function transportChgMap(tranportid:int,force:Boolean=false):void
 		{
 			SceneSender.transportChgMap(tranportid,force);
