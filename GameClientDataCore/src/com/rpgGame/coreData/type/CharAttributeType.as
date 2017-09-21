@@ -133,6 +133,19 @@ package com.rpgGame.coreData.type
 		public static const FIGHTING:int =44;
 		/**秒伤**/	
 		public static const HURT_SEC:int =45;
+		/**金针恢复值**/	
+		public static const GOLD_NEEDLE_VALUE:int =46;
+		/**BOSS伤害加深百分比**/	
+		public static const BOSS_PERCENTAGE_DAMAGE:int =47;
+		/**玩家攻击百分比**/	
+		public static const PLAYER_ATTACK:int =48;
+		/**最终伤害比例**/	
+		public static const UITIMATEDAMAGERATIO:int =49;
+		/**最终减伤伤害比例**/	
+		public static const UITIMATEDAMAGEREDUCTIONRATIO:int =50;
+		/**固定吸收伤害**/	
+		public static const FIXEDABSORPTIONINJURY:int =51;
+		
 		
 		public static const BAISC_HIT:int=9500;
 		public static const BAISC_CRIT:int=5000;
@@ -299,6 +312,12 @@ package com.rpgGame.coreData.type
 			pushAttir(HURT_SUB_PERCENT,"伤害减免百分比",10);//33		
 			pushAttir(FIGHTING,"战斗力");//44
 			pushAttir(HURT_SEC,"秒伤");//45
+			pushAttir(GOLD_NEEDLE_VALUE,"金针恢复值");//46
+			pushAttir(BOSS_PERCENTAGE_DAMAGE,"BOSS伤害加深百分比");//47
+			pushAttir(PLAYER_ATTACK,"玩家攻击百分比");//48
+			pushAttir(UITIMATEDAMAGERATIO,"最终伤害比");//49
+			pushAttir(UITIMATEDAMAGEREDUCTIONRATIO,"最终伤害减伤比");//50
+			pushAttir(FIXEDABSORPTIONINJURY,"固定吸收伤害");//51
 			
 			//			attrIconRes[3]="shenfa";
 			//			attrIconRes[12]="qixue";

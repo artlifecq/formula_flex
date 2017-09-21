@@ -47,7 +47,7 @@ package com.rpgGame.app.scene.animator
 		public function update(gapTm:uint):void
 		{
 			var curTime:Number =getTimer();
-			if ((curTime - _preTime) < 200)
+			if ((curTime - _preTime) < 50)
 			{
 				return;
 			}

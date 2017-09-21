@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -117,6 +119,14 @@ package com.rpgGame.appModule.equip
 		private var _alertJiPin:AlertSetInfo;
 		private static var noAlertjipin:Boolean;
 		
+		private var _huoPenEftContaner1:Inter3DContainer;
+//		private var _huoPenEftContaner2:Inter3DContainer;
+//		private var _huoXingEftContaner:Inter3DContainer;
+		
+		private var _huoPen1:InterObject3D;
+		private var _huoPen2:InterObject3D;
+		private var _huoXing:InterObject3D;
+		
 		public function EquipSmeltUI(skin:StateSkin=null)
 		{
 			_skin=new Xilian_Skin();
@@ -126,6 +136,8 @@ package com.rpgGame.appModule.equip
 		
 		private function initView():void
 		{
+			_huoPenEftContaner1=new Inter3DContainer();
+			_skin.container.addChildAt(_huoPenEftContaner1,3);
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
 			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/daixilian.png";
@@ -178,6 +190,14 @@ package com.rpgGame.appModule.equip
 			
 			_alertJiPin=new AlertSetInfo(LangAlertInfo.XILIAN_SURE);
 			_alertJiPin.isShowCBox=true;
+			initEff();
+		}
+		
+		private function initEff():void
+		{
+			_huoPen1=_huoPenEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_xilian_huopen"),407,270,0);
+			_huoPen2=_huoPenEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_xilian_huopen"),881,270,0);
+			_huoXing=_huoPenEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_xilian_huopen_huoxing"),467,180,0);
 		}
 		
 		private function createItemRender():GridItemRender
@@ -804,7 +824,6 @@ package com.rpgGame.appModule.equip
 				if(has_up.getValue(type)) v2=has_up.getValue(type);
 				else v2=0;
 				var num:int=AttValueConfig.getDisAttValue(type,(v2-v1));
-				trace("属性类型："+type+"值1：——"+v1+"   值2:——"+v2);
 				if(num!=0)
 					has.put(type,num);
 			}

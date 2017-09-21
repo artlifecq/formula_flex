@@ -8,12 +8,16 @@ package com.rpgGame.appModule.hubao
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.HuBaoEvent;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
@@ -195,6 +199,7 @@ package com.rpgGame.appModule.hubao
 			EventManager.addEvent(ItemEvent.ITEM_ADD,updateItem);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,updateItem);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,updateItem);
+			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			
 			updateShowUseItem();
 			updateHuSongNum(HuBaoManager.instance().num);
@@ -216,11 +221,21 @@ package com.rpgGame.appModule.hubao
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateItem);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,updateItem);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,updateItem);
+			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 		}
 		
 		private function updateItem(info:ClientItemInfo):void
 		{
 			updateShowUseItem();
+		}
+		
+		private function moveReschange() : void
+		{
+			var dist:int =TaskUtil.getDistHuBaoNpc();
+			if(dist>200)
+			{
+				this.hide();
+			}				
 		}
 		
 		/**更新显示消耗材料数量*/

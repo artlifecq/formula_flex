@@ -1,5 +1,4 @@
 package com.rpgGame.netData.backpack.bean{
-	import com.rpgGame.netData.backpack.bean.AttributeInfo;
 	
 	import org.game.netCore.data.long;
 	

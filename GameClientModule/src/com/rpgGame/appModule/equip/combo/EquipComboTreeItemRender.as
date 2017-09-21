@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.equip.combo
 {
-	import com.game.engine3D.vo.IFrameRender;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -8,13 +7,10 @@ package com.rpgGame.appModule.equip.combo
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
-	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	
-	import away3d.events.Event;
 	
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
