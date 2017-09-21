@@ -34,6 +34,7 @@ package com.rpgGame.app.ui
 		protected var _appInfo : AppInfo;
 		protected var _data : Object;
 		protected var _openTab : int;
+		protected var _changeMapClose:Boolean=true;
 		
 		public function SkinUIPanel(skin : StateSkin)
 		{
@@ -433,6 +434,17 @@ package com.rpgGame.app.ui
 			_openTab = null;
 			_parentContainer = null;
 		}
+
+		public function get changeMapClose():Boolean
+		{
+			return _changeMapClose;
+		}
+
+		public function set changeMapClose(value:Boolean):void
+		{
+			_changeMapClose = value;
+		}
+
 	}
 }
 

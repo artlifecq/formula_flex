@@ -44,6 +44,8 @@ package com.rpgGame.core.app
 		function get x():Number;
 		function set y(value:Number):void;
 		function get y():Number; 
-		function hitTest(localPoint:Point):DisplayObject
+		function hitTest(localPoint:Point):DisplayObject;
+		function set changeMapClose(value:Boolean):void;
+		function get changeMapClose():Boolean;
 	}
 }

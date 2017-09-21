@@ -24,6 +24,7 @@ package com.rpgGame.appModule.common
 		public function ExitScenePanel(skin:StateSkin)
 		{
 			super(skin);
+			this.changeMapClose=false;
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void

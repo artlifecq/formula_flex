@@ -237,6 +237,22 @@ package com.rpgGame.core.app
 		}
 		
 		/**
+		 * 且地图关模块
+		 * 
+		 */
+		public static function changeMapCloseApp():void
+		{
+			var arr:Array = _moduleMap.getValues();
+			for each ( var appPanel:AppPanel in arr )
+			{
+				if( appPanel != null && appPanel.hasParent&&appPanel.changeMapClose)
+				{
+					appPanel.hide();
+				}
+			}
+		}
+		
+		/**
 		 * 判断某个app是否在舞台显示中。。。 
 		 * @author 卢国征 2015-5-22
 		 */		

@@ -61,8 +61,6 @@ package com.rpgGame.app.ui.main.head
 		
 		override public function refresh():void
 		{
-			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
-			_roleData=SceneRoleSelectManager.selectedRole.data as HeroData;
 			updateNormal();
 			updateAttInfo();
 			updateBuff();
@@ -321,5 +319,11 @@ package com.rpgGame.app.ui.main.head
 					break;
 			}
 		}
+
+		public function set roleData(value:HeroData):void
+		{
+			_roleData = value;
+		}
+
 	}
 }

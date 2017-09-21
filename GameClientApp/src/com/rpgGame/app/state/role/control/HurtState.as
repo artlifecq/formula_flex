@@ -2,16 +2,22 @@ package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.Dictionary;
 	
 	import gs.TweenLite;
+	
+	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *
@@ -48,6 +54,10 @@ package com.rpgGame.app.state.role.control
 					if (_ref is HurtStateReference)
 					{
 						_stateReference = _ref as HurtStateReference;
+						var atkor:SceneRole= SceneManager.getSceneObjByID(_stateReference.hurtVo.atkorID) as SceneRole;
+						if(MainRoleManager.isSelfBySceneId(_stateReference.hurtVo.atkorID)||(atkor&&atkor.ownerIsMainChar)){
+							EventManager.dispatchEvent(RoleEvent.HURTED_ROLE,_stateReference.hurtVo.targetID);
+						}
 					}
 					else
 						throw new Error("场景角色伤害状态引用必须是HurtStateReference类型！");
