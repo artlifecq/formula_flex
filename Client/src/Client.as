@@ -195,14 +195,14 @@ package
 			var driverInfo:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
 			if (driverInfo.indexOf("software") != -1)
 			{
-				Log.error("stage3DLayerSetupComplete：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+//				Log.error("stage3DLayerSetupComplete：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
 				if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
 				{
-					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+//					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
 				}
 				else
 				{
-					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
+//					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
 				}
 				Statistics.intance.pushNode(Statistics.STEP_HARD_DRIVE_LOW,"硬件加速开启失败,显卡驱动后者显卡过低");
 			}
@@ -210,14 +210,14 @@ package
 			{
 				if (Away3D.profileLevel < 3)
 				{
-					Log.error("stage3DLayerSetupComplete：系统显卡配置太低，请升级显卡。");
+//					Log.error("stage3DLayerSetupComplete：系统显卡配置太低，请升级显卡。");
 					if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
 					{
-						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡。");
+//						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡。");
 					}
 					else
 					{
-						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡，或点击确定下载微端进入游戏。", onDownWeiDuan);
+//						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡，或点击确定下载微端进入游戏。", onDownWeiDuan);
 					}
 					Statistics.intance.pushNode(Statistics.STEP_XCARD_ERROR,"系统显卡配置太低");
 				}
