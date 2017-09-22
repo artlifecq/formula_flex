@@ -48,6 +48,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.display.Stage;
@@ -294,7 +295,7 @@ package com.rpgGame.app.ui.main
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showHead);
 			EventManager.addEvent(RoleEvent.HURTED_ROLE, roleHurted);
-			EventManager.addEvent(MapEvent.ROLE_DIE,hideHead);
+			EventManager.addEvent(MapEvent.UPDATE_MAP_ROLE_REMOVE,hideHead );
 			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,showLowBlood);
 			EventManager.addEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);
@@ -302,7 +303,6 @@ package com.rpgGame.app.ui.main
 			
 			EventManager.addEvent(PetEvent.PET_PANELSHOWORHIDE,onMeiRenHeadShow);
 		}
-		
 		//护宝
 		private function onhubao(msg:*):void
 		{
@@ -349,8 +349,7 @@ package com.rpgGame.app.ui.main
 //				TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
 //			}
 		}
-		
-		private function hideHead(roleId:int):void
+		private function hideHead(type:int,roleId:int):void
 		{
 			var role:SceneRole= SceneManager.getSceneObjByID(roleId) as SceneRole;
 			if(!role){
@@ -370,7 +369,7 @@ package com.rpgGame.app.ui.main
 				return;
 			}
 			var role:SceneRole= SceneManager.getSceneObjByID(roleId) as SceneRole;
-			if(!role||role==showBloodRole){
+			if(!role||role==showBloodRole||role.stateMachine.isDead){
 				return;
 			}
 			showBloodRole=role;
