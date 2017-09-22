@@ -187,6 +187,7 @@ package
 		
 		private function stage3DLayerSetupComplete():void
 		{
+			initStage3DLayer();
 			if (!ClientConfig.isBanShu)
 			{
 				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "xqj", "success", true, stage);
@@ -224,22 +225,27 @@ package
 				{	
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
-					Parsers.enableAllBundled();
-					Stage3DLayerManager.screenAntiAlias = 2;
-					Stage3DLayerManager.viewAntiAlias = 2;
-					Stage3DLayerManager.startRender();
-					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
-					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
-					Stage3DLayerManager.starlingLayer.setLayer("login", 7);
-					if (!ClientConfig.isRelease)
-					{
-						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
-					}
-					Statistics.intance.pushNode(Statistics.STEP_ENGINE_OK,"3D环境检测成功");
-					showCheckInfo();
-					runProcess();
+//					initStage3DLayer();
 				}
 			}
+		}
+		
+		private function initStage3DLayer():void
+		{
+			Parsers.enableAllBundled();
+			Stage3DLayerManager.screenAntiAlias = 2;
+			Stage3DLayerManager.viewAntiAlias = 2;
+			Stage3DLayerManager.startRender();
+			Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
+			Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
+			Stage3DLayerManager.starlingLayer.setLayer("login", 7);
+			if (!ClientConfig.isRelease)
+			{
+				StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
+			}
+			Statistics.intance.pushNode(Statistics.STEP_ENGINE_OK,"3D环境检测成功");
+			showCheckInfo();
+			runProcess();
 		}
 		
 		private function stage3DLayerSetupError():void
