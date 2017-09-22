@@ -4125,7 +4125,7 @@ package com.game.engine3D.scene.render
 			}
 			for each(var virtual : ObjectContainer3D in this._baseVirtualElements) 
 			{
-                if (-1 != virtual.name.indexOf(NameEnum.TYPE_ZT)) 
+                if (-1 != virtual.name.indexOf(NameEnum.TYPE_ZT)) //当挂点的名称包含"st_"的时候，不处理
 				{
                     continue;
                 }
