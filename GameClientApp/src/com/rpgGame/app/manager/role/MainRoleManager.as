@@ -334,9 +334,6 @@ package com.rpgGame.app.manager.role
 				newname=TextUtil.getByteLen(newname)<=length?newname:TextUtil.sliceToBytelen(newname,length-3)+"...";
 			}
 			return newname;
-		}
-		
-		
-		
+		}		
 	}
 }
