@@ -71,6 +71,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.utils.Dictionary;
+	import flash.utils.getQualifiedClassName;
 	
 	/**
 	 *
@@ -477,6 +478,34 @@ package com.rpgGame.app.state.role
 		{
 			var state : IState = getCurrState(FightLeaveEnterBuffState);
 			return state != null;
+		}
+		/**获取当前状态*/
+		public function getCurrStates(value:*=null):String
+		{
+			var rstr:String="";
+			
+			if(value!=null)
+			{
+				var vtribe:*=getQualifiedClassName(value)
+			}
+			var tribe : *;
+			for (tribe in _currStates)
+			{
+				var state : IState = _currStates[tribe];
+				if(value!=null&&vtribe!=null)
+				{
+					if(vtribe==tribe)
+					{
+						return ""+state.type;
+					}
+				}
+				else
+				{
+					rstr+=","+state.type;
+				}
+				
+			}
+			return rstr
 		}
 		override protected function createState(type : int) : IState
 		{
