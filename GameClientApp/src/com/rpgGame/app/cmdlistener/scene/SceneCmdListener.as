@@ -498,9 +498,9 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function RecvResPlayerRunFailMessage(msg:ResPlayerRunFailMessage):void
 		{
-			if(MainRoleManager.isSelfBySceneId(msg.personId))
+			if(!MainRoleManager.isSelfBySceneId(msg.personId))
 			{
-				GameLog.addShow("ResPlayerRunEndMessage这个message根本就不应该来！应该是针对主角的");
+				GameLog.addShow("ResPlayerRunFailMessage这个message根本就不应该来！应该是针对主角的");
 				return;
 			}
 			var posX : uint = msg.position.x;
