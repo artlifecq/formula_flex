@@ -516,6 +516,7 @@ package com.rpgGame.app.state.role
 		{
 			return isTargetInEye(target);
 		}
+		private static var time:int;
 		public static function updateMoveBySpeedChange(player:SceneRole):void
 		{
 			
@@ -541,6 +542,9 @@ package com.rpgGame.app.state.role
 				}
 				moveInfo.setValues((player.data as HeroData).id,(player.data as HeroData).totalStat.moveSpeed,SystemTimeManager.curtTm,posNow,path);
 				RoleStateUtil.walkByInfos(moveInfo);
+				var t:int=getTimer();
+				trace("====================速度改变间隔："+(t-time));
+				time=t;
 			}
 		}
 	}
