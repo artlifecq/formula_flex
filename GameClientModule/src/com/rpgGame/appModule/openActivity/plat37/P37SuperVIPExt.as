@@ -56,6 +56,18 @@ package  com.rpgGame.appModule.openActivity.plat37
 			_skin.container.addChildAt(_effEftContaner,index);
 			_eff1=_effEftContaner.playInter3DAt(ClientConfig.getEffect("ui_chaojihuiyuan"),498,10,0);
 		}
+		
+		override protected function onShow():void
+		{
+			super.onShow();
+			if(_eff1) _eff1.start();
+		}
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			if(_eff1) _eff1.stop();
+		}
 		override protected function setData(hash:HashMap):void
 		{
 			var arrs:Array=hash.values();
