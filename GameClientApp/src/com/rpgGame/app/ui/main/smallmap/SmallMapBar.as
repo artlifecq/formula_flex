@@ -119,16 +119,24 @@ package com.rpgGame.app.ui.main.smallmap
 			super.onShow();
 			this.showSmallMap();
 			this._smallMap.openRoad();
-//			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			//			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			setLine();
 			EventManager.addEvent(GameSettingEvent.FILTRATE_UPDATE,updatePingbiBtnState);
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,setLine);
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
 			this._smallMap.closeRoad();
-//			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			//			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(GameSettingEvent.FILTRATE_UPDATE,updatePingbiBtnState);
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,setLine);
+		}
+		
+		private function setLine():void
+		{
+			this._skin.btnSelect.label=MainRoleManager.actorInfo.line.toString()+"线";
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void {
@@ -168,7 +176,7 @@ package com.rpgGame.app.ui.main.smallmap
 					break;
 				case this._skin.btnHide://屏蔽场景
 					//var menus : Array = SystemSetUtil.getShieldingMenu();
-				//	ShieldingMenu.GetInstance().show(menus,-1,-1,80);
+					//	ShieldingMenu.GetInstance().show(menus,-1,-1,80);
 					GameSettingManager.aKeyBlock=!GameSettingManager.aKeyBlock;
 					if (GameSettingManager.aKeyBlock) 
 					{
@@ -188,13 +196,13 @@ package com.rpgGame.app.ui.main.smallmap
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSelect://换线
-					var menus : Array  = MenuUtil.getsystemChangeLine();
-					MenuManager.showMenu(menus,null, -1, -1, 80);
+					//					var menus : Array  = MenuUtil.getsystemChangeLine();
+					//					MenuManager.showMenu(menus,null, -1, -1, 80);
 					break;
 			}
 		}
 		
-
+		
 		
 		private function updatePingbiBtnState():void
 		{

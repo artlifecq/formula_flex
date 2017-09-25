@@ -87,11 +87,6 @@ package com.rpgGame.app.fight.spell
 				ref = spellInfo.atkor.stateMachine.getReference(AttackStateReference) as AttackStateReference;
 				ref.setParams(spellInfo, motion, 1, spellInfo.soarFrameTime);
 			}
-			try{if((spellInfo.atkor.data as MonsterData).modelID==9010)
-			{
-				Lyt.a(spellInfo.spellData.q_skillName);
-			}}catch(e:Error){}
-			
 			var blinked : Boolean = spellInfo.blinkType > 0;
 			if (blinked)
 			{
@@ -108,12 +103,14 @@ package com.rpgGame.app.fight.spell
 			{
 				if (ref)
 				{
-					ref.onAfterExecute(onAttackExecute);
-					ref.onStartFrame(onSelfEffectFrame);
-					ref.onHitFrame(onAttackHitFrame);
-//					ref.onBreakFrame(onBreakFrame);
-					
-					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
+					if(spellInfo.spellData.q_performType!=1)//战魂释放的技能不要切换主角状态 ----yt
+					{
+						ref.onAfterExecute(onAttackExecute);
+						ref.onStartFrame(onSelfEffectFrame);
+						ref.onHitFrame(onAttackHitFrame);
+						//					ref.onBreakFrame(onBreakFrame);
+						spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
+					}
 				}
 				else
 				{
