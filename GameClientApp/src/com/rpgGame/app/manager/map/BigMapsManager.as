@@ -1,6 +1,15 @@
 package com.rpgGame.app.manager.map
 {
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
+	import com.rpgGame.coreData.cfg.TransCfgData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -29,6 +38,84 @@ package com.rpgGame.app.manager.map
 		
 		private static var mapsIconID:int=0;
 		private static var mapsIconData:Vector.<BigMapIocnDataMode>=new Vector.<BigMapIocnDataMode>;
+		
+		
+		/**更新大地图图标数据*/
+		public static function updataRoleData():void
+		{
+			clearMapsData();
+			var monsterList:Array=MonsterDataManager.getBigMapMonsterBySceneId(MapDataManager.currentScene.sceneId);
+			var transList:Vector.<Q_map_transfer>=TransCfgData.getTranBySceneID(MapDataManager.currentScene.sceneId);
+			
+			var i:int,length:int;
+			var roleMode:BigMapIocnDataMode;
+			if(monsterList&&monsterList.length>0)
+			{
+				var monsterData:Object;
+				length=monsterList.length;
+				for(i=0;i<length;i++)
+				{
+					monsterData = monsterList[i];
+					/*roleMode=new BigMapIocnDataMode();
+					roleMode.name=monsterData.name;
+					roleMode.level=monsterData.level;
+					roleMode.show=monsterData.show;
+					roleMode.x=monsterData.x;
+					roleMode.y=monsterData.y;*/
+					var type:String;
+					switch(monsterData.type)
+					{
+						case 4:
+						case 6:
+							addMapsIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+							break;
+						case 5:
+							addMapsIcon(SceneCharType.COLLECT,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+							break;
+						default:
+							addMapsIcon(SceneCharType.MONSTER,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
+							
+							break;
+					}
+				}
+			}
+			if(transList&&transList.length>0)
+			{
+				var transData:Q_map_transfer;
+				length=transList.length;
+				for(i=0;i<length;i++)
+				{
+					transData = transList[i];
+					var name:String=transData.q_name;
+					if(transData.q_tran_dest_area_by_job!="")
+					{
+						var jobArea:Array=JSONUtil.decode(transData.q_tran_dest_area_by_job);
+						if(jobArea&&jobArea.length>0)
+						{
+							for(var j:int=0;j<jobArea.length;j++)
+							{
+								if(jobArea[j][0]==MainRoleManager.actorInfo.job)
+								{
+									var mapID:int= AreaCfgData.getAreaMapidByID(jobArea[j][1]);
+									var map:Q_map=MapDataManager.getMapInfo(mapID).getData();
+									name=map.q_map_name;
+									break;
+								}
+							}
+						}
+					}
+					addMapsIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
+					
+					//BigMapsData.addMapsThansIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
+					
+					//BigMapsData.mapsThansData.push(roleMode);
+				}
+			}
+			
+		}
+		
+		
+		
 		/**
 		 *大地图中显示一个图标 
 		 * @param type 类型 SceneCharType NPC MONSTER TRANS 会对应显示在右边滚动栏中
@@ -63,9 +150,11 @@ package com.rpgGame.app.manager.map
 				if(mapsIconData[i].id==id)
 				{
 					mapsIconData.splice(i,1);
+					EventManager.dispatchEvent(MapEvent.MAP_ROLEPOS_UPDATE);
+					return;
 				}
 			}
-			EventManager.dispatchEvent(MapEvent.MAP_ROLEPOS_UPDATE);
+			
 			
 		}
 		public static function getMapsIconList():Vector.<BigMapIocnDataMode>
