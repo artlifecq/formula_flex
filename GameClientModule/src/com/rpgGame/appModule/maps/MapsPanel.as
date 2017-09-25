@@ -76,14 +76,16 @@ package com.rpgGame.appModule.maps
 			}
 			
 		}
-		override public function hide():void 
+		
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			clearMapsData();
 			clearMapsView();
 			_bigMap.onClearPath();
 			removeEvent();
 		}
+		
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);

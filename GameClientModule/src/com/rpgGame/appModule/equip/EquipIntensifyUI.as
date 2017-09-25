@@ -1042,8 +1042,9 @@ package com.rpgGame.appModule.equip
 			_goodsContainerTarget.refleshGridsByDatas(result);
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);
 			EventManager.removeEvent(ItemEvent.ITEM_STRENGTH_MSG,getStrengthMsg);
 			cancelAllUse();

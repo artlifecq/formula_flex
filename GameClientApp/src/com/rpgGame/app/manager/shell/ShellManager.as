@@ -38,6 +38,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
+    import com.rpgGame.app.manager.scene.SceneSwitchManager;
     import com.rpgGame.app.manager.sound.GameSoundManager;
     import com.rpgGame.app.manager.task.TaskAutoManager;
     import com.rpgGame.app.manager.task.TouJingManager;
@@ -165,6 +166,7 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&showAttChange".toLowerCase()] = this.showAttChange;
 			this._funcs["&showUIAttChange".toLowerCase()] = this.showUIAttChange;
 			this._funcs["&cdShowPanel".toLowerCase()] = this.cdShowPanel;
+			this._funcs["&cdChangeMap".toLowerCase()] = this.cdChangeMap;
 			
             
             // cross
@@ -183,6 +185,20 @@ package com.rpgGame.app.manager.shell
 					TimerServer.addLoop(showPanel,1000);
 				}
 			}
+		}
+		
+		private function cdChangeMap():void
+		{
+			if(TimerServer.has(changeMap)){
+				TimerServer.remove(changeMap);
+			}else{
+				TimerServer.addLoop(changeMap,10000);
+			}
+		}
+		
+		private function changeMap():void
+		{
+			
 		}
 		
 		private function showPanel1(id:int):void

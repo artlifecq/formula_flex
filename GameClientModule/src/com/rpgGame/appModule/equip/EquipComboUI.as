@@ -395,9 +395,9 @@ package com.rpgGame.appModule.equip
 			}
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			clearEvent();
 			clearAll();
 			var oldindex:int=_skin.tree.selectedIndex;

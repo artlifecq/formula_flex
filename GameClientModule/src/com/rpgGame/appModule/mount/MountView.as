@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -15,7 +16,6 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
-	import com.rpgGame.coreData.clientConfig.Q_marriage_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -36,7 +36,6 @@ package com.rpgGame.appModule.mount
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import com.game.engine3D.display.InterObject3D;
 	
 	public class MountView extends AttChangeView
 	{
@@ -353,8 +352,9 @@ package com.rpgGame.appModule.mount
 		}
 		
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
 			if(autoReq){

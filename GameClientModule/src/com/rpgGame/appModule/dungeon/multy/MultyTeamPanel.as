@@ -5,21 +5,15 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
-	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
-	import com.rpgGame.netData.zone.bean.MultiZonePanelInfo;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.fuben.FuBenTanKuang_Skin;
 	import org.mokylin.skin.app.fuben.ListItem_Skin;
 	
@@ -95,10 +89,10 @@ package com.rpgGame.appModule.dungeon.multy
 			initVote();
 			setTime();
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
+			super.onHide();
 			removeEvent();
-			super.hide();
 		}
 		/**初始化投票*/
 		private function initVote():void

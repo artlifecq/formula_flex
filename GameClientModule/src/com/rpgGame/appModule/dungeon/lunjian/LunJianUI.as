@@ -194,9 +194,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 			pageContainer.currentPage=Math.floor(firstCanFight/3);//自动跳到第一个可挑战页面去
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			EventManager.removeEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,onGetLunJianDatas);
 			_skin.list_map.removeEventListener(Event.CHANGE,onChangeSelectedMap);
 			TipTargetManager.remove(_skin.btnShuoming);

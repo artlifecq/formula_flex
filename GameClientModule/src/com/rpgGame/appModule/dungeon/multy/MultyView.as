@@ -168,8 +168,9 @@ package com.rpgGame.appModule.dungeon.multy
 			gainReward();
 			creatGlobalReward();
 		}
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			removeEvent();
 		}
 		

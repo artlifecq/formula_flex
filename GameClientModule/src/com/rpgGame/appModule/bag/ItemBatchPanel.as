@@ -56,11 +56,6 @@ package com.rpgGame.appModule.bag
 			updateDisplay();
 		}
 		
-		override public function hide():void
-		{
-			super.hide();
-			//_skin.input_txt.removeEventListener(Event.CHANGE,onChangeNum);
-		}
 		private function dataChange(val:int):void
 		{
 			this.currentNum=val;

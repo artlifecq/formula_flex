@@ -578,8 +578,9 @@ package com.rpgGame.appModule.equip
 			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(21).q_describe));
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			onCancelTarget();
 			
 			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);

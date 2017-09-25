@@ -206,9 +206,9 @@ package com.rpgGame.appModule.hubao
 			updateNowSelectBaoWu(HuBaoManager.instance().level);
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			if(timer) timer.stop();
 			if(_tishiPanel&&_tishiPanel.stage!=null){
 				MCUtil.removeSelf(_tishiPanel);

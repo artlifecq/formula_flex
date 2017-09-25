@@ -105,9 +105,9 @@ package com.rpgGame.appModule.zhangong
 				showMapItemByIndex(0);
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			clearEvent();
 		}
 		

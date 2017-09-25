@@ -101,9 +101,9 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			ActivetyPanel(this.parent).showPaiHang();
 		}	
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			removeEvent();
 			JiXianTiaozhanPaiHnagPenelExt.hidePanel();
 //			_prizeItem.clear();

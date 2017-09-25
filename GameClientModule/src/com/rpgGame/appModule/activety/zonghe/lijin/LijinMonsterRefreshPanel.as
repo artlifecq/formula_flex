@@ -26,9 +26,9 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			super.show(data,openTable,parentContiner);
 			TweenLite.delayedCall(3, hide);
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TweenLite.killDelayedCallsTo(hide);
 		}
 		override protected function onStageResize(sw : int, sh : int) : void

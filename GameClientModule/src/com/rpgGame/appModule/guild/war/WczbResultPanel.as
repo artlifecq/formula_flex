@@ -6,7 +6,6 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.common.ExitScenePanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -57,10 +56,10 @@ package com.rpgGame.appModule.guild.war
 			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid3_1);
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
+			super.onHide();
 			rewardGrp.tweeRewardInBag();
-			super.hide();
 			timer.stop();
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 			rewardGrp.clear();

@@ -223,8 +223,9 @@ package com.rpgGame.appModule.activety.zonghe
 			}
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
 			_skin.joinBtn.removeEventListener(Event.TRIGGERED,onJoin);
 			EventManager.removeEvent(ActivityEvent.UPDATE_ACTIVITY,onUpdateAct);
