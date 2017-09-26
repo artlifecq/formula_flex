@@ -11,6 +11,8 @@ package com.rpgGame.app.manager.map
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.geom.Point;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	public class BigMapsManager
@@ -86,6 +88,16 @@ package com.rpgGame.app.manager.map
 				for(i=0;i<length;i++)
 				{
 					transData = transList[i];
+					var tranportData :Object=new Object();
+					tranportData.x=transData.q_tran_res_x;
+					tranportData.y=transData.q_tran_res_y;
+					var sourceArea:Vector.<Point>=AreaCfgData.getAreaPointsByID(transData.q_tran_source_area_id);//传送区域点
+					var centerPoint:Point=AreaCfgData.getAreaPointsCenter(sourceArea);//传送区域中点
+					if(centerPoint)
+					{
+						tranportData.x=centerPoint.x;
+						tranportData.y=centerPoint.y;
+					}
 					var name:String=transData.q_name;
 					if(transData.q_tran_dest_area_by_job!="")
 					{
@@ -104,7 +116,7 @@ package com.rpgGame.app.manager.map
 							}
 						}
 					}
-					addMapsIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
+					addMapsIcon(SceneCharType.TRANS,name,tranportData.x,tranportData.y);
 					
 					//BigMapsData.addMapsThansIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
 					
