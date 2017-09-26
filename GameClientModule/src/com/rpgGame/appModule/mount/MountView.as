@@ -363,7 +363,6 @@ package com.rpgGame.appModule.mount
 			}
 			_mountupContent.isAutoing = false;
 			_mountupContent.hide();
-			super.hide();
 			if(eft){
 				eft.stop();
 				eft.dispose();

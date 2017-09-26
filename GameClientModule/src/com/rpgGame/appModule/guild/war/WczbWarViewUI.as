@@ -666,7 +666,6 @@ package com.rpgGame.appModule.guild.war
 					NoticeManager.showNotifyById(60114);
 					return;
 			}
-			AppManager.hideApp(AppConstant.GUILD_PANEL);
 			if(_currentMap==wczbMap){
 				GuildWarSender.reqGuildWarEnter();
 			}else{

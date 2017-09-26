@@ -20,6 +20,7 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.vo.BaseObj3D;
     import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
+    import com.game.mainCore.core.timer.GameTimer;
     import com.gameClient.log.GameLog;
     import com.gameClient.utils.HashMap;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
@@ -36,6 +37,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.DropGoodsManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -66,6 +68,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.MapDataManager;
     import com.rpgGame.coreData.info.buff.BuffData;
+    import com.rpgGame.coreData.info.map.SceneData;
     import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
@@ -119,8 +122,12 @@ package com.rpgGame.app.manager.shell
         private var _funcs : Dictionary;
         
         private var _monsterID : uint = 0;
+		private var cdTimer:GameTimer;
         
         public function ShellManager() {
+			cdTimer=new GameTimer("cdTimer");
+			cdTimer.stop();
+			
             this._funcs = new Dictionary();
             this._funcs["&help".toLowerCase()] = this.help;
             this._funcs["&gotomap".toLowerCase()] = this.gotoMap;
@@ -166,7 +173,7 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&showAttChange".toLowerCase()] = this.showAttChange;
 			this._funcs["&showUIAttChange".toLowerCase()] = this.showUIAttChange;
 			this._funcs["&cdShowPanel".toLowerCase()] = this.cdShowPanel;
-			this._funcs["&cdChangeMap".toLowerCase()] = this.cdChangeMap;
+			this._funcs["&cdMoveXY".toLowerCase()] = this.cdMoveXY;
 			
             
             // cross
@@ -176,29 +183,34 @@ package com.rpgGame.app.manager.shell
 		
 		private function cdShowPanel(panelId:int=-1):void
 		{
-			if(TimerServer.has(showPanel)){
-				TimerServer.remove(showPanel);
+			if(cdTimer.running){
+				cdTimer.stop();
 			}else{
-				if(panelId!=-1){
-					TimerServer.addLoop(showPanel1,1000,[panelId]);
-				}else{
-					TimerServer.addLoop(showPanel,1000);
-				}
+				cdTimer.delay=1000;
+				cdTimer.onUpdate=showPanel;
+				cdTimer.start();
 			}
 		}
 		
-		private function cdChangeMap():void
+		private function cdMoveXY():void
 		{
-			if(TimerServer.has(changeMap)){
-				TimerServer.remove(changeMap);
-			}else{
-				TimerServer.addLoop(changeMap,10000);
-			}
+			changeMap();
 		}
 		
 		private function changeMap():void
 		{
-			
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var mapInfo : SceneData = MapDataManager.getMapInfo(mapId); //获取地图配置数据
+			var ps:Array=[[2000,7500],[950,480],[100,3000],[4000,1500]];
+			var index:int=Math.random()*ps.length;
+			var px:int=ps[index][0];
+			var py:int=-ps[index][1];
+			MainRoleSearchPathManager.walkToScene(mapId,px,py,onArr);
+		}
+		
+		private function onArr(data:*=null):void
+		{
+			changeMap();
 		}
 		
 		private function showPanel1(id:int):void
