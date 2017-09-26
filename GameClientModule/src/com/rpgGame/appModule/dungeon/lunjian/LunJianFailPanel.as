@@ -60,9 +60,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_skin.lbTime.text=leftTime+LanguageConfig.getText(LangUI.UI_TEXT33);
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 		}
 		

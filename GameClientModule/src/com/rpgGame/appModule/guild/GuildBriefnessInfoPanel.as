@@ -93,10 +93,5 @@ package com.rpgGame.appModule.guild
 			_skin.btnOk.label = "已申请";
 			GrayFilter.gray(_skin.btnOk);
 		}
-		
-		override public function hide():void
-		{
-			super.hide();
-		}
 	}
 }

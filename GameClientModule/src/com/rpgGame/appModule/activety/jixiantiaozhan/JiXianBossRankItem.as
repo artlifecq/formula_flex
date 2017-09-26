@@ -83,11 +83,6 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			super.show();
 		}	
 		
-		override public function hide():void
-		{
-			super.hide();
-		}
-		
 		public function setPoint(x:int,y:int):void
 		{
 			_initX = x;

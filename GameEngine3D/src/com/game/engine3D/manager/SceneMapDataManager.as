@@ -140,7 +140,7 @@ package com.game.engine3D.manager
 			{
 				sceneMapData.removeCompleteHandler(completeHandler);
 				sceneMapData.removeErrorHandler(errorHandler);
-				if (sceneMapData.count <= 0 && !sceneMapData.isLoaded)
+				if (sceneMapData.count <= 0/* && !sceneMapData.isLoaded*/)
 				{
 					sceneMapDataCountShare.removeShareData(mapName);
 				}

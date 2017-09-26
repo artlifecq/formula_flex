@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.time
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.sender.MiscSender;
-	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	
@@ -61,7 +60,7 @@ package com.rpgGame.app.manager.time
 		
 		public static function RecvHeartMessage(msg:ResHeartMessage):void
 		{
-			_serverTime = msg.time.fValue - getTimer();//服务器当前时间的秒数，从1970年到现在的时间差
+			_serverTime = msg.time.fValue - getTimer();//服务器当前时间的毫秒数，从1970年到现在的时间差
 			
 			if(todayOverTime == 0)
 			{

@@ -120,8 +120,8 @@ package com.rpgGame.appModule.equip
 		private static var noAlertjipin:Boolean;
 		
 		private var _huoPenEftContaner1:Inter3DContainer;
-//		private var _huoPenEftContaner2:Inter3DContainer;
-//		private var _huoXingEftContaner:Inter3DContainer;
+		//		private var _huoPenEftContaner2:Inter3DContainer;
+		//		private var _huoXingEftContaner:Inter3DContainer;
 		
 		private var _huoPen1:InterObject3D;
 		private var _huoPen2:InterObject3D;
@@ -562,6 +562,9 @@ package com.rpgGame.appModule.equip
 			getItemSkin(_skin.Item1).chk_suoding.isSelected=false;
 			getItemSkin(_skin.Item2).chk_suoding.isSelected=false;
 			refresh();
+			if( _huoPen1) _huoPen1.start();
+			if( _huoPen2) _huoPen2.start();
+			if( _huoXing) _huoXing.start();
 		}
 		
 		private function initEvent():void
@@ -578,8 +581,9 @@ package com.rpgGame.appModule.equip
 			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(21).q_describe));
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			onCancelTarget();
 			
 			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);
@@ -595,6 +599,9 @@ package com.rpgGame.appModule.equip
 			oldAtt1=oldAtt2=0;
 			
 			GameAlert.closeAlert(LangUI.UI_TEXT30);
+			if( _huoPen1) _huoPen1.stop();
+			if( _huoPen2) _huoPen2.stop();
+			if( _huoXing) _huoXing.stop();
 		}
 		
 		private function onRemoveFreshItems(list:Vector.<ClientItemInfo>):void

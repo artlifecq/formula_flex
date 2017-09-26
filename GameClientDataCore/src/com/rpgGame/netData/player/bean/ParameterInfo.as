@@ -48,7 +48,7 @@ package com.rpgGame.netData.player.bean{
 			writeInt(_x);
 			//坐标点
 			writeInt(_y);
-			//用于发送道具的具体信息，包括强化等级  等
+			//用于发送道具的具体信息，包括强化等级等
 			writeBean(_itemInfo);
 			return true;
 		}
@@ -67,8 +67,8 @@ package com.rpgGame.netData.player.bean{
 			_x = readInt();
 			//坐标点
 			_y = readInt();
-			//用于发送道具的具体信息，包括强化等级  等
-			_itemInfo = readBean(ItemInfo) as ItemInfo;
+			//用于发送道具的具体信息，包括强化等级等
+			_itemInfo=readBean(ItemInfo) as ItemInfo;
 			return true;
 		}
 		

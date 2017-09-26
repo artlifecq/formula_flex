@@ -139,8 +139,13 @@ package com.rpgGame.appModule.hubao
 		
 		override public function hide() : void
 		{
-			_rewardG.tweeRewardInBag();
 			super.hide();
+			_rewardG.tweeRewardInBag();
+		}
+		
+		override protected function onHide():void
+		{
+			super.onHide();
 			TimerServer.remove(onTimer);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,setDate);
 			_rewardG.clear();

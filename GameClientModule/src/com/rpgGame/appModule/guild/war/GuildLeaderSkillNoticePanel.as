@@ -2,7 +2,6 @@ package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarLeaderSkillUseMessage;
 	
@@ -16,7 +15,7 @@ package com.rpgGame.appModule.guild.war
 	
 	/**
 	 *统帅技能通知面板 
-	 * @author Administrator
+	 * @author dik
 	 * 
 	 */
 	public class GuildLeaderSkillNoticePanel extends SkinUIPanel
@@ -85,9 +84,9 @@ package com.rpgGame.appModule.guild.war
 			_skin.headGrp.addChild(head);
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			_currentLeads.length=0;
 			for(var i:int=0;i<headItems.length;i++){
 				headItems[i].removeFromParent();

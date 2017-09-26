@@ -1,27 +1,19 @@
 package com.rpgGame.appModule.dungeon.equip
 {
-	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.tab.ViewUI;
-	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
-	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	
 	import gs.TweenLite;
@@ -167,8 +159,9 @@ package com.rpgGame.appModule.dungeon.equip
 					break;
 			}
 		}
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			remvoeEvent();
 			//_skin.list.scrollToPageIndex(0,0);
 			icoListGroup.clear();

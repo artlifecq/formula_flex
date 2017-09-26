@@ -224,11 +224,6 @@ package com.rpgGame.appModule.skill
 				return
 			}
 		}
-		
-		override public function hide():void
-		{
-			
-		}
 		override protected function onShow():void
 		{
 			super.onShow();

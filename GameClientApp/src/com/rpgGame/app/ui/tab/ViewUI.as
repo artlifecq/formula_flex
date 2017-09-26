@@ -21,14 +21,18 @@ package com.rpgGame.app.ui.tab
 			
 		}
 		
-		public function hide():void
+		/**
+		 *隐藏视图避免与uiskinpanl的hide混淆 
+		 * 
+		 */
+		public function hideView():void
 		{
 			
 		}
 		
 		override protected function onHide() : void
 		{
-			hide();
+			hideView();
 		}
 	}
 }

@@ -15,7 +15,7 @@ package com.rpgGame.app.manager
 		/**自动购买按钮选中*/
 		private static var _lifeSelect:Boolean=true;
 		/**攻击距离*/
-		private static var _hookValue:int=10;
+		private static var _hookValue:int=20;
 		/**自动拾取所有按钮选中*/
 		private static var _autoSelect:Boolean=true;
 		/**拾取按钮选中*/

@@ -24,7 +24,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
-	import com.rpgGame.core.events.WorldMapEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
@@ -40,8 +39,6 @@ package com.rpgGame.app.state.role
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
-	
-	import cmodule.PreLoader.regFunc;
 	
 	import gs.TweenLite;
 	
@@ -292,8 +289,6 @@ package com.rpgGame.app.state.role
 				if (walkRole.stateMachine.isWalkMoving)
 				{
 					HorseManager.instance().autoRiding(role, pos);
-					
-					
 				}
 				if(!walkRole.stateMachine.isWalkMoving)
 				{
