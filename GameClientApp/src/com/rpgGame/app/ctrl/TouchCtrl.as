@@ -18,22 +18,37 @@ package  com.rpgGame.app.ctrl
 		private var _outCall:Function;
 		private var _clickCall:Function;
 		private var _target:DisplayObject;
+		private var _onRemoved:Function;
 		private  var isMouseOut : Boolean = true;
-		public function TouchCtrl(target:DisplayObject,click:Function=null,over:Function=null,out:Function=null)
+		public function TouchCtrl(target:DisplayObject,click:Function=null,over:Function=null,out:Function=null,remove:Function=null)
 		{
 			this._target=target;
 			this._clickCall=click;
 			this._overCall=over;
 			this._outCall=out;
+			this._onRemoved=remove;
 			_target.touchable=true;
 			_target.addEventListener(TouchEvent.TOUCH, onTouch);
 			_target.addEventListener(Event.REMOVED_FROM_STAGE,onRemoved);
 		}
-		
+		public function dispose():void
+		{
+			_target.removeEventListener(TouchEvent.TOUCH, onTouch);
+			_target.removeEventListener(Event.REMOVED_FROM_STAGE,onRemoved);
+			this._target=null;
+			this._clickCall=null;
+			this._overCall=null;
+			this._outCall=null;
+			this._onRemoved=null;
+		}
 		private function onRemoved(eve:Event):void
 		{
 			// TODO Auto Generated method stub
 			isMouseOut=true;
+			if (_onRemoved) 
+			{
+				_onRemoved();
+			}
 		}
 		private function onTouch(e:TouchEvent):void
 		{

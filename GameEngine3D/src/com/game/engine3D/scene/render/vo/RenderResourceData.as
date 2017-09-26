@@ -173,8 +173,13 @@ package com.game.engine3D.scene.render.vo
 					}
 					else
 					{
-						_drawElements.push(element);
-						addVirtualElements(element);
+						//_drawElements.push(element);
+						
+						var ret:Boolean=addVirtualElements(element);
+						if (!ret) 
+						{
+							_drawElements.push(element);
+						}
 					}
 				}
 			}
@@ -223,14 +228,16 @@ package com.game.engine3D.scene.render.vo
 			tryResourceAsyncComplete();
 		}
 		
-		private function addVirtualElements(element:ObjectContainer3D):void
+		private function addVirtualElements(element:ObjectContainer3D):Boolean
 		{
 			if(element.name.indexOf(NameEnum.TYPE_CHEST) != -1 
 				|| element.name.indexOf(NameEnum.TYPE_ZERO) != -1 
 				|| element.name.indexOf(NameEnum.TYPE_ZT) != -1)
 			{
 				_baseVirtualElements.push(ObjectContainer3D(element));
+				return true;
 			}
+			return false
 		}
 
 		private function onAnimatorError(loader : RenderUnitLoader) : void

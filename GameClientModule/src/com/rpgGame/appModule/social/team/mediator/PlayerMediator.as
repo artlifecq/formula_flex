@@ -191,7 +191,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				if (member.memberMapModelID!=0) 
 				{
 					var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map; 
-					mapName=map.q_map_name;
+					mapName=map.q_map_name+"."+member.memberMapLine+"线";
 				}
 				
 				//还需要添加线路
@@ -208,7 +208,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				}
 				else
 				{
-					if (member.memberMapModelID!=MapDataManager.currentScene.sceneId) 
+					if (member.memberMapModelID!=MapDataManager.currentScene.sceneId||member.memberMapUniqueID.EqualTo(MainRoleManager.actorInfo.verityMapId)==false) 
 					{
 						setState(1);
 						str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,NotifyCfgData.getNotifyTextByID(61042));

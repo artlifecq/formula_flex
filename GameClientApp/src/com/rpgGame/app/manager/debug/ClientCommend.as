@@ -567,7 +567,15 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".jj", function (...arg):void
 			{
 				(MainRoleManager.actor.headFace as HeadFace).updateTitle(arg[0]);
-			})
+			});
+			commandList.put(".jxtz", function (...arg):void
+			{
+				var obj:Object={};
+				obj.type=int(arg[0]);
+				obj.time=int(arg[1])
+				//AppManager.showApp(AppConstant.JXTZ_PK_CHANGE);
+				AppManager.showApp(AppConstant.JXTZ_END_NOTICE,obj);
+			});
 		}
 		
 		

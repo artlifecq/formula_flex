@@ -243,6 +243,7 @@ package com.rpgGame.coreData.type
 		public static const EFFECT_JUMPDOWN:String="tx_tiaoyueyan";
 		public static const EFFECT_TIME_10:String="ui_daojishi";
 		public static const EFFECT_BOSS:String="tx_boss_uimianbanzhanshi";
+		public static const EFFECT_UI_WARN:String="ui_huxiguangyun";
 		public function EffectUrl()
 		{
 		}

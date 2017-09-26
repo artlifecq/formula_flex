@@ -30,6 +30,8 @@ package com.rpgGame.app.manager
 	
 	import flash.events.EventDispatcher;
 	
+	import feathers.core.IFeathersControl;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	
@@ -378,7 +380,7 @@ package com.rpgGame.app.manager
 			teamInfo = _teamInfo;
 			SetTeamInfoMap( _teamInfo );
 			DispatchEvent( TeamEvent.GET_TEAM_INFO , _teamInfo , isCreated , isDismiss);
-			MapUnitDataManager.updataTeammate(teamInfo);
+			//MapUnitDataManager.updataTeammate(teamInfo);
 			updateTeamFlag();
 		}
 		private function updateTeamFlag():void
@@ -524,6 +526,16 @@ package com.rpgGame.app.manager
 					FloatingText.showUp(mem.memberName+"已下线");
 					return;
 				}
+				if (mem.memberMapModelID!=MapDataManager.currentScene.sceneId) 
+				{
+					FloatingText.showUp(mem.memberName+"与你不在同一地图，无法到达");
+					return;
+				}
+				if (mem.memberMapUniqueID.EqualTo(MainRoleManager.actorInfo.verityMapId)) 
+				{
+					FloatingText.showUp(mem.memberName+"与你不在同一场景，无法到达");
+					return;
+				}
 				var qMap:Q_map= MapDataManager.getMapInfo(mem.memberMapModelID).getData() as Q_map;
 				if (qMap) 
 				{
@@ -624,6 +636,10 @@ package com.rpgGame.app.manager
 				return 2;
 			}
 			if (mem.memberMapModelID!=MapDataManager.currentScene.sceneId) 
+			{
+				return 1;
+			}
+			if (!mem.memberMapUniqueID.EqualTo(MainRoleManager.actorInfo.verityMapId)) 
 			{
 				return 1;
 			}

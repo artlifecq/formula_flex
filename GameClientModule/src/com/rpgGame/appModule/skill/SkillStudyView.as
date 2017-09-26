@@ -169,7 +169,7 @@ package com.rpgGame.appModule.skill
 			return _tabBtns.shift();
 		}
 		
-		private function updateSkillList():void
+		private function updateSkillList(...arg):void
 		{
 			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
 			var data:Q_skill_model;
