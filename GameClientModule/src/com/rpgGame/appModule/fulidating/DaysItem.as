@@ -16,6 +16,7 @@ package com.rpgGame.appModule.fulidating
 	{
 		private var _skin:Item_Qiandao;
 		private var _day:int=0;
+		private var _isSign:Boolean;
 		public function DaysItem()
 		{
 			_skin=new Item_Qiandao();
@@ -64,6 +65,7 @@ package com.rpgGame.appModule.fulidating
 		
 		public function set sign(value:Boolean):void
 		{
+			_isSign=value;
 			_skin.uiOK.visible=value;
 			TipTargetManager.remove( this );
 			if(!value&&SystemTimeManager.sysDateTime.fullYear==Mgr.signMgr.signVO.openServerTime.fullYear&&
@@ -83,14 +85,14 @@ package com.rpgGame.appModule.fulidating
 				_skin.uiTiqian.visible=false;	
 				TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.SIGN_BUQIAN_TIP, 1 ) );
 			}
-			else if(!value&&_day==SystemTimeManager.sysDateTime.date+1){
+			else if(!value&&_day>SystemTimeManager.sysDateTime.date&&_day<=SystemTimeManager.sysDateTime.date+Mgr.signMgr.signVO.strikeSignSum){
 				_skin.bg1.visible=true;
 				_skin.bg2.visible=false;
 				_skin.uiBuqian.visible=false;
 				_skin.uiTiqian.visible=true;	
 				TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.SIGN_TIQIAN_TIP, 1 ) );
 			}
-			else if(!value&&_day>SystemTimeManager.sysDateTime.date+1){
+			else if(!value&&_day>SystemTimeManager.sysDateTime.date+Mgr.signMgr.signVO.strikeSignSum){
 				_skin.bg1.visible=true;
 				_skin.bg2.visible=false;
 				_skin.uiBuqian.visible=false;
@@ -110,6 +112,9 @@ package com.rpgGame.appModule.fulidating
 				_skin.uiBuqian.visible=false;
 				_skin.uiTiqian.visible=false;
 			}
+			
+			if(_isSign&&_day==SystemTimeManager.sysDateTime.date) currentDate=false;
+			else if(!_isSign&&_day==SystemTimeManager.sysDateTime.date) currentDate=true;
 		}
 		
 		public function set currentDate(value:Boolean):void

@@ -39,6 +39,12 @@ package com.rpgGame.appModule.openActivity.plat37
 			_skin.container.addChildAt(_shoujiEftContaner1,2);
 			_shoujiEff=_shoujiEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_shoujilibao_mianban"),479,253,0);
 		}
+		
+		override protected function onShow():void
+		{
+			super.onShow();
+			if(_shoujiEff) _shoujiEff.start();
+		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -95,6 +101,7 @@ package com.rpgGame.appModule.openActivity.plat37
 		{
 			super.onHide();
 			_gReward.clear();
+			if(_shoujiEff) _shoujiEff.stop();
 			_vo=null;
 		}
 	}

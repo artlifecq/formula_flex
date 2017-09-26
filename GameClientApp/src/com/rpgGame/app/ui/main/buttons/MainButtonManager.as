@@ -8,6 +8,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityPointNumButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivitySevendayButton;
+	import com.rpgGame.app.ui.main.activityBar.item.ActivityZaiXianButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
 	import com.rpgGame.coreData.cfg.MainBtnCfgData;
@@ -139,8 +140,9 @@ package com.rpgGame.app.ui.main.buttons
 				case EmMainBtnID.QIRIHAOLI:
 					return new ActivitySevendayButton();
 				case EmMainBtnID.FULIDATING:
-				case EmMainBtnID.ZAIXIAN:
 					return new ActivityFuLiDaTingButton();
+				case EmMainBtnID.ZAIXIAN:
+					return new ActivityZaiXianButton();
 				case EmMainBtnID.PIPEIDUILIE:
 					return new MultyActivityButton();
 				case EmMainBtnID.SHIJIEBOSS:
@@ -256,6 +258,23 @@ package com.rpgGame.app.ui.main.buttons
 			}
 		}
 		
-		
+		/** 
+		 * 设置活动倒计时
+		 * */
+		public static function setActivityZaiXianButton(id:int,time:int,isshowTime:Boolean=false):void
+		{
+			var info:Q_mainbtn=MainBtnCfgData.getMainBtnCfg(id);
+			if(info)
+			{
+				var button:ActivityZaiXianButton= MainButtonManager.getButtonByInfo(info) as ActivityZaiXianButton;
+				if(button)
+				{
+					if(isshowTime)
+						button.setTime(time);
+					else
+						button.setText("可领取");
+				}
+			}
+		}
 	}
 }

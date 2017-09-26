@@ -25,6 +25,10 @@ package com.rpgGame.core.events
 		 */
 		public static const SERVERACTIVE_DENGJI_PICKUP:int = UNIQUEID.NEXT;
 		/**
+		 *等级提升后可领取提示
+		 */
+		public static const SERVERACTIVE_DENGJI_TISHI:int = UNIQUEID.NEXT;
+		/**
 		 *返回在线时间
 		 */
 		public static const SERVERACTIVE_ONLINE_TIME:int = UNIQUEID.NEXT;
