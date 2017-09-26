@@ -555,11 +555,11 @@ package com.rpgGame.app.ui.main.chat
 							arr[infos[i].i]=replacePlayerShow(str,StaticValue.GREEN_TEXT,infos[i].parameterInfos[0].id.hexValue);
 							break;
 						case 2: //物品
-//							if(!infos[i].parameterInfos[0].itemInfo.itemId.EqualTo(new long(0))){
-//								arr[infos[i].i]=replaceItemInfoShow(infos[i].parameterInfos[0].itemInfo);
-//							}else{
+							if(!infos[i].parameterInfos[0].itemInfo.itemId.EqualTo(new long(0))){
+								arr[infos[i].i]=replaceItemInfoShow(infos[i].parameterInfos[0].itemInfo);
+							}else{
 								arr[infos[i].i]=replaceItemShowByMod(infos[i].parameterInfos[0].mod);
-//							}
+							}
 							break;
 						case 3: //组队 
 							var id:String=infos[i].parameterInfos[0].id.hexValue;
