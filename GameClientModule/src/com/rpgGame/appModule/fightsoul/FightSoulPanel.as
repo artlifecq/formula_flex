@@ -481,8 +481,9 @@ package com.rpgGame.appModule.fightsoul
 		private  function get fightSoulInfo(): FightSoulInfo{
 			return FightSoulManager.instance().fightSoulInfo;
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
+			super.onHide();
 			_skin.btn_prev.removeEventListener(Event.TRIGGERED,triggeredHander);
 			_skin.btn_next.removeEventListener(Event.TRIGGERED,triggeredHander);
 			_skin.btn_huanhua.removeEventListener(Event.TRIGGERED,huanhuaTriggeredHandler);
@@ -494,7 +495,6 @@ package com.rpgGame.appModule.fightsoul
 			EventManager.removeEvent(FightSoulManager.FightSoul_Vitality,refeashVitality);
 			EventManager.removeEvent(FightSoulManager.FightSoul_GetReward,refeashRewards);
 			EventManager.removeEvent(FightSoulManager.FightSoul_TypeValue,listrefeash);
-			super.hide();
 		}
 	}
 }

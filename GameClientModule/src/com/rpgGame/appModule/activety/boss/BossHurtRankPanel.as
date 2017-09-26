@@ -87,9 +87,9 @@ package com.rpgGame.appModule.activety.boss
 			this.escExcuteAble=false;
 		}
 		
-		override public function hide():void
+		override protected function onHide() : void
 		{
-			super.hide();
+			super.onHide();
 			TipTargetManager.remove( _skin.uiIcon);
 			EventManager.removeEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,updateView);
 		}

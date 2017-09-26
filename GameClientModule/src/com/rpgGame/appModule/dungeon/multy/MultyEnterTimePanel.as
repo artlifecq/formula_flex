@@ -69,9 +69,9 @@ package com.rpgGame.appModule.dungeon.multy
 				TimerServer.remove(updateTime);
 			}
 		}
-		override public function hide():void 
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 

@@ -919,8 +919,9 @@ package com.rpgGame.appModule.equip
 		}
 		
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			//			zuomoEft.stop();
 			_isMax=false;
 			cancelAllUse();

@@ -54,7 +54,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 507;
-			temp.styleName = "ui/app/banghui/kuang1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 782;
 			temp.x = 155;
 			temp.y = 85;
@@ -133,7 +133,7 @@ package org.mokylin.skin.app.banghui
 			temp.skin = skin
 			temp.width = 788;
 			temp.x = 155;
-			temp.y = 86;
+			temp.y = 83;
 			return temp;
 		}
 

@@ -69,9 +69,9 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			initEvent();
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TipTargetManager.remove( _skin.uiIcon);
 			EventManager.removeEvent(ActivityEvent.UPDATE_JIXIANBOSS_HURT_RANK,updateView);
 		}

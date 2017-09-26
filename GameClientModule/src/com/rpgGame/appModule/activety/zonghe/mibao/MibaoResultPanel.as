@@ -57,9 +57,9 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 			setReword(msg.reward);
 			
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 			//TweenLite.killDelayedCallsTo(hide);
 		}

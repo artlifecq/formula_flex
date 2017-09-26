@@ -63,9 +63,9 @@ package com.rpgGame.appModule.guild
 		}
 		
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			EventManager.removeEvent(GuildEvent.GET_INVITE_GUILD_LIST,refeashView);
 		}
 	

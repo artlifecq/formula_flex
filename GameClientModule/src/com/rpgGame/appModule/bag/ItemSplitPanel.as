@@ -63,9 +63,9 @@ package com.rpgGame.appModule.bag
 			slider.y+=10;
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			skin.input_txt.removeEventListener(Event.CHANGE,onChangeNum);
 			slider.removeEventListener(Event.CHANGE,onChange);
 		}

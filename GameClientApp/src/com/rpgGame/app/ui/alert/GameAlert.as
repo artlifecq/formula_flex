@@ -255,8 +255,9 @@ package com.rpgGame.app.ui.alert
 			}
 		}
 		
-		override public function hide() : void
+		override protected function onHide():void
 		{
+			super.onHide();
 			if (!alertPools)
 				alertPools = new HashMap();
 			var alerts : Array = alertPools.getValue(this.alertType);
@@ -268,7 +269,6 @@ package com.rpgGame.app.ui.alert
 			alerts.push(this);
 			showAlertMap.remove(alertSet.key);
 			TweenLite.killDelayedCallsTo(hide);
-			super.hide();
 		}
 		
 		public static function closeAlert(key : String) : void

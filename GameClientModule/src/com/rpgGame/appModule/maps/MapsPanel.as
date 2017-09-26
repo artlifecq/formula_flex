@@ -54,18 +54,10 @@ package com.rpgGame.appModule.maps
 				clearMapsData();
 				clearMapsView();
 				updataMapsData();
-				_bigMap.onClearPath();
-				if(sceneId!=BigMapsManager.currentMapId)//如果大地图上显示场景ID不是当前场景，则重新加载地图
-				{
-					BigMapsManager.isMapLoadComplete=false;
-					_bigMap.clearView();
-					loadBigMapView(sceneId);
-					
-				}
-				else
-				{
-					_bigMap.updateRolePos();
-				}
+				BigMapsManager.isMapLoadComplete=false;
+				_bigMap.clearView();
+				loadBigMapView(sceneId);
+				
 				scollBoxView();
 				onDrawPathRoad();
 				onDrawPath();
@@ -76,14 +68,16 @@ package com.rpgGame.appModule.maps
 			}
 			
 		}
-		override public function hide():void 
+		
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			clearMapsData();
 			clearMapsView();
-			_bigMap.onClearPath();
+			_bigMap.onHide();
 			removeEvent();
 		}
+		
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
