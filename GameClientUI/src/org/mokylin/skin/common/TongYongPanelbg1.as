@@ -1,8 +1,10 @@
 package org.mokylin.skin.common
 {
 	import feathers.controls.Button;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongHead1;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -15,7 +17,7 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -62,14 +64,17 @@ package org.mokylin.skin.common
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/common/background/tongyongV2_1.png";
-			temp.x = -17;
-			temp.y = -8;
+			temp.height = 82;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongHead1()
+			temp.skin = skin
+			temp.width = 956;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
