@@ -214,6 +214,7 @@ package com.rpgGame.appModule.hubao
 				MCUtil.removeSelf(_tishiPanel);
 				_tishiPanel=null;
 			}
+			clearChenHaoEff();
 			_skin.btnTiSheng.removeEventListener(Event.TRIGGERED,btnTiShengHandler);
 			_skin.btnHuSong.removeEventListener(Event.TRIGGERED,btnHuSongHandler);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_UPDATEPINZHI,updateNowSelectBaoWu);

@@ -190,7 +190,7 @@ package com.rpgGame.appModule.equip
 		{
 			_huoEftContaner1=new Inter3DContainer();
 			_skin.container.addChildAt(_huoEftContaner1,_skin.container.numChildren);
-			_huoEff=_huoEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_ronglu_huoyan"),590,216,0);
+			_huoEff=_huoEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_duanzao_mianban"),502,289,0);
 			_skin.input_txt.restrict = "0-9";
 			_skin.input_txt.maxChars = 3;
 			_cailiao=new Vector.<IconCDFace>();
@@ -240,7 +240,7 @@ package com.rpgGame.appModule.equip
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			
 			var node:TreeNode=_skin.tree.rootNode;
-//			node.expanded=false;
+			//			node.expanded=false;
 			if(data){
 				var info:ComboItemInfo=data as ComboItemInfo;
 				if(info.targetId!=0){
@@ -262,6 +262,7 @@ package com.rpgGame.appModule.equip
 			_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
 			_skin.tree.validate();
 			onSelected(null);
+			if(_huoEff) _huoEff.start();
 		}
 		
 		private function closeNode(node:TreeNode):void
@@ -405,6 +406,7 @@ package com.rpgGame.appModule.equip
 			_skin.tree.dataProvider.updateItemAt(oldindex);
 			_nowSelect=null;
 			minMaxBar.onHide();
+			if(_huoEff) _huoEff.stop();
 		}
 		
 		//显示合成的对象

@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.netData.gameactivities.message.ResGotSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.ResGrownInfoMessage;
+	import com.rpgGame.netData.gameactivities.message.ResRewardNoticeMessage;
 	import com.rpgGame.netData.gameactivities.message.SCOnlineInfoMessage;
 	import com.rpgGame.netData.gameactivities.message.SCOnlineRewardMessage;
 	import com.rpgGame.netData.gameactivities.message.SCRewardSuccessMessage;
@@ -39,6 +40,7 @@ package com.rpgGame.app.cmdlistener
 			/*等级礼包*/
 			SocketConnection.addCmdListener(192101, onResGrownInfoMessage);
 			SocketConnection.addCmdListener(192102, onResGotSuccessMessage);
+			SocketConnection.addCmdListener(192103, onResRewardNoticeMessage);
 			/*在线奖励*/
 			SocketConnection.addCmdListener(411101, onSCOnlineInfoMessage);
 			SocketConnection.addCmdListener(411102, onSCOnlineRewardMessage);
@@ -78,6 +80,12 @@ package com.rpgGame.app.cmdlistener
 		private function onResGotSuccessMessage(msg:ResGotSuccessMessage):void
 		{
 			Mgr.dengjiMgr.onResGotSuccessMessage(msg);
+		}
+		
+		/**等级提升后可领取礼包提示*/
+		private function onResRewardNoticeMessage(msg:ResRewardNoticeMessage):void
+		{
+			Mgr.dengjiMgr.onResRewardNoticeMessage(msg);
 		}
 		
 		/**等级礼包数据*/		

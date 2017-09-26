@@ -91,17 +91,19 @@ package com.rpgGame.appModule.fulidating
 			var info:onlineInfo=Mgr.zaiXianMgr.getonlineInfoByTime(_online);
 			if(!info||info.state==2){
 				_skin.uiOk.visible=true;
-				GrayFilter.gray(_skin.btnOK);
+				_skin.btnOK.visible=false;
 				_gameTimer.stop();
 				setIco(info.hasRewardItemId);
 			}else if(info.state==0){
 				_skin.uiOk.visible=false;
 				GrayFilter.gray(_skin.btnOK);
+				_skin.btnOK.visible=true;
 				_gameTimer.start();
 				updateShow();
 			}else if(info.state==1){
 				_skin.uiOk.visible=false;
 				_skin.btnOK.filter=null;
+				_skin.btnOK.visible=true;
 				_gameTimer.start();
 				updateShow();
 			}

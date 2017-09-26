@@ -588,6 +588,8 @@ package com.rpgGame.core.app
 
 		/**福利大厅*/
 		public static var FULIDATING_MAIN:String = createAppInfo("fulidating.FuLiDaTingMainPanelExt","fulidating",EmPanelID.ACTIVITY_FULI);
+		/**等级礼包提示*/
+		public static var FULIDATING_LEVEL_TISHI:String = createAppInfo("fulidating.LevelUpTiShiPanel","uptips");
 		//开服bug
 		public static const ACT_BUG:String=createAppInfo("openActivity.bug.BugSubmitPanelExt","youjiang");
 		public static const ACT_37_PLATFORM:String=createAppInfo("openActivity.plat37.P37PlatformTokenPanelExt","tequan");

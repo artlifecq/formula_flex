@@ -1,13 +1,15 @@
 package com.rpgGame.app.manager.fulidating
 {
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.goods.SevendayManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ServerActiveEvent;
 	import com.rpgGame.coreData.enum.EmMainBtnID;
 	import com.rpgGame.netData.gameactivities.bean.GrownInfo;
 	import com.rpgGame.netData.gameactivities.message.ResGotSuccessMessage;
 	import com.rpgGame.netData.gameactivities.message.ResGrownInfoMessage;
+	import com.rpgGame.netData.gameactivities.message.ResRewardNoticeMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -45,6 +47,12 @@ package com.rpgGame.app.manager.fulidating
 			_dengjiInfos=msg.info;
 			MainButtonManager.setActivityPointNumButton(EmMainBtnID.FULIDATING,chackCanGetNum());
 			EventManager.dispatchEvent(ServerActiveEvent.SERVERACTIVE_DENGJI_UPDATE);
+		}
+		
+		/**等级提升后可领取提示*/
+		public function onResRewardNoticeMessage(msg:ResRewardNoticeMessage):void
+		{
+			AppManager.showAppNoHide(AppConstant.FULIDATING_LEVEL_TISHI,msg.level);
 		}
 		
 		public function chackNot():Boolean
