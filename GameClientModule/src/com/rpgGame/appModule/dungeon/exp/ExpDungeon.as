@@ -70,8 +70,9 @@ package com.rpgGame.appModule.dungeon.exp
 					break;
 			}
 		}
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			EventManager.removeEvent(DungeonEvent.EQUIP_UPDATE_DAILYZONE_INFO,refeashValue);
 			_groupList1.clear();
 		}

@@ -136,9 +136,9 @@ package com.rpgGame.appModule.dungeon.genuine
 			DungeonSender.reqQuitDungeon(sceneId);
 			this.hide();
 		}
-		override public function hide() : void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 			icoListGroup.clear();
 			/*for each(var icon:IconCDFace in _rewardIcons)

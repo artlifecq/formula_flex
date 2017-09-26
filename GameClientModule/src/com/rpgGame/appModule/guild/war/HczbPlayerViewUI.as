@@ -101,9 +101,9 @@ package com.rpgGame.appModule.guild.war
 			TipTargetManager.show( _skin.btnShuoMing,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(30).q_describe));
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			EventManager.removeEvent(GuildEvent.GUILD_HCZB_AVATAR_LIST,onGetInfos);
 			TipTargetManager.remove( _skin.btnShuoMing);
 		}

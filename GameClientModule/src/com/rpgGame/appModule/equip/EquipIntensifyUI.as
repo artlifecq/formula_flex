@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -138,6 +140,8 @@ package com.rpgGame.appModule.equip
 		private static var noAlertUse:Boolean;
 		
 		private var alertOk:AlertSetInfo;
+		private var _huoEftContaner1:Inter3DContainer;
+		private var _huoEff:InterObject3D;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -147,6 +151,9 @@ package com.rpgGame.appModule.equip
 		
 		private function initView():void
 		{
+			_huoEftContaner1=new Inter3DContainer();
+			_skin.container.addChildAt(_huoEftContaner1,_skin.container.numChildren);
+			_huoEff=_huoEftContaner1.playInter3DAt(ClientConfig.getEffect("ui_ronglu_huoyan"),638,297,0);
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
 			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/daiqianghua.png";
@@ -546,7 +553,7 @@ package com.rpgGame.appModule.equip
 		{
 			initEvent();
 			refresh();
-			
+			if(_huoEff) _huoEff.start();
 			/*var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
 			alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",10);
 			alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",10);
@@ -1042,8 +1049,9 @@ package com.rpgGame.appModule.equip
 			_goodsContainerTarget.refleshGridsByDatas(result);
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);
 			EventManager.removeEvent(ItemEvent.ITEM_STRENGTH_MSG,getStrengthMsg);
 			cancelAllUse();
@@ -1056,6 +1064,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			TipTargetManager.remove( _skin.btn_shuoming);
 			GameAlert.closeAlert(LangUI.UI_TEXT3);
+			if(_huoEff) _huoEff.stop();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

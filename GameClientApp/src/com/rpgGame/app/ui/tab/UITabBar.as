@@ -287,7 +287,7 @@ package com.rpgGame.app.ui.tab
 		{
 			_tabBar.removeEventListener(Event.CHANGE,selectChangeHandler);
 			if(_currentView){
-				_currentView.hide();
+				_currentView.hideView();
 			}
 		}
 	}

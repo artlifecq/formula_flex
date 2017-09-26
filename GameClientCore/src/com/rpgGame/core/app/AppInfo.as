@@ -25,6 +25,5 @@ package com.rpgGame.core.app
 		public var pX:int = 0;
 		/** 显示的方位上的相对坐标 y**/
 		public var pY:int = 0;
-		
 	}
 }

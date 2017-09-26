@@ -130,6 +130,7 @@ package com.rpgGame.core.app
 				//					_app.addEvent();
 				//				}
 				_app.show(_data, _openTable, _parentContiner);
+				AppManager.changeAlwaysTopApp();
 				if(_needAmition)
 				{
 					TweenMax.killTweensOf(_app);
@@ -390,13 +391,20 @@ package com.rpgGame.core.app
 		public function bringToTop() : void
 		{
 			//DepthManager.bringToTop( _app as DisplayObject );
-			if (_app != null)
-				StarlingLayerManager.appUILayer.addChild(_app as starling.display.DisplayObject);
+			/*if (_app != null)
+				StarlingLayerManager.appUILayer.addChild(_app as starling.display.DisplayObject);*/
+			if (_app != null&&_app.parent)
+				_app.parent.addChild(_app as starling.display.DisplayObject);
 		}
 
 		public function hitTest(xPos : Number, yPos : Number) : Boolean
 		{
 			return _app.hitTest(new Point(xPos, yPos));
+		}
+
+		public function get alwaysTop():Boolean
+		{
+			return _app.alwaysTop;
 		}
 	}
 }

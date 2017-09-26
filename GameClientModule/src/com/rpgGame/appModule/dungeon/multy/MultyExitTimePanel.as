@@ -1,12 +1,9 @@
 package com.rpgGame.appModule.dungeon.multy
 {
 	import com.rpgGame.app.manager.DungeonManager;
-	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.utils.TimeUtil;
 	
 	import org.mokylin.skin.app.fuben.FuBen_Exit;
-	import org.mokylin.skin.app.fuben.FuBen_JinRuTime;
 	import org.mokylin.skin.app.fuben.uinumber.UINumberDaojishi;
 	
 	import starling.display.DisplayObject;
@@ -53,9 +50,9 @@ package com.rpgGame.appModule.dungeon.multy
 				TimerServer.remove(updateTime);
 			}
 		}
-		override public function hide():void 
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 

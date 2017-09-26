@@ -21,9 +21,9 @@ package com.rpgGame.appModule.xinfa
 			super.show(data);
 			_view.onShow();
 		}
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			_view.onHide();
 		}
 	}

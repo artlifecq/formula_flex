@@ -38,9 +38,9 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
 			}
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 		}
 		override protected function onStageResize(sw : int, sh : int) : void

@@ -102,6 +102,7 @@ package com.rpgGame.appModule.battle.dfdj
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,onGetPanelData);
 			onStateResChange(CharAttributeType.RES_PRESTIGE);
 			Mgr.d1v1Mgr.reqPanelData();
+			if(_eff1) _eff1.start(); 
 		}
 		
 		private function onGetPanelData(...arg):void
@@ -178,6 +179,7 @@ package com.rpgGame.appModule.battle.dfdj
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
 			EventManager.removeEvent(D1v1Event.GET_PANEL_DATA,onGetPanelData);
 			showRewardEffect(false);
+			if(_eff1) _eff1.stop();
 		}
 	}
 }

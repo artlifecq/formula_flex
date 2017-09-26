@@ -107,9 +107,9 @@ package com.rpgGame.appModule.role
 			this.hide();
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			_itemContainerID=0;
 			_index=0;
 			_type=0;

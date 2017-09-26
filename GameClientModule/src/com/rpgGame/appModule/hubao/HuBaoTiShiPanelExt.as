@@ -52,11 +52,5 @@ package com.rpgGame.appModule.hubao
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_STAR);
 			MCUtil.removeSelf(this);
 		}
-		
-		override public function hide() : void
-		{
-			super.hide();
-			MCUtil.removeSelf(this);
-		}
 	}
 }

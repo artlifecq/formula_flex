@@ -103,9 +103,9 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			return result;
 		}
 		
-		override public function hide():void
+		override 	protected function onHide() : void
 		{
-			super.hide();
+			super.onHide();
 			var icon:IconCDFace;
 			while(_gridList.length>0){
 				icon=_gridList.pop();

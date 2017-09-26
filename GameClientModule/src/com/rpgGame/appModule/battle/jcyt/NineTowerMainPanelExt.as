@@ -105,6 +105,7 @@ package com.rpgGame.appModule.battle.jcyt
 			onStateResChange(CharAttributeType.RES_PRESTIGE);
 			setReward();
 			Mgr.nineTowerMgr.reqPanelData();
+			if(_eff1) _eff1.start();
 		}
 		private function setReward():void
 		{
@@ -113,7 +114,7 @@ package com.rpgGame.appModule.battle.jcyt
 		private function onGetPanelData(...arg):void
 		{
 			// TODO Auto Generated method stub
-	
+			
 			
 			var state:int=arg[0];
 			var bool:Boolean=state==1;
@@ -135,7 +136,7 @@ package com.rpgGame.appModule.battle.jcyt
 		}
 		private function showRewardEffect(bool:Boolean):void
 		{
-		
+			
 			if (bool) 
 			{
 				if (!_eff) 
@@ -161,9 +162,9 @@ package com.rpgGame.appModule.battle.jcyt
 			if (CharAttributeType.RES_PRESTIGE==type) 
 			{
 				_skin.lbShengwang.text=MainRoleManager.actorInfo.totalStat.getResData(type)+"";
-			}
-			
+			}		
 		}
+		
 		override protected function onHide():void
 		{
 			super.onHide();
@@ -171,6 +172,7 @@ package com.rpgGame.appModule.battle.jcyt
 			EventManager.removeEvent(NineTowerEvent.GET_PANEL_DATA,onGetPanelData);
 			showRewardEffect(false);
 			_gReward.clear();
+			if(_eff1) _eff1.stop();
 		}
 	}
 }

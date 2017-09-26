@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
@@ -25,7 +26,6 @@ package com.rpgGame.appModule.mount
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import com.game.engine3D.display.InterObject3D;
 	
 	public class ZhanQiPanelExt extends AttChangeView
 	{
@@ -109,8 +109,9 @@ package com.rpgGame.appModule.mount
 			_skin.container.addChild(_skin.grpZhanli);
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
 			if(autoReq){

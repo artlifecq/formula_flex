@@ -25,6 +25,7 @@ package com.rpgGame.appModule.common
 		{
 			super(skin);
 			this.changeMapClose=false;
+			this.alwaysTop=true;
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void

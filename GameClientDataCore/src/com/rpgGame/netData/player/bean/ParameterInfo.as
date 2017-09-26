@@ -31,8 +31,8 @@ package com.rpgGame.netData.player.bean{
 		//坐标点
 		private var _y: int;
 		
-//		//用于发送道具的具体信息，包括强化等级  等
-//		private var _itemInfo: ItemInfo;
+		//用于发送道具的具体信息，包括强化等级  等
+		private var _itemInfo: ItemInfo;
 		
 		/**
 		 * 写入字节缓存
@@ -48,8 +48,8 @@ package com.rpgGame.netData.player.bean{
 			writeInt(_x);
 			//坐标点
 			writeInt(_y);
-			//用于发送道具的具体信息，包括强化等级  等
-//			writeBean(_itemInfo);
+			//用于发送道具的具体信息，包括强化等级等
+			writeBean(_itemInfo);
 			return true;
 		}
 		
@@ -67,8 +67,8 @@ package com.rpgGame.netData.player.bean{
 			_x = readInt();
 			//坐标点
 			_y = readInt();
-			//用于发送道具的具体信息，包括强化等级  等
-//			_itemInfo = readBean(ItemInfo) as ItemInfo;
+			//用于发送道具的具体信息，包括强化等级等
+			_itemInfo=readBean(ItemInfo) as ItemInfo;
 			return true;
 		}
 		
@@ -147,20 +147,20 @@ package com.rpgGame.netData.player.bean{
 			this._y = value;
 		}
 		
-//		/**
-//		 * get 用于发送道具的具体信息，包括强化等级  等
-//		 * @return 
-//		 */
-//		public function get itemInfo(): ItemInfo{
-//			return _itemInfo;
-//		}
-//		
-//		/**
-//		 * set 用于发送道具的具体信息，包括强化等级  等
-//		 */
-//		public function set itemInfo(value: ItemInfo): void{
-//			this._itemInfo = value;
-//		}
+		/**
+		 * get 用于发送道具的具体信息，包括强化等级  等
+		 * @return 
+		 */
+		public function get itemInfo(): ItemInfo{
+			return _itemInfo;
+		}
+		
+		/**
+		 * set 用于发送道具的具体信息，包括强化等级  等
+		 */
+		public function set itemInfo(value: ItemInfo): void{
+			this._itemInfo = value;
+		}
 		
 	}
 }

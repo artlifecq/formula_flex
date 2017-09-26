@@ -44,11 +44,5 @@ package com.rpgGame.app.ui.alert
 		{
 			_skin.lb_text.text = text;
 		}
-		
-		override public function hide() : void
-		{
-			super.hide();
-			MCUtil.removeSelf(this);
-		}
 	}
 }

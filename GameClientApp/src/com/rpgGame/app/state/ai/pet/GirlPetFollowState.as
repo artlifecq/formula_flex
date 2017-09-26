@@ -56,10 +56,25 @@ package com.rpgGame.app.state.ai.pet
 			}
 		}
 		
+		private function getDis():Boolean
+		{
+			_petOwner=SceneManager.getSceneObjByID(GirlPetData((_machine.owner as SceneRole).data).ownerId) as SceneRole;
+			if(_petOwner)
+			{
+				var dis:int=MathUtil.getDistanceNoSqrt(_pet.pos.x,_pet.pos.y,_petOwner.pos.x,_petOwner.pos.y);
+				if(dis>GirlPetFollowAnimator.MIN_NEAR)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		
 		private function onArrive(ref:*=null) : void
 		{
 			_isMoving=false;
-			transition(AIStateType.AI_NONE);
+			if(getDis)
+				transition(AIStateType.AI_NONE);
 		}
 		
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean

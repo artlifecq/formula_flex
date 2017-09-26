@@ -59,9 +59,9 @@ package com.rpgGame.appModule.guild.war
 			}
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			timer.stop();
 			rewardGrp.clear();
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);

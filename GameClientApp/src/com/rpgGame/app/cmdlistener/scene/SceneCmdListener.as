@@ -122,6 +122,7 @@ package com.rpgGame.app.cmdlistener.scene
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import flash.system.Security;
 	import flash.utils.ByteArray;
 	
 	import app.message.MonsterType;
@@ -500,9 +501,9 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function RecvResPlayerRunFailMessage(msg:ResPlayerRunFailMessage):void
 		{
-			if(MainRoleManager.isSelfBySceneId(msg.personId))
+			if(!MainRoleManager.isSelfBySceneId(msg.personId))
 			{
-				GameLog.addShow("ResPlayerRunEndMessage这个message根本就不应该来！应该是针对主角的");
+				GameLog.addShow("ResPlayerRunFailMessage这个message根本就不应该来！应该是针对主角的");
 				return;
 			}
 			var posX : uint = msg.position.x;
@@ -1176,7 +1177,6 @@ package com.rpgGame.app.cmdlistener.scene
 					animatData.role_res,
 					animatData.bind_bone);
 			}
-			
 			if(roleData.id == MainRoleManager.actorID)
 			{
 				if(msg.attributeChange.type==CharAttributeType.HP)
