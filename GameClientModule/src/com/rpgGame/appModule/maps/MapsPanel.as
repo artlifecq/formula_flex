@@ -51,13 +51,15 @@ package com.rpgGame.appModule.maps
 			{
 				super.show(data, openTable, parentContiner);
 				var sceneId:int=sceneData.sceneId;
-				clearMapsData();
+				//clearMapsData();
 				clearMapsView();
-				updataMapsData();
+				//updataMapsData();
+				_bigMap.onClearPath();
+				
 				BigMapsManager.isMapLoadComplete=false;
 				_bigMap.clearView();
 				loadBigMapView(sceneId);
-				
+
 				scollBoxView();
 				onDrawPathRoad();
 				onDrawPath();
@@ -72,8 +74,7 @@ package com.rpgGame.appModule.maps
 		override protected function onHide():void
 		{
 			super.onHide();
-			clearMapsData();
-			clearMapsView();
+			_bigMap.onClearPath();
 			_bigMap.onHide();
 			removeEvent();
 		}
@@ -239,99 +240,9 @@ package com.rpgGame.appModule.maps
 		/**更新大地图面板数据*/
 		private function updataMapsData():void
 		{
-			updataRoleData();
-			
+			BigMapsManager.updataRoleData();
 		}
 		
-		
-		/**更新大地图图标数据*/
-		private function updataRoleData():void
-		{
-			var monsterList:Array=MonsterDataManager.getBigMapMonsterBySceneId(MapDataManager.currentScene.sceneId);
-			var transList:Vector.<Q_map_transfer>=TransCfgData.getTranBySceneID(MapDataManager.currentScene.sceneId);
-			
-			var i:int,length:int;
-			var roleMode:BigMapIocnDataMode;
-			if(monsterList&&monsterList.length>0)
-			{
-				var monsterData:Object;
-				length=monsterList.length;
-				for(i=0;i<length;i++)
-				{
-					monsterData = monsterList[i];
-					/*roleMode=new BigMapIocnDataMode();
-					roleMode.name=monsterData.name;
-					roleMode.level=monsterData.level;
-					roleMode.show=monsterData.show;
-					roleMode.x=monsterData.x;
-					roleMode.y=monsterData.y;*/
-					var type:String;
-					switch(monsterData.type)
-					{
-						case 4:
-						case 6:
-							BigMapsManager.addMapsIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-							break;
-						case 5:
-							BigMapsManager.addMapsIcon(SceneCharType.COLLECT,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-							break;
-						default:
-							BigMapsManager.addMapsIcon(SceneCharType.MONSTER,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-							
-							break;
-					}
-					
-					
-					//BigMapsManager.addMapsIcon(type,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-//					if(monsterData.type==4||monsterData.type==6)
-//					{
-//						BigMapsData.addMapsNpcIcon(SceneCharType.NPC,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-//						//BigMapsData.mapsNpcData.push(roleMode);
-//					}
-//					else if(monsterData.type==5)
-//					{
-//						BigMapsData.addMapsNpcIcon(SceneCharType.COLLECT,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-//					}
-//					else
-//					{
-//						BigMapsData.addMapsMonsterIcon(SceneCharType.MONSTER,monsterData.name,monsterData.x,monsterData.y,monsterData.level,monsterData.show);
-//					}
-				}
-			}
-			if(transList&&transList.length>0)
-			{
-				var transData:Q_map_transfer;
-				length=transList.length;
-				for(i=0;i<length;i++)
-				{
-					transData = transList[i];
-					var name:String=transData.q_name;
-					if(transData.q_tran_dest_area_by_job!="")
-					{
-						var jobArea:Array=JSONUtil.decode(transData.q_tran_dest_area_by_job);
-						if(jobArea&&jobArea.length>0)
-						{
-							for(var j:int=0;j<jobArea.length;j++)
-							{
-								if(jobArea[j][0]==MainRoleManager.actorInfo.job)
-								{
-									var mapID:int= AreaCfgData.getAreaMapidByID(jobArea[j][1]);
-									var map:Q_map=MapDataManager.getMapInfo(mapID).getData();
-									name=map.q_map_name;
-									break;
-								}
-							}
-						}
-					}
-					BigMapsManager.addMapsIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
-
-					//BigMapsData.addMapsThansIcon(SceneCharType.TRANS,name,transData.q_tran_res_x,transData.q_tran_res_y);
-					
-					//BigMapsData.mapsThansData.push(roleMode);
-				}
-			}
-			
-		}
 		
 		
 		private function onUpdateRolePos():void

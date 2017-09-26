@@ -33,6 +33,7 @@ package com.rpgGame.appModule.maps
 	import org.mokylin.skin.app.maps.EndFly;
 	import org.mokylin.skin.app.maps.maps_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Shape;
 	import starling.display.Sprite;
@@ -508,8 +509,10 @@ package com.rpgGame.appModule.maps
 		}
 		public function clearAllRole():void
 		{
+			var chid:DisplayObject;
 			while(roleSpr.numChildren>0){
-				roleSpr.removeChildAt(0);
+				chid=roleSpr.removeChildAt(0);
+				chid.dispose();
 			}
 		}
 		public function onDrawPathRoad() : void
