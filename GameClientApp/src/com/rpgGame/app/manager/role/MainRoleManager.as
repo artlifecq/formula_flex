@@ -55,8 +55,6 @@ package com.rpgGame.app.manager.role
 		public function MainRoleManager()
 		{
 		}
-		
-		
 
 		public static function get serverID():long
 		{
