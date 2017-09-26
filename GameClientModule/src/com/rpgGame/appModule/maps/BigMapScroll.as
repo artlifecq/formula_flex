@@ -252,14 +252,41 @@ package com.rpgGame.appModule.maps
 		}
 		public function clearItem():void
 		{
-			if(npcList.numChildren>0)npcList.removeChildAt(0);
-			if(monsterList.numChildren>0)monsterList.removeChildAt(0);
-			if(thansList.numChildren>0)thansList.removeChildAt(0);
+			var dis:Sprite;
+			var chid:DisplayObject;
+			if(npcList.numChildren>0)
+			{
+				dis=npcList.removeChildAt(0) as Sprite;
+				while(dis.numChildren>0)
+				{
+					chid=dis.removeChildAt(0);
+					chid.dispose();
+				}				
+				dis.dispose();
+			}
+			if(monsterList.numChildren>0)
+			{
+				dis=monsterList.removeChildAt(0) as Sprite;
+				while(dis.numChildren>0)
+				{
+					chid=dis.removeChildAt(0);
+					chid.dispose();
+				}	
+				dis.dispose();
+			}
+			if(thansList.numChildren>0)
+			{
+				dis=thansList.removeChildAt(0) as Sprite;
+				while(dis.numChildren>0)
+				{
+					chid=dis.removeChildAt(0);
+					chid.dispose();
+				}
+				dis.dispose();
+			}
 			npcItemSpr.y=2;
 			monsterItemSpr.y=npcItemSpr.y+npcItemSpr.height;
 			thansItemSpr.y=monsterItemSpr.y+monsterItemSpr.height;
-			
-			
 		}
 		
 		

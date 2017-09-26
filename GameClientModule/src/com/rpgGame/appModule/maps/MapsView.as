@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.maps
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
+	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -9,14 +11,13 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import org.mokylin.skin.app.maps.maps_Skin;
 	import org.mokylin.skin.component.text.textInput2_Skin;
 	import org.mokylin.skin.component.text.textInput3_Skin;
 	
 	import starling.display.DisplayObject;
-	import com.rpgGame.app.manager.map.BigMapsManager;
-	import com.rpgGame.app.manager.map.BigMapIocnDataMode;
 
 	/**
 	 *大地图显示类，里面包含所有显示对象 
@@ -107,7 +108,8 @@ package com.rpgGame.appModule.maps
 				{
 					if(nameSplit[2]==1)
 					{
-						_bigMap.roleWalk(releData.x,releData.y,100);
+						var spacing:int=releData.type==SceneCharType.TRANS?0:100;
+						_bigMap.roleWalk(releData.x,releData.y,spacing);
 					}
 					else
 					{
