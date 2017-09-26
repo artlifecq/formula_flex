@@ -94,7 +94,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpNo = temp;
 			temp.name = "grpNo";
-			temp.x = 32;
+			temp.x = 23;
 			temp.y = 2;
 			temp.elementsContent = [__JiXianTiaoZhan_Item_UIAsset1_i(),numZhanli_i()];
 			return temp;
@@ -112,7 +112,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 155;
-			temp.x = 63;
+			temp.x = 67;
 			temp.y = 7;
 			return temp;
 		}
@@ -128,7 +128,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 30;
-			temp.x = 29;
+			temp.x = 20;
 			temp.y = 7;
 			return temp;
 		}
@@ -144,8 +144,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
-			temp.width = 92;
-			temp.x = 209;
+			temp.width = 88;
+			temp.x = 214;
 			temp.y = 7;
 			return temp;
 		}

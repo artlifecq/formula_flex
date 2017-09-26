@@ -158,7 +158,7 @@ package com.rpgGame.app.cmdlistener
 					setTimeout(ShortcutsManger.getInstance().updateNewSpell,2500+6000,cfg);
 				}
 			}
-			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
+			EventManager.dispatchEvent(SpellEvent.SPELL_ADD,msg.skillInfo.skillModelId);
 		}
 		
 		private function RecvResSkillChangeMessage(msg:ResSkillChangeMessage):void

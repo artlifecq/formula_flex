@@ -18,6 +18,12 @@ package com.rpgGame.netData.map.message{
 		
 		//跑步坐标集合
 		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
+		//开始走路时间戳(秒数部分)
+		private var _runTime: int;
+		
+		//开始走路时间戳(毫秒数部分)
+		private var _runTimeMs: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -31,6 +37,10 @@ package com.rpgGame.netData.map.message{
 			for (i = 0; i < _positions.length; i++) {
 				writeBean(_positions[i]);
 			}
+			//开始走路时间戳(秒数部分)
+			writeInt(_runTime);
+			//开始走路时间戳(毫秒数部分)
+			writeInt(_runTimeMs);
 			return true;
 		}
 		
@@ -46,6 +56,10 @@ package com.rpgGame.netData.map.message{
 			for (i = 0; i < positions_length; i++) {
 				_positions[i] = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			}
+			//开始走路时间戳(秒数部分)
+			_runTime = readInt();
+			//开始走路时间戳(毫秒数部分)
+			_runTimeMs = readInt();
 			return true;
 		}
 		
@@ -85,6 +99,36 @@ package com.rpgGame.netData.map.message{
 		 */
 		public function set positions(value: Vector.<com.rpgGame.netData.structs.Position>): void{
 			this._positions = value;
+		}
+		
+		/**
+		 * get 开始走路时间戳(秒数部分)
+		 * @return 
+		 */
+		public function get runTime(): int{
+			return _runTime;
+		}
+		
+		/**
+		 * set 开始走路时间戳(秒数部分)
+		 */
+		public function set runTime(value: int): void{
+			this._runTime = value;
+		}
+		
+		/**
+		 * get 开始走路时间戳(毫秒数部分)
+		 * @return 
+		 */
+		public function get runTimeMs(): int{
+			return _runTimeMs;
+		}
+		
+		/**
+		 * set 开始走路时间戳(毫秒数部分)
+		 */
+		public function set runTimeMs(value: int): void{
+			this._runTimeMs = value;
 		}
 		
 	}

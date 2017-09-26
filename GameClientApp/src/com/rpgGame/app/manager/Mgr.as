@@ -12,7 +12,16 @@ package com.rpgGame.app.manager
 		public function Mgr()
 		{
 		}
+		private static var _guideMgr:GuideMgr;
 		
+		public static function get guideMgr():GuideMgr
+		{
+			if (!_guideMgr) 
+			{
+				_guideMgr=new GuideMgr();
+			}
+			return _guideMgr;
+		}
 		public static function get meridianMgr():MeridianMgr
 		{
 			return MeridianMgr.ins;

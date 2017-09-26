@@ -74,7 +74,7 @@ package  com.rpgGame.appModule.social.team
 			}
 			//_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
 			var qMap:Q_map=MapDataManager.getMapInfo( MapDataManager.currentScene.sceneId).getData() as Q_map;
-			_skin.lbMap.text=qMap.q_map_name;
+			_skin.lbMap.text=qMap.q_map_name+"."+_data.line+"线";
 			setSelected(false);
 		}
 		public function setSelected(bool:Boolean):void

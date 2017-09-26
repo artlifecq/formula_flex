@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.NineTowerSender;
@@ -16,7 +17,9 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_nine_tower;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -136,7 +139,7 @@ package com.rpgGame.app.ui.scene.dungeon
 				setFlagData(Mgr.nineTowerMgr.flagData);
 			}
 		}
-		
+		private var zhanqiIcoId:int;
 		private function setFlagData(...arg):void
 		{
 			// TODO Auto Generated method stub
@@ -154,7 +157,30 @@ package com.rpgGame.app.ui.scene.dungeon
 				_flagEndTime=data.time*1000+getTimer();
 			}
 			_skin.labOwnerTime.htmlText=NotifyCfgData.getNotifyTextByID(61050)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(data.time));
+			if(name=="无")
+			{
+				var monsterAreaData:Q_scene_monster_area=MonsterDataManager.getMonsterById(14009);
+				var monsterName:String=MonsterDataManager.getMonsterName(monsterAreaData.q_monster_model);
+				if(monsterAreaData!=null)
+				{
+					if(zhanqiIcoId>0)
+					{
+						BigMapsManager.removeMapsIcon(zhanqiIcoId);
+					}
+					zhanqiIcoId=BigMapsManager.showMapsIcon("",monsterName,monsterAreaData.q_center_x,monsterAreaData.q_center_y,0,true,"ui/app/maps/zhanqi.png");
+				}
+			}
+			else
+			{
+				BigMapsManager.removeMapsIcon(zhanqiIcoId);
+				zhanqiIcoId=0;
+				//
+			}
+		
 		}
+		
+		
+		
 		override protected function onHide():void
 		{
 			super.onHide();

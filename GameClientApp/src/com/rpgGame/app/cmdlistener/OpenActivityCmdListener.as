@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.netData.player.handler.SCSuperVipHandler;
 	import com.rpgGame.netData.player.message.SCSuperVipMessage;
@@ -20,6 +21,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(181103, Mgr.activityPanelMgr.resActivitiesRefreshMsg);
 			SocketConnection.addCmdListener(181104,Mgr.activityPanelMgr.recActivityInfoChange);
 			SocketConnection.addCmdListener(103133,Mgr.activityPanelMgr.onSCSuperVipHandler);
+			SocketConnection.addCmdListener(103134,ActivetyDataManager.onSCLimitChallengePKStateChangeHandler);
 			finish();
 		}
 		
