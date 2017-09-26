@@ -155,6 +155,9 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
 		/** 极限挑战BOSS **/
 		public static var ACTIVETY_JIXIANBOSS_HURTRANK:String = createAppInfo("activety.jixiantiaozhan.JiXianRankPanel","activety");
+		public static const JXTZ_PK_CHANGE:String=createAppInfo("activety.jixiantiaozhan.JiXianNoticePanelExt","activety");
+		public static const JXTZ_END_NOTICE:String=createAppInfo("activety.jixiantiaozhan.JiXianNoticeLeavePanelExt","activety");
+		
 		/**
 		 *活动boss结果 
 		 */
@@ -593,5 +596,6 @@ package com.rpgGame.core.app
 		public static const ACT_37_PLATFORM:String=createAppInfo("openActivity.plat37.P37PlatformTokenPanelExt","tequan");
 		public static const ACT_37_SUPER_VIP:String=createAppInfo("openActivity.plat37.P37SuperVIPExt","showgirl");
 		public static const ACT_37_PHONE:String=createAppInfo("openActivity.plat37.P37PhonePanelExt","shoujilibao");
+	
 	}
 }

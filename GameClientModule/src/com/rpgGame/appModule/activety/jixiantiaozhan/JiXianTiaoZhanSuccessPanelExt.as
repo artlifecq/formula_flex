@@ -2,9 +2,12 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -23,14 +26,13 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	{
 		private var _skin:JiXianTiaoZhan_OK;
 		
-		private var _gridList:Vector.<IconCDFace>;
+		private var _rewardG:RewardGroup;
 		private var _reward:Array;
-		
 		public function JiXianTiaoZhanSuccessPanelExt()
 		{
 			_skin=new JiXianTiaoZhan_OK();
 			super(_skin);
-			_gridList=new Vector.<IconCDFace>();		
+			_rewardG=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1,1);
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
@@ -52,14 +54,42 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			_skin.lb_player_damage.text="累计伤害:"+msg.damage;
 			var nu:Number=Math.min(msg.damage/msg.totalDamage,1);
 			_skin.lb_damagethan.text="占总伤害:"+(nu*100).toFixed(1)+"%";
-			var icon:IconCDFace;
-			for(var i:int=0;i<reward.length;i++){			
-				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
-				_gridList.push(icon);
-				_skin.grpIcon.addChild(icon);
-				icon.x=i*60;
-				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(reward[i].mod,1,reward[i].bind);
-				FaceUtil.SetItemGrid(icon,itemInfo);
+		
+			var len:int=reward.length;
+			if (len>0) 
+			{
+				_rewardG.visible=true;
+				_skin.uiWei.visible=false;
+				var shows:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+				for(var i:int=0;i<len;i++)
+				{			
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(reward[i].mod,1,reward[i].bind);
+					shows.push(itemInfo);
+				}
+				_rewardG.setReward(shows);
+			}
+			else
+			{
+				_rewardG.visible=false;
+				_skin.uiWei.visible=true;
+			}
+			//胜利
+			if (msg.success==1) 
+			{
+				_skin.lbMsg.color=GameColorUtil.COLOR_GREEN;
+				_skin.lbMsg.text="成功击杀BOSS，可按排名获得奖励";
+			}
+			else
+			{
+				_skin.lbMsg.color=GameColorUtil.COLOR_RED;
+				if (msg.damage==0) 
+				{
+					_skin.lbMsg.text="必须对BOSS造成伤害才能获得奖励";
+				}
+				else
+				{
+					_skin.lbMsg.text="未能击杀BOSS，只能获得安慰奖";
+				}
 			}
 		}
 		
@@ -106,11 +136,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		override public function hide():void
 		{
 			super.hide();
-			var icon:IconCDFace;
-			while(_gridList.length>0){
-				icon=_gridList.pop();
-				icon.destroy();
-			}
+			_rewardG.clear();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

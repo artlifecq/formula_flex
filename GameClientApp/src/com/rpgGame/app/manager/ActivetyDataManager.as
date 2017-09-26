@@ -4,15 +4,20 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.cfg.active.JiXianVo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
+	import com.rpgGame.netData.player.handler.SCLimitChallengePKStateChangeHandler;
+	import com.rpgGame.netData.player.message.SCLimitChallengePKStateChangeMessage;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
 
 	/**
@@ -165,6 +170,10 @@ package com.rpgGame.app.manager
 				MainButtonManager.closeActivityButton(info.actCfg.q_btn_id);
 			}
 			
+		}
+		public static function onSCLimitChallengePKStateChangeHandler(msg:SCLimitChallengePKStateChangeMessage):void
+		{
+			AppManager.showApp(AppConstant.JXTZ_PK_CHANGE);
 		}
 	}
 }

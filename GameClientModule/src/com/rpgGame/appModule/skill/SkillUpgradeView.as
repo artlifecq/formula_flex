@@ -212,7 +212,7 @@ package com.rpgGame.appModule.skill
 			//			skin.lb_yinliang.x=xx;
 		}
 		
-		private function getTitleText(title:String,value:*,value1:int=-1):String
+		private function getTitleText(title:String,value:*,value1:Number=-1):String
 		{
 			var wu:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12);
 			if(value is int){

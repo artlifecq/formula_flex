@@ -29,6 +29,8 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var uiNo:feathers.controls.UIAsset;
 
+		public var uiOver:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -40,7 +42,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 27;
 			this.width = 298;
-			this.elementsContent = [bg1_i(),bg2_i(),lbNo_i(),lbName_i(),lbKillNum_i(),uiNo_i(),uiBaoxiang_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),lbNo_i(),lbName_i(),lbKillNum_i(),uiNo_i(),uiBaoxiang_i(),uiOver_i()];
 			
 			states = {
 			};
@@ -113,11 +115,12 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNo = temp;
 			temp.name = "lbNo";
-			temp.text = "10";
-			temp.textAlign = "center";
+			temp.height = 19;
+			temp.text = "未上榜";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 22;
+			temp.width = 54;
 			temp.x = 6;
 			temp.y = 6;
 			return temp;
@@ -142,6 +145,19 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.styleName = "ui/app/activety/shijieboss/number/1.png";
 			temp.x = 9;
 			temp.y = 4;
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.height = 27;
+			temp.styleName = "ui/common/hover/bossOver.png";
+			temp.width = 298;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
