@@ -217,6 +217,7 @@ package com.rpgGame.appModule.social.team
 			clearModel();
 			Mgr.teamMgr.removeEventListener(TeamEvent.GET_TEAM_INFO , OnTeamInfoChange);
 			//Mgr.teamMgr.removeEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
+			
 		}
 		private function clearModel():void
 		{
@@ -235,7 +236,7 @@ package com.rpgGame.appModule.social.team
 			
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_TEAM_INFO , OnTeamInfoChange);
 			//Mgr.teamMgr.addEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
-			
+
 		}
 		
 	

@@ -2,6 +2,7 @@ package com.rpgGame.appModule.task
 {
 
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -83,6 +84,7 @@ package com.rpgGame.appModule.task
 					break;
 			}
 		}
+
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			if(!TaskMissionManager.haveMainTask)
