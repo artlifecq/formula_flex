@@ -275,19 +275,15 @@ package com.rpgGame.appModule.activety.boss
 			_richText.x=_skin.lastSkiller.x+(_skin.lastSkiller.width-_richText.textWidth)/2;
 		}
 		
-		override public function hide():void
-		{
-			_reward.clear();
-			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
-			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateList);
-			EventManager.removeEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);
-		
-		}
 		override protected function onHide():void
 		{
 			super.onHide();
 			_bossEffectCon.dispose();
 			_bossEffectCon=null;
+			_reward.clear();
+			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
+			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateList);
+			EventManager.removeEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);
 		}
 		override protected function onShow():void
 		{

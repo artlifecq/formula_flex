@@ -1,10 +1,6 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.rpgGame.app.manager.FunctionOpenManager;
-    import com.rpgGame.coreData.enum.EmOpenType;
-    
-    import flash.net.URLRequest;
-    import flash.net.navigateToURL;
     
     import away3d.events.Event;
     

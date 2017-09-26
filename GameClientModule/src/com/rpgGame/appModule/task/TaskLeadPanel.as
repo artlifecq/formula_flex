@@ -114,8 +114,9 @@ package com.rpgGame.appModule.task
 			this.x=sw-this.width-254;
 			this.y=(sh-this.height)/2+21;
 		}
-		override public function hide():void 
+		override protected function onHide():void
 		{
+			super.onHide();
 			timer.stop();
 			currtimer=0;
 			if(this.visible&&this.parent!=null&&TaskMissionManager.getMainTaskIsFinish())
@@ -124,7 +125,6 @@ package com.rpgGame.appModule.task
 				TweenLite.killDelayedCallsTo(subFinish);
 				TweenLite.delayedCall(0.5, subFinish,[TaskMissionManager.mainTaskInfo.taskId]);
 			}
-			super.hide();
 		}
 		
 		

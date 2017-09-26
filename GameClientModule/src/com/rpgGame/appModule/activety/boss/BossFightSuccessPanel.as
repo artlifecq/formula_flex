@@ -68,9 +68,9 @@ package com.rpgGame.appModule.activety.boss
 			timer.start();
 		}
 		
-		override public function hide():void
+		override protected function onHide() : void
 		{
-			super.hide();
+			super.onHide();
 			rewardGrp.clear();
 			timer.stop();
 		}

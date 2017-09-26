@@ -45,7 +45,7 @@ package com.rpgGame.appModule.shop
 		private var _shopBtns:Array;
 		
 		private var _shangchengEftContaner1:Inter3DContainer;
-		private var _shangchengEff:InterObject3D;
+		private var _shangchengEff:InterObject3D;	
 		public function MallMainPanelExt()
 		{
 			_skin=new ShangCheng_Skin();
@@ -187,6 +187,7 @@ package com.rpgGame.appModule.shop
 			Mgr.shopMgr.addEventListener(ShopEvent.SHOP_ITEM_DATA_CHANGE,onSingleDataChange);
 			onStateResChange(CharAttributeType.RES_GOLD);
 			onStateResChange(CharAttributeType.RES_BIND_GOLD);
+			if(_shangchengEff) _shangchengEff.start();
 		}
 		
 		private function onStateResChange(type:int=0):void
@@ -211,7 +212,7 @@ package com.rpgGame.appModule.shop
 			{
 				cell.clearData();
 			}
-			
+			if(_shangchengEff) _shangchengEff.stop();
 		}
 	}
 }

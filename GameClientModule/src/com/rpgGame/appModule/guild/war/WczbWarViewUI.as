@@ -601,9 +601,9 @@ package com.rpgGame.appModule.guild.war
 			}
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			TipTargetManager.remove( _skin.btnShuoMing);
 			EventManager.removeEvent(GuildEvent.GUILD_WCZB_INFO,getCitysInfo);
 			EventManager.removeEvent(GuildEvent.GUILD_CHANGE_ACTIVE,updateAct);
@@ -666,7 +666,6 @@ package com.rpgGame.appModule.guild.war
 					NoticeManager.showNotifyById(60114);
 					return;
 			}
-			AppManager.hideApp(AppConstant.GUILD_PANEL);
 			if(_currentMap==wczbMap){
 				GuildWarSender.reqGuildWarEnter();
 			}else{

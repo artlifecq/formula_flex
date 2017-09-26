@@ -40,13 +40,6 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			
 			
 		}
-		override public function hide():void
-		{
-			super.hide();
-			
-			
-			
-		}
 		
 		private function setScoreList(myrank:int,cashNum:int,rankList:Vector.<RankInfo>):void
 		{
