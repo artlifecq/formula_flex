@@ -23,6 +23,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.lunjian.message.SCLunJianResultMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianTimeMessage;
 	import com.rpgGame.netData.team.message.SCZoneTeamVoteResultMessage;
+	import com.rpgGame.netData.zone.handler.SCZoneCloseCountdownTimerHandler;
 	import com.rpgGame.netData.zone.message.SCClientTriggerValiedMessage;
 	import com.rpgGame.netData.zone.message.SCCurTriggerMessage;
 	import com.rpgGame.netData.zone.message.SCEnterZoneMessage;
@@ -35,6 +36,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.zone.message.SCMultiZoneRewardMessage;
 	import com.rpgGame.netData.zone.message.SCOutZoneMessage;
 	import com.rpgGame.netData.zone.message.SCRemainTimeMessage;
+	import com.rpgGame.netData.zone.message.SCZoneCloseCountdownTimerMessage;
 	import com.rpgGame.netData.zone.message.SCZoneCommonResultMessage;
 	import com.rpgGame.netData.zone.message.SCZoneStageChangeMessage;
 	
@@ -87,7 +89,14 @@ package com.rpgGame.app.cmdlistener
 			
 			SocketConnection.addCmdListener(155148, onSCLimitTrackInfoMessage);//极限挑战追踪
 			SocketConnection.addCmdListener(155149, onSCZoneCommonResultMessage);//通用副本结算
+			SocketConnection.addCmdListener(155150, onSCZoneCloseCountdownTimerHandler);//通用副本结算
 			finish();
+		}
+		
+		private function onSCZoneCloseCountdownTimerHandler(msg:SCZoneCloseCountdownTimerMessage):void
+		{
+			// TODO Auto Generated method stub
+			AppManager.showApp(AppConstant.JXTZ_END_NOTICE,msg);
 		}
 		
 		private function onSCZoneCommonResultMessage(msg:SCZoneCommonResultMessage):void

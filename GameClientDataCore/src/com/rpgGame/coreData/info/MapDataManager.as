@@ -306,7 +306,7 @@ package com.rpgGame.coreData.info
 		}
 		
 		////////////////////////////////////////////////销毁相关/////////////////////////////////////////////////////
-		private static const MAPDATA_CACHE_TM:uint = 5*6;//地图数据缓存时长，秒
+		private static const MAPDATA_CACHE_TM:uint = 5*60;//地图数据缓存时长，秒
 		private static var _disposeMap:HashMap = new HashMap();
 		
 		private static function delayDisposeMap(mapResName:String):void

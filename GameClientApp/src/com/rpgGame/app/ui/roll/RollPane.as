@@ -103,7 +103,7 @@ package com.rpgGame.app.ui.roll
 			_roleskin.listItem.itemRendererType = RollGetScoreCell;
 			_roleskin.btnRandom.addEventListener(Event.TRIGGERED,randomclickHandler);
 			_isRandomEnd = false;
-			_roleskin.btnRandom.alpha=0;
+			_roleskin.btnRandom.alpha=1;
 			if (!_hasRoll) 
 			{
 				this.playInter3DAt(ClientConfig.getEffect("ui_shaizi"),_roleskin.btnRandom.x+14,_roleskin.btnRandom.y+15,0,null,addComple);
@@ -123,6 +123,7 @@ package com.rpgGame.app.ui.roll
 				this.saiziRender.scaleY=scale;
 				this.saiziRender.scaleZ=scale;
 				saiziRender.play(0);
+				this._roleskin.btnRandom.alpha=0;
 			}
 			else
 			{

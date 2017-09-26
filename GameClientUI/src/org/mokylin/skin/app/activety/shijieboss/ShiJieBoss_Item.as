@@ -50,7 +50,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 71;
 			this.width = 516;
-			this.elementsContent = [uiBg_i(),mcEffect_i(),selectedBtn_i(),uiName_i(),lbMsg1_i(),lbMsg2_i(),uiJinxing_i(),btnEnter_i(),lbLevel_i()];
+			this.elementsContent = [uiBg_i(),mcEffect_i(),selectedBtn_i(),uiName_i(),lbMsg1_i(),lbMsg2_i(),uiJinxing_i(),lbLevel_i(),btnEnter_i()];
 			
 			states = {
 			};
@@ -81,6 +81,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbLevel = temp;
 			temp.name = "lbLevel";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.text = "(等级需求：70级)";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
