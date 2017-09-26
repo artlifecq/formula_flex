@@ -2,23 +2,22 @@ package org.mokylin.skin.common.alert
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Group;
+	import feathers.controls.Check;
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.list.ListSkin1;
+	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Alert_LiBao extends feathers.controls.StateSkin
+	public class AlertJicheng extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -29,30 +28,26 @@ package org.mokylin.skin.common.alert
 
 		public var btn_ok:feathers.controls.Button;
 
-		public var gBtn:feathers.controls.Group;
+		public var chk_ok:feathers.controls.Check;
 
-		public var grpTime:feathers.controls.Group;
+		public var icons:feathers.controls.UIAsset;
 
-		public var icon1:feathers.controls.UIAsset;
+		public var labContent:feathers.controls.Label;
 
-		public var labName:feathers.controls.Label;
-
-		public var lbTime:feathers.controls.Label;
-
-		public var listCont:feathers.controls.List;
+		public var lbInfo:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Alert_LiBao()
+		public function AlertJicheng()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 267;
+			this.height = 264;
 			this.width = 326;
-			this.elementsContent = [bg_i(),btnClose_i(),__Alert_LiBao_UIAsset1_i(),gBtn_i(),__Alert_LiBao_Group1_i(),icon1_i(),listCont_i()];
+			this.elementsContent = [bg_i(),__AlertJicheng_UIAsset1_i(),btnClose_i(),btn_ok_i(),__AlertJicheng_UIAsset2_i(),labContent_i(),lbInfo_i(),chk_ok_i(),icons_i(),__AlertJicheng_UIAsset3_i()];
 			
 			states = {
 			};
@@ -63,30 +58,32 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Alert_LiBao_Group1_i():feathers.controls.Group
+		private function __AlertJicheng_UIAsset1_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 9;
-			temp.y = 44;
-			temp.elementsContent = [labName_i()];
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/big_bg/erji_bg.png";
+			temp.x = 12;
+			temp.y = 39;
 			return temp;
 		}
 
-		private function __Alert_LiBao_UIAsset1_i():feathers.controls.UIAsset
+		private function __AlertJicheng_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/art_txt/common/background/libaozhanshi.png";
-			temp.x = 119;
-			temp.y = 8;
+			temp.styleName = "ui/common/quan.png";
+			temp.x = 112;
+			temp.y = 53;
 			return temp;
 		}
 
-		private function __Alert_LiBao_UIAsset2_i():feathers.controls.UIAsset
+		private function __AlertJicheng_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/xian_heng.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/art_txt/common/background/jcts.png";
+			temp.x = 121;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -95,12 +92,12 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.bottom = -1;
+			temp.height = 264;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
 			temp.skin = skin
-			temp.top = 0;
 			temp.width = 326;
 			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -121,92 +118,66 @@ package org.mokylin.skin.common.alert
 			btn_ok = temp;
 			temp.name = "btn_ok";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "确 认";
+			temp.label = "立即使用";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 110;
-			temp.x = 73;
-			temp.y = 51;
+			temp.x = 108;
+			temp.y = 216;
 			return temp;
 		}
 
-		private function gBtn_i():feathers.controls.Group
+		private function chk_ok_i():feathers.controls.Check
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			gBtn = temp;
-			temp.name = "gBtn";
-			temp.height = 87;
-			temp.width = 263;
-			temp.x = 35;
-			temp.y = 171;
-			temp.elementsContent = [btn_ok_i(),grpTime_i()];
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_ok = temp;
+			temp.name = "chk_ok";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 96;
+			temp.y = 174;
 			return temp;
 		}
 
-		private function grpTime_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grpTime = temp;
-			temp.name = "grpTime";
-			temp.x = 0;
-			temp.y = 0;
-			temp.elementsContent = [__Alert_LiBao_UIAsset2_i(),lbTime_i()];
-			return temp;
-		}
-
-		private function icon1_i():feathers.controls.UIAsset
+		private function icons_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1 = temp;
-			temp.name = "icon1";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 37;
-			temp.y = 75;
+			icons = temp;
+			temp.name = "icons";
+			temp.styleName = "ui/icon/erjikuang/jicheng.png";
+			temp.x = 116;
+			temp.y = 55;
 			return temp;
 		}
 
-		private function labName_i():feathers.controls.Label
+		private function labContent_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			labName = temp;
-			temp.name = "labName";
-			temp.htmlText = "提示<font color='#ee0699'>国家BOSS帮派伤害</font>礼包，获得：";
-			temp.fontSize = 14;
+			labContent = temp;
+			temp.name = "labContent";
+			temp.height = 20;
+			temp.leading = 6;
+			temp.text = "新获得一件可以进行属性继承的装备";
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 308;
-			temp.x = 0;
-			temp.y = 1;
+			temp.width = 297;
+			temp.x = 14;
+			temp.y = 153;
 			return temp;
 		}
 
-		private function lbTime_i():feathers.controls.Label
+		private function lbInfo_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime = temp;
-			temp.name = "lbTime";
-			temp.text = "24秒后自动关闭";
-			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 140;
-			temp.x = 58;
-			temp.y = 11;
-			return temp;
-		}
-
-		private function listCont_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			listCont = temp;
-			temp.name = "listCont";
-			temp.height = 103;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 294;
-			temp.x = 17;
-			temp.y = 66;
+			lbInfo = temp;
+			temp.name = "lbInfo";
+			temp.text = "10分钟内不再提示";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 138;
+			temp.x = 122;
+			temp.y = 176;
 			return temp;
 		}
 
