@@ -5,6 +5,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
@@ -82,6 +83,8 @@ package com.rpgGame.app.sender
 			}
 			msg.chargeFlag=sprint?1:0;
 			msg.positions = vec;
+			msg.runTime = SystemTimeManager.curtTm/1000;
+			msg.runTimeMs = SystemTimeManager.curtTm%1000;
 			SocketConnection.send(msg);
 		}
 		
