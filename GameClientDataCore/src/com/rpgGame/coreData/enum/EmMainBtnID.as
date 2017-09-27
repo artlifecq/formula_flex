@@ -67,6 +67,8 @@ package com.rpgGame.coreData.enum
 		public static const FULIDATING:int=20000;
 		/** 在线奖励 **/
 		public static const ZAIXIAN:int=20002;
+		/** 封测元宝 **/
+		public static const FENCEYUANBAO:int=20003;
 		public function EmMainBtnID()
 		{
 		}

@@ -184,6 +184,10 @@ package com.rpgGame.core.app
 		 */
 		public static var ACTIVETY_LIJIN_RESULT:String = createAppInfo( "activety.zonghe.lijin.LijinResultPanel","activety");
 		
+		/**
+		 *封测活动面板
+		 */
+		public static var ACTIVETY_FENGCE_YUANBAO:String = createAppInfo( "activety.fenceyuanbao.FenCeYuanBaoPanel","fengcehuodong",EmPanelID.ACTIVITY_FENGCEYUANBAO);
 		
 		/**
 		 *秦陵秘宝结算
