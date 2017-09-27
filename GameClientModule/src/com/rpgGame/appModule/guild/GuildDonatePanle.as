@@ -1,7 +1,9 @@
 package com.rpgGame.appModule.guild
 {
+	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.AttChangePop;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -19,6 +21,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.type.OtherAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
@@ -46,11 +49,23 @@ package com.rpgGame.appModule.guild
 		private var maxCount:int=8;
 		private var cellList:Vector.<GuildDonateCell>=new Vector.<GuildDonateCell>();
 		private var _memList:Vector.<GuildMemberInfo>;
+		
+		private var attChangeEft:AttChangePop;
+		private var attMap:HashMap;
+		private var oneLing2H:int;
+		private var oneLing2G:int;
+		private var oneGold2H:int;
+		private var oneGold2G:int;
+		
+		
 		public function GuildDonatePanle():void
 		{
 			_skin = new TanKuang_JuanXian();
 			super(_skin);
 			initView();
+			attChangeEft=new AttChangePop(_stateSkin.width/2,_stateSkin.height/2);
+			_stateSkin.container.addChild(attChangeEft);
+			attMap=new HashMap();
 		}
 		private function showPageData(data:*):void
 		{
@@ -124,7 +139,11 @@ package com.rpgGame.appModule.guild
 			var tmpStr:String="1{0}={1}帮派活跃+{2}帮贡";
 			var obj:Object=JSONUtil.decode(GlobalSheetData.getStrValue(822));
 			_skin.labToken.text=LanguageConfig.replaceStr(tmpStr,[ItemConfig.getItemName(obj.itemid),obj.num1,obj.num2]);
+			oneLing2H=obj.num1;
+			oneLing2G=obj.num2;
 			obj=JSONUtil.decode(GlobalSheetData.getStrValue(823));
+			oneGold2H=obj.num1;
+			oneGold2G=obj.num2;
 			_skin.labGold.text=LanguageConfig.replaceStr(tmpStr,[ItemConfig.getItemName(obj.itemid),obj.num1,obj.num2]);
 		}
 		
@@ -145,6 +164,10 @@ package com.rpgGame.appModule.guild
 			{
 				_opaque = 0;
 				GuildSender.requestGuildInfo();
+				if(msg.result==1){
+					attChangeEft.addChangeHandler(attMap);
+				}
+				attMap.clear();
 			}
 		}
 		
@@ -201,6 +224,13 @@ package com.rpgGame.appModule.guild
 				return ;
 			_opaque = GuildManager.opaque;
 			GuildSender.guildDonate(type,num,_opaque);
+			if(type==1){
+				attMap.put(OtherAttributeType.HUO_YUEDU,oneLing2H*num);
+				attMap.put(OtherAttributeType.BANG_GONG,oneLing2G*num);
+			}else{
+				attMap.put(OtherAttributeType.HUO_YUEDU,oneGold2H*num);
+				attMap.put(OtherAttributeType.BANG_GONG,oneGold2G*num);
+			}
 		}
 		
 		override protected function onHide():void
@@ -208,6 +238,7 @@ package com.rpgGame.appModule.guild
 			super.onHide();
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
 			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,opaqueChangeList);
+			attChangeEft.clear();
 		}
 	}
 }

@@ -181,7 +181,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 				if(data.diff<3){
 					data.cfg=LunJianCfg.getCfgByInfo(selected.sceneData.sceneId,list[i].q_type,data.diff+1);
 					if(firstCanFight==-1){
-						firstCanFight=i;
+						firstCanFight=i+1;
 					}
 				}else{
 					data.cfg=list[i];
@@ -191,7 +191,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			if(firstCanFight==-1){
 				firstCanFight=0;
 			}
-			pageContainer.currentPage=Math.floor(firstCanFight/3);//自动跳到第一个可挑战页面去
+			pageContainer.currentPage=Math.ceil(firstCanFight/3);//自动跳到第一个可挑战页面去
 		}
 		
 		override public function hideView():void

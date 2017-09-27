@@ -212,7 +212,7 @@ package com.rpgGame.app.state.role.control
 					break;
 				case RenderUnitType.EFFECT:
 					render.repeat = 0;
-					render.setStatus(RoleActionType.IDLE, null, time);
+					render.setStatus(RoleActionType.STAND, null, time);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
 					break;

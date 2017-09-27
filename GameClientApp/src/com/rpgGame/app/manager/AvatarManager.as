@@ -334,7 +334,7 @@ package com.rpgGame.app.manager
 					{
 						//						ru.removeUnitChild(ru);
 					}
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
@@ -446,7 +446,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					ru.entityGlass = false;
@@ -482,7 +482,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					ru.entityGlass = false;
@@ -526,7 +526,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
@@ -580,7 +580,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
@@ -621,7 +621,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setErrorCallBack(partErrorCallBack, role);
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.entityGlass = false;
@@ -668,7 +668,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
@@ -756,7 +756,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
@@ -804,7 +804,7 @@ package com.rpgGame.app.manager
 				{
 					ru.removeUnitChild(ru);
 				}
-				ru.defalutStatus = RoleActionType.IDLE;
+				ru.defalutStatus = RoleActionType.STAND;
 				ru.setAddedCallBack(partAddedCallBack, role);
 				ru.setErrorCallBack(partErrorCallBack, role);
 				if (role.isMainChar)
@@ -945,7 +945,7 @@ package com.rpgGame.app.manager
 			if (rpd_method_type_effect != null)
 			{
 				var effectRu : RenderUnit3D = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_method_type_effect);
-				effectRu.defalutStatus = RoleActionType.IDLE;
+				effectRu.defalutStatus = RoleActionType.STAND;
 				effectRu.setAddedCallBack(partAddedCallBack, role);
 				effectRu.setErrorCallBack(partErrorCallBack, role);
 				effectRu.entityGlass = false;

@@ -7,7 +7,7 @@ package org.mokylin.skin.mainui.activityBar
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.mainui.activityBar.ActivityItem;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonRacing;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -19,12 +19,12 @@ package org.mokylin.skin.mainui.activityBar
 		//                                定义成员变量
 		//==========================================================================
 		public var btnBar:feathers.controls.Button;
-		
+
 		public var skinItem:feathers.controls.SkinnableContainer;
-		
+
 		public var uiJinXing:feathers.controls.UIAsset;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -33,16 +33,14 @@ package org.mokylin.skin.mainui.activityBar
 			super();
 			
 			this.currentState = "normal";
-			this.height = 101;
-			this.width = 86;
 			this.elementsContent = [btnBar_i(),uiJinXing_i(),skinItem_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -58,7 +56,7 @@ package org.mokylin.skin.mainui.activityBar
 			temp.y = 5;
 			return temp;
 		}
-		
+
 		private function skinItem_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -72,7 +70,7 @@ package org.mokylin.skin.mainui.activityBar
 			temp.y = 67;
 			return temp;
 		}
-		
+
 		private function uiJinXing_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -80,9 +78,9 @@ package org.mokylin.skin.mainui.activityBar
 			temp.name = "uiJinXing";
 			temp.styleName = "ui/common/jinxingzhong.png";
 			temp.x = 46;
-			temp.y = -5;
+			temp.y = -6;
 			return temp;
 		}
-		
+
 	}
 }

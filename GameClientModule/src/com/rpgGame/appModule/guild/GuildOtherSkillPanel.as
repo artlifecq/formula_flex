@@ -6,6 +6,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
@@ -41,9 +42,9 @@ package com.rpgGame.appModule.guild
 		private function initView():void
 		{
 			_propList = new Vector.<SkillPropCell>();
-			_propList.push(new SkillPropCell(CharAttributeType.WAI_GONG,_skin.skinGongji));
-			_propList.push(new SkillPropCell(CharAttributeType.DEFENSE_PER,_skin.skinFangyu));
-			_propList.push(new SkillPropCell(CharAttributeType.MAX_HP,_skin.skinShengming));
+			_propList.push(new SkillPropCell(CharAttributeType.WAI_GONG,_skin.skinGongji,_skin.num_lv1,_skin.grpUp1));
+			_propList.push(new SkillPropCell(CharAttributeType.DEFENSE_PER,_skin.skinFangyu,_skin.num_lv2,_skin.grpUp2));
+			_propList.push(new SkillPropCell(CharAttributeType.MAX_HP,_skin.skinShengming,_skin.num_lv3,_skin.grpUp3));
 			_skin.btnUP.addEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btnUP.addEventListener(Event.TRIGGERED, triggeredHandler);
 			SkinUI.addNode(RTNodeID.GUILD_SKILL_LEADER,RTNodeID.GUILD_SKILL_SELF_LEADER_BTN,_skin.btnUP,177,GuildManager.instance().hasLeaderSkill2LevelUp);
@@ -102,8 +103,8 @@ package com.rpgGame.appModule.guild
 				cell.setValue(currentatt,nextatt);
 			}
 			
-			
-			_skin.lbYuanbao.text = "元宝:"+MainRoleManager.actorInfo.totalStat.getResData(3);
+			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
+			_skin.lbYuanbao.text =(stat.getResData(CharAttributeType.RES_GOLD)+stat.getResData(CharAttributeType.RES_BIND_GOLD))+"";
 			if(_nextdata==null)
 			{
 				_skin.lbXiaohao.visible = false;
@@ -115,7 +116,7 @@ package com.rpgGame.appModule.guild
 				_skin.btnUP.visible = true;
 				_skin.imgmax.visible = false;
 				_skin.btnUP.label = "升级到LV"+int(currentLevel+1).toString();
-				_skin.lbXiaohao.htmlText = "本次花费元宝"+HtmlTextUtil.getTextColor(0x5DBD37,_nextdata.q_costvalue.toString());
+				_skin.lbXiaohao.htmlText = "本次花费元宝:"+HtmlTextUtil.getTextColor(0x5DBD37,_nextdata.q_costvalue.toString());
 			}
 			SkinUI.notifyUpdate(RTNodeID.GUILD_SKILL_SELF_LEADER_BTN);
 		}
@@ -140,17 +141,22 @@ import com.rpgGame.coreData.cfg.AttValueConfig;
 import com.rpgGame.coreData.clientConfig.Q_att_values;
 import com.rpgGame.coreData.type.CharAttributeType;
 
+import feathers.controls.Group;
 import feathers.controls.UINumber;
 
 
 class SkillPropCell
 {
 	private var _attid:int;
-	private var _skin:UINumber;
-	public function SkillPropCell(id:int,skin:UINumber)
+	private var _currentNum:UINumber;
+	private var _nextNum:UINumber;
+	private var _nextGrp:Group;
+	public function SkillPropCell(id:int,currentNum:UINumber,nextNum:UINumber,nextGrp:Group)
 	{
 		_attid = id;
-		_skin = skin;
+		_currentNum = currentNum;
+		_nextNum=nextNum;
+		_nextGrp=nextGrp;
 		refeashValue();
 		showHide(false);
 	}
@@ -189,16 +195,13 @@ class SkillPropCell
 	
 	private function  refeashValue():void
 	{
-//		_skin.lbGongji.text = str+_currentValue.toString();
-//		_skin.lbUp.text = "+"+(_nextValue-_currentValue).toString();
-		_skin.label="x"+_currentValue;
-		
+		_currentNum.label="x"+_currentValue;
+		_nextNum.label="x"+(_nextValue-_currentValue).toString();
 	}
 	private var _showHide:Boolean;
 	public function showHide(value:Boolean):void
 	{
 		_showHide = value;
-//		_skin.lbUp.visible = value;
-//		_skin.uiUp.visible = value;
+		_nextGrp.visible=value;
 	}
 }

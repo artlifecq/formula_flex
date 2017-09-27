@@ -10,6 +10,7 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import gs.TweenLite;
 
@@ -102,7 +103,11 @@ package com.rpgGame.app.state.role.action
 			if(role.data is MonsterData){//怪物
 				_showType=RoleActionType.ATTACK;
 			}else{
-				_showType=RoleActionType.SHOW_IDLE;
+				if(role.type!=SceneCharType.DUMMY){
+					_showType=RoleActionType.IDLE;
+				}else{
+					_showType=RoleActionType.SHOW_IDLE;
+				}
 			}
 			_repeatNum=1;			
 		}
@@ -138,8 +143,12 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween = null;
 				}
 				
-				_showType=RoleActionType.SHOW_STAND;
-//				_showType=RoleActionType.STAND;
+				var role:SceneRole=_machine.owner as SceneRole;
+				if(role.type!=SceneCharType.DUMMY){
+					_showType=RoleActionType.STAND;
+				}else{
+					_showType=RoleActionType.SHOW_STAND;
+				}
 				_repeatNum=0;
 				syncAnimation();
 				nextShowTween= TweenLite.delayedCall(showCD,onShowNext);

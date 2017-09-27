@@ -95,6 +95,7 @@ package com.rpgGame.app.ui.tips
 				info = new SkillInfo();
 				info.skillModelId = id;
 				info.skillLevel = 1;
+				info.skillChildLv=1;
 			}
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(info.skillModelId,info.skillLevel);
 			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,info.skillLevel+1);
