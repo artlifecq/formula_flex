@@ -193,7 +193,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icons = temp;
 			temp.name = "icons";
-			temp.styleName = "ui/app/activety/jixiantiaozhan/icon/bosstouxiang.png";
+			temp.styleName = "ui/icon/activity/jixian/bosshead/bosstouxiang.png";
 			temp.x = 20;
 			temp.y = 11;
 			return temp;
@@ -204,7 +204,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ionbg = temp;
 			temp.name = "ionbg";
-			temp.styleName = "ui/app/activety/jixiantiaozhan/quan.png";
+			temp.styleName = "ui/icon/activity/jixian/quan.png";
 			temp.x = 12;
 			temp.y = 0;
 			return temp;

@@ -156,6 +156,7 @@ package com.rpgGame.app.ui.main.buttons
 				case EmMainBtnID.QINLINGMIBAO:
 				case EmMainBtnID.TIANJIANGLIJING:
 				case EmMainBtnID.JIXIANTIAOZHAN:
+				case EmMainBtnID.FENCEYUANBAO:
 					return new LimitTimeActivityButton();
 			}
 			

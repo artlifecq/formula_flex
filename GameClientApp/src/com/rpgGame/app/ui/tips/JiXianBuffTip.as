@@ -45,7 +45,7 @@ package com.rpgGame.app.ui.tips
 		public function setTipData(data : *) : void
 		{
 			_buffData=data as BuffData;
-			_shopIco.setIconResName(ClientConfig.getItemIcon(_buffData.buffData.q_icon,IcoSizeEnum.ICON_64));
+			_shopIco.setIconResName(ClientConfig.getBuffIcon(_buffData.buffData.q_icon,IcoSizeEnum.ICON_64));
 			_skin.lbName.text= _buffData.buffData.q_buff_name;
 			_skin.lbT1.text="效果增强:"+_buffData.buffData.q_description;
 			_skin.lbT2.text="当前层数:"+_buffData.buffInfo.overlay+"层";

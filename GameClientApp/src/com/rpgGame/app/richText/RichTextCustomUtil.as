@@ -113,8 +113,11 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	import com.rpgGame.coreData.clientConfig.Q_panel;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
@@ -404,6 +407,20 @@ package com.rpgGame.app.richText
 					//					TaskUtil.walkToSceneMonster(parseInt(unitData.linkData));
 					break;
 				case RichTextCustomLinkType.QIUHUN:
+					var funcCfg:Q_newfunc=NewFuncCfgData.getFuncCfg(EmFunctionID.EM_HUNYIN);
+					if(!funcCfg){
+						return;
+					}
+					var panelCfg:Q_panel=PanelCfgData.getPanelCfg(funcCfg.q_open_panel);
+					if(!panelCfg){
+						return;
+					}					
+					var minlevel:int =funcCfg.q_level;
+					if(!FunctionOpenManager.checkOpenByLevel(minlevel))//未达到开启等级
+					{
+						NoticeManager.showNotifyById(90203,null,funcCfg.q_name,minlevel);
+						return ;
+					}
 					var name:Array=unitData.linkData.split(',');
 					id = new long(name[1]);
 					if (MainRoleManager.isSelfByServerId(id))
@@ -414,7 +431,7 @@ package com.rpgGame.app.richText
 					{
 						//已婚人士
 						return;
-					}					
+					}		
 					Mgr.hunyinMgr.showQiuHunTiShiPanel(1,null,name[0]);
 					break;
 				

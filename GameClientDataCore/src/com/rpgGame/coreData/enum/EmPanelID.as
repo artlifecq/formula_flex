@@ -116,6 +116,10 @@ package com.rpgGame.coreData.enum
 		 * 福利大厅
 		 */
 		public static const ACTIVITY_FULI:int=27;
+		/**
+		 * 封测元宝
+		 */
+		public static const ACTIVITY_FENGCEYUANBAO:int=28	;
 		
 		public function EmPanelID()
 		{
