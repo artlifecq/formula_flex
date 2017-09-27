@@ -413,11 +413,9 @@ package com.game.engine3D.scene.layers
 			{
 				if (baseObj.usable)
 				{
-					var inViewDistance : Boolean = true;
-					if (_viewFilter != null)
-					{
-						inViewDistance = _viewFilter(baseObj);
-					}
+					var inViewDistance : Boolean = true;//在视野内
+					var isShow:Boolean = true;//是否 在业务层正常显示
+					var isLimit:Boolean = false;//是否被数量限制
 					if (inViewDistance && baseObj.needInViewDist)
 					{
 						if (_scene3D.mainChar)
@@ -426,29 +424,39 @@ package com.game.engine3D.scene.layers
 							inViewDistance = dist < _viewDistanceSquare;
 						}
 					}
-					if (inViewDistance && baseObj.renderLimitable)
+					if(inViewDistance)
 					{
-						if (_maxRenderLimitNumByType[baseObj.type] != null)
+						if (_viewFilter != null)
 						{
-							var maxRenderLimitNum : int = _maxRenderLimitNumByType[baseObj.type];
-							if (maxRenderLimitNum > -1)
-							{
-								var currRenderLimitNum : int = _currRenderLimitNumByType[baseObj.type];
-								currRenderLimitNum++;
-								_currRenderLimitNumByType[baseObj.type] = currRenderLimitNum;
-								if (currRenderLimitNum > maxRenderLimitNum)
-									inViewDistance = false;
-							}
-						}
-						else if (_maxOtherRenderLimitNum > -1)
-						{
-							_currOtherRenderLimitNum++;
-							if (_currOtherRenderLimitNum > _maxOtherRenderLimitNum)
-								inViewDistance = false;
+							isShow = _viewFilter(baseObj);
 						}
 					}
-					baseObj.isInViewDistance = inViewDistance;
-					if (inViewDistance)
+					if (inViewDistance && isShow)
+					{
+						if(baseObj.renderLimitable)
+						{
+							if (_maxRenderLimitNumByType[baseObj.type] != null)
+							{
+								var maxRenderLimitNum : int = _maxRenderLimitNumByType[baseObj.type];
+								if (maxRenderLimitNum > -1)
+								{
+									var currRenderLimitNum : int = _currRenderLimitNumByType[baseObj.type];
+									currRenderLimitNum++;
+									_currRenderLimitNumByType[baseObj.type] = currRenderLimitNum;
+									if (currRenderLimitNum > maxRenderLimitNum)
+										isLimit = true;
+								}
+							}
+							else if (_maxOtherRenderLimitNum > -1)
+							{
+								_currOtherRenderLimitNum++;
+								if (_currOtherRenderLimitNum > _maxOtherRenderLimitNum)
+									isLimit = true;
+							}
+						}
+					}
+					baseObj.isInViewDistance = inViewDistance && isShow && !isLimit;
+					if (baseObj.isInViewDistance)
 					{
 						_renderObjCnt++;
 					}
@@ -456,17 +464,20 @@ package com.game.engine3D.scene.layers
 					{
 						for each (var attachType : String in baseObj.attachLimitable)
 						{
-							var attachVisible : Boolean = true;
-							if (_maxAttachLimitNumByType[attachType] != null)
+							var attachVisible : Boolean = inViewDistance;
+							if(attachVisible)
 							{
-								var maxAttachLimitNum : int = _maxAttachLimitNumByType[attachType];
-								if (maxAttachLimitNum > -1)
+								if (_maxAttachLimitNumByType[attachType] != null)
 								{
-									var currAttachLimitNum : int = _currAttachLimitNumByType[attachType];
-									currAttachLimitNum++;
-									_currAttachLimitNumByType[attachType] = currAttachLimitNum;
-									if (currAttachLimitNum > maxAttachLimitNum)
-										attachVisible = false;
+									var maxAttachLimitNum : int = _maxAttachLimitNumByType[attachType];
+									if (maxAttachLimitNum > -1)
+									{
+										var currAttachLimitNum : int = _currAttachLimitNumByType[attachType];
+										currAttachLimitNum++;
+										_currAttachLimitNumByType[attachType] = currAttachLimitNum;
+										if (currAttachLimitNum > maxAttachLimitNum)
+											attachVisible = false;
+									}
 								}
 							}
 							baseObj.internalAttachVisible(attachType, attachVisible);
