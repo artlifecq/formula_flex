@@ -47,5 +47,7 @@ package com.rpgGame.core.app
 		function hitTest(localPoint:Point):DisplayObject;
 		function set changeMapClose(value:Boolean):void;
 		function get changeMapClose():Boolean;
+		function set alwaysTop(value:Boolean):void;
+		function get alwaysTop():Boolean;
 	}
 }

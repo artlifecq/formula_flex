@@ -109,9 +109,9 @@ package com.rpgGame.appModule.mount
 			super.show(data,openTable,parentContiner);
 			TimerServer.addLoop(updateTime,20000);
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 		}
 		private function updateTime():void

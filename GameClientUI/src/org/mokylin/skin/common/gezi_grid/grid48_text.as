@@ -46,7 +46,7 @@ package org.mokylin.skin.common.gezi_grid
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			grid = temp;
 			temp.name = "grid";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
+			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

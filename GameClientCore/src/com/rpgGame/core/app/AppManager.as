@@ -285,6 +285,22 @@ package com.rpgGame.core.app
 		}
 		
 		/**
+		 * 
+		 * 改变所有topapp
+		 */
+		public static function changeAlwaysTopApp():void
+		{
+			var arr:Array = _moduleMap.getValues();
+			for each ( var appPanel:AppPanel in arr )
+			{
+				if( appPanel != null && appPanel.hasParent&&appPanel.alwaysTop)
+				{
+					appPanel.bringToTop();
+				}
+			}
+		}
+		
+		/**
 		 * 把一个app面板设置到所在父容器的最顶层
 		 * @param appName
 		 * @author 卢国征 2015-5-22

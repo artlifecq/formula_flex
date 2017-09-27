@@ -228,7 +228,7 @@ package   com.rpgGame.app.ui.main.team
 			if (_data.memberMapModelID!=0) 
 			{
 				var qMap:Q_map=MapDataManager.getMapInfo( _data.memberMapModelID ).getData() as Q_map;
-				mapName=qMap.q_map_name;
+				mapName=qMap.q_map_name+"."+_data.memberMapLine+"线";
 			}
 			tipData[0]=mapName;
 			tipData[1]=_data.memberLevel;

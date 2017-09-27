@@ -1,5 +1,6 @@
 package org.mokylin.skin.common.alert
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
@@ -60,7 +61,7 @@ package org.mokylin.skin.common.alert
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 176;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 312;
 			temp.x = 7;
 			temp.y = 34;
@@ -98,8 +99,8 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 293;
-			temp.y = 5;
+			temp.x = 290;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -109,7 +110,8 @@ package org.mokylin.skin.common.alert
 			lb_hecheng = temp;
 			temp.name = "lb_hecheng";
 			temp.text = "前往合成";
-			temp.color = 0x6BCC08;
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.x = 47;
 			temp.y = 83;

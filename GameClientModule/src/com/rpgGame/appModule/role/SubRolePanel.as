@@ -50,9 +50,9 @@ package com.rpgGame.appModule.role
 			avatarView.show(_roleData);			
 		}
 		
-		override  public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			basicView.onHide();
 			avatarView.onHide();
 			packsView.onHide();

@@ -118,8 +118,9 @@ package com.rpgGame.appModule.equip
 			refresh();
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			deleteTargetEquip();
 		//	_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			_costCtrl.reset();

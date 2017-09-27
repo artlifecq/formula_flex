@@ -315,8 +315,8 @@ package com.rpgGame.coreData.info
 			//
 			cancelDelayDisposeMap(mapResName);
 			//
-			TweenLite.delayedCall(MAPDATA_CACHE_TM,disposeMapData,[mapResName]);
-			_disposeMap.add(mapResName,disposeMapData);
+			var delayedTween:TweenLite=TweenLite.delayedCall(MAPDATA_CACHE_TM,disposeMapData,[mapResName]);
+			_disposeMap.add(mapResName,delayedTween);
 		}
 		/**
 		 *检查是否可以延时释放地图资源,当存在资源引用的情况下， 不释放  
@@ -370,6 +370,10 @@ package com.rpgGame.coreData.info
 				return;
 			}
 			var url:String = ClientConfig.getMapDataConfig(mapResName);
+			if (GlobalConfig.version != null)
+			{
+				url = GlobalConfig.version(url);
+			}
 			var mapConfig:MapConfig = _mapConfigMap.getValue(url);
 			if(mapConfig)
 			{
@@ -394,9 +398,9 @@ package com.rpgGame.coreData.info
 		 */		
 		public static function cancelDelayDisposeMap(mapResName:String):void
 		{
-			var fun:Function = _disposeMap.getValue(mapResName);
-            if (fun) {
-                TweenLite.killDelayedCallsTo(fun);
+			var delayedTween:TweenLite = _disposeMap.getValue(mapResName);
+            if (delayedTween) {
+				delayedTween.kill();
                 _disposeMap.remove(mapResName);
             }
 		}

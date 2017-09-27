@@ -1,9 +1,13 @@
 package com.rpgGame.appModule.activety.jixiantiaozhan
 {
+	import com.rpgGame.app.ctrl.TouchCtrl;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.info.tip.BossHurtTipsData;
@@ -22,7 +26,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		
 		private var _tipsData:DynamicTipData;
 		private var _tipsSetInfo:BossHurtTipsData;
-		
+		private var _isSelf:Boolean;
 		public function JiXianBossRankItem()
 		{
 			_skin=new JiXianPaiHang_Item();
@@ -30,7 +34,29 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			_tipsData=new DynamicTipData();
 			_tipsSetInfo=new BossHurtTipsData();
 			_tipsData.data=_tipsSetInfo;
-			TipTargetManager.show( _skin.uiBaoxiang, TargetTipsMaker.makeTips( TipType.SHIJIEBOSS_REWAD_TIP, _tipsData));
+			TipTargetManager.show( _skin.uiBaoxiang, TargetTipsMaker.makeTips( TipType.SHIJIEBOSS_REWAD_TIP, _tipsData));var touch:TouchCtrl=new TouchCtrl(this,null,onOver,onOut);
+			_skin.uiOver.visible=false;
+			MCUtil.BringToTop(_skin.uiBaoxiang);
+		}
+		
+		private function onOut():void
+		{
+			// TODO Auto Generated method stub
+			_skin.uiOver.visible=false;
+		}
+		
+		private function onOver():void
+		{
+			// TODO Auto Generated method stub
+			_skin.uiOver.visible=true;
+		}
+		public function setSelf():void
+		{
+			_skin.bg1.visible=false;
+			_skin.bg2.visible=false;
+			_skin.lbKillNum.color=_skin.lbName.color=_skin.lbNo.color=GameColorUtil.COLOR_GREEN;
+			_isSelf=true;
+			//MCUtil.removeSelf(_skin.uiBaoxiang);
 		}
 		public function get initX():int
 		{
@@ -57,11 +83,6 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			super.show();
 		}	
 		
-		override public function hide():void
-		{
-			super.hide();
-		}
-		
 		public function setPoint(x:int,y:int):void
 		{
 			_initX = x;
@@ -74,30 +95,47 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		{
 			if(info!=null)
 			{
-				var num:int=rank+1;
-				_tipsSetInfo.rewads=ActivetyDataManager.jixianVo.getRankReward(num);
-				if(num<=3){
-					_tipsSetInfo.titleRes="ui/app/activety/shijieboss/"+num+".png";
-					_skin.uiNo.styleName = "ui/app/activety/shijieboss/number/"+num+".png";
+				_skin.uiBaoxiang.visible=rank!=0;
+				if (rank==0) 
+				{
+					_skin.lbNo.text="未上榜";
 					_skin.uiNo.visible=true;
-					_skin.lbNo.visible=false;
-				}
-				else{
-					_tipsSetInfo.titleRes="ui/app/activety/shijieboss/4.png";
-					_skin.lbNo.text=num.toString();
 					_skin.uiNo.visible=false;
-					_skin.lbNo.visible=true;
 				}
-				if(num%2==0){
-					_skin.bg1.visible=false;
-					_skin.bg2.visible=true;
-				}else{
-					_skin.bg1.visible=true;
-					_skin.bg2.visible=false;
+				else
+				{
+					var num:int=rank;
+					_tipsSetInfo.rewads=ActivetyDataManager.jixianVo.getRankReward(num);
+					if(num<=3){
+						_tipsSetInfo.titleRes="ui/app/activety/shijieboss/"+num+".png";
+						_skin.uiNo.styleName = "ui/app/activety/shijieboss/number/"+num+".png";
+						_skin.uiNo.visible=true;
+						_skin.lbNo.visible=false;
+					}
+					else{
+						_tipsSetInfo.titleRes="ui/app/activety/shijieboss/4.png";
+						_skin.lbNo.text=num.toString();
+						_skin.uiNo.visible=false;
+						_skin.lbNo.visible=true;
+					}
+				}
+				if (!_isSelf) 
+				{
+					_skin.bg1.visible=rank%2==0;
+					_skin.bg2.visible=!_skin.bg1.visible;
 				}
 				_skin.lbName.text=info.playerName;
-				var nu:Number=Math.min(info.damage/totalHp,1);
-				_skin.lbKillNum.text=info.damage.toString()+"("+(nu*100).toFixed(0)+"%)";		
+				var str:String
+				if (totalHp!=0) 
+				{
+					str=(info.damage*100/totalHp).toFixed(2);
+				}
+				else
+				{
+					str="0.00";
+				}
+				
+				_skin.lbKillNum.text=NumberUtil.getNumberTo(info.damage,true)+"("+str+"%)";		
 			}
 		}
 	}

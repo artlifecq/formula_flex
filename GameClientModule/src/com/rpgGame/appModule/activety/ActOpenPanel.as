@@ -87,9 +87,9 @@ package com.rpgGame.appModule.activety
 			}
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			EventManager.removeEvent(ActivityEvent.CLOSE_ACTIVITY_NOTICE,closeAct);
 		}
 		

@@ -61,10 +61,10 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			//setReword2();
 			//TweenLite.delayedCall(6, hide);
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
+			super.onHide();
 			icoList1Group.tweeRewardInBag();
-			super.hide();
 			TimerServer.remove(updateTime);
 			//TweenLite.killDelayedCallsTo(hide);
 		}

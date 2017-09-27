@@ -5,8 +5,6 @@ package com.rpgGame.app.ui
 	import com.rpgGame.core.app.enum.PanelPosType;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.core.utils.UIUtil;
 	
 	import away3d.events.Event;
 	
@@ -35,6 +33,7 @@ package com.rpgGame.app.ui
 		protected var _data : Object;
 		protected var _openTab : int;
 		protected var _changeMapClose:Boolean=true;
+		protected var _alwaysTop:Boolean=false;
 		
 		public function SkinUIPanel(skin : StateSkin)
 		{
@@ -445,6 +444,16 @@ package com.rpgGame.app.ui
 			_changeMapClose = value;
 		}
 
+		
+		public function get alwaysTop():Boolean
+		{
+			return _alwaysTop;
+		}
+		
+		public function set alwaysTop(value:Boolean):void
+		{
+			_alwaysTop = value;
+		}
 	}
 }
 

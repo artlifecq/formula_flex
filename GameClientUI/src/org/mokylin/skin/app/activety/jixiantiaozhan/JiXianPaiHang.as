@@ -32,15 +32,23 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 
 		public var contentBox:feathers.controls.Group;
 
+		public var gKiller:feathers.controls.Group;
+
+		public var gNotKill:feathers.controls.Group;
+
 		public var head_left:feathers.controls.UIAsset;
 
 		public var head_right:feathers.controls.UIAsset;
 
+		public var labKiller:feathers.controls.Label;
+
 		public var lbHeadName:feathers.controls.Label;
 
-		public var myHurt:feathers.controls.Label;
+		public var myLast:feathers.controls.Label;
 
-		public var myRank:feathers.controls.Label;
+		public var myMsg:feathers.controls.Label;
+
+		public var myMsg0:feathers.controls.Label;
 
 		public var uiIcon:feathers.controls.UIAsset;
 
@@ -85,23 +93,11 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = -23;
 			temp.y = 32;
-			temp.elementsContent = [__JiXianPaiHang_UIAsset5_i(),__JiXianPaiHang_UIAsset6_i(),__JiXianPaiHang_UIAsset7_i(),__JiXianPaiHang_UIAsset8_i(),__JiXianPaiHang_Label2_i(),__JiXianPaiHang_Label3_i(),__JiXianPaiHang_Label4_i(),__JiXianPaiHang_Label5_i()];
+			temp.elementsContent = [__JiXianPaiHang_UIAsset4_i(),__JiXianPaiHang_UIAsset5_i(),__JiXianPaiHang_UIAsset6_i(),__JiXianPaiHang_UIAsset7_i(),__JiXianPaiHang_Label1_i(),__JiXianPaiHang_Label2_i(),__JiXianPaiHang_Label3_i(),__JiXianPaiHang_Label4_i()];
 			return temp;
 		}
 
 		private function __JiXianPaiHang_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "若BOSS未被成功击杀，也将发放参与奖";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 251;
-			temp.x = 10;
-			temp.y = 361;
-			return temp;
-		}
-
-		private function __JiXianPaiHang_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "名次";
@@ -114,7 +110,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianPaiHang_Label3_i():feathers.controls.Label
+		private function __JiXianPaiHang_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "玩家名";
@@ -127,7 +123,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianPaiHang_Label4_i():feathers.controls.Label
+		private function __JiXianPaiHang_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "伤害值";
@@ -140,7 +136,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianPaiHang_Label5_i():feathers.controls.Label
+		private function __JiXianPaiHang_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "奖励";
@@ -185,15 +181,6 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianPaiHang_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/shijieboss/zuihoulyijiwanjia.png";
-			temp.x = 40;
-			temp.y = 384;
-			return temp;
-		}
-
-		private function __JiXianPaiHang_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
 			temp.width = 36;
 			temp.x = 26;
@@ -201,7 +188,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianPaiHang_UIAsset6_i():feathers.controls.UIAsset
+		private function __JiXianPaiHang_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -211,7 +198,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianPaiHang_UIAsset7_i():feathers.controls.UIAsset
+		private function __JiXianPaiHang_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -221,12 +208,21 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianPaiHang_UIAsset8_i():feathers.controls.UIAsset
+		private function __JiXianPaiHang_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
 			temp.width = 41;
 			temp.x = 286;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __JiXianPaiHang_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/activety/shijieboss/zuihoulyijiwanjia.png";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -274,7 +270,29 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.width = 305;
 			temp.x = -3;
 			temp.y = 0;
-			temp.elementsContent = [__JiXianPaiHang_UIAsset1_i(),__JiXianPaiHang_UIAsset2_i(),__JiXianPaiHang_UIAsset3_i(),lbHeadName_i(),head_left_i(),head_right_i(),__JiXianPaiHang_UIAsset4_i(),__JiXianPaiHang_Label1_i(),myHurt_i(),myRank_i(),__JiXianPaiHang_Group1_i(),ListItem_i(),uiIcon_i(),container_list_i()];
+			temp.elementsContent = [__JiXianPaiHang_UIAsset1_i(),__JiXianPaiHang_UIAsset2_i(),__JiXianPaiHang_UIAsset3_i(),lbHeadName_i(),head_left_i(),head_right_i(),__JiXianPaiHang_Group1_i(),ListItem_i(),uiIcon_i(),container_list_i(),gKiller_i(),gNotKill_i()];
+			return temp;
+		}
+
+		private function gKiller_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gKiller = temp;
+			temp.name = "gKiller";
+			temp.x = 21;
+			temp.y = 368;
+			temp.elementsContent = [myLast_i(),myMsg0_i(),labKiller_i()];
+			return temp;
+		}
+
+		private function gNotKill_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gNotKill = temp;
+			temp.name = "gNotKill";
+			temp.x = 21;
+			temp.y = 366;
+			temp.elementsContent = [__JiXianPaiHang_UIAsset8_i(),myMsg_i()];
 			return temp;
 		}
 
@@ -305,6 +323,21 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
+		private function labKiller_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labKiller = temp;
+			temp.name = "labKiller";
+			temp.height = 18;
+			temp.text = "234";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 111;
+			temp.x = 94;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function lbHeadName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -321,31 +354,47 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function myHurt_i():feathers.controls.Label
+		private function myLast_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			myHurt = temp;
-			temp.name = "myHurt";
-			temp.text = "我的伤害：$";
-			temp.color = 0xFFEA00;
+			myLast = temp;
+			temp.name = "myLast";
+			temp.text = "最后一击玩家：";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 180;
-			temp.x = 10;
-			temp.y = 340;
+			temp.width = 228;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function myRank_i():feathers.controls.Label
+		private function myMsg0_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			myRank = temp;
-			temp.name = "myRank";
-			temp.text = "我的排名：$";
-			temp.color = 0xFFEA00;
+			myMsg0 = temp;
+			temp.name = "myMsg0";
+			temp.height = 17;
+			temp.text = "已击杀BOSS,可根据排名获取排名奖励";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 110;
-			temp.x = 191;
-			temp.y = 340;
+			temp.width = 275;
+			temp.x = 0;
+			temp.y = 18;
+			return temp;
+		}
+
+		private function myMsg_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			myMsg = temp;
+			temp.name = "myMsg";
+			temp.height = 17;
+			temp.text = "活动结束BOSS存活，所有人只能获得参与奖";
+			temp.color = 0xFF0D0D;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 275;
+			temp.x = 0;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -355,8 +404,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			uiIcon = temp;
 			temp.name = "uiIcon";
 			temp.styleName = "ui/app/activety/shijieboss/icon/1.png";
-			temp.x = 248;
-			temp.y = 376;
+			temp.x = 261;
+			temp.y = 363;
 			return temp;
 		}
 

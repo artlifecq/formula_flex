@@ -60,9 +60,9 @@ package com.rpgGame.appModule.sevenday
 			addEvent();
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			removeEvent();
 		}
 		private function addEvent():void

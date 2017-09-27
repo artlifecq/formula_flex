@@ -185,9 +185,9 @@ package com.rpgGame.appModule.junjie
 			return 0;		
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			closeEvent();
 			if(_nowSelectItem!=null)
 			{

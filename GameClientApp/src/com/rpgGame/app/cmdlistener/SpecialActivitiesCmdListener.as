@@ -23,10 +23,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.mibao.message.SCMosterNumChangeMessage;
 	import com.rpgGame.netData.mibao.message.SCRemainMosterNumMessage;
 	import com.rpgGame.netData.monster.bean.HateInfo;
+	import com.rpgGame.netData.monster.handler.SCWorldBossKillerRankNameHandler;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
 	import com.rpgGame.netData.monster.message.ResBossHateInfosToClientMessage;
 	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossKillerNameMessage;
+	import com.rpgGame.netData.monster.message.SCWorldBossKillerRankNameMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossResultMessage;
 	import com.rpgGame.netData.specialactivities.bean.ActivityNotifyInfo;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
@@ -60,7 +62,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(114115,onResBossDamageInfosToClientMessage);
 			SocketConnection.addCmdListener(114120,onSCLimitChallengeBossResultMessage);
 			SocketConnection.addCmdListener(114121,onResBossHateInfosToClientMessage);
-			
+			SocketConnection.addCmdListener(114122,SCWorldBossKillerRankNameHandler);
 			/*----------------天降元宝   yt---------------------------------------------*/
 			SocketConnection.addCmdListener(130101,onSCRankInfoMessage);
 			SocketConnection.addCmdListener(130102,onSCCashGiftClientMessage);
@@ -79,6 +81,12 @@ package com.rpgGame.app.cmdlistener
 			
 
 			finish();
+		}
+		
+		private function SCWorldBossKillerRankNameHandler(msg:SCWorldBossKillerRankNameMessage):void
+		{
+			// TODO Auto Generated method stub
+			EventManager.dispatchEvent(ActivityEvent.LAST_KILLER,msg.killerName);
 		}
 		
 		private function onSCWorldBossResultMessage(msg:SCWorldBossResultMessage):void

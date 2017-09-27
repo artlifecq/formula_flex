@@ -2,7 +2,6 @@ package com.rpgGame.appModule.maps
 {
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
@@ -26,20 +25,15 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;
-	import com.rpgGame.coreData.info.map.MapUnitEvent;
 	import com.rpgGame.coreData.info.map.SceneData;
-	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
-	import away3d.pathFinding.DistrictWithPath;
-	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.maps.EndFly;
 	import org.mokylin.skin.app.maps.maps_Skin;
-	import org.mokylin.skin.component.text.textInput3_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Shape;
 	import starling.display.Sprite;
@@ -150,33 +144,17 @@ package com.rpgGame.appModule.maps
 		
 		public function loadMap(sceneId:int) : void
 		{
-			
-			///查看当前是否有地图数据，如果有则清除
+			//重新加载新的地图数据
+			_isMapLoadComplete = false;
+			_currentMapId=sceneId;
 			var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
 			if (senceData)
 			{
 				var mapUrl : String = ClientConfig.getMap(senceData.map);
-				if (_sceneMapData)
-				{
-					SceneMapDataManager.removeMapData(this, mapUrl, onMapDataComplete, onMapDataFaild);
-					SceneMapDataManager.removeMiniMap(mapUrl, onLoadBitmapDataComplete, onMapDataFaild);
-					_sceneMapData = null;
-				}
-			}
-			
-			//重新加载新的地图数据
-			_isMapLoadComplete = false;
-			_currentMapId=sceneId;
-			senceData = MapDataManager.getMapInfo(_currentMapId);
-			if (senceData)
-			{
-				mapUrl = ClientConfig.getMap(senceData.map);
 				var mapName : String = ClientConfig.getMapName(senceData.map);
 				var mapDataName : String = ClientConfig.getMapDataName();
 				_sceneMapData = SceneMapDataManager.addMapData(this, mapName, mapUrl + "/" + mapDataName, onMapDataComplete, onMapDataFaild);
 			}
-			
-			
 		}
 		private function onMapDataComplete(sceneMapData : SceneMapData) : void
 		{
@@ -531,8 +509,10 @@ package com.rpgGame.appModule.maps
 		}
 		public function clearAllRole():void
 		{
+			var chid:DisplayObject;
 			while(roleSpr.numChildren>0){
-				roleSpr.removeChildAt(0);
+				chid=roleSpr.removeChildAt(0);
+				chid.dispose();
 			}
 		}
 		public function onDrawPathRoad() : void
@@ -551,11 +531,38 @@ package com.rpgGame.appModule.maps
 			
 			
 		}
+		
 		public function onClearPath() : void
 		{
 			isWalkClick=false;
 			flyPoin.visible=false;
 			roadSpr.onClearPath();
+		}
+		
+		public function onHide():void
+		{
+			onClearPath();
+			var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
+			var mapName : String ;
+			var mapDataName : String ;
+			if (senceData)
+			{
+				var mapUrl : String = ClientConfig.getMap(senceData.map);
+				if (_sceneMapData)
+				{
+					mapName = ClientConfig.getMapName(senceData.map);
+					SceneMapDataManager.removeMapData(this, mapName, onMapDataComplete, onMapDataFaild);
+					SceneMapDataManager.removeMiniMap(mapName, onLoadBitmapDataComplete, onMapDataFaild);
+					_sceneMapData = null;
+				}
+			}
+			
+			if (thumbnaiImage != null && thumbnaiImage.parent != null)
+			{
+				thumbnaiSpr.removeChild(thumbnaiImage);
+				thumbnaiImage.dispose();
+				thumbnaiImage = null;
+			}
 		}
 		
 		

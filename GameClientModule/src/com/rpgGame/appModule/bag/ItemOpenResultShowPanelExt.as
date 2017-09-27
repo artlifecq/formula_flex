@@ -31,7 +31,7 @@ package com.rpgGame.appModule.bag
 		}
 		private function onTime():void
 		{
-			var left:int=Math.ceil(_endTime-getTimer()/1000);
+			var left:int=Math.ceil((_endTime-getTimer())/1000);
 			if (left>0) 
 			{
 				_skin.lbTime.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,left+"")+"秒后自动关闭";

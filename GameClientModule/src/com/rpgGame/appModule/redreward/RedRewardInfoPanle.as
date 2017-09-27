@@ -9,12 +9,9 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.type.TipType;
 	
-	import feathers.controls.StateSkin;
-	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.hongbao.HongBao_Fa;
 	import org.mokylin.skin.app.hongbao.HongBao_Skin;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_tab;
 	
 	import starling.display.DisplayObject;
@@ -63,10 +60,10 @@ package com.rpgGame.appModule.redreward
 			_view.onTouchTarget(target);
 		}
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
+			super.onHide();
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDMONTHCOUNT,refashMothCountHandler);
-			super.hide();
 		}
 	}
 }

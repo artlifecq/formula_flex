@@ -26,11 +26,5 @@ package com.rpgGame.appModule.alert
 			
 			_skin.lb_text.htmlText=String(data);
 		}
-		
-		override public function hide():void 
-		{
-			super.hide();
-		}
-		
 	}
 }

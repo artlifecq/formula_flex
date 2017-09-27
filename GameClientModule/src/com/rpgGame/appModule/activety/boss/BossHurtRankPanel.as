@@ -2,6 +2,7 @@ package com.rpgGame.appModule.activety.boss
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -11,6 +12,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.info.tip.BossHurtTipsData;
 	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.netData.monster.bean.BossDamageInfo;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
 	
 	import feathers.controls.ScrollBarDisplayMode;
@@ -35,7 +37,8 @@ package com.rpgGame.appModule.activety.boss
 		private var _tipsData:DynamicTipData;
 		private var _tipsSetInfo:BossHurtTipsData;
 		private var tween:TweenMax;
-		
+		private var _myRank:BossHurtItemRender;
+		private var _myHurtData:BossHurtInfo=new BossHurtInfo(0);
 		public function BossHurtRankPanel()
 		{
 			_skin=new ShangHaiPaiHang();
@@ -49,12 +52,21 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.itemRendererType=BossHurtItemRender;
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			_skin.ListItem.dataProvider=new ListCollection();
+			_skin.ListItem.visible=true;
 			for(var i:int=1;i<11;i++){
 				_skin.ListItem.dataProvider.addItem(new BossHurtInfo(i));
 			}
 			_tipsData=new DynamicTipData();
 			_tipsSetInfo=new BossHurtTipsData();
 			_tipsData.data=_tipsSetInfo;
+			_myRank=new BossHurtItemRender();
+			_myRank.x=5;
+			_myRank.y=334;
+			_skin.contentBox.addChild(_myRank);
+			_myRank.setSelf();
+			_myHurtData.bossDamageInfo=new BossDamageInfo();
+			_myHurtData.bossDamageInfo.playerId=MainRoleManager.serverID;
+			_myHurtData.bossDamageInfo.playerName=MainRoleManager.actorInfo.name;
 		}
 		
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void
@@ -72,8 +84,8 @@ package com.rpgGame.appModule.activety.boss
 			
 			}
 			_tipsSetInfo.titleRes="ui/app/activety/shijieboss/5.png";
-			_skin.myHurt.text="我的伤害:";
-			_skin.myRank.text="我的排名:";
+			
+			_myRank.visible=false;
 			for(var i:int=1;i<11;i++){
 				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i-1) as BossHurtInfo;
 				info.bossDamageInfo=null;
@@ -85,13 +97,15 @@ package com.rpgGame.appModule.activety.boss
 			
 			initEvent();
 			this.escExcuteAble=false;
+			setBossKill("");
 		}
 		
-		override public function hide():void
+		override protected function onHide() : void
 		{
-			super.hide();
+			super.onHide();
 			TipTargetManager.remove( _skin.uiIcon);
 			EventManager.removeEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,updateView);
+			EventManager.removeEvent(ActivityEvent.LAST_KILLER,setBossKill);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -131,12 +145,23 @@ package com.rpgGame.appModule.activety.boss
 		{
 			EventManager.addEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,updateView);
 			TipTargetManager.show( _skin.uiIcon, TargetTipsMaker.makeTips( TipType.SHIJIEBOSS_REWAD_TIP, _tipsData));
+			EventManager.addEvent(ActivityEvent.LAST_KILLER,setBossKill);
 		}
 		
 		private function updateView(msg:ResBossDamageInfosToClientMessage):void
 		{
-			_skin.myHurt.text="我的伤害:"+msg.damage;
-			_skin.myRank.text="我的排名:"+msg.rank;
+			
+			_myHurtData.bossDamageInfo.damage=msg.damage;
+			_myHurtData.rank=msg.rank;
+			_myHurtData.bossDamageInfo.playerName=MainRoleManager.actorInfo.name;
+			if (msg.totalHp!=0) 
+			{
+				_myHurtData.perDamage=(msg.damage*100/msg.totalHp).toFixed(2);
+			}
+			else
+			{
+				_myHurtData.perDamage="0.00";
+			}
 			var num:int=msg.BossDamageInfos.length;
 			for(var i:int=0;i<10;i++){
 				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i) as BossHurtInfo;
@@ -145,9 +170,24 @@ package com.rpgGame.appModule.activety.boss
 					info.perDamage=(info.bossDamageInfo.damage*100/msg.totalHp).toFixed(2);
 				}
 			}
+			_myRank.visible=true;
+			_myRank.setData(_myHurtData,_skin.ListItem.customData as int);
 			_skin.ListItem.dataProvider.updateAll();
 		}
-		
+		private function setBossKill(killer:String):void
+		{
+			if (killer!=null&&killer!="") 
+			{
+				_skin.gKiller.visible=true;
+				_skin.gNotKill.visible=false;
+				_skin.labKiller.text=killer;
+			}
+			else
+			{
+				_skin.gNotKill.visible=true;
+				_skin.gKiller.visible=false;
+			}
+		}
 		override protected function onStageResize(sw:int, sh:int):void
 		{
 			var xx : int, yy : int;

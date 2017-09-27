@@ -41,9 +41,9 @@ package com.rpgGame.appModule.task
 			taskId=int(data);
 			setTime(TaskAutoManager.FLYTIME);
 		}
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			TimerServer.remove(updateTime);
 			//TweenLite.killDelayedCallsTo(hide);
 		}

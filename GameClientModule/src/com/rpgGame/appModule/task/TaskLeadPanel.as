@@ -2,6 +2,7 @@ package com.rpgGame.appModule.task
 {
 
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -83,6 +84,7 @@ package com.rpgGame.appModule.task
 					break;
 			}
 		}
+
 		override public function show(data:*=null, openTable:int=0, parentContiner:DisplayObjectContainer=null):void 
 		{
 			if(!TaskMissionManager.haveMainTask)
@@ -114,8 +116,9 @@ package com.rpgGame.appModule.task
 			this.x=sw-this.width-254;
 			this.y=(sh-this.height)/2+21;
 		}
-		override public function hide():void 
+		override protected function onHide():void
 		{
+			super.onHide();
 			timer.stop();
 			currtimer=0;
 			if(this.visible&&this.parent!=null&&TaskMissionManager.getMainTaskIsFinish())
@@ -124,7 +127,6 @@ package com.rpgGame.appModule.task
 				TweenLite.killDelayedCallsTo(subFinish);
 				TweenLite.delayedCall(0.5, subFinish,[TaskMissionManager.mainTaskInfo.taskId]);
 			}
-			super.hide();
 		}
 		
 		

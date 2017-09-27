@@ -2,11 +2,13 @@ package org.mokylin.skin.app.banghui
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.banghui.button.ButtonJinengup;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
@@ -21,7 +23,11 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		public var btnUP:feathers.controls.Button;
 
-		public var icon:feathers.controls.UIAsset;
+		public var grpUp1:feathers.controls.Group;
+
+		public var grpUp2:feathers.controls.Group;
+
+		public var grpUp3:feathers.controls.Group;
 
 		public var imgmax:feathers.controls.UIAsset;
 
@@ -29,11 +35,23 @@ package org.mokylin.skin.app.banghui
 
 		public var lbYuanbao:feathers.controls.Label;
 
+		public var num_lv1:feathers.controls.UINumber;
+
+		public var num_lv2:feathers.controls.UINumber;
+
+		public var num_lv3:feathers.controls.UINumber;
+
 		public var skinFangyu:feathers.controls.UINumber;
 
 		public var skinGongji:feathers.controls.UINumber;
 
 		public var skinShengming:feathers.controls.UINumber;
+
+		public var uiarrow1:feathers.controls.UIAsset;
+
+		public var uiarrow2:feathers.controls.UIAsset;
+
+		public var uiarrow3:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -46,7 +64,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 506;
 			this.width = 785;
-			this.elementsContent = [__Skill_TongShuai_UIAsset1_i(),__Skill_TongShuai_UIAsset2_i(),__Skill_TongShuai_UIAsset3_i(),lbYuanbao_i(),lbXiaohao_i(),btnUP_i(),icon_i(),__Skill_TongShuai_UIAsset4_i(),imgmax_i(),skinGongji_i(),skinFangyu_i(),skinShengming_i(),__Skill_TongShuai_Label1_i(),__Skill_TongShuai_Label2_i()];
+			this.elementsContent = [__Skill_TongShuai_UIAsset1_i(),__Skill_TongShuai_UIAsset2_i(),__Skill_TongShuai_UIAsset3_i(),lbYuanbao_i(),lbXiaohao_i(),btnUP_i(),imgmax_i(),skinGongji_i(),skinFangyu_i(),skinShengming_i(),grpUp1_i(),grpUp2_i(),grpUp3_i(),__Skill_TongShuai_Label1_i(),__Skill_TongShuai_Label2_i()];
 			
 			states = {
 			};
@@ -112,15 +130,6 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function __Skill_TongShuai_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/icon/11.png";
-			temp.x = 70;
-			temp.y = 53;
-			return temp;
-		}
-
 		private function btnUP_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -136,14 +145,36 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function icon_i():feathers.controls.UIAsset
+		private function grpUp1_i():feathers.controls.Group
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon = temp;
-			temp.name = "icon";
-			temp.styleName = "ui/app/banghui/tubiaokuang.png";
-			temp.x = 65;
-			temp.y = 48;
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpUp1 = temp;
+			temp.name = "grpUp1";
+			temp.x = 210;
+			temp.y = 201;
+			temp.elementsContent = [num_lv1_i(),uiarrow1_i()];
+			return temp;
+		}
+
+		private function grpUp2_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpUp2 = temp;
+			temp.name = "grpUp2";
+			temp.x = 210;
+			temp.y = 231;
+			temp.elementsContent = [num_lv2_i(),uiarrow2_i()];
+			return temp;
+		}
+
+		private function grpUp3_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpUp3 = temp;
+			temp.name = "grpUp3";
+			temp.x = 210;
+			temp.y = 261;
+			temp.elementsContent = [num_lv3_i(),uiarrow3_i()];
 			return temp;
 		}
 
@@ -183,6 +214,51 @@ package org.mokylin.skin.app.banghui
 			temp.width = 85;
 			temp.x = 515;
 			temp.y = 481;
+			return temp;
+		}
+
+		private function num_lv1_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv1 = temp;
+			temp.name = "num_lv1";
+			temp.gap = -4;
+			temp.height = 22;
+			temp.label = "x100";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
+			temp.width = 70;
+			temp.x = 13;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function num_lv2_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv2 = temp;
+			temp.name = "num_lv2";
+			temp.gap = -4;
+			temp.height = 22;
+			temp.label = "x100";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
+			temp.width = 70;
+			temp.x = 13;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function num_lv3_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv3 = temp;
+			temp.name = "num_lv3";
+			temp.gap = -4;
+			temp.height = 22;
+			temp.label = "x100";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
+			temp.width = 70;
+			temp.x = 13;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -228,6 +304,39 @@ package org.mokylin.skin.app.banghui
 			temp.width = 94;
 			temp.x = 104;
 			temp.y = 258;
+			return temp;
+		}
+
+		private function uiarrow1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiarrow1 = temp;
+			temp.name = "uiarrow1";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 0;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function uiarrow2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiarrow2 = temp;
+			temp.name = "uiarrow2";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 0;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function uiarrow3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiarrow3 = temp;
+			temp.name = "uiarrow3";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 0;
+			temp.y = 2;
 			return temp;
 		}
 

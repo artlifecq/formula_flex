@@ -254,9 +254,9 @@ package com.rpgGame.appModule.redreward
 		}
 		
 		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDINFO,refeashOpenValue);
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO,updataRedRewardOpenList);
 			EventManager.removeEvent(RedRewardEvent.UPDATA_COUNTINFO,refeashOpenValue);

@@ -30,9 +30,19 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var contentBox:feathers.controls.Group;
 
-		public var myHurt:feathers.controls.Label;
+		public var gKiller:feathers.controls.Group;
 
-		public var myRank:feathers.controls.Label;
+		public var gNotKill:feathers.controls.Group;
+
+		public var labKiller:feathers.controls.Label;
+
+		public var myCon:feathers.controls.UIAsset;
+
+		public var myLast:feathers.controls.Label;
+
+		public var myMsg:feathers.controls.Label;
+
+		public var myMsg0:feathers.controls.Label;
 
 		public var uiIcon:feathers.controls.UIAsset;
 
@@ -65,6 +75,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "ListItem";
 			temp.height = 267;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.visible = false;
 			temp.width = 295;
 			temp.x = 6;
 			temp.y = 60;
@@ -76,7 +87,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = -23;
 			temp.y = 32;
-			temp.elementsContent = [__ShangHaiPaiHang_UIAsset7_i(),__ShangHaiPaiHang_UIAsset8_i(),__ShangHaiPaiHang_UIAsset9_i(),__ShangHaiPaiHang_UIAsset10_i(),__ShangHaiPaiHang_Label1_i(),__ShangHaiPaiHang_Label2_i(),__ShangHaiPaiHang_Label3_i(),__ShangHaiPaiHang_Label4_i()];
+			temp.elementsContent = [__ShangHaiPaiHang_UIAsset5_i(),__ShangHaiPaiHang_UIAsset6_i(),__ShangHaiPaiHang_UIAsset7_i(),__ShangHaiPaiHang_UIAsset8_i(),__ShangHaiPaiHang_Label1_i(),__ShangHaiPaiHang_Label2_i(),__ShangHaiPaiHang_Label3_i(),__ShangHaiPaiHang_Label4_i()];
 			return temp;
 		}
 
@@ -113,8 +124,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.textAlign = "left";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 60;
-			temp.x = 219;
+			temp.width = 56;
+			temp.x = 223;
 			temp.y = 4;
 			return temp;
 		}
@@ -132,38 +143,18 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset10_i():feathers.controls.UIAsset
+		private function __ShangHaiPaiHang_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 41;
-			temp.x = 286;
+			temp.height = 410;
+			temp.styleName = "ui/common/background/neikuang_3.png";
+			temp.width = 304;
+			temp.x = 2;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 383;
-			temp.styleName = "ui/common/background/neikuang_3.png";
-			temp.width = 302;
-			temp.x = 2;
-			temp.y = 1;
-			return temp;
-		}
-
 		private function __ShangHaiPaiHang_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/shijieboss/bossbg.jpg";
-			temp.width = 300;
-			temp.x = 4;
-			temp.y = 331;
-			return temp;
-		}
-
-		private function __ShangHaiPaiHang_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/titledi.png";
@@ -172,7 +163,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset4_i():feathers.controls.UIAsset
+		private function __ShangHaiPaiHang_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/bosspaihang.png";
@@ -181,25 +172,16 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset5_i():feathers.controls.UIAsset
+		private function __ShangHaiPaiHang_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/zuihoulyijiwanjia.png";
-			temp.x = 40;
-			temp.y = 384;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/shijieboss/anzke.png";
-			temp.x = 40;
-			temp.y = 367;
-			return temp;
-		}
-
-		private function __ShangHaiPaiHang_UIAsset7_i():feathers.controls.UIAsset
+		private function __ShangHaiPaiHang_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
@@ -209,22 +191,32 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset8_i():feathers.controls.UIAsset
+		private function __ShangHaiPaiHang_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 141;
+			temp.width = 148;
 			temp.x = 62;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __ShangHaiPaiHang_UIAsset9_i():feathers.controls.UIAsset
+		private function __ShangHaiPaiHang_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
-			temp.width = 83;
-			temp.x = 203;
+			temp.width = 76;
+			temp.x = 210;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __ShangHaiPaiHang_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 41;
+			temp.x = 286;
 			temp.y = 0;
 			return temp;
 		}
@@ -260,35 +252,101 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.width = 305;
 			temp.x = -3;
 			temp.y = 0;
-			temp.elementsContent = [__ShangHaiPaiHang_UIAsset1_i(),__ShangHaiPaiHang_UIAsset2_i(),__ShangHaiPaiHang_UIAsset3_i(),__ShangHaiPaiHang_UIAsset4_i(),__ShangHaiPaiHang_UIAsset5_i(),__ShangHaiPaiHang_UIAsset6_i(),myHurt_i(),myRank_i(),__ShangHaiPaiHang_Group1_i(),ListItem_i(),uiIcon_i()];
+			temp.elementsContent = [__ShangHaiPaiHang_UIAsset1_i(),myCon_i(),__ShangHaiPaiHang_UIAsset2_i(),__ShangHaiPaiHang_UIAsset3_i(),gNotKill_i(),__ShangHaiPaiHang_Group1_i(),ListItem_i(),uiIcon_i(),gKiller_i()];
 			return temp;
 		}
 
-		private function myHurt_i():feathers.controls.Label
+		private function gKiller_i():feathers.controls.Group
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			myHurt = temp;
-			temp.name = "myHurt";
-			temp.text = "我的伤害：$";
-			temp.color = 0xFFEA00;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 180;
-			temp.x = 10;
-			temp.y = 340;
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gKiller = temp;
+			temp.name = "gKiller";
+			temp.x = 21;
+			temp.y = 368;
+			temp.elementsContent = [myLast_i(),myMsg0_i(),labKiller_i()];
 			return temp;
 		}
 
-		private function myRank_i():feathers.controls.Label
+		private function gNotKill_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gNotKill = temp;
+			temp.name = "gNotKill";
+			temp.visible = false;
+			temp.x = 21;
+			temp.y = 366;
+			temp.elementsContent = [__ShangHaiPaiHang_UIAsset4_i(),myMsg_i()];
+			return temp;
+		}
+
+		private function labKiller_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			myRank = temp;
-			temp.name = "myRank";
-			temp.text = "我的排名：$";
-			temp.color = 0xFFEA00;
+			labKiller = temp;
+			temp.name = "labKiller";
+			temp.height = 18;
+			temp.text = "234";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 110;
-			temp.x = 191;
-			temp.y = 340;
+			temp.width = 111;
+			temp.x = 94;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function myCon_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			myCon = temp;
+			temp.name = "myCon";
+			temp.styleName = "ui/app/activety/shijieboss/bossbg.jpg";
+			temp.width = 300;
+			temp.x = 4;
+			temp.y = 331;
+			return temp;
+		}
+
+		private function myLast_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			myLast = temp;
+			temp.name = "myLast";
+			temp.text = "最后一击玩家：";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 228;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function myMsg0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			myMsg0 = temp;
+			temp.name = "myMsg0";
+			temp.height = 17;
+			temp.text = "已击杀BOSS,可根据排名获取排名奖励";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 275;
+			temp.x = 0;
+			temp.y = 18;
+			return temp;
+		}
+
+		private function myMsg_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			myMsg = temp;
+			temp.name = "myMsg";
+			temp.height = 17;
+			temp.text = "活动结束BOSS存活，所有人只能获得参与奖";
+			temp.color = 0xFF0D0D;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 275;
+			temp.x = 0;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -298,8 +356,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			uiIcon = temp;
 			temp.name = "uiIcon";
 			temp.styleName = "ui/app/activety/shijieboss/icon/1.png";
-			temp.x = 248;
-			temp.y = 376;
+			temp.x = 261;
+			temp.y = 363;
 			return temp;
 		}
 

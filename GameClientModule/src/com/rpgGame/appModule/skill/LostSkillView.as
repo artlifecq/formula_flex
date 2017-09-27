@@ -122,8 +122,9 @@ package com.rpgGame.appModule.skill
 			// TODO Auto Generated method stub
 			refeashIconsList();
 		}
-		override public function hide():void
+		override public function hideView():void
 		{
+			super.hideView();
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
 			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,updataLevelHandler);

@@ -16,6 +16,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.map.BigMapsManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -121,6 +122,7 @@ package com.rpgGame.app.cmdlistener.scene
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import flash.system.Security;
 	import flash.utils.ByteArray;
 	
 	import app.message.MonsterType;
@@ -397,6 +399,7 @@ package com.rpgGame.app.cmdlistener.scene
 			playerData.id=msg.shortId;
 			MainRoleManager.actor.id=msg.shortId;
 			SceneManager.getScene().updateSceneObjID(playerData.id,MainRoleManager.actor);
+			BigMapsManager.updataRoleData();
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
 
 			EventManager.dispatchEvent(MapEvent.MAP_FLY_COMPLETE);
@@ -1174,7 +1177,6 @@ package com.rpgGame.app.cmdlistener.scene
 					animatData.role_res,
 					animatData.bind_bone);
 			}
-			
 			if(roleData.id == MainRoleManager.actorID)
 			{
 				if(msg.attributeChange.type==CharAttributeType.HP)

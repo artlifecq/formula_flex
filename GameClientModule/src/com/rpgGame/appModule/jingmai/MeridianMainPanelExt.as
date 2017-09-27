@@ -74,9 +74,9 @@ package com.rpgGame.appModule.jingmai
 		{
 			
 		}
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			if (_view) 
 			{
 				_view.onHide();

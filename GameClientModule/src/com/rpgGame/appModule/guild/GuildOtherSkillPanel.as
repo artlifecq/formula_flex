@@ -191,7 +191,7 @@ class SkillPropCell
 	{
 //		_skin.lbGongji.text = str+_currentValue.toString();
 //		_skin.lbUp.text = "+"+(_nextValue-_currentValue).toString();
-		_skin.label="+"+_currentValue;
+		_skin.label="x"+_currentValue;
 		
 	}
 	private var _showHide:Boolean;

@@ -69,9 +69,9 @@ package com.rpgGame.appModule.dungeon.genuine
 			
 		}
 		
-		override public function hide():void
+		override public function hideView():void
 		{
-			super.hide();
+			super.hideView();
 			remvoeEvent();
 			icoListGroup.clear();
 		}

@@ -37,10 +37,10 @@ package com.rpgGame.app.state.role.control
 					var animatData : Q_SpellAnimation =AnimationDataManager.getData(EFFECT_ID);
 					if (animatData)
 					{
-						var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(role, 0, RenderUnitType.BUFF +EFFECT_ID, animatData.role_res, animatData.bind_bone, 0);
+						var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(role, 0, RenderUnitType.BUFF +EFFECT_ID, animatData.role_res, null, 0);
 						if (ru) 
 						{
-							ru.rotationY=role.rotationY;
+							//ru.rotationY=role.rotationY;
 						}
 					}
 				}

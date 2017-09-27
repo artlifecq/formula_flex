@@ -187,6 +187,13 @@ package com.rpgGame.app.ui.main.smallmap
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public function clearAll() : void
 		{
+			if (thumbnaiImage != null && thumbnaiImage.parent != null)
+			{
+				thumbnaiSpr.removeChild(thumbnaiImage);
+				thumbnaiImage.dispose();
+				thumbnaiImage = null;
+			}
+			
 			onClearPath();
 			clearBornMonster();
 			clearTrans();
@@ -218,14 +225,17 @@ package com.rpgGame.app.ui.main.smallmap
 		{
 			clearAll();
 			var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
+			var mapName : String ;
+			var mapDataName : String ;
 			if (senceData)
 			{
 				var mapUrl : String = ClientConfig.getMap(senceData.map);
 				if (_sceneMapData)
 				{
-					SceneMapDataManager.removeMapData(this, mapUrl, onMapDataComplete, onMapDataFaild);
-					SceneMapDataManager.removeMiniMap(mapUrl, onLoadBitmapDataComplete, onMapDataFaild);
-					SceneMapDataManager.removeRadarMap(mapUrl, onLoadBitmapDataComplete, onMapDataFaild);
+					mapName  = ClientConfig.getMapName(senceData.map);
+					SceneMapDataManager.removeMapData(this, mapName, onMapDataComplete, onMapDataFaild);
+					SceneMapDataManager.removeMiniMap(mapName, onLoadBitmapDataComplete, onMapDataFaild);
+					SceneMapDataManager.removeRadarMap(mapName, onLoadBitmapDataComplete, onMapDataFaild);
 					_sceneMapData = null;
 				}
 			}
@@ -241,8 +251,8 @@ package com.rpgGame.app.ui.main.smallmap
 			if (senceData)
 			{
 				mapUrl = ClientConfig.getMap(senceData.map);
-				var mapName : String = ClientConfig.getMapName(senceData.map);
-				var mapDataName : String = ClientConfig.getMapDataName();
+				mapName  = ClientConfig.getMapName(senceData.map);
+				mapDataName  = ClientConfig.getMapDataName();
 				_sceneMapData = SceneMapDataManager.addMapData(this, mapName, mapUrl + "/" + mapDataName, onMapDataComplete, onMapDataFaild);
 			}
 			
