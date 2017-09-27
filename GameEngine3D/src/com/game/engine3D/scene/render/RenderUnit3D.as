@@ -1009,7 +1009,11 @@ package com.game.engine3D.scene.render
 				for each (obj in _childObj3ds)
 				{
 					if ((GlobalConfig.use2DMap || _validateChildMeshEffect) && obj is Mesh) //CompositeMesh,Mesh//
-						validateMeshEffect(Mesh(obj));
+					{
+//						validateMeshEffect(Mesh(obj));
+						validateMeshEffect(Mesh(obj),(obj is Mesh) && Mesh(obj).material && Mesh(obj).material.blendMode == BlendMode.NORMAL);//透明的子对象不添加玻璃效果
+					
+					}
 					else
 						validateContainerEffect(obj);
 				}
@@ -1058,7 +1062,7 @@ package com.game.engine3D.scene.render
 			mesh.layerType = layerType;
 		}
 
-		private function validateMeshEffect(mesh : Mesh) : void
+		private function validateMeshEffect(mesh : Mesh,needGlass:Boolean = true) : void
 		{
 			if (!_renderUnitData)
 			{
@@ -1070,11 +1074,11 @@ package com.game.engine3D.scene.render
 			}
 			var layerType : uint = getLayerType(mesh.name);
 			layerType |= EntityLayerType.POST_GLASS | EntityLayerType.PLANAR_REFLECTION_LAYER;
-			if (_entityGlass)
+			if (_entityGlass && needGlass)
 				layerType |= EntityLayerType.GLASS;
 			if (_entityPhantom)
 				layerType |= EntityLayerType.PHANTOM;
-			if (_softOutlineData)
+			if (_softOutlineData && needGlass)
 			{
 				layerType |= EntityLayerType.OUTLINE_GLOW_LAYER; //EntityLayerType.SOFT_OUTLINE_LAYER//
 				mesh.outlineColor = _softOutlineData.color;
