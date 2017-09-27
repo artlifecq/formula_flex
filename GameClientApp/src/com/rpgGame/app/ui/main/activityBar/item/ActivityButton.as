@@ -64,6 +64,16 @@
 			_item.updataWidth(ui.btnBar.width);
 			ui.skinItem.x = ui.btnBar.x;
 		}
+		
+		override public function get height():Number
+		{
+			return ui.btnBar.height+ui.skinItem.height;
+		}
+		
+		override public function get width():Number
+		{
+			return ui.btnBar.width+10;
+		}
 
         override public function set styleClass(cl:Class):void
         {

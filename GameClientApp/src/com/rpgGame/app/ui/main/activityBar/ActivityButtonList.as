@@ -10,12 +10,7 @@
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.MainBtnCfgData;
-	import com.rpgGame.coreData.cfg.NewFuncCfgData;
-	import com.rpgGame.coreData.cfg.PanelCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mainbtn;
-	import com.rpgGame.coreData.clientConfig.Q_newfunc;
-	import com.rpgGame.coreData.clientConfig.Q_panel;
-	import com.rpgGame.coreData.enum.EmOpenType;
 	import com.rpgGame.coreData.enum.EnumFunctionBtnType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	
@@ -29,11 +24,10 @@
 	{
 		private const SIZE_WIDTH:uint = 360;
 		private const SIZE_HEIGHT:uint = 320;
-		private const GRID_WIDTH:Array = [80,80,80,80]
-		private const GRID_HEIGHT:uint = 80;
 		private const ALIGN:String = "right";
 		
 		private const ACT_TYPES:Array=[EnumFunctionBtnType.NORMAL_ACT,EnumFunctionBtnType.SPECIAL_ACT,EnumFunctionBtnType.TIME_ACT];
+		private const ROW_START_Y:Array=[0,80,160];
 		
 		public function ActivityButtonList()
 		{
@@ -72,17 +66,23 @@
 			var length:int = ACT_TYPES.length;
 			var button:IOpen;
 			var len:int;
-			var starX:int;
+			var startX:int;
 			var btnInfo:Q_mainbtn;
-			var width:int;
+			var nextRowY:int;
+			var nextNoZone:Array=[];
+			var currentNoZone:Array=[];
 			for(var i:int=0;i<length;i++){
 				var list:Vector.<Q_mainbtn>=MainBtnCfgData.getBtnListByType(ACT_TYPES[i]);
 				len=list.length;
 				if(len<=0){
 					continue;
 				}
-				starX = SIZE_WIDTH;
-				width = GRID_WIDTH[i];
+				startX = SIZE_WIDTH;
+				if(i+1<ROW_START_Y.length){
+					nextRowY=ROW_START_Y[i+1];
+				}else{
+					nextRowY=0;
+				}
 				for(var j:int=0;j<len;j++){
 					btnInfo = list[j] as Q_mainbtn;
 					if(q_map_zones==1&&btnInfo.q_show_zone!=q_map_zones)
@@ -98,12 +98,40 @@
 					
 					if(button!=null&&button.canOpen())
 					{
-						button.y = i*GRID_HEIGHT;
-						starX -= width;
-						button.x = starX;
+						button.y = ROW_START_Y[i];
+						setBtnX(button,btnInfo.q_btn_w,currentNoZone,startX);
+						startX=button.x;
+						if(nextRowY!=0&&(button.y+btnInfo.q_btn_h)>nextRowY){
+							nextNoZone.push([startX,startX+btnInfo.q_btn_w]);
+						}
 						this.addChild(button as DisplayObject);
 					}
 				}
+				currentNoZone=nextNoZone;
+				nextNoZone=[];
+			}
+		}
+		
+		private function setBtnX(button:IOpen,w:int,noZones:Array,startX:int):void
+		{
+			var newStartX:int=startX-w;
+			var endX:int=startX;
+			var num:int=noZones.length;
+			var list:Array;
+			var inNoList:Array;
+			for(var i:int=0;i<num;i++){
+				list=noZones[i];
+				if((list[0]<=newStartX&&list[1]>=newStartX)&&(list[0]<=endX&&list[1]>=endX)){
+					inNoList=list;
+					break;
+				}
+			}
+			
+			if(inNoList){
+				newStartX=inNoList[0];
+				setBtnX(button,w,noZones,newStartX);
+			}else{
+				button.x=newStartX;
 			}
 		}
 		

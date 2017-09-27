@@ -258,7 +258,7 @@ package com.rpgGame.app.manager.role
 				ref1.setParams(mountResID, null);
 				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
 			}
-			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+			role.stateMachine.transition(RoleStateType.ACTION_SHOW, null, true); //切换到“站立状态”
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;

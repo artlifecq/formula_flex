@@ -188,18 +188,16 @@ package com.rpgGame.app.ui
 				if (touch.phase == TouchPhase.MOVED)
 				{
 					//仅点中背景层时才允许被拖动,bg必须是第０层
-					if (this.getChildByName("bg") != touch.target&&this.getChildAt(0) != touch.target&&touch.target.name!="bg")
+					if (touch.target&&touch.target.name&&touch.target.name.indexOf("drag_panel")!=-1)
 					{
-						return;
+						this._touchID = -1;
+						this._touchOffX = touch.globalX - this.x;
+						this._touchOffY = touch.globalY - this.y;
+						
+						var dragData : DragData = new DragData();
+						dragData.setDataForFormat(DRAG_FORMAT, this._draggedObject);
+						DragDropManager.startDrag(this, touch, dragData);
 					}
-					
-					this._touchID = -1;
-					this._touchOffX = touch.globalX - this.x;
-					this._touchOffY = touch.globalY - this.y;
-					
-					var dragData : DragData = new DragData();
-					dragData.setDataForFormat(DRAG_FORMAT, this._draggedObject);
-					DragDropManager.startDrag(this, touch, dragData);
 				}
 				else if (touch.phase == TouchPhase.ENDED)
 				{

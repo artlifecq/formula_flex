@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild.war
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TimeUtil;
@@ -64,6 +65,7 @@ package com.rpgGame.appModule.guild.war
 		private var fightInfo:GuildWarCityInfo;
 		private var cityState:int;
 		private var myGuildId:String;
+		private var showData:Object;
 		
 		public function WczbWarViewUI()
 		{
@@ -98,10 +100,20 @@ package com.rpgGame.appModule.guild.war
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
-			
+			showData=data;
 			initEvent();
-			
-			if(data&&data==EnumCity.HUANG_CHENG){
+			if(GuildManager.instance().haveGuild&&!GuildManager.instance().guildData){
+				EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,initGuildInfo);
+				GuildSender.requestGuildInfo();
+			}else{
+				initGuildInfo();
+			}
+		}
+		
+		private function initGuildInfo():void
+		{
+			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,initGuildInfo);
+			if(showData&&showData==EnumCity.HUANG_CHENG){
 				GuildWarSender.reqGuildWarCityInfo(1);
 			}else{
 				GuildWarSender.reqGuildWarCityInfo(-1);
@@ -148,7 +160,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			currentCityId=_infoMsg.applyCityId;//自己帮派参与的城池id;
 			
-			if(GuildManager.instance().haveGuild){
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().guildData){
 				myGuildId=GuildManager.instance().guildData.id.hexValue;
 			}
 			var num:int=_infoMsg.citys.length;
