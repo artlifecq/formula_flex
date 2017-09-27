@@ -48,7 +48,7 @@ package com.rpgGame.app.ui.tips
 		public function setTipData(data : *) : void
 		{
 			_shopVo=data as ShopItemVo;
-			_shopIco.setIconResName(ClientConfig.getItemIcon(_shopVo.getItemConfig().q_icon.toString(),IcoSizeEnum.ICON_64));
+			_shopIco.setIconResName(ClientConfig.getBuffIcon(_shopVo.getItemConfig().q_icon.toString(),IcoSizeEnum.ICON_64));
 			_skin.lbName.text=_shopVo.getItemConfig().q_name;
 			_skin.lbT1.htmlText="效果增强:"+_shopVo.getItemConfig().q_describe;
 			_skin.lbT2.text="最大层数:5层";
