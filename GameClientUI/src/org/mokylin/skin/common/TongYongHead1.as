@@ -373,6 +373,7 @@ package org.mokylin.skin.common
 			temp.x = 54;
 			temp.y = 0;
 			return temp;
+			
 		}
 
 		private function drag_panel7_i():feathers.controls.UIAsset
