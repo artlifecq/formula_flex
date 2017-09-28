@@ -17,9 +17,9 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnClose:feathers.controls.Button;
+		public var bg:feathers.controls.SkinnableContainer;
 
-		public var drag_panel:feathers.controls.SkinnableContainer;
+		public var btnClose:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -32,7 +32,7 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [drag_panel_i(),__TongYongPanelbg1_UIAsset1_i(),__TongYongPanelbg1_UIAsset2_i(),btnClose_i()];
+			this.elementsContent = [bg_i(),__TongYongPanelbg1_UIAsset1_i(),__TongYongPanelbg1_UIAsset2_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -64,6 +64,20 @@ package org.mokylin.skin.common
 			return temp;
 		}
 
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 82;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongHead1()
+			temp.skin = skin
+			temp.width = 956;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function btnClose_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -72,20 +86,6 @@ package org.mokylin.skin.common
 			temp.right = 20;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.top = 13;
-			return temp;
-		}
-
-		private function drag_panel_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			drag_panel = temp;
-			temp.name = "drag_panel";
-			temp.height = 82;
-			var skin:StateSkin = new org.mokylin.skin.common.TongYongHead1()
-			temp.skin = skin
-			temp.width = 956;
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 
